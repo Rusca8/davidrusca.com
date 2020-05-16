@@ -10,17 +10,27 @@ app = Flask(__name__)
 def hello_world():
     return render_template("index.html")
 
+
+@app.route('/music/')
+def music():
+    return render_template("music.html")
+
+
 @app.route('/bmonstres/')
 def bmonstres():
     return render_template("bmonstres.html")
+
 
 @app.route('/logos/')
 def logos():
     return render_template("logos.html")
 
+
 @app.route('/<patillada>/')
 def notfound(patillada):
-    return "<h3>Error 42: Esta página aún no existe</h3><p>...o sea sí existe pero existe para decirte que no existe.</p><p>Aigües joan d'estàn.</p>"
+    return "<h3>Error 42: Esta página aún no existe</h3>" \
+           "<p>...o sea sí existe pero existe para decirte que no existe.</p><p>Aigües joan d'estàn.</p>"
+
 
 if __name__ == "__main__":  # això la fa córrer en local
     app.run()
