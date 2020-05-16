@@ -21,3 +21,6 @@ def logos():
 @app.route('/<patillada>/')
 def notfound(patillada):
     return "<h3>Error 42: Esta página aún no existe</h3><p>...o sea sí existe pero existe para decirte que no existe.</p><p>Aigües joan d'estàn.</p>"
+
+if __name__ == "__main__":  # això la fa córrer en local
+    app.run()

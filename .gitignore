@@ -9,3 +9,7 @@
 *.png
 *.jpg
 *.jpeg
+*.psd
+
+#venv
+/.venvs
