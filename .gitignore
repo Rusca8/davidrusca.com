@@ -1,0 +1,10 @@
+# cache de pythonanywhere
+*.pyc
+
+#fitxers ocults (.coses)
+.*
+!.gitignore
+
+#imatges
+*.png
+*.jpg
