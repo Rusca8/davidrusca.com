@@ -17,3 +17,7 @@
 .btn-c-light {
  background-color: #f5f0e9;
 }
+
+.navbar {
+ padding-top: 0.25rem; padding-bottom: 0.25rem;
+}

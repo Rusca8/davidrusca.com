@@ -12,5 +12,8 @@
 *.psd
 *.pdf
 
+#altres
+*.apkg
+
 #venv
 /.venvs

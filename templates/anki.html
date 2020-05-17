@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block title %}Anki - Web de David Ruscalleda{% endblock %}
+{% block content %}
+<div class="ml-2 mr-2">
+    <h3 class="mt-3 text-center">Recursos Anki</h3>
+    <p class="text-center">Barajas que he creado y tutoriales.</p>
+
+    <div class="row mb-4">
+      <div class="col-md-6 pr-1">
+        <div class="card border-c mt-2">
+            <div class="card-body">
+                <b>Tutorial #1 - Qué es, instalación y cómo usarlo.</b>
+                <p>
+                    En este tutorial os cuento cómo instalar Anki y cómo se usa.<br>
+                    Hay vídeo en youtube y un resumen en pdf.
+                </p>
+                <a href="https://www.youtube.com/watch?v=Hw7V3TwLIc4" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Tutorial</a>
+                <a href="/static/pdf/ankinstall_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Resumen (CA)</a>
+                <a href="/static/pdf/ankinstall_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Resumen (ES)</a>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6 pl-1">
+        <div class="card border-c mt-2">
+            <div class="card-body">
+                <b>Tutorial #2 - Cómo crear tus propias tarjetas.</b><br>
+                <p>
+                    En este tutorial os cuento cómo crear vuestras propias tarjetas.<br>
+                    Colgaré vídeo este finde, y hay ya un resumen en pdf.
+                </p>
+                <a href="/static/pdf/ankicrea_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Resumen (CA)</a>
+                <a href="/static/pdf/ankicrea_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Resumen (ES)</a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-columns">
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_capitales.png" alt="Tarjeta Capitales de Asia">
+        <div class="card-body">
+            <h5 class="card-tittle">Mnemotecnia Capitales de Asia [ES]</h5>
+            <i>Junio 2019</i>
+            <p>
+                Capitales de los paises de asia con frases mnemotécnicas que había hecho para mi prima Raquel el Mayo anterior.
+            </p>
+            <b>Campos:</b>
+            <ul>
+                <li>País</li>
+                <li>Capital</li>
+                <li>Imagen</li>
+                <li>Mnemotecnia</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Imagen > País, Capital, (Mnemotecnia)</li>
+                <li>País > Capital, (Imagen), (Mnemotecnia)</li>
+                <li>Capital > País, (Imagen), (Mnemotecnia)</li>
+            </ul>
+            <a href="/anki/d/capitales" class="btn btn-light btn-sm btn-block" role="button">Descarga (48 notas, 483K) </a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_valencies.png" alt="Tarjeta Valències">
+        <div class="card-body">
+            <h5 class="card-tittle">Valències Química [CA]</h5>
+            <i>Septiembre 2019</i>
+            <p>
+                Valencias de los elementos que se suelen memorizar de química inorgánica.
+            </p>
+            <b>Campos:</b>
+            <ul>
+                <li>Elemento</li>
+                <li>Valencia</li>
+                <li>Otros con la misma valencia</li>
+                <li>Mnemotecnia</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Elemento > Valencia, (Otros), (Mnemotecnia)</li>
+            </ul>
+            <a href="/anki/d/valencies" class="btn btn-light btn-sm btn-block" role="button">Descarga (46 notas, 11K)</a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_irregular.png" alt="Tarjeta Irregular Verbs">
+        <div class="card-body">
+            <h5 class="card-tittle">Verbs Irregulars Anglès [CA]</h5>
+            <i>Diciembre 2019</i>
+            <p>
+                Una lista amplia de los verbos irregulares de inglés con la traducción.<br>
+                La traducción está en catalán.
+            </p>
+            <b>Campos:</b>
+            <ul>
+                <li>Base</li>
+                <li>Simple</li>
+                <li>Participle</li>
+                <li>Traducción</li>
+                <li>Comentarios</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Base, Simple, Participle > Traducción, (Comentarios)</li>
+                <li>Base > Simple, Participle, (Traducción), (Comentarios)</li>
+            </ul>
+            <a href="/anki/d/irregular" class="btn btn-light btn-sm btn-block" role="button">Descarga (138 notas, 29K)</a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_braille.png" alt="Tarjeta Braille">
+        <div class="card-body">
+            <h5 class="card-tittle">Braille Español/Catalán [ES/CA]</h5>
+            <i>Diciembre 2019</i>
+            <p>
+                Las letras y los símbolos más típicos.<br>
+                En catalán las tildes van algo distintas, así que las añadí también.
+            </p>
+            <b>Campos:</b>
+            <ul>
+                <li>Braille</li>
+                <li>Significado</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Braille > Significado</li>
+                <li>Significado > Braille</li>
+            </ul>
+            <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">Descarga (50 notas, 11K)</a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_lsc.png" alt="Tarjeta LSC">
+        <div class="card-body">
+            <h5 class="card-tittle">LSC - Llengua de Signes Catalana [CA]</h5>
+            <i>Febrero 2020 - En proceso...</i>
+            <p>
+                Vocabulario de lengua de signos catalana, con foto, signoescritura y notas sobre gramática básica.
+            </p>
+            <div class="alert alert-warning" role="alert">
+                <b>Cuidado:</b> Si vais en serio a intentar aprender LSC, esta baraja no será suficiente (deberíais al menos echar una ojeada también a los apuntes de gramática del IEC.
+            </div>
+            <b>Referencias:</b>
+            <ul>
+                <li>Dosier de <a href="http://www.agilscomunicacio.com/ca/">agils comunicació</a>.</li>
+                <li><a href="https://llengua.gencat.cat/ca/llengua_signes_catalana/recursos-i-activitats/vocabulari/cercador/">Diccionario en vídeo de la Generalitat.</a></li>
+                <li><a href="https://www.signbank.org/signpuddle2.0/searchword.php">Diccionario de signoescritura SignPuddle.</a></li>
+                <li><a href="http://www.signwriting.org/archive/docs5/sw0494-SignoEscritura-Parkhurst-ES-LSE.pdf">Apuntes de signoescritura SignPuddle (LSE).</a></li>
+                <li><a href="https://blogs.iec.cat/lsc/gramatica/">Apuntes de gramática IEC.</a></li>
+                <li><a href="https://www.instagram.com/silsweb_llenguadesignes/">Vídeos de vocabulario de SiLS</a></li>
+            </ul>
+            <b>Campos:</b>
+            <ul>
+                <li>Palabra</li>
+                <li>Imagen</li>
+                <li>Descripción</li>
+                <li>SignoEscritura</li>
+                <li>Aclaraciones y teoría</li>
+                <li>Comentarios signoescritura</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Palabra > Imagen, Descripción, SignoEscritura, (...)</li>
+                <li>Imagen, Descripción, SignoEscritura > Palabra, (...)</li>
+            </ul>
+            <a href="/anki/d/lsc" class="btn btn-light btn-sm btn-block" role="button">Descarga (423 notas, 3.1M)</a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_verbs.png" alt="Tarjeta Temps Verbals">
+        <div class="card-body">
+            <h5 class="card-tittle">Temps Verbals Catalans [CA]</h5>
+            <i>Marzo 2020</i>
+            <p>
+                Tiempos verbales catalanes.<br>
+                Toda la primera conjugación, las formas que en 2a y 3a son distintas, y los tiempos que cambian según el modelo en la 2a y 3a.<br>
+                Incluye algunos trucos para recordar mejor los tiempos.
+            </p>
+            <b>Campos:</b>
+            <ul>
+                <li>Modo</li>
+                <li>Tiempo</li>
+                <li>Modelo</li>
+                <li>Conjugación</li>
+                <li>Comentarios</li>
+            </ul>
+            <b>Tarjetas</b>
+            <ul>
+                <li>Modo, Tiempo, Modelo > Conjugación, (Comentarios)</li>
+                <li>Conjugación > Modo, Tiempo, (Modelo), (Comentarios)</li>
+            </ul>
+            <a href="/anki/d/verbscat" class="btn btn-light btn-sm btn-block" role="button">Descarga (38 notas, 15K)</a>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
