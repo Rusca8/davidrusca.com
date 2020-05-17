@@ -35,20 +35,26 @@ def logos():
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":
-        baralla = "[Rusca] Temps Verbals Catalans.apkg"
+        deck = "verbscat.apkg"  # las tildes en nombre de archivo se le hacen bola a pythonanywhere
+        nom = "[Rusca] Temps Verbals Catalans.apkg"
     elif file == "irregular":
-        baralla = "[Rusca] Verbs Irregulars Anglès.apkg"
+        deck = "irregular.apkg"
+        nom = "[Rusca] Verbs Irregulars Anglès.apkg"
     elif file == "valencies":
-        baralla = "[Rusca] Valències.apkg"
+        deck = "valencies.apkg"
+        nom = "[Rusca] Valències.apkg"
     elif file == "braille":
-        baralla = "[Rusca] Braille Español (i Català).apkg"
+        deck = "braille.apkg"
+        nom = "[Rusca] Braille Español (i Català).apkg"
     elif file == "lsc":
-        baralla = "[Rusca] LSC - Llengua de Signes Catalana.apkg"
+        deck = "lsc.apkg"
+        nom = "[Rusca] LSC - Llengua de Signes Catalana.apkg"
     elif file == "capitales":
-        baralla = "[Rusca] Mnemotecnia Capitales (Asia).apkg"
+        deck = "capitales.apkg"
+        nom = "[Rusca] Mnemotecnia Capitales (Asia).apkg"
     else:
         return f"El fitxer {file} no l'he pas trobat."
-    return send_from_directory("./static/anki/", baralla, as_attachment=True, cache_timeout=0)
+    return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
 
 
 @app.route('/<patillada>/')
