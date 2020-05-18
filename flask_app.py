@@ -8,25 +8,31 @@ from flask import send_from_directory, send_file
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/index')
+@app.route('/index/')
 def hello_world():
     return render_template("index.html")
 
 
+@app.route('/music')
 @app.route('/music/')
 def music():
     return render_template("music.html")
 
 
+@app.route('/anki')
 @app.route('/anki/')
 def anki():
     return render_template("anki.html")
 
 
+@app.route('/bmonstres')
 @app.route('/bmonstres/')
 def bmonstres():
     return render_template("bmonstres.html")
 
 
+@app.route('/logos')
 @app.route('/logos/')
 def logos():
     return render_template("logos.html")
@@ -57,6 +63,7 @@ def d_anki(file):
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
 
 
+@app.route('/<patillada>')
 @app.route('/<patillada>/')
 def notfound(patillada):
     return "<h3>Error 42: Esta página aún no existe</h3>" \
