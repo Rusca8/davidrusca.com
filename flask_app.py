@@ -26,6 +26,12 @@ def anki():
     return render_template("anki.html")
 
 
+@app.route('/anki/code')
+@app.route('/anki/code/')
+def ankicode():
+    return render_template("ankicode.html")
+
+
 @app.route('/bmonstres')
 @app.route('/bmonstres/')
 def bmonstres():
@@ -61,13 +67,6 @@ def d_anki(file):
     else:
         return f"El fitxer {file} no l'he pas trobat."
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
-
-
-@app.route('/<patillada>')
-@app.route('/<patillada>/')
-def notfound(patillada):
-    return "<h3>Error 42: Esta página aún no existe</h3>" \
-           "<p>...o sea sí existe pero existe para decirte que no existe.</p><p>Aigües joan d'estàn.</p>"
 
 
 @app.errorhandler(404)

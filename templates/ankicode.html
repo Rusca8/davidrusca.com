@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+{% block title %}Código Anki - David Ruscalleda{% endblock %}
+{% block content %}
+<div class="ml-2 mr-2">
+<h3 class="mt-3 text-center">Resumen de HTML y CSS en Anki</h3>
+<p class="text-center">Y enlaces para toquetear el código que vimos (y el de otras tarjetas).</p>
+
+<div class="row mb-4">
+  <div class="col-md-6 pr-1">
+    <div class="card border-c mt-2">
+        <div class="card-body">
+            <b>Índice</b>
+            <ul>
+                <li>Código de Anki</li>
+                <ul>
+                    <li><a href="#vars">Datos de la tarjeta</a></li>
+                </ul>
+                <li>Estructura de la tarjeta (HTML)</li>
+                <ul>
+                    <li><a href="#br">Salto de línea</a></li>
+                    <li><a href="#hr">Línea horizontal</a></li>
+                    <li><a href="#b">Negrita</a></li>
+                    <li><a href="#i">Cursvia</a></li>
+                    <li><a href="#p">Párrafo</a></li>
+                    <li><a href="#div">Sección</a></li>
+                    <li><a href="#table">Tabla</a></li>
+                    <li><a href="#span">Combinar celdas</a></li>
+                    <li><a href="#class">Poner nombre a las cosas</a></li>
+                </ul>
+                <li>Aspecto de la tarjeta (CSS)</li>
+                <ul>
+                    <li><a href="#tag">Acceder a las cosas por el tipo</a></li>
+                    <li><a href="#classCSS">Acceder a las cosas por el nombre</a></li>
+                    <li><a href="#card">Aspecto general de la tarjeta</a></li>
+                    <li><a href="#tableCSS">Bordes de las tablas</a></li>
+                    <li><a href="#margins">Márgenes</a></li>
+                    <li><a href="#wh">Ancho y alto</a></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-6 pl-1">
+    <div class="card border-c mt-2">
+        <div class="card-body">
+            <b>Toquetea el código de mis tarjetas</b><br>
+            <p>
+                Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas.
+            </p>
+            <ul>
+                <li><a href="https://codepen.io/Rusca8/pen/WNQYLBy" target="_blank">Tarjeta del tutorial (obscure sorrows)</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/JjYeQdr" target="_blank">Tarjeta de valencias</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/rNOQExj" target="_blank">Tarjeta Irregular Verbs</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/bGVQPEX" target="_blank">Tarjeta LSC</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/VwvVOqy" target="_blank">Tarjeta tiempos verbales catalanes</a></li>
+
+            </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card border-c bg-light mb-2">
+    <h5 class="card-header">Código de Anki</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="vars"></b>
+        <div class="card-body">
+            <p>
+                <b>Datos de la tarjeta</b><br>
+                <code>{{"{{"}}Campo{{"}}"}}</code>
+            </p>
+            <p>
+                Escribo {{"{{"}}Capital{{"}}"}} donde quiero que aparezca "París".
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card border-c bg-light pb-2 mb-2">
+    <h5 class="card-header">Estructura de la tarjeta (HTML)</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="br"></b>
+        <div class="card-body">
+            <p>
+                <b>Salto de línea</b><br>
+                <code>&lt;br&gt;</code>
+            </p>
+            <p>
+                Aquí está la primera línea,&lt;br&gt;<br>
+                Y aquí está la segunda.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="hr"></b>
+        <div class="card-body">
+            <p>
+                <b>Línea horizontal</b><br>
+                <code>&lt;hr&gt;</code>
+            </p>
+            <p>
+                Texto antes de la línea&lt;hr&gt;<hr>
+                Texto después
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="b"></b>
+        <div class="card-body">
+            <p>
+                <b>Negrita</b><br>
+                <code>&lt;b&gt;cosas gruesas&lt;/b&gt;</code>
+            </p>
+            <p>
+                Deben rodear &lt;b&gt;<b>el cacho</b>&lt;/b&gt; que quieres resaltar.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="i"></b>
+        <div class="card-body">
+            <p>
+                <b>Cursiva</b><br>
+                <code>&lt;i&gt;cosas italianas&lt;/i&gt;</code>
+            </p>
+            <p>
+                El texto que quieras torcido, &lt;i&gt;<i>entre las etiquetas</i>&lt;/i&gt;.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="p"></b>
+        <div class="card-body">
+            <p>
+                <b>Párrafo</b><br>
+                <code>&lt;p&gt;texto a su bola&lt;/p&gt;</code>
+            </p>
+            <p>
+                &lt;p&gt;<br>
+                &emsp;&emsp;El texto de aquí dentro tendrá márgenes arriba y abajo.<br>
+                &lt;/p&gt;.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="div"></b>
+        <div class="card-body">
+            <p>
+                <b>Sección</b><br>
+                <code>&lt;div&gt;texto no tan a su bola&lt;/div&gt;</code>
+            </p>
+            <p>
+                &lt;div&gt;<br>
+                &emsp;&emsp;Este texto quería separarlo espiritualmente de lo demás textos.&lt;br&gt;<br>
+                &emsp;&emsp;No cambia nada (va a tener el mismo contacto social con los demás).&lt;br&gt;<br>
+                &emsp;&emsp;...pero como está delimitado podré ponerle nombre para decorar.&lt;br&gt;<br>
+                &lt;/div&gt;.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="table"></b>
+        <div class="card-body">
+            <p>
+                <b>Tabla</b><br>
+                <code>
+                    &lt;table&gt;<br>
+                    &emsp;&emsp;&lt;tr&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;cabecera izquierda&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;cabecera derecha&lt;/th&gt;<br>
+                    &emsp;&emsp;&lt;/tr&gt;<br>
+                    &emsp;&emsp;&lt;tr&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal izquierda&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal derecha&lt;/td&gt;<br>
+                    &emsp;&emsp;&lt;/tr&gt;<br>
+                    &lt;/table&gt;<br>
+                </code>
+            </p>
+            <p>
+                &lt;table&gt; lo engloba todo,<br>
+                &lt;tr&gt; engloba las filas.<br>
+                Dentro de la primera fila las casillas serán &lt;th&gt;.<br>
+                Dentro de las demás filas las casillas serán &lt;td&gt;.
+            </p>
+            <table class="table table-bordered">
+                <tr>
+                    <th>cabecera izquierda</th>
+                    <th>cabecera derecha</th>
+                </tr>
+                <tr>
+                    <td>casilla normal izquierda</td>
+                    <td>casilla normal derecha</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="span"></b>
+        <div class="card-body">
+            <p>
+                <b>Combinar celdas</b><br>
+                <code>
+                    &lt;table&gt;<br>
+                    &emsp;&emsp;&lt;tr&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th colspan="2"&gt;esto ocupa dos columnas&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td rowspan="2"&gt;esto ocupa dos filas&lt;/th&gt;<br>
+                    &emsp;&emsp;&lt;/tr&gt;<br>
+                    &emsp;&emsp;&lt;tr&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal izquierda&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal derecha&lt;/td&gt;<br>
+                    &emsp;&emsp;&lt;/tr&gt;<br>
+                    &lt;/table&gt;<br>
+                </code>
+            </p>
+            <p>
+                Podemos hacer que una celda ocupe dos columnas añadiendo <code>colspan="2"</code>.<br>
+                (y por tanto nos saltamos la siguiente columna)<br><br>
+                Y podemos hacer lo mismo con las filas poniendo <code>rowspan="2"</code>.<br>
+                (y por tanto en la siguiente fila no ponemos esa columna)
+            </p>
+                <table class="table table-bordered">
+                    <tr>
+                        <th colspan="2">esto ocupa dos columnas</th>
+                        <td rowspan="2">esto ocupa dos filas</td>
+                    </tr>
+                    <tr>
+                        <td>casilla normal izquierda</td>
+                        <td>casilla normal derecha</td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="class"></b>
+        <div class="card-body">
+            <p>
+                <b>Poner nombre a las cosas</b><br>
+                <code>&lt;p class="nombre"&gt;<br>&emsp;&emsp;Párrafo que tiene nombre<br>&lt;/p&gt;</code>
+            </p>
+            <p>
+                Cualquier etiqueta puede tener nombre.<br>
+                Lo típico son cachos de una tabla, secciones, párrafos...<br>
+                Darle nombre nos permite luego elegir su aspecto desde el CSS.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="card border-c bg-light pb-2">
+    <h5 class="card-header">Aspecto de la tarjeta (CSS)</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="tag"></b>
+        <div class="card-body">
+            <p>
+                <b>Acceder a las cosas por el tipo</b><br>
+                <code>td {{"{"}}<br>&emsp;&emsp;colorinchis-y-cosas;<br>{{"}"}}</code>
+            </p>
+            <p>
+                Para cambiar el aspecto de las casillas normales <code>&lt;td&gt;</code> de las tablas.<br>
+                Cuidado que si es una etiqueta no lleva punto.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="classCSS"></b>
+        <div class="card-body">
+            <p>
+                <b>Acceder a las cosas por el nombre</b><br>
+                <code>.nombre {{"{"}}<br>&emsp;&emsp;colorinchis-y-cosas;<br>{{"}"}}</code>
+            </p>
+            <p>
+                Para cambiar el aspecto de algo que tenga <code>class="nombre"</code>.<br>
+                Ojo que si es una clase (un nombre) tiene que llevar punto.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="card"></b>
+        <div class="card-body">
+            <p>
+                <b>Aspecto general de la tarjeta</b><br>
+                <code>.card {{"{"}}<br>
+                    &emsp;font-family: arial;<br>
+                    &emsp;font-size: 20px;<br>
+                    &emsp;text-align: center;<br>
+                    &emsp;color: black;<br>
+                    &emsp;background-color: white;<br>
+                    {{"}"}}
+                </code>
+            </p>
+            <p>
+                Anki lleva una clase previa que lo engloba todo <code>.card</code>.<br>
+                Aquí podemos cambiar las pintas generales de todo antes de meternos a los detalles.
+            </p>
+            <ul>
+                <li>La letra por defecto es <code>arial</code>: times, georgia, helvetica, "Gill Sans"...</li>
+                <li>20px marca la medida de la letra.</li>
+                <li>El texto viene en <code>center</code>, pero se puede alinear hacia los lados.</li>
+                <li>El color del texto <code>color</code>: white, <a href="https://www.w3schools.com/colors/colors_names.asp">lavender</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#42af42</a>...</li>
+                <li>El color de fondo de la tarjeta entera será <code>background-color</code></li>.
+            </ul>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="tableCSS"></b>
+        <div class="card-body">
+            <p>
+                <b>Bordes de las tablas</b><br>
+                <code>table, td, th {{"{"}}<br>
+                    &emsp;border: 1px solid black;<br>
+                    &emsp;border-collapse: collapse;<br>
+                    {{"}"}}
+                </code>
+            </p>
+            <p>
+                Podemos aplicar el mismo estilo a varias cosas a la vez: <code>table, td, th</code>.<br><br>
+                Si no usamos <code>border:</code> no veremos la tabla (el borde será invisible).<br>
+                <ul>
+                    <li>1px marca el grueso de la línea</li>
+                    <li>solid marca la continuidad: solid, dashed, dotted...</li>
+                    <li>black marca el color: red, <a href="https://www.w3schools.com/colors/colors_names.asp">darkslateblue</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#1abaca</a>...</li>
+                </ul>
+                Si no usamos <code>border-collapse:</code> el borde será doble (tendrán borde la tabla y las casillas).
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="margins"></b>
+        <div class="card-body">
+            <p>
+                <b>Márgenes</b><br>
+                <code>
+                    table {{"{"}}<br>
+                    &emsp;margin-left: auto;<br>
+                    &emsp;margin-right: auto;<br>
+                    {{"}"}}
+                </code>
+            </p>
+            <p>
+                Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes.<br>
+                Poniendo <code>auto</code> a ambos lados se centra ella sola.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="wh"></b>
+        <div class="card-body">
+            <p>
+                <b>Ancho y alto</b><br>
+                <code>
+                    .casilla {{"{"}}<br>
+                    &emsp;width: 300px;<br>
+                    &emsp;height: 100px;<br>
+                    {{"}"}}
+                </code>
+            </p>
+            <p>
+                Podemos elegir las medidas de elementos de la tabla (o de la tabla entera).<br>
+                Ponemos <code>width</code> o <code>height</code>, y la cantidad de píxeles.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</div>
+{% endblock %}
