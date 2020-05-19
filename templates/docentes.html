@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Docentes - David Ruscalleda{% endblock %}
+
+{% block content %}
+<div class="ml-2 mr-2">
+<h3 class="mt-3 text-center">Recursos Docentes</h3>
+<p class="text-center">Formularios y fichas que he ido haciendo, de distintos temas y materias.</p>
+
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">Bachillerato</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesC"></b>
+            <div class="card-body">
+                <h5 class="card-title">Mates Científicas</h5>
+                <b>Formularios:</b>
+                <ul>
+                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - Límites [CA]</a>.</li>
+                    <li><a href="/static/pdf/M2_Funcions.pdf" target="_blank">M2 - Representación de funciones [CA]</a>.</li>
+                    <li><a href="/static/pdf/M2_Geo3D.pdf" target="_blank">M2 - Geometría 3D [CA]</a>.</li>
+                </ul>
+                <b>Fichas:</b>
+                <ul>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - Sistemas 3D (Dynamic Deures).</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesS"></b>
+            <div class="card-body">
+                <h5 class="card-title">Mates Sociales</h5>
+                <b>Formularios:</b>
+                <ul>
+                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - Límites [CA]</a>.</li>
+                </ul>
+                <b>Fichas:</b>
+                <ul>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - Sistemas 3D (Dynamic Deures).</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="fis"></b>
+            <div class="card-body">
+                <h5 class="card-title">Física</h5>
+                <b>Formularios:</b>
+                <ul>
+                    <li><a href="/static/pdf/F1_Moviments.pdf" target="_blank">F1 - Movimientos [CA]</a>.</li>
+                    <ul>
+                        <li><a href="/static/img/F1_MRUA.png" target="_blank">Gráficos de MRUA</a>.</li>
+                    </ul>
+                    <li><a href="/static/pdf/F2_Ones.pdf" target="_blank">F2 - Ondas [CA]</a>. (WIP...)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="quim"></b>
+            <div class="card-body">
+                <h5 class="card-title">Química</h5>
+                <b>Formularios:</b>
+                <ul>
+                    <li><a href="/static/pdf/Q2_Termoq.pdf" target="_blank">F2 - Termoquímica [CA]</a>.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">Ciclo Formativo GM</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGM"></b>
+            <div class="card-body">
+                <h5 class="card-title">Tecnología</h5>
+                <b>Fichas:</b>
+                <ul>
+                    <li><a href="/static/pdf/T_Circuits.pdf" target="_blank">T - Circuitos Eléctricos [CA]</a>.</li>
+                    <li><a href="/static/pdf/T_ElectroDigital.pdf" target="_blank">T - Electrónica Digital [CA]</a>.</li>
+                    <li><a href="/static/pdf/T_Energies.pdf" target="_blank">T - Energías [CA]</a>.</li>
+                    <li><a href="/static/pdf/T_Pneum.pdf" target="_blank">T - Pneumática [CA]</a>.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">ESO</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesESO"></b>
+            <div class="card-body">
+                <h5 class="card-title">Mates</h5>
+                <b>Fichas:</b>
+                <ul>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - Operaciones con signos y paréntesis (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - Ecuaciones (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/proporcionalitat/" target="_blank">M - Proporcionalidad (Dynamic Deures)</a>.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">Primaria</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesEP"></b>
+            <div class="card-body">
+                <h5 class="card-title">Mates</h5>
+                <b>Fichas:</b>
+                <ul>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - Operaciones sencillas (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - Ecuaciones sencillas (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/apilades/" target="_blank">M - Operaciones en columna (Dynamic Deures)</a>.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

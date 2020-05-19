@@ -32,6 +32,12 @@ def ankicode():
     return render_template("ankicode.html")
 
 
+@app.route('/docentes')
+@app.route('/docentes/')
+def docents():
+    return render_template("docentes.html")
+
+
 @app.route('/bmonstres')
 @app.route('/bmonstres/')
 def bmonstres():
