@@ -2,10 +2,13 @@
 # A very simple Flask Hello World app for you to get started with...
 
 from flask import Flask
-from flask import render_template
-from flask import send_from_directory, send_file
+from flask import render_template, redirect
+from flask import send_from_directory
+
+import crypto as c
 
 app = Flask(__name__)
+
 
 @app.route('/')
 @app.route('/index')
@@ -48,6 +51,36 @@ def bmonstres():
 @app.route('/logos/')
 def logos():
     return render_template("logos.html")
+
+
+@app.route('/raquel')
+@app.route('/raquel/')
+def raquel():
+    return redirect('/raquel/1')
+
+
+@app.route('/raquel/<key>')
+@app.route('/raquel/<key>/')
+def raquel_k(key):
+    otros = {}
+    otros["navbar"] = ["David Ruscalleda", "Inicio", "Estamos", "En", "Construcción"]
+    otros["top"] = ["Cosas escondidas para Raquel", "Ya veremos cómo te mando hasta aquí..."]
+    if key.isnumeric():
+        encoded = 10  # esto decodifica en 16 (Y en 42 lo cual es una maravillosa inesperada coincidencia)
+        key = (int(key) + encoded) % 26  # corrijo la previa
+        text = c.cesarhtml(c.raquel_text, key)
+        otros["title"] = c.cesar("Raquel - Web de David Ruscalleda", key)
+        for x in range(len(otros["navbar"])):
+            otros["navbar"][x] = c.cesar(otros["navbar"][x], key)
+        for x in range(len(otros["top"])):
+            otros["top"][x] = c.cesar(otros["top"][x], key)
+
+        return render_template("raquel.html", text=text, otros=otros)
+    else:
+        otros["top"][0] = "Ay qué pena!"
+        otros["top"][1] = "Raquel aún no ha encontrado nada relevante juasjuas querisas"
+        otros["title"] = "Raquel aún no ha encontrado nada relevante juasjuas querisas"
+        return render_template("raquel.html", text="Bueno, hay <b>numerosas</b> cosas que puedes probar...", otros=otros)
 
 
 @app.route('/anki/d/<file>')

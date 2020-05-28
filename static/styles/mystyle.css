@@ -22,6 +22,10 @@
  padding-top: 0.25rem; padding-bottom: 0.25rem;
 }
 
+.raquel {
+ background-color = grey;
+}
+
 :target {
     display: block;
     position: relative;

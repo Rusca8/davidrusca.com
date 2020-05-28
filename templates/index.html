@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Web de David Ruscalleda{% endblock %}
-{% block content %}
+{% block headjs %}
+    function showKeyPress(evt)
+    {
+        if(document.getElementById("secretillos").class === undefined || String.fromCharCode(evt.charCode) == 'r'){
+            document.getElementById("secretillos").class = String.fromCharCode(evt.charCode);
+        }else{
+            document.getElementById("secretillos").class += String.fromCharCode(evt.charCode);
+        }
 
+        if(document.getElementById("secretillos").class == "raquel"){
+            window.location.href = "/raquel/";
+        }
+    }
+{% endblock %}
+
+{% block bodyextra %} onkeypress="showKeyPress(event);" {% endblock %}
+
+{% block content %}
 <div class="card border-c mt-2 ml-2 mr-2 mb-2">
   <div class="card-body">
     <h3 class="text-center">Uola estoy creando esto...</h3>
