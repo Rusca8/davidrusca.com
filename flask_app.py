@@ -83,6 +83,12 @@ def raquel_k(key):
         return render_template("raquel.html", text="Bueno, hay <b>numerosas</b> cosas que puedes probar...", otros=otros)
 
 
+@app.route('/ktn')
+@app.route('/ktn/')
+def ktn():
+    return redirect('/static/pdf/KendamaTrickNotation1.0.pdf')
+
+
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":
