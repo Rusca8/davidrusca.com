@@ -86,7 +86,7 @@ def raquel_k(key):
 @app.route('/ktn')
 @app.route('/ktn/')
 def ktn():
-    return redirect('/static/pdf/KendamaTrickNotation1.0.pdf')
+    return redirect('/static/pdf/KendamaTrickNotation1.1.pdf')
 
 
 @app.route('/anki/d/<file>')
