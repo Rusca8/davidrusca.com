@@ -6,6 +6,14 @@
  background-color: #5c4723;
 }
 
+.bg-c-lb {
+ background-color: #8c6f3c;
+}
+
+.text-c-light {
+ color: #f5f0e9;
+}
+
 .border-c {
  border-color: #8a7450;
 }
@@ -24,6 +32,11 @@
 
 .raquel {
  background-color = grey;
+}
+
+.alert-thin {
+ margin-bottom: 1px;
+ padding: 5px 15px;
 }
 
 :target {
