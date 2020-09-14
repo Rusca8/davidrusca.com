@@ -100,6 +100,9 @@ def d_anki(file):
     elif file == "valencies":
         deck = "valencies.apkg"
         nom = "[Rusca] Valències.apkg"
+    elif file == "derivades":
+        deck = "derivades.apkg"
+        nom = "[Rusca] Regles de Derivació.apkg"
     elif file == "braille":
         deck = "braille.apkg"
         nom = "[Rusca] Braille Español (i Català).apkg"
