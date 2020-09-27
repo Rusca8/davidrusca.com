@@ -1,32 +1,32 @@
 {% extends "base.html" %}
-{% block title %}Docentes - David Ruscalleda{% endblock %}
+{% block title %}{{ _('Docentes') }} - David Ruscalleda{% endblock %}
 {% block navdocentes %}active{% endblock %}
 
 {% block content %}
 <div class="ml-2 mr-2">
-<h3 class="mt-3 text-center">Recursos Docentes</h3>
-<p class="text-center">Formularios y fichas que he ido haciendo, de distintos temas y materias.</p>
+<h3 class="mt-3 text-center">{{ _('Recursos Docentes') }}</h3>
+<p class="text-center">{{ _('Formularios y fichas que he ido haciendo, de distintos temas y materias.') }}</p>
 
     <div class="card border-c mt-2 mb-2">
         <div class="card-body">
-            <h5>Índice</h5>
+            <h5>{{ _('Índice') }}</h5>
             <ul>
-                <li><a href="#BAT">Bachillerato</a></li>
+                <li><a href="#BAT">{{ _('Bachillerato') }}</a></li>
                 <ul>
-                    <li><a href="#matesC">Mates científicas</a></li>
-                    <li><a href="#matesS">Mates sociales</a></li>
+                    <li><a href="#matesC">{{ _('Mates científicas') }}</a></li>
+                    <li><a href="#matesS">{{ _('Mates sociales') }}</a></li>
                     <li><a href="#fis">Física</a></li>
                     <li><a href="#quim">Química</a></li>
                 </ul>
-                <li><a href="#CFGM">Ciclo Formativo Grado Medio</a></li>
+                <li><a href="#CFGM">{{ _('Ciclo Formativo Grado Medio') }}</a></li>
                 <ul>
-                    <li><a href="#tecnoCFGM">Tecnología</a></li>
+                    <li><a href="#tecnoCFGM">{{ _('Tecnología') }}</a></li>
                 </ul>
-                <li><a href="#ESO">Educación Secundaria (ESO)</a></li>
+                <li><a href="#ESO">{{ _('Educación Secundaria (ESO)') }}</a></li>
                 <ul>
                     <li><a href="#matesESO">Mates</a></li>
                 </ul>
-                <li><a href="#EP">Educación Primaria (EP)</a></li>
+                <li><a href="#EP">{{ _('Educación Primaria (EP)') }}</a></li>
                 <ul>
                     <li><a href="#matesEP">Mates</a></li>
                 </ul>
@@ -35,38 +35,38 @@
     </div>
 
     <div class="card border-c bg-light mb-2"><b id="BAT"></b>
-        <h5 class="card-header">Bachillerato</h5>
+        <h5 class="card-header">{{ _('Bachillerato') }}</h5>
 
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesC"></b>
             <div class="card-body">
-                <h5 class="card-title">Mates Científicas</h5>
-                <b>Formularios:</b>
+                <h5 class="card-title">{{ _('Mates Científicas') }}</h5>
+                <b>{{ _('Formularios:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - Límites [CA]</a>.</li>
-                    <li><a href="/static/pdf/M2_Funcions.pdf" target="_blank">M2 - Representación de funciones [CA]</a>.</li>
+                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - {{ _('Límites') }} [CA]</a></li>
+                    <li><a href="/static/pdf/M2_Funcions.pdf" target="_blank">M2 - {{ _('Representación de funciones') }} [CA]</a></li>
                     <ul>
-                        <li><a href="/static/pdf/M2_VennDerivades.pdf">M2 - Relación entre gráficas y derivadas [CA]</a></li>
+                        <li><a href="/static/pdf/M2_VennDerivades.pdf">M2 - {{ _('Relación entre gráficas y derivadas') }} [CA]</a></li>
                     </ul>
-                    <li><a href="/static/pdf/M2_Geo3D.pdf" target="_blank">M2 - Geometría 3D [CA]</a>.</li>
+                    <li><a href="/static/pdf/M2_Geo3D.pdf" target="_blank">M2 - {{ _('Geometría 3D') }} [CA]</a></li>
                 </ul>
-                <b>Fichas:</b>
+                <b>{{ _('Fichas:') }}</b>
                 <ul>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - Sistemas 3D (Dynamic Deures).</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - {{ _('Sistemas 3D') }} (Dynamic Deures)</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesS"></b>
             <div class="card-body">
-                <h5 class="card-title">Mates Sociales</h5>
-                <b>Formularios:</b>
+                <h5 class="card-title">{{ _('Mates Sociales') }}</h5>
+                <b>{{ _('Formularios:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - Límites [CA]</a>.</li>
-                    <li><a href="/static/pdf/M2_VennDerivades.pdf">M2 - Relación entre gráficas y derivadas [CA]</a></li>
+                    <li><a href="/static/pdf/M1_Lim.pdf" target="_blank">M1 - {{ _('Límites') }} [CA]</a></li>
+                    <li><a href="/static/pdf/M2_VennDerivades.pdf">M2 - {{ _('Relación entre gráficas y derivadas') }} [CA]</a></li>
                 </ul>
-                <b>Fichas:</b>
+                <b>{{ _('Fichas:') }}</b>
                 <ul>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - Sistemas 3D (Dynamic Deures).</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M2 - {{ _('Sistemas 3D') }} (Dynamic Deures)</a></li>
                 </ul>
             </div>
         </div>
@@ -74,14 +74,14 @@
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="fis"></b>
             <div class="card-body">
                 <h5 class="card-title">Física</h5>
-                <b>Formularios:</b>
+                <b>{{ _('Formularios:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/F1_Moviments.pdf" target="_blank">F1 - Movimientos [CA]</a>.</li>
+                    <li><a href="/static/pdf/F1_Moviments.pdf" target="_blank">F1 - {{ _('Movimientos') }} [CA]</a></li>
                     <ul>
-                        <li><a href="/static/img/F1_MRUA.png" target="_blank">Gráficos de MRUA</a>.</li>
+                        <li><a href="/static/img/F1_MRUA.png" target="_blank">{{ _('Gráficos de MRUA') }}</a></li>
                     </ul>
-                    <li><a href="/static/pdf/F1_Forces.pdf" target="_blank">F1 - Forces [CA]</a>.</li>
-                    <li><a href="/static/pdf/F2_Ones.pdf" target="_blank">F2 - Ondas [CA]</a>. (WIP...)</li>
+                    <li><a href="/static/pdf/F1_Forces.pdf" target="_blank">F1 - {{ _('Fuerzas') }} [CA]</a></li>
+                    <li><a href="/static/pdf/F2_Ones.pdf" target="_blank">F2 - {{ _('Ondas') }} [CA]</a> (WIP...)</li>
                 </ul>
             </div>
         </div>
@@ -89,9 +89,9 @@
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="quim"></b>
             <div class="card-body">
                 <h5 class="card-title">Química</h5>
-                <b>Formularios:</b>
+                <b>{{ _('Formularios:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/Q2_Termoq.pdf" target="_blank">F2 - Termoquímica [CA]</a>.</li>
+                    <li><a href="/static/pdf/Q2_Termoq.pdf" target="_blank">F2 - {{ _('Termoquímica') }} [CA]</a></li>
                 </ul>
             </div>
         </div>
@@ -100,19 +100,19 @@
 
 
     <div class="card border-c bg-light mb-2"><b id="CFGM"></b>
-        <h5 class="card-header">Ciclo Formativo GM</h5>
+        <h5 class="card-header">{{ _('Ciclo Formativo GM') }}</h5>
 
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGM"></b>
             <div class="card-body">
-                <h5 class="card-title">Tecnología</h5>
-                <b>Fichas:</b>
+                <h5 class="card-title">{{ _('Tecnología') }}</h5>
+                <b>{{ _('Fichas:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/T_Circuits.pdf" target="_blank">T - Circuitos Eléctricos [CA]</a>.</li>
-                    <li><a href="/static/pdf/T_ElectroDigital.pdf" target="_blank">T - Electrónica Digital [CA]</a>.</li>
-                    <li><a href="/static/pdf/T_Energies.pdf" target="_blank">T - Energías [CA]</a>.</li>
-                    <li><a href="/static/pdf/T_Pneum.pdf" target="_blank">T - Pneumática [CA]</a>.</li>
-                    <li><a href="/static/pdf/T_Telecos.pdf" target="_blank">T - Telecomunicaciones [CA]</a>.</li>
-                    <li><a href="/static/pdf/T_Comb.pdf" target="_blank">T - Máquinas de Combustión [CA]</a>.</li>
+                    <li><a href="/static/pdf/T_Circuits.pdf" target="_blank">T - {{ _('Circuitos Eléctricos') }} [CA]</a></li>
+                    <li><a href="/static/pdf/T_ElectroDigital.pdf" target="_blank">T - {{ _('Electrónica Digital') }} [CA]</a></li>
+                    <li><a href="/static/pdf/T_Energies.pdf" target="_blank">T - {{ _('Energías') }} [CA]</a></li>
+                    <li><a href="/static/pdf/T_Pneum.pdf" target="_blank">T - {{ _('Pneumática') }} [CA]</a></li>
+                    <li><a href="/static/pdf/T_Telecos.pdf" target="_blank">T - {{ _('Telecomunicaciones') }} [CA]</a></li>
+                    <li><a href="/static/pdf/T_Comb.pdf" target="_blank">T - {{ _('Máquinas de Combustión') }} [CA]</a></li>
                 </ul>
             </div>
         </div>
@@ -125,11 +125,11 @@
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesESO"></b>
             <div class="card-body">
                 <h5 class="card-title">Mates</h5>
-                <b>Fichas:</b>
+                <b>{{ _('Fichas:') }}</b>
                 <ul>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - Operaciones con signos y paréntesis (Dynamic Deures)</a>.</li>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - Ecuaciones (Dynamic Deures)</a>.</li>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/proporcionalitat/" target="_blank">M - Proporcionalidad (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - {{ _('Operaciones con signos y paréntesis') }} (Dynamic Deures)</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - {{ _('Ecuaciones') }} (Dynamic Deures)</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/proporcionalitat/" target="_blank">M - {{ _('Proporcionalidad') }} (Dynamic Deures)</a></li>
                 </ul>
             </div>
         </div>
@@ -137,16 +137,16 @@
     </div>
 
     <div class="card border-c bg-light mb-2"><b id="EP"></b>
-        <h5 class="card-header">Primaria</h5>
+        <h5 class="card-header">{{ _('Primaria') }}</h5>
 
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="matesEP"></b>
             <div class="card-body">
                 <h5 class="card-title">Mates</h5>
-                <b>Fichas:</b>
+                <b>{{ _('Fichas:') }}</b>
                 <ul>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - Operaciones sencillas (Dynamic Deures)</a>.</li>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - Ecuaciones sencillas (Dynamic Deures)</a>.</li>
-                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/apilades/" target="_blank">M - Operaciones en columna (Dynamic Deures)</a>.</li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - {{ _('Operaciones sencillas') }} (Dynamic Deures)</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - {{ _('Ecuaciones sencillas') }} (Dynamic Deures)</a></li>
+                    <li><a href="http://ruscalatex.eu.pythonanywhere.com/apilades/" target="_blank">M - {{ _('Operaciones en columna') }} (Dynamic Deures)</a></li>
                 </ul>
             </div>
         </div>

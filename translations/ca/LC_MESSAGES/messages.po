@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-27 20:48+0200\n"
+"POT-Creation-Date: 2020-09-27 21:10+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -17,6 +17,165 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#: templates/docentes.html:2
+msgid "Docentes"
+msgstr "Docents"
+
+#: templates/docentes.html:7
+msgid "Recursos Docentes"
+msgstr "Recursos Docents"
+
+#: templates/docentes.html:8
+msgid "Formularios y fichas que he ido haciendo, de distintos temas y materias."
+msgstr "Formularis i fitxes que he anat fent, de diferents temes i matèries."
+
+#: templates/docentes.html:12
+msgid "Índice"
+msgstr "Índex"
+
+#: templates/docentes.html:14 templates/docentes.html:38
+msgid "Bachillerato"
+msgstr "Batxillerat"
+
+#: templates/docentes.html:16
+msgid "Mates científicas"
+msgstr "Mates científiques"
+
+#: templates/docentes.html:17
+msgid "Mates sociales"
+msgstr "Mates socials"
+
+#: templates/docentes.html:21
+msgid "Ciclo Formativo Grado Medio"
+msgstr "Cicle Formatiu de Grau Mig"
+
+#: templates/docentes.html:23 templates/docentes.html:107
+msgid "Tecnología"
+msgstr "Tecnologia"
+
+#: templates/docentes.html:25
+msgid "Educación Secundaria (ESO)"
+msgstr "Educació Secundària (ESO)"
+
+#: templates/docentes.html:29
+msgid "Educación Primaria (EP)"
+msgstr "Educació Primària (EP)"
+
+#: templates/docentes.html:42
+msgid "Mates Científicas"
+msgstr "Mates Científiques"
+
+#: templates/docentes.html:43 templates/docentes.html:62
+#: templates/docentes.html:77 templates/docentes.html:92
+msgid "Formularios:"
+msgstr "Formularis"
+
+#: templates/docentes.html:45 templates/docentes.html:64
+msgid "Límites"
+msgstr "Límits"
+
+#: templates/docentes.html:46
+msgid "Representación de funciones"
+msgstr "Representació de funcions"
+
+#: templates/docentes.html:48 templates/docentes.html:65
+msgid "Relación entre gráficas y derivadas"
+msgstr "Relació entre gràfiques i derivades"
+
+#: templates/docentes.html:50
+msgid "Geometría 3D"
+msgstr "Geometria 3D"
+
+#: templates/docentes.html:52 templates/docentes.html:67
+#: templates/docentes.html:108 templates/docentes.html:128
+#: templates/docentes.html:145
+msgid "Fichas:"
+msgstr "Fitxes:"
+
+#: templates/docentes.html:54 templates/docentes.html:69
+msgid "Sistemas 3D"
+msgstr "Sistemes 3D"
+
+#: templates/docentes.html:61
+msgid "Mates Sociales"
+msgstr "Mates Socials"
+
+#: templates/docentes.html:79
+msgid "Movimientos"
+msgstr "Moviments"
+
+#: templates/docentes.html:81
+msgid "Gráficos de MRUA"
+msgstr "Gràfics de MRUA"
+
+#: templates/docentes.html:83
+msgid "Fuerzas"
+msgstr "Forces"
+
+#: templates/docentes.html:84
+msgid "Ondas"
+msgstr "Ones"
+
+#: templates/docentes.html:94
+msgid "Termoquímica"
+msgstr "Termoquímica"
+
+#: templates/docentes.html:103
+msgid "Ciclo Formativo GM"
+msgstr "Cicle Formatiu GM"
+
+#: templates/docentes.html:110
+msgid "Circuitos Eléctricos"
+msgstr "Circuits Elèctrics"
+
+#: templates/docentes.html:111
+msgid "Electrónica Digital"
+msgstr "Electrònica Digital"
+
+#: templates/docentes.html:112
+msgid "Energías"
+msgstr "Energies"
+
+#: templates/docentes.html:113
+msgid "Pneumática"
+msgstr "Pneumàtica"
+
+#: templates/docentes.html:114
+msgid "Telecomunicaciones"
+msgstr "Telecomunicacions"
+
+#: templates/docentes.html:115
+msgid "Máquinas de Combustión"
+msgstr "Màquines de Combustió"
+
+#: templates/docentes.html:130
+msgid "Operaciones con signos y paréntesis"
+msgstr "Operacions amb signes i parèntesis"
+
+#: templates/docentes.html:131
+msgid "Ecuaciones"
+msgstr "Equacions"
+
+#: templates/docentes.html:132
+msgid "Proporcionalidad"
+msgstr "Proporcionalitat"
+
+#: templates/docentes.html:140
+msgid "Primaria"
+msgstr "Primària"
+
+#: templates/docentes.html:147
+msgid "Operaciones sencillas"
+msgstr "Operacions senzilles"
+
+#: templates/docentes.html:148
+msgid "Ecuaciones sencillas"
+msgstr "Equacions senzilles"
+
+#: templates/docentes.html:149
+msgid "Operaciones en columna"
+msgstr "Operacions en columna"
 
 #: templates/logos.html:2
 msgid "Logotipos - Web de David Ruscalleda"
@@ -58,7 +217,9 @@ msgstr "Presentat a la primera fase del procés, amb ell vaig passar a la segona
 
 #: templates/logos.html:47
 msgid "Para mi app de edición de esquemas musicales (que a su vez fue mi TFG)."
-msgstr "Per la meva app d'edició d'esquemes musicals (que alhora va ser el meu TFG)."
+msgstr ""
+"Per la meva app d'edició d'esquemes musicals (que alhora va ser el meu "
+"TFG)."
 
 #: templates/logos.html:48
 msgid "Usado en la app"
