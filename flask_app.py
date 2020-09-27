@@ -1,13 +1,25 @@
 
-# A very simple Flask Hello World app for you to get started with...
-
 from flask import Flask
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 from flask import send_from_directory
+from flask_babel import Babel  # traduccions
 
 import crypto as c
 
 app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'es'
+babel = Babel(app)
+
+# Recopilar cambios por traducir:  $ pybabel extract -F babel.cfg -o messages.pot .
+# Combinar novedades con antiguas: $ pybabel update -i messages.pot -d translations
+#           (traducir novedades en archivo .po de cada idioma)
+# Compilar de nuevo:               $ pybabel compile -d translations
+
+
+@babel.localeselector
+def get_locale():
+    return 'ca'
+    return request.accept_languages.best_match(['es', 'ca'])
 
 
 @app.route('/')

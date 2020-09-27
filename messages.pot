@@ -1,0 +1,73 @@
+# Translations template for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-09-27 20:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: templates/logos.html:2
+msgid "Logotipos - Web de David Ruscalleda"
+msgstr ""
+
+#: templates/logos.html:4
+msgid "Disseño de Logotipos"
+msgstr ""
+
+#: templates/logos.html:5
+msgid "Recopilatorio de logotipos que he ido diseñando."
+msgstr ""
+
+#: templates/logos.html:14
+msgid "Propuesta de imagen alternativa a las que se presentaron oficialmente"
+msgstr ""
+
+#: templates/logos.html:14
+msgid "doc completo"
+msgstr ""
+
+#: templates/logos.html:15
+msgid ""
+"Junto a otras dos, se tuvo en cuenta para darle una segunda vuelta a las "
+"oficiales."
+msgstr ""
+
+#: templates/logos.html:25 templates/logos.html:36
+msgid "Para el proceso de selección de una oferta de trabajo de TwoSet Violin."
+msgstr ""
+
+#: templates/logos.html:26
+msgid "Presentado para la segunda fase."
+msgstr ""
+
+#: templates/logos.html:37
+msgid "Presentado en la primera fase del proceso, con él pasé a la segunda."
+msgstr ""
+
+#: templates/logos.html:47
+msgid "Para mi app de edición de esquemas musicales (que a su vez fue mi TFG)."
+msgstr ""
+
+#: templates/logos.html:48
+msgid "Usado en la app"
+msgstr ""
+
+#: templates/logos.html:58
+msgid "Renovación del logotipo de Grup Sardanista Antaviana."
+msgstr ""
+
+#: templates/logos.html:59
+msgid "Ahora en uso en su instagram"
+msgstr ""
+
