@@ -3,38 +3,38 @@
 {% block navmusic %}active{% endblock %}
 
 {% block content %}
-<h3 class="mt-3 text-center">Composición</h3>
-<p class="text-center">Recopilatorio de cosas que he compuesto.</p>
+<h3 class="mt-3 text-center">{{ _('Composición') }}</h3>
+<p class="text-center">{{ _('Recopilatorio de cosas que he compuesto.') }}</p>
 
 <div class="card border-c ml-2 mr-2" id="calamar">
     <div class="card-body">
         <p>
-            <b>El Calamars i el Lluç</b><br>
-            <i>Para flautín y piano (Abril 2019).</i>
+            <b>{{ _('El Calamar y la Merluza') }}</b><br>
+            <i>{{ _('Para flautín y piano') }} (Abril 2019).</i>
         </p>
         <p>
-            Basado en un poema de Enric Larreula bajo el mismo nombre.<br>
-            La pieza explora las posibilidades la autoreferencia y lleva al límite el concepto de leitmotiv.
+            {{ _('Basado en un poema de Enric Larreula bajo el mismo nombre.') }}<br>
+            {{ _('La pieza explora las posibilidades la autoreferencia y lleva al límite el concepto de leitmotiv.') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=WRzSkPvHuUc" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Pieza</a>
-        <a href="https://www.youtube.com/watch?v=BkiJLnk_QzE" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Análisis</a>
+        <a href="https://www.youtube.com/watch?v=WRzSkPvHuUc" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza') }}</a>
+        <a href="https://www.youtube.com/watch?v=BkiJLnk_QzE" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Análisis') }}</a>
         <a href="/static/pdf/Calamars_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
-        <a href="/static/pdf/Calamars_picc.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Flautín</a>
+        <a href="/static/pdf/Calamars_picc.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Flautín') }}</a>
     </div>
 </div>
 
 <div class="card border-c ml-2 mr-2 mt-2" id="motivos19">
     <div class="card-body">
         <p>
-            <b>12 Motivos de Fin de Año (2019)</b><br>
-            <i>Dúos cortos para dos violines (Enero - Mayo 2019).</i>
+            <b>{{ _('12 Motivos de Fin de Año') }} (2019)</b><br>
+            <i>{{ _('Dúos cortos para dos violines') }} ({{ _('Enero') }} - {{ _('Mayo') }} 2019).</i>
         </p>
         <p>
-            En 2019 en lugar de comer uvas con las campanadas, improvisé 12 motivos musicales al piano.
+            {{ _('En 2019 en lugar de comer uvas con las campanadas, improvisé 12 motivos musicales al piano.') }}
             <br>
-            Luego cada mes (en realidad más rápido) hice un dúo corto con cada uno de ellos.<br>
+            {{ _('Luego cada mes (en realidad más rápido) hice un dúo corto con cada uno de ellos.') }}<br>
         </p>
-        <a href="https://www.youtube.com/watch?v=P6VzrDUu4qs" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Pieza</a>
+        <a href="https://www.youtube.com/watch?v=P6VzrDUu4qs" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza') }}</a>
         <a href="/static/pdf/Motius2019_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
     </div>
 </div>
@@ -43,12 +43,12 @@
     <div class="card-body">
         <p>
             <b>Fuga nº3</b><br>
-            <i>Para dos trompetas y dos trombones (Mayo - Junio 2019).</i>
+            <i>{{ _('Para dos trompetas y dos trombones') }} ({{ _('Mayo') }} - {{ _('Junio') }} 2019).</i>
         </p>
         <p>
-            Inspirada en el sistema de ejes de Bartók.<br>
-            La fuga va pasando de un eje a otro, usando sólo las notas incluídas en los acordes de ese eje.<br>
-            (en algún caso puntual hay alguna nota estraña, pero es tratada correctamente como tal)
+            {{ _('Inspirada en el sistema de ejes de Bartók.') }}<br>
+            {{ _('La fuga va pasando de un eje a otro, usando sólo las notas incluídas en los acordes de ese eje.') }}<br>
+            {{ _('(en algún caso puntual hay alguna nota estraña, pero es tratada correctamente como tal)') }}
         </p>
         <a href="/static/pdf/Fuga3a4_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
     </div>
@@ -57,14 +57,14 @@
 <div class="card border-c ml-2 mr-2 mt-2" id="fuga2">
     <div class="card-body">
         <p>
-            <b>Fuga nº2 en Mi Frigio</b><br>
-            <i>Para flauta, clarinete y trompa (Febrero - Abril 2019).</i>
+            <b>Fuga nº2 {{ _('en Mi Frigio') }}</b><br>
+            <i>{{ _('Para flauta, clarinete y trompa') }} ({{ _('Febrero') }} - Abril 2019).</i>
         </p>
         <p>
-            Lenta y melancólica, con armonía por cuartas y quintas.<br>
-            El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).
+            {{ _('Lenta y melancólica, con armonía por cuartas y quintas.') }}<br>
+            {{ _('El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=Hw7V3TwLIc4" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Pieza anotada</a>
+        <a href="https://www.youtube.com/watch?v=Hw7V3TwLIc4" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza anotada') }}</a>
         <a href="/static/pdf/Fuga2MiFrigio_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
     </div>
 </div>
@@ -73,13 +73,13 @@
     <div class="card-body">
         <p>
             <b>Fuga nº1 en Sol M</b><br>
-            <i>Para trio de cuerda (Diciembre 2018 - Enero 2019).</i>
+            <i>{{ _('Para trio de cuerda') }} ({{ _('Diciembre') }} 2018 - {{ _('Enero') }} 2019).</i>
         </p>
         <p>
-            Siguiendo la estructura de las fugas de escuela francesa.<br>
-            El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).
+            {{ _('Siguiendo la estructura de las fugas de escuela francesa.') }}<br>
+            {{ _('El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=UstvUnPDcac" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Pieza anotada</a>
+        <a href="https://www.youtube.com/watch?v=UstvUnPDcac" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza anotada') }}</a>
         <a href="/static/pdf/Fuga1SolM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
     </div>
 </div>
@@ -87,32 +87,32 @@
 <div class="card border-c ml-2 mr-2 mt-2" id="quintal">
     <div class="card-body">
         <p>
-            <b>Quintal per corda</b><br>
-            <i>Para orquesta de cuerda (Marzo - Junio 2018).</i>
+            <b>{{ _('Quintal para Cuerda') }}</b><br>
+            <i>{{ _('Para orquesta de cuerda') }} ({{ _('Marzo') }} - {{ _('Junio') }} 2018).</i>
         </p>
         <p>
-            Pieza en armonía por quintas y cuartas.
+            {{ _('Pieza en armonía por quintas y cuartas.') }}
             <br>
-            La pieza fue mi primer contacto serio con la escritura para orquesta de cuerda.
+            {{ _('La pieza fue mi primer contacto serio con la escritura para orquesta de cuerda.') }}
         </p>
-        <i>Un rato que tenga saco las partituras y la cuelgo...</i>
+        <i>{{ _('Un rato que tenga saco las partituras y la cuelgo...') }}</i>
     </div>
 </div>
 
 <div class="card border-c ml-2 mr-2 mt-2" id="quartetacinc">
     <div class="card-body">
         <p>
-            <b>Quartet a Cinc en Sib M</b><br>
-            <i>Para cuarteto de viento madera (Noviembre 2017 - Enero 2018).</i>
+            <b>{{ _('Cuarteto a Cinco en Sib M') }}</b><br>
+            <i>{{ _('Para cuarteto de viento madera') }} ({{ _('Noviembre') }} 2017 - {{ _('Enero') }} 2018).</i>
         </p>
         <p>
-            Movimiento lento en cinco por cuatro.<br>
-            La pieza fue mi primer contacto serio con la escritura para cuarteto de viento.
+            {{ _('Movimiento lento en cinco por cuatro.') }}<br>
+            {{ _('La pieza fue mi primer contacto serio con la escritura para cuarteto de viento.') }}
         </p>
         <a href="/static/pdf/QuartetSibM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
         <a href="/static/pdf/QuartetSibM_fl.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Flauta</a>
-        <a href="/static/pdf/QuartetSibM_ob.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Oboe</a>
-        <a href="/static/pdf/QuartetSibM_cl.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Clarinete</a>
+        <a href="/static/pdf/QuartetSibM_ob.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Oboe') }}</a>
+        <a href="/static/pdf/QuartetSibM_cl.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Clarinete') }}</a>
         <a href="/static/pdf/QuartetSibM_fg.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Fagot</a>
     </div>
 </div>

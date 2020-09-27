@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-27 21:10+0200\n"
+"POT-Creation-Date: 2020-09-28 00:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,1031 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#: templates/anki.html:7
+msgid "Recursos Anki"
+msgstr ""
+
+#: templates/anki.html:8
+msgid "Barajas que he creado y tutoriales."
+msgstr ""
+
+#: templates/anki.html:14
+msgid "Qué es, instalación y cómo usarlo."
+msgstr ""
+
+#: templates/anki.html:16
+msgid "En este tutorial os cuento cómo instalar Anki y cómo se usa."
+msgstr ""
+
+#: templates/anki.html:17 templates/anki.html:31
+msgid "Hay vídeo en YouTube y un resumen en pdf."
+msgstr ""
+
+#: templates/anki.html:20 templates/anki.html:21 templates/anki.html:34
+#: templates/anki.html:35 templates/anki.html:54 templates/anki.html:55
+msgid "Resumen"
+msgstr ""
+
+#: templates/anki.html:28
+msgid "Cómo crear tus propias tarjetas."
+msgstr ""
+
+#: templates/anki.html:30
+msgid "En este tutorial os cuento cómo crear vuestras propias tarjetas."
+msgstr ""
+
+#: templates/anki.html:36
+msgid "Apuntes Código"
+msgstr ""
+
+#: templates/anki.html:44
+msgid "Cómo actualizar una baraja externa (y solucionar el posible desorden)."
+msgstr ""
+
+#: templates/anki.html:46
+msgid ""
+"A veces al actualizar una baraja que ha hecho otra persona se lía el "
+"orden de tarjetas nuevas."
+msgstr ""
+
+#: templates/anki.html:47
+msgid "O también al bajar una baraja por primera vez puede que esté liado ya."
+msgstr ""
+
+#: templates/anki.html:48
+msgid "En estas diapositivas vemos cómo arreglarlo."
+msgstr ""
+
+#: templates/anki.html:50
+msgid "Un día de estos haré un vídeo rápido de esto, pero por ahora está aquí."
+msgstr ""
+
+#: templates/anki.html:51
+msgid "Me falta investigar si se puede hacer desde el móvil y cómo."
+msgstr ""
+
+#: templates/anki.html:64
+msgid "Mnemotecnia Capitales de Asia"
+msgstr ""
+
+#: templates/anki.html:65 templates/music.html:46 templates/music.html:91
+msgid "Junio"
+msgstr ""
+
+#: templates/anki.html:67
+msgid ""
+"Capitales de los paises de asia con frases mnemotécnicas que había hecho "
+"para mi prima Raquel el Mayo anterior."
+msgstr ""
+
+#: templates/anki.html:69 templates/anki.html:94 templates/anki.html:118
+#: templates/anki.html:145 templates/anki.html:170 templates/anki.html:201
+#: templates/anki.html:235
+msgid "Campos:"
+msgstr ""
+
+#: templates/anki.html:73 templates/anki.html:78 templates/anki.html:79
+#: templates/anki.html:80 templates/anki.html:204 templates/anki.html:212
+#: templates/anki.html:213
+msgid "Imagen"
+msgstr ""
+
+#: templates/anki.html:74 templates/anki.html:78 templates/anki.html:79
+#: templates/anki.html:80 templates/anki.html:103
+msgid "Mnemotecnia"
+msgstr ""
+
+#: templates/anki.html:76 templates/anki.html:101 templates/anki.html:175
+msgid "Tarjetas"
+msgstr ""
+
+#: templates/anki.html:82 templates/anki.html:105 templates/anki.html:131
+#: templates/anki.html:155 templates/anki.html:180 templates/anki.html:221
+#: templates/anki.html:248
+msgid "Descarga"
+msgstr ""
+
+#: templates/anki.html:82 templates/anki.html:105 templates/anki.html:131
+#: templates/anki.html:155 templates/anki.html:180 templates/anki.html:221
+#: templates/anki.html:248
+msgid "notas"
+msgstr ""
+
+#: templates/anki.html:89
+msgid "Valencias Química"
+msgstr ""
+
+#: templates/anki.html:90 templates/anki.html:139
+msgid "Septiembre"
+msgstr ""
+
+#: templates/anki.html:92
+msgid "Valencias de los elementos que se suelen memorizar de química inorgánica."
+msgstr ""
+
+#: templates/anki.html:96 templates/anki.html:103
+msgid "Elemento"
+msgstr ""
+
+#: templates/anki.html:97 templates/anki.html:103
+msgid "Valencia"
+msgstr ""
+
+#: templates/anki.html:98
+msgid "Otros con la misma valencia"
+msgstr ""
+
+#: templates/anki.html:99
+msgid "Mnemotecnia [CA]"
+msgstr ""
+
+#: templates/anki.html:103
+msgid "Otros"
+msgstr ""
+
+#: templates/anki.html:112
+msgid "Verbos Irregulares Inglés"
+msgstr ""
+
+#: templates/anki.html:113 templates/anki.html:165 templates/music.html:76
+msgid "Diciembre"
+msgstr ""
+
+#: templates/anki.html:115
+msgid "Una lista amplia de los verbos irregulares de inglés con la traducción."
+msgstr ""
+
+#: templates/anki.html:116
+msgid "La traducción está en catalán."
+msgstr ""
+
+#: templates/anki.html:123
+msgid "Traducción [CA]"
+msgstr ""
+
+#: templates/anki.html:124 templates/anki.html:149
+msgid "Comentarios [CA]"
+msgstr ""
+
+#: templates/anki.html:126 templates/anki.html:151 templates/anki.html:210
+#: templates/anki.html:243
+msgid "Tarjetas:"
+msgstr ""
+
+#: templates/anki.html:128 templates/anki.html:129
+msgid "Traducción"
+msgstr ""
+
+#: templates/anki.html:128 templates/anki.html:129 templates/anki.html:153
+#: templates/anki.html:241 templates/anki.html:245 templates/anki.html:246
+msgid "Comentarios"
+msgstr ""
+
+#: templates/anki.html:138
+msgid "Reglas de Derivación"
+msgstr ""
+
+#: templates/anki.html:141
+msgid "Reglas de derivación a través de ejemplos."
+msgstr ""
+
+#: templates/anki.html:142
+msgid "Incluye multiplicación, división y regla de la cadena."
+msgstr ""
+
+#: templates/anki.html:143
+msgid "Los comentarios están en catalán."
+msgstr ""
+
+#: templates/anki.html:147 templates/anki.html:153
+msgid "Función"
+msgstr ""
+
+#: templates/anki.html:164
+msgid "Braille Español/Catalán"
+msgstr ""
+
+#: templates/anki.html:167
+msgid "Las letras y los símbolos más típicos."
+msgstr ""
+
+#: templates/anki.html:168
+msgid "En catalán las tildes van algo distintas, así que las añadí también."
+msgstr ""
+
+#: templates/anki.html:173 templates/anki.html:177 templates/anki.html:178
+msgid "Significado"
+msgstr ""
+
+#: templates/anki.html:187
+msgid "Lengua de Signos Catalana"
+msgstr ""
+
+#: templates/anki.html:188 templates/music.html:61
+msgid "Febrero"
+msgstr ""
+
+#: templates/anki.html:188
+msgid "En proceso..."
+msgstr ""
+
+#: templates/anki.html:190
+msgid ""
+"Vocabulario de lengua de signos catalana, con foto, signoescritura y "
+"notas sobre gramática básica."
+msgstr ""
+
+#: templates/anki.html:192
+msgid "Referencias:"
+msgstr ""
+
+#: templates/anki.html:194
+msgid "Dosier de "
+msgstr ""
+
+#: templates/anki.html:195
+msgid "Diccionario en vídeo de la Generalitat."
+msgstr ""
+
+#: templates/anki.html:196
+msgid "Diccionario de signoescritura"
+msgstr ""
+
+#: templates/anki.html:197
+msgid "Apuntes de signoescritura"
+msgstr ""
+
+#: templates/anki.html:198
+msgid "Apuntes de gramática"
+msgstr ""
+
+#: templates/anki.html:199
+msgid "Vídeos de vocabulario de"
+msgstr ""
+
+#: templates/anki.html:203 templates/anki.html:212 templates/anki.html:213
+msgid "Palabra"
+msgstr ""
+
+#: templates/anki.html:205 templates/anki.html:212 templates/anki.html:213
+msgid "Descripción"
+msgstr ""
+
+#: templates/anki.html:206 templates/anki.html:212 templates/anki.html:213
+msgid "SignoEscritura"
+msgstr ""
+
+#: templates/anki.html:207
+msgid "Aclaraciones y teoría"
+msgstr ""
+
+#: templates/anki.html:208
+msgid "Comentarios de la signoescritura"
+msgstr ""
+
+#: templates/anki.html:216
+msgid "Cuidado:"
+msgstr ""
+
+#: templates/anki.html:216
+msgid ""
+"Si vas en serio a intentar aprender LSC, esta baraja no será suficiente "
+"(deberías al menos echar una ojeada también a los apuntes de gramática "
+"del IEC)."
+msgstr ""
+
+#: templates/anki.html:219
+msgid "Comprueba que empieza por el abecedario!"
+msgstr ""
+
+#: templates/anki.html:219
+msgid "Si no es así tendrás que "
+msgstr ""
+
+#: templates/anki.html:219
+msgid ""
+"En el ordenador vas a la pestaña \"explorar\". El campo ordenado tiene "
+"que tener cosas tipo \"T0.01\", y luego puedes seleccionar todas las que "
+"en la columna \"programadas\" dicen \"Nuevas\" y dar: botón derecho / "
+"reprogramar / al final de la cola."
+msgstr ""
+
+#: templates/anki.html:228
+msgid "Tiempos Verbales Catalanes"
+msgstr ""
+
+#: templates/anki.html:229 templates/music.html:91
+msgid "Marzo"
+msgstr ""
+
+#: templates/anki.html:231
+msgid "Tiempos verbales catalanes."
+msgstr ""
+
+#: templates/anki.html:232
+msgid ""
+"Toda la primera conjugación, las formas que en 2a y 3a son distintas, y "
+"los tiempos que cambian según el modelo en la 2a y 3a."
+msgstr ""
+
+#: templates/anki.html:233
+msgid "Incluye algunos trucos para recordar mejor los tiempos."
+msgstr ""
+
+#: templates/anki.html:237 templates/anki.html:245 templates/anki.html:246
+msgid "Modo"
+msgstr ""
+
+#: templates/anki.html:238 templates/anki.html:245 templates/anki.html:246
+msgid "Tiempo"
+msgstr ""
+
+#: templates/anki.html:239 templates/anki.html:245 templates/anki.html:246
+msgid "Modelo"
+msgstr ""
+
+#: templates/anki.html:240 templates/anki.html:245 templates/anki.html:246
+msgid "Conjugación"
+msgstr ""
+
+#: templates/ankicode.html:2
+msgid "Código Anki"
+msgstr ""
+
+#: templates/ankicode.html:5
+msgid "Resumen de HTML y CSS (...y LaTeX) en Anki"
+msgstr ""
+
+#: templates/ankicode.html:6
+msgid "Y enlaces para toquetear el código que vimos (y el de otras tarjetas)."
+msgstr ""
+
+#: templates/ankicode.html:12 templates/docentes.html:12
+msgid "Índice"
+msgstr ""
+
+#: templates/ankicode.html:14 templates/ankicode.html:80
+msgid "Código de Anki"
+msgstr ""
+
+#: templates/ankicode.html:16 templates/ankicode.html:85
+msgid "Datos de la tarjeta"
+msgstr ""
+
+#: templates/ankicode.html:19 templates/ankicode.html:96
+msgid "Estructura de la tarjeta"
+msgstr ""
+
+#: templates/ankicode.html:21 templates/ankicode.html:101
+msgid "Salto de línea"
+msgstr ""
+
+#: templates/ankicode.html:22 templates/ankicode.html:114
+msgid "Línea horizontal"
+msgstr ""
+
+#: templates/ankicode.html:23 templates/ankicode.html:127
+msgid "Negrita"
+msgstr ""
+
+#: templates/ankicode.html:25 templates/ankicode.html:151
+msgid "Párrafo"
+msgstr ""
+
+#: templates/ankicode.html:26 templates/ankicode.html:165
+msgid "Sección"
+msgstr ""
+
+#: templates/ankicode.html:27 templates/ankicode.html:181
+msgid "Tabla"
+msgstr ""
+
+#: templates/ankicode.html:28 templates/ankicode.html:217
+msgid "Combinar celdas"
+msgstr ""
+
+#: templates/ankicode.html:29 templates/ankicode.html:253
+msgid "Poner nombre a las cosas"
+msgstr ""
+
+#: templates/ankicode.html:32
+msgid "Aspecto de la tarjeta (CSS)"
+msgstr ""
+
+#: templates/ankicode.html:34 templates/ankicode.html:271
+msgid "Acceder a las cosas por el tipo"
+msgstr ""
+
+#: templates/ankicode.html:35 templates/ankicode.html:284
+msgid "Acceder a las cosas por el nombre"
+msgstr ""
+
+#: templates/ankicode.html:36 templates/ankicode.html:297
+msgid "Aspecto general de la tarjeta"
+msgstr ""
+
+#: templates/ankicode.html:37 templates/ankicode.html:324
+msgid "Bordes de las tablas"
+msgstr ""
+
+#: templates/ankicode.html:38 templates/ankicode.html:347
+msgid "Márgenes"
+msgstr ""
+
+#: templates/ankicode.html:39 templates/ankicode.html:365
+msgid "Ancho y alto"
+msgstr ""
+
+#: templates/ankicode.html:41 templates/ankicode.html:383
+msgid "Ecuaciones matemáticas"
+msgstr ""
+
+#: templates/ankicode.html:43 templates/ankicode.html:388
+msgid "Bloque de ecuación"
+msgstr ""
+
+#: templates/ankicode.html:44 templates/ankicode.html:404
+msgid "Números y letras"
+msgstr ""
+
+#: templates/ankicode.html:45 templates/ankicode.html:417
+msgid "Signos de multiplicar y dividir"
+msgstr ""
+
+#: templates/ankicode.html:46 templates/ankicode.html:433
+msgid "Potencia y subíndice"
+msgstr ""
+
+#: templates/ankicode.html:47 templates/ankicode.html:449
+msgid "Agrupar cosas"
+msgstr ""
+
+#: templates/ankicode.html:48 templates/ankicode.html:462
+msgid "Fracciones en vertical"
+msgstr ""
+
+#: templates/ankicode.html:49 templates/ankicode.html:474
+msgid "Raíz cuadrada"
+msgstr ""
+
+#: templates/ankicode.html:50 templates/ankicode.html:488
+msgid "Letras griegas"
+msgstr ""
+
+#: templates/ankicode.html:51 templates/ankicode.html:505
+msgid "Integrales y sumatorios"
+msgstr ""
+
+#: templates/ankicode.html:52 templates/ankicode.html:523
+msgid "Espacios"
+msgstr ""
+
+#: templates/ankicode.html:53 templates/ankicode.html:542
+msgid "Sistemas de ecuaciones"
+msgstr ""
+
+#: templates/ankicode.html:62
+msgid "Toquetea el código de mis tarjetas"
+msgstr ""
+
+#: templates/ankicode.html:64
+msgid "Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas."
+msgstr ""
+
+#: templates/ankicode.html:67
+msgid "Tarjeta del tutorial"
+msgstr ""
+
+#: templates/ankicode.html:68
+msgid "Tarjeta de valencias"
+msgstr ""
+
+#: templates/ankicode.html:69
+msgid "Tarjeta Irregular Verbs"
+msgstr ""
+
+#: templates/ankicode.html:70
+msgid "Tarjeta LSC"
+msgstr ""
+
+#: templates/ankicode.html:71
+msgid "Tarjeta tiempos verbales catalanes"
+msgstr ""
+
+#: templates/ankicode.html:86
+msgid "{{Campo}}"
+msgstr ""
+
+#: templates/ankicode.html:89
+msgid "Escribo {{Capital}} donde quiero que aparezca"
+msgstr ""
+
+#: templates/ankicode.html:105
+msgid "Aquí está la primera línea,"
+msgstr ""
+
+#: templates/ankicode.html:106
+msgid "Y aquí está la segunda."
+msgstr ""
+
+#: templates/ankicode.html:118
+msgid "Texto antes de la línea"
+msgstr ""
+
+#: templates/ankicode.html:119
+msgid "Texto después"
+msgstr ""
+
+#: templates/ankicode.html:128
+msgid "cosas gruesas"
+msgstr ""
+
+#: templates/ankicode.html:131
+msgid "Deben rodear"
+msgstr ""
+
+#: templates/ankicode.html:131
+msgid "el cacho"
+msgstr ""
+
+#: templates/ankicode.html:131
+msgid "que quieres resaltar."
+msgstr ""
+
+#: templates/ankicode.html:139
+msgid "Cursiva"
+msgstr ""
+
+#: templates/ankicode.html:140
+msgid "cosas italianas"
+msgstr ""
+
+#: templates/ankicode.html:143
+msgid "El texto que quieras torcido,"
+msgstr ""
+
+#: templates/ankicode.html:143
+msgid "entre las etiquetas"
+msgstr ""
+
+#: templates/ankicode.html:152
+msgid "texto a su bola"
+msgstr ""
+
+#: templates/ankicode.html:156
+msgid "El texto de aquí dentro tendrá márgenes arriba y abajo."
+msgstr ""
+
+#: templates/ankicode.html:166
+msgid "texto no tan a su bola"
+msgstr ""
+
+#: templates/ankicode.html:170
+msgid "Este texto quería separarlo espiritualmente de lo demás textos."
+msgstr ""
+
+#: templates/ankicode.html:171
+msgid "No cambia nada (va a tener el mismo contacto social con los demás)."
+msgstr ""
+
+#: templates/ankicode.html:172
+msgid "...pero como está delimitado podré ponerle nombre para decorar."
+msgstr ""
+
+#: templates/ankicode.html:185 templates/ankicode.html:203
+msgid "cabecera izquierda"
+msgstr ""
+
+#: templates/ankicode.html:186 templates/ankicode.html:204
+msgid "cabecera derecha"
+msgstr ""
+
+#: templates/ankicode.html:189 templates/ankicode.html:207
+#: templates/ankicode.html:225 templates/ankicode.html:243
+msgid "casilla normal izquierda"
+msgstr ""
+
+#: templates/ankicode.html:190 templates/ankicode.html:208
+#: templates/ankicode.html:226 templates/ankicode.html:244
+msgid "casilla normal derecha"
+msgstr ""
+
+#: templates/ankicode.html:196
+msgid "lo engloba todo,"
+msgstr ""
+
+#: templates/ankicode.html:197
+msgid "engloba las filas."
+msgstr ""
+
+#: templates/ankicode.html:198
+msgid "Dentro de la primera fila las casillas serán"
+msgstr ""
+
+#: templates/ankicode.html:199
+msgid "Dentro de las demás filas las casillas serán"
+msgstr ""
+
+#: templates/ankicode.html:221 templates/ankicode.html:239
+msgid "esto ocupa dos columnas"
+msgstr ""
+
+#: templates/ankicode.html:222 templates/ankicode.html:240
+msgid "esto ocupa dos filas"
+msgstr ""
+
+#: templates/ankicode.html:232
+msgid "Podemos hacer que una celda ocupe dos columnas añadiendo"
+msgstr ""
+
+#: templates/ankicode.html:233
+msgid "(y por tanto nos saltamos la siguiente columna)"
+msgstr ""
+
+#: templates/ankicode.html:234
+msgid "Y podemos hacer lo mismo con las filas poniendo"
+msgstr ""
+
+#: templates/ankicode.html:235
+msgid "(y por tanto en la siguiente fila no ponemos esa columna)"
+msgstr ""
+
+#: templates/ankicode.html:254 templates/ankicode.html:288
+msgid "nombre"
+msgstr ""
+
+#: templates/ankicode.html:254
+msgid "Párrafo que tiene nombre"
+msgstr ""
+
+#: templates/ankicode.html:257
+msgid "Cualquier etiqueta puede tener nombre."
+msgstr ""
+
+#: templates/ankicode.html:258
+msgid "Lo típico son cachos de una tabla, secciones, párrafos..."
+msgstr ""
+
+#: templates/ankicode.html:259
+msgid "Darle nombre nos permite luego elegir su aspecto desde el CSS."
+msgstr ""
+
+#: templates/ankicode.html:266
+msgid "Aspecto de la tarjeta"
+msgstr ""
+
+#: templates/ankicode.html:272 templates/ankicode.html:285
+msgid "colorinchis-y-cosas"
+msgstr ""
+
+#: templates/ankicode.html:275
+msgid "Para cambiar el aspecto de las casillas normales"
+msgstr ""
+
+#: templates/ankicode.html:275
+msgid "de las tablas."
+msgstr ""
+
+#: templates/ankicode.html:276
+msgid "Cuidado que si es una etiqueta no lleva punto."
+msgstr ""
+
+#: templates/ankicode.html:288
+msgid "Para cambiar el aspecto de algo que tenga"
+msgstr ""
+
+#: templates/ankicode.html:289
+msgid "Ojo que si es una clase (un nombre) tiene que llevar punto."
+msgstr ""
+
+#: templates/ankicode.html:308
+msgid "Anki lleva una clase previa que lo engloba todo"
+msgstr ""
+
+#: templates/ankicode.html:309
+msgid ""
+"Aquí podemos cambiar las pintas generales de todo antes de meternos a los"
+" detalles."
+msgstr ""
+
+#: templates/ankicode.html:312
+msgid "La letra por defecto es"
+msgstr ""
+
+#: templates/ankicode.html:313
+msgid "marca la medida de la letra."
+msgstr ""
+
+#: templates/ankicode.html:314
+msgid "El texto viene en"
+msgstr ""
+
+#: templates/ankicode.html:314
+msgid "pero se puede alinear hacia los lados."
+msgstr ""
+
+#: templates/ankicode.html:315
+msgid "El color del texto"
+msgstr ""
+
+#: templates/ankicode.html:316
+msgid "El color de fondo de la tarjeta entera será"
+msgstr ""
+
+#: templates/ankicode.html:332
+msgid "Podemos aplicar el mismo estilo a varias cosas a la vez:"
+msgstr ""
+
+#: templates/ankicode.html:333 templates/ankicode.html:339
+msgid "Si no usamos"
+msgstr ""
+
+#: templates/ankicode.html:333
+msgid "no veremos la tabla (el borde será invisible)."
+msgstr ""
+
+#: templates/ankicode.html:335
+msgid "marca el grueso de la línea"
+msgstr ""
+
+#: templates/ankicode.html:336
+msgid "marca la continuidad:"
+msgstr ""
+
+#: templates/ankicode.html:337
+msgid "marca el color:"
+msgstr ""
+
+#: templates/ankicode.html:339
+msgid "el borde será doble (tendrán borde la tabla y las casillas)."
+msgstr ""
+
+#: templates/ankicode.html:356
+msgid "Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes."
+msgstr ""
+
+#: templates/ankicode.html:357
+msgid "Poniendo"
+msgstr ""
+
+#: templates/ankicode.html:357
+msgid "a ambos lados se centra ella sola."
+msgstr ""
+
+#: templates/ankicode.html:367
+msgid "casilla"
+msgstr ""
+
+#: templates/ankicode.html:374
+msgid ""
+"Podemos elegir las medidas de elementos de la tabla (o de la tabla "
+"entera)."
+msgstr ""
+
+#: templates/ankicode.html:375
+msgid "Ponemos"
+msgstr ""
+
+#: templates/ankicode.html:375
+msgid "y la cantidad de píxeles."
+msgstr ""
+
+#: templates/ankicode.html:389
+msgid "Ecuación escrita en LaTeX"
+msgstr ""
+
+#: templates/ankicode.html:392
+msgid ""
+"Para indicarle a Anki que voy a escribir una ecuación, la rodeo con "
+"dólares."
+msgstr ""
+
+#: templates/ankicode.html:393
+msgid "Por ejemplo, escribo"
+msgstr ""
+
+#: templates/ankicode.html:393
+msgid "para dibujar la ecuación $3x = 4$."
+msgstr ""
+
+#: templates/ankicode.html:395
+msgid ""
+"Todos los códigos de LaTeX que vemos debajo tienen que estar en una "
+"ecuación de estas."
+msgstr ""
+
+#: templates/ankicode.html:408
+msgid "Los números y letras de la ecuación se escriben tal cual."
+msgstr ""
+
+#: templates/ankicode.html:409
+msgid "Por ejemplo, poniendo"
+msgstr ""
+
+#: templates/ankicode.html:409 templates/ankicode.html:466
+#: templates/ankicode.html:478 templates/ankicode.html:480
+#: templates/ankicode.html:513
+msgid "me dibuja"
+msgstr ""
+
+#: templates/ankicode.html:421
+msgid "Punto de multiplicar:"
+msgstr ""
+
+#: templates/ankicode.html:421 templates/ankicode.html:422
+#: templates/ankicode.html:423 templates/ankicode.html:437
+#: templates/ankicode.html:438 templates/ankicode.html:454
+msgid "nos dibuja"
+msgstr ""
+
+#: templates/ankicode.html:422
+msgid "Cruz de multiplicar:"
+msgstr ""
+
+#: templates/ankicode.html:423
+msgid "Signo de división:"
+msgstr ""
+
+#: templates/ankicode.html:425
+msgid "Otro signo útil es"
+msgstr ""
+
+#: templates/ankicode.html:425
+msgid "que dibuja"
+msgstr ""
+
+#: templates/ankicode.html:437
+msgid "El exponente es como lo escribiríamos:"
+msgstr ""
+
+#: templates/ankicode.html:438
+msgid "El subíndice va con barra baja:"
+msgstr ""
+
+#: templates/ankicode.html:440
+msgid "Si queremos poner exponentes o subíndices con más de un carácter o cifra,"
+msgstr ""
+
+#: templates/ankicode.html:441
+msgid "habrá que agrupar todo el texto (ponerlo entre llaves"
+msgstr ""
+
+#: templates/ankicode.html:450
+msgid "{cosas que van juntas}"
+msgstr ""
+
+#: templates/ankicode.html:453
+msgid ""
+"Siempre que quiera agrupar cosas para que actúen como un solo bloque, uso"
+" las llaves."
+msgstr ""
+
+#: templates/ankicode.html:454 templates/ankicode.html:549
+msgid "Por ejemplo,"
+msgstr ""
+
+#: templates/ankicode.html:454
+msgid "y"
+msgstr ""
+
+#: templates/ankicode.html:466 templates/ankicode.html:478
+msgid "Si escribo"
+msgstr ""
+
+#: templates/ankicode.html:475
+msgid "\\sqrt{cosas dentro de la raíz}"
+msgstr ""
+
+#: templates/ankicode.html:480
+msgid "También puedo elegir el índice: si escribo"
+msgstr ""
+
+#: templates/ankicode.html:492
+msgid "Se pueden escribir"
+msgstr ""
+
+#: templates/ankicode.html:492
+msgid "letras griegas"
+msgstr ""
+
+#: templates/ankicode.html:492
+msgid "poniendo cómo se llaman después de una barra."
+msgstr ""
+
+#: templates/ankicode.html:493
+msgid ""
+"El código distingue mayúscula y minúscula, así que el ejemplo de arriba "
+"dibujaría"
+msgstr ""
+
+#: templates/ankicode.html:495
+msgid "Algunas minúsculas, como"
+msgstr ""
+
+#: templates/ankicode.html:495
+msgid "tienen variante:"
+msgstr ""
+
+#: templates/ankicode.html:497
+msgid "El infinito se puede hacer así, también:"
+msgstr ""
+
+#: templates/ankicode.html:497
+msgid "dibuja"
+msgstr ""
+
+#: templates/ankicode.html:509
+msgid "Los símbolos para integral y sumatorio son"
+msgstr ""
+
+#: templates/ankicode.html:511
+msgid "Para acotar la integral simplemente usamos potencia y subíndice:"
+msgstr ""
+
+#: templates/ankicode.html:512
+msgid "Para acotar la suma hay que usar"
+msgstr ""
+
+#: templates/ankicode.html:512
+msgid "que sirve para escribir arriba y debajo del anterior."
+msgstr ""
+
+#: templates/ankicode.html:513 templates/ankicode.html:531
+msgid "Por ejemplo: si escribo"
+msgstr ""
+
+#: templates/ankicode.html:515
+msgid "Y bueno, los más friquis podéis hacer integrales cerradas con"
+msgstr ""
+
+#: templates/ankicode.html:527
+msgid "Por defecto la fórmula decide ella misma qué espacios hay que poner."
+msgstr ""
+
+#: templates/ankicode.html:528
+msgid ""
+"Si quieres forzar espacios a propósito tienes estos cinco para elegir, de"
+" estrecho a ancho."
+msgstr ""
+
+#: templates/ankicode.html:529
+msgid "La cuarta opción es la barra seguida de un espacio."
+msgstr ""
+
+#: templates/ankicode.html:531
+msgid "me separa sólo la b en el dibujo"
+msgstr ""
+
+#: templates/ankicode.html:533
+msgid "También puedo crear un espacio a medida escribiendo texto transparente con"
+msgstr ""
+
+#: templates/ankicode.html:534
+msgid "Por ejemplo, si escribo"
+msgstr ""
+
+#: templates/ankicode.html:534
+msgid "me deja lo que ocupa"
+msgstr ""
+
+#: templates/ankicode.html:534
+msgid "como espacio"
+msgstr ""
+
+#: templates/ankicode.html:543
+msgid "segunda"
+msgstr ""
+
+#: templates/ankicode.html:546
+msgid ""
+"Para agrupar cosas en una llave, tenemos que crear un \"entorno\" de "
+"sistema de ecuaciones."
+msgstr ""
+
+#: templates/ankicode.html:547
+msgid "Empezaremos con"
+msgstr ""
+
+#: templates/ankicode.html:547
+msgid "saltamos de línea con"
+msgstr ""
+
+#: templates/ankicode.html:547
+msgid "y cerramos con"
+msgstr ""
+
+#: templates/ankicode.html:549
+msgid "nos dará"
+msgstr ""
+
+#: templates/base.html:42
+msgid "Inicio"
+msgstr ""
+
+#: templates/base.html:48
+msgid "Fichas"
+msgstr ""
 
 #: templates/docentes.html:2
 msgid "Docentes"
@@ -27,10 +1052,6 @@ msgstr ""
 
 #: templates/docentes.html:8
 msgid "Formularios y fichas que he ido haciendo, de distintos temas y materias."
-msgstr ""
-
-#: templates/docentes.html:12
-msgid "Índice"
 msgstr ""
 
 #: templates/docentes.html:14 templates/docentes.html:38
@@ -176,6 +1197,244 @@ msgstr ""
 msgid "Operaciones en columna"
 msgstr ""
 
+#: templates/index.html:25
+msgid "Bienvenidas a mi página!"
+msgstr ""
+
+#: templates/index.html:27
+msgid ""
+"A lo largo del tiempo he ido aprendiendo y haciendo muchas cosas "
+"distintas. Puramente por curiosidad."
+msgstr ""
+
+#: templates/index.html:28
+msgid "Estas de aquí son algunas de ellas (estrellitas en las novedades ✨)."
+msgstr ""
+
+#: templates/index.html:65
+msgid "Fugas comentadas:"
+msgstr ""
+
+#: templates/index.html:68 templates/music.html:60
+msgid "en Mi Frigio"
+msgstr ""
+
+#: templates/index.html:70
+msgid "Música para un calamar:"
+msgstr ""
+
+#: templates/index.html:72
+msgid "Vídeo de la pieza (con partitura)"
+msgstr ""
+
+#: templates/index.html:73
+msgid "Los secretos compositivos que esconde (subs ES)"
+msgstr ""
+
+#: templates/index.html:75 templates/index.html:90 templates/index.html:147
+msgid "Tutoriales:"
+msgstr ""
+
+#: templates/index.html:77
+msgid "Cómo tocar con un bote de alubias"
+msgstr ""
+
+#: templates/index.html:80
+msgid "Mi música (partituras)"
+msgstr ""
+
+#: templates/index.html:86
+msgid "Memoria y productividad"
+msgstr ""
+
+#: templates/index.html:92
+msgid "GTD con Evernote"
+msgstr ""
+
+#: templates/index.html:93
+msgid "Cómo memorizar una baraja de póquer desordenada"
+msgstr ""
+
+#: templates/index.html:96 templates/index.html:155
+msgid "Apuntes:"
+msgstr ""
+
+#: templates/index.html:98
+msgid "Cómo implementar GTD con Evernote"
+msgstr ""
+
+#: templates/index.html:99
+msgid "Diagrama de flujo y repaso semanal"
+msgstr ""
+
+#: templates/index.html:106
+msgid "Ilustración"
+msgstr ""
+
+#: templates/index.html:108
+msgid "Diseño de personajes:"
+msgstr ""
+
+#: templates/index.html:110
+msgid "Monstruos para un escape room de jugarXjugar"
+msgstr ""
+
+#: templates/index.html:112
+msgid "Camisetas:"
+msgstr ""
+
+#: templates/index.html:114
+msgid "Camiseta para el club de juegos de mesa de jugarXjugar"
+msgstr ""
+
+#: templates/index.html:116
+msgid "Personal:"
+msgstr ""
+
+#: templates/index.html:118
+msgid "Dibujo de una Lluvia de vacas"
+msgstr ""
+
+#: templates/index.html:125
+msgid "Programación"
+msgstr ""
+
+#: templates/index.html:129 templates/index.html:211
+msgid "Generador de fichas de mates"
+msgstr ""
+
+#: templates/index.html:130
+msgid "Esta misma web, que también es artesanal"
+msgstr ""
+
+#: templates/index.html:134
+msgid "Juego matemático (descomposición)"
+msgstr ""
+
+#: templates/index.html:135
+msgid "Editor de esquemas musicales"
+msgstr ""
+
+#: templates/index.html:137
+msgid "Rusca8 en GitHub"
+msgstr ""
+
+#: templates/index.html:149
+msgid "La app para estudiar sin esfuerzo"
+msgstr ""
+
+#: templates/index.html:150
+msgid "Crea tus propias barajas"
+msgstr ""
+
+#: templates/index.html:157
+msgid "Cómo instalarlo y usarlo"
+msgstr ""
+
+#: templates/index.html:158
+msgid "Hacer tus propias tarjetas"
+msgstr ""
+
+#: templates/index.html:161
+msgid "Barajas y Tutoriales"
+msgstr ""
+
+#: templates/index.html:167
+msgid "Diseño gráfico"
+msgstr ""
+
+#: templates/index.html:169
+msgid "Infografía:"
+msgstr ""
+
+#: templates/index.html:171
+msgid "Artículo para Climate Tracker"
+msgstr ""
+
+#: templates/index.html:173
+msgid "Logotipos:"
+msgstr ""
+
+#: templates/index.html:175
+msgid "Propuesta de logotipo para Som Energia"
+msgstr ""
+
+#: templates/index.html:176
+msgid "Nuevo logotipo para el grupo Antaviana"
+msgstr ""
+
+#: templates/index.html:177
+msgid "Propuestas para TwoSetViolin"
+msgstr ""
+
+#: templates/index.html:183
+msgid "Carteles:"
+msgstr ""
+
+#: templates/index.html:185
+msgid "Cartel para la extraescolar de Antaviana"
+msgstr ""
+
+#: templates/index.html:187
+msgid "Logotipos"
+msgstr ""
+
+#: templates/index.html:197
+msgid "Cosas que he construído, en"
+msgstr ""
+
+#: templates/index.html:205
+msgid "Recursos docentes"
+msgstr ""
+
+#: templates/index.html:207
+msgid "Fichas y formularios:"
+msgstr ""
+
+#: templates/index.html:209
+msgid "Formulario de movimientos"
+msgstr ""
+
+#: templates/index.html:210
+msgid "Ficha de circuitos eléctricos de Ciclo Formativo"
+msgstr ""
+
+#: templates/index.html:213
+msgid "Todas las fichas y formularios"
+msgstr ""
+
+#: templates/index.html:223
+msgid "Campeón de Francia de Multi"
+msgstr ""
+
+#: templates/index.html:224
+msgid "Memorizo un cubo en 35 segundos"
+msgstr ""
+
+#: templates/index.html:225
+msgid "Resuelvo un cubo en 20 segundos con una mano"
+msgstr ""
+
+#: templates/index.html:226
+msgid "Resolviendo cubos bajo el agua sin respirar"
+msgstr ""
+
+#: templates/index.html:230
+msgid "Mis tiempos oficiales"
+msgstr ""
+
+#: templates/index.html:240
+msgid "Estudio de la notación:"
+msgstr ""
+
+#: templates/index.html:246
+msgid "Recopilatorio de trucos:"
+msgstr ""
+
+#: templates/index.html:250
+msgid "Edit con los trucos de"
+msgstr ""
+
 #: templates/logos.html:2
 msgid "Logotipos - Web de David Ruscalleda"
 msgstr ""
@@ -228,5 +1487,169 @@ msgstr ""
 
 #: templates/logos.html:59
 msgid "Ahora en uso en su instagram"
+msgstr ""
+
+#: templates/music.html:6
+msgid "Composición"
+msgstr ""
+
+#: templates/music.html:7
+msgid "Recopilatorio de cosas que he compuesto."
+msgstr ""
+
+#: templates/music.html:12
+msgid "El Calamar y la Merluza"
+msgstr ""
+
+#: templates/music.html:13
+msgid "Para flautín y piano"
+msgstr ""
+
+#: templates/music.html:16
+msgid "Basado en un poema de Enric Larreula bajo el mismo nombre."
+msgstr ""
+
+#: templates/music.html:17
+msgid ""
+"La pieza explora las posibilidades la autoreferencia y lleva al límite el"
+" concepto de leitmotiv."
+msgstr ""
+
+#: templates/music.html:19 templates/music.html:37
+msgid "Pieza"
+msgstr ""
+
+#: templates/music.html:20
+msgid "Análisis"
+msgstr ""
+
+#: templates/music.html:22
+msgid "Flautín"
+msgstr ""
+
+#: templates/music.html:29
+msgid "12 Motivos de Fin de Año"
+msgstr ""
+
+#: templates/music.html:30
+msgid "Dúos cortos para dos violines"
+msgstr ""
+
+#: templates/music.html:30 templates/music.html:76 templates/music.html:106
+msgid "Enero"
+msgstr ""
+
+#: templates/music.html:30 templates/music.html:46
+msgid "Mayo"
+msgstr ""
+
+#: templates/music.html:33
+msgid ""
+"En 2019 en lugar de comer uvas con las campanadas, improvisé 12 motivos "
+"musicales al piano."
+msgstr ""
+
+#: templates/music.html:35
+msgid ""
+"Luego cada mes (en realidad más rápido) hice un dúo corto con cada uno de"
+" ellos."
+msgstr ""
+
+#: templates/music.html:46
+msgid "Para dos trompetas y dos trombones"
+msgstr ""
+
+#: templates/music.html:49
+msgid "Inspirada en el sistema de ejes de Bartók."
+msgstr ""
+
+#: templates/music.html:50
+msgid ""
+"La fuga va pasando de un eje a otro, usando sólo las notas incluídas en "
+"los acordes de ese eje."
+msgstr ""
+
+#: templates/music.html:51
+msgid ""
+"(en algún caso puntual hay alguna nota estraña, pero es tratada "
+"correctamente como tal)"
+msgstr ""
+
+#: templates/music.html:61
+msgid "Para flauta, clarinete y trompa"
+msgstr ""
+
+#: templates/music.html:64
+msgid "Lenta y melancólica, con armonía por cuartas y quintas."
+msgstr ""
+
+#: templates/music.html:65 templates/music.html:80
+msgid ""
+"El vídeo tiene la partitura con el sonido, y anotaciones sobre la "
+"estructura (a modo de análisis)."
+msgstr ""
+
+#: templates/music.html:67 templates/music.html:82
+msgid "Pieza anotada"
+msgstr ""
+
+#: templates/music.html:76
+msgid "Para trio de cuerda"
+msgstr ""
+
+#: templates/music.html:79
+msgid "Siguiendo la estructura de las fugas de escuela francesa."
+msgstr ""
+
+#: templates/music.html:90
+msgid "Quintal para Cuerda"
+msgstr ""
+
+#: templates/music.html:91
+msgid "Para orquesta de cuerda"
+msgstr ""
+
+#: templates/music.html:94
+msgid "Pieza en armonía por quintas y cuartas."
+msgstr ""
+
+#: templates/music.html:96
+msgid ""
+"La pieza fue mi primer contacto serio con la escritura para orquesta de "
+"cuerda."
+msgstr ""
+
+#: templates/music.html:98
+msgid "Un rato que tenga saco las partituras y la cuelgo..."
+msgstr ""
+
+#: templates/music.html:105
+msgid "Cuarteto a Cinco en Sib M"
+msgstr ""
+
+#: templates/music.html:106
+msgid "Para cuarteto de viento madera"
+msgstr ""
+
+#: templates/music.html:106
+msgid "Noviembre"
+msgstr ""
+
+#: templates/music.html:109
+msgid "Movimiento lento en cinco por cuatro."
+msgstr ""
+
+#: templates/music.html:110
+msgid ""
+"La pieza fue mi primer contacto serio con la escritura para cuarteto de "
+"viento."
+msgstr ""
+
+#: templates/music.html:114
+msgid "Oboe"
+msgstr ""
+
+#: templates/music.html:115
+msgid "Clarinete"
 msgstr ""
 

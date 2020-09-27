@@ -1,54 +1,56 @@
 {% extends "base.html" %}
-{% block title %}Código Anki - David Ruscalleda{% endblock %}
+{% block title %}{{ _('Código Anki') }} - David Ruscalleda{% endblock %}
 {% block content %}
 <div class="ml-2 mr-2">
-<h3 class="mt-3 text-center">Resumen de HTML y CSS (...y LaTeX) en Anki</h3>
-<p class="text-center">Y enlaces para toquetear el código que vimos (y el de otras tarjetas).</p>
+<h3 class="mt-3 text-center">{{ _('Resumen de HTML y CSS (...y LaTeX) en Anki') }}</h3>
+<p class="text-center">{{ _('Y enlaces para toquetear el código que vimos (y el de otras tarjetas).') }}</p>
 
 <div class="row mb-4">
   <div class="col-md-6 pr-1">
     <div class="card border-c mt-2">
         <div class="card-body">
-            <b>Índice</b>
+            <b>{{ _('Índice') }}</b>
             <ul>
-                <li>Código de Anki</li>
+                <li>{{ _('Código de Anki') }}</li>
                 <ul>
-                    <li><a href="#vars">Datos de la tarjeta</a></li>
+                    <li><a href="#vars">{{ _('Datos de la tarjeta') }}</a></li>
+                </ul>
+                <br>
+                <li>{{ _('Estructura de la tarjeta') }} (HTML)</li>
+                <ul>
+                    <li><a href="#br">{{ _('Salto de línea') }}</a></li>
+                    <li><a href="#hr">{{ _('Línea horizontal') }}</a></li>
+                    <li><a href="#b">{{ _('Negrita') }}</a></li>
+                    <li><a href="#i">Cursiva</a></li>
+                    <li><a href="#p">{{ _('Párrafo') }}</a></li>
+                    <li><a href="#div">{{ _('Sección') }}</a></li>
+                    <li><a href="#table">{{ _('Tabla') }}</a></li>
+                    <li><a href="#span">{{ _('Combinar celdas') }}</a></li>
+                    <li><a href="#class">{{ _('Poner nombre a las cosas') }}</a></li>
+                </ul>
+                <br>
+                <li>{{ _('Aspecto de la tarjeta (CSS)') }}</li>
+                <ul>
+                    <li><a href="#tag">{{ _('Acceder a las cosas por el tipo') }}</a></li>
+                    <li><a href="#classCSS">{{ _('Acceder a las cosas por el nombre') }}</a></li>
+                    <li><a href="#card">{{ _('Aspecto general de la tarjeta') }}</a></li>
+                    <li><a href="#tableCSS">{{ _('Bordes de las tablas') }}</a></li>
+                    <li><a href="#margins">{{ _('Márgenes') }}</a></li>
+                    <li><a href="#wh">{{ _('Ancho y alto') }}</a></li>
                 </ul><br>
-                <li>Estructura de la tarjeta (HTML)</li>
+                <li>{{ _('Ecuaciones matemáticas') }} (LaTeX) ✨</li>
                 <ul>
-                    <li><a href="#br">Salto de línea</a></li>
-                    <li><a href="#hr">Línea horizontal</a></li>
-                    <li><a href="#b">Negrita</a></li>
-                    <li><a href="#i">Cursvia</a></li>
-                    <li><a href="#p">Párrafo</a></li>
-                    <li><a href="#div">Sección</a></li>
-                    <li><a href="#table">Tabla</a></li>
-                    <li><a href="#span">Combinar celdas</a></li>
-                    <li><a href="#class">Poner nombre a las cosas</a></li>
-                </ul><br>
-                <li>Aspecto de la tarjeta (CSS)</li>
-                <ul>
-                    <li><a href="#tag">Acceder a las cosas por el tipo</a></li>
-                    <li><a href="#classCSS">Acceder a las cosas por el nombre</a></li>
-                    <li><a href="#card">Aspecto general de la tarjeta</a></li>
-                    <li><a href="#tableCSS">Bordes de las tablas</a></li>
-                    <li><a href="#margins">Márgenes</a></li>
-                    <li><a href="#wh">Ancho y alto</a></li>
-                </ul><br>
-                <li>Ecuaciones matemáticas (LaTeX) ✨</li>
-                <ul>
-                    <li><a href="#eqn">Bloque de ecuación</a></li>
-                    <li><a href="#nums">Números y letras</a></li>
-                    <li><a href="#xdiv">Signos de multiplicar y dividir</a></li>
-                    <li><a href="#pow">Potencia y subíndice</a></li>
-                    <li><a href="#grupo">Agrupar cosas</a></li>
-                    <li><a href="#frac">Fracciones en vertical</a></li>
-                    <li><a href="#sqrt">Raíz cuadrada</a></li>
-                    <li><a href="#symb">Letras griegas</a></li>
-                    <li><a href="#int">Integrales y sumatorios</a></li>
-                    <li><a href="#esp">Espacios</a></li>
-                    <li><a href="#braces">Sistemas de ecuaciones</a></li>
+                    <li><a href="#eqn">{{ _('Bloque de ecuación') }}</a></li>
+                    <li><a href="#nums">{{ _('Números y letras') }}</a></li>
+                    <li><a href="#xdiv">{{ _('Signos de multiplicar y dividir') }}</a></li>
+                    <li><a href="#pow">{{ _('Potencia y subíndice') }}</a></li>
+                    <li><a href="#grupo">{{ _('Agrupar cosas') }}</a></li>
+                    <li><a href="#frac">{{ _('Fracciones en vertical') }}</a></li>
+                    <li><a href="#sqrt">{{ _('Raíz cuadrada') }}</a></li>
+                    <li><a href="#symb">{{ _('Letras griegas') }}</a></li>
+                    <li><a href="#int">{{ _('Integrales y sumatorios') }}</a></li>
+                    <li><a href="#esp">{{ _('Espacios') }}</a></li>
+                    <li><a href="#braces">{{ _('Sistemas de ecuaciones') }}</a></li>
                 </ul>
             </ul>
         </div>
@@ -57,16 +59,16 @@
   <div class="col-md-6 pl-1">
     <div class="card border-c mt-2">
         <div class="card-body">
-            <b>Toquetea el código de mis tarjetas</b><br>
+            <b>{{ _('Toquetea el código de mis tarjetas') }}</b><br>
             <p>
-                Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas.
+                {{ _('Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas.') }}
             </p>
             <ul>
-                <li><a href="https://codepen.io/Rusca8/pen/WNQYLBy" target="_blank">Tarjeta del tutorial (obscure sorrows)</a></li>
-                <li><a href="https://codepen.io/Rusca8/pen/JjYeQdr" target="_blank">Tarjeta de valencias</a></li>
-                <li><a href="https://codepen.io/Rusca8/pen/rNOQExj" target="_blank">Tarjeta Irregular Verbs</a></li>
-                <li><a href="https://codepen.io/Rusca8/pen/bGVQPEX" target="_blank">Tarjeta LSC</a></li>
-                <li><a href="https://codepen.io/Rusca8/pen/VwvVOqy" target="_blank">Tarjeta tiempos verbales catalanes</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/WNQYLBy" target="_blank">{{ _('Tarjeta del tutorial') }} (obscure sorrows)</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/JjYeQdr" target="_blank">{{ _('Tarjeta de valencias') }}</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/rNOQExj" target="_blank">{{ _('Tarjeta Irregular Verbs') }}</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/bGVQPEX" target="_blank">{{ _('Tarjeta LSC') }}</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/VwvVOqy" target="_blank">{{ _('Tarjeta tiempos verbales catalanes') }}</a></li>
             </ul>
         </div>
     </div>
@@ -75,33 +77,33 @@
 
 
 <div class="card border-c bg-light mb-2">
-    <h5 class="card-header">Código de Anki</h5>
+    <h5 class="card-header">{{ _('Código de Anki') }}</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="vars"></b>
         <div class="card-body">
             <p>
-                <b>Datos de la tarjeta</b><br>
-                <code>{{"{{"}}Campo{{"}}"}}</code>
+                <b>{{ _('Datos de la tarjeta') }}</b><br>
+                <code>{{ _('{{Campo}}') }}</code>
             </p>
             <p>
-                Escribo {{"{{"}}Capital{{"}}"}} donde quiero que aparezca "París".
+                {{ _('Escribo {{Capital}} donde quiero que aparezca') }} "París".
             </p>
         </div>
     </div>
 </div>
 
 <div class="card border-c bg-light pb-2 mb-2">
-    <h5 class="card-header">Estructura de la tarjeta (HTML)</h5>
+    <h5 class="card-header">{{ _('Estructura de la tarjeta') }} (HTML)</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2"><b id="br"></b>
         <div class="card-body">
             <p>
-                <b>Salto de línea</b><br>
+                <b>{{ _('Salto de línea') }}</b><br>
                 <code>&lt;br&gt;</code>
             </p>
             <p>
-                Aquí está la primera línea,&lt;br&gt;<br>
-                Y aquí está la segunda.
+                {{ _('Aquí está la primera línea,') }}&lt;br&gt;<br>
+                {{ _('Y aquí está la segunda.') }}
             </p>
         </div>
     </div>
@@ -109,12 +111,12 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="hr"></b>
         <div class="card-body">
             <p>
-                <b>Línea horizontal</b><br>
+                <b>{{ _('Línea horizontal') }}</b><br>
                 <code>&lt;hr&gt;</code>
             </p>
             <p>
-                Texto antes de la línea&lt;hr&gt;<hr>
-                Texto después
+                {{ _('Texto antes de la línea') }}&lt;hr&gt;<hr>
+                {{ _('Texto después') }}
             </p>
         </div>
     </div>
@@ -122,11 +124,11 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="b"></b>
         <div class="card-body">
             <p>
-                <b>Negrita</b><br>
-                <code>&lt;b&gt;cosas gruesas&lt;/b&gt;</code>
+                <b>{{ _('Negrita') }}</b><br>
+                <code>&lt;b&gt;{{ _('cosas gruesas') }}&lt;/b&gt;</code>
             </p>
             <p>
-                Deben rodear &lt;b&gt;<b>el cacho</b>&lt;/b&gt; que quieres resaltar.
+                {{ _('Deben rodear') }} &lt;b&gt;<b>{{ _('el cacho') }}</b>&lt;/b&gt; {{ _('que quieres resaltar.') }}
             </p>
         </div>
     </div>
@@ -134,11 +136,11 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="i"></b>
         <div class="card-body">
             <p>
-                <b>Cursiva</b><br>
-                <code>&lt;i&gt;cosas italianas&lt;/i&gt;</code>
+                <b>{{ _('Cursiva') }}</b><br>
+                <code>&lt;i&gt;{{ _('cosas italianas') }}&lt;/i&gt;</code>
             </p>
             <p>
-                El texto que quieras torcido, &lt;i&gt;<i>entre las etiquetas</i>&lt;/i&gt;.
+                {{ _('El texto que quieras torcido,') }} &lt;i&gt;<i>{{ _('entre las etiquetas') }}</i>&lt;/i&gt;.
             </p>
         </div>
     </div>
@@ -146,12 +148,12 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="p"></b>
         <div class="card-body">
             <p>
-                <b>Párrafo</b><br>
-                <code>&lt;p&gt;texto a su bola&lt;/p&gt;</code>
+                <b>{{ _('Párrafo') }}</b><br>
+                <code>&lt;p&gt;{{ _('texto a su bola') }}&lt;/p&gt;</code>
             </p>
             <p>
                 &lt;p&gt;<br>
-                &emsp;&emsp;El texto de aquí dentro tendrá márgenes arriba y abajo.<br>
+                &emsp;&emsp;{{ _('El texto de aquí dentro tendrá márgenes arriba y abajo.') }}<br>
                 &lt;/p&gt;.
             </p>
         </div>
@@ -160,14 +162,14 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="div"></b>
         <div class="card-body">
             <p>
-                <b>Sección</b><br>
-                <code>&lt;div&gt;texto no tan a su bola&lt;/div&gt;</code>
+                <b>{{ _('Sección') }}</b><br>
+                <code>&lt;div&gt;{{ _('texto no tan a su bola') }}&lt;/div&gt;</code>
             </p>
             <p>
                 &lt;div&gt;<br>
-                &emsp;&emsp;Este texto quería separarlo espiritualmente de lo demás textos.&lt;br&gt;<br>
-                &emsp;&emsp;No cambia nada (va a tener el mismo contacto social con los demás).&lt;br&gt;<br>
-                &emsp;&emsp;...pero como está delimitado podré ponerle nombre para decorar.&lt;br&gt;<br>
+                &emsp;&emsp;{{ _('Este texto quería separarlo espiritualmente de lo demás textos.') }}&lt;br&gt;<br>
+                &emsp;&emsp;{{ _('No cambia nada (va a tener el mismo contacto social con los demás).') }}&lt;br&gt;<br>
+                &emsp;&emsp;{{ _('...pero como está delimitado podré ponerle nombre para decorar.') }}&lt;br&gt;<br>
                 &lt;/div&gt;.
             </p>
         </div>
@@ -176,34 +178,34 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="table"></b>
         <div class="card-body">
             <p>
-                <b>Tabla</b><br>
+                <b>{{ _('Tabla') }}</b><br>
                 <code>
                     &lt;table&gt;<br>
                     &emsp;&emsp;&lt;tr&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;cabecera izquierda&lt;/th&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;cabecera derecha&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;{{ _('cabecera izquierda') }}&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th&gt;{{ _('cabecera derecha') }}&lt;/th&gt;<br>
                     &emsp;&emsp;&lt;/tr&gt;<br>
                     &emsp;&emsp;&lt;tr&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal izquierda&lt;/td&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal derecha&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;{{ _('casilla normal izquierda') }}&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;{{ _('casilla normal derecha') }}&lt;/td&gt;<br>
                     &emsp;&emsp;&lt;/tr&gt;<br>
                     &lt;/table&gt;<br>
                 </code>
             </p>
             <p>
-                &lt;table&gt; lo engloba todo,<br>
-                &lt;tr&gt; engloba las filas.<br>
-                Dentro de la primera fila las casillas serán &lt;th&gt;.<br>
-                Dentro de las demás filas las casillas serán &lt;td&gt;.
+                &lt;table&gt; {{ _('lo engloba todo,') }}<br>
+                &lt;tr&gt; {{ _('engloba las filas.') }}<br>
+                {{ _('Dentro de la primera fila las casillas serán') }} &lt;th&gt;.<br>
+                {{ _('Dentro de las demás filas las casillas serán') }} &lt;td&gt;.
             </p>
             <table class="table table-bordered">
                 <tr>
-                    <th>cabecera izquierda</th>
-                    <th>cabecera derecha</th>
+                    <th>{{ _('cabecera izquierda') }}</th>
+                    <th>{{ _('cabecera derecha') }}</th>
                 </tr>
                 <tr>
-                    <td>casilla normal izquierda</td>
-                    <td>casilla normal derecha</td>
+                    <td>{{ _('casilla normal izquierda') }}</td>
+                    <td>{{ _('casilla normal derecha') }}</td>
                 </tr>
             </table>
         </div>
@@ -212,34 +214,34 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="span"></b>
         <div class="card-body">
             <p>
-                <b>Combinar celdas</b><br>
+                <b>{{ _('Combinar celdas') }}</b><br>
                 <code>
                     &lt;table&gt;<br>
                     &emsp;&emsp;&lt;tr&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;th colspan="2"&gt;esto ocupa dos columnas&lt;/th&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;td rowspan="2"&gt;esto ocupa dos filas&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;th colspan="2"&gt;{{ _('esto ocupa dos columnas') }}&lt;/th&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td rowspan="2"&gt;{{ _('esto ocupa dos filas') }}&lt;/th&gt;<br>
                     &emsp;&emsp;&lt;/tr&gt;<br>
                     &emsp;&emsp;&lt;tr&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal izquierda&lt;/td&gt;<br>
-                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;casilla normal derecha&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;{{ _('casilla normal izquierda') }}&lt;/td&gt;<br>
+                    &emsp;&emsp;&emsp;&emsp;&lt;td&gt;{{ _('casilla normal derecha') }}&lt;/td&gt;<br>
                     &emsp;&emsp;&lt;/tr&gt;<br>
                     &lt;/table&gt;<br>
                 </code>
             </p>
             <p>
-                Podemos hacer que una celda ocupe dos columnas añadiendo <code>colspan="2"</code>.<br>
-                (y por tanto nos saltamos la siguiente columna)<br><br>
-                Y podemos hacer lo mismo con las filas poniendo <code>rowspan="2"</code>.<br>
-                (y por tanto en la siguiente fila no ponemos esa columna)
+                {{ _('Podemos hacer que una celda ocupe dos columnas añadiendo') }} <code>colspan="2"</code>.<br>
+                {{ _('(y por tanto nos saltamos la siguiente columna)') }}<br><br>
+                {{ _('Y podemos hacer lo mismo con las filas poniendo') }} <code>rowspan="2"</code>.<br>
+                {{ _('(y por tanto en la siguiente fila no ponemos esa columna)') }}
             </p>
                 <table class="table table-bordered">
                     <tr>
-                        <th colspan="2">esto ocupa dos columnas</th>
-                        <td rowspan="2">esto ocupa dos filas</td>
+                        <th colspan="2">{{ _('esto ocupa dos columnas') }}</th>
+                        <td rowspan="2">{{ _('esto ocupa dos filas') }}</td>
                     </tr>
                     <tr>
-                        <td>casilla normal izquierda</td>
-                        <td>casilla normal derecha</td>
+                        <td>{{ _('casilla normal izquierda') }}</td>
+                        <td>{{ _('casilla normal derecha') }}</td>
                     </tr>
                 </table>
         </div>
@@ -248,30 +250,30 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="class"></b>
         <div class="card-body">
             <p>
-                <b>Poner nombre a las cosas</b><br>
-                <code>&lt;p class="nombre"&gt;<br>&emsp;&emsp;Párrafo que tiene nombre<br>&lt;/p&gt;</code>
+                <b>{{ _('Poner nombre a las cosas') }}</b><br>
+                <code>&lt;p class="{{ _('nombre') }}"&gt;<br>&emsp;&emsp;{{ _('Párrafo que tiene nombre') }}<br>&lt;/p&gt;</code>
             </p>
             <p>
-                Cualquier etiqueta puede tener nombre.<br>
-                Lo típico son cachos de una tabla, secciones, párrafos...<br>
-                Darle nombre nos permite luego elegir su aspecto desde el CSS.
+                {{ _('Cualquier etiqueta puede tener nombre.') }}<br>
+                {{ _('Lo típico son cachos de una tabla, secciones, párrafos...') }}<br>
+                {{ _('Darle nombre nos permite luego elegir su aspecto desde el CSS.') }}
             </p>
         </div>
     </div>
 </div>
 
 <div class="card border-c bg-light pb-2">
-    <h5 class="card-header">Aspecto de la tarjeta (CSS)</h5>
+    <h5 class="card-header">{{ _('Aspecto de la tarjeta') }} (CSS)</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2"><b id="tag"></b>
         <div class="card-body">
             <p>
-                <b>Acceder a las cosas por el tipo</b><br>
-                <code>td {{"{"}}<br>&emsp;&emsp;colorinchis-y-cosas;<br>{{"}"}}</code>
+                <b>{{ _('Acceder a las cosas por el tipo') }}</b><br>
+                <code>td {{"{"}}<br>&emsp;&emsp;{{ _('colorinchis-y-cosas') }};<br>{{"}"}}</code>
             </p>
             <p>
-                Para cambiar el aspecto de las casillas normales <code>&lt;td&gt;</code> de las tablas.<br>
-                Cuidado que si es una etiqueta no lleva punto.
+                {{ _('Para cambiar el aspecto de las casillas normales') }} <code>&lt;td&gt;</code> {{ _('de las tablas.') }}<br>
+                {{ _('Cuidado que si es una etiqueta no lleva punto.') }}
             </p>
         </div>
     </div>
@@ -279,12 +281,12 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="classCSS"></b>
         <div class="card-body">
             <p>
-                <b>Acceder a las cosas por el nombre</b><br>
-                <code>.nombre {{"{"}}<br>&emsp;&emsp;colorinchis-y-cosas;<br>{{"}"}}</code>
+                <b>{{ _('Acceder a las cosas por el nombre') }}</b><br>
+                <code>.nombre {{"{"}}<br>&emsp;&emsp;{{ _('colorinchis-y-cosas') }};<br>{{"}"}}</code>
             </p>
             <p>
-                Para cambiar el aspecto de algo que tenga <code>class="nombre"</code>.<br>
-                Ojo que si es una clase (un nombre) tiene que llevar punto.
+                {{ _('Para cambiar el aspecto de algo que tenga') }} <code>class="{{ _('nombre') }}"</code>.<br>
+                {{ _('Ojo que si es una clase (un nombre) tiene que llevar punto.') }}
             </p>
         </div>
     </div>
@@ -292,7 +294,7 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="card"></b>
         <div class="card-body">
             <p>
-                <b>Aspecto general de la tarjeta</b><br>
+                <b>{{ _('Aspecto general de la tarjeta') }}</b><br>
                 <code>.card {{"{"}}<br>
                     &emsp;font-family: arial;<br>
                     &emsp;font-size: 20px;<br>
@@ -303,15 +305,15 @@
                 </code>
             </p>
             <p>
-                Anki lleva una clase previa que lo engloba todo <code>.card</code>.<br>
-                Aquí podemos cambiar las pintas generales de todo antes de meternos a los detalles.
+                {{ _('Anki lleva una clase previa que lo engloba todo') }} <code>.card</code>.<br>
+                {{ _('Aquí podemos cambiar las pintas generales de todo antes de meternos a los detalles.') }}
             </p>
             <ul>
-                <li>La letra por defecto es <code>arial</code>: times, georgia, helvetica, "Gill Sans"...</li>
-                <li>20px marca la medida de la letra.</li>
-                <li>El texto viene en <code>center</code>, pero se puede alinear hacia los lados.</li>
-                <li>El color del texto <code>color</code>: white, <a href="https://www.w3schools.com/colors/colors_names.asp">lavender</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#42af42</a>...</li>
-                <li>El color de fondo de la tarjeta entera será <code>background-color</code></li>.
+                <li>{{ _('La letra por defecto es') }} <code>arial</code>: times, georgia, helvetica, "Gill Sans"...</li>
+                <li>20px {{ _('marca la medida de la letra.') }}</li>
+                <li>{{ _('El texto viene en') }} <code>center</code>, {{ _('pero se puede alinear hacia los lados.') }}</li>
+                <li>{{ _('El color del texto') }} <code>color</code>: white, <a href="https://www.w3schools.com/colors/colors_names.asp">lavender</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#42af42</a>...</li>
+                <li>{{ _('El color de fondo de la tarjeta entera será') }} <code>background-color</code></li>.
             </ul>
         </div>
     </div>
@@ -319,7 +321,7 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="tableCSS"></b>
         <div class="card-body">
             <p>
-                <b>Bordes de las tablas</b><br>
+                <b>{{ _('Bordes de las tablas') }}</b><br>
                 <code>table, td, th {{"{"}}<br>
                     &emsp;border: 1px solid black;<br>
                     &emsp;border-collapse: collapse;<br>
@@ -327,14 +329,14 @@
                 </code>
             </p>
             <p>
-                Podemos aplicar el mismo estilo a varias cosas a la vez: <code>table, td, th</code>.<br><br>
-                Si no usamos <code>border:</code> no veremos la tabla (el borde será invisible).<br>
+                {{ _('Podemos aplicar el mismo estilo a varias cosas a la vez:') }} <code>table, td, th</code>.<br><br>
+                {{ _('Si no usamos') }} <code>border:</code> {{ _('no veremos la tabla (el borde será invisible).') }}<br>
                 <ul>
-                    <li>1px marca el grueso de la línea</li>
-                    <li>solid marca la continuidad: solid, dashed, dotted...</li>
-                    <li>black marca el color: red, <a href="https://www.w3schools.com/colors/colors_names.asp">darkslateblue</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#1abaca</a>...</li>
+                    <li>1px {{ _('marca el grueso de la línea') }}</li>
+                    <li>solid {{ _('marca la continuidad:') }} solid, dashed, dotted...</li>
+                    <li>black {{ _('marca el color:') }} red, <a href="https://www.w3schools.com/colors/colors_names.asp">darkslateblue</a>, <a href="https://www.google.com/search?q=color+picker&oq=color+picker">#1abaca</a>...</li>
                 </ul>
-                Si no usamos <code>border-collapse:</code> el borde será doble (tendrán borde la tabla y las casillas).
+                {{ _('Si no usamos') }} <code>border-collapse:</code> {{ _('el borde será doble (tendrán borde la tabla y las casillas).') }}
             </p>
         </div>
     </div>
@@ -342,7 +344,7 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="margins"></b>
         <div class="card-body">
             <p>
-                <b>Márgenes</b><br>
+                <b>{{ _('Márgenes') }}</b><br>
                 <code>
                     table {{"{"}}<br>
                     &emsp;margin-left: auto;<br>
@@ -351,8 +353,8 @@
                 </code>
             </p>
             <p>
-                Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes.<br>
-                Poniendo <code>auto</code> a ambos lados se centra ella sola.
+                {{ _('Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes.') }}<br>
+                {{ _('Poniendo') }} <code>auto</code> {{ _('a ambos lados se centra ella sola.') }}
             </p>
         </div>
     </div>
@@ -360,17 +362,17 @@
     <div class="card border-c ml-2 mr-2 mt-2"><b id="wh"></b>
         <div class="card-body">
             <p>
-                <b>Ancho y alto</b><br>
+                <b>{{ _('Ancho y alto') }}</b><br>
                 <code>
-                    .casilla {{"{"}}<br>
+                    .{{ _('casilla') }} {{"{"}}<br>
                     &emsp;width: 300px;<br>
                     &emsp;height: 100px;<br>
                     {{"}"}}
                 </code>
             </p>
             <p>
-                Podemos elegir las medidas de elementos de la tabla (o de la tabla entera).<br>
-                Ponemos <code>width</code> o <code>height</code>, y la cantidad de píxeles.
+                {{ _('Podemos elegir las medidas de elementos de la tabla (o de la tabla entera).') }}<br>
+                {{ _('Ponemos') }} <code>width</code> o <code>height</code>, {{ _('y la cantidad de píxeles.') }}
             </p>
         </div>
     </div>
@@ -378,19 +380,19 @@
 </div>
 
 <div class="card border-c bg-light mb-2 mt-2">
-    <h5 class="card-header">Ecuaciones matemáticas (LaTeX)</h5>
+    <h5 class="card-header">{{ _('Ecuaciones matemáticas') }} (LaTeX)</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="eqn"></b>
         <div class="card-body">
             <p>
-                <b>Bloque de ecuación</b><br>
-                <code>[$]Ecuación escrita en LaTeX[/$]</code>
+                <b>{{ _('Bloque de ecuación') }}</b><br>
+                <code>[$]{{ _('Ecuación escrita en LaTeX') }}[/$]</code>
             </p>
             <p>
-                Para indicarle a Anki que voy a escribir una ecuación, la rodeo con dólares.<br>
-                Por ejemplo, escribo <code>[$]3x=4[/$]</code> para dibujar la ecuación $3x = 4$.<br>
+                {{ _('Para indicarle a Anki que voy a escribir una ecuación, la rodeo con dólares.') }}<br>
+                {{ _('Por ejemplo, escribo') }} <code>[$]3x=4[/$]</code> {{ _('para dibujar la ecuación $3x = 4$.') }}<br>
                 <br>
-                <i>Todos los códigos de LaTeX que vemos debajo tienen que estar en una ecuación de estas.</i>
+                <i>{{ _('Todos los códigos de LaTeX que vemos debajo tienen que estar en una ecuación de estas.') }}</i>
 
             </p>
         </div>
@@ -399,12 +401,12 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="nums"></b>
         <div class="card-body">
             <p>
-                <b>Números y letras</b><br>
+                <b>{{ _('Números y letras') }}</b><br>
                 <code>0123..9 abc..z ABC..Z</code>
             </p>
             <p>
-                Los números y letras de la ecuación se escriben tal cual.<br>
-                Por ejemplo, poniendo <code>123abc</code> me dibuja $123abc$.
+                {{ _('Los números y letras de la ecuación se escriben tal cual.') }}<br>
+                {{ _('Por ejemplo, poniendo') }} <code>123abc</code> {{ _('me dibuja') }} $123abc$.
             </p>
         </div>
     </div>
@@ -412,15 +414,15 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="xdiv"></b>
         <div class="card-body">
             <p>
-                <b>Signos de multiplicar y dividir</b><br>
+                <b>{{ _('Signos de multiplicar y dividir') }}</b><br>
                 <code>\cdot \times \div</code>
             </p>
             <p>
-                Punto de multiplicar: <code>3\cdot 4=12</code> nos dibuja $3\cdot 4=12$.<br>
-                Cruz de multiplicar: <code>5\times 3=15</code> nos dibuja $5\times 3=15$.<br>
-                Signo de división: <code>6\div 2=3</code> nos dibuja $6\div 2=3$.<br>
+                {{ _('Punto de multiplicar:') }} <code>3\cdot 4=12</code> {{ _('nos dibuja') }} $3\cdot 4=12$.<br>
+                {{ _('Cruz de multiplicar:') }} <code>5\times 3=15</code> {{ _('nos dibuja') }} $5\times 3=15$.<br>
+                {{ _('Signo de división:') }} <code>6\div 2=3</code> {{ _('nos dibuja') }} $6\div 2=3$.<br>
                 <br>
-                Otro signo útil es <code>\pm</code>, que dibuja $\pm$.
+                {{ _('Otro signo útil es') }} <code>\pm</code>, {{ _('que dibuja') }} $\pm$.
             </p>
         </div>
     </div>
@@ -428,15 +430,15 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="pow"></b>
         <div class="card-body">
             <p>
-                <b>Potencia y subíndice</b><br>
+                <b>{{ _('Potencia y subíndice') }}</b><br>
                 <code>base^exp cosa_sub</code>
             </p>
             <p>
-                El exponente es como lo escribiríamos: <code>5^2</code> nos dibuja $5^2$.<br>
-                El subíndice va con barra baja: <code>a_1</code> nos dibuja $a_1$.<br>
+                {{ _('El exponente es como lo escribiríamos:') }} <code>5^2</code> {{ _('nos dibuja') }} $5^2$.<br>
+                {{ _('El subíndice va con barra baja:') }} <code>a_1</code> {{ _('nos dibuja') }} $a_1$.<br>
                 <br>
-                Si queremos poner exponentes o subíndices con más de un carácter o cifra,<br>
-                habrá que agrupar todo el texto (ponerlo entre llaves <code>{}</code>).
+                {{ _('Si queremos poner exponentes o subíndices con más de un carácter o cifra,') }}<br>
+                {{ _('habrá que agrupar todo el texto (ponerlo entre llaves') }} <code>{}</code>).
             </p>
         </div>
     </div>
@@ -444,12 +446,12 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="grupo"></b>
         <div class="card-body">
             <p>
-                <b>Agrupar cosas</b><br>
-                <code>{cosas que van juntas}</code>
+                <b>{{ _('Agrupar cosas') }}</b><br>
+                <code>{{ _('{cosas que van juntas}') }}</code>
             </p>
             <p>
-                Siempre que quiera agrupar cosas para que actúen como un solo bloque, uso las llaves.<br>
-                Por ejemplo, <code>3^{12}</code> nos dibuja $3^{12}$, y <code>3^{2^x}_{j,k}</code> nos dibuja $3^{2^x}_{j,k}$.
+                {{ _('Siempre que quiera agrupar cosas para que actúen como un solo bloque, uso las llaves.') }}<br>
+                {{ _('Por ejemplo,') }} <code>3^{12}</code> {{ _('nos dibuja') }} $3^{12}$, {{ _('y') }} <code>3^{2^x}_{j,k}</code> {{ _('nos dibuja') }} $3^{2^x}_{j,k}$.
             </p>
         </div>
     </div>
@@ -457,11 +459,11 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="frac"></b>
         <div class="card-body">
             <p>
-                <b>Fracciones en vertical</b><br>
+                <b>{{ _('Fracciones en vertical') }}</b><br>
                 <code>\frac{numerador}{denominador}</code>
             </p>
             <p>
-                Si escribo <code>\frac{3x+9}{2x}</code> me dibuja $\frac{3x+9}{2x}$.
+                {{ _('Si escribo') }} <code>\frac{3x+9}{2x}</code> {{ _('me dibuja') }} $\frac{3x+9}{2x}$.
             </p>
         </div>
     </div>
@@ -469,13 +471,13 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="sqrt"></b>
         <div class="card-body">
             <p>
-                <b>Raíz cuadrada</b><br>
-                <code>\sqrt{cosas dentro de la raíz}</code>
+                <b>{{ _('Raíz cuadrada') }}</b><br>
+                <code>{{ _('\\sqrt{cosas dentro de la raíz}') }}</code>
             </p>
             <p>
-                Si escribo <code>\sqrt{2x^2-8}</code> me dibuja $\sqrt{2x^2-8}$.<br>
+                {{ _('Si escribo') }} <code>\sqrt{2x^2-8}</code> {{ _('me dibuja') }} $\sqrt{2x^2-8}$.<br>
                 <br>
-                También puedo elegir el índice: si escribo <code>\sqrt[3]{27}</code> me dibuja $\sqrt[3]{27}$.
+                {{ _('También puedo elegir el índice: si escribo') }} <code>\sqrt[3]{27}</code> {{ _('me dibuja') }} $\sqrt[3]{27}$.
             </p>
         </div>
     </div>
@@ -483,16 +485,16 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="symb"></b>
         <div class="card-body">
             <p>
-                <b>Letras griegas</b><br>
+                <b>{{ _('Letras griegas') }}</b><br>
                 <code>\pi \Pi \delta \Delta</code>
             </p>
             <p>
-                Se pueden escribir <a href="https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols">letras griegas</a> poniendo cómo se llaman después de una barra.<br>
-                El código distingue mayúscula y minúscula, así que el ejemplo de arriba dibujaría $\pi \Pi \delta \Delta$.<br>
+                {{ _('Se pueden escribir') }} <a href="https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols">{{ _('letras griegas') }}</a> {{ _('poniendo cómo se llaman después de una barra.') }}<br>
+                {{ _('El código distingue mayúscula y minúscula, así que el ejemplo de arriba dibujaría') }} $\pi \Pi \delta \Delta$.<br>
                 <br>
-                Algunas minúsculas, como <code>\phi</code> $\phi$, tienen variante: <code>\varphi</code> $\varphi$.<br>
+                {{ _('Algunas minúsculas, como') }} <code>\phi</code> $\phi$, {{ _('tienen variante:') }} <code>\varphi</code> $\varphi$.<br>
                 <br>
-                El infinito se puede hacer así, también: <code>\infty</code> dibuja $\infty$.
+                {{ _('El infinito se puede hacer así, también:') }} <code>\infty</code> {{ _('dibuja') }} $\infty$.
             </p>
         </div>
     </div>
@@ -500,17 +502,17 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="int"></b>
         <div class="card-body">
             <p>
-                <b>Integrales y sumatorios</b><br>
+                <b>{{ _('Integrales y sumatorios') }}</b><br>
                 <code>\int \sum</code>
             </p>
             <p>
-                Los símbolos para integral y sumatorio son <code>\int</code> $\int$ <code>\sum</code> $\sum$.<br>
+                {{ _('Los símbolos para integral y sumatorio son') }} <code>\int</code> $\int$ <code>\sum</code> $\sum$.<br>
                 <br>
-                Para acotar la integral simplemente usamos potencia y subíndice: <code>$\int^3_2$</code> $\int^3_2$.<br>
-                Para acotar la suma hay que usar <code>\limits</code>, que sirve para escribir arriba y debajo del anterior.<br>
-                Por ejemplo: si escribo <code>\sum\limits_{n=1}^{\infty}</code> me dibuja $\sum\limits_{n=1}^{\infty}$<br>
+                {{ _('Para acotar la integral simplemente usamos potencia y subíndice:') }} <code>$\int^3_2$</code> $\int^3_2$.<br>
+                {{ _('Para acotar la suma hay que usar') }} <code>\limits</code>, {{ _('que sirve para escribir arriba y debajo del anterior.') }}<br>
+                {{ _('Por ejemplo: si escribo') }} <code>\sum\limits_{n=1}^{\infty}</code> {{ _('me dibuja') }} $\sum\limits_{n=1}^{\infty}$<br>
                 <br>
-                Y bueno, los más friquis podéis hacer integrales cerradas con <code>\oint</code> $\oint$.
+                {{ _('Y bueno, los más friquis podéis hacer integrales cerradas con') }} <code>\oint</code> $\oint$.
             </p>
         </div>
     </div>
@@ -518,18 +520,18 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="esp"></b>
         <div class="card-body">
             <p>
-                <b>Espacios</b><br>
+                <b>{{ _('Espacios') }}</b><br>
                 <code>\, \: \; \  \quad \qquad</code>
             </p>
             <p>
-                Por defecto la fórmula decide ella misma qué espacios hay que poner.<br>
-                Si quieres forzar espacios a propósito tienes estos cinco para elegir, de estrecho a ancho.<br>
-                <i>La cuarta opción es la barra seguida de un espacio.</i><br>
+                {{ _('Por defecto la fórmula decide ella misma qué espacios hay que poner.') }}<br>
+                {{ _('Si quieres forzar espacios a propósito tienes estos cinco para elegir, de estrecho a ancho.') }}<br>
+                <i>{{ _('La cuarta opción es la barra seguida de un espacio.') }}</i><br>
                 <br>
-                Por ejemplo: si escribo <code>a 2\: b c</code> me separa sólo la b en el dibujo ($a 2\: b c$).<br>
+                {{ _('Por ejemplo: si escribo') }} <code>a 2\: b c</code> {{ _('me separa sólo la b en el dibujo') }} ($a 2\: b c$).<br>
                 <br>
-                También puedo crear un espacio a medida escribiendo texto transparente con <code>\phantom{texto}</code>.<br>
-                Por ejemplo, si escribo <code>a\phantom{hola}b</code> me deja lo que ocupa "hola" como espacio ($a\phantom{hola}b$).
+                {{ _('También puedo crear un espacio a medida escribiendo texto transparente con') }} <code>\phantom{texto}</code>.<br>
+                {{ _('Por ejemplo, si escribo') }} <code>a\phantom{hola}b</code> {{ _('me deja lo que ocupa') }} "hola" {{ _('como espacio') }} ($a\phantom{hola}b$).
             </p>
         </div>
     </div>
@@ -537,14 +539,14 @@
     <div class="card border-c ml-2 mr-2 mb-2"><b id="braces"></b>
         <div class="card-body">
             <p>
-                <b>Sistemas de ecuaciones</b><br>
-                <code>\begin{cases} primera eq \\ segunda eq \end{cases}</code>
+                <b>{{ _('Sistemas de ecuaciones') }}</b><br>
+                <code>\begin{cases} primera eq \\ {{ _('segunda') }} eq \end{cases}</code>
             </p>
             <p>
-                Para agrupar cosas en una llave, tenemos que crear un "entorno" de sistema de ecuaciones.<br>
-                Empezaremos con <code>\begin{cases}</code>, saltamos de línea con <code>\\</code>, y cerramos con <code>\end{cases}</code>.<br>
+                {{ _('Para agrupar cosas en una llave, tenemos que crear un "entorno" de sistema de ecuaciones.') }}<br>
+                {{ _('Empezaremos con') }} <code>\begin{cases}</code>, {{ _('saltamos de línea con') }} <code>\\</code>, {{ _('y cerramos con') }} <code>\end{cases}</code>.<br>
                 <br>
-                Por ejemplo, <code>\begin{cases} x+y=5 \\ x\times y=6 \end{cases}</code> nos dará $\begin{cases} x+y=5 \\ x\times y=6 \end{cases}$.
+                {{ _('Por ejemplo,') }} <code>\begin{cases} x+y=5 \\ x\times y=6 \end{cases}</code> {{ _('nos dará') }} $\begin{cases} x+y=5 \\ x\times y=6 \end{cases}$.
             </p>
         </div>
     </div>
