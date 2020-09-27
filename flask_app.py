@@ -18,7 +18,6 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    return 'ca'
     return request.accept_languages.best_match(['es', 'ca'])
 
 
