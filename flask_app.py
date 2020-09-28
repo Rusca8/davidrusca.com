@@ -8,6 +8,7 @@ import crypto as c
 
 app = Flask(__name__)
 app.config['BABEL_DEFAULT_LOCALE'] = 'es'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = './translations'
 babel = Babel(app)
 
 # Recopilar cambios por traducir:  $ pybabel extract -F babel.cfg -o messages.pot .
