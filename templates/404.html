@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}{% endblock %}
+{% block title %}{{ _('404 No Encontrada') }} - Web de David Ruscalleda{% endblock %}
 {% block content%}
 
 <div class="ml-4 mr-4">
-    <h4 class="mt-4">404 - Vaja, tenim una gracioseta</h4>
+    <h4 class="mt-4">404 - {{ _('Vaya, tenemos una graciosilla...') }}</h4>
     <p>
-        Em temo que aquesta pàgina no existeix
-        (...encara?)
+        {{ _('Me temo que esta página no existe') }}
+        {{ _('(...aún?)') }}
     </p>
 </div>
 {% endblock %}

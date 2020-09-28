@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-28 00:20+0200\n"
+"POT-Creation-Date: 2020-09-28 09:46+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#: templates/404.html:2
+msgid "404 No Encontrada"
+msgstr "404 No Trobada"
+
+#: templates/404.html:6
+msgid "Vaya, tenemos una graciosilla..."
+msgstr "Vaja, tenim una gracioseta..."
+
+#: templates/404.html:8
+msgid "Me temo que esta página no existe"
+msgstr "Em temo que aquesta pàgina no existeix"
+
+#: templates/404.html:9
+msgid "(...aún?)"
+msgstr "(...encara?)"
 
 #: templates/anki.html:7
 msgid "Recursos Anki"
@@ -684,7 +700,8 @@ msgstr "I podem fer el mateix amb les files posant"
 msgid "(y por tanto en la siguiente fila no ponemos esa columna)"
 msgstr "(i per tant a la següent fila no hi posem la columna saltada)"
 
-#: templates/ankicode.html:254 templates/ankicode.html:288
+#: templates/ankicode.html:254 templates/ankicode.html:285
+#: templates/ankicode.html:288
 msgid "nombre"
 msgstr "nom"
 
@@ -1072,6 +1089,20 @@ msgstr "Inici"
 msgid "Fichas"
 msgstr "Fitxes"
 
+#: templates/bmonstres.html:2
+msgid "Monstruos Bibliotecas"
+msgstr "Monstres Biblioteques"
+
+#: templates/bmonstres.html:4
+msgid "Disseño de Monstruos"
+msgstr "Disseny de Monstres"
+
+#: templates/bmonstres.html:5
+msgid ""
+"Para el escape room \"El Misteri del Col·lecionista de Contes\" de "
+"jugarXjugar para la Diputació de Girona."
+msgstr "Per a l'escape room \"El Misteri del Col·lecionista de Contes\" de jugarXjugar per a la Diputació de Girona."
+
 #: templates/docentes.html:2
 msgid "Docentes"
 msgstr "Docents"
@@ -1353,11 +1384,11 @@ msgstr "Rusca8 a GitHub"
 
 #: templates/index.html:149
 msgid "La app para estudiar sin esfuerzo"
-msgstr "L'app per a estudiar sense esforç [ES]"
+msgstr "L'app per a estudiar sense esforç"
 
 #: templates/index.html:150
 msgid "Crea tus propias barajas"
-msgstr "Crea les teves pròpies baralles [ES]"
+msgstr "Crea les teves pròpies baralles"
 
 #: templates/index.html:157
 msgid "Cómo instalarlo y usarlo"
@@ -1702,5 +1733,4 @@ msgstr "Oboè"
 #: templates/music.html:115
 msgid "Clarinete"
 msgstr "Clarinet"
-
 

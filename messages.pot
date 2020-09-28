@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-28 00:20+0200\n"
+"POT-Creation-Date: 2020-09-28 09:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#: templates/404.html:2
+msgid "404 No Encontrada"
+msgstr ""
+
+#: templates/404.html:6
+msgid "Vaya, tenemos una graciosilla..."
+msgstr ""
+
+#: templates/404.html:8
+msgid "Me temo que esta página no existe"
+msgstr ""
+
+#: templates/404.html:9
+msgid "(...aún?)"
+msgstr ""
 
 #: templates/anki.html:7
 msgid "Recursos Anki"
@@ -666,7 +682,8 @@ msgstr ""
 msgid "(y por tanto en la siguiente fila no ponemos esa columna)"
 msgstr ""
 
-#: templates/ankicode.html:254 templates/ankicode.html:288
+#: templates/ankicode.html:254 templates/ankicode.html:285
+#: templates/ankicode.html:288
 msgid "nombre"
 msgstr ""
 
@@ -1040,6 +1057,20 @@ msgstr ""
 
 #: templates/base.html:48
 msgid "Fichas"
+msgstr ""
+
+#: templates/bmonstres.html:2
+msgid "Monstruos Bibliotecas"
+msgstr ""
+
+#: templates/bmonstres.html:4
+msgid "Disseño de Monstruos"
+msgstr ""
+
+#: templates/bmonstres.html:5
+msgid ""
+"Para el escape room \"El Misteri del Col·lecionista de Contes\" de "
+"jugarXjugar para la Diputació de Girona."
 msgstr ""
 
 #: templates/docentes.html:2
