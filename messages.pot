@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-09 23:17+0200\n"
+"POT-Creation-Date: 2020-10-12 16:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1102,7 +1102,7 @@ msgid "Ciclo Formativo Grado Medio"
 msgstr ""
 
 #: templates/docentes.html:23 templates/docentes.html:30
-#: templates/docentes.html:110
+#: templates/docentes.html:114
 msgid "Tecnología"
 msgstr ""
 
@@ -1118,12 +1118,12 @@ msgstr ""
 msgid "Mates Científicas"
 msgstr ""
 
-#: templates/docentes.html:46 templates/docentes.html:65
-#: templates/docentes.html:80 templates/docentes.html:95
+#: templates/docentes.html:46 templates/docentes.html:67
+#: templates/docentes.html:84 templates/docentes.html:99
 msgid "Formularios:"
 msgstr ""
 
-#: templates/docentes.html:48 templates/docentes.html:67
+#: templates/docentes.html:48 templates/docentes.html:69
 msgid "Límites"
 msgstr ""
 
@@ -1131,7 +1131,7 @@ msgstr ""
 msgid "Representación de funciones"
 msgstr ""
 
-#: templates/docentes.html:51 templates/docentes.html:68
+#: templates/docentes.html:51 templates/docentes.html:70
 msgid "Relación entre gráficas y derivadas"
 msgstr ""
 
@@ -1139,93 +1139,106 @@ msgstr ""
 msgid "Geometría 3D"
 msgstr ""
 
-#: templates/docentes.html:55 templates/docentes.html:70
-#: templates/docentes.html:111 templates/docentes.html:131
-#: templates/docentes.html:143 templates/docentes.html:158
+#: templates/docentes.html:55 templates/docentes.html:72
+#: templates/docentes.html:115 templates/docentes.html:135
+#: templates/docentes.html:149 templates/docentes.html:164
 msgid "Fichas:"
 msgstr ""
 
-#: templates/docentes.html:57 templates/docentes.html:72
+#: templates/docentes.html:57 templates/docentes.html:74
+#: templates/docentes.html:139
+msgid "Potencias y raíces"
+msgstr ""
+
+#: templates/docentes.html:58 templates/docentes.html:75
 msgid "Sistemas 3D"
 msgstr ""
 
-#: templates/docentes.html:64
+#: templates/docentes.html:59 templates/docentes.html:76
+msgid "Derivadas"
+msgstr ""
+
+#: templates/docentes.html:66
 msgid "Mates Sociales"
 msgstr ""
 
-#: templates/docentes.html:82
+#: templates/docentes.html:86
 msgid "Movimientos"
 msgstr ""
 
-#: templates/docentes.html:84
+#: templates/docentes.html:88
 msgid "Gráficos de MRUA"
 msgstr ""
 
-#: templates/docentes.html:86 templates/docentes.html:145
+#: templates/docentes.html:90 templates/docentes.html:151
 msgid "Fuerzas"
 msgstr ""
 
-#: templates/docentes.html:87
+#: templates/docentes.html:91
 msgid "Ondas"
 msgstr ""
 
-#: templates/docentes.html:97
+#: templates/docentes.html:101
 msgid "Termoquímica"
 msgstr ""
 
-#: templates/docentes.html:106
+#: templates/docentes.html:110
 msgid "Ciclo Formativo GM"
 msgstr ""
 
-#: templates/docentes.html:113
+#: templates/docentes.html:117
 msgid "Circuitos Eléctricos"
 msgstr ""
 
-#: templates/docentes.html:114
+#: templates/docentes.html:118
 msgid "Electrónica Digital"
 msgstr ""
 
-#: templates/docentes.html:115
+#: templates/docentes.html:119
 msgid "Energías"
 msgstr ""
 
-#: templates/docentes.html:116
+#: templates/docentes.html:120
 msgid "Pneumática"
 msgstr ""
 
-#: templates/docentes.html:117
+#: templates/docentes.html:121
 msgid "Telecomunicaciones"
 msgstr ""
 
-#: templates/docentes.html:118
+#: templates/docentes.html:122
 msgid "Máquinas de Combustión"
 msgstr ""
 
-#: templates/docentes.html:133
-msgid "Operaciones con signos y paréntesis"
+#: templates/docentes.html:137
+msgid "Operaciones con Enteros"
 msgstr ""
 
-#: templates/docentes.html:134
+#: templates/docentes.html:138
+msgid "Fracciones"
+msgstr ""
+
+#: templates/docentes.html:140
 msgid "Ecuaciones"
 msgstr ""
 
-#: templates/docentes.html:135
+#: templates/docentes.html:141
 msgid "Proporcionalidad"
 msgstr ""
 
-#: templates/docentes.html:153
+#: templates/docentes.html:159
 msgid "Primaria"
 msgstr ""
 
-#: templates/docentes.html:160
+#: templates/docentes.html:166
 msgid "Operaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:161
+#: templates/docentes.html:167
 msgid "Ecuaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:162
+#: templates/docentes.html:168
 msgid "Operaciones en columna"
 msgstr ""
 

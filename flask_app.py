@@ -15,7 +15,7 @@ babel = Babel(app)
 # Combinar con traducciones antiguas: $ pybabel update -i messages.pot -d translations
 #           (traducir novedades en archivo .po de cada idioma)
 # Compilar de nuevo:                  $ pybabel compile -d translations
-
+ 
 
 @babel.localeselector
 def get_locale():
