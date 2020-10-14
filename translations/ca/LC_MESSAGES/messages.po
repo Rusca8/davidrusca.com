@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-12 16:31+0200\n"
+"POT-Creation-Date: 2020-10-14 13:17+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -1134,7 +1134,7 @@ msgid "Ciclo Formativo Grado Medio"
 msgstr "Cicle Formatiu de Grau Mig"
 
 #: templates/docentes.html:23 templates/docentes.html:30
-#: templates/docentes.html:114
+#: templates/docentes.html:115
 msgid "Tecnología"
 msgstr "Tecnologia"
 
@@ -1151,7 +1151,7 @@ msgid "Mates Científicas"
 msgstr "Mates Científiques"
 
 #: templates/docentes.html:46 templates/docentes.html:67
-#: templates/docentes.html:84 templates/docentes.html:99
+#: templates/docentes.html:85 templates/docentes.html:100
 msgid "Formularios:"
 msgstr "Formularis"
 
@@ -1163,7 +1163,7 @@ msgstr "Límits"
 msgid "Representación de funciones"
 msgstr "Representació de funcions"
 
-#: templates/docentes.html:51 templates/docentes.html:70
+#: templates/docentes.html:51 templates/docentes.html:71
 msgid "Relación entre gráficas y derivadas"
 msgstr "Relació entre gràfiques i derivades"
 
@@ -1171,22 +1171,22 @@ msgstr "Relació entre gràfiques i derivades"
 msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
-#: templates/docentes.html:55 templates/docentes.html:72
-#: templates/docentes.html:115 templates/docentes.html:135
-#: templates/docentes.html:149 templates/docentes.html:164
+#: templates/docentes.html:55 templates/docentes.html:73
+#: templates/docentes.html:116 templates/docentes.html:136
+#: templates/docentes.html:150 templates/docentes.html:166
 msgid "Fichas:"
 msgstr "Fitxes:"
 
-#: templates/docentes.html:57 templates/docentes.html:74
-#: templates/docentes.html:139
+#: templates/docentes.html:57 templates/docentes.html:75
+#: templates/docentes.html:140
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
-#: templates/docentes.html:58 templates/docentes.html:75
+#: templates/docentes.html:58 templates/docentes.html:76
 msgid "Sistemas 3D"
 msgstr "Sistemes 3D"
 
-#: templates/docentes.html:59 templates/docentes.html:76
+#: templates/docentes.html:59 templates/docentes.html:77
 msgid "Derivadas"
 msgstr "Derivades"
 
@@ -1194,83 +1194,91 @@ msgstr "Derivades"
 msgid "Mates Sociales"
 msgstr "Mates Socials"
 
-#: templates/docentes.html:86
+#: templates/docentes.html:70
+msgid "Matemática Financiera"
+msgstr "Matemàtica Financera"
+
+#: templates/docentes.html:87
 msgid "Movimientos"
 msgstr "Moviments"
 
-#: templates/docentes.html:88
+#: templates/docentes.html:89
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de MRUA"
 
-#: templates/docentes.html:90 templates/docentes.html:151
+#: templates/docentes.html:91 templates/docentes.html:153
 msgid "Fuerzas"
 msgstr "Forces"
 
-#: templates/docentes.html:91
+#: templates/docentes.html:92
 msgid "Ondas"
 msgstr "Ones"
 
-#: templates/docentes.html:101
+#: templates/docentes.html:102
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: templates/docentes.html:110
+#: templates/docentes.html:111
 msgid "Ciclo Formativo GM"
 msgstr "Cicle Formatiu GM"
 
-#: templates/docentes.html:117
+#: templates/docentes.html:118
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: templates/docentes.html:118
+#: templates/docentes.html:119
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: templates/docentes.html:119
+#: templates/docentes.html:120
 msgid "Energías"
 msgstr "Energies"
 
-#: templates/docentes.html:120
+#: templates/docentes.html:121
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: templates/docentes.html:121
+#: templates/docentes.html:122
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: templates/docentes.html:122
+#: templates/docentes.html:123
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: templates/docentes.html:137
+#: templates/docentes.html:138
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: templates/docentes.html:138
+#: templates/docentes.html:139
 msgid "Fracciones"
 msgstr "Fraccions"
 
-#: templates/docentes.html:140
+#: templates/docentes.html:141
 msgid "Ecuaciones"
 msgstr "Equacions"
 
-#: templates/docentes.html:141
+#: templates/docentes.html:142
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: templates/docentes.html:159
+#: templates/docentes.html:152
+msgid "Rendimiento"
+msgstr "Rendiment"
+
+#: templates/docentes.html:161
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:166
+#: templates/docentes.html:168
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:167
+#: templates/docentes.html:169
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:168
+#: templates/docentes.html:170
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
