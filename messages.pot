@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-14 13:17+0200\n"
+"POT-Creation-Date: 2020-10-20 22:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,658 +396,720 @@ msgstr ""
 msgid "Índice"
 msgstr ""
 
-#: templates/ankicode.html:14 templates/ankicode.html:80
+#: templates/ankicode.html:14 templates/ankicode.html:83
 msgid "Código de Anki"
 msgstr ""
 
-#: templates/ankicode.html:16 templates/ankicode.html:85
+#: templates/ankicode.html:16 templates/ankicode.html:88
 msgid "Datos de la tarjeta"
 msgstr ""
 
-#: templates/ankicode.html:19 templates/ankicode.html:96
+#: templates/ankicode.html:17 templates/ankicode.html:100
+msgid "Condicionales"
+msgstr ""
+
+#: templates/ankicode.html:20 templates/ankicode.html:114
 msgid "Estructura de la tarjeta"
 msgstr ""
 
-#: templates/ankicode.html:21 templates/ankicode.html:101
+#: templates/ankicode.html:22 templates/ankicode.html:119
 msgid "Salto de línea"
 msgstr ""
 
-#: templates/ankicode.html:22 templates/ankicode.html:114
+#: templates/ankicode.html:23 templates/ankicode.html:132
 msgid "Línea horizontal"
 msgstr ""
 
-#: templates/ankicode.html:23 templates/ankicode.html:127
+#: templates/ankicode.html:24 templates/ankicode.html:145
 msgid "Negrita"
 msgstr ""
 
-#: templates/ankicode.html:25 templates/ankicode.html:151
+#: templates/ankicode.html:26 templates/ankicode.html:169
 msgid "Párrafo"
 msgstr ""
 
-#: templates/ankicode.html:26 templates/ankicode.html:165
+#: templates/ankicode.html:27 templates/ankicode.html:183
 msgid "Sección"
 msgstr ""
 
-#: templates/ankicode.html:27 templates/ankicode.html:181
+#: templates/ankicode.html:28 templates/ankicode.html:199
 msgid "Tabla"
 msgstr ""
 
-#: templates/ankicode.html:28 templates/ankicode.html:217
+#: templates/ankicode.html:29 templates/ankicode.html:235
 msgid "Combinar celdas"
 msgstr ""
 
-#: templates/ankicode.html:29 templates/ankicode.html:253
+#: templates/ankicode.html:30 templates/ankicode.html:271
 msgid "Poner nombre a las cosas"
 msgstr ""
 
-#: templates/ankicode.html:32
+#: templates/ankicode.html:33
 msgid "Aspecto de la tarjeta (CSS)"
 msgstr ""
 
-#: templates/ankicode.html:34 templates/ankicode.html:271
+#: templates/ankicode.html:35 templates/ankicode.html:289
 msgid "Acceder a las cosas por el tipo"
 msgstr ""
 
-#: templates/ankicode.html:35 templates/ankicode.html:284
+#: templates/ankicode.html:36 templates/ankicode.html:302
 msgid "Acceder a las cosas por el nombre"
 msgstr ""
 
-#: templates/ankicode.html:36 templates/ankicode.html:297
+#: templates/ankicode.html:37 templates/ankicode.html:315
 msgid "Aspecto general de la tarjeta"
 msgstr ""
 
-#: templates/ankicode.html:37 templates/ankicode.html:324
+#: templates/ankicode.html:38 templates/ankicode.html:342
 msgid "Bordes de las tablas"
 msgstr ""
 
-#: templates/ankicode.html:38 templates/ankicode.html:347
+#: templates/ankicode.html:39 templates/ankicode.html:365
 msgid "Márgenes"
 msgstr ""
 
-#: templates/ankicode.html:39 templates/ankicode.html:365
+#: templates/ankicode.html:40 templates/ankicode.html:383
 msgid "Ancho y alto"
 msgstr ""
 
-#: templates/ankicode.html:41 templates/ankicode.html:383
+#: templates/ankicode.html:42 templates/ankicode.html:401
 msgid "Ecuaciones matemáticas"
 msgstr ""
 
-#: templates/ankicode.html:43 templates/ankicode.html:388
+#: templates/ankicode.html:44 templates/ankicode.html:406
+msgid "Consideraciones previas"
+msgstr ""
+
+#: templates/ankicode.html:45 templates/ankicode.html:423
 msgid "Bloque de ecuación"
 msgstr ""
 
-#: templates/ankicode.html:44 templates/ankicode.html:404
+#: templates/ankicode.html:46 templates/ankicode.html:438
 msgid "Números y letras"
 msgstr ""
 
-#: templates/ankicode.html:45 templates/ankicode.html:417
+#: templates/ankicode.html:47 templates/ankicode.html:451
 msgid "Signos de multiplicar y dividir"
 msgstr ""
 
-#: templates/ankicode.html:46 templates/ankicode.html:433
+#: templates/ankicode.html:48 templates/ankicode.html:467
 msgid "Potencia y subíndice"
 msgstr ""
 
-#: templates/ankicode.html:47 templates/ankicode.html:449
+#: templates/ankicode.html:49 templates/ankicode.html:483
 msgid "Agrupar cosas"
 msgstr ""
 
-#: templates/ankicode.html:48 templates/ankicode.html:462
+#: templates/ankicode.html:50 templates/ankicode.html:496
 msgid "Fracciones en vertical"
 msgstr ""
 
-#: templates/ankicode.html:49 templates/ankicode.html:474
+#: templates/ankicode.html:51 templates/ankicode.html:508
 msgid "Raíz cuadrada"
 msgstr ""
 
-#: templates/ankicode.html:50 templates/ankicode.html:488
+#: templates/ankicode.html:52 templates/ankicode.html:522
 msgid "Letras griegas"
 msgstr ""
 
-#: templates/ankicode.html:51 templates/ankicode.html:505
+#: templates/ankicode.html:53 templates/ankicode.html:539
 msgid "Integrales y sumatorios"
 msgstr ""
 
-#: templates/ankicode.html:52 templates/ankicode.html:523
+#: templates/ankicode.html:54 templates/ankicode.html:557
 msgid "Espacios"
 msgstr ""
 
-#: templates/ankicode.html:53 templates/ankicode.html:542
+#: templates/ankicode.html:55 templates/ankicode.html:576
 msgid "Sistemas de ecuaciones"
 msgstr ""
 
-#: templates/ankicode.html:62
+#: templates/ankicode.html:64
 msgid "Toquetea el código de mis tarjetas"
 msgstr ""
 
-#: templates/ankicode.html:64
+#: templates/ankicode.html:66
 msgid "Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas."
 msgstr ""
 
-#: templates/ankicode.html:67
+#: templates/ankicode.html:69
 msgid "Tarjeta del tutorial"
 msgstr ""
 
-#: templates/ankicode.html:68
+#: templates/ankicode.html:70
 msgid "Tarjeta de valencias"
 msgstr ""
 
-#: templates/ankicode.html:69
+#: templates/ankicode.html:71
 msgid "Tarjeta Irregular Verbs"
 msgstr ""
 
-#: templates/ankicode.html:70
+#: templates/ankicode.html:72
 msgid "Tarjeta LSC"
 msgstr ""
 
-#: templates/ankicode.html:71
+#: templates/ankicode.html:73
 msgid "Tarjeta tiempos verbales catalanes"
 msgstr ""
 
-#: templates/ankicode.html:86
-msgid "{{Campo}}"
+#: templates/ankicode.html:74
+msgid "Tarjeta de derivadas"
 msgstr ""
 
 #: templates/ankicode.html:89
+msgid "{{Campo}}"
+msgstr ""
+
+#: templates/ankicode.html:92
 msgid "Escribo {{Capital}} donde quiero que aparezca"
 msgstr ""
 
+#: templates/ankicode.html:101
+msgid "{{#A}} Cacho que sólo veo si hay A {{/A}}"
+msgstr ""
+
+#: templates/ankicode.html:104
+msgid "Si escribo un cacho de la tarjeta entre {{#Campo}} y {{/Campo}},"
+msgstr ""
+
 #: templates/ankicode.html:105
-msgid "Aquí está la primera línea,"
+msgid ""
+"ese cacho sólo se verá en las tarjetas que tengan algo escrito en "
+"\"Campo\"."
 msgstr ""
 
 #: templates/ankicode.html:106
+msgid "Por ejemplo, en algunas capitales quiero curiosidades y en otras no,"
+msgstr ""
+
+#: templates/ankicode.html:107
+msgid ""
+"y quiero un apartado de \"Curiosidades\" que sólo aparezca cuando haya "
+"curiosidades."
+msgstr ""
+
+#: templates/ankicode.html:123
+msgid "Aquí está la primera línea,"
+msgstr ""
+
+#: templates/ankicode.html:124
 msgid "Y aquí está la segunda."
 msgstr ""
 
-#: templates/ankicode.html:118
+#: templates/ankicode.html:136
 msgid "Texto antes de la línea"
 msgstr ""
 
-#: templates/ankicode.html:119
+#: templates/ankicode.html:137
 msgid "Texto después"
 msgstr ""
 
-#: templates/ankicode.html:128
+#: templates/ankicode.html:146
 msgid "cosas gruesas"
 msgstr ""
 
-#: templates/ankicode.html:131
+#: templates/ankicode.html:149
 msgid "Deben rodear"
 msgstr ""
 
-#: templates/ankicode.html:131
+#: templates/ankicode.html:149
 msgid "el cacho"
 msgstr ""
 
-#: templates/ankicode.html:131
+#: templates/ankicode.html:149
 msgid "que quieres resaltar."
 msgstr ""
 
-#: templates/ankicode.html:139
+#: templates/ankicode.html:157
 msgid "Cursiva"
 msgstr ""
 
-#: templates/ankicode.html:140
+#: templates/ankicode.html:158
 msgid "cosas italianas"
 msgstr ""
 
-#: templates/ankicode.html:143
+#: templates/ankicode.html:161
 msgid "El texto que quieras torcido,"
 msgstr ""
 
-#: templates/ankicode.html:143
+#: templates/ankicode.html:161
 msgid "entre las etiquetas"
 msgstr ""
 
-#: templates/ankicode.html:152
+#: templates/ankicode.html:170
 msgid "texto a su bola"
 msgstr ""
 
-#: templates/ankicode.html:156
+#: templates/ankicode.html:174
 msgid "El texto de aquí dentro tendrá márgenes arriba y abajo."
 msgstr ""
 
-#: templates/ankicode.html:166
+#: templates/ankicode.html:184
 msgid "texto no tan a su bola"
 msgstr ""
 
-#: templates/ankicode.html:170
+#: templates/ankicode.html:188
 msgid "Este texto quería separarlo espiritualmente de lo demás textos."
 msgstr ""
 
-#: templates/ankicode.html:171
+#: templates/ankicode.html:189
 msgid "No cambia nada (va a tener el mismo contacto social con los demás)."
 msgstr ""
 
-#: templates/ankicode.html:172
+#: templates/ankicode.html:190
 msgid "...pero como está delimitado podré ponerle nombre para decorar."
 msgstr ""
 
-#: templates/ankicode.html:185 templates/ankicode.html:203
+#: templates/ankicode.html:203 templates/ankicode.html:221
 msgid "cabecera izquierda"
 msgstr ""
 
-#: templates/ankicode.html:186 templates/ankicode.html:204
+#: templates/ankicode.html:204 templates/ankicode.html:222
 msgid "cabecera derecha"
 msgstr ""
 
-#: templates/ankicode.html:189 templates/ankicode.html:207
-#: templates/ankicode.html:225 templates/ankicode.html:243
+#: templates/ankicode.html:207 templates/ankicode.html:225
+#: templates/ankicode.html:243 templates/ankicode.html:261
 msgid "casilla normal izquierda"
 msgstr ""
 
-#: templates/ankicode.html:190 templates/ankicode.html:208
-#: templates/ankicode.html:226 templates/ankicode.html:244
+#: templates/ankicode.html:208 templates/ankicode.html:226
+#: templates/ankicode.html:244 templates/ankicode.html:262
 msgid "casilla normal derecha"
 msgstr ""
 
-#: templates/ankicode.html:196
+#: templates/ankicode.html:214
 msgid "lo engloba todo,"
 msgstr ""
 
-#: templates/ankicode.html:197
+#: templates/ankicode.html:215
 msgid "engloba las filas."
 msgstr ""
 
-#: templates/ankicode.html:198
+#: templates/ankicode.html:216
 msgid "Dentro de la primera fila las casillas serán"
 msgstr ""
 
-#: templates/ankicode.html:199
+#: templates/ankicode.html:217
 msgid "Dentro de las demás filas las casillas serán"
 msgstr ""
 
-#: templates/ankicode.html:221 templates/ankicode.html:239
+#: templates/ankicode.html:239 templates/ankicode.html:257
 msgid "esto ocupa dos columnas"
 msgstr ""
 
-#: templates/ankicode.html:222 templates/ankicode.html:240
+#: templates/ankicode.html:240 templates/ankicode.html:258
 msgid "esto ocupa dos filas"
 msgstr ""
 
-#: templates/ankicode.html:232
+#: templates/ankicode.html:250
 msgid "Podemos hacer que una celda ocupe dos columnas añadiendo"
 msgstr ""
 
-#: templates/ankicode.html:233
+#: templates/ankicode.html:251
 msgid "(y por tanto nos saltamos la siguiente columna)"
 msgstr ""
 
-#: templates/ankicode.html:234
+#: templates/ankicode.html:252
 msgid "Y podemos hacer lo mismo con las filas poniendo"
 msgstr ""
 
-#: templates/ankicode.html:235
+#: templates/ankicode.html:253
 msgid "(y por tanto en la siguiente fila no ponemos esa columna)"
 msgstr ""
 
-#: templates/ankicode.html:254 templates/ankicode.html:285
-#: templates/ankicode.html:288
+#: templates/ankicode.html:272 templates/ankicode.html:303
+#: templates/ankicode.html:306
 msgid "nombre"
 msgstr ""
 
-#: templates/ankicode.html:254
+#: templates/ankicode.html:272
 msgid "Párrafo que tiene nombre"
 msgstr ""
 
-#: templates/ankicode.html:257
+#: templates/ankicode.html:275
 msgid "Cualquier etiqueta puede tener nombre."
 msgstr ""
 
-#: templates/ankicode.html:258
+#: templates/ankicode.html:276
 msgid "Lo típico son cachos de una tabla, secciones, párrafos..."
 msgstr ""
 
-#: templates/ankicode.html:259
+#: templates/ankicode.html:277
 msgid "Darle nombre nos permite luego elegir su aspecto desde el CSS."
 msgstr ""
 
-#: templates/ankicode.html:266
+#: templates/ankicode.html:284
 msgid "Aspecto de la tarjeta"
 msgstr ""
 
-#: templates/ankicode.html:272 templates/ankicode.html:285
+#: templates/ankicode.html:290 templates/ankicode.html:303
 msgid "colorinchis-y-cosas"
 msgstr ""
 
-#: templates/ankicode.html:275
+#: templates/ankicode.html:293
 msgid "Para cambiar el aspecto de las casillas normales"
 msgstr ""
 
-#: templates/ankicode.html:275
+#: templates/ankicode.html:293
 msgid "de las tablas."
 msgstr ""
 
-#: templates/ankicode.html:276
+#: templates/ankicode.html:294
 msgid "Cuidado que si es una etiqueta no lleva punto."
 msgstr ""
 
-#: templates/ankicode.html:288
+#: templates/ankicode.html:306
 msgid "Para cambiar el aspecto de algo que tenga"
 msgstr ""
 
-#: templates/ankicode.html:289
+#: templates/ankicode.html:307
 msgid "Ojo que si es una clase (un nombre) tiene que llevar punto."
 msgstr ""
 
-#: templates/ankicode.html:308
+#: templates/ankicode.html:326
 msgid "Anki lleva una clase previa que lo engloba todo"
 msgstr ""
 
-#: templates/ankicode.html:309
+#: templates/ankicode.html:327
 msgid ""
 "Aquí podemos cambiar las pintas generales de todo antes de meternos a los"
 " detalles."
 msgstr ""
 
-#: templates/ankicode.html:312
+#: templates/ankicode.html:330
 msgid "La letra por defecto es"
 msgstr ""
 
-#: templates/ankicode.html:313
+#: templates/ankicode.html:331
 msgid "marca la medida de la letra."
 msgstr ""
 
-#: templates/ankicode.html:314
+#: templates/ankicode.html:332
 msgid "El texto viene en"
 msgstr ""
 
-#: templates/ankicode.html:314
+#: templates/ankicode.html:332
 msgid "pero se puede alinear hacia los lados."
 msgstr ""
 
-#: templates/ankicode.html:315
+#: templates/ankicode.html:333
 msgid "El color del texto"
 msgstr ""
 
-#: templates/ankicode.html:316
+#: templates/ankicode.html:334
 msgid "El color de fondo de la tarjeta entera será"
 msgstr ""
 
-#: templates/ankicode.html:332
+#: templates/ankicode.html:350
 msgid "Podemos aplicar el mismo estilo a varias cosas a la vez:"
 msgstr ""
 
-#: templates/ankicode.html:333 templates/ankicode.html:339
+#: templates/ankicode.html:351 templates/ankicode.html:357
 msgid "Si no usamos"
 msgstr ""
 
-#: templates/ankicode.html:333
+#: templates/ankicode.html:351
 msgid "no veremos la tabla (el borde será invisible)."
 msgstr ""
 
-#: templates/ankicode.html:335
+#: templates/ankicode.html:353
 msgid "marca el grueso de la línea"
 msgstr ""
 
-#: templates/ankicode.html:336
+#: templates/ankicode.html:354
 msgid "marca la continuidad:"
 msgstr ""
 
-#: templates/ankicode.html:337
+#: templates/ankicode.html:355
 msgid "marca el color:"
 msgstr ""
 
-#: templates/ankicode.html:339
+#: templates/ankicode.html:357
 msgid "el borde será doble (tendrán borde la tabla y las casillas)."
 msgstr ""
 
-#: templates/ankicode.html:356
+#: templates/ankicode.html:374
 msgid "Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes."
 msgstr ""
 
-#: templates/ankicode.html:357
+#: templates/ankicode.html:375
 msgid "Poniendo"
 msgstr ""
 
-#: templates/ankicode.html:357
+#: templates/ankicode.html:375
 msgid "a ambos lados se centra ella sola."
 msgstr ""
 
-#: templates/ankicode.html:367
+#: templates/ankicode.html:385
 msgid "casilla"
 msgstr ""
 
-#: templates/ankicode.html:374
+#: templates/ankicode.html:392
 msgid ""
 "Podemos elegir las medidas de elementos de la tabla (o de la tabla "
 "entera)."
 msgstr ""
 
-#: templates/ankicode.html:375
+#: templates/ankicode.html:393
 msgid "Ponemos"
 msgstr ""
 
-#: templates/ankicode.html:375
+#: templates/ankicode.html:393
 msgid "y la cantidad de píxeles."
 msgstr ""
 
-#: templates/ankicode.html:389
+#: templates/ankicode.html:409
+msgid ""
+"Para poder usar esto directamente desde Anki tienes que tener LaTeX en el"
+" ordenador."
+msgstr ""
+
+#: templates/ankicode.html:410
+msgid "Eso significa tener descargado MacTeX (Mac) o MiKTeX (Windows)."
+msgstr ""
+
+#: templates/ankicode.html:412
+msgid ""
+"A pesar de eso, una alternativa fácil es crear las ecuaciones en el "
+"editor de "
+msgstr ""
+
+#: templates/ankicode.html:413
+msgid "en"
+msgstr ""
+
+#: templates/ankicode.html:415
+msgid ""
+"...es decir, generar el LaTeX en otro sitio y simplemente copiar y pegar "
+"la imagen."
+msgstr ""
+
+#: templates/ankicode.html:424
 msgid "Ecuación escrita en LaTeX"
 msgstr ""
 
-#: templates/ankicode.html:392
+#: templates/ankicode.html:427
 msgid ""
 "Para indicarle a Anki que voy a escribir una ecuación, la rodeo con "
 "dólares."
 msgstr ""
 
-#: templates/ankicode.html:393
+#: templates/ankicode.html:428
 msgid "Por ejemplo, escribo"
 msgstr ""
 
-#: templates/ankicode.html:393
+#: templates/ankicode.html:428
 msgid "para dibujar la ecuación $3x = 4$."
 msgstr ""
 
-#: templates/ankicode.html:395
+#: templates/ankicode.html:430
 msgid ""
 "Todos los códigos de LaTeX que vemos debajo tienen que estar en una "
 "ecuación de estas."
 msgstr ""
 
-#: templates/ankicode.html:408
+#: templates/ankicode.html:442
 msgid "Los números y letras de la ecuación se escriben tal cual."
 msgstr ""
 
-#: templates/ankicode.html:409
+#: templates/ankicode.html:443
 msgid "Por ejemplo, poniendo"
 msgstr ""
 
-#: templates/ankicode.html:409 templates/ankicode.html:466
-#: templates/ankicode.html:478 templates/ankicode.html:480
-#: templates/ankicode.html:513
+#: templates/ankicode.html:443 templates/ankicode.html:500
+#: templates/ankicode.html:512 templates/ankicode.html:514
+#: templates/ankicode.html:547
 msgid "me dibuja"
 msgstr ""
 
-#: templates/ankicode.html:421
+#: templates/ankicode.html:455
 msgid "Punto de multiplicar:"
 msgstr ""
 
-#: templates/ankicode.html:421 templates/ankicode.html:422
-#: templates/ankicode.html:423 templates/ankicode.html:437
-#: templates/ankicode.html:438 templates/ankicode.html:454
+#: templates/ankicode.html:455 templates/ankicode.html:456
+#: templates/ankicode.html:457 templates/ankicode.html:471
+#: templates/ankicode.html:472 templates/ankicode.html:488
 msgid "nos dibuja"
 msgstr ""
 
-#: templates/ankicode.html:422
+#: templates/ankicode.html:456
 msgid "Cruz de multiplicar:"
 msgstr ""
 
-#: templates/ankicode.html:423
+#: templates/ankicode.html:457
 msgid "Signo de división:"
 msgstr ""
 
-#: templates/ankicode.html:425
+#: templates/ankicode.html:459
 msgid "Otro signo útil es"
 msgstr ""
 
-#: templates/ankicode.html:425
+#: templates/ankicode.html:459
 msgid "que dibuja"
 msgstr ""
 
-#: templates/ankicode.html:437
+#: templates/ankicode.html:471
 msgid "El exponente es como lo escribiríamos:"
 msgstr ""
 
-#: templates/ankicode.html:438
+#: templates/ankicode.html:472
 msgid "El subíndice va con barra baja:"
 msgstr ""
 
-#: templates/ankicode.html:440
+#: templates/ankicode.html:474
 msgid "Si queremos poner exponentes o subíndices con más de un carácter o cifra,"
 msgstr ""
 
-#: templates/ankicode.html:441
+#: templates/ankicode.html:475
 msgid "habrá que agrupar todo el texto (ponerlo entre llaves"
 msgstr ""
 
-#: templates/ankicode.html:450
+#: templates/ankicode.html:484
 msgid "{cosas que van juntas}"
 msgstr ""
 
-#: templates/ankicode.html:453
+#: templates/ankicode.html:487
 msgid ""
 "Siempre que quiera agrupar cosas para que actúen como un solo bloque, uso"
 " las llaves."
 msgstr ""
 
-#: templates/ankicode.html:454 templates/ankicode.html:549
+#: templates/ankicode.html:488 templates/ankicode.html:583
 msgid "Por ejemplo,"
 msgstr ""
 
-#: templates/ankicode.html:454
+#: templates/ankicode.html:488
 msgid "y"
 msgstr ""
 
-#: templates/ankicode.html:466 templates/ankicode.html:478
+#: templates/ankicode.html:500 templates/ankicode.html:512
 msgid "Si escribo"
 msgstr ""
 
-#: templates/ankicode.html:475
+#: templates/ankicode.html:509
 msgid "\\sqrt{cosas dentro de la raíz}"
 msgstr ""
 
-#: templates/ankicode.html:480
+#: templates/ankicode.html:514
 msgid "También puedo elegir el índice: si escribo"
 msgstr ""
 
-#: templates/ankicode.html:492
+#: templates/ankicode.html:526
 msgid "Se pueden escribir"
 msgstr ""
 
-#: templates/ankicode.html:492
+#: templates/ankicode.html:526
 msgid "letras griegas"
 msgstr ""
 
-#: templates/ankicode.html:492
+#: templates/ankicode.html:526
 msgid "poniendo cómo se llaman después de una barra."
 msgstr ""
 
-#: templates/ankicode.html:493
+#: templates/ankicode.html:527
 msgid ""
 "El código distingue mayúscula y minúscula, así que el ejemplo de arriba "
 "dibujaría"
 msgstr ""
 
-#: templates/ankicode.html:495
+#: templates/ankicode.html:529
 msgid "Algunas minúsculas, como"
 msgstr ""
 
-#: templates/ankicode.html:495
+#: templates/ankicode.html:529
 msgid "tienen variante:"
 msgstr ""
 
-#: templates/ankicode.html:497
+#: templates/ankicode.html:531
 msgid "El infinito se puede hacer así, también:"
 msgstr ""
 
-#: templates/ankicode.html:497
+#: templates/ankicode.html:531
 msgid "dibuja"
 msgstr ""
 
-#: templates/ankicode.html:509
+#: templates/ankicode.html:543
 msgid "Los símbolos para integral y sumatorio son"
 msgstr ""
 
-#: templates/ankicode.html:511
+#: templates/ankicode.html:545
 msgid "Para acotar la integral simplemente usamos potencia y subíndice:"
 msgstr ""
 
-#: templates/ankicode.html:512
+#: templates/ankicode.html:546
 msgid "Para acotar la suma hay que usar"
 msgstr ""
 
-#: templates/ankicode.html:512
+#: templates/ankicode.html:546
 msgid "que sirve para escribir arriba y debajo del anterior."
 msgstr ""
 
-#: templates/ankicode.html:513 templates/ankicode.html:531
+#: templates/ankicode.html:547 templates/ankicode.html:565
 msgid "Por ejemplo: si escribo"
 msgstr ""
 
-#: templates/ankicode.html:515
+#: templates/ankicode.html:549
 msgid "Y bueno, los más friquis podéis hacer integrales cerradas con"
 msgstr ""
 
-#: templates/ankicode.html:527
+#: templates/ankicode.html:561
 msgid "Por defecto la fórmula decide ella misma qué espacios hay que poner."
 msgstr ""
 
-#: templates/ankicode.html:528
+#: templates/ankicode.html:562
 msgid ""
 "Si quieres forzar espacios a propósito tienes estos cinco para elegir, de"
 " estrecho a ancho."
 msgstr ""
 
-#: templates/ankicode.html:529
+#: templates/ankicode.html:563
 msgid "La cuarta opción es la barra seguida de un espacio."
 msgstr ""
 
-#: templates/ankicode.html:531
+#: templates/ankicode.html:565
 msgid "me separa sólo la b en el dibujo"
 msgstr ""
 
-#: templates/ankicode.html:533
+#: templates/ankicode.html:567
 msgid "También puedo crear un espacio a medida escribiendo texto transparente con"
 msgstr ""
 
-#: templates/ankicode.html:534
+#: templates/ankicode.html:568
 msgid "Por ejemplo, si escribo"
 msgstr ""
 
-#: templates/ankicode.html:534
+#: templates/ankicode.html:568
 msgid "me deja lo que ocupa"
 msgstr ""
 
-#: templates/ankicode.html:534
+#: templates/ankicode.html:568
 msgid "como espacio"
 msgstr ""
 
-#: templates/ankicode.html:543
+#: templates/ankicode.html:577
 msgid "segunda"
 msgstr ""
 
-#: templates/ankicode.html:546
+#: templates/ankicode.html:580
 msgid ""
 "Para agrupar cosas en una llave, tenemos que crear un \"entorno\" de "
 "sistema de ecuaciones."
 msgstr ""
 
-#: templates/ankicode.html:547
+#: templates/ankicode.html:581
 msgid "Empezaremos con"
 msgstr ""
 
-#: templates/ankicode.html:547
+#: templates/ankicode.html:581
 msgid "saltamos de línea con"
 msgstr ""
 
-#: templates/ankicode.html:547
+#: templates/ankicode.html:581
 msgid "y cerramos con"
 msgstr ""
 
-#: templates/ankicode.html:549
+#: templates/ankicode.html:583
 msgid "nos dará"
 msgstr ""
 
@@ -1120,6 +1182,7 @@ msgstr ""
 
 #: templates/docentes.html:46 templates/docentes.html:67
 #: templates/docentes.html:85 templates/docentes.html:100
+#: templates/docentes.html:150
 msgid "Formularios:"
 msgstr ""
 
@@ -1141,7 +1204,7 @@ msgstr ""
 
 #: templates/docentes.html:55 templates/docentes.html:73
 #: templates/docentes.html:116 templates/docentes.html:136
-#: templates/docentes.html:150 templates/docentes.html:166
+#: templates/docentes.html:154 templates/docentes.html:169
 msgid "Fichas:"
 msgstr ""
 
@@ -1174,7 +1237,7 @@ msgstr ""
 msgid "Gráficos de MRUA"
 msgstr ""
 
-#: templates/docentes.html:91 templates/docentes.html:153
+#: templates/docentes.html:91 templates/docentes.html:156
 msgid "Fuerzas"
 msgstr ""
 
@@ -1234,19 +1297,19 @@ msgstr ""
 msgid "Rendimiento"
 msgstr ""
 
-#: templates/docentes.html:161
+#: templates/docentes.html:164
 msgid "Primaria"
 msgstr ""
 
-#: templates/docentes.html:168
+#: templates/docentes.html:171
 msgid "Operaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:169
+#: templates/docentes.html:172
 msgid "Ecuaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:170
+#: templates/docentes.html:173
 msgid "Operaciones en columna"
 msgstr ""
 

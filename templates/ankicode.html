@@ -11,9 +11,10 @@
         <div class="card-body">
             <b>{{ _('Índice') }}</b>
             <ul>
-                <li>{{ _('Código de Anki') }}</li>
+                <li>{{ _('Código de Anki') }} (Pystache)</li>
                 <ul>
                     <li><a href="#vars">{{ _('Datos de la tarjeta') }}</a></li>
+                    <li><a href="#ifs">{{ _('Condicionales') }}</a></li>
                 </ul>
                 <br>
                 <li>{{ _('Estructura de la tarjeta') }} (HTML)</li>
@@ -40,6 +41,7 @@
                 </ul><br>
                 <li>{{ _('Ecuaciones matemáticas') }} (LaTeX) ✨</li>
                 <ul>
+                    <li><a href="#prev">{{ _('Consideraciones previas') }}</a></li>
                     <li><a href="#eqn">{{ _('Bloque de ecuación') }}</a></li>
                     <li><a href="#nums">{{ _('Números y letras') }}</a></li>
                     <li><a href="#xdiv">{{ _('Signos de multiplicar y dividir') }}</a></li>
@@ -69,6 +71,7 @@
                 <li><a href="https://codepen.io/Rusca8/pen/rNOQExj" target="_blank">{{ _('Tarjeta Irregular Verbs') }}</a></li>
                 <li><a href="https://codepen.io/Rusca8/pen/bGVQPEX" target="_blank">{{ _('Tarjeta LSC') }}</a></li>
                 <li><a href="https://codepen.io/Rusca8/pen/VwvVOqy" target="_blank">{{ _('Tarjeta tiempos verbales catalanes') }}</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/MWejrRL" target="_blank">{{ _('Tarjeta de derivadas') }}</a></li>
             </ul>
         </div>
     </div>
@@ -77,7 +80,7 @@
 
 
 <div class="card border-c bg-light mb-2">
-    <h5 class="card-header">{{ _('Código de Anki') }}</h5>
+    <h5 class="card-header">{{ _('Código de Anki') }} (Pystache)</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="vars"></b>
         <div class="card-body">
@@ -87,6 +90,21 @@
             </p>
             <p>
                 {{ _('Escribo {{Capital}} donde quiero que aparezca') }} "París".
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="ifs"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Condicionales') }}</b><br>
+                <code>{{ _('{{#A}} Cacho que sólo veo si hay A {{/A}}') }}</code>
+            </p>
+            <p>
+                {{ _('Si escribo un cacho de la tarjeta entre {{#Campo}} y {{/Campo}},') }}<br>
+                {{ _('ese cacho sólo se verá en las tarjetas que tengan algo escrito en "Campo".') }}<br><br>
+                {{ _('Por ejemplo, en algunas capitales quiero curiosidades y en otras no,') }}<br>
+                {{ _('y quiero un apartado de "Curiosidades" que sólo aparezca cuando haya curiosidades.') }}
             </p>
         </div>
     </div>
@@ -382,6 +400,23 @@
 <div class="card border-c bg-light mb-2 mt-2">
     <h5 class="card-header">{{ _('Ecuaciones matemáticas') }} (LaTeX)</h5>
 
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="prev"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Consideraciones previas') }}</b><br>
+            </p>
+            <p>
+                {{ _('Para poder usar esto directamente desde Anki tienes que tener LaTeX en el ordenador.') }}<br>
+                {{ _('Eso significa tener descargado MacTeX (Mac) o MiKTeX (Windows).') }}<br>
+                <br>
+                {{ _('A pesar de eso, una alternativa fácil es crear las ecuaciones en el editor de ') }}<a href="https://www.codecogs.com/latex/eqneditor.php">codecogs</a>,<br>
+                {{ _('en') }} google docs (<a href="https://gsuite.google.com/u/0/marketplace/app/autolatex_equations/850293439076">AutoLaTeX Equations</a>) o {{ _('en') }} google slides (<a href="https://gsuite.google.com/u/0/marketplace/app/equation_editor_++/820814187583">Equation Editor ++</a>).<br>
+                <br>
+                <i>{{ _('...es decir, generar el LaTeX en otro sitio y simplemente copiar y pegar la imagen.') }}</i>
+            </p>
+        </div>
+    </div>
+
     <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="eqn"></b>
         <div class="card-body">
             <p>
@@ -393,7 +428,6 @@
                 {{ _('Por ejemplo, escribo') }} <code>[$]3x=4[/$]</code> {{ _('para dibujar la ecuación $3x = 4$.') }}<br>
                 <br>
                 <i>{{ _('Todos los códigos de LaTeX que vemos debajo tienen que estar en una ecuación de estas.') }}</i>
-
             </p>
         </div>
     </div>
