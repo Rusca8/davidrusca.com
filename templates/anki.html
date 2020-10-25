@@ -58,29 +58,68 @@
 
     <div class="card-columns">
 
+
       <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_geometria.png" alt="Tarjeta Geometría">
+        <img class="card-img-top" src="/static/img/a_comarques.png" alt="Tarjeta Braille">
         <div class="card-body">
-            <h5 class="card-tittle">{{ _('Perímetros, Áreas y Volúmenes') }} [CA]</h5>
-            <i>Octubre 2020</i>
+            <h5 class="card-tittle">{{ _('Comarcas de Cataluña') }} [CA]</h5>
+            <i>{{ _('Octubre') }} 2020</i>
             <p>
-                {{ _('Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos geométricos.') }}<br>
-                {{ _('Incluye explicaciones y trucos para recordarlas mejor.') }}
+                {{ _('Capitales y ubicación de las 42 comarcas de Cataluña.') }}<br>
+                {{ _('Incluye historias cortas para recordar mejor la capital.') }}
             </p>
+            <p>
+                <i>{{ _('Las historias las he escrito todas yo mismo y puedes encontrarlas ')}} <a href="/static/pdf/Mn_Comarques.pdf" target="_blank"> aquí</a>.</i>
+            </p>
+            <div class="alert alert-info" role="alert">
+                <b>{{ _('Para estudiar sólo mapas o sólo capitales:') }}</b> <br>
+                <ul>
+                    <li><b>{{ _('Móvil:') }}</b><br>
+                        {{ _('En el menú de la izquierda, "navegador de cartas". En los puntos de la derecha, "filtrar por etiqueta". Y eliges "Comarca-capital" o "Comarca-mapa".') }} </li>
+                    <li><b>{{ _('Ordenador:') }}</b><br>
+                        {{ _('Dentro del mazo, "estudio personalizado". Luego "estudiar según estado o etiqueta". Abajo "elije las etiquetas". Y eliges "Comarca-capital" o "Comarca-mapa".') }}</li>
+                </ul>
+                <i>{{ _('En los dos casos, se crea un mazo azul con sólo las tarjetas que has elegido. Si luego un día quieres devolverlas al mazo original, sólo tienes que borrar el mazo azul (tranqui, el progreso se conserva).') }}</i>
+            </div>
             <b>{{ _('Campos:') }}</b>
             <ul>
-                <li>{{ _('Figura') }}</li>
-                <li>{{ _('Tipo') }} <i>({{ _('Área, Perímetro, Volumen...') }})</i></li>
-                <li>{{ _('Imagen') }}</li>
-                <li>{{ _('Fórmula') }}</li>
-                <li>{{ _('Variables') }}</li>
-                <li>{{ _('Comentarios') }}</li>
+                <li>Comarca</li>
+                <li>Capital</li>
+                <li>{{ _('Provincia') }}</li>
+                <li>Mapa</li>
+                <li>{{ _('Historia') }}</li>
             </ul>
             <b>{{ _('Tarjetas') }}</b>
             <ul>
-                <li>{{ _('Tipo') }}, {{ _('Figura') }}, etc > {{ _('Fórmula') }}, ({{ _('Comentarios') }})</li>
+                <li>Comarca > Mapa ({{ _('Provincia') }})</li>
+                <li>Comarca > Capital ({{ _('Provincia') }}), ({{ _('Historia') }})</li>
+                <li>Mapa > Comarca ({{ _('Provincia') }})</li>
+                <li>Capital > Comarca ({{ _('Provincia') }}), ({{ _('Historia') }})</li>
             </ul>
-            <a href="/anki/d/geometria" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (42 {{ _('notas') }}, 279K) </a>
+            <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 944K)</a>
+        </div>
+      </div>
+
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_valencies.png" alt="Tarjeta Valències">
+        <div class="card-body">
+            <h5 class="card-tittle">{{ _('Valencias Química') }} [CA]</h5>
+            <i>{{ _('Septiembre') }} 2019</i>
+            <p>
+                {{ _('Valencias de los elementos que se suelen memorizar de química inorgánica.') }}
+            </p>
+            <b>{{ _('Campos:') }}</b>
+            <ul>
+                <li>{{ _('Elemento') }}</li>
+                <li>{{ _('Valencia') }}</li>
+                <li>{{ _('Otros con la misma valencia') }}</li>
+                <li>{{ _('Mnemotecnia [CA]') }}</li>
+            </ul>
+            <b>{{ _('Tarjetas') }}</b>
+            <ul>
+                <li>{{ _('Elemento') }} > {{ _('Valencia') }}, ({{ _('Otros') }}), ({{ _('Mnemotecnia') }})</li>
+            </ul>
+            <a href="/anki/d/valencies" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (46 {{ _('notas') }}, 11K)</a>
         </div>
       </div>
 
@@ -110,25 +149,28 @@
       </div>
 
       <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_valencies.png" alt="Tarjeta Valències">
+        <img class="card-img-top" src="/static/img/a_geometria.png" alt="Tarjeta Geometría">
         <div class="card-body">
-            <h5 class="card-tittle">{{ _('Valencias Química') }} [CA]</h5>
-            <i>{{ _('Septiembre') }} 2019</i>
+            <h5 class="card-tittle">{{ _('Perímetros, Áreas y Volúmenes') }} [CA]</h5>
+            <i>Octubre 2020</i>
             <p>
-                {{ _('Valencias de los elementos que se suelen memorizar de química inorgánica.') }}
+                {{ _('Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos geométricos.') }}<br>
+                {{ _('Incluye explicaciones y trucos para recordarlas mejor.') }}
             </p>
             <b>{{ _('Campos:') }}</b>
             <ul>
-                <li>{{ _('Elemento') }}</li>
-                <li>{{ _('Valencia') }}</li>
-                <li>{{ _('Otros con la misma valencia') }}</li>
-                <li>{{ _('Mnemotecnia [CA]') }}</li>
+                <li>{{ _('Figura') }}</li>
+                <li>{{ _('Tipo') }} <i>({{ _('Área, Perímetro, Volumen...') }})</i></li>
+                <li>{{ _('Imagen') }}</li>
+                <li>{{ _('Fórmula') }}</li>
+                <li>{{ _('Variables') }}</li>
+                <li>{{ _('Comentarios') }}</li>
             </ul>
             <b>{{ _('Tarjetas') }}</b>
             <ul>
-                <li>{{ _('Elemento') }} > {{ _('Valencia') }}, ({{ _('Otros') }}), ({{ _('Mnemotecnia') }})</li>
+                <li>{{ _('Tipo') }}, {{ _('Figura') }}, etc > {{ _('Fórmula') }}, ({{ _('Comentarios') }})</li>
             </ul>
-            <a href="/anki/d/valencies" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (46 {{ _('notas') }}, 11K)</a>
+            <a href="/anki/d/geometria" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (43 {{ _('notas') }}, 279K) </a>
         </div>
       </div>
 
@@ -179,31 +221,6 @@
                 <li>{{ _('Función') }} > Derivada, ({{ _('Comentarios') }})</li>
             </ul>
             <a href="/anki/d/derivades" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (41 {{ _('notas') }}, 188K)</a>
-        </div>
-      </div>
-
-
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_braille.png" alt="Tarjeta Braille">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Braille Español/Catalán') }} [ES/CA]</h5>
-            <i>{{ _('Diciembre') }} 2019</i>
-            <p>
-                {{ _('Las letras y los símbolos más típicos.') }}<br>
-                {{ _('En catalán las tildes van algo distintas, así que las añadí también.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>Braille</li>
-                <li>{{ _('Significado') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas') }}</b>
-            <ul>
-                <li>Braille > {{ _('Significado') }}</li>
-                <li>{{ _('Significado') }} > Braille</li>
-            </ul>
-            <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (50 {{ _('notas') }}, 11K)</a>
         </div>
       </div>
 
@@ -275,8 +292,30 @@
         </div>
       </div>
 
-    </div>
+      <div class="card border-c">
+        <img class="card-img-top" src="/static/img/a_braille.png" alt="Tarjeta Braille">
+        <div class="card-body">
+            <h5 class="card-tittle">{{ _('Braille Español/Catalán') }} [ES/CA]</h5>
+            <i>{{ _('Diciembre') }} 2019</i>
+            <p>
+                {{ _('Las letras y los símbolos más típicos.') }}<br>
+                {{ _('En catalán las tildes van algo distintas, así que las añadí también.') }}
+            </p>
+            <b>{{ _('Campos:') }}</b>
+            <ul>
+                <li>Braille</li>
+                <li>{{ _('Significado') }}</li>
+            </ul>
+            <b>{{ _('Tarjetas') }}</b>
+            <ul>
+                <li>Braille > {{ _('Significado') }}</li>
+                <li>{{ _('Significado') }} > Braille</li>
+            </ul>
+            <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (50 {{ _('notas') }}, 11K)</a>
+        </div>
+      </div>
 
+    </div>
 </div>
 
 {% endblock %}
