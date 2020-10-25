@@ -71,16 +71,6 @@
             <p>
                 <i>{{ _('Las historias las he escrito todas yo mismo y puedes encontrarlas ')}} <a href="/static/pdf/Mn_Comarques.pdf" target="_blank"> aquí</a>.</i>
             </p>
-            <div class="alert alert-info" role="alert">
-                <b>{{ _('Para estudiar sólo mapas o sólo capitales:') }}</b> <br>
-                <ul>
-                    <li><b>{{ _('Móvil:') }}</b><br>
-                        {{ _('En el menú de la izquierda, "navegador de cartas". En los puntos de la derecha, "filtrar por etiqueta". Y eliges "Comarca-capital" o "Comarca-mapa".') }} </li>
-                    <li><b>{{ _('Ordenador:') }}</b><br>
-                        {{ _('Dentro del mazo, "estudio personalizado". Luego "estudiar según estado o etiqueta". Abajo "elije las etiquetas". Y eliges "Comarca-capital" o "Comarca-mapa".') }}</li>
-                </ul>
-                <i>{{ _('En los dos casos, se crea un mazo azul con sólo las tarjetas que has elegido. Si luego un día quieres devolverlas al mazo original, sólo tienes que borrar el mazo azul (tranqui, el progreso se conserva).') }}</i>
-            </div>
             <b>{{ _('Campos:') }}</b>
             <ul>
                 <li>Comarca</li>
@@ -96,6 +86,16 @@
                 <li>Mapa > Comarca ({{ _('Provincia') }})</li>
                 <li>Capital > Comarca ({{ _('Provincia') }}), ({{ _('Historia') }})</li>
             </ul>
+            <div class="alert alert-info" role="alert">
+                <b>{{ _('Para estudiar sólo mapas o sólo capitales:') }}</b> <br>
+                <ul>
+                    <li><b>{{ _('Móvil:') }}</b><br>
+                        {{ _('En el menú de la izquierda, "navegador de cartas". En los puntos de la derecha, "filtrar por etiqueta". Y eliges "Comarca-capital" o "Comarca-mapa".') }} </li>
+                    <li><b>{{ _('Ordenador:') }}</b><br>
+                        {{ _('Dentro del mazo, "estudio personalizado". Luego "estudiar según estado o etiqueta". Abajo "elije las etiquetas". Y eliges "Comarca-capital" o "Comarca-mapa".') }}</li>
+                </ul>
+                <i>{{ _('En los dos casos, se crea un mazo azul con sólo las tarjetas que has elegido. Si luego un día quieres devolverlas al mazo original, sólo tienes que borrar el mazo azul (tranqui, el progreso se conserva).') }}</i>
+            </div>
             <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 944K)</a>
         </div>
       </div>
