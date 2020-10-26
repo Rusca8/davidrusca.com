@@ -23,7 +23,12 @@
 }
 
 .btn-c-light {
- background-color: #f5f0e9;
+ background-color: #f7f5f2;
+}
+
+.btn-c-light:hover {
+ background-color: #f0e8dd;
+ //background-color: #f5f0e9;
 }
 
 .btn-mini {
