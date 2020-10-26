@@ -26,6 +26,10 @@
  background-color: #f5f0e9;
 }
 
+.btn-mini {
+    font-size: 0.7em;
+}
+
 .navbar {
  padding-top: 0.25rem; padding-bottom: 0.25rem;
 }

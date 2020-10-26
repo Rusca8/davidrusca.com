@@ -79,14 +79,20 @@
                 <li>Mapa</li>
                 <li>{{ _('Historia') }}</li>
             </ul>
-            <b>{{ _('Tarjetas') }}</b>
+            <b>{{ _('Tarjetas:') }}</b>
             <ul>
-                <li>Comarca > Mapa ({{ _('Provincia') }})</li>
-                <li>Comarca > Capital ({{ _('Provincia') }}), ({{ _('Historia') }})</li>
-                <li>Mapa > Comarca ({{ _('Provincia') }})</li>
-                <li>Capital > Comarca ({{ _('Provincia') }}), ({{ _('Historia') }})</li>
+                <li>{{ _('¿Dónde está la comarca?') }}<br>
+                    <code>Comarca > Mapa, ({{ _('Provincia') }})</code></li>
+                <li>{{ _('¿Cuál es la capital?') }}<br>
+                    <code>Comarca > Capital, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
+                <li>{{ _('¿Qué comarca es?') }}<br>
+                    <code>Mapa > Comarca, ({{ _('Provincia') }})</code></li>
+                <li>{{ _('¿De qué comarca es la capital?') }}<br>
+                    <code>Capital > Comarca, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
             </ul>
-            <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 944K)</a>
+            <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 965K)</a>
+            <a href="/anki/d/comarques-mapes" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo los mapas') }} (42 {{ _('notas') }}, 946K)</a>
+            <a href="/anki/d/comarques-capitals" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo las capitales') }} (42 {{ _('notas') }}, 27K)</a>
         </div>
       </div>
 

@@ -130,6 +130,12 @@ def d_anki(file):
     elif file == "comarques":
         deck = "comarques.apkg"
         nom = "[Rusca] Comarques de Catalunya.apkg"
+    elif file == "comarques-mapes":
+        deck = "comarques-mapes.apkg"
+        nom = "[Rusca] Comarques de Catalunya (mapes).apkg"
+    elif file == "comarques-capitals":
+        deck = "comarques-capitals.apkg"
+        nom = "[Rusca] Comarques de Catalunya (capitals).apkg"
     else:
         return f"El fitxer {file} no l'he pas trobat."
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
