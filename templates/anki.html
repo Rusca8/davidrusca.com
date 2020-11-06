@@ -5,312 +5,368 @@
 {% block content %}
 <div class="ml-2 mr-2">
     <h3 class="mt-3 text-center">{{ _('Recursos Anki') }}</h3>
-    <p class="text-center">{{ _('Barajas que he creado y tutoriales.') }}</p>
+    <p class="text-center">{{ _('Barajas de Anki que he creado, y tutoriales de cómo usarlo y cómo crear las tuyas.') }}</p>
 
-    <div class="row mb-2">
-      <div class="col-md-6 pr-1">
-        <div class="card border-c mt-2">
-            <div class="card-body">
-                <b>Tutorial #1 - {{ _('Qué es, instalación y cómo usarlo.') }}</b>
-                <p>
-                    {{ _('En este tutorial os cuento cómo instalar Anki y cómo se usa.') }}<br>
-                    {{ _('Hay vídeo en YouTube y un resumen en pdf.') }}
-                </p>
-                <a href="https://www.youtube.com/watch?v=g-Sid8QoIQw" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Tutorial</a>
-                <a href="/static/pdf/ankinstall_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
-                <a href="/static/pdf/ankinstall_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">{{ _('Tutoriales') }}</h5>
+
+        <div class="pl-2 pr-2">
+            <div class="row mb-2">
+              <div class="col-md-6 pr-1">
+                <div class="card border-c mt-2">
+                    <div class="card-body">
+                        <b>Tutorial #1 - {{ _('Qué es Anki, instalación y cómo usarlo.') }}</b>
+                        <p>
+                            {{ _('En este tutorial os cuento cómo instalar Anki y cómo se usa.') }}<br>
+                            {{ _('Hay vídeo en YouTube y un resumen en pdf.') }}
+                        </p>
+                        <a href="https://www.youtube.com/watch?v=g-Sid8QoIQw" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Tutorial</a>
+                        <a href="/static/pdf/ankinstall_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
+                        <a href="/static/pdf/ankinstall_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="card border-c mt-2">
+                    <div class="card-body">
+                        <b>Tutorial #2 - {{ _('Cómo crear tus propias tarjetas.') }}</b><br>
+                        <p>
+                            {{ _('En este tutorial os cuento cómo crear vuestras propias tarjetas.') }}<br>
+                            {{ _('Hay vídeo en YouTube y un resumen en pdf.') }}
+                        </p>
+                        <a href="https://youtu.be/Lh96Yt4ns44" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Tutorial</a>
+                        <a href="/static/pdf/ankicrea_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
+                        <a href="/static/pdf/ankicrea_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
+                        <a href="/anki/code/" class="btn btn-outline-secondary btn-sm" role="button">{{ _('Apuntes Código') }} ✨</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border-c mb-2">
+                <div class="card-body">
+                    <b>Tutorial #3 - {{ _('Cómo actualizar una baraja externa (y solucionar el posible desorden).') }}</b>
+                    <p>
+                        {{ _('A veces al actualizar una baraja que ha hecho otra persona se lía el orden de tarjetas nuevas.') }}<br>
+                        {{ _('O también al bajar una baraja por primera vez puede que esté liado ya.') }}<br>
+                        {{ _('En estas diapositivas vemos cómo arreglarlo.') }}<br><br>
+                        <i>
+                            {{ _('Un día de estos haré un vídeo rápido de esto, pero por ahora está aquí.') }}<br>
+                            {{ _('Me falta investigar si se puede hacer desde el móvil y cómo.') }}
+                        </i>
+                    </p>
+                    <a href="/static/pdf/ankiupdate_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
+                    <a href="/static/pdf/ankiupdate_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="col-md-6 pl-1">
-        <div class="card border-c mt-2">
-            <div class="card-body">
-                <b>Tutorial #2 - {{ _('Cómo crear tus propias tarjetas.') }}</b><br>
-                <p>
-                    {{ _('En este tutorial os cuento cómo crear vuestras propias tarjetas.') }}<br>
-                    {{ _('Hay vídeo en YouTube y un resumen en pdf.') }}
-                </p>
-                <a href="https://youtu.be/Lh96Yt4ns44" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: Tutorial</a>
-                <a href="/static/pdf/ankicrea_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
-                <a href="/static/pdf/ankicrea_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
-                <a href="/anki/code/" class="btn btn-outline-secondary btn-sm" role="button">{{ _('Apuntes Código') }} ✨</a>
-            </div>
-        </div>
-      </div>
     </div>
 
-    <div class="card border-c mb-4">
-        <div class="card-body">
-            <b>Tutorial #3 - {{ _('Cómo actualizar una baraja externa (y solucionar el posible desorden).') }}</b>
-            <p>
-                {{ _('A veces al actualizar una baraja que ha hecho otra persona se lía el orden de tarjetas nuevas.') }}<br>
-                {{ _('O también al bajar una baraja por primera vez puede que esté liado ya.') }}<br>
-                {{ _('En estas diapositivas vemos cómo arreglarlo.') }}<br><br>
-                <i>
-                    {{ _('Un día de estos haré un vídeo rápido de esto, pero por ahora está aquí.') }}<br>
-                    {{ _('Me falta investigar si se puede hacer desde el móvil y cómo.') }}
-                </i>
-            </p>
-            <a href="/static/pdf/ankiupdate_CA.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [CA]</a>
-            <a href="/static/pdf/ankiupdate_ES.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Resumen') }} [ES]</a>
-        </div>
-    </div>
+    <div class="card border-c bg-light mb-2">
+        <h5 class="card-header">{{ _('Barajas') }}</h5>
+        <div class="py-2 px-2">
+            <div class="card border-c mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ _('Índice') }}</h5>
 
-    <div class="card-columns">
+                    <div class="container mx-0">
+                      <div class="row">
+                        <div class="col-sm">
+                          <ul>
+                                <li><a href="#comarcat">{{ _('Comarcas de Cataluña') }} [CA]</a></li>
+                                <li><a href="#valencies">{{ _('Valencias Química') }} [CA]</a></li>
+                                <li><a href="#capitasia">{{ _('Mnemotecnia Capitales de Asia') }} [ES]</a></li>
+                          </ul>
+                        </div>
+                        <div class="col-sm">
+                          <ul>
+                                <li><a href="#geometria">{{ _('Perímetros, Áreas y Volúmenes') }} [CA]</a></li>
+                                <li><a href="#irregular">{{ _('Verbos Irregulares Inglés') }} [CA]</a></li>
+                                <li><a href="#derivades">{{ _('Reglas de Derivación') }} [CA]</a></li>
+                          </ul>
+                        </div>
+                        <div class="col-sm">
+                          <ul>
+                                <li><a href="#lsc">LSC - {{ _('Lengua de Signos Catalana') }} [CA]</a></li>
+                                <li><a href="#verbscat">{{ _('Tiempos Verbales Catalanes') }} [CA]</a></li>
+                                <li><a href="#braille">{{ _('Braille Español/Catalán') }} [ES/CA]</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
 
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_comarques.png" alt="Tarjeta Braille">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Comarcas de Cataluña') }} [CA]</h5>
-            <i>{{ _('Octubre') }} 2020</i>
-            <p>
-                {{ _('Capitales y ubicación de las 42 comarcas de Cataluña.') }}<br>
-                {{ _('Incluye historias cortas para recordar mejor la capital.') }}
-            </p>
-            <p>
-                <i>{{ _('Las historias las he escrito todas yo mismo y puedes encontrarlas ')}} <a href="/static/pdf/Mn_Comarques.pdf" target="_blank"> aquí</a>.</i>
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>Comarca</li>
-                <li>Capital</li>
-                <li>{{ _('Provincia') }}</li>
-                <li>Mapa</li>
-                <li>{{ _('Historia') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas:') }}</b>
-            <ul>
-                <li>{{ _('¿Dónde está la comarca?') }}<br>
-                    <code>Comarca > Mapa, ({{ _('Provincia') }})</code></li>
-                <li>{{ _('¿Cuál es la capital?') }}<br>
-                    <code>Comarca > Capital, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
-                <li>{{ _('¿Qué comarca es?') }}<br>
-                    <code>Mapa > Comarca, ({{ _('Provincia') }})</code></li>
-                <li>{{ _('¿De qué comarca es la capital?') }}<br>
-                    <code>Capital > Comarca, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
-            </ul>
-            <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 965K)</a>
-            <a href="/anki/d/comarques-mapes" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo los mapas') }} (42 {{ _('notas') }}, 946K)</a>
-            <a href="/anki/d/comarques-capitals" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo las capitales') }} (42 {{ _('notas') }}, 27K)</a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_valencies.png" alt="Tarjeta Valències">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Valencias Química') }} [CA]</h5>
-            <i>{{ _('Septiembre') }} 2019</i>
-            <p>
-                {{ _('Valencias de los elementos que se suelen memorizar de química inorgánica.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>{{ _('Elemento') }}</li>
-                <li>{{ _('Valencia') }}</li>
-                <li>{{ _('Otros con la misma valencia') }}</li>
-                <li>{{ _('Mnemotecnia [CA]') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas') }}</b>
-            <ul>
-                <li>{{ _('Elemento') }} > {{ _('Valencia') }}, ({{ _('Otros') }}), ({{ _('Mnemotecnia') }})</li>
-            </ul>
-            <a href="/anki/d/valencies" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (46 {{ _('notas') }}, 11K)</a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_capitales.png" alt="Tarjeta Capitales de Asia">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Mnemotecnia Capitales de Asia') }} [ES]</h5>
-            <i>{{ _('Junio') }} 2019</i>
-            <p>
-                {{ _('Capitales de los paises de asia con frases mnemotécnicas que había hecho para mi prima Raquel el Mayo anterior.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>País</li>
-                <li>Capital</li>
-                <li>{{ _('Imagen') }}</li>
-                <li>{{ _('Mnemotecnia') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas') }}</b>
-            <ul>
-                <li>{{ _('Imagen') }} > País, Capital, ({{ _('Mnemotecnia') }})</li>
-                <li>País > Capital, ({{ _('Imagen') }}), ({{ _('Mnemotecnia') }})</li>
-                <li>Capital > País, ({{ _('Imagen') }}), ({{ _('Mnemotecnia') }})</li>
-            </ul>
-            <a href="/anki/d/capitales" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (48 {{ _('notas') }}, 483K) </a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_geometria.png" alt="Tarjeta Geometría">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Perímetros, Áreas y Volúmenes') }} [CA]</h5>
-            <i>Octubre 2020</i>
-            <p>
-                {{ _('Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos geométricos.') }}<br>
-                {{ _('Incluye explicaciones y trucos para recordarlas mejor.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>{{ _('Figura') }}</li>
-                <li>{{ _('Tipo') }} <i>({{ _('Área, Perímetro, Volumen...') }})</i></li>
-                <li>{{ _('Imagen') }}</li>
-                <li>{{ _('Fórmula') }}</li>
-                <li>{{ _('Variables') }}</li>
-                <li>{{ _('Comentarios') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas') }}</b>
-            <ul>
-                <li>{{ _('Tipo') }}, {{ _('Figura') }}, etc > {{ _('Fórmula') }}, ({{ _('Comentarios') }})</li>
-            </ul>
-            <a href="/anki/d/geometria" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (43 {{ _('notas') }}, 279K) </a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_irregular.png" alt="Tarjeta Irregular Verbs">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Verbos Irregulares Inglés') }} [CA]</h5>
-            <i>{{ _('Diciembre') }} 2019</i>
-            <p>
-                {{ _('Una lista amplia de los verbos irregulares de inglés con la traducción.') }}<br>
-                {{ _('La traducción está en catalán.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>Base</li>
-                <li>Simple</li>
-                <li>Participle</li>
-                <li>{{ _('Traducción [CA]') }}</li>
-                <li>{{ _('Comentarios [CA]') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas:') }}</b>
-            <ul>
-                <li>Base, Simple, Participle > {{ _('Traducción') }}, ({{ _('Comentarios') }})</li>
-                <li>Base > Simple, Participle, ({{ _('Traducción') }}), ({{ _('Comentarios') }})</li>
-            </ul>
-            <a href="/anki/d/irregular" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (138 {{ _('notas') }}, 29K)</a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_derivades.png" alt="Tarjeta Derivades">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Reglas de Derivación') }} [CA]</h5>
-            <i>{{ _('Septiembre') }} 2020</i>
-            <p>
-                {{ _('Reglas de derivación a través de ejemplos.') }}<br>
-                {{ _('Incluye multiplicación, división y regla de la cadena.') }}<br>
-                {{ _('Los comentarios están en catalán.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>{{ _('Función') }}</li>
-                <li>Derivada</li>
-                <li>{{ _('Comentarios [CA]') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas:') }}</b>
-            <ul>
-                <li>{{ _('Función') }} > Derivada, ({{ _('Comentarios') }})</li>
-            </ul>
-            <a href="/anki/d/derivades" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (41 {{ _('notas') }}, 188K)</a>
-        </div>
-      </div>
-
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_lsc.png" alt="Tarjeta LSC">
-        <div class="card-body">
-            <h5 class="card-tittle">LSC - {{ _('Lengua de Signos Catalana') }} [CA]</h5>
-            <i>{{ _('Febrero') }} 2020 - {{ _('En proceso...') }} (<a href="https://docs.google.com/document/d/1JLvd6akdpUnnZ9jrx9LwnPrYH__3fu2_zkRXi-xZtJ4/edit?usp=sharing">changelog</a>)</i>
-            <p>
-                {{ _('Vocabulario de lengua de signos catalana, con foto, signoescritura y notas sobre gramática básica.') }}
-            </p>
-            <b>{{ _('Referencias:') }}</b>
-            <ul>
-                <li>{{ _('Dosier de ') }}<a href="http://www.agilscomunicacio.com/ca/">agils comunicació</a>.</li>
-                <li><a href="https://llengua.gencat.cat/ca/llengua_signes_catalana/recursos-i-activitats/vocabulari/cercador/">{{ _('Diccionario en vídeo de la Generalitat.') }}</a></li>
-                <li><a href="https://www.signbank.org/signpuddle2.0/searchword.php">{{ _('Diccionario de signoescritura') }} SignPuddle.</a></li>
-                <li><a href="http://www.signwriting.org/archive/docs5/sw0494-SignoEscritura-Parkhurst-ES-LSE.pdf">{{ _('Apuntes de signoescritura') }} SignPuddle (LSE).</a></li>
-                <li><a href="https://blogs.iec.cat/lsc/gramatica/">{{ _('Apuntes de gramática') }} IEC.</a></li>
-                <li><a href="https://www.instagram.com/silsweb_llenguadesignes/">{{ _('Vídeos de vocabulario de') }} SiLS</a></li>
-            </ul>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>{{ _('Palabra') }}</li>
-                <li>{{ _('Imagen') }}</li>
-                <li>{{ _('Descripción') }}</li>
-                <li>{{ _('SignoEscritura') }}</li>
-                <li>{{ _('Aclaraciones y teoría') }}</li>
-                <li>{{ _('Comentarios de la signoescritura') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas:') }}</b>
-            <ul>
-                <li>{{ _('Palabra') }} > {{ _('Imagen') }}, {{ _('Descripción') }}, {{ _('SignoEscritura') }}, (...)</li>
-                <li>{{ _('Imagen') }}, {{ _('Descripción') }}, {{ _('SignoEscritura') }} > {{ _('Palabra') }}, (...)</li>
-            </ul>
-            <div class="alert alert-warning" role="alert">
-                <b>{{ _('Cuidado:') }}</b> {{ _('Si vas en serio a intentar aprender LSC, esta baraja no será suficiente (deberías al menos echar una ojeada también a los apuntes de gramática del IEC).') }}
+                </div>
             </div>
-            <div class="alert alert-info" role="alert">
-                <b>{{ _('Comprueba que empieza por el abecedario!') }}<br>{{ _('Si no es así tendrás que ') }}<a href="/static/pdf/ankiupdate_ES.pdf">ordenar</a>:</b><br>{{ _('En el ordenador vas a la pestaña "explorar". El campo ordenado tiene que tener cosas tipo "T0.01", y luego puedes seleccionar todas las que en la columna "programadas" dicen "Nuevas" y dar: botón derecho / reprogramar / al final de la cola.') }}
+
+            <div class="card border-c mb-2">
+                <div class="card-body">
+                    <p>
+                        <i>{{ _('Para poder abrir y utilizar estas tarjetas de estudio tienes que tener Anki instalado (es gratis).') }}</i>
+                    </p>
+                    <a href="https://apps.ankiweb.net/" target="_blank" class="btn btn-outline-info btn-sm" role="button">{{ _('Anki (PC/Mac/Linux)') }}</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.ichi2.anki" target="_blank" class="btn btn-outline-info btn-sm" role="button">{{ _('AnkiDroid (Android)') }}</a>
+                    <a href="https://apps.apple.com/us/app/ankimobile-flashcards/id373493387" target="_blank" class="btn btn-outline-secondary btn-sm" role="button">{{ _('AnkiMobile (iOS, de pago)') }}</a>
+                    <a href="https://apps.apple.com/us/app/smartcards-with-anki-import/id1210521987" target="_blank" class="btn btn-outline-info btn-sm" role="button">{{ _('SmartCards+ (iOS, alternativa)') }}</a>
+                </div>
             </div>
-            <a href="/anki/d/lsc" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (727 {{ _('notas') }}, 5.2M)</a>
-        </div>
-      </div>
 
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_verbs.png" alt="Tarjeta Temps Verbals">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Tiempos Verbales Catalanes') }} [CA]</h5>
-            <i>{{ _('Marzo') }} 2020</i>
-            <p>
-                {{ _('Tiempos verbales catalanes.') }}<br>
-                {{ _('Toda la primera conjugación, las formas que en 2a y 3a son distintas, y los tiempos que cambian según el modelo en la 2a y 3a.') }}<br>
-                {{ _('Incluye algunos trucos para recordar mejor los tiempos.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>{{ _('Modo') }}</li>
-                <li>{{ _('Tiempo') }}</li>
-                <li>{{ _('Modelo') }}</li>
-                <li>{{ _('Conjugación') }}</li>
-                <li>{{ _('Comentarios') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas:') }}</b>
-            <ul>
-                <li>{{ _('Modo') }}, {{ _('Tiempo') }}, {{ _('Modelo') }} > {{ _('Conjugación') }}, ({{ _('Comentarios') }})</li>
-                <li>{{ _('Conjugación') }} > {{ _('Modo') }}, {{ _('Tiempo') }}, ({{ _('Modelo') }}), ({{ _('Comentarios') }})</li>
-            </ul>
-            <a href="/anki/d/verbscat" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (38 {{ _('notas') }}, 15K)</a>
-        </div>
-      </div>
+            <!-- COLUMNAS BARAJAS ANKI -->
+            <div class="card-columns card-columns-fit">
 
-      <div class="card border-c">
-        <img class="card-img-top" src="/static/img/a_braille.png" alt="Tarjeta Braille">
-        <div class="card-body">
-            <h5 class="card-tittle">{{ _('Braille Español/Catalán') }} [ES/CA]</h5>
-            <i>{{ _('Diciembre') }} 2019</i>
-            <p>
-                {{ _('Las letras y los símbolos más típicos.') }}<br>
-                {{ _('En catalán las tildes van algo distintas, así que las añadí también.') }}
-            </p>
-            <b>{{ _('Campos:') }}</b>
-            <ul>
-                <li>Braille</li>
-                <li>{{ _('Significado') }}</li>
-            </ul>
-            <b>{{ _('Tarjetas') }}</b>
-            <ul>
-                <li>Braille > {{ _('Significado') }}</li>
-                <li>{{ _('Significado') }} > Braille</li>
-            </ul>
-            <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (50 {{ _('notas') }}, 11K)</a>
-        </div>
-      </div>
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_comarques.png" alt="Tarjeta Braille">
+                <div class="card-body"><b id="comarcat"></b>
+                    <h5 class="card-tittle">{{ _('Comarcas de Cataluña') }} [CA]</h5>
+                    <i>{{ _('Octubre') }} 2020</i>
+                    <p>
+                        {{ _('Capitales y ubicación de las 42 comarcas de Cataluña.') }}<br>
+                        {{ _('Incluye historias cortas para recordar mejor la capital.') }}
+                    </p>
+                    <p>
+                        <i>{{ _('Las historias las he escrito todas yo mismo y puedes encontrarlas ')}} <a href="/static/pdf/Mn_Comarques.pdf" target="_blank"> aquí</a>.</i>
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>Comarca</li>
+                        <li>Capital</li>
+                        <li>{{ _('Provincia') }}</li>
+                        <li>Mapa</li>
+                        <li>{{ _('Historia') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>{{ _('¿Dónde está la comarca?') }}<br>
+                            <code>Comarca > Mapa, ({{ _('Provincia') }})</code></li>
+                        <li>{{ _('¿Cuál es la capital?') }}<br>
+                            <code>Comarca > Capital, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
+                        <li>{{ _('¿Qué comarca es?') }}<br>
+                            <code>Mapa > Comarca, ({{ _('Provincia') }})</code></li>
+                        <li>{{ _('¿De qué comarca es la capital?') }}<br>
+                            <code>Capital > Comarca, ({{ _('Provincia') }}), ({{ _('Historia') }})</code></li>
+                    </ul>
+                    <a href="/anki/d/comarques" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (84 {{ _('notas') }}, 965K)</a>
+                    <a href="/anki/d/comarques-mapes" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo los mapas') }} (42 {{ _('notas') }}, 946K)</a>
+                    <a href="/anki/d/comarques-capitals" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo las capitales') }} (42 {{ _('notas') }}, 27K)</a>
+                </div>
+              </div>
 
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_valencies.png" alt="Tarjeta Valències">
+                <div class="card-body"><b id="valencies"></b>
+                    <h5 class="card-tittle">{{ _('Valencias Química') }} [CA]</h5>
+                    <i>{{ _('Septiembre') }} 2019</i>
+                    <p>
+                        {{ _('Valencias de los elementos que se suelen memorizar de química inorgánica.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Elemento') }}</li>
+                        <li>{{ _('Valencia') }}</li>
+                        <li>{{ _('Otros con la misma valencia') }}</li>
+                        <li>{{ _('Mnemotecnia [CA]') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas') }}</b>
+                    <ul>
+                        <li>{{ _('Elemento') }} > {{ _('Valencia') }}, ({{ _('Otros') }}), ({{ _('Mnemotecnia') }})</li>
+                    </ul>
+                    <a href="/anki/d/valencies" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (46 {{ _('notas') }}, 11K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_capitales.png" alt="Tarjeta Capitales de Asia">
+                <div class="card-body"><b id="capitasia"></b>
+                    <h5 class="card-tittle">{{ _('Mnemotecnia Capitales de Asia') }} [ES]</h5>
+                    <i>{{ _('Junio') }} 2019</i>
+                    <p>
+                        {{ _('Capitales de los paises de asia con frases mnemotécnicas que había hecho para mi prima Raquel el Mayo anterior.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>País</li>
+                        <li>Capital</li>
+                        <li>{{ _('Imagen') }}</li>
+                        <li>{{ _('Mnemotecnia') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas') }}</b>
+                    <ul>
+                        <li>{{ _('Imagen') }} > País, Capital, ({{ _('Mnemotecnia') }})</li>
+                        <li>País > Capital, ({{ _('Imagen') }}), ({{ _('Mnemotecnia') }})</li>
+                        <li>Capital > País, ({{ _('Imagen') }}), ({{ _('Mnemotecnia') }})</li>
+                    </ul>
+                    <a href="/anki/d/capitales" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (48 {{ _('notas') }}, 483K) </a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_geometria.png" alt="Tarjeta Geometría">
+                <div class="card-body"><b id="geometria"></b>
+                    <h5 class="card-tittle">{{ _('Perímetros, Áreas y Volúmenes') }} [CA]</h5>
+                    <i>Octubre 2020</i>
+                    <p>
+                        {{ _('Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos geométricos.') }}<br>
+                        {{ _('Incluye explicaciones y trucos para recordarlas mejor.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Figura') }}</li>
+                        <li>{{ _('Tipo') }} <i>({{ _('Área, Perímetro, Volumen...') }})</i></li>
+                        <li>{{ _('Imagen') }}</li>
+                        <li>{{ _('Fórmula') }}</li>
+                        <li>{{ _('Variables') }}</li>
+                        <li>{{ _('Comentarios') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas') }}</b>
+                    <ul>
+                        <li>{{ _('Tipo') }}, {{ _('Figura') }}, etc > {{ _('Fórmula') }}, ({{ _('Comentarios') }})</li>
+                    </ul>
+                    <a href="/anki/d/geometria" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (43 {{ _('notas') }}, 279K) </a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_irregular.png" alt="Tarjeta Irregular Verbs">
+                <div class="card-body"><b id="irregular"></b>
+                    <h5 class="card-tittle">{{ _('Verbos Irregulares Inglés') }} [CA]</h5>
+                    <i>{{ _('Diciembre') }} 2019</i>
+                    <p>
+                        {{ _('Una lista amplia de los verbos irregulares de inglés con la traducción.') }}<br>
+                        {{ _('La traducción está en catalán.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>Base</li>
+                        <li>Simple</li>
+                        <li>Participle</li>
+                        <li>{{ _('Traducción [CA]') }}</li>
+                        <li>{{ _('Comentarios [CA]') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>Base, Simple, Participle > {{ _('Traducción') }}, ({{ _('Comentarios') }})</li>
+                        <li>Base > Simple, Participle, ({{ _('Traducción') }}), ({{ _('Comentarios') }})</li>
+                    </ul>
+                    <a href="/anki/d/irregular" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (138 {{ _('notas') }}, 29K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_derivades.png" alt="Tarjeta Derivades">
+                <div class="card-body"><b id="derivades"></b>
+                    <h5 class="card-tittle">{{ _('Reglas de Derivación') }} [CA]</h5>
+                    <i>{{ _('Septiembre') }} 2020</i>
+                    <p>
+                        {{ _('Reglas de derivación a través de ejemplos.') }}<br>
+                        {{ _('Incluye multiplicación, división y regla de la cadena.') }}<br>
+                        {{ _('Los comentarios están en catalán.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Función') }}</li>
+                        <li>Derivada</li>
+                        <li>{{ _('Comentarios [CA]') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>{{ _('Función') }} > Derivada, ({{ _('Comentarios') }})</li>
+                    </ul>
+                    <a href="/anki/d/derivades" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (41 {{ _('notas') }}, 188K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_lsc.png" alt="Tarjeta LSC">
+                <div class="card-body"><b id="lsc"></b>
+                    <h5 class="card-tittle">LSC - {{ _('Lengua de Signos Catalana') }} [CA]</h5>
+                    <i>{{ _('Febrero') }} 2020 - {{ _('En proceso...') }} (<a href="https://docs.google.com/document/d/1JLvd6akdpUnnZ9jrx9LwnPrYH__3fu2_zkRXi-xZtJ4/edit?usp=sharing">changelog</a>)</i>
+                    <p>
+                        {{ _('Vocabulario de lengua de signos catalana, con foto, signoescritura y notas sobre gramática básica.') }}
+                    </p>
+                    <b>{{ _('Referencias:') }}</b>
+                    <ul>
+                        <li>{{ _('Dosier de ') }}<a href="http://www.agilscomunicacio.com/ca/">agils comunicació</a>.</li>
+                        <li><a href="https://llengua.gencat.cat/ca/llengua_signes_catalana/recursos-i-activitats/vocabulari/cercador/">{{ _('Diccionario en vídeo de la Generalitat.') }}</a></li>
+                        <li><a href="https://www.signbank.org/signpuddle2.0/searchword.php">{{ _('Diccionario de signoescritura') }} SignPuddle.</a></li>
+                        <li><a href="http://www.signwriting.org/archive/docs5/sw0494-SignoEscritura-Parkhurst-ES-LSE.pdf">{{ _('Apuntes de signoescritura') }} SignPuddle (LSE).</a></li>
+                        <li><a href="https://blogs.iec.cat/lsc/gramatica/">{{ _('Apuntes de gramática') }} IEC.</a></li>
+                        <li><a href="https://www.instagram.com/silsweb_llenguadesignes/">{{ _('Vídeos de vocabulario de') }} SiLS</a></li>
+                    </ul>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Palabra') }}</li>
+                        <li>{{ _('Imagen') }}</li>
+                        <li>{{ _('Descripción') }}</li>
+                        <li>{{ _('SignoEscritura') }}</li>
+                        <li>{{ _('Aclaraciones y teoría') }}</li>
+                        <li>{{ _('Comentarios de la signoescritura') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>{{ _('Palabra') }} > {{ _('Imagen') }}, {{ _('Descripción') }}, {{ _('SignoEscritura') }}, (...)</li>
+                        <li>{{ _('Imagen') }}, {{ _('Descripción') }}, {{ _('SignoEscritura') }} > {{ _('Palabra') }}, (...)</li>
+                    </ul>
+                    <div class="alert alert-warning" role="alert">
+                        <b>{{ _('Cuidado:') }}</b> {{ _('Si vas en serio a intentar aprender LSC, esta baraja no será suficiente (deberías al menos echar una ojeada también a los apuntes de gramática del IEC).') }}
+                    </div>
+                    <div class="alert alert-info" role="alert">
+                        <b>{{ _('Comprueba que empieza por el abecedario!') }}<br>{{ _('Si no es así tendrás que ') }}<a href="/static/pdf/ankiupdate_ES.pdf">ordenar</a>:</b><br>{{ _('En el ordenador vas a la pestaña "explorar". El campo ordenado tiene que tener cosas tipo "T0.01", y luego puedes seleccionar todas las que en la columna "programadas" dicen "Nuevas" y dar: botón derecho / reprogramar / al final de la cola.') }}
+                    </div>
+                    <a href="/anki/d/lsc" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (727 {{ _('notas') }}, 5.2M)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_verbs.png" alt="Tarjeta Temps Verbals">
+                <div class="card-body"><b id="verbscat"></b>
+                    <h5 class="card-tittle">{{ _('Tiempos Verbales Catalanes') }} [CA]</h5>
+                    <i>{{ _('Marzo') }} 2020</i>
+                    <p>
+                        {{ _('Tiempos verbales catalanes.') }}<br>
+                        {{ _('Toda la primera conjugación, las formas que en 2a y 3a son distintas, y los tiempos que cambian según el modelo en la 2a y 3a.') }}<br>
+                        {{ _('Incluye algunos trucos para recordar mejor los tiempos.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Modo') }}</li>
+                        <li>{{ _('Tiempo') }}</li>
+                        <li>{{ _('Modelo') }}</li>
+                        <li>{{ _('Conjugación') }}</li>
+                        <li>{{ _('Comentarios') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>{{ _('Modo') }}, {{ _('Tiempo') }}, {{ _('Modelo') }} > {{ _('Conjugación') }}, ({{ _('Comentarios') }})</li>
+                        <li>{{ _('Conjugación') }} > {{ _('Modo') }}, {{ _('Tiempo') }}, ({{ _('Modelo') }}), ({{ _('Comentarios') }})</li>
+                    </ul>
+                    <a href="/anki/d/verbscat" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (38 {{ _('notas') }}, 15K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_braille.png" alt="Tarjeta Braille">
+                <div class="card-body"><b id="braille"></b>
+                    <h5 class="card-tittle">{{ _('Braille Español/Catalán') }} [ES/CA]</h5>
+                    <i>{{ _('Diciembre') }} 2019</i>
+                    <p>
+                        {{ _('Las letras y los símbolos más típicos.') }}<br>
+                        {{ _('En catalán las tildes van algo distintas, así que las añadí también.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>Braille</li>
+                        <li>{{ _('Significado') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas') }}</b>
+                    <ul>
+                        <li>Braille > {{ _('Significado') }}</li>
+                        <li>{{ _('Significado') }} > Braille</li>
+                    </ul>
+                    <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (50 {{ _('notas') }}, 11K)</a>
+                </div>
+              </div>
+
+            </div>
+        </div>
     </div>
 </div>
 

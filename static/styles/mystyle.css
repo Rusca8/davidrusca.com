@@ -54,3 +54,7 @@
     top: -70px;
     visibility: hidden;
 }
+
+.card-columns-fit {
+    column-gap: 0.6rem;
+}
