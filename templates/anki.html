@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="card border-c bg-light mb-2">
+    <div class="card border-c bg-light">
         <h5 class="card-header">{{ _('Barajas') }}</h5>
         <div class="py-2 px-2">
             <div class="card border-c mb-2">
@@ -76,6 +76,7 @@
                                 <li><a href="#comarcat">{{ _('Comarcas de Cataluña') }} [CA]</a></li>
                                 <li><a href="#valencies">{{ _('Valencias Química') }} [CA]</a></li>
                                 <li><a href="#capitasia">{{ _('Mnemotecnia Capitales de Asia') }} [ES]</a></li>
+                                <li><a href="#musculs">{{ _('Músculos') }} [CA]</a></li>
                           </ul>
                         </div>
                         <div class="col-sm">
@@ -246,6 +247,9 @@
                         <li>Base, Simple, Participle > {{ _('Traducción') }}, ({{ _('Comentarios') }})</li>
                         <li>Base > Simple, Participle, ({{ _('Traducción') }}), ({{ _('Comentarios') }})</li>
                     </ul>
+                    <div class="alert alert-warning" role="alert">
+                        <b>{{ _('Ojo:') }}</b> {{ _('la versión de antes de 7/11/2020 tenía mal la traducción de "wind".') }}
+                    </div>
                     <a href="/anki/d/irregular" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (138 {{ _('notas') }}, 29K)</a>
                 </div>
               </div>
@@ -271,6 +275,28 @@
                         <li>{{ _('Función') }} > Derivada, ({{ _('Comentarios') }})</li>
                     </ul>
                     <a href="/anki/d/derivades" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (41 {{ _('notas') }}, 188K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_musculs.png" alt="Tarjeta Músculs">
+                <div class="card-body"><b id="musculs"></b>
+                    <h5 class="card-tittle">{{ _('Músculos') }} [CA]</h5>
+                    <i>{{ _('Noviembre') }} 2020</i>
+                    <p>
+                        {{ _('61 músculos del cuerpo humano.') }}<br>
+                        {{ _('Para identificar en el dibujo cuál es cuál.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Imagen') }} <i>(Image Occlusion)</i></li>
+                        <li>{{ _('Nombre') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>{{ _('Imagen') }} > {{ _('Nombre') }}</li>
+                    </ul>
+                    <a href="/anki/d/musculs" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (61 {{ _('notas') }}, 2.3M)</a>
                 </div>
               </div>
 

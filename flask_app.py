@@ -124,6 +124,9 @@ def d_anki(file):
     elif file == "lsc":
         deck = "lsc.apkg"
         nom = "[Rusca] LSC - Llengua de Signes Catalana.apkg"
+    elif file == "musculs":
+        deck = "musculs.apkg"
+        nom = "[Rusca] Músculs.apkg"
     elif file == "capitales":
         deck = "capitales.apkg"
         nom = "[Rusca] Mnemotecnia Capitales (Asia).apkg"
