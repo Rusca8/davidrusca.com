@@ -118,6 +118,9 @@ def d_anki(file):
     elif file == "geometria":
         deck = "geometria.apkg"
         nom = "[Rusca] Perímetres, Àrees i Volums.apkg"
+    elif file == "vandalismes":
+        deck = "vandalismes.apkg"
+        nom = "[Rusca] Vandalismes Matemàtics.apkg"
     elif file == "braille":
         deck = "braille.apkg"
         nom = "[Rusca] Braille Español (i Català).apkg"
