@@ -47,6 +47,8 @@ def ankicode():
     return render_template("ankicode.html")
 
 
+@app.route('/docents')
+@app.route('/docents/')
 @app.route('/docentes')
 @app.route('/docentes/')
 def docents():
