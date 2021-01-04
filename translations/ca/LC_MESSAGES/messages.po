@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-11 18:05+0100\n"
+"POT-Creation-Date: 2021-01-04 21:45+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -117,47 +117,51 @@ msgstr "Baralles"
 msgid "Índice"
 msgstr "Índex"
 
-#: templates/anki.html:76 templates/anki.html:120 templates/docentes.html:169
+#: templates/anki.html:76 templates/anki.html:121 templates/docentes.html:169
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
-#: templates/anki.html:77 templates/anki.html:157
+#: templates/anki.html:77 templates/anki.html:158
 msgid "Valencias Química"
 msgstr "Valències Química"
 
-#: templates/anki.html:78 templates/anki.html:180
+#: templates/anki.html:78 templates/anki.html:181
 msgid "Mnemotecnia Capitales de Asia"
 msgstr "Mnemotècnia Capitals de l'Àsia"
 
-#: templates/anki.html:79 templates/anki.html:320
+#: templates/anki.html:79 templates/anki.html:321
 msgid "Músculos"
 msgstr "Músculs"
 
-#: templates/anki.html:84 templates/anki.html:241
+#: templates/anki.html:84 templates/anki.html:242
 msgid "Perímetros, Áreas y Volúmenes"
 msgstr "Perímetres, Àrees i Volums"
 
-#: templates/anki.html:85 templates/anki.html:267
+#: templates/anki.html:85 templates/anki.html:268
 msgid "Verbos Irregulares Inglés"
 msgstr "Verbs Irregulars Anglès"
 
-#: templates/anki.html:86 templates/anki.html:296
+#: templates/anki.html:86 templates/anki.html:297
 msgid "Reglas de Derivación"
 msgstr "Regles de Derivació"
 
-#: templates/anki.html:91 templates/anki.html:342
+#: templates/anki.html:87 templates/anki.html:206
+msgid "Vandalismos Matemáticos"
+msgstr "Vandalismes Matemàtics"
+
+#: templates/anki.html:92 templates/anki.html:343
 msgid "Lengua de Signos Catalana"
 msgstr "Llengua de Signes Catalana"
 
-#: templates/anki.html:92 templates/anki.html:383
+#: templates/anki.html:93 templates/anki.html:384
 msgid "Tiempos Verbales Catalanes"
 msgstr "Temps Verbals Catalans"
 
-#: templates/anki.html:93 templates/anki.html:410
+#: templates/anki.html:94 templates/anki.html:411
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:105
+#: templates/anki.html:106
 msgid ""
 "Para poder abrir y utilizar estas tarjetas de estudio tienes que tener "
 "Anki instalado (es gratis)."
@@ -165,144 +169,144 @@ msgstr ""
 "Per poder obrir i utilitzar aquestes targetes d'estudi has de tenir "
 "l'Anki instal·lat (és gratis)."
 
-#: templates/anki.html:107
+#: templates/anki.html:108
 msgid "Anki (PC/Mac/Linux)"
 msgstr "Anki (PC/Mac/Linux)"
 
-#: templates/anki.html:108
+#: templates/anki.html:109
 msgid "AnkiDroid (Android)"
 msgstr "AnkiDroid (Android)"
 
-#: templates/anki.html:109
+#: templates/anki.html:110
 msgid "AnkiMobile (iOS, de pago)"
 msgstr "AnkiMobile (iOS, de pagament)"
 
-#: templates/anki.html:110
+#: templates/anki.html:111
 msgid "SmartCards+ (iOS, alternativa)"
 msgstr "SmartCards+ (iOS, alternativa)"
 
-#: templates/anki.html:121
+#: templates/anki.html:122
 msgid "Octubre"
 msgstr "Octubre"
 
-#: templates/anki.html:123
+#: templates/anki.html:124
 msgid "Capitales y ubicación de las 42 comarcas de Cataluña."
 msgstr "Capitals i ubicació de les 42 comarques de Catalunya."
 
-#: templates/anki.html:124
+#: templates/anki.html:125
 msgid "Incluye historias cortas para recordar mejor la capital."
 msgstr "Inclou històries curtes per recordar millor la capital."
 
-#: templates/anki.html:127
+#: templates/anki.html:128
 msgid "Las historias las he escrito todas yo mismo y puedes encontrarlas "
 msgstr "Les històries les he escrit totes jo mateix i pots trobar-les "
 
-#: templates/anki.html:129 templates/anki.html:162 templates/anki.html:185
-#: templates/anki.html:220 templates/anki.html:247 templates/anki.html:273
-#: templates/anki.html:303 templates/anki.html:326 templates/anki.html:356
-#: templates/anki.html:390 templates/anki.html:416
+#: templates/anki.html:130 templates/anki.html:163 templates/anki.html:186
+#: templates/anki.html:221 templates/anki.html:248 templates/anki.html:274
+#: templates/anki.html:304 templates/anki.html:327 templates/anki.html:357
+#: templates/anki.html:391 templates/anki.html:417
 msgid "Campos:"
 msgstr "Camps:"
 
-#: templates/anki.html:133 templates/anki.html:140 templates/anki.html:142
-#: templates/anki.html:144 templates/anki.html:146
+#: templates/anki.html:134 templates/anki.html:141 templates/anki.html:143
+#: templates/anki.html:145 templates/anki.html:147
 msgid "Provincia"
 msgstr "Província"
 
-#: templates/anki.html:135 templates/anki.html:142 templates/anki.html:146
+#: templates/anki.html:136 templates/anki.html:143 templates/anki.html:147
 msgid "Historia"
 msgstr "Història"
 
-#: templates/anki.html:137 templates/anki.html:228 templates/anki.html:281
-#: templates/anki.html:309 templates/anki.html:331 templates/anki.html:365
-#: templates/anki.html:398
+#: templates/anki.html:138 templates/anki.html:229 templates/anki.html:282
+#: templates/anki.html:310 templates/anki.html:332 templates/anki.html:366
+#: templates/anki.html:399
 msgid "Tarjetas:"
 msgstr "Targetes:"
 
-#: templates/anki.html:139
+#: templates/anki.html:140
 msgid "¿Dónde está la comarca?"
 msgstr "On és la comarca?"
 
-#: templates/anki.html:141
+#: templates/anki.html:142
 msgid "¿Cuál es la capital?"
 msgstr "Quina és la capital?"
 
-#: templates/anki.html:143
+#: templates/anki.html:144
 msgid "¿Qué comarca es?"
 msgstr "Quina comarca és?"
 
-#: templates/anki.html:145
+#: templates/anki.html:146
 msgid "¿De qué comarca es la capital?"
 msgstr "De quina comarca és la capital?"
 
-#: templates/anki.html:148 templates/anki.html:173 templates/anki.html:198
-#: templates/anki.html:234 templates/anki.html:260 templates/anki.html:289
-#: templates/anki.html:313 templates/anki.html:335 templates/anki.html:376
-#: templates/anki.html:403 templates/anki.html:426
+#: templates/anki.html:149 templates/anki.html:174 templates/anki.html:199
+#: templates/anki.html:235 templates/anki.html:261 templates/anki.html:290
+#: templates/anki.html:314 templates/anki.html:336 templates/anki.html:377
+#: templates/anki.html:404 templates/anki.html:427
 msgid "Descarga"
 msgstr "Descarrega"
 
-#: templates/anki.html:148 templates/anki.html:149 templates/anki.html:150
-#: templates/anki.html:173 templates/anki.html:198 templates/anki.html:213
-#: templates/anki.html:214 templates/anki.html:215 templates/anki.html:216
-#: templates/anki.html:217 templates/anki.html:218 templates/anki.html:234
-#: templates/anki.html:260 templates/anki.html:289 templates/anki.html:313
-#: templates/anki.html:335 templates/anki.html:376 templates/anki.html:403
-#: templates/anki.html:426
+#: templates/anki.html:149 templates/anki.html:150 templates/anki.html:151
+#: templates/anki.html:174 templates/anki.html:199 templates/anki.html:214
+#: templates/anki.html:215 templates/anki.html:216 templates/anki.html:217
+#: templates/anki.html:218 templates/anki.html:219 templates/anki.html:235
+#: templates/anki.html:261 templates/anki.html:290 templates/anki.html:314
+#: templates/anki.html:336 templates/anki.html:377 templates/anki.html:404
+#: templates/anki.html:427
 msgid "notas"
 msgstr "notes"
 
-#: templates/anki.html:149
+#: templates/anki.html:150
 msgid "Sólo los mapas"
 msgstr "Només els mapes"
 
-#: templates/anki.html:150
+#: templates/anki.html:151
 msgid "Sólo las capitales"
 msgstr "Només les capitals"
 
-#: templates/anki.html:158 templates/anki.html:297
+#: templates/anki.html:159 templates/anki.html:298
 msgid "Septiembre"
 msgstr "Setembre"
 
-#: templates/anki.html:160
+#: templates/anki.html:161
 msgid "Valencias de los elementos que se suelen memorizar de química inorgánica."
 msgstr "Valències dels elements que se solen memoritzar de química inorgànica."
 
-#: templates/anki.html:164 templates/anki.html:171
+#: templates/anki.html:165 templates/anki.html:172
 msgid "Elemento"
 msgstr "Element"
 
-#: templates/anki.html:165 templates/anki.html:171
+#: templates/anki.html:166 templates/anki.html:172
 msgid "Valencia"
 msgstr "València"
 
-#: templates/anki.html:166
+#: templates/anki.html:167
 msgid "Otros con la misma valencia"
 msgstr "Altres amb la mateixa valència"
 
-#: templates/anki.html:167
+#: templates/anki.html:168
 msgid "Mnemotecnia [CA]"
 msgstr "Mnemotècnia"
 
-#: templates/anki.html:169 templates/anki.html:192 templates/anki.html:256
-#: templates/anki.html:421
+#: templates/anki.html:170 templates/anki.html:193 templates/anki.html:257
+#: templates/anki.html:422
 msgid "Tarjetas"
 msgstr "Targetes"
 
-#: templates/anki.html:171
+#: templates/anki.html:172
 msgid "Otros"
 msgstr "Altres"
 
-#: templates/anki.html:171 templates/anki.html:190 templates/anki.html:194
-#: templates/anki.html:195 templates/anki.html:196
+#: templates/anki.html:172 templates/anki.html:191 templates/anki.html:195
+#: templates/anki.html:196 templates/anki.html:197
 msgid "Mnemotecnia"
 msgstr "Mnemotècnia"
 
-#: templates/anki.html:181 templates/music.html:46 templates/music.html:91
+#: templates/anki.html:182 templates/music.html:46 templates/music.html:91
 msgid "Junio"
 msgstr "Juny"
 
-#: templates/anki.html:183
+#: templates/anki.html:184
 msgid ""
 "Capitales de los paises de asia con frases mnemotécnicas que había hecho "
 "para mi prima Raquel el Mayo anterior."
@@ -310,167 +314,163 @@ msgstr ""
 "Capitals dels països de l'Àsia amb frases de mnemotècnia que havia fet "
 "per la meva cosina Raquel al Maig anterior."
 
-#: templates/anki.html:189 templates/anki.html:194 templates/anki.html:195
-#: templates/anki.html:196 templates/anki.html:251 templates/anki.html:328
-#: templates/anki.html:333 templates/anki.html:359 templates/anki.html:367
-#: templates/anki.html:368
+#: templates/anki.html:190 templates/anki.html:195 templates/anki.html:196
+#: templates/anki.html:197 templates/anki.html:252 templates/anki.html:329
+#: templates/anki.html:334 templates/anki.html:360 templates/anki.html:368
+#: templates/anki.html:369
 msgid "Imagen"
 msgstr "Imatge"
 
-#: templates/anki.html:205
-msgid "Vandalismos Matemáticos"
-msgstr "Vandalismes Matemàtics"
-
-#: templates/anki.html:206 templates/anki.html:321 templates/music.html:106
+#: templates/anki.html:207 templates/anki.html:322 templates/music.html:106
 msgid "Noviembre"
 msgstr "Novembre"
 
-#: templates/anki.html:206 templates/anki.html:343
+#: templates/anki.html:207 templates/anki.html:344
 msgid "En proceso..."
 msgstr "En procés..."
 
-#: templates/anki.html:208
+#: templates/anki.html:209
 msgid "Errores comunes y no tan comunes en matemáticas. "
 msgstr "Errors comuns i no tan comuns en matemàtiques. "
 
-#: templates/anki.html:209
+#: templates/anki.html:210
 msgid "Identificar qué es un error y qué no lo es."
 msgstr "Identificar què és un error i què no ho és."
 
-#: templates/anki.html:211
+#: templates/anki.html:212
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:213 templates/docentes.html:142
+#: templates/anki.html:214 templates/docentes.html:142
 msgid "Fracciones"
 msgstr "Fraccions"
 
-#: templates/anki.html:214
+#: templates/anki.html:215
 msgid "Potencias"
 msgstr "Potències"
 
-#: templates/anki.html:215
+#: templates/anki.html:216
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:216 templates/docentes.html:144
+#: templates/anki.html:217 templates/docentes.html:144
 msgid "Ecuaciones"
 msgstr "Equacions"
 
-#: templates/anki.html:217
+#: templates/anki.html:218
 msgid "Logaritmos"
 msgstr "Logaritmes"
 
-#: templates/anki.html:218
+#: templates/anki.html:219
 msgid "Ecuaciones log y exp"
 msgstr "Equacions log i exp"
 
-#: templates/anki.html:225
+#: templates/anki.html:226
 msgid "(cierto o falso)"
 msgstr "(cert o fals)"
 
-#: templates/anki.html:226 templates/anki.html:231 templates/anki.html:254
-#: templates/anki.html:258 templates/anki.html:283 templates/anki.html:284
-#: templates/anki.html:311 templates/anki.html:396 templates/anki.html:400
-#: templates/anki.html:401
+#: templates/anki.html:227 templates/anki.html:232 templates/anki.html:255
+#: templates/anki.html:259 templates/anki.html:284 templates/anki.html:285
+#: templates/anki.html:312 templates/anki.html:397 templates/anki.html:401
+#: templates/anki.html:402
 msgid "Comentarios"
 msgstr "Comentaris"
 
-#: templates/anki.html:244
+#: templates/anki.html:245
 msgid ""
 "Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos "
 "geométricos."
 msgstr "Fòrmules de perímetre, àrea i volum de figures planes i cossos geomètrics."
 
-#: templates/anki.html:245
+#: templates/anki.html:246
 msgid "Incluye explicaciones y trucos para recordarlas mejor."
 msgstr "Inclou explicacions i trucs per recordar-les millor."
 
-#: templates/anki.html:249 templates/anki.html:258
+#: templates/anki.html:250 templates/anki.html:259
 msgid "Figura"
 msgstr "Figura"
 
-#: templates/anki.html:250 templates/anki.html:258
+#: templates/anki.html:251 templates/anki.html:259
 msgid "Tipo"
 msgstr "Tipus"
 
-#: templates/anki.html:250
+#: templates/anki.html:251
 msgid "Área, Perímetro, Volumen..."
 msgstr "Àrea, Perímetre, Volum..."
 
-#: templates/anki.html:252 templates/anki.html:258
+#: templates/anki.html:253 templates/anki.html:259
 msgid "Fórmula"
 msgstr "Fórmula"
 
-#: templates/anki.html:253
+#: templates/anki.html:254
 msgid "Variables"
 msgstr "Variables"
 
-#: templates/anki.html:268 templates/anki.html:411 templates/music.html:76
+#: templates/anki.html:269 templates/anki.html:412 templates/music.html:76
 msgid "Diciembre"
 msgstr "Desembre"
 
-#: templates/anki.html:270
+#: templates/anki.html:271
 msgid "Una lista amplia de los verbos irregulares de inglés con la traducción."
 msgstr "Una llista àmplia dels verbs irregulars d'anglès amb la traducció."
 
-#: templates/anki.html:271
+#: templates/anki.html:272
 msgid "La traducción está en catalán."
 msgstr "La traducció i comentaris estan en català."
 
-#: templates/anki.html:278
+#: templates/anki.html:279
 msgid "Traducción [CA]"
 msgstr "Traducció"
 
-#: templates/anki.html:279 templates/anki.html:307
+#: templates/anki.html:280 templates/anki.html:308
 msgid "Comentarios [CA]"
 msgstr "Comentaris"
 
-#: templates/anki.html:283 templates/anki.html:284
+#: templates/anki.html:284 templates/anki.html:285
 msgid "Traducción"
 msgstr "Traducció"
 
-#: templates/anki.html:287
+#: templates/anki.html:288
 msgid "Ojo:"
 msgstr "Compte:"
 
-#: templates/anki.html:287
+#: templates/anki.html:288
 msgid "la versión de antes de 7/11/2020 tenía mal la traducción de \"wind\"."
 msgstr "la versió d'abans del 7/11/2020 tenia malament la traducció de \"wind\"."
 
-#: templates/anki.html:299
+#: templates/anki.html:300
 msgid "Reglas de derivación a través de ejemplos."
 msgstr "Regles de derivació a través d'exemples."
 
-#: templates/anki.html:300
+#: templates/anki.html:301
 msgid "Incluye multiplicación, división y regla de la cadena."
 msgstr "Inclou multiplicació, divisió i regla de la cadena."
 
-#: templates/anki.html:301
+#: templates/anki.html:302
 msgid "Los comentarios están en catalán."
 msgstr "Els comentaris estan en català (en algun moment en faré la traducció)."
 
-#: templates/anki.html:305 templates/anki.html:311
+#: templates/anki.html:306 templates/anki.html:312
 msgid "Función"
 msgstr "Funció"
 
-#: templates/anki.html:323
+#: templates/anki.html:324
 msgid "61 músculos del cuerpo humano."
 msgstr "61 músculs del cos humà."
 
-#: templates/anki.html:324
+#: templates/anki.html:325
 msgid "Para identificar en el dibujo cuál es cuál."
 msgstr "Per identificar al dibuix quin és quin."
 
-#: templates/anki.html:329 templates/anki.html:333
+#: templates/anki.html:330 templates/anki.html:334
 msgid "Nombre"
 msgstr "Nom"
 
-#: templates/anki.html:343 templates/music.html:61
+#: templates/anki.html:344 templates/music.html:61
 msgid "Febrero"
 msgstr "Febrer"
 
-#: templates/anki.html:345
+#: templates/anki.html:346
 msgid ""
 "Vocabulario de lengua de signos catalana, con foto, signoescritura y "
 "notas sobre gramática básica."
@@ -478,59 +478,59 @@ msgstr ""
 "Vocabulari de Llengua de Signes Catalana, amb dibuix, signoescriptura i "
 "notes sobre gramàtica bàsica."
 
-#: templates/anki.html:347
+#: templates/anki.html:348
 msgid "Referencias:"
 msgstr "Referències:"
 
-#: templates/anki.html:349
+#: templates/anki.html:350
 msgid "Dosier de "
 msgstr "Dossier d'"
 
-#: templates/anki.html:350
+#: templates/anki.html:351
 msgid "Diccionario en vídeo de la Generalitat."
 msgstr "Diccionari en vídeo de la Generalitat."
 
-#: templates/anki.html:351
+#: templates/anki.html:352
 msgid "Diccionario de signoescritura"
 msgstr "Diccionari de SignoEscriptura"
 
-#: templates/anki.html:352
+#: templates/anki.html:353
 msgid "Apuntes de signoescritura"
 msgstr "Apunts de SignoEscriptura"
 
-#: templates/anki.html:353
+#: templates/anki.html:354
 msgid "Apuntes de gramática"
 msgstr "Apunts de gramàtica"
 
-#: templates/anki.html:354
+#: templates/anki.html:355
 msgid "Vídeos de vocabulario de"
 msgstr "Vídeos de vocabulari de"
 
-#: templates/anki.html:358 templates/anki.html:367 templates/anki.html:368
+#: templates/anki.html:359 templates/anki.html:368 templates/anki.html:369
 msgid "Palabra"
 msgstr "Paraula"
 
-#: templates/anki.html:360 templates/anki.html:367 templates/anki.html:368
+#: templates/anki.html:361 templates/anki.html:368 templates/anki.html:369
 msgid "Descripción"
 msgstr "Descripció"
 
-#: templates/anki.html:361 templates/anki.html:367 templates/anki.html:368
+#: templates/anki.html:362 templates/anki.html:368 templates/anki.html:369
 msgid "SignoEscritura"
 msgstr "SignoEscriptura"
 
-#: templates/anki.html:362
+#: templates/anki.html:363
 msgid "Aclaraciones y teoría"
 msgstr "Aclariments i teoria"
 
-#: templates/anki.html:363
+#: templates/anki.html:364
 msgid "Comentarios de la signoescritura"
 msgstr "Comentaris de la SignoEscriptura"
 
-#: templates/anki.html:371
+#: templates/anki.html:372
 msgid "Cuidado:"
 msgstr "Compte:"
 
-#: templates/anki.html:371
+#: templates/anki.html:372
 msgid ""
 "Si vas en serio a intentar aprender LSC, esta baraja no será suficiente "
 "(deberías al menos echar una ojeada también a los apuntes de gramática "
@@ -540,15 +540,15 @@ msgstr ""
 " (hauríes al menys de fer també un cop d'ull als apunts de gramàtica de "
 "l'IEC)."
 
-#: templates/anki.html:374
+#: templates/anki.html:375
 msgid "Comprueba que empieza por el abecedario!"
 msgstr "Comprova que comença per l'abecedari!"
 
-#: templates/anki.html:374
+#: templates/anki.html:375
 msgid "Si no es así tendrás que "
 msgstr "Si no és així, hauràs d'"
 
-#: templates/anki.html:374
+#: templates/anki.html:375
 msgid ""
 "En el ordenador vas a la pestaña \"explorar\". El campo ordenado tiene "
 "que tener cosas tipo \"T0.01\", y luego puedes seleccionar todas las que "
@@ -560,15 +560,15 @@ msgstr ""
 "columna de \"programades\" diuen \"Noves\" i fer: botó dret / reprogramar"
 " / al final de la cua."
 
-#: templates/anki.html:384 templates/music.html:91
+#: templates/anki.html:385 templates/music.html:91
 msgid "Marzo"
 msgstr "Març"
 
-#: templates/anki.html:386
+#: templates/anki.html:387
 msgid "Tiempos verbales catalanes."
 msgstr "Temps verbals catalans."
 
-#: templates/anki.html:387
+#: templates/anki.html:388
 msgid ""
 "Toda la primera conjugación, las formas que en 2a y 3a son distintas, y "
 "los tiempos que cambian según el modelo en la 2a y 3a."
@@ -576,35 +576,35 @@ msgstr ""
 "Tota la primera conjugació, les formes que a la 2a i 3a són diferents, i "
 "els temps de 2a i 3a que canvien segons el model."
 
-#: templates/anki.html:388
+#: templates/anki.html:389
 msgid "Incluye algunos trucos para recordar mejor los tiempos."
 msgstr "Inclou alguns trucs per recordar millor els temps."
 
-#: templates/anki.html:392 templates/anki.html:400 templates/anki.html:401
+#: templates/anki.html:393 templates/anki.html:401 templates/anki.html:402
 msgid "Modo"
 msgstr "Mode"
 
-#: templates/anki.html:393 templates/anki.html:400 templates/anki.html:401
+#: templates/anki.html:394 templates/anki.html:401 templates/anki.html:402
 msgid "Tiempo"
 msgstr "Temps"
 
-#: templates/anki.html:394 templates/anki.html:400 templates/anki.html:401
+#: templates/anki.html:395 templates/anki.html:401 templates/anki.html:402
 msgid "Modelo"
 msgstr "Model"
 
-#: templates/anki.html:395 templates/anki.html:400 templates/anki.html:401
+#: templates/anki.html:396 templates/anki.html:401 templates/anki.html:402
 msgid "Conjugación"
 msgstr "Conjugació"
 
-#: templates/anki.html:413
+#: templates/anki.html:414
 msgid "Las letras y los símbolos más típicos."
 msgstr "Les lletres i els símbols més típics."
 
-#: templates/anki.html:414
+#: templates/anki.html:415
 msgid "En catalán las tildes van algo distintas, así que las añadí también."
 msgstr "En català els accents van una mica diferents, així que els hi vaig afegir."
 
-#: templates/anki.html:419 templates/anki.html:423 templates/anki.html:424
+#: templates/anki.html:420 templates/anki.html:424 templates/anki.html:425
 msgid "Significado"
 msgstr "Significat"
 
@@ -613,190 +613,258 @@ msgid "Código Anki"
 msgstr "Codi Anki"
 
 #: templates/ankicode.html:5
-msgid "Resumen de HTML y CSS (...y LaTeX) en Anki"
-msgstr "Resum de HTML i CSS (...i LaTeX) a l'Anki"
+msgid "Resumen de HTML y CSS (...y LaTeX y Javascript) en Anki"
+msgstr "Resum d'HTML i CSS (...i LaTeX i Javascript) a l'Anki"
 
 #: templates/ankicode.html:6
 msgid "Y enlaces para toquetear el código que vimos (y el de otras tarjetas)."
 msgstr "I enllaços per toquinejar el codi que vam veure (i el d'altres targetes)."
 
-#: templates/ankicode.html:14 templates/ankicode.html:83
+#: templates/ankicode.html:14 templates/ankicode.html:98
 msgid "Código de Anki"
 msgstr "Codi de l'Anki"
 
-#: templates/ankicode.html:16 templates/ankicode.html:88
+#: templates/ankicode.html:16 templates/ankicode.html:103
 msgid "Datos de la tarjeta"
 msgstr "Dades de la targeta"
 
-#: templates/ankicode.html:17 templates/ankicode.html:100
+#: templates/ankicode.html:17 templates/ankicode.html:115
+msgid "Escribe la respuesta"
+msgstr "Escriu la resposta"
+
+#: templates/ankicode.html:18 templates/ankicode.html:128
 msgid "Condicionales"
 msgstr "Condicionals"
 
-#: templates/ankicode.html:20 templates/ankicode.html:114
+#: templates/ankicode.html:19 templates/ankicode.html:143
+msgid "Condicional inverso"
+msgstr "Condicional invers"
+
+#: templates/ankicode.html:22 templates/ankicode.html:155
 msgid "Estructura de la tarjeta"
 msgstr "Estructura de la targeta"
 
-#: templates/ankicode.html:22 templates/ankicode.html:119
+#: templates/ankicode.html:24 templates/ankicode.html:160
 msgid "Salto de línea"
 msgstr "Salt de línia"
 
-#: templates/ankicode.html:23 templates/ankicode.html:132
+#: templates/ankicode.html:25 templates/ankicode.html:173
 msgid "Línea horizontal"
 msgstr "Línia horitzontal"
 
-#: templates/ankicode.html:24 templates/ankicode.html:145
+#: templates/ankicode.html:26 templates/ankicode.html:186
 msgid "Negrita"
 msgstr "Negreta"
 
-#: templates/ankicode.html:26 templates/ankicode.html:169
+#: templates/ankicode.html:28 templates/ankicode.html:210
 msgid "Párrafo"
 msgstr "Paràgraf"
 
-#: templates/ankicode.html:27 templates/ankicode.html:183
+#: templates/ankicode.html:29 templates/ankicode.html:224
 msgid "Sección"
 msgstr "Secció"
 
-#: templates/ankicode.html:28 templates/ankicode.html:199
+#: templates/ankicode.html:30 templates/ankicode.html:240
+msgid "Texto especialito"
+msgstr "Text especialet"
+
+#: templates/ankicode.html:31 templates/ankicode.html:254
 msgid "Tabla"
 msgstr "Taula"
 
-#: templates/ankicode.html:29 templates/ankicode.html:235
+#: templates/ankicode.html:32 templates/ankicode.html:290
 msgid "Combinar celdas"
 msgstr "Combinar cel·les"
 
-#: templates/ankicode.html:30 templates/ankicode.html:271
+#: templates/ankicode.html:33 templates/ankicode.html:326
 msgid "Poner nombre a las cosas"
 msgstr "Posar nom a les coses"
 
-#: templates/ankicode.html:33
+#: templates/ankicode.html:34 templates/ankicode.html:342
+msgid "Poner DNI a las cosas"
+msgstr "Posar DNI a les coses"
+
+#: templates/ankicode.html:37
 msgid "Aspecto de la tarjeta (CSS)"
 msgstr "Aspecte de la targeta (CSS)"
 
-#: templates/ankicode.html:35 templates/ankicode.html:289
+#: templates/ankicode.html:39 templates/ankicode.html:361
 msgid "Acceder a las cosas por el tipo"
 msgstr "Accedir a les coses pel tipus"
 
-#: templates/ankicode.html:36 templates/ankicode.html:302
+#: templates/ankicode.html:40 templates/ankicode.html:374
 msgid "Acceder a las cosas por el nombre"
 msgstr "Accedir a les coses pel nom"
 
-#: templates/ankicode.html:37 templates/ankicode.html:315
+#: templates/ankicode.html:41 templates/ankicode.html:387
 msgid "Aspecto general de la tarjeta"
 msgstr "Aspecte general de la targeta"
 
-#: templates/ankicode.html:38 templates/ankicode.html:342
+#: templates/ankicode.html:42 templates/ankicode.html:414
 msgid "Bordes de las tablas"
 msgstr "Vores de les taules"
 
-#: templates/ankicode.html:39 templates/ankicode.html:365
+#: templates/ankicode.html:43 templates/ankicode.html:437
 msgid "Márgenes"
 msgstr "Marges"
 
-#: templates/ankicode.html:40 templates/ankicode.html:383
+#: templates/ankicode.html:44 templates/ankicode.html:455
 msgid "Ancho y alto"
 msgstr "Amplada i alçada"
 
-#: templates/ankicode.html:42 templates/ankicode.html:401
+#: templates/ankicode.html:46 templates/ankicode.html:473
 msgid "Ecuaciones matemáticas"
 msgstr "Equacions matemàtiques"
 
-#: templates/ankicode.html:44 templates/ankicode.html:406
+#: templates/ankicode.html:48 templates/ankicode.html:478
 msgid "Consideraciones previas"
 msgstr "Consideracions prèvies"
 
-#: templates/ankicode.html:45 templates/ankicode.html:423
+#: templates/ankicode.html:49 templates/ankicode.html:495
 msgid "Bloque de ecuación"
 msgstr "Bloc d'equació"
 
-#: templates/ankicode.html:46 templates/ankicode.html:438
+#: templates/ankicode.html:50 templates/ankicode.html:510
 msgid "Números y letras"
 msgstr "Números i lletres"
 
-#: templates/ankicode.html:47 templates/ankicode.html:451
+#: templates/ankicode.html:51 templates/ankicode.html:523
 msgid "Signos de multiplicar y dividir"
 msgstr "Signes de multiplicar i dividir"
 
-#: templates/ankicode.html:48 templates/ankicode.html:467
+#: templates/ankicode.html:52 templates/ankicode.html:539
 msgid "Potencia y subíndice"
 msgstr "Potència i subíndex"
 
-#: templates/ankicode.html:49 templates/ankicode.html:483
+#: templates/ankicode.html:53 templates/ankicode.html:555
 msgid "Agrupar cosas"
 msgstr "Agrupar coses"
 
-#: templates/ankicode.html:50 templates/ankicode.html:496
+#: templates/ankicode.html:54 templates/ankicode.html:568
 msgid "Fracciones en vertical"
 msgstr "Fraccions en vertical"
 
-#: templates/ankicode.html:51 templates/ankicode.html:508
+#: templates/ankicode.html:55 templates/ankicode.html:580
 msgid "Raíz cuadrada"
 msgstr "Arrel quadrada"
 
-#: templates/ankicode.html:52 templates/ankicode.html:522
+#: templates/ankicode.html:56 templates/ankicode.html:594
 msgid "Letras griegas"
 msgstr "Lletres gregues"
 
-#: templates/ankicode.html:53 templates/ankicode.html:539
+#: templates/ankicode.html:57 templates/ankicode.html:611
 msgid "Integrales y sumatorios"
 msgstr "Integrals i sumatoris"
 
-#: templates/ankicode.html:54 templates/ankicode.html:557
+#: templates/ankicode.html:58 templates/ankicode.html:629
 msgid "Espacios"
 msgstr "Espais"
 
-#: templates/ankicode.html:55 templates/ankicode.html:576
+#: templates/ankicode.html:59 templates/ankicode.html:648
 msgid "Sistemas de ecuaciones"
 msgstr "Sistemes d'equacions"
 
-#: templates/ankicode.html:64
+#: templates/ankicode.html:61 templates/ankicode.html:663
+msgid "Aspecto condicional"
+msgstr "Aspecte condicional"
+
+#: templates/ankicode.html:63 templates/ankicode.html:668
+msgid "Usar JavaScript"
+msgstr "Utilitzar JavaScript"
+
+#: templates/ankicode.html:64 templates/ankicode.html:685
+msgid "Acceder a las cosas por el DNI"
+msgstr "Accedir a les coses pel DNI"
+
+#: templates/ankicode.html:65 templates/ankicode.html:700
+msgid "Cambiar el contenido de algo"
+msgstr "Canviar el contingut"
+
+#: templates/ankicode.html:66 templates/ankicode.html:717
+msgid "Cambiar el aspecto de algo"
+msgstr "Canviar l'aspecte"
+
+#: templates/ankicode.html:67 templates/ankicode.html:735
+msgid "Comprobar condiciones"
+msgstr "Comprovar condicions"
+
+#: templates/ankicode.html:68 templates/ankicode.html:762
+msgid "Comprobar alternativas"
+msgstr "Comprovar alternatives"
+
+#: templates/ankicode.html:69 templates/ankicode.html:788
+msgid "Comillas en el texto"
+msgstr "Cometes dins el text"
+
+#: templates/ankicode.html:78
 msgid "Toquetea el código de mis tarjetas"
 msgstr "Toquineja el codi de les meves targetes"
 
-#: templates/ankicode.html:66
+#: templates/ankicode.html:80
 msgid "Prueba a cambiar cosas de mis tarjetas para entender cómo están hechas."
 msgstr "Prova de canviar coses de les meves targetes per entendre com estan fetes."
 
-#: templates/ankicode.html:69
+#: templates/ankicode.html:83
 msgid "Tarjeta del tutorial"
 msgstr "Targeta del tutorial"
 
-#: templates/ankicode.html:70
+#: templates/ankicode.html:84
 msgid "Tarjeta de valencias"
 msgstr "Targeta de valències"
 
-#: templates/ankicode.html:71
+#: templates/ankicode.html:85
 msgid "Tarjeta Irregular Verbs"
 msgstr "Targeta Irregular Verbs"
 
-#: templates/ankicode.html:72
+#: templates/ankicode.html:86
 msgid "Tarjeta LSC"
 msgstr "Targeta LSC"
 
-#: templates/ankicode.html:73
+#: templates/ankicode.html:87
 msgid "Tarjeta tiempos verbales catalanes"
 msgstr "Targeta temps verbals catalans"
 
-#: templates/ankicode.html:74
+#: templates/ankicode.html:88
 msgid "Tarjeta de derivadas"
 msgstr "Targeta de derivades"
 
 #: templates/ankicode.html:89
+msgid "Tarjeta de vandalismos matemáticos"
+msgstr "Targeta de vandalismes matemàtics"
+
+#: templates/ankicode.html:104
 msgid "{{Campo}}"
 msgstr "{{Camp}}"
 
-#: templates/ankicode.html:92
+#: templates/ankicode.html:107
 msgid "Escribo {{Capital}} donde quiero que aparezca"
 msgstr "Escric {{Capital}} on vull que aparegui"
 
-#: templates/ankicode.html:101
+#: templates/ankicode.html:116
+msgid "{{type:Campo}}"
+msgstr "{{type:Camp}}"
+
+#: templates/ankicode.html:119
+msgid "Si escribo {{type:Capital}} me pedirá que escriba "
+msgstr "Si escric {{type:Capital}} em demanarà que escrigui "
+
+#: templates/ankicode.html:120
+msgid ""
+"...no te obliga a escribirlo pero te da espacio para escribir y te "
+"corrige lo que escribes."
+msgstr ""
+"...no t'obliga a escriure-ho però et dóna espai per escriure i et "
+"corregeix el que escrius."
+
+#: templates/ankicode.html:129
 msgid "{{#A}} Cacho que sólo veo si hay A {{/A}}"
 msgstr "{{#A}} Tros que només veig si hi ha A {{/A}}"
 
-#: templates/ankicode.html:104
+#: templates/ankicode.html:132
 msgid "Si escribo un cacho de la tarjeta entre {{#Campo}} y {{/Campo}},"
 msgstr "Si escric un tros de la targeta entre {{#Camp}} i {{/Camp}},"
 
-#: templates/ankicode.html:105
+#: templates/ankicode.html:133
 msgid ""
 "ese cacho sólo se verá en las tarjetas que tengan algo escrito en "
 "\"Campo\"."
@@ -804,202 +872,264 @@ msgstr ""
 "aquest tros només es veurà a les targetes que tinguin alguna cosa escrita"
 " a \"Camp\"."
 
-#: templates/ankicode.html:106
-msgid "Por ejemplo, en algunas capitales quiero curiosidades y en otras no,"
-msgstr "Per exemple, en algunes capitals vull curiositats i en d'altres no,"
-
-#: templates/ankicode.html:107
+#: templates/ankicode.html:134
 msgid ""
-"y quiero un apartado de \"Curiosidades\" que sólo aparezca cuando haya "
-"curiosidades."
+"Por ejemplo, puedo añadir así un apartado que sólo aparece si hay "
+"curiosidades:"
 msgstr ""
-"i vull un apartat de \"Curiositats\" que només aparegui quan hi hagi "
-"curiositats."
+"Per exemple, puc afegir així un apartat que només apareix si hi ha "
+"curiositats:"
 
-#: templates/ankicode.html:123
+#: templates/ankicode.html:135
+msgid ""
+"{{#Curiosidad}}</code> La curiosidad es: {{Curiosidad}}. "
+"<code>{{/Curiosidad}}"
+msgstr ""
+"{{#Curiositat}}</code> La curiositat és: {{Curiositat}}. "
+"<code>{{/Curiositat}}"
+
+#: templates/ankicode.html:144
+msgid "{{^A}} Cacho que sólo veo si NO hay A {{/A}}"
+msgstr "{{^A}} Tros que només veig si NO hi ha A {{/A}}"
+
+#: templates/ankicode.html:147
+msgid "Funciona igual que el condicional normal, pero lleva ^ en lugar de #"
+msgstr "Funciona igual que el condicional normal, però porta ^ en lloc de #"
+
+#: templates/ankicode.html:148
+msgid ""
+"<code>{{^Curiosidad}}</code> Esta capital no tiene nada de curioso. "
+"<code>{{/Curiosidad}}</code>"
+msgstr ""
+"<code>{{^Curiositat}}</code> Aquesta capital no té res de curiós. "
+"<code>{{/Curiositat}}</code>"
+
+#: templates/ankicode.html:164
 msgid "Aquí está la primera línea,"
 msgstr "Aquí hi ha la primera línia,"
 
-#: templates/ankicode.html:124
+#: templates/ankicode.html:165
 msgid "Y aquí está la segunda."
 msgstr "I aquí hi ha la segona."
 
-#: templates/ankicode.html:136
+#: templates/ankicode.html:177
 msgid "Texto antes de la línea"
 msgstr "Text abans de la línia"
 
-#: templates/ankicode.html:137
+#: templates/ankicode.html:178
 msgid "Texto después"
 msgstr "Text després"
 
-#: templates/ankicode.html:146
+#: templates/ankicode.html:187
 msgid "cosas gruesas"
 msgstr "coses gruixudes"
 
-#: templates/ankicode.html:149
+#: templates/ankicode.html:190
 msgid "Deben rodear"
 msgstr "Han d'envoltar"
 
-#: templates/ankicode.html:149
+#: templates/ankicode.html:190
 msgid "el cacho"
 msgstr "el tros"
 
-#: templates/ankicode.html:149
+#: templates/ankicode.html:190
 msgid "que quieres resaltar."
 msgstr "que vols ressaltar."
 
-#: templates/ankicode.html:157
+#: templates/ankicode.html:198
 msgid "Cursiva"
 msgstr "Cursiva"
 
-#: templates/ankicode.html:158
+#: templates/ankicode.html:199
 msgid "cosas italianas"
 msgstr "coses italianes"
 
-#: templates/ankicode.html:161
+#: templates/ankicode.html:202
 msgid "El texto que quieras torcido,"
 msgstr "El text que vulguis tort"
 
-#: templates/ankicode.html:161
+#: templates/ankicode.html:202
 msgid "entre las etiquetas"
 msgstr "entre les etiquetes"
 
-#: templates/ankicode.html:170
+#: templates/ankicode.html:211
 msgid "texto a su bola"
 msgstr "text a la seva bola"
 
-#: templates/ankicode.html:174
+#: templates/ankicode.html:215
 msgid "El texto de aquí dentro tendrá márgenes arriba y abajo."
 msgstr "El text d'aquí dins tindrà marges a dalt i a baix."
 
-#: templates/ankicode.html:184
+#: templates/ankicode.html:225
 msgid "texto no tan a su bola"
 msgstr "text no tant a la seva bola"
 
-#: templates/ankicode.html:188
+#: templates/ankicode.html:229
 msgid "Este texto quería separarlo espiritualmente de lo demás textos."
 msgstr "Aquest text volia separar-lo espiritualment dels altres textos."
 
-#: templates/ankicode.html:189
+#: templates/ankicode.html:230
 msgid "No cambia nada (va a tener el mismo contacto social con los demás)."
 msgstr "No canvia res (tindrà el mateix contacte social amb els altres)."
 
-#: templates/ankicode.html:190
+#: templates/ankicode.html:231 templates/ankicode.html:246
 msgid "...pero como está delimitado podré ponerle nombre para decorar."
 msgstr "...però com que està delimitat podré posar-li nom per decorar"
 
-#: templates/ankicode.html:203 templates/ankicode.html:221
+#: templates/ankicode.html:241
+msgid "palabras distintas de sus vecinas"
+msgstr "paraules diferents de les veïnes"
+
+#: templates/ankicode.html:244
+msgid ""
+"De esta frase, <code>&lt;span&gt;</code>esto<code>&lt;/span&gt;</code> se"
+" merecía un trato especial."
+msgstr ""
+"D'aquesta frase', <code>&lt;span&gt;</code>això<code>&lt;/span&gt;</code>"
+" es mereixia un tracte especial."
+
+#: templates/ankicode.html:245
+msgid ""
+"No cambia nada (va a tener el mismo contacto social con el resto de la "
+"frase)."
+msgstr "No canvia res (tindrà el mateix contacte social amb la resta de la frase)."
+
+#: templates/ankicode.html:258 templates/ankicode.html:276
 msgid "cabecera izquierda"
 msgstr "capçalera esquerra"
 
-#: templates/ankicode.html:204 templates/ankicode.html:222
+#: templates/ankicode.html:259 templates/ankicode.html:277
 msgid "cabecera derecha"
 msgstr "capçalera dreta"
 
-#: templates/ankicode.html:207 templates/ankicode.html:225
-#: templates/ankicode.html:243 templates/ankicode.html:261
+#: templates/ankicode.html:262 templates/ankicode.html:280
+#: templates/ankicode.html:298 templates/ankicode.html:316
 msgid "casilla normal izquierda"
 msgstr "casella normal esquerra"
 
-#: templates/ankicode.html:208 templates/ankicode.html:226
-#: templates/ankicode.html:244 templates/ankicode.html:262
+#: templates/ankicode.html:263 templates/ankicode.html:281
+#: templates/ankicode.html:299 templates/ankicode.html:317
 msgid "casilla normal derecha"
 msgstr "casella normal dreta"
 
-#: templates/ankicode.html:214
+#: templates/ankicode.html:269
 msgid "lo engloba todo,"
 msgstr "ho engloba tot"
 
-#: templates/ankicode.html:215
+#: templates/ankicode.html:270
 msgid "engloba las filas."
 msgstr "engloba les files."
 
-#: templates/ankicode.html:216
+#: templates/ankicode.html:271
 msgid "Dentro de la primera fila las casillas serán"
 msgstr "Dins de la primera fila les caselles seran"
 
-#: templates/ankicode.html:217
+#: templates/ankicode.html:272
 msgid "Dentro de las demás filas las casillas serán"
 msgstr "Dins de les altres files les caselles seran"
 
-#: templates/ankicode.html:239 templates/ankicode.html:257
+#: templates/ankicode.html:294 templates/ankicode.html:312
 msgid "esto ocupa dos columnas"
 msgstr "això ocupa dues columnes"
 
-#: templates/ankicode.html:240 templates/ankicode.html:258
+#: templates/ankicode.html:295 templates/ankicode.html:313
 msgid "esto ocupa dos filas"
 msgstr "això ocupa dues files"
 
-#: templates/ankicode.html:250
+#: templates/ankicode.html:305
 msgid "Podemos hacer que una celda ocupe dos columnas añadiendo"
 msgstr "Podem fer que una cel·la ocupi dues columnes afegint"
 
-#: templates/ankicode.html:251
+#: templates/ankicode.html:306
 msgid "(y por tanto nos saltamos la siguiente columna)"
 msgstr "(i per tant ens saltem la següent columna)"
 
-#: templates/ankicode.html:252
+#: templates/ankicode.html:307
 msgid "Y podemos hacer lo mismo con las filas poniendo"
 msgstr "I podem fer el mateix amb les files posant"
 
-#: templates/ankicode.html:253
+#: templates/ankicode.html:308
 msgid "(y por tanto en la siguiente fila no ponemos esa columna)"
 msgstr "(i per tant a la següent fila no hi posem la columna saltada)"
 
-#: templates/ankicode.html:272 templates/ankicode.html:303
-#: templates/ankicode.html:306
+#: templates/ankicode.html:327 templates/ankicode.html:334
+#: templates/ankicode.html:375 templates/ankicode.html:378
 msgid "nombre"
 msgstr "nom"
 
-#: templates/ankicode.html:272
+#: templates/ankicode.html:327
 msgid "Párrafo que tiene nombre"
 msgstr "Paràgraf que té nom"
 
-#: templates/ankicode.html:275
+#: templates/ankicode.html:330
 msgid "Cualquier etiqueta puede tener nombre."
 msgstr "Qualsevol etiqueta pot tenir nom."
 
-#: templates/ankicode.html:276
+#: templates/ankicode.html:331
 msgid "Lo típico son cachos de una tabla, secciones, párrafos..."
 msgstr "El típic són trossos d'una taula, seccions, paràgrafs..."
 
-#: templates/ankicode.html:277
+#: templates/ankicode.html:332
 msgid "Darle nombre nos permite luego elegir su aspecto desde el CSS."
 msgstr "Donar-li un nom ens permet després escollir-ne l'aspecte des del CSS."
 
-#: templates/ankicode.html:284
+#: templates/ankicode.html:334
+msgid "...y puede tener varios nombres a la vez:"
+msgstr "...i pot tenir més d'un nom alhora:"
+
+#: templates/ankicode.html:343
+msgid "identificador"
+msgstr "identificador"
+
+#: templates/ankicode.html:343
+msgid "Párrafo que tiene DNI."
+msgstr "Paràgraf que té DNI"
+
+#: templates/ankicode.html:346
+msgid "Cualquier etiqueta puede tener identificador."
+msgstr "Qualsevol etiqueta pot tenir identificador."
+
+#: templates/ankicode.html:347
+msgid "Darle identificador nos permite hacer trastadas desde "
+msgstr "Donar-li identificador ens permet remenar-lo des del "
+
+#: templates/ankicode.html:349
+msgid "Cada cosa puede tener sólo un id, y nadie más puede tener ese mismo id."
+msgstr "Cada cosa pot tenir un sol id, i ningú més pot tenir aquest mateix id."
+
+#: templates/ankicode.html:356
 msgid "Aspecto de la tarjeta"
 msgstr "Aspecte de la targeta"
 
-#: templates/ankicode.html:290 templates/ankicode.html:303
+#: templates/ankicode.html:362 templates/ankicode.html:375
 msgid "colorinchis-y-cosas"
 msgstr "coloraines-i-coses"
 
-#: templates/ankicode.html:293
+#: templates/ankicode.html:365
 msgid "Para cambiar el aspecto de las casillas normales"
 msgstr "Per canviar l'aspecte de les caselles normals"
 
-#: templates/ankicode.html:293
+#: templates/ankicode.html:365
 msgid "de las tablas."
 msgstr "de les taules"
 
-#: templates/ankicode.html:294
+#: templates/ankicode.html:366
 msgid "Cuidado que si es una etiqueta no lleva punto."
 msgstr "Compte, que si és una etiqueta no porta punt."
 
-#: templates/ankicode.html:306
+#: templates/ankicode.html:378
 msgid "Para cambiar el aspecto de algo que tenga"
 msgstr "Per canviar l'aspecte d'alguna cosa que tingui"
 
-#: templates/ankicode.html:307
+#: templates/ankicode.html:379
 msgid "Ojo que si es una clase (un nombre) tiene que llevar punto."
 msgstr "Compte, que si és una classe (un nom) ha de portar punt."
 
-#: templates/ankicode.html:326
+#: templates/ankicode.html:398
 msgid "Anki lleva una clase previa que lo engloba todo"
 msgstr "Anki hi posa una classe prèvia que ho engloba tot"
 
-#: templates/ankicode.html:327
+#: templates/ankicode.html:399
 msgid ""
 "Aquí podemos cambiar las pintas generales de todo antes de meternos a los"
 " detalles."
@@ -1007,89 +1137,89 @@ msgstr ""
 "Aquí podem canviar les pintes generals de tot, abans de posar-nos amb els"
 " detalls."
 
-#: templates/ankicode.html:330
+#: templates/ankicode.html:402
 msgid "La letra por defecto es"
 msgstr "La lletra per defecte és"
 
-#: templates/ankicode.html:331
+#: templates/ankicode.html:403
 msgid "marca la medida de la letra."
 msgstr "marca la mida de la lletra."
 
-#: templates/ankicode.html:332
+#: templates/ankicode.html:404
 msgid "El texto viene en"
 msgstr "El text ve en"
 
-#: templates/ankicode.html:332
+#: templates/ankicode.html:404
 msgid "pero se puede alinear hacia los lados."
 msgstr "però es pot alinear cap als costats."
 
-#: templates/ankicode.html:333
+#: templates/ankicode.html:405
 msgid "El color del texto"
 msgstr "El color del text"
 
-#: templates/ankicode.html:334
+#: templates/ankicode.html:406
 msgid "El color de fondo de la tarjeta entera será"
 msgstr "El color de fons de la targeta sencera serà"
 
-#: templates/ankicode.html:350
+#: templates/ankicode.html:422
 msgid "Podemos aplicar el mismo estilo a varias cosas a la vez:"
 msgstr "Podem aplicar el mateix estil a diverses coses alhora:"
 
-#: templates/ankicode.html:351 templates/ankicode.html:357
+#: templates/ankicode.html:423 templates/ankicode.html:429
 msgid "Si no usamos"
 msgstr "Si no fem servir"
 
-#: templates/ankicode.html:351
+#: templates/ankicode.html:423
 msgid "no veremos la tabla (el borde será invisible)."
 msgstr "no veurem la taula (la vora serà invisible)."
 
-#: templates/ankicode.html:353
+#: templates/ankicode.html:425
 msgid "marca el grueso de la línea"
 msgstr "marca el gruix de la línia"
 
-#: templates/ankicode.html:354
+#: templates/ankicode.html:426
 msgid "marca la continuidad:"
 msgstr "marca la continuïtat"
 
-#: templates/ankicode.html:355
+#: templates/ankicode.html:427
 msgid "marca el color:"
 msgstr "marca el color:"
 
-#: templates/ankicode.html:357
+#: templates/ankicode.html:429
 msgid "el borde será doble (tendrán borde la tabla y las casillas)."
 msgstr "la vora serà doble (tindran vora la taula i les caselles)."
 
-#: templates/ankicode.html:374
+#: templates/ankicode.html:446
 msgid "Si queremos alinear la tabla en la tarjeta, podemos elegir los márgenes."
 msgstr "Si volem alinear la taula dins la targeta, podem triar els marges."
 
-#: templates/ankicode.html:375
+#: templates/ankicode.html:447
 msgid "Poniendo"
 msgstr "Posant"
 
-#: templates/ankicode.html:375
+#: templates/ankicode.html:447
 msgid "a ambos lados se centra ella sola."
 msgstr "a ambdós costats, se centra ella sola."
 
-#: templates/ankicode.html:385
+#: templates/ankicode.html:457
 msgid "casilla"
 msgstr "casella"
 
-#: templates/ankicode.html:392
+#: templates/ankicode.html:464
 msgid ""
 "Podemos elegir las medidas de elementos de la tabla (o de la tabla "
 "entera)."
 msgstr "Podem triar les mesures dels elements de la taula (o de la taula sencera)."
 
-#: templates/ankicode.html:393
+#: templates/ankicode.html:465
 msgid "Ponemos"
 msgstr "Posem"
 
-#: templates/ankicode.html:393
+#: templates/ankicode.html:465
 msgid "y la cantidad de píxeles."
 msgstr "i la quantitat de píxels."
 
-#: templates/ankicode.html:409
+#: templates/ankicode.html:481
 msgid ""
 "Para poder usar esto directamente desde Anki tienes que tener LaTeX en el"
 " ordenador."
@@ -1097,21 +1227,21 @@ msgstr ""
 "Per poder fer servir això directament des de l'Anki has de tenir LaTeX a "
 "l'ordinador."
 
-#: templates/ankicode.html:410
+#: templates/ankicode.html:482
 msgid "Eso significa tener descargado MacTeX (Mac) o MiKTeX (Windows)."
 msgstr "Això significa haver descarregat MacTeX (Mac) o MiKTeX (Windows)."
 
-#: templates/ankicode.html:412
+#: templates/ankicode.html:484
 msgid ""
 "A pesar de eso, una alternativa fácil es crear las ecuaciones en el "
 "editor de "
 msgstr "Tot i això, una alternativa fàcil és crear les equacions a l'editor de "
 
-#: templates/ankicode.html:413
+#: templates/ankicode.html:485
 msgid "en"
 msgstr "a"
 
-#: templates/ankicode.html:415
+#: templates/ankicode.html:487
 msgid ""
 "...es decir, generar el LaTeX en otro sitio y simplemente copiar y pegar "
 "la imagen."
@@ -1119,25 +1249,25 @@ msgstr ""
 "...és a dir, generar el LaTeX en un altre lloc i simplement copiar i "
 "enganxar la imatge."
 
-#: templates/ankicode.html:424
+#: templates/ankicode.html:496
 msgid "Ecuación escrita en LaTeX"
 msgstr "Equació escrita en LaTeX"
 
-#: templates/ankicode.html:427
+#: templates/ankicode.html:499
 msgid ""
 "Para indicarle a Anki que voy a escribir una ecuación, la rodeo con "
 "dólares."
 msgstr "Per indicar-li a l'Anki que escriuré una equació, l'envolto amb dòlars."
 
-#: templates/ankicode.html:428
+#: templates/ankicode.html:500
 msgid "Por ejemplo, escribo"
 msgstr "Per exemple, escric"
 
-#: templates/ankicode.html:428
+#: templates/ankicode.html:500
 msgid "para dibujar la ecuación $3x = 4$."
 msgstr "per dibuixar l'equació $3x = 4$."
 
-#: templates/ankicode.html:430
+#: templates/ankicode.html:502
 msgid ""
 "Todos los códigos de LaTeX que vemos debajo tienen que estar en una "
 "ecuación de estas."
@@ -1145,67 +1275,67 @@ msgstr ""
 "Tots els codis de LaTeX que veurem han d'estar en una d'aquestes "
 "equacions."
 
-#: templates/ankicode.html:442
+#: templates/ankicode.html:514
 msgid "Los números y letras de la ecuación se escriben tal cual."
 msgstr "Els números i lletres de l'equació s'escriuen normal."
 
-#: templates/ankicode.html:443
+#: templates/ankicode.html:515
 msgid "Por ejemplo, poniendo"
 msgstr "Per exemple, posant"
 
-#: templates/ankicode.html:443 templates/ankicode.html:500
-#: templates/ankicode.html:512 templates/ankicode.html:514
-#: templates/ankicode.html:547
+#: templates/ankicode.html:515 templates/ankicode.html:572
+#: templates/ankicode.html:584 templates/ankicode.html:586
+#: templates/ankicode.html:619
 msgid "me dibuja"
 msgstr "em dibuixa"
 
-#: templates/ankicode.html:455
+#: templates/ankicode.html:527
 msgid "Punto de multiplicar:"
 msgstr "Punt de multiplicar:"
 
-#: templates/ankicode.html:455 templates/ankicode.html:456
-#: templates/ankicode.html:457 templates/ankicode.html:471
-#: templates/ankicode.html:472 templates/ankicode.html:488
+#: templates/ankicode.html:527 templates/ankicode.html:528
+#: templates/ankicode.html:529 templates/ankicode.html:543
+#: templates/ankicode.html:544 templates/ankicode.html:560
 msgid "nos dibuja"
 msgstr "ens dibuixa"
 
-#: templates/ankicode.html:456
+#: templates/ankicode.html:528
 msgid "Cruz de multiplicar:"
 msgstr "Creu de multiplicar:"
 
-#: templates/ankicode.html:457
+#: templates/ankicode.html:529
 msgid "Signo de división:"
 msgstr "Signe de divisió:"
 
-#: templates/ankicode.html:459
+#: templates/ankicode.html:531
 msgid "Otro signo útil es"
 msgstr "Un altre signe útil és"
 
-#: templates/ankicode.html:459
+#: templates/ankicode.html:531
 msgid "que dibuja"
 msgstr "que dibuixa"
 
-#: templates/ankicode.html:471
+#: templates/ankicode.html:543
 msgid "El exponente es como lo escribiríamos:"
 msgstr "L'exponent és com l'escriuríem:"
 
-#: templates/ankicode.html:472
+#: templates/ankicode.html:544
 msgid "El subíndice va con barra baja:"
 msgstr "El subíndex va amb una barra baixa:"
 
-#: templates/ankicode.html:474
+#: templates/ankicode.html:546
 msgid "Si queremos poner exponentes o subíndices con más de un carácter o cifra,"
 msgstr "Si volem posar exponents o subíndexs amb més d'un caràcter o xifra,"
 
-#: templates/ankicode.html:475
+#: templates/ankicode.html:547
 msgid "habrá que agrupar todo el texto (ponerlo entre llaves"
 msgstr "haurem d'agrupar tot el text (posar-lo entre claus"
 
-#: templates/ankicode.html:484
+#: templates/ankicode.html:556
 msgid "{cosas que van juntas}"
 msgstr "{coses que van juntes}"
 
-#: templates/ankicode.html:487
+#: templates/ankicode.html:559
 msgid ""
 "Siempre que quiera agrupar cosas para que actúen como un solo bloque, uso"
 " las llaves."
@@ -1213,39 +1343,39 @@ msgstr ""
 "Sempre que vulgui agrupar coses per què actuin com un sol bloc, faig "
 "servir"
 
-#: templates/ankicode.html:488 templates/ankicode.html:583
+#: templates/ankicode.html:560 templates/ankicode.html:655
 msgid "Por ejemplo,"
 msgstr "Per exemple,"
 
-#: templates/ankicode.html:488
+#: templates/ankicode.html:560
 msgid "y"
 msgstr "i"
 
-#: templates/ankicode.html:500 templates/ankicode.html:512
+#: templates/ankicode.html:572 templates/ankicode.html:584
 msgid "Si escribo"
 msgstr "Si escric"
 
-#: templates/ankicode.html:509
+#: templates/ankicode.html:581
 msgid "\\sqrt{cosas dentro de la raíz}"
 msgstr "\\sqrt{coses dins l'arrel}"
 
-#: templates/ankicode.html:514
+#: templates/ankicode.html:586
 msgid "También puedo elegir el índice: si escribo"
 msgstr "També puc triar l'índex: si escric"
 
-#: templates/ankicode.html:526
+#: templates/ankicode.html:598
 msgid "Se pueden escribir"
 msgstr "Es poden escriure"
 
-#: templates/ankicode.html:526
+#: templates/ankicode.html:598
 msgid "letras griegas"
 msgstr "lletres gregues"
 
-#: templates/ankicode.html:526
+#: templates/ankicode.html:598
 msgid "poniendo cómo se llaman después de una barra."
 msgstr "posant-ne el nom després d'una barra."
 
-#: templates/ankicode.html:527
+#: templates/ankicode.html:599
 msgid ""
 "El código distingue mayúscula y minúscula, así que el ejemplo de arriba "
 "dibujaría"
@@ -1253,51 +1383,51 @@ msgstr ""
 "El codi distingeix majúscula i minúscula, així que l'exemple de dalt "
 "dibuixaria"
 
-#: templates/ankicode.html:529
+#: templates/ankicode.html:601
 msgid "Algunas minúsculas, como"
 msgstr "Algunes minúscules, com"
 
-#: templates/ankicode.html:529
+#: templates/ankicode.html:601
 msgid "tienen variante:"
 msgstr "tenen variant:"
 
-#: templates/ankicode.html:531
+#: templates/ankicode.html:603
 msgid "El infinito se puede hacer así, también:"
 msgstr "L'infinit també es fa així:"
 
-#: templates/ankicode.html:531
+#: templates/ankicode.html:603
 msgid "dibuja"
 msgstr "dibuixa"
 
-#: templates/ankicode.html:543
+#: templates/ankicode.html:615
 msgid "Los símbolos para integral y sumatorio son"
 msgstr "Els símbols per integral i sumatori són"
 
-#: templates/ankicode.html:545
+#: templates/ankicode.html:617
 msgid "Para acotar la integral simplemente usamos potencia y subíndice:"
 msgstr "Per acotar la integral simplement fem servir potència i subíndex:"
 
-#: templates/ankicode.html:546
+#: templates/ankicode.html:618
 msgid "Para acotar la suma hay que usar"
 msgstr "Per acotar la suma hem de fer servir"
 
-#: templates/ankicode.html:546
+#: templates/ankicode.html:618
 msgid "que sirve para escribir arriba y debajo del anterior."
 msgstr "que serveix per escriure a dalt i a sota de l'anterior."
 
-#: templates/ankicode.html:547 templates/ankicode.html:565
+#: templates/ankicode.html:619 templates/ankicode.html:637
 msgid "Por ejemplo: si escribo"
 msgstr "Per exemple: si escric"
 
-#: templates/ankicode.html:549
+#: templates/ankicode.html:621
 msgid "Y bueno, los más friquis podéis hacer integrales cerradas con"
 msgstr "I bé, els més friquis podeu fer integrals tancades amb"
 
-#: templates/ankicode.html:561
+#: templates/ankicode.html:633
 msgid "Por defecto la fórmula decide ella misma qué espacios hay que poner."
 msgstr "Per defecte la fórmula decideix ella mateixa quins espais posar."
 
-#: templates/ankicode.html:562
+#: templates/ankicode.html:634
 msgid ""
 "Si quieres forzar espacios a propósito tienes estos cinco para elegir, de"
 " estrecho a ancho."
@@ -1305,35 +1435,35 @@ msgstr ""
 "Si vols forçar espais expressament, tens aquests cinc per triar, d'estret"
 " a ample."
 
-#: templates/ankicode.html:563
+#: templates/ankicode.html:635
 msgid "La cuarta opción es la barra seguida de un espacio."
 msgstr "La quarta opció és una barra seguida d'un espai."
 
-#: templates/ankicode.html:565
+#: templates/ankicode.html:637
 msgid "me separa sólo la b en el dibujo"
 msgstr "em separa només la b al dibuix"
 
-#: templates/ankicode.html:567
+#: templates/ankicode.html:639
 msgid "También puedo crear un espacio a medida escribiendo texto transparente con"
 msgstr "També puc crear un espai a mida escrivint text transparent amb"
 
-#: templates/ankicode.html:568
+#: templates/ankicode.html:640
 msgid "Por ejemplo, si escribo"
 msgstr "Per exemple, si escric"
 
-#: templates/ankicode.html:568
+#: templates/ankicode.html:640
 msgid "me deja lo que ocupa"
 msgstr "em deixa el que ocupa"
 
-#: templates/ankicode.html:568
+#: templates/ankicode.html:640
 msgid "como espacio"
 msgstr "com a espai"
 
-#: templates/ankicode.html:577
+#: templates/ankicode.html:649
 msgid "segunda"
 msgstr "segona"
 
-#: templates/ankicode.html:580
+#: templates/ankicode.html:652
 msgid ""
 "Para agrupar cosas en una llave, tenemos que crear un \"entorno\" de "
 "sistema de ecuaciones."
@@ -1341,21 +1471,282 @@ msgstr ""
 "Per agrupar coses en una clau, hem de crear un \"entorn\" de sistema "
 "d'equacions"
 
-#: templates/ankicode.html:581
+#: templates/ankicode.html:653
 msgid "Empezaremos con"
 msgstr "Començarem amb"
 
-#: templates/ankicode.html:581
+#: templates/ankicode.html:653
 msgid "saltamos de línea con"
 msgstr "saltem de línia amb"
 
-#: templates/ankicode.html:581
+#: templates/ankicode.html:653
 msgid "y cerramos con"
 msgstr "i tanquem amb"
 
-#: templates/ankicode.html:583
+#: templates/ankicode.html:655
 msgid "nos dará"
 msgstr "ens donarà"
+
+#: templates/ankicode.html:670
+msgid "Código JavaScript"
+msgstr "Codi JavaScript"
+
+#: templates/ankicode.html:674
+msgid ""
+"Para poder usar JavaScript añadiremos al final del html una región de "
+"código:"
+msgstr ""
+"Per poder fer servir JavaScript afegirem al final de l'html una regió de "
+"codi:"
+
+#: templates/ankicode.html:675
+msgid ""
+"todo el JavaScript que usemos tendrá que estar entre "
+"<code>&lt;script&gt;</code> y <code>&lt;/script&gt;</code>."
+msgstr ""
+"tot el JavaScript que fem servir haurà d'estar entre "
+"<code>&lt;script&gt;</code> i <code>&lt;/script&gt;</code>."
+
+#: templates/ankicode.html:677
+msgid ""
+"JS sirve para cosas como pintar la respuesta verde si es cierta pero roja"
+" si es falsa, por ejemplo."
+msgstr ""
+"JS serveix per coses com pintar la resposta verda si és certa però "
+"vermella si és falsa, per exemple."
+
+#: templates/ankicode.html:689
+msgid ""
+"Usamos <code>document.getElementById</code> para coger del html cosas que"
+" tengan "
+msgstr ""
+"Fem servir <code>document.getElementById</code> per agafar de l'html "
+"coses que tinguin "
+
+#: templates/ankicode.html:690
+msgid ""
+"Lo de <code>cosa = </code> lo que hace es darle un nombre a lo que "
+"cogemos para tenerlo a mano después."
+msgstr ""
+"Això de <code>cosa = </code> el que fa és donar-li un nom a allò que "
+"agafem, per tenir-lo a mà després."
+
+#: templates/ankicode.html:692
+msgid ""
+"Cuidado con el punto y coma que acaba las frases de JavaScript (es "
+"obligatorio)."
+msgstr ""
+"Compte amb el punt i coma que acaba les frases de JavaScript (és "
+"obligatori)."
+
+#: templates/ankicode.html:701
+msgid "Nuevo contenido"
+msgstr "Nou contingut"
+
+#: templates/ankicode.html:704
+msgid ""
+"Usamos <code>.innerHTML</code> para hablar de lo que sea que hay dentro "
+"de <code>cosa</code>."
+msgstr ""
+"Fem servir <code>.innerHTML</code> per parlar del que sigui que hi ha "
+"dins de <code>cosa</code>."
+
+#: templates/ankicode.html:705
+msgid ""
+"Aquí le damos un nuevo contenido poniendo <code> = </code> seguido del "
+"contenido nuevo entre comillas."
+msgstr ""
+"Aquí li donem un nou contingut escrivint <code> = </code> seguit del "
+"contingut nou entre cometes."
+
+#: templates/ankicode.html:707
+msgid ""
+"El <code>\"</code>contenido nuevo<code>\"</code> puede ser texto o "
+"cualquier cosa que esté en html,"
+msgstr ""
+"El <code>\"</code>contingut nou<code>\"</code> pot ser text o qualsevol "
+"cosa escrita en html,"
+
+#: templates/ankicode.html:708
+msgid "y sustituirá todo lo que había dentro hasta ahora."
+msgstr "i substituirà tot el que hi havia a dins fins ara."
+
+#: templates/ankicode.html:718
+msgid "propiedad"
+msgstr "propietat"
+
+#: templates/ankicode.html:718
+msgid "nuevo valor"
+msgstr "nou valor"
+
+#: templates/ankicode.html:721
+msgid ""
+"Usamos <code>.style</code> para cambiar el estilo (CSS) de la "
+"<code>cosa</code>."
+msgstr ""
+"Fem servir <code>.style</code> per canviar l'estil (CSS) de la "
+"<code>cosa</code>."
+
+#: templates/ankicode.html:722
+msgid ""
+"Después de <code>.style</code> ponemos "
+"<code>.laPropiedadQueQueremosCambiar</code>."
+msgstr ""
+"Després de <code>.style</code> posem "
+"<code>.laPropietatQueVolemCanviar</code>."
+
+#: templates/ankicode.html:723
+msgid ""
+"Y a continuación <code>=</code> y entre comillas el <code>nuevo "
+"valor</code> (tal como lo pondríamos en CSS)."
+msgstr ""
+"I a continuació <code>=</code> i entre cometes el <code>nou valor</code> "
+"(tal com el posaríem al CSS)."
+
+#: templates/ankicode.html:725
+msgid ""
+"Por ejemplo, <code>cosa.style.backgroundColor = \"red\";</code> pintará "
+"de rojo el fondo de la cosa."
+msgstr ""
+"Per exemple, <code>cosa.style.backgroundColor = \"red\";</code> pintarà "
+"de vermell el fons de la cosa."
+
+#: templates/ankicode.html:727
+msgid ""
+"...ojo que en CSS las propiedades eran con guiones (font-size) pero aquí "
+"es en camelCase (.fontSize)"
+msgstr ""
+"...compte que al CSS les propietats són amb guions (font-size) però aquí "
+"és camelCase (.fontSize)"
+
+#: templates/ankicode.html:737
+msgid "cual"
+msgstr "qual"
+
+#: templates/ankicode.html:738 templates/ankicode.html:765
+#: templates/ankicode.html:767 templates/ankicode.html:769
+msgid "cambios"
+msgstr "canvis"
+
+#: templates/ankicode.html:743
+msgid ""
+"Usamos <code>if (condición)</code> para para hacer cambios sólo si la "
+"condición se cumple."
+msgstr ""
+"Fem servir <code>if (condició)</code> per fer canvis només si la condició"
+" es compleix."
+
+#: templates/ankicode.html:744
+msgid ""
+"Los cambios serán cada uno una línea dentro de los corchetes (acabada en "
+"punto y coma)."
+msgstr ""
+"Els canvis seran cadascun una línia dins les claus (acabada en punt i "
+"coma)."
+
+#: templates/ankicode.html:746
+msgid ""
+"Como estamos en Anki, a menudo ese \"<code>tal</code>\" será uno de "
+"nuestros campos de la tarjeta:"
+msgstr ""
+"Com que estem a l'Anki, sovint aquest \"<code>tal</code>\" serà un dels "
+"nostres camps de la targeta:"
+
+#: templates/ankicode.html:747
+msgid "{{Edad}}"
+msgstr "{{Edat}}"
+
+#: templates/ankicode.html:748
+msgid "cartel"
+msgstr "cartell"
+
+#: templates/ankicode.html:748
+msgid "Oh enhorabuena qué edad tan bonita!"
+msgstr "Oh enhorabona quina edat més maca!"
+
+#: templates/ankicode.html:751
+msgid ""
+"También puedo hacer que pase cuando son distintos <code>(tal != "
+"cual)</code>"
+msgstr "També puc fer que passi quan són diferents <code>(tal != qual)</code>"
+
+#: templates/ankicode.html:752
+msgid ""
+"...o cuando uno es mayor que el otro <code>(tal > cual)</code> (si son "
+"números, claro!)"
+msgstr ""
+"...o quan un és més gran que l'altre <code>(tal > qual)</code> (si són "
+"números, és clar!)"
+
+#: templates/ankicode.html:754
+msgid ""
+"...ojo que el igual de comparar es doble (un igual sirve para asignar, "
+"dos iguales para comparar)."
+msgstr ""
+"...compte que l'igual de comparar és doble (un igual serveix per "
+"assignar, dos iguals per comparar)."
+
+#: templates/ankicode.html:766
+msgid "alcachofa"
+msgstr "carxofa"
+
+#: templates/ankicode.html:774
+msgid ""
+"Usamos <code>else if </code> para comprobar otras condiciones (cuando la "
+"primera no se cumple)."
+msgstr ""
+"Fem servir <code>else if </code> per comprovar altres condicions (quan la"
+" primera no es compleix)."
+
+#: templates/ankicode.html:775
+msgid ""
+"Usamos <code>else </code> si queremos cambiar cosas cuando falle todo lo "
+"anterior."
+msgstr ""
+"Fem servir <code>else </code> si volem canviar coses quan fallin totes "
+"les anteriors."
+
+#: templates/ankicode.html:777
+msgid ""
+"Aquí obviamente <code>animal</code> tiene que significar algo para que "
+"funcione:"
+msgstr ""
+"Aquí òbviament <code>animal</code> ha de significar alguna cosa si vull "
+"que funcioni:"
+
+#: templates/ankicode.html:778
+msgid ""
+"puedo hacer <code>animal = {{Animal}};</code> al principio (o simplemente"
+" usar <code>{{Animal}}</code> en su lugar)."
+msgstr ""
+"puc fer <code>animal = {{Animal}};</code> al principi (o simplement "
+"canviar-ho per <code>{{Animal}}</code>)."
+
+#: templates/ankicode.html:780
+msgid ""
+"...y vale la pena notar que a diferencia de los números el texto necesita"
+" comillas (no importa si simples o dobles)."
+msgstr ""
+"...i val la pena notar que a diferència dels números el text necessita "
+"cometes (no importa si simples o dobles)."
+
+#: templates/ankicode.html:790
+msgid "texto = \"este texto tiene 'comillas' dentro\""
+msgstr "text = \"aquest text pot tenir l'apòstrof a dins\""
+
+#: templates/ankicode.html:794
+msgid ""
+"Si necesito que mi texto tenga un tipo de comillas dentro, lo rodeo con "
+"las otras."
+msgstr ""
+"Si necessito que el meu text tingui cometes o apòstrofs a dins, l'envolto "
+"amb l'altra cosa."
+
+#: templates/ankicode.html:795
+msgid ""
+"Funciona como en el ejemplo y <code>'también \"funciona\" al "
+"revés'</code>."
+msgstr "Funciona com a l'exemple i <code>'també \"funciona\" al revés'</code>."
 
 #: templates/base.html:42
 msgid "Inicio"
@@ -2037,4 +2428,25 @@ msgstr "Clarinet"
 
 #~ msgid "Errores comunes y no tan comunes en matemáticas."
 #~ msgstr "Errors comuns i no tan comuns en matemàtiques."
+
+#~ msgid "Resumen de HTML y CSS (...y LaTeX) en Anki"
+#~ msgstr "Resum de HTML i CSS (...i LaTeX) a l'Anki"
+
+#~ msgid "Por ejemplo, en algunas capitales quiero curiosidades y en otras no,"
+#~ msgstr "Per exemple, en algunes capitals vull curiositats i en d'altres no,"
+
+#~ msgid ""
+#~ "y quiero un apartado de \"Curiosidades\""
+#~ " que sólo aparezca cuando haya "
+#~ "curiosidades."
+#~ msgstr ""
+#~ "i vull un apartat de \"Curiositats\" "
+#~ "que només aparegui quan hi hagi "
+#~ "curiositats."
+
+#~ msgid ""
+#~ "Cuidado con el punto y coma que"
+#~ " acaba las frases de JavaScript (es"
+#~ " bligatorio)."
+#~ msgstr "Compte amb el punt i coma"
 

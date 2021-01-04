@@ -2,7 +2,7 @@
 {% block title %}{{ _('Código Anki') }} - David Ruscalleda{% endblock %}
 {% block content %}
 <div class="ml-2 mr-2">
-<h3 class="mt-3 text-center">{{ _('Resumen de HTML y CSS (...y LaTeX) en Anki') }}</h3>
+<h3 class="mt-3 text-center">{{ _('Resumen de HTML y CSS (...y LaTeX y Javascript) en Anki') }}</h3>
 <p class="text-center">{{ _('Y enlaces para toquetear el código que vimos (y el de otras tarjetas).') }}</p>
 
 <div class="row mb-4">
@@ -14,7 +14,9 @@
                 <li>{{ _('Código de Anki') }} (Pystache)</li>
                 <ul>
                     <li><a href="#vars">{{ _('Datos de la tarjeta') }}</a></li>
+                    <li><a href="#type">{{ _('Escribe la respuesta') }}</a></li>
                     <li><a href="#ifs">{{ _('Condicionales') }}</a></li>
+                    <li><a href="#nifs">{{ _('Condicional inverso') }}</a></li>
                 </ul>
                 <br>
                 <li>{{ _('Estructura de la tarjeta') }} (HTML)</li>
@@ -25,9 +27,11 @@
                     <li><a href="#i">Cursiva</a></li>
                     <li><a href="#p">{{ _('Párrafo') }}</a></li>
                     <li><a href="#div">{{ _('Sección') }}</a></li>
+                    <li><a href="#span">{{ _('Texto especialito') }}</a></li>
                     <li><a href="#table">{{ _('Tabla') }}</a></li>
-                    <li><a href="#span">{{ _('Combinar celdas') }}</a></li>
+                    <li><a href="#tdspan">{{ _('Combinar celdas') }}</a></li>
                     <li><a href="#class">{{ _('Poner nombre a las cosas') }}</a></li>
+                    <li><a href="#ids">{{ _('Poner DNI a las cosas') }}</a></li>
                 </ul>
                 <br>
                 <li>{{ _('Aspecto de la tarjeta (CSS)') }}</li>
@@ -53,6 +57,16 @@
                     <li><a href="#int">{{ _('Integrales y sumatorios') }}</a></li>
                     <li><a href="#esp">{{ _('Espacios') }}</a></li>
                     <li><a href="#braces">{{ _('Sistemas de ecuaciones') }}</a></li>
+                </ul><br>
+                <li>{{ _('Aspecto condicional') }} (Javascript) ✨</li>
+                <ul>
+                    <li><a href="#js">{{ _('Usar JavaScript') }}</a></li>
+                    <li><a href="#idjs">{{ _('Acceder a las cosas por el DNI') }}</a></li>
+                    <li><a href="#innerhtml">{{ _('Cambiar el contenido de algo') }}</a></li>
+                    <li><a href="#jscss">{{ _('Cambiar el aspecto de algo') }}</a></li>
+                    <li><a href="#jsifs">{{ _('Comprobar condiciones') }}</a></li>
+                    <li><a href="#jsifelse">{{ _('Comprobar alternativas') }}</a></li>
+                    <li><a href="#jsquotes">{{ _('Comillas en el texto') }}</a></li>
                 </ul>
             </ul>
         </div>
@@ -72,6 +86,7 @@
                 <li><a href="https://codepen.io/Rusca8/pen/bGVQPEX" target="_blank">{{ _('Tarjeta LSC') }}</a></li>
                 <li><a href="https://codepen.io/Rusca8/pen/VwvVOqy" target="_blank">{{ _('Tarjeta tiempos verbales catalanes') }}</a></li>
                 <li><a href="https://codepen.io/Rusca8/pen/MWejrRL" target="_blank">{{ _('Tarjeta de derivadas') }}</a></li>
+                <li><a href="https://codepen.io/Rusca8/pen/xxEjbbe" target="_blank">{{ _('Tarjeta de vandalismos matemáticos') }}</a></li>
             </ul>
         </div>
     </div>
@@ -94,7 +109,20 @@
         </div>
     </div>
 
-    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="ifs"></b>
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="type"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Escribe la respuesta') }}</b><br>
+                <code>{{ _('{{type:Campo}}') }}</code>
+            </p>
+            <p>
+                {{ _('Si escribo {{type:Capital}} me pedirá que escriba ') }} "París".<br>
+                <i>{{ _('...no te obliga a escribirlo pero te da espacio para escribir y te corrige lo que escribes.') }}</i>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mb-2"><b id="ifs"></b>
         <div class="card-body">
             <p>
                 <b>{{ _('Condicionales') }}</b><br>
@@ -103,8 +131,21 @@
             <p>
                 {{ _('Si escribo un cacho de la tarjeta entre {{#Campo}} y {{/Campo}},') }}<br>
                 {{ _('ese cacho sólo se verá en las tarjetas que tengan algo escrito en "Campo".') }}<br><br>
-                {{ _('Por ejemplo, en algunas capitales quiero curiosidades y en otras no,') }}<br>
-                {{ _('y quiero un apartado de "Curiosidades" que sólo aparezca cuando haya curiosidades.') }}
+                {{ _('Por ejemplo, puedo añadir así un apartado que sólo aparece si hay curiosidades:') }}<br>
+                <code>{{ _('{{#Curiosidad}}</code> La curiosidad es: {{Curiosidad}}. <code>{{/Curiosidad}}') }}</code><br>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mb-2"><b id="nifs"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Condicional inverso') }}</b><br>
+                <code>{{ _('{{^A}} Cacho que sólo veo si NO hay A {{/A}}') }}</code>
+            </p>
+            <p>
+                {{ _('Funciona igual que el condicional normal, pero lleva ^ en lugar de #') }}<br>
+                {{ _('<code>{{^Curiosidad}}</code> Esta capital no tiene nada de curioso. <code>{{/Curiosidad}}</code>') }}
             </p>
         </div>
     </div>
@@ -187,8 +228,22 @@
                 &lt;div&gt;<br>
                 &emsp;&emsp;{{ _('Este texto quería separarlo espiritualmente de lo demás textos.') }}&lt;br&gt;<br>
                 &emsp;&emsp;{{ _('No cambia nada (va a tener el mismo contacto social con los demás).') }}&lt;br&gt;<br>
-                &emsp;&emsp;{{ _('...pero como está delimitado podré ponerle nombre para decorar.') }}&lt;br&gt;<br>
+                &emsp;&emsp;{{ _('...pero como está delimitado podré ponerle nombre para decorar.') }}.&lt;br&gt;<br>
                 &lt;/div&gt;.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="span"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Texto especialito') }}</b><br>
+                <code>&lt;span&gt;{{ _('palabras distintas de sus vecinas') }}&lt;/span&gt;</code>
+            </p>
+            <p>
+                {{ _('De esta frase, <code>&lt;span&gt;</code>esto<code>&lt;/span&gt;</code> se merecía un trato especial.') }}&lt;br&gt;<br>
+                {{ _('No cambia nada (va a tener el mismo contacto social con el resto de la frase).') }}&lt;br&gt;<br>
+                {{ _('...pero como está delimitado podré ponerle nombre para decorar.') }}.&lt;br&gt;<br>
             </p>
         </div>
     </div>
@@ -229,7 +284,7 @@
         </div>
     </div>
 
-    <div class="card border-c ml-2 mr-2 mt-2"><b id="span"></b>
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="tdspan"></b>
         <div class="card-body">
             <p>
                 <b>{{ _('Combinar celdas') }}</b><br>
@@ -274,7 +329,24 @@
             <p>
                 {{ _('Cualquier etiqueta puede tener nombre.') }}<br>
                 {{ _('Lo típico son cachos de una tabla, secciones, párrafos...') }}<br>
-                {{ _('Darle nombre nos permite luego elegir su aspecto desde el CSS.') }}
+                {{ _('Darle nombre nos permite luego elegir su aspecto desde el CSS.') }}<br>
+                <br>
+                {{ _('...y puede tener varios nombres a la vez:') }} <code>class="{{ _('nombre') }}1 {{ _('nombre') }}2"</code>.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="ids"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Poner DNI a las cosas') }}</b><br>
+                <code>&lt;p id="{{ _('identificador') }}"&gt;<br>&emsp;&emsp;{{ _('Párrafo que tiene DNI.') }}<br>&lt;/p&gt;</code>
+            </p>
+            <p>
+                {{ _('Cualquier etiqueta puede tener identificador.') }}<br>
+                {{ _('Darle identificador nos permite hacer trastadas desde ') }} JavaScript.<br>
+                <br>
+                <i>{{ _('Cada cosa puede tener sólo un id, y nadie más puede tener ese mismo id.') }}</i>
             </p>
         </div>
     </div>
@@ -581,6 +653,146 @@
                 {{ _('Empezaremos con') }} <code>\begin{cases}</code>, {{ _('saltamos de línea con') }} <code>\\</code>, {{ _('y cerramos con') }} <code>\end{cases}</code>.<br>
                 <br>
                 {{ _('Por ejemplo,') }} <code>\begin{cases} x+y=5 \\ x\times y=6 \end{cases}</code> {{ _('nos dará') }} $\begin{cases} x+y=5 \\ x\times y=6 \end{cases}$.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="card border-c bg-light pb-2 mt-2">
+    <h5 class="card-header">{{ _('Aspecto condicional') }} (JavaScript)</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="js"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Usar JavaScript') }}</b><br>
+                <code>&lt;script&gt;<br>
+                    &emsp;&emsp;{{ _('Código JavaScript') }}<br>
+                    &lt;/script&gt;</code>
+            </p>
+            <p>
+                {{ _('Para poder usar JavaScript añadiremos al final del html una región de código:') }}<br>
+                {{ _('todo el JavaScript que usemos tendrá que estar entre <code>&lt;script&gt;</code> y <code>&lt;/script&gt;</code>.') }}<br>
+                <br>
+                <i>{{ _('JS sirve para cosas como pintar la respuesta verde si es cierta pero roja si es falsa, por ejemplo.') }}</i><br>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="idjs"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Acceder a las cosas por el DNI') }}</b><br>
+                <code>cosa = document.getElementById("DNI_de_la_cosa");</code>
+            </p>
+            <p>
+                {{ _('Usamos <code>document.getElementById</code> para coger del html cosas que tengan ') }}<a href="#ids">DNI</a>.<br>
+                {{ _('Lo de <code>cosa = </code> lo que hace es darle un nombre a lo que cogemos para tenerlo a mano después.') }}<br>
+                <br>
+                <i>{{ _('Cuidado con el punto y coma que acaba las frases de JavaScript (es obligatorio).') }}</i>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="innerhtml"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Cambiar el contenido de algo') }}</b><br>
+                <code>cosa.innerHTML = "{{ _('Nuevo contenido') }}";</code>
+            </p>
+            <p>
+                {{ _('Usamos <code>.innerHTML</code> para hablar de lo que sea que hay dentro de <code>cosa</code>.') }}<br>
+                {{ _('Aquí le damos un nuevo contenido poniendo <code> = </code> seguido del contenido nuevo entre comillas.') }}<br>
+                <br>
+                {{ _('El <code>"</code>contenido nuevo<code>"</code> puede ser texto o cualquier cosa que esté en html,') }}<br>
+                {{ _('y sustituirá todo lo que había dentro hasta ahora.') }}<br>
+
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="jscss"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Cambiar el aspecto de algo') }}</b><br>
+                <code>cosa.style.{{ _('propiedad') }} = "{{ _('nuevo valor') }}";</code>
+            </p>
+            <p>
+                {{ _('Usamos <code>.style</code> para cambiar el estilo (CSS) de la <code>cosa</code>.') }}<br>
+                {{ _('Después de <code>.style</code> ponemos <code>.laPropiedadQueQueremosCambiar</code>.') }}<br>
+                {{ _('Y a continuación <code>=</code> y entre comillas el <code>nuevo valor</code> (tal como lo pondríamos en CSS).') }}<br>
+                <br>
+                {{ _('Por ejemplo, <code>cosa.style.backgroundColor = "red";</code> pintará de rojo el fondo de la cosa.') }}<br>
+                <br>
+                <i>{{ _('...ojo que en CSS las propiedades eran con guiones (font-size) pero aquí es en camelCase (.fontSize)') }}</i>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="jsifs"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Comprobar condiciones') }}</b><br>
+                <code>
+                    if (tal == {{ _('cual') }}) {<br>
+                    &emsp;&emsp;{{ _('cambios') }};<br>
+                    }
+                </code>
+            </p>
+            <p>
+                {{ _('Usamos <code>if (condición)</code> para para hacer cambios sólo si la condición se cumple.') }}<br>
+                {{ _('Los cambios serán cada uno una línea dentro de los corchetes (acabada en punto y coma).') }}<br>
+                <br>
+                {{ _('Como estamos en Anki, a menudo ese "<code>tal</code>" será uno de nuestros campos de la tarjeta:') }}<br>
+                &emsp;&emsp;if (<code>{{ _('{{Edad}}') }}</code> == 42) {<br>
+                &emsp;&emsp;&emsp;&emsp;{{ _('cartel') }}.innerHTML = "{{ _('Oh enhorabuena qué edad tan bonita!') }}";<br>
+                &emsp;&emsp;}<br>
+                <br>
+                {{ _('También puedo hacer que pase cuando son distintos <code>(tal != cual)</code>') }}<br>
+                {{ _('...o cuando uno es mayor que el otro <code>(tal > cual)</code> (si son números, claro!)') }}<br>
+                <br>
+                <i>{{ _('...ojo que el igual de comparar es doble (un igual sirve para asignar, dos iguales para comparar).') }}</i>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="jsifelse"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Comprobar alternativas') }}</b><br>
+                <code>
+                    if (animal == 'vaca') {<br>
+                    &emsp;&emsp;{{ _('cambios') }};<br>
+                    } else if (animal == "{{ _('alcachofa') }}") {<br>
+                    &emsp;&emsp;{{ _('cambios') }};<br>
+                    } else {<br>
+                    &emsp;&emsp;{{ _('cambios') }};<br>
+                    }
+                </code>
+            </p>
+            <p>
+                {{ _('Usamos <code>else if </code> para comprobar otras condiciones (cuando la primera no se cumple).') }}<br>
+                {{ _('Usamos <code>else </code> si queremos cambiar cosas cuando falle todo lo anterior.') }}<br>
+                <br>
+                {{ _('Aquí obviamente <code>animal</code> tiene que significar algo para que funcione:') }}<br>
+                {{ _('puedo hacer <code>animal = {{Animal}};</code> al principio (o simplemente usar <code>{{Animal}}</code> en su lugar).') }}<br>
+                <br>
+                <i>{{ _('...y vale la pena notar que a diferencia de los números el texto necesita comillas (no importa si simples o dobles).') }}</i>
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2"><b id="jsquotes"></b>
+        <div class="card-body">
+            <p>
+                <b>{{ _('Comillas en el texto') }}</b><br>
+                <code>
+                    {{ _('texto = "este texto tiene \'comillas\' dentro"') }}
+                </code>
+            </p>
+            <p>
+                {{ _('Si necesito que mi texto tenga un tipo de comillas dentro, lo rodeo con las otras.') }}<br>
+                {{ _('Funciona como en el ejemplo y <code>\'también "funciona" al revés\'</code>.') }}</i>
             </p>
         </div>
     </div>
