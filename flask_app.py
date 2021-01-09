@@ -4,6 +4,8 @@ from flask import render_template, redirect, request
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
 
+import re
+
 import crypto as c
 
 app = Flask(__name__)
@@ -109,6 +111,9 @@ def ktn():
 @app.route('/ivtest/<temps>')
 def ivtest(temps=180):
     vlang = request.accept_languages.best_match(['es', 'ca'])
+    temps = re.sub("[^0-9]", "", temps)
+    if not temps:
+        temps = 180;
     return render_template("irregular.html", temps=temps, vlang=vlang)
 
 
