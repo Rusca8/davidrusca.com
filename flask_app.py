@@ -103,6 +103,15 @@ def ktn():
     return redirect('/static/pdf/KendamaTrickNotation1.2.pdf')
 
 
+@app.route('/ivtest')
+@app.route('/ivtest/')
+@app.route('/ivtest<temps>')
+@app.route('/ivtest/<temps>')
+def ivtest(temps=180):
+    vlang = request.accept_languages.best_match(['es', 'ca'])
+    return render_template("irregular.html", temps=temps, vlang=vlang)
+
+
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":

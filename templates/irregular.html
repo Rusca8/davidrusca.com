@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+        <!-- Nom de la pàgina -->
+        <title>Irregular Verbs</title>
+    </head>
+    <body onload="carrega()">
+
+        <!-- Introduir nom i cognom i la paraula test -->  <!-- Data i hora actual -->
+
+        <div class="container mb-5 mt-5">
+            <h1 class="display-5 mb-1 mt-0 text-center">IRREGULAR VERBS {{temps}}s TEST</h1>
+            <div class="container-fluid mr-3">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <script type="text/javascript" >
+                            function posaZero(num) {
+                                if (num < 10) {
+                                    return ("0" + num.toString());
+                                } else {
+                                    return (num.toString());
+                                }
+                            }
+
+                            var d = new Date();
+                            document.write("Started: " + d.getDate() + "/" + (d.getMonth() +1) + "/" + d.getFullYear() + ' - ' + d.getHours() + ':' + posaZero(d.getMinutes()) + ':' + posaZero(d.getSeconds()));
+                        </script>
+                    </div>
+                    <div class="col">
+                        <div class="text-right">This window will close automatically within <span id="counter">{{temps}}</span> second(s).</div>
+                        <script type="text/javascript">
+                            function countdown() {
+                                var i = document.getElementById('counter');
+                                num = parseInt(i.innerHTML)-1;
+                                i.innerHTML = num;
+                                if (num <= 0) {
+                                   window.close();
+                                } else if (num <= 10) {
+                                   document.body.style.background = "#f7e3df";
+                                } else if (num < 30) {
+                                   document.body.style.background = "#f7f3df";
+                                }
+
+                            }
+                            setInterval(function(){ countdown(); }, 1000);
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mt-2"><!-- "horizontal ruler" (línia a través) -->
+
+            <div class="well pb-4 pt-3 mb-2">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label for="nom" id="nm">Nom:</label>
+                        <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom" tabindex="1">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label for="cognom" id="cg">Cognom:</label>
+                            <input type="text" name="cognom" id="cognom" class="form-control" placeholder="Cognom" tabindex="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botó desplegable -->
+            <div class="container-fluid px-3">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dropdown">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="triafranja" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trieu la franja de verbs
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="triafranja">
+                              <li><a href="javascript:posa_els_verbs(0);"><span id="dd0">Tots els verbs</span></a></li>
+                              <li><a href="javascript:posa_els_verbs(1);"><span id="dd1">Primera</span> 0-9</a></li>
+                              <li><a href="javascript:posa_els_verbs(2);"><span id="dd2">Segona</span> 10-19</a></li>
+                              <li><a href="javascript:posa_els_verbs(3);"><span id="dd3">Tercera</span> 20-29</a></li>
+                              <li><a href="javascript:posa_els_verbs(4);"><span id="dd4">Quarta</span> 30-39</a></li>
+                              <li><a href="javascript:posa_els_verbs(5);"><span id="dd5">Cinquena</span> 40-49</a></li>
+                              <li><a href="javascript:posa_els_verbs(6);"><span id="dd6">Sisena</span> 50-59</a></li>
+                              <li><a href="javascript:posa_els_verbs(7);"><span id="dd7">Setena</span> 60-69</a></li>
+                              <li><a href="javascript:posa_els_verbs(8);"><span id="dd8">Vuitena</span> 70-79</a></li>
+                              <li><a href="javascript:posa_els_verbs(100);"><span id="dd9">Novena</span> 76-85</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 text-right pr-0">
+                        <button type="button" class="btn btn-primary btn-md button-block col-4" id="lang" onclick="changelang()" >Spanish</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <figure class="text-center">
+              <blockquote class="blockquote border-0">
+                <p>Press "Correct" when you're done. Press "Print" to save.</p>
+              </blockquote>
+            </figure>
+
+
+
+            <!-- Taula amb els verbs -->
+            <table class="table text-center">
+              <thead> <!-- capçalera de la taula -->
+                <tr> <!-- "table row" -->
+                  <th scope="col" id="tlang">Catalan</th>  <!-- "table header" (títol columna) -->
+                  <th scope="col">Present</th>
+                  <th scope="col">Past Simple</th>
+                  <th scope="col">Past Participle</th>
+                </tr>
+              </thead>
+              <tbody class="table-light"> <!-- cos de la taula (light és color gris clar) -->
+                <!-- Fila 0 -->
+                <tr id="fila0">
+                  <th scope="row" class="align-middle"> <!-- "table header" (títol fila; align-middle centra en vertical) -->
+                      <span id="verb0">Verb0</span> <!-- Verb0 ni es veurà perquè el javascript hi posa el verb -->
+                  </th>
+                  <td> <!-- "table divider" (casella normal) - L'he obert cap a baix perquè s'entén millor amb l'input  -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p0">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps0">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp0">
+                      </div>
+                  </td>
+                </tr>
+
+                <!-- Fila 1 -->
+                <tr id="fila1">
+                  <th scope="row" class="align-middle" id="verb1">Verb1</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p1">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps1">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp1">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 2 -->
+                <tr id="fila2">
+                  <th scope="row" class="align-middle" id="verb2">Verb2</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p2">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps2">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp2">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 3 -->
+                <tr id="fila3">
+                  <th scope="row" class="align-middle" id="verb3">Verb3</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p3">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps3">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp3">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 4 -->
+                <tr id="fila4">
+                  <th scope="row" class="align-middle" id="verb4">Verb4</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p4">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps4">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp4">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 5 -->
+                <tr id="fila5">
+                  <th scope="row" class="align-middle" id="verb5">Verb5</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p5">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps5">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp5">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 6 -->
+                <tr id="fila6">
+                  <th scope="row" class="align-middle" id="verb6">Verb6</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p6">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps6">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp6">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 7 -->
+                <tr id="fila7">
+                  <th scope="row" class="align-middle" id="verb7">Verb7</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p7">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps7">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp7">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 8 -->
+                <tr id="fila8">
+                  <th scope="row" class="align-middle" id="verb8">Verb8</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p8">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps8">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp8">
+                      </div>
+                  </td>
+                </tr>
+
+              <!-- Fila 9 -->
+                <tr id="fila9">
+                  <th scope="row" class="align-middle" id="verb9">Verb9</th>
+                  <td> <!-- "table divider" (casella normal) - l'envio a baix perquè s'entén millor amb l'input -->
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="present" id="p9">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past simple" id="ps9">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="past participle" id="pp9">
+                      </div>
+                  </td>
+                </tr>
+
+                <!--  </td>
+                </tr>
+                 <tr id="filan">
+                  <th scope="row">...</th>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr> -->
+
+              </tbody>
+            </table>
+
+            <div id="missatges"> </div><!-- espai per les alertes un cop corregit -->
+
+
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+            <div class="row mb-4">
+                <div class="col-sm-12 text-center">
+                    <button type="button" class="btn btn-primary btn-md button-block col-2" onclick="corregeix()" >Correct</button>
+                    <button type="button" class="btn btn-danger btn-md button-block col-2" onclick="window.print()" >Print</button>
+                 </div>
+            </div>
+        </div>
+
+        <hr class="mb-3">
+        <div class="text-center mb-3">
+            <small clasS=""><i>Design by David & Josep Ruscalleda</i></small>
+        </div>
+
+        <!-- Bootstrap Javascript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    </body>
+    <script>
+        // declarem les variables
+        var verbs = [
+            ["ser, estar", "be", "was/were", "been", "ser, estar"],                                //  01
+            ["atonyinar", "beat", "beat", "beaten", "apalizar"],
+            ["tornar-se, arribar a ser", "become", "beacame", "become", "volverse, llegar a ser"],
+            ["començar", "begin", "began", "begun", "empezar"],
+            ["mossegar", "bite", "bit", "bitten", "morder"],                        //  05
+            ["bufar", "blow", "bleu", "blown", "soplar"],
+            ["trencar", "break", "broke", "broken", "romper"],
+            ["portar", "bring", "brought", "brought", "traer"],
+            ["construir", "build", "built", "built", "construir"],
+            ["cremar", "burn", "burnt/burned", "burnt/burned", "quemar"],           //  10
+            ["esclatar", "burst", "burst", "burst", "explotar"],
+            ["comprar", "buy", "bought", "bought", "comprar"],
+            ["poder", "can", "could", "", "poder"],
+            ["agafar", "catch", "caugnt", "caught", "coger"],
+            ["escollir", "choose", "chose", "chosen", "elegir"],                    //  15
+            ["venir", "come", "came", "come", "venir"],
+            ["costar (valer)", "cost", "cost", "cost", "costar (valer)"],
+            ["tallar", "cut", "cut", "cut", "cortar"],
+            ["fer", "do", "did", "done", "hacer"],
+            ["excavar", "dig", "dug", "dug", "excavar"],                             //  20
+            ["dibuixar", "draw", "drew", "drawn", "dibujar"],
+            ["beure", "drink", "drank", "drunk", "beber"],
+            ["menjar", "eat", "ate", "eaten", "comer"],
+            ["caure", "fall", "fell", "fallen", "caer"],
+            ["alimentar", "feed", "fed", "fed", "alimentar"],                                     //  25
+            ["sentir (sentiment)", "feel", "felt", "felt", "sentir"],
+            ["lluitar", "fight", "fought", "fought", "luchar"],
+            ["trobar", "find", "foung", "found", "encontrar"],
+            ["volar", "fly", "flew", "flown", "volar"],
+            ["oblidar", "forget", "forgot", "forgotten", "olvidar"],                 //  30
+            ["perdonar", "forgive", "forgave", "forgiven", "perdonar"],
+            ["obtenir", "get", "got", "got", "obtener"],
+            ["donar", "give", "gave", "given", "dar"],
+            ["anar", "go", "went", "gone", "ir"],
+            ["créixer", "grow", "grew", "grown", "crecer"],                         //  35
+            ["tenir, haver", "have", "had", "had", "tener"],
+            ["sentir (escoltar)", "hear", "hear", "heard", "oír"],
+            ["amagar", "hide", "hid", "hidden", "esconder"],
+            ["colpejar", "hit", "hit", "hit", "golpear"],
+            ["sostenir, aguantar", "hold", "held", "held", "sostener, aguantar"],                         //  40
+            ["mantenir", "keep", "kept", "kept", "mantener"],
+            ["conèixer, saber", "know", "knew", "known", "conocer"],
+            ["aprendre", "learn", "learnt/learned", "learnt/learned", "aprender"],
+            ["deixar, marxar", "leave", "left", "left", "dejar, irse"],
+            ["deixar, prestar", "lend", "lent", "lent", "dejar, prestar"],                  //  45
+            ["permetre", "let", "let", "let", "permitir"],
+            ["estirar-se, reposar", "lie", "lay", "lain", "estirarse, reposar"],
+            ["mentir", "lie", "lied", "lied", "mentir"],
+            ["perdre", "lose", "lost", "lost", "perder"],
+            ["fer, construir", "make", "made", "made", "hacer"],                   //  50
+            ["trobar-se, quedar", "meet", "met", "met", "encontrarse, quedar"],
+            ["pagar", "pay", "paid", "paid", "pagar"],
+            ["posar", "put", "put", "put", "poner"],
+            ["llegir", "read", "read", "read", "leer"],
+            ["muntar (cavall, bici)", "ride", "rode", "ridden", "montar (caballo, bici)"],          //  55
+            ["trucar (timbre), sonar (telf)", "ring", "rang", "rung", "llamar (timbre), sonar (telf)"],
+            ["córrer", "run", "ran", "run", "correr"],
+            ["dir", "say", "said", "said", "decir"],
+            ["veure, mirar", "see", "saw", "seen", "ver"],
+            ["vendre", "sell", "sold", "sold", "vender"],                           //  60
+            ["enviar", "send", "sent", "sent", "enviar"],
+            ["establir (col·locar)", "set", "set", "set", "establecer (colocar)"],
+            ["sacsejar", "shake", "shook", "shaken", "agitar"],
+            ["brillar", "shine", "shone", "shone", "brillar"],
+            ["mostrar", "show", "showed", "shown", "mostrar"],                       //  65
+            ["tancar", "shut", "shut", "shut", "cerrar"],
+            ["cantar", "sing", "sang", "sung", "cantar"],
+            ["seure", "sit", "sat", "sat", "sentarse"],
+            ["dormir", "sleep", "slept", "slept", "dormir"],
+            ["parlar", "speak", "spoke", "spoken", "hablar"],                       //  70
+            ["lletrejar", "spell", "spelt/spelled", "spelt/spelled", "deletrear"],
+            ["gastar", "spend", "spent", "spent", "gastar"],
+            ["estar dret", "stand", "stood", "stood", "estar de pie"],
+            ["robar", "steal", "stole", "solen", "robar"],
+            ["nedar", "swim", "swam", "swum", "nadar"],                            //  75
+            ["prendre", "take", "took", "taken", "tomar"],
+            ["ensenyar (educar)", "teach", "taught", "taught", "enseñar (educar)"],
+            ["dir, explicar", "tell", "told", "told", "decir"],
+            ["pensar", "think", "thought", "thought", "pensar"],
+            ["llençar", "throw", "threw", "thrown", "lanzar"],                      //  80
+            ["entendre, comprendre", "understand", "understood", "understood", "entender, comprender"],
+            ["despertar-se", "wake", "woke", "woken", "despertarse"],
+            ["portar posat", "wear", "wore", "worn", "llevar puesto"],
+            ["guanyar", "win", "won", "won", "ganar"],
+            ["escriure", "write", "wrote", "written", "escribir"],                    //  85
+            // ...
+            // Compte la coma a la dreta de cada fila! Estem fent una llista de llistes: [[], [], [],]
+        ];
+
+        //var nums = [0,1,2,3,4,5,6,7,8,9];  // llista amb els números dels verbs que vull a la taula (seria fàcil fer-ho aleatori)
+
+        var MIN=0, MAX=9;  // triar inici i final del bloc (ambdós inclosos)
+        var nums = Array.from({length:MAX-MIN+1},(v,k)=>k+MIN)
+
+        quantsverbs = 85;
+
+        /* ************************************************************************************ */
+        /* *               per afegir verbs no cal tocar res d'aquí en avall                  * */
+        /* ************************************************************************************ */
+
+        function carrega() {
+            if ("{{ vlang }}" != "ca"){
+                changelang();
+            }
+            posa_els_verbs(0);
+        }
+
+        function posa_els_verbs(franja) {  // la crido des del <body> (li dic que ho faci quan s'hagi carregat tot)
+            if (franja == 0) {  // tots els verbs
+                MIN=0;
+                MAX=quantsverbs-1;
+            } else if (franja == 100) {  // última franja (incompleta)
+                MIN = quantsverbs - 9;
+                MAX = quantsverbs - 1;
+            } else {  // grup (excepte l'últim)
+                MIN = (franja-1) * 10;
+                MAX = (franja) * 10 - 1;
+            }
+            nums = Array.from({length:MAX-MIN+1},(v,k)=>k+MIN)
+            shuffleArray(nums);
+            nums = nums.slice(0, 10);  // coge las posiciones 0 a 9
+            //respuesta = prompt("Pregunta?");  // sale una ventana que pregunta
+            verbs_taula(nums);
+            buida();  // trec les respostes que hi pugui haver
+        };
+
+        function verbs_taula() {
+            // escriu a la taula els verbs en funció de l'idioma actual
+            if (document.getElementById("lang").innerHTML == "Catalan") {
+                vlang = 4;  // està posat ara en castellà
+            } else {
+                vlang = 0;  // està posat en cat
+            }
+            i = 0;
+            for (let n of nums) {  // per cada numero de la llista "nums" (dins la funció, el número es dirà "n")
+                document.getElementById("verb" + i.toString()).innerHTML = verbs[n][vlang];  // busco la casella de català i hi poso el verb (les caselles es diuen "verb0", "verb1", etc)
+                i++;
+            }
+        };
+
+        function buida(){
+            ids = ["p", "ps", "pp"];
+            for (i=0;i<10;i++) {
+                for (j=0;j<ids.length;j++) {
+                    document.getElementById(ids[j] + i.toString()).value = "";
+                }
+            }
+        }
+
+        function corregeix(){
+            errors = 0;
+            e_fila = 0;
+            buits = 0;
+            b_fila = 0;
+            ids = ["p", "ps", "pp"];  // id de les columnes (els camps de les respostes es diuen "p1", "ps1", etc)
+            j = 0;
+            for (let n of nums) {  // per cada número de la llista "nums" (dins la funció, el número es dirà "n")
+                e_fila = 0;
+                b_fila = 0;
+                for (i=0; i<ids.length; i++) {  // per cada temps verbal
+                    resposta = document.getElementById(ids[i]+j.toString()).value;
+                    correcte = verbs[n][i+1];  // i+1 perquè no comptàvem que hi ha el català
+
+                    if (resposta.length == 0 && resposta != correcte) {  // excepció pel "can" que va buit
+                        buits++;
+                        b_fila++;
+                        errors++;  // si és buida la compto error pel total
+                    } else if (resposta != correcte) {  // != vol dir diferent
+                        errors++;  // sumo un error
+                        e_fila++;  // i hi ha errors dins la fila (la faré vermella)
+                    }
+                }
+
+                // pinto la fila
+                if (e_fila > 0) {
+                    document.getElementById("fila"+j).className = "table-danger";  // pinto vermell
+                } else if (b_fila > 0) {
+                    document.getElementById("fila"+j).className = "table-warning";  // pinto groc
+                } else {
+                    document.getElementById("fila"+j).className = "table-success";  // pinto verd
+                }
+                j++;
+            }
+
+            total = (nums.length * ids.length);
+            missatges = document.getElementById("missatges");
+            if (buits > 0) {  // n'hi ha de buits
+                if (buits == total) {
+                    missatges.innerHTML = "What exactly do you want me to correct?";
+                } else if (buits >= total / 2 ){
+                    missatges.innerHTML = "Oh My God, it's full of holes!";
+                } else {
+                    missatges.innerHTML = "Hey, you forgot some of them...";
+                }
+                document.getElementById("missatges").className = "alert alert-warning py-0 col-6 mx-auto text-center";  // groc
+            }else{  // correcció
+                var nota = ((total-errors)*10/total).toFixed(2);
+                missatges.innerHTML = "You got " + (total-errors).toString() + " right (out of " + (total).toString() + "). Grade: " + nota + ".";
+                if (errors > total / 2 ) {
+                    document.getElementById("missatges").className = "alert alert-danger py-0 col-6 mx-auto text-center";  // vermell
+                } else {
+                    document.getElementById("missatges").className = "alert alert-success py-0 col-6 mx-auto text-center";  // verd
+                }
+            }
+        };
+
+        var ordinals = [
+            ["Tots els verbs", "Primera", "Segona", "Tercera", "Quarta", "Cinquena", "Sisena", "Setena", "Vuitena", "Novena"],
+            ["Todos los verbos", "Primera", "Segunda", "Tercera", "Cuarta", "Quinta", "Sexta", "Séptima", "Octava", "Novena"],
+        ];
+
+        function changelang(){
+            lang = document.getElementById("lang");
+            if (lang.innerHTML == "Catalan") {  // passa a català
+                lang.innerHTML = "Spanish";
+                document.getElementById("nm").innerHTML = "Nom:";
+                document.getElementById("nom").placeholder = "Nom";
+                document.getElementById("cg").innerHTML = "Cognom:";
+                document.getElementById("cognom").placeholder = "Cognom";
+                document.getElementById("triafranja").innerHTML = "Trieu la franja de verbs";
+                document.getElementById("tlang").innerHTML = "Catalan";
+                langnum = 0;
+            } else {  // passa a castellà
+                lang.innerHTML = "Catalan";
+                document.getElementById("nm").innerHTML = "Nombre:";
+                document.getElementById("nom").placeholder = "Nombre";
+                document.getElementById("cg").innerHTML = "Apellido:";
+                document.getElementById("cognom").placeholder = "Apellido";
+                document.getElementById("triafranja").innerHTML = "Elegid la franja de verbos";
+                document.getElementById("tlang").innerHTML = "Spanish";
+                langnum = 1;
+            }
+            for (x=0;x<ordinals[0].length;x++) {
+                document.getElementById("dd" + x).innerHTML = ordinals[langnum][x];
+            }
+            verbs_taula();  // escriu a la taula
+        }
+
+        /* Randomize array in-place using Durstenfeld shuffle algorithm */
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    </script>
+</html>
