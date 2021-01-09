@@ -526,6 +526,7 @@
                 b_fila = 0;
                 for (i=0; i<ids.length; i++) {  // per cada temps verbal
                     resposta = document.getElementById(ids[i]+j.toString()).value;
+                    resposta = resposta.replace(/\s/g, '');  // esborra els espais per si n'has posat sense voler
                     correcte = verbs[n][i+1];  // i+1 perquè no comptàvem que hi ha el català
 
                     if (resposta.length == 0 && resposta != correcte) {  // excepció pel "can" que va buit
