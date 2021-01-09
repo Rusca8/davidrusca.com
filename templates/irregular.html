@@ -18,9 +18,10 @@
 
         <div class="container mb-5 mt-5">
             <h1 class="display-5 mb-1 mt-0 text-center">IRREGULAR VERBS {{temps}}s TEST</h1>
+
             <div class="container-fluid mr-3">
                 <div class="row">
-                    <div class="col-md-auto">
+                    <div>
                         <script type="text/javascript" >
                             function posaZero(num) {
                                 if (num < 10) {
@@ -33,9 +34,7 @@
                             var d = new Date();
                             document.write("Started: " + d.getDate() + "/" + (d.getMonth() +1) + "/" + d.getFullYear() + ' - ' + d.getHours() + ':' + posaZero(d.getMinutes()) + ':' + posaZero(d.getSeconds()));
                         </script>
-                    </div>
-                    <div class="col">
-                        <div class="text-right">This window will close automatically within <span id="counter">{{temps}}</span> second(s).</div>
+                        <span style="float:right">This window will close automatically within <span id="counter">{{temps}}</span> second(s).</span>
                         <script type="text/javascript">
                             function countdown() {
                                 var i = document.getElementById('counter');
