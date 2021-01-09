@@ -111,7 +111,7 @@ def ktn():
 @app.route('/ivtest/<temps>')
 def ivtest(temps=180):
     vlang = request.accept_languages.best_match(['es', 'ca'])
-    temps = re.sub("[^0-9]", "", temps)
+    temps = re.sub("[^0-9]", "", f"{temps}")
     if not temps:
         temps = 180;
     return render_template("irregular.html", temps=temps, vlang=vlang)
