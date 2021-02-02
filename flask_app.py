@@ -140,6 +140,9 @@ def d_anki(file):
     elif file == "braille":
         deck = "braille.apkg"
         nom = "[Rusca] Braille Español (i Català).apkg"
+    elif file == "isot":
+        deck = "isot.apkg"
+        nom = "[Rusca] Isòtops i Companyia.apkg"
     elif file == "lsc":
         deck = "lsc.apkg"
         nom = "[Rusca] LSC - Llengua de Signes Catalana.apkg"
