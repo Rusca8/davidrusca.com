@@ -92,6 +92,7 @@
                                 <li><a href="#lsc">LSC - {{ _('Lengua de Signos Catalana') }} [CA]</a></li>
                                 <li><a href="#verbscat">{{ _('Tiempos Verbales Catalanes') }} [CA]</a></li>
                                 <li><a href="#braille">{{ _('Braille Español/Catalán') }} [ES/CA]</a></li>
+                                <li><a href="#isot">{{ _('Isótopos y Compañía') }} [CA]</a></li>
                           </ul>
                         </div>
                       </div>
@@ -419,12 +420,33 @@
                         <li>Braille</li>
                         <li>{{ _('Significado') }}</li>
                     </ul>
-                    <b>{{ _('Tarjetas') }}</b>
+                    <b>{{ _('Tarjetas:') }}</b>
                     <ul>
                         <li>Braille > {{ _('Significado') }}</li>
                         <li>{{ _('Significado') }} > Braille</li>
                     </ul>
                     <a href="/anki/d/braille" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (50 {{ _('notas') }}, 11K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_isot.png" alt="Tarjeta Isótopos">
+                <div class="card-body"><b id="isot"></b>
+                    <h5 class="card-tittle">{{ _('Isótopos y Compañía') }} [CA]</h5>
+                    <i>{{ _('Enero') }} 2021</i>
+                    <p>
+                        {{ _('Preguntas de teoría sobre isótopos e iones.') }}
+                    </p>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>Frase <i>({{ _('rellena los huecos') }})</i></li>
+                        <li>{{ _('Comentarios') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas:') }}</b>
+                    <ul>
+                        <li>Frase > ({{ _('Comentarios') }})</li>
+                    </ul>
+                    <a href="/anki/d/isot" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (40 {{ _('notas') }}, 35K)</a>
                 </div>
               </div>
 
