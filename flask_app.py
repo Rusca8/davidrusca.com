@@ -125,7 +125,7 @@ def d_anki(file):
     elif file == "irregular":
         deck = "irregular.apkg"
         nom = "[Rusca] Verbs Irregulars Anglès.apkg"
-    elif file == "irregular":
+    elif file == "irregular-common":
         deck = "irregular-common.apkg"
         nom = "[Rusca] Verbs Irregulars Anglès (filtrada).apkg"
     elif file == "valencies":
