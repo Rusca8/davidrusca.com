@@ -18,7 +18,8 @@
                     <li><a href="#fis">Física</a></li>
                     <li><a href="#quim">Química</a></li>
                 </ul>
-                <li><a href="#CFGM">{{ _('Ciclo Formativo Grado Medio') }}</a></li>
+                <li><a href="#CFGS">{{ _('Prueba de acceso') }} CFGS</a></li>
+                <li><a href="#CFGM">{{ _('Prueba de acceso') }} CFGM</a></li>
                 <ul>
                     <li><a href="#tecnoCFGM">{{ _('Tecnología') }}</a></li>
                 </ul>
@@ -111,9 +112,23 @@
 
     </div>
 
+    <div class="card border-c bg-light mb-2"><b id="CFGS"></b>
+        <h5 class="card-header">{{ _('Prueba de Acceso') }} CFGS</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGS"></b>
+            <div class="card-body">
+                <h5 class="card-title">{{ _('Dibujo Técnico') }}</h5>
+                <b>{{ _('Temario:') }}</b>
+                <ul>
+                    <li><a href="/static/pdf/DTGS_Temari.pdf" target="_blank">T - {{ _('Temario optimizado') }} [CA]</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 
     <div class="card border-c bg-light mb-2"><b id="CFGM"></b>
-        <h5 class="card-header">{{ _('Ciclo Formativo GM') }}</h5>
+        <h5 class="card-header">{{ _('Prueba de Acceso') }} CFGM</h5>
 
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGM"></b>
             <div class="card-body">
