@@ -19,6 +19,10 @@
                     <li><a href="#quim">Química</a></li>
                 </ul>
                 <li><a href="#CFGS">{{ _('Prueba de acceso') }} CFGS</a></li>
+                <ul>
+                    <li><a href="#dtCFGS">{{ _('Dibujo Técnico') }}</a></li>
+                    <li><a href="#tecnoCFGS">{{ _('Tecnología') }}</a></li>
+                </ul>
                 <li><a href="#CFGM">{{ _('Prueba de acceso') }} CFGM</a></li>
                 <ul>
                     <li><a href="#tecnoCFGM">{{ _('Tecnología') }}</a></li>
@@ -115,12 +119,21 @@
     <div class="card border-c bg-light mb-2"><b id="CFGS"></b>
         <h5 class="card-header">{{ _('Prueba de Acceso') }} CFGS</h5>
 
-        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGS"></b>
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="dtCFGS"></b>
             <div class="card-body">
                 <h5 class="card-title">{{ _('Dibujo Técnico') }}</h5>
                 <b>{{ _('Temario:') }}</b>
                 <ul>
-                    <li><a href="/static/pdf/DTGS_Temari.pdf" target="_blank">T - {{ _('Temario optimizado') }} [CA]</a></li>
+                    <li><a href="/static/pdf/DTGS_Temari.pdf" target="_blank">DT - {{ _('Temario optimizado') }} [CA]</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="tecnoCFGS"></b>
+            <div class="card-body">
+                <h5 class="card-title">{{ _('Tecnología') }}</h5>
+                <b>{{ _('Temario:') }}</b>
+                <ul>
+                    <li><a href="/static/pdf/TGS_Temari.pdf" target="_blank">T - {{ _('Temario optimizado') }} [CA]</a></li>
                 </ul>
             </div>
         </div>
