@@ -77,6 +77,7 @@
                                 <li><a href="#valencies">{{ _('Valencias Química') }} [CA]</a></li>
                                 <li><a href="#capitasia">{{ _('Mnemotecnia Capitales de Asia') }} [ES]</a></li>
                                 <li><a href="#musculs">{{ _('Músculos') }} [CA]</a></li>
+                                <li><a href="#casillero">{{ _('Mnemotecnia Números 0-99') }} [ES]</a></li>
                           </ul>
                         </div>
                         <div class="col-sm">
@@ -247,6 +248,41 @@
                     </div>
                     <a href="/anki/d/vandalismes" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (239 {{ _('notas') }}, 605K)</a>
                     <a href="/anki/d/vandalismes-nolog" class="btn btn-c-light btn-sm btn-block py-0 btn-mini" role="button">{{ _('Sólo los temas') }} T0-T3 (179 {{ _('notas') }}, 460K)</a>
+                </div>
+              </div>
+
+              <div class="card border-c">
+                <img class="card-img-top" src="/static/img/a_casillero.png" alt="Tarjeta Casillero">
+                <div class="card-body"><b id="casillero"></b>
+                    <h5 class="card-tittle">{{ _('Mnemotecnia Números') }} 0-99 [ES]</h5>
+                    <i>Abril 2020</i>
+                    <p>
+                        {{ _('Aprende a memorizar cualquier número convirtiéndolo en una historia memorable.') }}<br><br>
+                        {{ _('La baraja es universal, autosuficiente y apta para peques.') }}<br>
+                        {{ _('Incluye instrucciones para personalizarla fácilmente.') }}
+                    </p>
+                    <b>{{ _('Incluye:') }}</b>
+                    <ol>
+                        <li>{{ _('Información previa') }}</li>
+                        <li>{{ _('Casillero 0-9 (Formas)') }}</li>
+                        <li>{{ _('Sistema Mayor') }}</li>
+                        <li>{{ _('Casillero 00-99') }} {{ _('Sistema Mayor') }}</li>
+                        <li>{{ _('Casillero .0-.9') }} {{ _('Sistema Mayor') }}</li>
+                        <li>{{ _('Ejemplos y consejos') }}</li>
+                    </ol>
+                    <b>{{ _('Campos:') }}</b>
+                    <ul>
+                        <li>{{ _('Número') }}</li>
+                        <li>{{ _('Palabra') }}</li>
+                        <li>{{ _('Imagen') }}</li>
+                        <li>{{ _('Comentarios') }}</li>
+                    </ul>
+                    <b>{{ _('Tarjetas') }}:</b>
+                    <ul>
+                        <li><code>{{ _('Número') }} > {{ _('Palabra') }}, {{ _('Imagen') }}, ({{ _('Comentarios') }})</code></li>
+                        <li><code>{{ _('Imagen') }} > {{ _('Número') }}, ({{ _('Palabra') }}, {{ _('Comentarios') }})</code></li>
+                    </ul>
+                    <a href="/anki/d/casillero" class="btn btn-light btn-sm btn-block" role="button">{{ _('Descarga') }} (140 {{ _('notas') }}, 1.1M) </a>
                 </div>
               </div>
 

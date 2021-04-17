@@ -167,6 +167,9 @@ def d_anki(file):
     elif file == "comarques-capitals":
         deck = "comarques-capitals.apkg"
         nom = "[Rusca] Comarques de Catalunya (capitals).apkg"
+    elif file == "casillero":
+        deck = "casillero.apkg"
+        nom = "[Rusca] Mnemotecnia Números 0-99.apkg"
     else:
         return f"El fitxer {file} no l'he pas trobat."
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
