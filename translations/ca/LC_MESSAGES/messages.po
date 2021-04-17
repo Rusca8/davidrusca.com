@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-07 11:10+0200\n"
+"POT-Creation-Date: 2021-04-17 22:27+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -117,55 +117,59 @@ msgstr "Baralles"
 msgid "Índice"
 msgstr "Índex"
 
-#: templates/anki.html:76 templates/anki.html:131 templates/docentes.html:200
+#: templates/anki.html:76 templates/anki.html:132 templates/docentes.html:200
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
-#: templates/anki.html:77 templates/anki.html:168
+#: templates/anki.html:77 templates/anki.html:169
 msgid "Valencias Química"
 msgstr "Valències Química"
 
-#: templates/anki.html:78 templates/anki.html:191
+#: templates/anki.html:78 templates/anki.html:192
 msgid "Mnemotecnia Capitales de Asia"
 msgstr "Mnemotècnia Capitals de l'Àsia"
 
-#: templates/anki.html:79 templates/anki.html:336
+#: templates/anki.html:79 templates/anki.html:372
 msgid "Músculos"
 msgstr "Músculs"
 
-#: templates/anki.html:84 templates/anki.html:256
+#: templates/anki.html:80
+msgid "Mnemotecnia Números 0-99"
+msgstr "Mnemotècnia Números 0-99"
+
+#: templates/anki.html:85 templates/anki.html:292
 msgid "Perímetros, Áreas y Volúmenes"
 msgstr "Perímetres, Àrees i Volums"
 
-#: templates/anki.html:85 templates/anki.html:282
+#: templates/anki.html:86 templates/anki.html:318
 msgid "Verbos Irregulares Inglés"
 msgstr "Verbs Irregulars Anglès"
 
-#: templates/anki.html:86 templates/anki.html:312
+#: templates/anki.html:87 templates/anki.html:348
 msgid "Reglas de Derivación"
 msgstr "Regles de Derivació"
 
-#: templates/anki.html:87 templates/anki.html:216
+#: templates/anki.html:88 templates/anki.html:217
 msgid "Vandalismos Matemáticos"
 msgstr "Vandalismes Matemàtics"
 
-#: templates/anki.html:92 templates/anki.html:358
+#: templates/anki.html:93 templates/anki.html:394
 msgid "Lengua de Signos Catalana"
 msgstr "Llengua de Signes Catalana"
 
-#: templates/anki.html:93 templates/anki.html:399
+#: templates/anki.html:94 templates/anki.html:435
 msgid "Tiempos Verbales Catalanes"
 msgstr "Temps Verbals Catalans"
 
-#: templates/anki.html:94 templates/anki.html:426
+#: templates/anki.html:95 templates/anki.html:462
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:95 templates/anki.html:449
+#: templates/anki.html:96 templates/anki.html:485
 msgid "Isótopos y Compañía"
 msgstr "Isòtops i Companyia"
 
-#: templates/anki.html:107
+#: templates/anki.html:108
 msgid ""
 "Para poder abrir y utilizar estas tarjetas de estudio tienes que tener "
 "Anki instalado (es gratis)."
@@ -173,23 +177,23 @@ msgstr ""
 "Per poder obrir i utilitzar aquestes targetes d'estudi has de tenir "
 "l'Anki instal·lat (és gratis)."
 
-#: templates/anki.html:109
+#: templates/anki.html:110
 msgid "Anki (PC/Mac/Linux)"
 msgstr "Anki (PC/Mac/Linux)"
 
-#: templates/anki.html:110
+#: templates/anki.html:111
 msgid "AnkiDroid (Android)"
 msgstr "AnkiDroid (Android)"
 
-#: templates/anki.html:111
+#: templates/anki.html:112
 msgid "AnkiMobile (iOS, de pago)"
 msgstr "AnkiMobile (iOS, de pagament)"
 
-#: templates/anki.html:114
+#: templates/anki.html:115
 msgid "Notas"
 msgstr "Notes"
 
-#: templates/anki.html:116
+#: templates/anki.html:117
 msgid ""
 "La app \"AnkiApp\" de iOS no tiene nada que ver, sólo plagiaron el nombre"
 " para aprovechar la marca."
@@ -197,7 +201,7 @@ msgstr ""
 "L'app \"AnkiApp\" d'iOS no té res a veure, només van plagiar el nom per "
 "aprofitar la marca."
 
-#: templates/anki.html:117
+#: templates/anki.html:118
 msgid ""
 "La app \"SmartCards+\" en teoría puede abrir mazos de Anki, pero por lo "
 "que he visto no lo hace nada bien."
@@ -205,7 +209,7 @@ msgstr ""
 "L'app \"SmartCards+\" en teoria pot obrir baralles d'Anki, però pel que "
 "he vist ho fa molt malament."
 
-#: templates/anki.html:118
+#: templates/anki.html:119
 msgid ""
 "Es posible hacer los repasos desde <a href=\"ankiweb.net\">AnkiWeb</a> "
 "sin ninguna app (pero tienes que tener el mazo ya en tu cuenta)."
@@ -213,128 +217,131 @@ msgstr ""
 "És possible fer els repassos des d'<a href=\"ankiweb.net\">AnkiWeb</a> "
 "sense cap app (però has de tenir la baralla ja al teu compte)."
 
-#: templates/anki.html:132
+#: templates/anki.html:133
 msgid "Octubre"
 msgstr "Octubre"
 
-#: templates/anki.html:134
+#: templates/anki.html:135
 msgid "Capitales y ubicación de las 42 comarcas de Cataluña."
 msgstr "Capitals i ubicació de les 42 comarques de Catalunya."
 
-#: templates/anki.html:135
+#: templates/anki.html:136
 msgid "Incluye historias cortas para recordar mejor la capital."
 msgstr "Inclou històries curtes per recordar millor la capital."
 
-#: templates/anki.html:138
+#: templates/anki.html:139
 msgid "Las historias las he escrito todas yo mismo y puedes encontrarlas "
 msgstr "Les històries les he escrit totes jo mateix i pots trobar-les "
 
-#: templates/anki.html:140 templates/anki.html:173 templates/anki.html:196
-#: templates/anki.html:231 templates/anki.html:262 templates/anki.html:288
-#: templates/anki.html:319 templates/anki.html:342 templates/anki.html:372
-#: templates/anki.html:406 templates/anki.html:432 templates/anki.html:454
+#: templates/anki.html:141 templates/anki.html:174 templates/anki.html:197
+#: templates/anki.html:232 templates/anki.html:273 templates/anki.html:298
+#: templates/anki.html:324 templates/anki.html:355 templates/anki.html:378
+#: templates/anki.html:408 templates/anki.html:442 templates/anki.html:468
+#: templates/anki.html:490
 msgid "Campos:"
 msgstr "Camps:"
 
-#: templates/anki.html:144 templates/anki.html:151 templates/anki.html:153
-#: templates/anki.html:155 templates/anki.html:157
+#: templates/anki.html:145 templates/anki.html:152 templates/anki.html:154
+#: templates/anki.html:156 templates/anki.html:158
 msgid "Provincia"
 msgstr "Província"
 
-#: templates/anki.html:146 templates/anki.html:153 templates/anki.html:157
+#: templates/anki.html:147 templates/anki.html:154 templates/anki.html:158
 msgid "Historia"
 msgstr "Història"
 
-#: templates/anki.html:148 templates/anki.html:239 templates/anki.html:296
-#: templates/anki.html:325 templates/anki.html:347 templates/anki.html:381
-#: templates/anki.html:414 templates/anki.html:437 templates/anki.html:459
+#: templates/anki.html:149 templates/anki.html:240 templates/anki.html:332
+#: templates/anki.html:361 templates/anki.html:383 templates/anki.html:417
+#: templates/anki.html:450 templates/anki.html:473 templates/anki.html:495
 msgid "Tarjetas:"
 msgstr "Targetes:"
 
-#: templates/anki.html:150
+#: templates/anki.html:151
 msgid "¿Dónde está la comarca?"
 msgstr "On és la comarca?"
 
-#: templates/anki.html:152
+#: templates/anki.html:153
 msgid "¿Cuál es la capital?"
 msgstr "Quina és la capital?"
 
-#: templates/anki.html:154
+#: templates/anki.html:155
 msgid "¿Qué comarca es?"
 msgstr "Quina comarca és?"
 
-#: templates/anki.html:156
+#: templates/anki.html:157
 msgid "¿De qué comarca es la capital?"
 msgstr "De quina comarca és la capital?"
 
-#: templates/anki.html:159 templates/anki.html:184 templates/anki.html:209
-#: templates/anki.html:248 templates/anki.html:275 templates/anki.html:304
-#: templates/anki.html:329 templates/anki.html:351 templates/anki.html:392
-#: templates/anki.html:419 templates/anki.html:442 templates/anki.html:463
+#: templates/anki.html:160 templates/anki.html:185 templates/anki.html:210
+#: templates/anki.html:249 templates/anki.html:285 templates/anki.html:311
+#: templates/anki.html:340 templates/anki.html:365 templates/anki.html:387
+#: templates/anki.html:428 templates/anki.html:455 templates/anki.html:478
+#: templates/anki.html:499
 msgid "Descarga"
 msgstr "Descarrega"
 
-#: templates/anki.html:159 templates/anki.html:160 templates/anki.html:161
-#: templates/anki.html:184 templates/anki.html:209 templates/anki.html:224
-#: templates/anki.html:225 templates/anki.html:226 templates/anki.html:227
-#: templates/anki.html:228 templates/anki.html:229 templates/anki.html:248
-#: templates/anki.html:249 templates/anki.html:275 templates/anki.html:304
-#: templates/anki.html:305 templates/anki.html:329 templates/anki.html:351
-#: templates/anki.html:392 templates/anki.html:419 templates/anki.html:442
-#: templates/anki.html:463
+#: templates/anki.html:160 templates/anki.html:161 templates/anki.html:162
+#: templates/anki.html:185 templates/anki.html:210 templates/anki.html:225
+#: templates/anki.html:226 templates/anki.html:227 templates/anki.html:228
+#: templates/anki.html:229 templates/anki.html:230 templates/anki.html:249
+#: templates/anki.html:250 templates/anki.html:285 templates/anki.html:311
+#: templates/anki.html:340 templates/anki.html:341 templates/anki.html:365
+#: templates/anki.html:387 templates/anki.html:428 templates/anki.html:455
+#: templates/anki.html:478 templates/anki.html:499
 msgid "notas"
 msgstr "notes"
 
-#: templates/anki.html:160
+#: templates/anki.html:161
 msgid "Sólo los mapas"
 msgstr "Només els mapes"
 
-#: templates/anki.html:161
+#: templates/anki.html:162
 msgid "Sólo las capitales"
 msgstr "Només les capitals"
 
-#: templates/anki.html:169 templates/anki.html:313
+#: templates/anki.html:170 templates/anki.html:349
 msgid "Septiembre"
 msgstr "Setembre"
 
-#: templates/anki.html:171
+#: templates/anki.html:172
 msgid "Valencias de los elementos que se suelen memorizar de química inorgánica."
 msgstr "Valències dels elements que se solen memoritzar de química inorgànica."
 
-#: templates/anki.html:175 templates/anki.html:182
+#: templates/anki.html:176 templates/anki.html:183
 msgid "Elemento"
 msgstr "Element"
 
-#: templates/anki.html:176 templates/anki.html:182
+#: templates/anki.html:177 templates/anki.html:183
 msgid "Valencia"
 msgstr "València"
 
-#: templates/anki.html:177
+#: templates/anki.html:178
 msgid "Otros con la misma valencia"
 msgstr "Altres amb la mateixa valència"
 
-#: templates/anki.html:178
+#: templates/anki.html:179
 msgid "Mnemotecnia [CA]"
-msgstr "Mnemotècnia"
+msgstr "Mnemotècnia [CA]"
 
-#: templates/anki.html:180 templates/anki.html:203 templates/anki.html:271
+#: templates/anki.html:181 templates/anki.html:204 templates/anki.html:280
+#: templates/anki.html:307
 msgid "Tarjetas"
 msgstr "Targetes"
 
-#: templates/anki.html:182
+#: templates/anki.html:183
 msgid "Otros"
 msgstr "Altres"
 
-#: templates/anki.html:182 templates/anki.html:201 templates/anki.html:205
-#: templates/anki.html:206 templates/anki.html:207
+#: templates/anki.html:183 templates/anki.html:202 templates/anki.html:206
+#: templates/anki.html:207 templates/anki.html:208
 msgid "Mnemotecnia"
 msgstr "Mnemotècnia"
 
-#: templates/anki.html:192 templates/music.html:46 templates/music.html:91
+#: templates/anki.html:193 templates/music.html:46 templates/music.html:91
 msgid "Junio"
 msgstr "Juny"
 
-#: templates/anki.html:194
+#: templates/anki.html:195
 msgid ""
 "Capitales de los paises de asia con frases mnemotécnicas que había hecho "
 "para mi prima Raquel el Mayo anterior."
@@ -342,179 +349,232 @@ msgstr ""
 "Capitals dels països de l'Àsia amb frases de mnemotècnia que havia fet "
 "per la meva cosina Raquel al Maig anterior."
 
-#: templates/anki.html:200 templates/anki.html:205 templates/anki.html:206
-#: templates/anki.html:207 templates/anki.html:266 templates/anki.html:344
-#: templates/anki.html:349 templates/anki.html:375 templates/anki.html:383
-#: templates/anki.html:384
+#: templates/anki.html:201 templates/anki.html:206 templates/anki.html:207
+#: templates/anki.html:208 templates/anki.html:277 templates/anki.html:282
+#: templates/anki.html:283 templates/anki.html:302 templates/anki.html:380
+#: templates/anki.html:385 templates/anki.html:411 templates/anki.html:419
+#: templates/anki.html:420
 msgid "Imagen"
 msgstr "Imatge"
 
-#: templates/anki.html:217 templates/anki.html:337 templates/music.html:106
+#: templates/anki.html:218 templates/anki.html:373 templates/music.html:106
 msgid "Noviembre"
 msgstr "Novembre"
 
-#: templates/anki.html:217 templates/anki.html:359
+#: templates/anki.html:218 templates/anki.html:395
 msgid "En proceso..."
 msgstr "En procés..."
 
-#: templates/anki.html:219
+#: templates/anki.html:220
 msgid "Errores comunes y no tan comunes en matemáticas. "
 msgstr "Errors comuns i no tan comuns en matemàtiques. "
 
-#: templates/anki.html:220
+#: templates/anki.html:221
 msgid "Identificar qué es un error y qué no lo es."
 msgstr "Identificar què és un error i què no ho és."
 
-#: templates/anki.html:222
+#: templates/anki.html:223 templates/anki.html:264
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:224 templates/docentes.html:172
+#: templates/anki.html:225 templates/docentes.html:172
 msgid "Fracciones"
 msgstr "Fraccions"
 
-#: templates/anki.html:225
+#: templates/anki.html:226
 msgid "Potencias"
 msgstr "Potències"
 
-#: templates/anki.html:226
+#: templates/anki.html:227
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:227 templates/docentes.html:174
+#: templates/anki.html:228 templates/docentes.html:174
 msgid "Ecuaciones"
 msgstr "Equacions"
 
-#: templates/anki.html:228
+#: templates/anki.html:229
 msgid "Logaritmos"
 msgstr "Logaritmes"
 
-#: templates/anki.html:229
+#: templates/anki.html:230
 msgid "Ecuaciones log y exp"
 msgstr "Equacions log i exp"
 
-#: templates/anki.html:236
+#: templates/anki.html:237
 msgid "(cierto o falso)"
 msgstr "(cert o fals)"
 
-#: templates/anki.html:237 templates/anki.html:242 templates/anki.html:269
-#: templates/anki.html:273 templates/anki.html:298 templates/anki.html:299
-#: templates/anki.html:327 templates/anki.html:412 templates/anki.html:416
-#: templates/anki.html:417 templates/anki.html:457 templates/anki.html:461
+#: templates/anki.html:238 templates/anki.html:243 templates/anki.html:278
+#: templates/anki.html:282 templates/anki.html:283 templates/anki.html:305
+#: templates/anki.html:309 templates/anki.html:334 templates/anki.html:335
+#: templates/anki.html:363 templates/anki.html:448 templates/anki.html:452
+#: templates/anki.html:453 templates/anki.html:493 templates/anki.html:497
 msgid "Comentarios"
 msgstr "Comentaris"
 
-#: templates/anki.html:246
+#: templates/anki.html:247
 msgid "Actualizado"
 msgstr "Actualitzat"
 
-#: templates/anki.html:246
+#: templates/anki.html:247
 msgid "corrijo un error en fracciones y añado bastantes explicaciones nuevas."
 msgstr "corregeixo un error a fraccions i afegeixo bastantes explicacions noves."
 
-#: templates/anki.html:249
+#: templates/anki.html:250
 msgid "Sólo los temas"
 msgstr "Només els temes"
 
-#: templates/anki.html:259
+#: templates/anki.html:257
+msgid "Mnemotecnia Números"
+msgstr "Mnemotècnia Números"
+
+#: templates/anki.html:260
+msgid ""
+"Aprende a memorizar cualquier número convirtiéndolo en una historia "
+"memorable."
+msgstr "Aprèn a memoritzar qualsevol número convertint-lo en una història memorable."
+
+#: templates/anki.html:261
+msgid "La baraja es universal, autosuficiente y apta para peques."
+msgstr "La baralla és universal, autosuficient i apta per canalla."
+
+#: templates/anki.html:262
+msgid "Incluye instrucciones para personalizarla fácilmente."
+msgstr "Inclou instruccions per personalitzar-la fàcilment."
+
+#: templates/anki.html:266
+msgid "Información previa"
+msgstr "Informació prèvia"
+
+#: templates/anki.html:267
+msgid "Casillero 0-9 (Formas)"
+msgstr "Caseller 0-9 (Formes)"
+
+#: templates/anki.html:268 templates/anki.html:269 templates/anki.html:270
+msgid "Sistema Mayor"
+msgstr "Sistema Major"
+
+#: templates/anki.html:269
+msgid "Casillero 00-99"
+msgstr "Caseller 00-99"
+
+#: templates/anki.html:270
+msgid "Casillero .0-.9"
+msgstr "Caseller .0-.9"
+
+#: templates/anki.html:271
+msgid "Ejemplos y consejos"
+msgstr "Exemples i consells"
+
+#: templates/anki.html:275 templates/anki.html:282 templates/anki.html:283
+msgid "Número"
+msgstr "Número"
+
+#: templates/anki.html:276 templates/anki.html:282 templates/anki.html:283
+#: templates/anki.html:410 templates/anki.html:419 templates/anki.html:420
+msgid "Palabra"
+msgstr "Paraula"
+
+#: templates/anki.html:295
 msgid ""
 "Fórmulas de perímetros, áreas y volúmenes de figuras planas y cuerpos "
 "geométricos."
 msgstr "Fòrmules de perímetre, àrea i volum de figures planes i cossos geomètrics."
 
-#: templates/anki.html:260
+#: templates/anki.html:296
 msgid "Incluye explicaciones y trucos para recordarlas mejor."
 msgstr "Inclou explicacions i trucs per recordar-les millor."
 
-#: templates/anki.html:264 templates/anki.html:273
+#: templates/anki.html:300 templates/anki.html:309
 msgid "Figura"
 msgstr "Figura"
 
-#: templates/anki.html:265 templates/anki.html:273
+#: templates/anki.html:301 templates/anki.html:309
 msgid "Tipo"
 msgstr "Tipus"
 
-#: templates/anki.html:265
+#: templates/anki.html:301
 msgid "Área, Perímetro, Volumen..."
 msgstr "Àrea, Perímetre, Volum..."
 
-#: templates/anki.html:267 templates/anki.html:273
+#: templates/anki.html:303 templates/anki.html:309
 msgid "Fórmula"
 msgstr "Fórmula"
 
-#: templates/anki.html:268
+#: templates/anki.html:304
 msgid "Variables"
 msgstr "Variables"
 
-#: templates/anki.html:283 templates/anki.html:427 templates/music.html:76
+#: templates/anki.html:319 templates/anki.html:463 templates/music.html:76
 msgid "Diciembre"
 msgstr "Desembre"
 
-#: templates/anki.html:285
+#: templates/anki.html:321
 msgid "Una lista amplia de los verbos irregulares de inglés con la traducción."
 msgstr "Una llista àmplia dels verbs irregulars d'anglès amb la traducció."
 
-#: templates/anki.html:286
+#: templates/anki.html:322
 msgid "La traducción está en catalán."
 msgstr "La traducció i comentaris estan en català."
 
-#: templates/anki.html:293
+#: templates/anki.html:329
 msgid "Traducción [CA]"
 msgstr "Traducció"
 
-#: templates/anki.html:294 templates/anki.html:323
+#: templates/anki.html:330 templates/anki.html:359
 msgid "Comentarios [CA]"
 msgstr "Comentaris"
 
-#: templates/anki.html:298 templates/anki.html:299
+#: templates/anki.html:334 templates/anki.html:335
 msgid "Traducción"
 msgstr "Traducció"
 
-#: templates/anki.html:302
+#: templates/anki.html:338
 msgid "Ojo:"
 msgstr "Compte:"
 
-#: templates/anki.html:302
+#: templates/anki.html:338
 msgid "la versión de antes de 7/11/2020 tenía mal la traducción de \"wind\"."
 msgstr "la versió d'abans del 7/11/2020 tenia malament la traducció de \"wind\"."
 
-#: templates/anki.html:305
+#: templates/anki.html:341
 msgid "Sólo los habituales"
 msgstr "Només els habituals"
 
-#: templates/anki.html:315
+#: templates/anki.html:351
 msgid "Reglas de derivación a través de ejemplos."
 msgstr "Regles de derivació a través d'exemples."
 
-#: templates/anki.html:316
+#: templates/anki.html:352
 msgid "Incluye multiplicación, división y regla de la cadena."
 msgstr "Inclou multiplicació, divisió i regla de la cadena."
 
-#: templates/anki.html:317
+#: templates/anki.html:353
 msgid "Los comentarios están en catalán."
 msgstr "Els comentaris estan en català (en algun moment en faré la traducció)."
 
-#: templates/anki.html:321 templates/anki.html:327
+#: templates/anki.html:357 templates/anki.html:363
 msgid "Función"
 msgstr "Funció"
 
-#: templates/anki.html:339
+#: templates/anki.html:375
 msgid "61 músculos del cuerpo humano."
 msgstr "61 músculs del cos humà."
 
-#: templates/anki.html:340
+#: templates/anki.html:376
 msgid "Para identificar en el dibujo cuál es cuál."
 msgstr "Per identificar al dibuix quin és quin."
 
-#: templates/anki.html:345 templates/anki.html:349
+#: templates/anki.html:381 templates/anki.html:385
 msgid "Nombre"
 msgstr "Nom"
 
-#: templates/anki.html:359 templates/music.html:61
+#: templates/anki.html:395 templates/music.html:61
 msgid "Febrero"
 msgstr "Febrer"
 
-#: templates/anki.html:361
+#: templates/anki.html:397
 msgid ""
 "Vocabulario de lengua de signos catalana, con foto, signoescritura y "
 "notas sobre gramática básica."
@@ -522,59 +582,55 @@ msgstr ""
 "Vocabulari de Llengua de Signes Catalana, amb dibuix, signoescriptura i "
 "notes sobre gramàtica bàsica."
 
-#: templates/anki.html:363
+#: templates/anki.html:399
 msgid "Referencias:"
 msgstr "Referències:"
 
-#: templates/anki.html:365
+#: templates/anki.html:401
 msgid "Dosier de "
 msgstr "Dossier d'"
 
-#: templates/anki.html:366
+#: templates/anki.html:402
 msgid "Diccionario en vídeo de la Generalitat."
 msgstr "Diccionari en vídeo de la Generalitat."
 
-#: templates/anki.html:367
+#: templates/anki.html:403
 msgid "Diccionario de signoescritura"
 msgstr "Diccionari de SignoEscriptura"
 
-#: templates/anki.html:368
+#: templates/anki.html:404
 msgid "Apuntes de signoescritura"
 msgstr "Apunts de SignoEscriptura"
 
-#: templates/anki.html:369
+#: templates/anki.html:405
 msgid "Apuntes de gramática"
 msgstr "Apunts de gramàtica"
 
-#: templates/anki.html:370
+#: templates/anki.html:406
 msgid "Vídeos de vocabulario de"
 msgstr "Vídeos de vocabulari de"
 
-#: templates/anki.html:374 templates/anki.html:383 templates/anki.html:384
-msgid "Palabra"
-msgstr "Paraula"
-
-#: templates/anki.html:376 templates/anki.html:383 templates/anki.html:384
+#: templates/anki.html:412 templates/anki.html:419 templates/anki.html:420
 msgid "Descripción"
 msgstr "Descripció"
 
-#: templates/anki.html:377 templates/anki.html:383 templates/anki.html:384
+#: templates/anki.html:413 templates/anki.html:419 templates/anki.html:420
 msgid "SignoEscritura"
 msgstr "SignoEscriptura"
 
-#: templates/anki.html:378
+#: templates/anki.html:414
 msgid "Aclaraciones y teoría"
 msgstr "Aclariments i teoria"
 
-#: templates/anki.html:379
+#: templates/anki.html:415
 msgid "Comentarios de la signoescritura"
 msgstr "Comentaris de la SignoEscriptura"
 
-#: templates/anki.html:387
+#: templates/anki.html:423
 msgid "Cuidado:"
 msgstr "Compte:"
 
-#: templates/anki.html:387
+#: templates/anki.html:423
 msgid ""
 "Si vas en serio a intentar aprender LSC, esta baraja no será suficiente "
 "(deberías al menos echar una ojeada también a los apuntes de gramática "
@@ -584,15 +640,15 @@ msgstr ""
 " (hauríes al menys de fer també un cop d'ull als apunts de gramàtica de "
 "l'IEC)."
 
-#: templates/anki.html:390
+#: templates/anki.html:426
 msgid "Comprueba que empieza por el abecedario!"
 msgstr "Comprova que comença per l'abecedari!"
 
-#: templates/anki.html:390
+#: templates/anki.html:426
 msgid "Si no es así tendrás que "
 msgstr "Si no és així, hauràs d'"
 
-#: templates/anki.html:390
+#: templates/anki.html:426
 msgid ""
 "En el ordenador vas a la pestaña \"explorar\". El campo ordenado tiene "
 "que tener cosas tipo \"T0.01\", y luego puedes seleccionar todas las que "
@@ -604,15 +660,15 @@ msgstr ""
 "columna de \"programades\" diuen \"Noves\" i fer: botó dret / reprogramar"
 " / al final de la cua."
 
-#: templates/anki.html:400 templates/music.html:91
+#: templates/anki.html:436 templates/music.html:91
 msgid "Marzo"
 msgstr "Març"
 
-#: templates/anki.html:402
+#: templates/anki.html:438
 msgid "Tiempos verbales catalanes."
 msgstr "Temps verbals catalans."
 
-#: templates/anki.html:403
+#: templates/anki.html:439
 msgid ""
 "Toda la primera conjugación, las formas que en 2a y 3a son distintas, y "
 "los tiempos que cambian según el modelo en la 2a y 3a."
@@ -620,48 +676,48 @@ msgstr ""
 "Tota la primera conjugació, les formes que a la 2a i 3a són diferents, i "
 "els temps de 2a i 3a que canvien segons el model."
 
-#: templates/anki.html:404
+#: templates/anki.html:440
 msgid "Incluye algunos trucos para recordar mejor los tiempos."
 msgstr "Inclou alguns trucs per recordar millor els temps."
 
-#: templates/anki.html:408 templates/anki.html:416 templates/anki.html:417
+#: templates/anki.html:444 templates/anki.html:452 templates/anki.html:453
 msgid "Modo"
 msgstr "Mode"
 
-#: templates/anki.html:409 templates/anki.html:416 templates/anki.html:417
+#: templates/anki.html:445 templates/anki.html:452 templates/anki.html:453
 msgid "Tiempo"
 msgstr "Temps"
 
-#: templates/anki.html:410 templates/anki.html:416 templates/anki.html:417
+#: templates/anki.html:446 templates/anki.html:452 templates/anki.html:453
 msgid "Modelo"
 msgstr "Model"
 
-#: templates/anki.html:411 templates/anki.html:416 templates/anki.html:417
+#: templates/anki.html:447 templates/anki.html:452 templates/anki.html:453
 msgid "Conjugación"
 msgstr "Conjugació"
 
-#: templates/anki.html:429
+#: templates/anki.html:465
 msgid "Las letras y los símbolos más típicos."
 msgstr "Les lletres i els símbols més típics."
 
-#: templates/anki.html:430
+#: templates/anki.html:466
 msgid "En catalán las tildes van algo distintas, así que las añadí también."
 msgstr "En català els accents van una mica diferents, així que els hi vaig afegir."
 
-#: templates/anki.html:435 templates/anki.html:439 templates/anki.html:440
+#: templates/anki.html:471 templates/anki.html:475 templates/anki.html:476
 msgid "Significado"
 msgstr "Significat"
 
-#: templates/anki.html:450 templates/music.html:30 templates/music.html:76
+#: templates/anki.html:486 templates/music.html:30 templates/music.html:76
 #: templates/music.html:106
 msgid "Enero"
 msgstr "Gener"
 
-#: templates/anki.html:452
+#: templates/anki.html:488
 msgid "Preguntas de teoría sobre isótopos e iones."
 msgstr "Preguntes de teoria sobre isòtops i ions."
 
-#: templates/anki.html:456
+#: templates/anki.html:492
 msgid "rellena los huecos"
 msgstr "omple els buits"
 
@@ -2018,7 +2074,7 @@ msgstr "Màquines simples"
 
 #: templates/docentes.html:198
 msgid "Mnemotecnia:"
-msgstr "Mnemotècnia"
+msgstr "Mnemotècnia:"
 
 #: templates/docentes.html:207
 msgid "Online:"
