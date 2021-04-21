@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-17 22:27+0200\n"
+"POT-Creation-Date: 2021-04-21 13:08+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -433,7 +433,9 @@ msgstr "Mnemotècnia Números"
 msgid ""
 "Aprende a memorizar cualquier número convirtiéndolo en una historia "
 "memorable."
-msgstr "Aprèn a memoritzar qualsevol número convertint-lo en una història memorable."
+msgstr ""
+"Aprèn a memoritzar qualsevol número convertint-lo en una història "
+"memorable."
 
 #: templates/anki.html:261
 msgid "La baraja es universal, autosuficiente y apta para peques."
@@ -1864,6 +1866,10 @@ msgstr "Funciona com a l'exemple i <code>'també \"funciona\" al revés'</code>.
 #: templates/base.html:42
 msgid "Inicio"
 msgstr "Inici"
+
+#: templates/base.html:48
+msgid "docentes"
+msgstr "docents"
 
 #: templates/base.html:48
 msgid "Fichas"
