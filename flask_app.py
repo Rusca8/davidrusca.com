@@ -78,9 +78,8 @@ def raquel():
 @app.route('/raquel/<key>')
 @app.route('/raquel/<key>/')
 def raquel_k(key):
-    otros = {}
-    otros["navbar"] = ["David Ruscalleda", "Inicio", "Estamos", "En", "Construcción"]
-    otros["top"] = ["Cosas escondidas para Raquel", "Ya veremos cómo te mando hasta aquí..."]
+    otros = {"navbar": ["David Ruscalleda", "Inicio", "Estamos", "En", "Construcción"],
+             "top": ["Cosas escondidas para Raquel", "Ya veremos cómo te mando hasta aquí..."]}
     if key.isnumeric():
         encoded = 10  # esto decodifica en 16 (Y en 42 lo cual es una maravillosa inesperada coincidencia)
         key = (int(key) + encoded) % 26  # corrijo la previa
@@ -96,7 +95,8 @@ def raquel_k(key):
         otros["top"][0] = "Ay qué pena!"
         otros["top"][1] = "Raquel aún no ha encontrado nada relevante juasjuas querisas"
         otros["title"] = "Raquel aún no ha encontrado nada relevante juasjuas querisas"
-        return render_template("raquel.html", text="Bueno, hay <b>numerosas</b> cosas que puedes probar...", otros=otros)
+        return render_template("raquel.html",
+                               text="Bueno, hay <b>numerosas</b> cosas que puedes probar...", otros=otros)
 
 
 @app.route('/ktn')
@@ -113,7 +113,7 @@ def ivtest(temps=180):
     vlang = request.accept_languages.best_match(['es', 'ca'])
     temps = re.sub("[^0-9]", "", f"{temps}")
     if not temps:
-        temps = 180;
+        temps = 180
     return render_template("irregular.html", temps=temps, vlang=vlang)
 
 
