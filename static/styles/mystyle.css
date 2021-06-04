@@ -31,6 +31,22 @@
  //background-color: #f5f0e9;
 }
 
+.bg-info-light {
+ background-color: #d1e7ed;
+}
+
+.bg-secondary-light {
+ background-color: #e0e0e0;
+}
+
+.bg-success-light {
+ background-color: #bee8ba;
+}
+
+.bg-warning-light {
+ background-color: #ffe3a8;
+}
+
 .btn-mini {
     font-size: 0.7em;
 }

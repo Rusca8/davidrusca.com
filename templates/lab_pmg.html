@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block title %} Lab P=mg - Web de David Ruscalleda {% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _('Laboratori de Masses i Pesos') }} </h3>
+<div class="card border-c ml-2 mr-2">
+    <div class="card-body">
+
+        <div class="container mx-2">
+            {% set right_arrows="► ► ►"%}
+            {% set left_arrows="◄ ◄ ◄"%}
+            {% set up_arrows="▲ ▲" %}
+            {% set down_arrows="▼ ▼" %}
+            {% set times="×" %}
+            {% set div="÷" %}
+
+            {% set g_terra = 9.81 %}
+            {% set g_lluna = 1.62 %}
+            {% set g_mart = 3.72 %}
+            <div class="row align-items-center">
+                <div class="col-sm text-center">
+                    <b>Terra</b>
+                </div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="massa" id="kg1" onchange="canvis('kg1');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tkg1">kg</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm text-center bg-secondary-light" id="larr1">&nbsp;</div>
+                <div class="col-sm text-center bg-secondary-light" id="g1">{{g_terra}} <small>m/s²</small></div>
+                <div class="col-sm text-center bg-secondary-light" id="rarr1">&nbsp;</div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="pes" id="n1" onchange="canvis('n1');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tn1">N</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-sm text-center"></div>
+                <div class="col-sm text-center">
+                    <div class="bg-secondary-light mx-5" id="darr1">&nbsp;</div>
+                </div>
+                <div class="col-sm text-center"></div>
+                <div class="col-sm text-center"></div>
+                <div class="col-sm text-center"></div>
+                <div class="col-sm text-center"></div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-sm text-center">
+                    <b>Lluna</b>
+                </div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="massa" id="kg2" onchange="canvis('kg2');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tkg2">kg</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm text-center bg-secondary-light" id="larr2">&nbsp;</div>
+                <div class="col-sm text-center bg-secondary-light" id="g2">{{g_lluna}} <small>m/s²</small></div>
+                <div class="col-sm text-center bg-secondary-light" id="rarr2">&nbsp;</div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="pes" id="n2" onchange="canvis('n2');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tn2">N</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-sm text-center">
+
+                </div>
+                <div class="col-sm text-center">
+                    <div class="bg-secondary-light mx-5" id="darr2">&nbsp;</div>
+                </div>
+                <div class="col-sm text-center">
+
+                </div>
+                <div class="col-sm text-center">
+
+                </div>
+                <div class="col-sm text-center">
+
+                </div>
+                <div class="col-sm text-center">
+
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-sm text-center">
+                    <b>Mart</b>
+                </div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="massa" id="kg3" onchange="canvis('kg3');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tkg3">kg</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm text-center bg-secondary-light" id="larr3">&nbsp;</div>
+                <div class="col-sm text-center bg-secondary-light" id="g3">{{g_mart}} <small>m/s²</small></div>
+                <div class="col-sm text-center bg-secondary-light" id="rarr3">&nbsp;</div>
+                <div class="col-sm-2 text-center px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" class="form-control border-c" placeholder="pes" id="n3" onchange="canvis('n3');">
+                      <div class="input-group-append">
+                        <span class="input-group-text border-c" id="tn3">N</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card border-c mx-2 mt-2">
+    <div class="card-body py-1">
+        <small>
+            La <b>massa</b> ens diu com de difícil és moure la cosa.<br>
+            El <b>pes</b> ens diu com de fort trepitja la cosa quan la posem en un planeta.
+        </small>
+    </div>
+</div>
+
+<script>
+    function canvis(quin){
+        tot_buit=true;
+        caselles = ["kg1", "n1", "kg2", "n2", "kg3", "n3"];
+        gs = [{{g_terra}}, {{g_lluna}}, {{g_mart}}];
+        origen = quin.slice(-1);
+        // precàlcul
+        massa=document.getElementById(quin).value;
+        // si està buit, buido tot i plego
+        if(massa.length==0){
+            for(let x of caselles){
+                el = document.getElementById(x).value="";
+            }
+            // buido fletxes
+            for(let x of ["1", "2", "3"]){
+                larr = document.getElementById("larr"+x);
+                gcell = document.getElementById("g"+x);
+                rarr = document.getElementById("rarr"+x);
+                g = gs[parseInt(x)-1];
+                larr.innerHTML = "&nbsp;";
+                gcell.innerHTML = g.toString() + " <small>m/s²</small>";
+                rarr.innerHTML = "&nbsp;";
+                // colors
+                for(let el of [larr, gcell, rarr]){
+                    el.classList.remove("bg-warning-light");
+                    el.classList.remove("bg-success-light");
+                    el.classList.add("bg-secondary-light");
+                }
+                if(parseInt(x)<3){
+                    darr = document.getElementById("darr"+x);
+                    darr.innerHTML = "&nbsp;";
+                }
+            }
+            return;
+        }
+        if(quin.slice(0, 1)=="n"){
+            massa=document.getElementById(quin).value/gs[origen-1];
+        }
+        // canvis nums
+        for(let x of [1, 2, 3]){
+            kgs = document.getElementById("kg"+x);
+            kgs.value = parseFloat(massa).toFixed(2);
+            ns = document.getElementById("n"+x);
+            ns.value = parseFloat(massa*gs[x-1]).toFixed(2);
+        }
+        // canvis estil
+        for(let x of caselles){
+            casella = document.getElementById(x);
+            unitats = document.getElementById("t"+x);
+
+            // marco casella canviada (vora)
+            if(x==quin){
+                casella.classList.remove("border-c");
+                casella.classList.add("border-info");
+                unitats.classList.remove("border-c");
+                unitats.classList.add("border-info");
+                unitats.classList.add("bg-info-light");
+            }else{
+                casella.classList.remove("border-info");
+                casella.classList.add("border-c");
+                unitats.classList.remove("border-info");
+                unitats.classList.add("border-c");
+                unitats.classList.remove("bg-info-light");
+            }
+        };
+
+        // canvio fletxes
+        for(let x of ["1", "2", "3"]){  // si parametritzes, hi ha també un 3 allà baix...
+            larr = document.getElementById("larr"+x);
+            gcell = document.getElementById("g"+x);
+            rarr = document.getElementById("rarr"+x);
+            g = gs[parseInt(x)-1];
+            if(x==origen && quin.slice(0, 1)=="n"){
+                // fletxes
+                larr.innerHTML = "{{left_arrows}}";
+                gcell.innerHTML = "{{div}}" + g.toString();
+                rarr.innerHTML = "{{left_arrows}}";
+                // colors
+                for(let el of [larr, gcell, rarr]){
+                    el.classList.remove("bg-warning-light");
+                    el.classList.add("bg-success-light");
+                }
+            }else{
+                // fletxes
+                larr.innerHTML = "{{right_arrows}}";
+                gcell.innerHTML = "{{times}}" + g.toString();
+                rarr.innerHTML = "{{right_arrows}}";
+                // colors
+                for(let el of [larr, gcell, rarr]){
+                    el.classList.remove("bg-success-light");
+                    el.classList.add("bg-warning-light");
+                }
+            }
+            // coses que necessiten [x, origen == Int]
+            x = parseInt(x);
+            origen = parseInt(origen);
+            if(x<3){
+                darr = document.getElementById("darr"+x.toString());
+                if(x<origen){
+                    darr.innerHTML = "{{up_arrows}}";
+                }else{
+                    darr.innerHTML = "{{down_arrows}}";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

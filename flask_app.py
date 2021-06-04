@@ -117,6 +117,12 @@ def ivtest(temps=180):
     return render_template("irregular.html", temps=temps, vlang=vlang)
 
 
+@app.route('/labs/pmg')
+@app.route('/labs/pmg/')
+def pmg():
+    return render_template("lab_pmg.html")
+
+
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":
