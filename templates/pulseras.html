@@ -974,7 +974,7 @@
     }
 
     window.addEventListener("keydown", function(e){
-        if(flechas.includes(e.key) && document.activeElement==c){
+        if((flechas.includes(e.key) || e.key==" ") && document.activeElement==c){
             e.preventDefault();
         }
     }, false);
