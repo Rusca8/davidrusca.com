@@ -61,7 +61,7 @@
 
 <div class="card mx-2 mt-2 border-c">
     <h5 class="card-header">{{ _('Colores') }}</h5>
-    <div class="card-body">
+    <div class="card-body pb-2">
         <p>
             {{ _('Los colores de la aplicación intentan parecerse a los de las cuentas siguientes:') }}
         </p>
@@ -70,8 +70,8 @@
             {% if x%4 == 1 %}
             <div class="row mb-1">
             {% endif %}
-                <div id="color{{x}}" class="col-sm-1"></div>
-                <div class="col-sm-2"><small id="colorcode{{x}}">COLOR</small></div>
+                <div id="color{{x}}" class="col-sm-1 border border-secondary"></div>
+                <div class="col-sm border-top border-bottom border-right border-c mr-2"><small id="colorcode{{x}}">COLOR</small></div>
             {% if x%4 == 0 or x==18 %}
             </div>
             {% endif %}
