@@ -123,6 +123,8 @@ def pmg():
     return render_template("lab_pmg.html")
 
 
+@app.route('/braçalets')
+@app.route('/braçalets/')
 @app.route('/pulseras')
 @app.route('/pulseras/')
 def pulseras():

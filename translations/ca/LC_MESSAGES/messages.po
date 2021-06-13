@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-13 20:57+0200\n"
+"POT-Creation-Date: 2021-06-13 21:51+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -1875,7 +1875,11 @@ msgstr "docents"
 msgid "Docentes"
 msgstr "Docents"
 
-#: templates/base.html:54
+#: templates/base.html:54 templates/index.html:129 templates/index.html:145
+msgid "pulseras"
+msgstr "braçalets"
+
+#: templates/base.html:54 templates/pulseras.html:2
 msgid "Pulseras"
 msgstr "Braçalets"
 
