@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-04 11:05+0200\n"
+"POT-Creation-Date: 2021-06-13 20:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "Índice"
 msgstr ""
 
-#: templates/anki.html:76 templates/anki.html:132 templates/docentes.html:215
+#: templates/anki.html:76 templates/anki.html:132 templates/docentes.html:219
 msgid "Comarcas de Cataluña"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 msgid "Incluye:"
 msgstr ""
 
-#: templates/anki.html:225 templates/docentes.html:177
+#: templates/anki.html:225 templates/docentes.html:181
 msgid "Fracciones"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "Raíces"
 msgstr ""
 
-#: templates/anki.html:228 templates/docentes.html:179
+#: templates/anki.html:228 templates/docentes.html:183
 msgid "Ecuaciones"
 msgstr ""
 
@@ -1763,8 +1763,12 @@ msgstr ""
 msgid "docentes"
 msgstr ""
 
-#: templates/base.html:48
-msgid "Fichas"
+#: templates/base.html:48 templates/docentes.html:2
+msgid "Docentes"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Pulseras"
 msgstr ""
 
 #: templates/bmonstres.html:2
@@ -1779,10 +1783,6 @@ msgstr ""
 msgid ""
 "Para el escape room \"El Misteri del Col·lecionista de Contes\" de "
 "jugarXjugar para la Diputació de Girona."
-msgstr ""
-
-#: templates/docentes.html:2
-msgid "Docentes"
 msgstr ""
 
 #: templates/docentes.html:7
@@ -1809,13 +1809,13 @@ msgstr ""
 msgid "Prueba de acceso"
 msgstr ""
 
-#: templates/docentes.html:23 templates/docentes.html:129
+#: templates/docentes.html:23 templates/docentes.html:133
 msgid "Dibujo Técnico"
 msgstr ""
 
 #: templates/docentes.html:24 templates/docentes.html:28
-#: templates/docentes.html:34 templates/docentes.html:138
-#: templates/docentes.html:153
+#: templates/docentes.html:34 templates/docentes.html:142
+#: templates/docentes.html:157
 msgid "Tecnología"
 msgstr ""
 
@@ -1823,15 +1823,15 @@ msgstr ""
 msgid "Educación Secundaria (ESO)"
 msgstr ""
 
-#: templates/docentes.html:33 templates/docentes.html:187
+#: templates/docentes.html:33 templates/docentes.html:191
 msgid "Física y Química"
 msgstr ""
 
-#: templates/docentes.html:35 templates/docentes.html:212
+#: templates/docentes.html:35 templates/docentes.html:216
 msgid "Sociales"
 msgstr ""
 
-#: templates/docentes.html:36 templates/docentes.html:222
+#: templates/docentes.html:36 templates/docentes.html:226
 msgid "Inglés"
 msgstr ""
 
@@ -1845,7 +1845,7 @@ msgstr ""
 
 #: templates/docentes.html:52 templates/docentes.html:77
 #: templates/docentes.html:98 templates/docentes.html:115
-#: templates/docentes.html:198
+#: templates/docentes.html:202
 msgid "Formularios:"
 msgstr ""
 
@@ -1866,13 +1866,13 @@ msgid "Geometría 3D"
 msgstr ""
 
 #: templates/docentes.html:61 templates/docentes.html:86
-#: templates/docentes.html:154 templates/docentes.html:174
-#: templates/docentes.html:202 templates/docentes.html:240
+#: templates/docentes.html:158 templates/docentes.html:178
+#: templates/docentes.html:206 templates/docentes.html:244
 msgid "Fichas:"
 msgstr ""
 
 #: templates/docentes.html:63 templates/docentes.html:88
-#: templates/docentes.html:178
+#: templates/docentes.html:182
 msgid "Potencias y raíces"
 msgstr ""
 
@@ -1884,13 +1884,13 @@ msgstr ""
 msgid "Derivadas"
 msgstr ""
 
-#: templates/docentes.html:67 templates/docentes.html:130
-#: templates/docentes.html:139
+#: templates/docentes.html:67 templates/docentes.html:119
+#: templates/docentes.html:134 templates/docentes.html:143
 msgid "Temario:"
 msgstr ""
 
-#: templates/docentes.html:69 templates/docentes.html:132
-#: templates/docentes.html:141
+#: templates/docentes.html:69 templates/docentes.html:121
+#: templates/docentes.html:136 templates/docentes.html:145
 msgid "Temario optimizado"
 msgstr ""
 
@@ -1914,7 +1914,7 @@ msgstr ""
 msgid "Gráficos de MRUA"
 msgstr ""
 
-#: templates/docentes.html:104 templates/docentes.html:204
+#: templates/docentes.html:104 templates/docentes.html:208
 msgid "Fuerzas"
 msgstr ""
 
@@ -1930,75 +1930,75 @@ msgstr ""
 msgid "Termoquímica"
 msgstr ""
 
-#: templates/docentes.html:125 templates/docentes.html:149
+#: templates/docentes.html:129 templates/docentes.html:153
 msgid "Prueba de Acceso"
 msgstr ""
 
-#: templates/docentes.html:156
+#: templates/docentes.html:160
 msgid "Circuitos Eléctricos"
 msgstr ""
 
-#: templates/docentes.html:157
+#: templates/docentes.html:161
 msgid "Electrónica Digital"
 msgstr ""
 
-#: templates/docentes.html:158
+#: templates/docentes.html:162
 msgid "Energías"
 msgstr ""
 
-#: templates/docentes.html:159
+#: templates/docentes.html:163
 msgid "Pneumática"
 msgstr ""
 
-#: templates/docentes.html:160
+#: templates/docentes.html:164
 msgid "Telecomunicaciones"
 msgstr ""
 
-#: templates/docentes.html:161
+#: templates/docentes.html:165
 msgid "Máquinas de Combustión"
 msgstr ""
 
-#: templates/docentes.html:176
+#: templates/docentes.html:180
 msgid "Operaciones con Enteros"
 msgstr ""
 
-#: templates/docentes.html:180
+#: templates/docentes.html:184
 msgid "Proporcionalidad"
 msgstr ""
 
-#: templates/docentes.html:190
+#: templates/docentes.html:194
 msgid "Masa y peso"
 msgstr ""
 
-#: templates/docentes.html:200
+#: templates/docentes.html:204
 msgid "Rendimiento"
 msgstr ""
 
-#: templates/docentes.html:205
+#: templates/docentes.html:209
 msgid "Máquinas simples"
 msgstr ""
 
-#: templates/docentes.html:213
+#: templates/docentes.html:217
 msgid "Mnemotecnia:"
 msgstr ""
 
-#: templates/docentes.html:223
+#: templates/docentes.html:227
 msgid "Online:"
 msgstr ""
 
-#: templates/docentes.html:235
+#: templates/docentes.html:239
 msgid "Primaria"
 msgstr ""
 
-#: templates/docentes.html:242
+#: templates/docentes.html:246
 msgid "Operaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:243
+#: templates/docentes.html:247
 msgid "Ecuaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:244
+#: templates/docentes.html:248
 msgid "Operaciones en columna"
 msgstr ""
 
@@ -2036,7 +2036,7 @@ msgstr ""
 msgid "Los secretos compositivos que esconde (subs ES)"
 msgstr ""
 
-#: templates/index.html:75 templates/index.html:90 templates/index.html:147
+#: templates/index.html:75 templates/index.html:90 templates/index.html:162
 msgid "Tutoriales:"
 msgstr ""
 
@@ -2060,7 +2060,7 @@ msgstr ""
 msgid "Cómo memorizar una baraja de póquer desordenada"
 msgstr ""
 
-#: templates/index.html:96 templates/index.html:155
+#: templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr ""
 
@@ -2101,147 +2101,155 @@ msgid "Dibujo de una Lluvia de vacas"
 msgstr ""
 
 #: templates/index.html:125
+msgid "Manualidades"
+msgstr ""
+
+#: templates/index.html:127
+msgid "Web:"
+msgstr ""
+
+#: templates/index.html:129 templates/index.html:145
+msgid "Editor de pulseras de abalorios"
+msgstr ""
+
+#: templates/index.html:136
 msgid "Programación"
 msgstr ""
 
-#: templates/index.html:129 templates/index.html:211
+#: templates/index.html:140 templates/index.html:226
 msgid "Generador de fichas de mates"
 msgstr ""
 
-#: templates/index.html:130
+#: templates/index.html:141
 msgid "Esta misma web, que también es artesanal"
 msgstr ""
 
-#: templates/index.html:134
+#: templates/index.html:149
 msgid "Juego matemático (descomposición)"
 msgstr ""
 
-#: templates/index.html:135
+#: templates/index.html:150
 msgid "Editor de esquemas musicales"
 msgstr ""
 
-#: templates/index.html:137
+#: templates/index.html:152
 msgid "Rusca8 en GitHub"
 msgstr ""
 
-#: templates/index.html:149
+#: templates/index.html:164
 msgid "La app para estudiar sin esfuerzo"
 msgstr ""
 
-#: templates/index.html:150
+#: templates/index.html:165
 msgid "Crea tus propias barajas"
 msgstr ""
 
-#: templates/index.html:157
+#: templates/index.html:172
 msgid "Cómo instalarlo y usarlo"
 msgstr ""
 
-#: templates/index.html:158
+#: templates/index.html:173
 msgid "Hacer tus propias tarjetas"
 msgstr ""
 
-#: templates/index.html:161
+#: templates/index.html:176
 msgid "Barajas y Tutoriales"
 msgstr ""
 
-#: templates/index.html:167
+#: templates/index.html:182
 msgid "Diseño gráfico"
 msgstr ""
 
-#: templates/index.html:169
+#: templates/index.html:184
 msgid "Infografía:"
 msgstr ""
 
-#: templates/index.html:171
+#: templates/index.html:186
 msgid "Artículo para Climate Tracker"
 msgstr ""
 
-#: templates/index.html:173
+#: templates/index.html:188
 msgid "Logotipos:"
 msgstr ""
 
-#: templates/index.html:175
+#: templates/index.html:190
 msgid "Propuesta de logotipo para Som Energia"
 msgstr ""
 
-#: templates/index.html:176
+#: templates/index.html:191
 msgid "Nuevo logotipo para el grupo Antaviana"
 msgstr ""
 
-#: templates/index.html:177
+#: templates/index.html:192
 msgid "Propuestas para TwoSetViolin"
 msgstr ""
 
-#: templates/index.html:183
+#: templates/index.html:198
 msgid "Carteles:"
 msgstr ""
 
-#: templates/index.html:185
+#: templates/index.html:200
 msgid "Cartel para la extraescolar de Antaviana"
 msgstr ""
 
-#: templates/index.html:187
+#: templates/index.html:202
 msgid "Logotipos"
 msgstr ""
 
-#: templates/index.html:197
+#: templates/index.html:212
 msgid "Cosas que he construído, en"
 msgstr ""
 
-#: templates/index.html:205
+#: templates/index.html:220
 msgid "Recursos docentes"
 msgstr ""
 
-#: templates/index.html:207
+#: templates/index.html:222
 msgid "Fichas y formularios:"
 msgstr ""
 
-#: templates/index.html:209
+#: templates/index.html:224
 msgid "Formulario de movimientos"
 msgstr ""
 
-#: templates/index.html:210
+#: templates/index.html:225
 msgid "Ficha de circuitos eléctricos de Ciclo Formativo"
 msgstr ""
 
-#: templates/index.html:213
+#: templates/index.html:228
 msgid "Todas las fichas y formularios"
 msgstr ""
 
-#: templates/index.html:223
+#: templates/index.html:238
 msgid "Campeón de Francia de Multi"
 msgstr ""
 
-#: templates/index.html:224
+#: templates/index.html:239
 msgid "Memorizo un cubo en 35 segundos"
 msgstr ""
 
-#: templates/index.html:225
+#: templates/index.html:240
 msgid "Resuelvo un cubo en 20 segundos con una mano"
 msgstr ""
 
-#: templates/index.html:226
+#: templates/index.html:241
 msgid "Resolviendo cubos bajo el agua sin respirar"
 msgstr ""
 
-#: templates/index.html:230
+#: templates/index.html:245
 msgid "Mis tiempos oficiales"
 msgstr ""
 
-#: templates/index.html:240
+#: templates/index.html:255
 msgid "Estudio de la notación:"
 msgstr ""
 
-#: templates/index.html:246
+#: templates/index.html:261
 msgid "Recopilatorio de trucos:"
 msgstr ""
 
-#: templates/index.html:250
+#: templates/index.html:265
 msgid "Edit con los trucos de"
-msgstr ""
-
-#: templates/lab_pmg.html:4
-msgid "Laboratori de Masses i Pesos"
 msgstr ""
 
 #: templates/logos.html:2
@@ -2452,5 +2460,155 @@ msgstr ""
 
 #: templates/music.html:115
 msgid "Clarinete"
+msgstr ""
+
+#: templates/pulseras.html:5
+msgid "Pulseras de abalorios"
+msgstr ""
+
+#: templates/pulseras.html:6
+msgid "Crea tus propios diseños o carga diseños hechos por otros."
+msgstr ""
+
+#: templates/pulseras.html:12
+msgid "Editor de pulseras"
+msgstr ""
+
+#: templates/pulseras.html:15
+msgid "Introduce el código de la pulsera que quieras ver"
+msgstr ""
+
+#: templates/pulseras.html:28
+msgid "cuentas"
+msgstr ""
+
+#: templates/pulseras.html:53
+msgid "Pulsa 'exportar' para obtener el código de esta pulsera"
+msgstr ""
+
+#: templates/pulseras.html:63
+msgid "Colores"
+msgstr ""
+
+#: templates/pulseras.html:66
+msgid ""
+"Los colores de la aplicación intentan parecerse a los de las cuentas "
+"siguientes:"
+msgstr ""
+
+#: templates/pulseras.html:92
+msgid "Diseños"
+msgstr ""
+
+#: templates/pulseras.html:95
+msgid "Arcoíris"
+msgstr ""
+
+#: templates/pulseras.html:99
+msgid "Arcoíris simple"
+msgstr ""
+
+#: templates/pulseras.html:103 templates/pulseras.html:113
+#: templates/pulseras.html:123 templates/pulseras.html:136
+#: templates/pulseras.html:146 templates/pulseras.html:156
+#: templates/pulseras.html:169 templates/pulseras.html:179
+#: templates/pulseras.html:189 templates/pulseras.html:199
+#: templates/pulseras.html:211 templates/pulseras.html:221
+#: templates/pulseras.html:234 templates/pulseras.html:247
+msgid "Llevar al editor"
+msgstr ""
+
+#: templates/pulseras.html:109
+msgid "Arcoíris negro"
+msgstr ""
+
+#: templates/pulseras.html:119
+msgid "Arcoíris suave"
+msgstr ""
+
+#: templates/pulseras.html:128
+msgid "Pulso de color"
+msgstr ""
+
+#: templates/pulseras.html:132
+msgid "Pulso azul"
+msgstr ""
+
+#: templates/pulseras.html:142
+msgid "Pulso verde"
+msgstr ""
+
+#: templates/pulseras.html:152
+msgid "Pulso rojo"
+msgstr ""
+
+#: templates/pulseras.html:161
+msgid "Luz y sombra"
+msgstr ""
+
+#: templates/pulseras.html:165
+msgid "Iceberg"
+msgstr ""
+
+#: templates/pulseras.html:175
+msgid "Incendio"
+msgstr ""
+
+#: templates/pulseras.html:185
+msgid "Erupción"
+msgstr ""
+
+#: templates/pulseras.html:195
+msgid "Jungla"
+msgstr ""
+
+#: templates/pulseras.html:204
+msgid "Cuatro elementos"
+msgstr ""
+
+#: templates/pulseras.html:207
+msgid "Cuatro Elementos (tierra)"
+msgstr ""
+
+#: templates/pulseras.html:217
+msgid "Cuatro Elementos (bosque)"
+msgstr ""
+
+#: templates/pulseras.html:226
+msgid "Dibujando cosas"
+msgstr ""
+
+#: templates/pulseras.html:230
+msgid "Día soleado"
+msgstr ""
+
+#: templates/pulseras.html:239
+msgid "Escondiendo mensajes"
+msgstr ""
+
+#: templates/pulseras.html:243
+msgid "Agua y cuarzo (Morse: David)"
+msgstr ""
+
+#: templates/pulseras.html:256
+msgid ""
+"Llevaba demasiado tiempo echando de menos aquél \"Pulsermaker\" que hice "
+"en 2010 con flash..."
+msgstr ""
+
+#: templates/pulseras.html:257
+msgid "por fin ha podido renacer."
+msgstr ""
+
+#: templates/pulseras.html:863
+msgid "Los datos de la bolita"
+msgstr ""
+
+#: templates/pulseras.html:863 templates/pulseras.html:865
+msgid "se perderán. Continuar?"
+msgstr ""
+
+#: templates/pulseras.html:865
+msgid "Los datos de las bolitas"
 msgstr ""
 

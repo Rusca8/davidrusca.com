@@ -1,0 +1,1183 @@
+{% extends "base.html" %}
+{% block title %} Pulseras - Web de David Ruscalleda {% endblock %}
+{% block navpulseras %}active{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _('Pulseras de abalorios') }}</h3>
+<p class="mt-2 text-center">{{ _('Crea tus propios diseños o carga diseños hechos por otros.') }}</p>
+
+{% set nmin = 30 %}
+{% set nmax = 200 %}
+{% set ndefault = 100 %}
+<div class="card mx-2 border-c">
+    <h5 class="card-header">{{ _('Editor de pulseras') }}</h5>
+    <div class="card-body text-center"><b id="to_input"></b>
+        <div class="input-group input-group-sm">
+          <input type="text" class="form-control" placeholder="{{ _('Introduce el código de la pulsera que quieras ver') }}" id="text" onkeypress="key_importar(event);">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-5" onclick="importar();">Importar</button>
+          </div>
+        </div>
+        <hr>
+        <div class="container-fluid mb-2">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2 px-0">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="{{nmin}}" max="{{nmax}}" class="form-control" value="{{ndefault}}" id="n" onchange="input_n();">
+                      <div class="input-group-append">
+                        <span class="input-group-text">{{ _('cuentas') }}</span> <!-- vidrets, granadura -->
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <select id="cuenta" class="custom-select custom-select-sm" onchange="input_cuenta();">
+                      <option value="my11" selected>11º Round Rocailles (Miyuki)</option>
+                      <option value="th11">11º Round Rocailles (Toho)</option>
+                    </select>
+                </div>
+                <div class="col-sm-2 px-0 text-right">
+                    <div class="input-group input-group-sm">
+                      <input type="number" min="0" max="200" class="form-control" id="cm" onchange="input_cms();">
+                      <div class="input-group-append">
+                        <span class="input-group-text">cm</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+
+        <div class="input-group input-group-sm mt-2">
+          <input type="text" readonly="readonly" class="form-control" placeholder="{{ _('Pulsa \'exportar\' para obtener el código de esta pulsera') }}" id="exportext">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-5" onclick="exporta();">Exportar</button>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mx-2 mt-2 border-c">
+    <h5 class="card-header">{{ _('Colores') }}</h5>
+    <div class="card-body">
+        <p>
+            {{ _('Los colores de la aplicación intentan parecerse a los de las cuentas siguientes:') }}
+        </p>
+        <div class="container">
+            {% for x in range(1, 19) %}
+            {% if x%4 == 1 %}
+            <div class="row mb-1">
+            {% endif %}
+                <div id="color{{x}}" class="col-sm-1"></div>
+                <div class="col-sm-2"><small id="colorcode{{x}}">COLOR</small></div>
+            {% if x%4 == 0 or x==18 %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <hr class="mb-1">
+        <div>
+            <small>
+                <b>MY</b> = Miyuki, <b>TH</b> = Toho<br>
+                <b>OL</b> = Opaque Luster, <b>CY</b> = Ceylon, <b>M</b> = Metallic, <b>OR</b> = Opaque Rainbow
+            </small>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mx-2 mt-2 border-c">
+    <h5 class="card-header">{{ _('Diseños') }}</h5>
+    <div class="card-body">
+
+        <b>{{ _('Arcoíris') }}</b>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Arcoíris simple') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Ai" value="7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6,7,8,9,10,3,4,5,6">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Ai');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Arcoíris negro') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="An" value="5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4,5,6,1,1,7,8,9,10,3,4">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('An');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Arcoíris suave') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Sn" value="3,4,5,3,4,5,3,4,5,3,4,5,4,5,6,4,5,6,4,5,6,4,5,6,5,6,7,5,6,7,5,6,7,5,6,7,6,7,8,6,7,8,6,7,8,6,7,8,7,8,9,7,8,9,7,8,9,7,8,9,8,9,10,8,9,10,8,9,10,8,9,10,9,10,3,9,10,3,9,10,3,9,10,3,10,3,4,10,3,4,10,3,4,10,3,4">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Sn');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <hr>
+        <b>{{ _('Pulso de color') }}</b>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Pulso azul') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Ak" value="1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12,1,7,8,9,8,7,1,12">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Ak');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Pulso verde') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Ak_v" value="1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12,1,11,10,3,10,11,1,12">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Ak_v');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Pulso rojo') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Ak_r" value="1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12,1,5,4,3,4,5,1,12">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Ak_r');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <hr>
+        <b>{{ _('Luz y sombra') }}</b>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Iceberg') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Se" value="8,7,8,9,7,8,9,7,8,9,8,9,2,8,9,2,8,9,2,9,2,9,2,2,2,9,2,9,8,2,9,8,2,9,8,9,8,7,9,8,7,9,8,7,8,7,8,7,7,7,8,7,8,9,7,8,9,7,8,9,8,9,2,8,9,2,8,9,2,9,2,9,2,2,2,9,2,9,8,2,9,8,2,9,8,9,8,7,9,8,7,9,8,7,8,7,8,7,7,7">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Se');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Incendio') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Se_i" value="4,5,4,3,5,4,3,5,4,3,4,3,2,4,3,2,4,3,2,3,2,3,2,2,2,3,2,3,4,2,3,4,2,3,4,3,4,5,3,4,5,3,4,5,4,5,4,5,5,5,4,5,4,3,5,4,3,5,4,3,4,3,2,4,3,2,4,3,2,3,2,3,2,2,2,3,2,3,4,2,3,4,2,3,4,3,4,5,3,4,5,3,4,5,4,5,4,5,5,5">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Se_i');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Erupción') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Se_e" value="5,6,5,4,6,5,4,6,5,4,5,4,3,5,4,3,5,4,3,4,3,4,3,3,3,4,3,4,5,3,4,5,3,4,5,4,5,6,4,5,6,4,5,6,5,6,5,6,6,6,5,6,5,4,6,5,4,6,5,4,5,4,3,5,4,3,5,4,3,4,3,4,3,3,3,4,3,4,5,3,4,5,3,4,5,4,5,6,4,5,6,4,5,6,5,6,5,6,6,6">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Se_e');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Jungla') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Se_j" value="17,6,17,11,6,17,11,6,17,11,17,11,10,17,11,10,17,11,10,11,10,11,10,10,10,11,10,11,17,10,11,17,11,11,17,11,17,6,11,17,6,11,17,6,17,6,17,6,6,6,17,6,17,11,6,17,11,6,17,11,17,11,10,17,11,10,17,11,10,11,10,11,10,10,10,11,10,11,17,10,11,17,10,11,17,11,17,6,11,17,6,11,17,6,17,6,17,6,6,6">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Se_j');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <hr>
+        <b>{{ _('Cuatro elementos') }}</b>
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Cuatro Elementos (tierra)') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="E" value="1,3,4,3,3,4,4,3,4,4,4,5,4,4,5,4,5,5,5,5,1,12,2,12,1,1,9,8,9,9,8,8,9,8,8,8,7,8,8,7,8,7,7,7,7,1,12,2,12,1,1,3,14,3,3,14,14,3,14,14,14,6,14,14,6,14,6,6,6,6,1,12,2,12,1,1,2,9,2,2,9,9,2,9,9,9,8,9,9,8,9,8,8,8,8,1,12,2,12,1">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('E');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Cuatro Elementos (bosque)') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="E_b" value="1,3,4,3,3,4,4,3,4,4,4,5,4,4,5,4,5,5,5,5,1,12,2,12,1,1,9,8,9,9,8,8,9,8,8,8,7,8,8,7,8,7,7,7,7,1,12,2,12,1,1,10,11,10,10,11,11,10,11,11,11,6,11,11,6,11,6,6,6,6,1,12,2,12,1,1,2,9,2,2,9,9,2,9,9,9,8,9,9,8,9,8,8,8,8,1,12,2,12,1">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('E_b');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <hr>
+        <b>{{ _('Dibujando cosas') }}</b>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Día soleado') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="En" value="9,9,8,9,9,9,9,3,9,9,9,3,3,9,9,3,3,3,9,3,3,3,3,3,3,3,3,9,3,3,3,9,9,3,3,9,9,9,3,9,9,9,9,8,9,9,9,8,8,9,9,8,8,8,9,8,8,8,8,10,10,10,10,11,11,10,10,10,11,11,11,11,10,11,11,11,11,10,10,10,11,11,10,10,10,10,8,8,8,8,9,8,8,8,9,9,8,8,9">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('En');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+        <hr>
+        <b>{{ _('Escondiendo mensajes') }}</b>
+
+        <div class="input-group input-group-sm mt-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text px-4"><b>{{ _('Agua y cuarzo (Morse: David)') }}</b></span>
+          </div>
+          <input type="text" readonly="readonly" class="form-control" id="Md" value="8,7,7,8,8,8,7,8,8,8,8,9,8,8,8,9,9,8,8,9,9,9,9,9,9,9,9,9,8,8,9,9,8,8,8,9,8,8,8,8,7,8,8,8,7,7,8,8,7,7,7,8,7,7,7,7,1,2,1,2,1,1,2,2,1,10,1,2,10,1,1,10,1,10,1,10,1,10,10,1,1,2,1,10,2,1,2,1,2,1,1,7,7,7,7,8,7,7,7,8">
+          <div class="input-group-append">
+            <button class="btn btn-block btn-outline-secondary btn-sm px-4" onclick="to_import('Md');">{{ _('Llevar al editor') }}</button>
+          </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="text-center px-3 mt-2">
+    <small>
+        {{ _('Llevaba demasiado tiempo echando de menos aquél "Pulsermaker" que hice en 2010 con flash...') }}
+        {{ _('por fin ha podido renacer.') }}<br>
+        ~ Rusca 2021 ~
+    </small>
+</div>
+
+
+<script>
+    //TODO resize con ResizeObserver
+
+    /**** variables globales ****/
+    // UI
+    i_actual = 1;
+    x_actual = -200;
+    y_actual = -200;
+    color_actual = 3;
+    xc_actual = -200;
+    yc_actual = -200;
+    rc_actual = 50;
+    acabados = true;
+
+
+    // cantidades de bolitas
+    CANTIDAD_INICIAL = {{ndefault}};
+    var n, nSide, nTop, nBot;
+    update_ns(CANTIDAD_INICIAL);
+
+    //anchos de bola (en la realidad)
+    var anchos = {
+        "my11": 0.20,
+        "th11": 0.22,
+    }
+
+    // medidas por defecto (override en update_sizes)
+    u = 1;
+    bw = 20;
+    bh = bw*3/2;
+    br = bw*0.25;
+    bgap = bw*0.3;
+    yTop = 40;
+    yBot = 100;
+
+    // herramientas
+    hu = 1;
+
+    // debugging
+    xcur = 0;
+    ycur = 0;
+
+    //inicio
+    window.onload = function(){
+        c=document.getElementById("app");
+        //c.focus();  //si lo pongo, cuando llego a la página se va para abajo
+
+        // medidas
+        cWidth = c.clientWidth*3;
+        cWidth = 0.9*cWidth;
+        c.width = cWidth;
+        c.height = c.width*0.7;
+        update_sizes(c);
+        set_positions();
+        set_toolbars();
+
+        //UI
+        n2cms();
+
+        // inicializa
+        cc=c.getContext("2d");
+        init_collisions(c);
+
+        // dibuix recurrent
+        setInterval(update, 1000/24);
+    }
+
+    function update_ns(newn){
+        n = newn;
+        nSide = Math.max(Math.round(n/20), 1);
+        nTop = Math.ceil((n - 2*nSide) / 2);
+        nBot = n-2*nSide-nTop;
+        if(i_actual>n){
+            i_actual = n;
+        }
+    }
+
+    function update_sizes(c){
+        //pulsera
+        pgap = 0.15;  // proporción del ancho que coge el hueco
+        bw = c.width/((nTop+2)*(1+pgap));
+        bh = bw*3/2;
+        br = bw*0.25;
+        bgap = bw*pgap;
+        yTop = bw + bw*(nSide/5);
+        yBot = yTop + 2*bgap*9+(bh+bgap)*(nSide+1);
+        u = bw/20;  // la "unidad" para medir lo demás que dependa de la bolita
+
+        //herramientas
+        hu =  (yBot-yTop-2*bh)/120;  // unidad para medir el menú
+        hy = (yBot+yTop)/2;
+        hr = 9*hu;  // radio color
+        hrs = 7*hu;  // radio color peques
+        hrl = 12*hu;  // radio color grandes (bw)
+        hgap = 2*hr*pgap;  // hueco entre colores
+        hgaps = 2*hrs*pgap;  // hueco entre colores peques
+        hgapl = 2*hrl*pgap;  // hueco entre colores grandes
+
+        //canvas adapto altura
+        c.height = yBot + yTop;
+    }
+
+    // genero el brazalete
+    bolitas = [];
+    function set_positions(){
+        ioffset = 0;
+        bolitas = [];
+        //top
+        for(i=0;i<nTop;i++){
+            x = Math.round(c.width/2 - (bw*nTop+bgap*(nTop-1))/2 +i*(bw+bgap) +bw/2);
+            ntoborder = Math.min(i+1, nTop-i);
+            if(ntoborder>3){
+                y = yTop;
+            }else{
+                y = yTop + bgap*Math.pow((4-ntoborder), 2);
+            }
+            bolitas.push({
+                num: (i+1+ioffset) % n +1,
+                x: x,
+                y: y,
+                ccode: 2,
+                edge: "t",
+            });
+        }
+        //right
+        x = Math.round(c.width/2 + (bw*nTop+bgap*(nTop-1))/2 -bw/2 + 2*bgap);
+        for(i=0;i<nSide;i++){
+            y = yTop + bgap*9+(bh+bgap)*(i+1);
+            bolitas.push({
+                num: (i+nTop+1+ioffset) % n +1,
+                x: x,
+                y: y,
+                ccode: 2,
+                edge: "r",
+            });
+        }
+        //bottom
+        for(i=0;i<nBot;i++){
+            ntoborder = Math.min(i+1, nBot-i);
+            if(ntoborder>3){
+                y = yBot;
+            }else{
+                y = yBot - bgap*Math.pow((4-ntoborder), 2);
+            }
+            bolitas.push({
+                num: (nBot-i +nTop+nSide +ioffset) % n +1,
+                x: Math.round(c.width/2 - (bw*nBot+bgap*(nBot-1))/2 + i*(bw+bgap) + bw/2),
+                y: y,
+                ccode: 2,
+                edge: "b",
+            });
+        }
+        //left
+        x = Math.round(c.width/2 - (bw*nTop+bgap*(nTop-1))/2 +bw/2 - 2*bgap);
+        for(i=0;i<nSide;i++){
+            y = yTop + bgap*9+(bh+bgap)*(i+1);
+            bolitas.push({
+                num: (nSide-i +nTop+nSide+nBot +ioffset) % n +1,
+                x: x,
+                y: y,
+                ccode: 2,
+                edge: "l",
+            });
+        }
+    }
+
+    h_colores=[];
+    function set_toolbars(){
+        h_colores = [];
+
+        // deselect, negro y blanco
+        x0 = c.width/2 - (8*(hr*2)+7*hgap + 3*(hrl*2)+2*hgapl + hgapl)/2 + (hrl+hr)/2;  //x izquierda barra
+        for(i=0;i<3;i++){
+            x = x0 + (hrl*2+hgapl)*i;
+            h_colores.push({
+                x: x,
+                y: hy,
+                r: hrl,
+                hnum: i,
+                hotkey: i == 0 ? "v" : "esp",
+            });
+        }
+
+        // fila central
+        x01 = x0 + (hrl*2+hgapl)*3;
+        hotkeys = ["q", "w", "e", "r", "t", "y", "u", "i"];
+        for(i=0;i<8;i++){
+            x = x01 + (hr*2+hgap)*i;
+            h_colores.push({
+                x: x,
+                y: hy,
+                r: hr,
+                hnum: i+3,
+                hotkey: hotkeys[i],
+            });
+        }
+
+        // fila superior
+        x02 = x01-hr-hgap/2;
+        for(i=0;i<8;i++){
+            x = x02 + (hr*2+hgap)*i;
+            h_colores.push({
+                x: x,
+                y: hy-hr*2-hgap,
+                r: hr,
+                hnum: i+3+16,
+                hotkey: (i+1).toString(),
+            });
+        }
+
+        // fila inferior
+        x03 = x01+hr+hgap/2;
+        hotkeys = ["a", "s", "d", "f", "g", "h", "j", "k"];
+        for(i=0;i<8;i++){
+            x = x03 + (hr*2+hgap)*i;
+            h_colores.push({
+                x: x,
+                y: hy+hr*2+hgap,
+                r: hr,
+                hnum: i+3+8,
+                hotkey: hotkeys[i],
+            });
+        }
+
+    }
+
+    function newn_canvas(newn, c){
+        update_ns(newn);
+        update_sizes(c);
+        set_positions();
+        set_toolbars();
+
+    }
+
+    function update(){
+        // previos
+        cc.font = (10*u).toString() + "px Helvetica";
+        cc.lineWidth = 1.4*u;
+        cc.textBaseline = "middle";
+        cc.textAlign = "center";
+
+        // fondo
+        cc.fillStyle="white";
+        cc.fillRect(0, 0, c.width, c.height);
+
+        //precálculo
+        for(let b of bolitas){
+            if(i_actual==b.num){
+                x_actual = b.x;
+                y_actual = b.y;
+            }
+        }
+
+        //sub_ui
+        if(color_actual!=0){
+            cc.fillStyle=toColor(color_actual);
+            cc.roundRect(x_actual-bw/2-8*u, y_actual-bh/2-8*u, bw+16*u, bh+16*u, br).fill();
+        }else{
+            cc.strokeStyle = "lightgrey";
+            cc.roundRect(x_actual-bw/2-6*u, y_actual-bh/2-6*u, bw+12*u, bh+12*u, br).stroke();
+        }
+
+        // bolitas
+        for(let b of bolitas){
+            dibujaBolita(b);
+        }
+        cc.roundRect(x_actual-bw/2-8*u, y_actual-bh/2-8*u, bw+16*u, bh+16*u, br).stroke();
+
+
+        // herramientas
+        cc.font = (8*hu).toString() + "px Helvetica";
+        for(let col of h_colores){
+            cc.lineWidth = 1.2*hu;
+            activo = true;
+            if(tool_ccode(col.hnum)==2 && col.hnum > 2){
+                activo = false;
+            }
+            if(activo){
+                cc.strokeStyle = "black";
+            }else{
+                cc.strokeStyle = "lightgrey";
+            }
+            cc.fillStyle = tool_color(col.hnum);
+            drawCircle(cc, col.x, col.y, col.r, true, true);
+            if(activo){
+                cc.fillStyle = toTextColor(tool_ccode(col.hnum));
+            }else{
+                cc.fillStyle = "lightgrey";
+            }
+            cc.fillText(col.hotkey.toString(), col.x, col.y);
+            if(col.hnum==0){  // dibuix select
+                cc.strokeStyle = "lightgrey";
+                drawCircle(cc, col.x, col.y, col.r-3*hu, true, false);
+            }
+
+            //actual?
+            if(activo && tool_ccode(col.hnum)==color_actual){
+                xc_actual = col.x;
+                yc_actual = col.y;
+                rc_actual = col.r;
+            }
+        }
+        lineWidth = 1.5*hu;
+        cc.strokeStyle = "lightblue";
+        drawCircle(cc, xc_actual, yc_actual, rc_actual+1.3*hu, true, false);
+
+
+        //debugging
+        cc.fillStyle = "red";
+        //cc.fillRect(xcur, ycur, 5, 5);
+        //cc.fillRect(x0, 0, u/3, c.height);
+        //cc.fillRect(x01, 0, u/3, c.height);
+        //cc.fillRect(x01+(hr*2)*8+hgap*7, 0, u/3, c.height);
+    }
+
+    lightest_colors = [2, 3, 9];
+    function g_luster_t(b){
+        luster = cc.createLinearGradient(0, b.y-bh/2, 0, b.y+bh/2);
+        if(lightest_colors.includes(b.ccode)){
+            luster.addColorStop(0, "rgb(255, 255, 255, 0.9)");
+            luster.addColorStop(0.5, "rgb(255, 255, 255, 0)");
+        }else if(dark_colors.includes(b.ccode)){
+            luster.addColorStop(0, "rgb(255, 255, 255, 0.4)");
+            luster.addColorStop(0.5, "rgb(255, 255, 255, 0)");
+        }else{
+            luster.addColorStop(0, "rgb(255, 255, 255, 0.5)");
+            luster.addColorStop(0.5, "rgb(255, 255, 255, 0)");
+        }
+
+        return luster;
+    }
+
+    function g_luster_b(b){
+        luster = cc.createRadialGradient(b.x, b.y-bh/2, bw/10, b.x, b.y-bh/2, bh*0.93);
+        if(lightest_colors.includes(b.ccode)){
+            luster.addColorStop(0.7, "rgb(255, 255, 255, 0)");
+            luster.addColorStop(1, "rgb(255, 255, 255, 0.5)");
+        }else if(dark_colors.includes(b.ccode)){
+            luster.addColorStop(0.7, "rgb(255, 255, 255, 0)");
+            luster.addColorStop(1, "rgb(255, 255, 255, 0.2)");
+        }else{
+            luster.addColorStop(0.7, "rgb(255, 255, 255, 0)");
+            luster.addColorStop(1, "rgb(255, 255, 255, 0.3)");
+        }
+
+        return luster;
+    }
+
+
+    function dibujaBolita(b){
+        //color
+        cc.fillStyle = toColor(b.ccode);
+        cc.roundRect(b.x-bw/2, b.y-bh/2, bw, bh, br).fill();
+        //acabado
+        if(acabados){
+            cc.fillStyle = g_luster_t(b);
+            cc.roundRect(b.x-bw*0.4, b.y-bh*0.43, bw*0.8, bh*0.86, br*0.9).fill();
+            cc.fillStyle = g_luster_b(b);
+            cc.roundRect(b.x-bw/2, b.y-bh/2, bw, bh, br).fill();
+        }
+        //línea
+        cc.strokeStyle = "black";
+        cc.roundRect(b.x-bw/2, b.y-bh/2, bw, bh, br).stroke();
+        //num
+        cc.fillStyle = toTextColor(b.ccode);
+        cc.fillText(b.num.toString(), b.x, b.y);
+    }
+
+    // decrypt colores
+    function toColor(ccode){
+        switch(ccode){
+            case 1:
+                return "#1c1c1c";  // negro / MY: [O-401], OL-464
+            case 2:
+                return "#f2f2f2";    // blanco / MY: [OL-420]
+            case 3:
+                return "#ffdf0f";  // amarillo / MY: [OL-422]
+            case 4:
+                return "#fc7b2b";  // naranja (oscuro) / MY: [OL-423]
+            case 5:
+                return "#e02b2b";  // rojo / MY: [OL-425]
+            case 6:
+                return "#8a2424";  // granate / MY: [OL-426]
+            case 7:
+                return "#492c96";  // azul oscuro / MY: [OL-434]
+            case 8:
+                return "#50b9eb";  // azul parís /
+            case 9:
+                return "#9ae4f5";  // azul claro / TH: [OL-124]
+            case 10:
+                return "#dff048";  // verde amarillo / MY: [OL-439]
+            case 11:
+                return "#4ca652";  // verde medio / MY: [OL-431]
+            case 12:
+                return "#616061";  // gunmetal / MY: [M-451]
+            case 13:
+                return "#fcd9eb";  // rosa / MY: OL-428
+            case 14:
+                return "#f0c169";  // beige / TH: OL-123D
+            case 15:
+                return "#fce9dc";  // rosa / MY: CY-529
+            case 16:
+                return "#80edd9";  // turquesa claro / TH: OR-413
+            case 17:
+                return "#1f5c35";  // verde oscuro / TH: [OL-130D?]
+            case 18:
+                return "#8486e8";  // lila / MY: [CY-538]
+            default:
+                return "#f700ff";
+        }
+    }
+
+    dark_colors = [1, 5, 6, 7, 11, 12, 17, 18];
+    function toTextColor(ccode){
+        if(dark_colors.includes(ccode)){
+            return "white";
+        }else{
+            return "black";
+        }
+    }
+
+    color_rows = [
+        [3, 4, 5, 6, 7, 8, 9, 10],
+        [11, 17, 12, 13, 14, 15, 16, 18],
+        [2, 2, 2, 2, 2, 2, 2, 2],
+    ];
+    function tool_ccode(hnum){
+        if(hnum<3){
+            return hnum;
+        }else{
+            fila = (Math.floor((hnum-3)/8))%color_rows.length;
+            return color_rows[fila][(hnum-3)%8];
+        }
+    }
+    function tool_color(hnum){
+        if(hnum==0){  // selection tool
+            return "white";
+        }else{
+            return toColor(tool_ccode(hnum));
+        }
+    }
+
+
+    //decoder
+    function cc_aplica(combi){
+        if(combi.length!=n && combi.length>20){
+            newn_canvas(combi.length, c);
+        }
+        for(let b of bolitas){
+            ccode = parseInt(combi[b.num-1]);
+            if(!isNaN(ccode)){
+                b.ccode = ccode;
+            }
+        }
+    }
+
+    //encoder
+    function cc_extrae(){
+        combi = new Array(n).fill(15);
+        for(let b of bolitas){
+            combi[b.num-1] = b.ccode;
+        }
+        return combi;
+    }
+
+    //traslada
+    function cc_traslada(combi, nuevan){
+        nuevacombi = [];
+        for(i=0;i<nuevan;i++){
+            if(i<combi.length){
+                nuevacombi.push(combi[i]);
+            }else{
+                nuevacombi.push(2);
+            }
+        }
+        return nuevacombi;
+    }
+
+    // circles
+    function drawCircle(cc, x, y, r, stroke, fill){
+        cc.beginPath();
+        cc.arc(x, y, r, 0, 2 * Math.PI, false);
+        if(fill){
+            cc.fill();
+        }
+        if(stroke){
+            cc.stroke();
+        }
+    }
+
+    // StackOverflow rounded Rects
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+      if (w < 2 * r) r = w / 2;
+      if (h < 2 * r) r = h / 2;
+      this.beginPath();
+      this.moveTo(x+r, y);
+      this.arcTo(x+w, y,   x+w, y+h, r);
+      this.arcTo(x+w, y+h, x,   y+h, r);
+      this.arcTo(x,   y+h, x,   y,   r);
+      this.arcTo(x,   y,   x+w, y,   r);
+      this.closePath();
+      return this;
+    }
+
+    // Collisions (partially StackOverflow)
+    function init_collisions(c){
+        c.addEventListener('click', function(event){
+            /* x = event.pageX - (c.offsetLeft + c.clientLeft);
+            y = event.pageY - (c.offsetTop + c.clientTop); */
+            const rect = c.getBoundingClientRect();
+            const relX = event.clientX - rect.left;
+            const relY = event.clientY - rect.top;
+            x = relX * c.width / rect.width;
+            y = relY * c.height / rect.height;
+            //prompt(bolitas[0].x + ":" + bw + " // " + x + ", " + y);
+            xcur = x;
+            ycur = y;
+            for(let b of bolitas){
+                if(x > b.x-bw/2 && x < b.x+bw/2 && y > b.y-bh/2 && y < b.y+bh/2){
+                    if(color_actual!=0){
+                        b.ccode = color_actual;
+                    }
+                    i_actual = b.num;
+                    clear_export();
+                    return;
+                }
+            }
+            for(let col of h_colores){
+                if(Math.pow(x-col.x, 2)+Math.pow(y-col.y, 2)<Math.pow(col.r, 2)){
+                    if(col.hnum>2 && tool_ccode(col.hnum)==2){
+                        return; //estaba desactivada
+                    }
+                    color_actual = tool_ccode(col.hnum);
+                    return;
+                }
+            }
+            if(color_actual==0){
+                i_actual = -200;
+                x_actual = -200;
+                y_actual = -200;
+            }
+        }, false);
+    }
+
+    /***************************************************************/
+    /**----------------------- Form UI ---------------------------**/
+    /***************************************************************/
+
+    //importar combinació
+    function importar(){
+        text = document.getElementById("text");
+        combi = text.value;
+        if(combi.startsWith(",")){
+            combi = combi.slice(1);
+        }
+        if(combi.endsWith(",")){
+            combi = combi.slice(0, -1);
+        }
+        combi = combi.split(",");
+        cc_aplica(combi);
+        document.getElementById("exportext").value=text.value;
+        text.value="";
+        document.getElementById("n").value=n;
+        n2cms();
+        i_actual=1;
+        color_actual=0;
+    }
+
+    function key_importar(e){
+        if(event.key==="Enter"){
+            importar();
+        }
+    }
+
+    //entra n nova
+    function input_n(){
+        ui_n = document.getElementById("n");
+        nuevan = parseInt(ui_n.value);
+        if(nuevan<{{nmin}}){
+            ui_n.value = {{nmin}};
+        }else if(nuevan>{{nmax}}){
+            ui_n.value = {{nmax}};
+        }
+        nuevan = parseInt(ui_n.value);
+        if(nuevan==n){
+            n2cms();
+            return;
+        }
+        if(nuevan<n){
+            // compruebo si hay cosas
+            combi = cc_extrae();
+            avisar = false;
+            for(i=nuevan;i<combi.length;i++){
+                if(combi[i]!=2){
+                    avisar = true;
+                    break;
+                }
+            }
+            if(avisar){
+                if(nuevan==n-1){
+                    aviso = "{{ _('Los datos de la bolita') }} " + n.toString() + " {{ _('se perderán. Continuar?') }}";
+                }else{
+                    aviso = "{{ _('Los datos de las bolitas') }} " + (nuevan+1).toString() + "-" + (n).toString() + " {{ _('se perderán. Continuar?') }}";
+                }
+                if(!confirm(aviso)){
+                    ui_n.value=n;
+                    n2cms();
+                    return;
+                }
+            }
+        }
+        n2cms();
+        combi = cc_extrae();
+        newn_canvas(nuevan, c);
+        cc_aplica(cc_traslada(combi, n));
+        clear_export();
+    }
+
+    //n->cms
+    function n2cms(){
+        ui_n = document.getElementById("n");
+        ui_cm = document.getElementById("cm");
+        ui_cuenta = document.getElementById("cuenta");
+        nuevoscm = parseInt(ui_n.value)*anchos[ui_cuenta.value];
+        ui_cm.value = parseFloat(nuevoscm).toFixed(1);
+    }
+
+    //entra cms nuevos
+    function input_cms(){
+        ui_cm = document.getElementById("cm");
+        ui_cuenta = document.getElementById("cuenta");
+        ui_n = document.getElementById("n");
+        nuevoscm = parseFloat(ui_cm.value);
+        nuevan = Math.round(nuevoscm/anchos[ui_cuenta.value])
+        ui_n.value = nuevan;
+        input_n();
+    }
+
+    //cambia el tipo de cuenta
+    function input_cuenta(){
+        n2cms();
+    }
+
+    function clear_export(){
+        document.getElementById("exportext").value = "";
+    }
+
+    function exporta(){
+        // exporta
+        combi = cc_extrae();
+        combitext = combi.join();
+
+        //escribe
+        exportext = document.getElementById("exportext");
+        exportext.value = combitext;
+
+        //focus (no copio por defecto)
+        exportext.focus();
+        exportext.select();
+    }
+
+
+    //canvas hotkeys
+    flechas = ["ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown"];
+    function canvas_hotkeys(e){
+        if(e.key=="Enter"){
+            for(let b of bolitas){
+                if(i_actual==b.num){
+                    b.ccode = color_actual;
+                    break;
+                }
+            }
+        }else if(e.key==" "){
+            if(color_actual==1){
+                color_actual=2;
+            }else{
+                color_actual=1;
+            }
+        }else if(flechas.includes(e.key)){
+            edge="";
+            for(let b of bolitas){
+                if(b.num==i_actual){
+                    edge = b.edge;
+                    break;
+                }
+            }
+            if((e.key=="ArrowUp" && edge=="l") || (e.key=="ArrowDown" && edge=="r") ||
+               (e.key=="ArrowRight" && edge=="t") || (e.key=="ArrowLeft" && edge=="b")){
+                    i_actual++;
+                    if(i_actual>n){
+                        i_actual-=n;
+                    }
+            }else if((e.key=="ArrowUp" && edge=="r") || (e.key=="ArrowDown" && edge=="l") ||
+                     (e.key=="ArrowRight" && edge=="b") || (e.key=="ArrowLeft" && edge=="t")){
+                i_actual--;
+                if(i_actual<1){
+                    i_actual+=n;
+                }
+            }
+        }else{
+            for(let col of h_colores){
+                if(col.hotkey==e.key){
+                    if(col.hnum>2 && tool_ccode(col.hnum)==2){
+                       // desactivada
+                    }else{
+                        color_actual = tool_ccode(col.hnum);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    window.addEventListener("keydown", function(e){
+        if(flechas.includes(e.key) && document.activeElement==c){
+            e.preventDefault();
+        }
+    }, false);
+
+
+    /* *********** UI DISEÑOS *********** */
+    function to_import(d){
+        dfield = document.getElementById(d);
+        importext = document.getElementById("text");
+        importext.value = dfield.value;
+        window.location="#to_input";
+        importext.select();
+        importext.focus();
+    }
+
+    /******* otras cosas de la página ********/
+    beads_info = {
+        1: {
+            hex: "#1c1c1c",
+            nombre: "negro",
+            main: "my",
+            my: ["OL", "464"],
+            x_my: ["O", "401"],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        2: {
+            hex: "#f2f2f2",
+            nombre: "blanco",
+            main: "my",
+            my: ["OL", "420"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        3: {
+            hex: "#ffdf0f",
+            nombre: "amarillo",
+            main: "my",
+            my: ["OL", "422"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        4: {
+            hex: "#fc7b2b",
+            nombre: "naranja",
+            main: "my",
+            my: ["OL", "423"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        5: {
+            hex: "#e02b2b",
+            nombre: "rojo",
+            main: "my",
+            my: ["OL", "425"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        6: {
+            hex: "#8a2424",
+            nombre: "granate",
+            main: "my",
+            my: ["OL", "426"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        7: {
+            hex: "#492c96",
+            nombre: "azul oscuro",
+            main: "my",
+            my: ["OL", "434"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        8: {
+            hex: "#50b9eb",
+            nombre: "azul parís",
+            main: "th",
+            my: ["", ""],
+            x_my: ["", ""],
+            th: ["OL", "403"],
+            x_th: ["", ""],
+        },
+        9: {
+            hex: "#9ae4f5",
+            nombre: "azul claro",
+            main: "th",
+            my: ["", ""],
+            x_my: ["", ""],
+            th: ["OL", "124"],
+            x_th: ["", ""],
+        },
+        10: {
+            hex: "#dff048",
+            nombre: "verde amarillo",
+            main: "my",
+            my: ["OL", "439"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        11: {
+            hex: "#4ca652",
+            nombre: "verde",
+            main: "my",
+            my: ["OL", "431"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        12: {
+            hex: "#616061",
+            nombre: "gris gunmetal",
+            main: "my",
+            my: ["M", "451"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        13: {
+            hex: "#fcd9eb",
+            nombre: "rosa",
+            main: "my",
+            my: ["OL", "428"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        14: {
+            hex: "#f0c169",
+            nombre: "beige",
+            main: "th",
+            my: ["", ""],
+            x_my: ["", ""],
+            th: ["OL", "123D"],
+            x_th: ["", ""],
+        },
+        15: {
+            hex: "#fce9dc",
+            nombre: "crema",
+            main: "my",
+            my: ["CY", "529"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+        16: {
+            hex: "#80edd9",
+            nombre: "turquesa",
+            main: "th",
+            my: ["", ""],
+            x_my: ["", ""],
+            th: ["OR", "413"],
+            x_th: ["", ""],
+        },
+        17: {
+            hex: "#1f5c35",
+            nombre: "verde oscuro",
+            main: "th",
+            my: ["", ""],
+            x_my: ["", ""],
+            th: ["OL", "130D?"],
+            x_th: ["", ""],
+        },
+        18: {
+            hex: "#8486e8",
+            nombre: "lila",
+            main: "my",
+            my: ["CY", "538"],
+            x_my: ["", ""],
+            th: ["", ""],
+            x_th: ["", ""],
+        },
+    }
+
+    function getBeadCode(ccode){
+        bead = beads_info[ccode];
+        if(bead.main=="my"){
+            brand = "MY";
+            type = bead.my[0];
+            code = bead.my[1];
+        }else if(bead.main=="th"){
+            brand = "TH";
+            type = bead.th[0];
+            code = bead.th[1];
+        }else{
+            return "?";
+        }
+        return brand + " " + type + "-" + code;
+    }
+
+    // pinto la tabla de colores
+    for(i=1;i<19;i++){
+        cuadro_color = document.getElementById("color" + i);
+        nombre_color = document.getElementById("colorcode" + i);
+        cuadro_color.style.backgroundColor = beads_info[i].hex;
+        nombre_color.innerHTML = getBeadCode(i);
+    }
+</script>
+{% endblock %}

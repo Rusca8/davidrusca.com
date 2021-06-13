@@ -123,6 +123,12 @@ def pmg():
     return render_template("lab_pmg.html")
 
 
+@app.route('/pulseras')
+@app.route('/pulseras/')
+def pulseras():
+    return render_template("pulseras.html")
+
+
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":
