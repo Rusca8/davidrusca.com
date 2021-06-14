@@ -376,12 +376,21 @@
             }else{
                 y = yTop + bgap*Math.pow((4-ntoborder), 2);
             }
+            if(ntoborder>4){
+                edge = ["t"];
+            }else{
+                if(i+1 < nTop-i){
+                    edge = ["t", "l"];
+                }else{
+                    edge = ["t", "r"];
+                }
+            }
             bolitas.push({
                 num: (i+1+ioffset) % n +1,
                 x: x,
                 y: y,
                 ccode: 2,
-                edge: "t",
+                edge: edge,
             });
         }
         //right
@@ -393,7 +402,7 @@
                 x: x,
                 y: y,
                 ccode: 2,
-                edge: "r",
+                edge: ["r"],
             });
         }
         //bottom
@@ -404,12 +413,21 @@
             }else{
                 y = yBot - bgap*Math.pow((4-ntoborder), 2);
             }
+            if(ntoborder>4){
+                edge = ["b"];
+            }else{
+                if(i+1 < nTop-i){
+                    edge = ["b", "l"];
+                }else{
+                    edge = ["b", "r"];
+                }
+            }
             bolitas.push({
                 num: (nBot-i +nTop+nSide +ioffset) % n +1,
                 x: Math.round(c.width/2 - (bw*nBot+bgap*(nBot-1))/2 + i*(bw+bgap) + bw/2),
                 y: y,
                 ccode: 2,
-                edge: "b",
+                edge: edge,
             });
         }
         //left
@@ -421,7 +439,7 @@
                 x: x,
                 y: y,
                 ccode: 2,
-                edge: "l",
+                edge: ["l"],
             });
         }
     }
@@ -946,14 +964,14 @@
                     break;
                 }
             }
-            if((e.key=="ArrowUp" && edge=="l") || (e.key=="ArrowDown" && edge=="r") ||
-               (e.key=="ArrowRight" && edge=="t") || (e.key=="ArrowLeft" && edge=="b")){
+            if((e.key=="ArrowUp" && edge.includes("l")) || (e.key=="ArrowDown" && edge.includes("r")) ||
+               (e.key=="ArrowRight" && edge.includes("t")) || (e.key=="ArrowLeft" && edge.includes("b"))){
                     i_actual++;
                     if(i_actual>n){
                         i_actual-=n;
                     }
-            }else if((e.key=="ArrowUp" && edge=="r") || (e.key=="ArrowDown" && edge=="l") ||
-                     (e.key=="ArrowRight" && edge=="b") || (e.key=="ArrowLeft" && edge=="t")){
+            }else if((e.key=="ArrowUp" && edge.includes("r")) || (e.key=="ArrowDown" && edge.includes("l")) ||
+                     (e.key=="ArrowRight" && edge.includes("b")) || (e.key=="ArrowLeft" && edge.includes("t"))){
                 i_actual--;
                 if(i_actual<1){
                     i_actual+=n;
