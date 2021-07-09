@@ -2728,11 +2728,11 @@ msgstr "Aigua i quars (Morse: David)"
 msgid ""
 "Llevaba demasiado tiempo echando de menos aquél \"Pulsermaker\" que hice "
 "en 2010 con flash..."
-msgstr ""
+msgstr "Portava massa temps trobant a faltar aquell 'Pulsermaker' que vaig fer el 2010 amb flash..."
 
 #: templates/pulseras.html:257
 msgid "por fin ha podido renacer."
-msgstr ""
+msgstr "per fi l'he pugut fer renéixer."
 
 #: templates/pulseras.html:863
 msgid "Los datos de la bolita"

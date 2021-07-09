@@ -49,6 +49,29 @@
 
         <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
 
+        <div class="container-fluid mb-2">
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-2 px-0">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="input_lr(-1);">◄</button>
+                      </div>
+                      <input type="number" min="-{{ndefault}}" max="{{ndefault}}" class="form-control" value="0" id="offset" onchange="input_offset();">
+                      <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="input_no_offset();">Origen</button>
+                      </div>
+                      <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="input_lr(1);">►</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-5"></div>
+            </div>
+        </div>
+
+        <hr>
+
         <div class="input-group input-group-sm mt-2">
           <input type="text" readonly="readonly" class="form-control" placeholder="{{ _('Pulsa \'exportar\' para obtener el código de esta pulsera') }}" id="exportext">
           <div class="input-group-append">
@@ -363,9 +386,9 @@
     }
 
     // genero el brazalete
-    bolitas = [];
+    var bolitas = [];
+    var ioffset = 0;
     function set_positions(){
-        ioffset = 0;
         bolitas = [];
         //top
         for(i=0;i<nTop;i++){
@@ -509,7 +532,38 @@
         update_sizes(c);
         set_positions();
         set_toolbars();
+    }
 
+    function input_offset(){
+        let ui_offset = document.getElementById("offset");
+        let q = parseInt(ui_offset.value);
+        q = q % n;
+        ui_offset.value = q;
+        if(q<0){
+            q += n;
+        }
+        new_offset(q);
+    }
+
+    function input_lr(lr){
+        let ui_offset = document.getElementById("offset");
+        let q = parseInt(ui_offset.value);
+        q = (q + lr) % n;
+        ui_offset.value = q;
+        new_offset(q);
+    }
+
+    function input_no_offset(){
+        let ui_offset = document.getElementById("offset").value = 0;
+        new_offset(0);
+    }
+
+    function new_offset(q){
+        /* coloca los colores "q" bolitas hacia la derecha */
+        let ncombi = cc_extrae();
+        ioffset = q+n;
+        set_positions();
+        cc_aplica(ncombi);
     }
 
     function update(){
@@ -736,7 +790,7 @@
 
     //encoder
     function cc_extrae(){
-        combi = new Array(n).fill(15);
+        let combi = new Array(n).fill(15);
         for(let b of bolitas){
             combi[b.num-1] = b.ccode;
         }
@@ -889,6 +943,12 @@
                 }
             }
         }
+        // ajusto máximos del deslizable
+        let ui_offset = document.getElementById("offset");
+        ui_offset.min = -nuevan;
+        ui_offset.max = nuevan;
+
+        // ajusta todo
         n2cms();
         combi = cc_extrae();
         newn_canvas(nuevan, c);
