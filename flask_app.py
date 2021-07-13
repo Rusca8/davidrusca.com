@@ -148,6 +148,9 @@ def d_anki(file):
     elif file == "derivades":
         deck = "derivades.apkg"
         nom = "[Rusca] Regles de Derivació.apkg"
+    elif file == "derivades-noarc":
+        deck = "derivades-noarc.apkg"
+        nom = "[Rusca] Regles de Derivació.apkg"
     elif file == "geometria":
         deck = "geometria.apkg"
         nom = "[Rusca] Perímetres, Àrees i Volums.apkg"
