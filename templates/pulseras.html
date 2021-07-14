@@ -906,8 +906,61 @@
             combi = combi.slice(0, -1);
         }
 
+        // comandos estilo Emmet (x, i, >, ...)
+        if(combi.includes("i")){  // Insertar: BNUMSi / BNUMSiCOMBI
+            ems_combi = combi.split("i");
+            if(ems_combi.length==2){
+                let posiciones = ems_combi[0].split(",");
+                for(let i=0; i<posiciones.length; i++){  // parse todo el array de posiciones
+                    posiciones[i] = parseInt(posiciones[i]);
+                }
 
-        if(combi.includes("x")){ //Emmet-style (WIP) ...de momento sólo COSASx5 / COSASx  //TODO distinguir si quiero sobreescribir la n o pintar encima
+                posiciones.sort(function(a, b) {return a-b}).reverse();  // ordenadas de grande a pequeña (para insertar sin afectar)
+                combi = cc_extrae();
+
+                if(ems_combi[1]==""){  // BNUMSi (mete una bola blanca)
+                    i_combi = [2];
+                }else{  // BNUMSiCOMBI (mete combinación)
+                    if(ems_combi[1].endsWith(",")){
+                        ems_combi[1] = ems_combi[1].slice(0, -1);
+                    }
+                    i_combi = ems_combi[1].split(",");
+                    i_combi.reverse();  // entrarán por la derecha
+                }
+
+                for(let p of posiciones){
+                    if(p>0 && p<=n){
+                        for(let bi of i_combi){
+                            combi.splice(p, 0, bi);
+                        }
+                    }
+                }
+            }else{
+                return;
+            }
+        }else if(combi.includes("e")){  // elimina bolita en posición: BNUMSe
+            ems_combi = combi.split("e");
+            if(ems_combi.length==2){
+                if(ems_combi[0].endsWith(",")){
+                    ems_combi[0] = ems_combi[0].slice(0, -1);
+                }
+                posiciones = ems_combi[0].split(",");
+                for(let i=0; i<posiciones.length; i++){  // parse todo el array de posiciones
+                    posiciones[i] = parseInt(posiciones[i]);
+                }
+                posiciones.sort(function(a, b) {return a-b}).reverse();  // ordenadas de grande a pequeña (para insertar sin afectar)
+                combi = cc_extrae();
+
+                for(let p of posiciones){
+                    if(p>0 && p<=combi.length){
+                        combi.splice(p-1, 1);
+                    }
+                }
+            }else{
+                return;
+            }
+
+        }else if(combi.includes("x")){  // Generar: COMBIx / COMBIxVECES
             ems_combi = combi.split("x");
             if(ems_combi[0].endsWith(",")){
                 ems_combi[0] = ems_combi[0].slice(0, -1);
@@ -918,7 +971,7 @@
                 return;
             }
 
-            if(ems_combi[1].length<1){  // COSASx
+            if(ems_combi[1].length<1){  // COMBIx
                 ems_n = Math.ceil(n/aux_combi.length);
                 target_n = n;
             }else{  //COSASx#
@@ -938,7 +991,7 @@
                     combi.push("2");
                 }
             }
-        }else if(combi.includes(">")){  // substituciones (no cambia cantidades ni nada)
+        }else if(combi.includes(">")){  // substituir COLOR>NUEVO
             ems_combi = combi.split(">");
             if(ems_combi.length==2){
                 for(let b of bolitas){
