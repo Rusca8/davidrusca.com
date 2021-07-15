@@ -906,8 +906,12 @@
             combi = combi.slice(0, -1);
         }
 
-        // comandos estilo Emmet (x, i, >, ...)
-        if(combi.includes("i")){  // Insertar: BNUMSi / BNUMSiCOMBI
+        // comandos estilo Emmet (x, i, >, e, r...)
+        if(combi.startsWith("r")){  // Rotar origen (eligiendo nueva bolita #1): rBNUM
+            let cantidad = parseInt(combi.slice(1)); // cantidad a rotar
+            combi = cc_extrae();
+            combi = combi.slice(cantidad-1).concat(combi.slice(0, cantidad-1));
+        }else if(combi.includes("i")){  // Insertar: BNUMSi / BNUMSiCOMBI
             ems_combi = combi.split("i");
             if(ems_combi.length==2){
                 let posiciones = ems_combi[0].split(",");
