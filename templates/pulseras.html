@@ -874,20 +874,22 @@
                     return;
                 }
             }
-            for(let col of h_colores){
-                if(Math.pow(x-col.x, 2)+Math.pow(y-col.y, 2)<Math.pow(col.r, 2)){
-                    if(col.hnum>2 && tool_ccode(col.hnum)==2){
-                        return; //estaba desactivada
+            if(mostrando_ui > 0){  // sólo clicables si visibles
+                for(let col of h_colores){
+                    if(Math.pow(x-col.x, 2)+Math.pow(y-col.y, 2)<Math.pow(col.r, 2)){
+                        if(col.hnum>2 && tool_ccode(col.hnum)==2){
+                            return; //estaba desactivada
+                        }
+                        color_actual = tool_ccode(col.hnum);
+                        update();
+                        return;
                     }
-                    color_actual = tool_ccode(col.hnum);
-                    update();
-                    return;
                 }
-            }
-            if(color_actual==0){
-                i_actual = -200;
-                x_actual = -200;
-                y_actual = -200;
+                if(color_actual==0){
+                    i_actual = -200;
+                    x_actual = -200;
+                    y_actual = -200;
+                }
             }
             update();
         }, false);
