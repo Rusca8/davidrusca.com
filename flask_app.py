@@ -187,6 +187,9 @@ def d_anki(file):
     elif file == "casillero":
         deck = "casillero.apkg"
         nom = "[Rusca] Mnemotecnia Números 0-99.apkg"
+    elif file == "intervals":
+        deck = "intervals.apkg"
+        nom = "[Rusca] Intervals.apkg"
     else:
         return f"El fitxer {file} no l'he pas trobat."
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-13 09:38+0200\n"
+"POT-Creation-Date: 2021-08-01 15:40+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -237,7 +237,7 @@ msgstr "Les històries les he escrit totes jo mateix i pots trobar-les "
 #: templates/anki.html:232 templates/anki.html:273 templates/anki.html:298
 #: templates/anki.html:324 templates/anki.html:355 templates/anki.html:379
 #: templates/anki.html:409 templates/anki.html:443 templates/anki.html:469
-#: templates/anki.html:491
+#: templates/anki.html:491 templates/anki.html:513
 msgid "Campos:"
 msgstr "Camps:"
 
@@ -253,6 +253,7 @@ msgstr "Història"
 #: templates/anki.html:149 templates/anki.html:240 templates/anki.html:332
 #: templates/anki.html:361 templates/anki.html:384 templates/anki.html:418
 #: templates/anki.html:451 templates/anki.html:474 templates/anki.html:496
+#: templates/anki.html:519
 msgid "Tarjetas:"
 msgstr "Targetes:"
 
@@ -276,7 +277,7 @@ msgstr "De quina comarca és la capital?"
 #: templates/anki.html:249 templates/anki.html:285 templates/anki.html:311
 #: templates/anki.html:340 templates/anki.html:365 templates/anki.html:388
 #: templates/anki.html:429 templates/anki.html:456 templates/anki.html:479
-#: templates/anki.html:500
+#: templates/anki.html:500 templates/anki.html:523
 msgid "Descarga"
 msgstr "Descarrega"
 
@@ -288,6 +289,7 @@ msgstr "Descarrega"
 #: templates/anki.html:340 templates/anki.html:341 templates/anki.html:365
 #: templates/anki.html:366 templates/anki.html:388 templates/anki.html:429
 #: templates/anki.html:456 templates/anki.html:479 templates/anki.html:500
+#: templates/anki.html:523
 msgid "notas"
 msgstr "notes"
 
@@ -726,6 +728,36 @@ msgstr "Preguntes de teoria sobre isòtops i ions."
 #: templates/anki.html:493
 msgid "rellena los huecos"
 msgstr "omple els buits"
+
+#: templates/anki.html:507
+msgid "Intervalos Musicales"
+msgstr "Intervals Musicals"
+
+#: templates/anki.html:508
+msgid "Agosto"
+msgstr "Agost"
+
+#: templates/anki.html:510
+msgid ""
+"Reconocimiento de intervalos musicales a partir de canciones y piezas "
+"conocidas."
+msgstr "Reconeixement d'intervals musicals a partir de cançons i peces conegudes."
+
+#: templates/anki.html:511
+msgid "La baraja está basada en"
+msgstr "La baralla està basada en"
+
+#: templates/anki.html:511
+msgid "esta lista de referencias"
+msgstr "aquesta llista de referències"
+
+#: templates/anki.html:515 templates/anki.html:521
+msgid "Intervalo"
+msgstr "Interval"
+
+#: templates/anki.html:517 templates/anki.html:521
+msgid "Referencias"
+msgstr "Referències"
 
 #: templates/ankicode.html:2
 msgid "Código Anki"
@@ -2758,15 +2790,15 @@ msgstr ""
 msgid "por fin ha podido renacer."
 msgstr "per fi l'he pugut fer renéixer."
 
-#: templates/pulseras.html:1000
+#: templates/pulseras.html:1061
 msgid "Los datos de la bolita"
 msgstr "Les dades del vidret"
 
-#: templates/pulseras.html:1000 templates/pulseras.html:1002
+#: templates/pulseras.html:1061 templates/pulseras.html:1063
 msgid "se perderán. Continuar?"
 msgstr "es perdran. Continuar?"
 
-#: templates/pulseras.html:1002
+#: templates/pulseras.html:1063
 msgid "Los datos de las bolitas"
 msgstr "Les dades dels vidrets"
 
