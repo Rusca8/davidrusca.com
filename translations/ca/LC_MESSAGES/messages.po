@@ -1999,7 +1999,7 @@ msgstr "Educació Primària (EP)"
 
 #: templates/docentes.html:52 templates/docentes.html:294
 msgid "Misceláneo"
-msgstr ""
+msgstr "Miscel·lani"
 
 #: templates/docentes.html:66
 msgid "Mates Científicas"
