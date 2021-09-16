@@ -11,38 +11,49 @@
         <div class="card-body">
             <h5>{{ _('Índice') }}</h5>
             <ul>
-                <li><a href="#BAT">{{ _('Bachillerato') }}</a></li>
-                <ul>
-                    <li><a href="#matesC">{{ _('Mates científicas') }}</a></li>
-                    <li><a href="#matesS">{{ _('Mates sociales') }}</a></li>
-                    <li><a href="#fis">Física</a></li>
-                    <li><a href="#quim">Química</a></li>
-                </ul>
-                <li><a href="#CFGS">{{ _('Prueba de acceso') }} CFGS</a></li>
-                <ul>
-                    <li><a href="#dtCFGS">{{ _('Dibujo Técnico') }}</a></li>
-                    <li><a href="#tecnoCFGS">{{ _('Tecnología') }}</a></li>
-                </ul>
-                <li><a href="#CFGM">{{ _('Prueba de acceso') }} CFGM</a></li>
-                <ul>
-                    <li><a href="#tecnoCFGM">{{ _('Tecnología') }}</a></li>
-                </ul>
-                <li><a href="#musGP">{{ _('Grado Profesional de Música') }}</a></li>
-                <ul>
-                    <li><a href="#harmonia">{{ _('Armonía') }}</a></li>
-                </ul>
-                <li><a href="#ESO">{{ _('Educación Secundaria (ESO)') }}</a></li>
-                <ul>
-                    <li><a href="#matesESO">Mates</a></li>
-                    <li><a href="#natusESO">{{ _('Física y Química') }}</a></li>
-                    <li><a href="#tecnoESO">{{ _('Tecnología') }}</a></li>
-                    <li><a href="#socialsESO">{{ _('Sociales') }}</a></li>
-                    <li><a href="#angESO">{{ _('Inglés') }}</a></li>
-                </ul>
-                <li><a href="#EP">{{ _('Educación Primaria (EP)') }}</a></li>
-                <ul>
-                    <li><a href="#matesEP">Mates</a></li>
-                </ul>
+                <li><a href="#BAT">{{ _('Bachillerato') }}</a>
+                    <ul>
+                        <li><a href="#matesC">{{ _('Mates científicas') }}</a></li>
+                        <li><a href="#matesS">{{ _('Mates sociales') }}</a></li>
+                        <li><a href="#fis">Física</a></li>
+                        <li><a href="#quim">Química</a></li>
+                    </ul>
+                </li>
+                <li><a href="#CFGS">{{ _('Prueba de acceso') }} CFGS</a>
+                    <ul>
+                        <li><a href="#dtCFGS">{{ _('Dibujo Técnico') }}</a></li>
+                        <li><a href="#tecnoCFGS">{{ _('Tecnología') }}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#CFGM">{{ _('Prueba de acceso') }} CFGM</a>
+                    <ul>
+                        <li><a href="#tecnoCFGM">{{ _('Tecnología') }}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#musGP">{{ _('Grado Profesional de Música') }}</a>
+                    <ul>
+                        <li><a href="#harmonia">{{ _('Armonía') }}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#ESO">{{ _('Educación Secundaria (ESO)') }}</a>
+                    <ul>
+                        <li><a href="#matesESO">Mates</a></li>
+                        <li><a href="#natusESO">{{ _('Física y Química') }}</a></li>
+                        <li><a href="#tecnoESO">{{ _('Tecnología') }}</a></li>
+                        <li><a href="#socialsESO">{{ _('Sociales') }}</a></li>
+                        <li><a href="#angESO">{{ _('Inglés') }}</a></li>
+                    </ul>
+                </li>
+                <li><a href="#EP">{{ _('Educación Primaria (EP)') }}</a>
+                    <ul>
+                        <li><a href="#matesEP">Mates</a></li>
+                    </ul>
+                </li>
+                <li><a href="#EP">{{ _('Misceláneo') }}</a>
+                    <ul>
+                        <li><a href="#coding">Programación</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -273,6 +284,22 @@
                     <li><a href="http://ruscalatex.eu.pythonanywhere.com/enters/" target="_blank">M - {{ _('Operaciones sencillas') }} (Dynamic Deures)</a></li>
                     <li><a href="http://ruscalatex.eu.pythonanywhere.com/equacions/" target="_blank">M - {{ _('Ecuaciones sencillas') }} (Dynamic Deures)</a></li>
                     <li><a href="http://ruscalatex.eu.pythonanywhere.com/apilades/" target="_blank">M - {{ _('Operaciones en columna') }} (Dynamic Deures)</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card border-c bg-light mb-2"><b id="misc"></b>
+        <h5 class="card-header">{{ _('Misceláneo') }}</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="coding"></b>
+            <div class="card-body">
+                <h5 class="card-title">Programación</h5>
+                <b>{{ _('Apuntes:') }}</b>
+                <ul>
+                    <li><a href="/anki/code/" target="_blank">M - {{ _('Apuntes') }} HTML / CSS / JS / LaTeX</a></li>
+                    <li><a href="/static/pdf/Python.pdf" target="_blank">M - {{ _('Apuntes y Trucos') }} Python [CA]</a></li>
                 </ul>
             </div>
         </div>
