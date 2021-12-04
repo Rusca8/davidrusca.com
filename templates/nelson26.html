@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+
+    <title>Flash Memory Debunker Online</title>
+</head>
+<body class="mt-4 mx-4" style="background-color: lightblue;">
+
+    <div class="card-group">
+        {% set files_de = files_de|default(10, true) %}
+
+        {% for x in range(quantes|default(26, true)) %}
+            <div class="card border-c bg-light mr-2 mb-2">
+                <div class="card-body fs-2" id="card-{{loop.index0}}"><br></div>
+            </div>
+            {% if x % files_de == files_de-1 %}
+                </div><div class="card-group">
+            {% endif %}
+        {% endfor %}
+            {% if quantes and quantes % files_de %}
+                {% for x in range(files_de - quantes % files_de) %}
+                    <div class="card border-c mr-2 mb-2" style="background-color: lightgrey;">
+                        <div class="card-body" id="card-{{loop.index0 + quantes}}"></div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+    </div>
+
+    <button class="btn btn-secondary w-100 mt-3" role="button" onclick="show_rand({{quantes}});">Start</button>
+    <button class="btn btn-secondary w-100 mt-3" role="button" onclick="show_ans();">Show Answer</button>
+
+    <hr class="mt-4">
+
+    <div class="container mx-0 mt-4">
+        <div class="row">
+            <div class="col-sm-auto px-0 mb-2">
+                <div class="input-group">
+                    <input type="number" value="{{quantes}}" class="form-control border-c" onchange="this.value = parseInt(this.value);" id="qtat">
+                    <div class="input-group-append">
+                        <span class="input-group-text border-c">Cards</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto ml-1 mb-2"></div>
+            <div class="col-sm-auto px-0">
+                <div class="input-group ml-2">
+                    <input type="number" value="{{files_de}}" class="form-control border-c" onchange="this.value = parseInt(this.value);" id="fde">
+                    <div class="input-group-append">
+                        <span class="input-group-text border-c">Cards per Row</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto ml-1 mb-2"></div>
+            <div class="col-sm-auto px-0">
+                <button class="btn btn-secondary ml-2" role="button" onclick="change_setup();">Apply Layout Change</button>
+            </div>
+            <div class="col-sm-auto ml-1 mb-2"></div>
+            <div class="col-sm-auto px-0">
+                <div class="input-group">
+                    <input type="number" value="{{segons}}" class="form-control border-c" onchange="this.value = parseInt(this.value); seconds=this.value;" id="sec">
+                    <div class="input-group-append">
+                        <span class="input-group-text border-c">Memorization Time (Seconds)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Bootstrap Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script>
+        var current_shower;
+        var current_hider;
+        var seconds = {{segons}};
+        var showing_hidden = false;
+
+        var cards = [];
+        for(let x of ["♠︎", "♥︎", "♣︎", "♦︎"]){
+            for(let y=0; y<14; y++){
+                switch(y){
+                    case 0:
+                        num = "A";
+                        break;
+                    case 11:
+                        num = "J";
+                        break;
+                    case 12:
+                        num = "Q";
+                        break;
+                    case 13:
+                        num = "K";
+                        break;
+                    default:
+                        num = y.toString()
+                        break;
+                }
+                cards.push(x + num);
+            }
+        }
+
+        function show_cards(list){
+            for(var i=0; i<list.length; i++){
+                card_text = list[i];
+                card = document.getElementById("card-" + i.toString());
+                card.innerHTML = card_text;
+                if(card_text.includes("♥︎") || card_text.includes("♦︎")){
+                    card.style.color = "red";
+                }else{
+                    card.style.color = "black";
+                }
+            }
+        }
+
+        function hide_cards(){
+            for(var i=0; i<{{quantes}}; i++){
+                card = document.getElementById("card-" + i.toString());
+                card.innerHTML = "<br>";
+            }
+        }
+
+        function show_rand(num){
+            showing_hidden = false;
+
+            try{
+                clearTimeout(current_shower);
+                clearTimeout(current_hider);
+            }catch{};
+
+            shuffleArray(cards);
+            selected = cards.slice(0, Math.min(num, 52))
+            show_cards(selected);
+
+            current_shower = setTimeout(function(){ hide_cards(); }, seconds*1000);
+            current_hider = setTimeout(function(){ show_hidden(selected); }, seconds*1000 + 2000);
+        }
+
+        function show_hidden(list){
+            shuffleArray(list);
+            show_cards(list.slice(1));
+            showing_hidden = true;
+        }
+
+        function show_ans(){
+            if(showing_hidden){
+                try{
+                    card = document.getElementById("card-" + {{quantes-1}});
+                    card_text = selected[0];
+                    card.innerHTML = card_text;
+                    if(card_text.includes("♥︎") || card_text.includes("♦︎")){
+                        card.style.color = "red";
+                    }else{
+                        card.style.color = "black";
+                    }
+                }catch{};
+            }
+        }
+
+        /////////////////////// utilities //////////////////////
+
+        /* Randomize array in-place using Durstenfeld shuffle algorithm */
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        function change_setup(){
+            qtat = document.getElementById("qtat").value;
+            fde = document.getElementById("fde").value;
+
+            window.location.href = "/flashmemory/" + qtat + "/" + fde + "/" + seconds + "/";
+        }
+
+    </script>
+</body>
+</html>

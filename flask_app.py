@@ -99,6 +99,24 @@ def raquel_k(key):
                                text="Bueno, hay <b>numerosas</b> cosas que puedes probar...", otros=otros)
 
 
+@app.route('/flashmemory/')
+@app.route('/flashmemory')
+@app.route('/flashmemory/<key>')
+@app.route('/flashmemory/<key>/')
+@app.route('/flashmemory/<key>/<files_de>')
+@app.route('/flashmemory/<key>/<files_de>/')
+@app.route('/flashmemory/<key>/<files_de>/<segons>')
+@app.route('/flashmemory/<key>/<files_de>/<segons>/')
+def flashmemory_debunker(key=26, files_de=10, segons=2):
+    try:
+        key = min(int(key), 52)
+        files_de = min(int(files_de), key)
+        segons = int(segons)
+    except:
+        return render_template("nelson26.html", quantes=26, files_de=10, segons=2)
+    return render_template("nelson26.html", quantes=key, files_de=files_de, segons=segons)
+
+
 @app.route('/ktn')
 @app.route('/ktn/')
 def ktn():
