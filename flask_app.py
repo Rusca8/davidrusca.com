@@ -141,6 +141,12 @@ def pmg():
     return render_template("lab_pmg.html")
 
 
+@app.route('/labs/q/eq')
+@app.route('/labs/q/eq/')
+def q_eq():
+    return render_template("lab_q_eq.html")
+
+
 @app.route('/braçalets')
 @app.route('/braçalets/')
 @app.route('/pulseras')

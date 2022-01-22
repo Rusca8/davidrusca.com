@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-11-28 10:25+0100\n"
+"POT-Creation-Date: 2022-01-22 23:09+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -121,7 +121,7 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:288
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:292
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
@@ -317,7 +317,9 @@ msgstr "Valències dels elements que se solen memoritzar de química inorgànica
 msgid ""
 "Puedes ver qué elementos contiene (y las frases que les he dado para la "
 "mnemotecnia) "
-msgstr "Pots veure quins elements conté (i les frases que els he donat per la mnemotècnia) "
+msgstr ""
+"Pots veure quins elements conté (i les frases que els he donat per la "
+"mnemotècnia) "
 
 #: templates/anki.html:178 templates/anki.html:185
 msgid "Elemento"
@@ -389,7 +391,7 @@ msgstr "Identificar què és un error i què no ho és."
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:227 templates/docentes.html:242
+#: templates/anki.html:227 templates/docentes.html:246
 msgid "Fracciones"
 msgstr "Fraccions"
 
@@ -401,7 +403,7 @@ msgstr "Potències"
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:230 templates/docentes.html:244
+#: templates/anki.html:230 templates/docentes.html:248
 msgid "Ecuaciones"
 msgstr "Equacions"
 
@@ -1969,21 +1971,21 @@ msgstr "Economia de l'empresa"
 msgid "Prueba de acceso"
 msgstr "Prova d'accés"
 
-#: templates/docentes.html:25 templates/docentes.html:175
+#: templates/docentes.html:25 templates/docentes.html:179
 msgid "Dibujo Técnico"
 msgstr "Dibuix Tècnic"
 
 #: templates/docentes.html:26 templates/docentes.html:31
-#: templates/docentes.html:43 templates/docentes.html:184
-#: templates/docentes.html:199
+#: templates/docentes.html:43 templates/docentes.html:188
+#: templates/docentes.html:203
 msgid "Tecnología"
 msgstr "Tecnologia"
 
-#: templates/docentes.html:34 templates/docentes.html:215
+#: templates/docentes.html:34 templates/docentes.html:219
 msgid "Grado Profesional de Música"
 msgstr "Grau Professional de Música"
 
-#: templates/docentes.html:36 templates/docentes.html:219
+#: templates/docentes.html:36 templates/docentes.html:223
 msgid "Armonía"
 msgstr "Harmonia"
 
@@ -1991,15 +1993,15 @@ msgstr "Harmonia"
 msgid "Educación Secundaria (ESO)"
 msgstr "Educació Secundària (ESO)"
 
-#: templates/docentes.html:42 templates/docentes.html:256
+#: templates/docentes.html:42 templates/docentes.html:260
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: templates/docentes.html:44 templates/docentes.html:285
+#: templates/docentes.html:44 templates/docentes.html:289
 msgid "Sociales"
 msgstr "Socials"
 
-#: templates/docentes.html:45 templates/docentes.html:295
+#: templates/docentes.html:45 templates/docentes.html:299
 msgid "Inglés"
 msgstr "Anglès"
 
@@ -2007,11 +2009,11 @@ msgstr "Anglès"
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: templates/docentes.html:53 templates/docentes.html:325
+#: templates/docentes.html:53 templates/docentes.html:329
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: templates/docentes.html:55 templates/docentes.html:329
+#: templates/docentes.html:55 templates/docentes.html:333
 #: templates/index.html:136
 msgid "Programación"
 msgstr "Programació"
@@ -2022,7 +2024,7 @@ msgstr "Mates Científiques"
 
 #: templates/docentes.html:68 templates/docentes.html:97
 #: templates/docentes.html:126 templates/docentes.html:143
-#: templates/docentes.html:271
+#: templates/docentes.html:275
 msgid "Formularios:"
 msgstr "Formularis"
 
@@ -2043,13 +2045,13 @@ msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
 #: templates/docentes.html:77 templates/docentes.html:106
-#: templates/docentes.html:200 templates/docentes.html:239
-#: templates/docentes.html:275 templates/docentes.html:313
+#: templates/docentes.html:204 templates/docentes.html:243
+#: templates/docentes.html:279 templates/docentes.html:317
 msgid "Fichas:"
 msgstr "Fitxes:"
 
 #: templates/docentes.html:79 templates/docentes.html:108
-#: templates/docentes.html:243
+#: templates/docentes.html:247
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
@@ -2062,19 +2064,19 @@ msgid "Derivadas"
 msgstr "Derivades"
 
 #: templates/docentes.html:83 templates/docentes.html:112
-#: templates/docentes.html:147 templates/docentes.html:176
-#: templates/docentes.html:185
+#: templates/docentes.html:147 templates/docentes.html:180
+#: templates/docentes.html:189
 msgid "Temario:"
 msgstr "Temari:"
 
 #: templates/docentes.html:85 templates/docentes.html:114
-#: templates/docentes.html:149 templates/docentes.html:178
-#: templates/docentes.html:187
+#: templates/docentes.html:149 templates/docentes.html:182
+#: templates/docentes.html:191
 msgid "Temario optimizado"
 msgstr "Temari optimitzat"
 
 #: templates/docentes.html:89 templates/docentes.html:118
-#: templates/docentes.html:249
+#: templates/docentes.html:253
 msgid "Funciones trigonométricas"
 msgstr "Funcions trigonomètriques"
 
@@ -2098,7 +2100,7 @@ msgstr "Moviments"
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de MRUA"
 
-#: templates/docentes.html:132 templates/docentes.html:277
+#: templates/docentes.html:132 templates/docentes.html:281
 msgid "Fuerzas"
 msgstr "Forces"
 
@@ -2114,109 +2116,114 @@ msgstr "Ones"
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: templates/docentes.html:151 templates/docentes.html:261
-#: templates/docentes.html:286
+#: templates/docentes.html:151 templates/docentes.html:265
+#: templates/docentes.html:290
 msgid "Mnemotecnia:"
 msgstr "Mnemotècnia:"
 
-#: templates/docentes.html:153 templates/docentes.html:263
+#: templates/docentes.html:153 templates/docentes.html:267
 msgid "Valencias de los Elementos"
 msgstr "Valències dels Elements"
 
-#: templates/docentes.html:160
+#: templates/docentes.html:157 templates/lab_q_eq.html:2
+#: templates/lab_q_eq.html:5
+msgid "Equilibrio Químico"
+msgstr "Equilibri Químic"
+
+#: templates/docentes.html:164
 msgid "Economía de la Empresa"
 msgstr "Economia de l'Empresa"
 
-#: templates/docentes.html:161 templates/docentes.html:220
-#: templates/docentes.html:330 templates/index.html:96 templates/index.html:170
+#: templates/docentes.html:165 templates/docentes.html:224
+#: templates/docentes.html:334 templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr "Apunts:"
 
-#: templates/docentes.html:163
+#: templates/docentes.html:167
 msgid "Asientos"
 msgstr "Assentaments"
 
-#: templates/docentes.html:171 templates/docentes.html:195
+#: templates/docentes.html:175 templates/docentes.html:199
 msgid "Prueba de Acceso"
 msgstr "Prova d'Accés"
 
-#: templates/docentes.html:202
+#: templates/docentes.html:206
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: templates/docentes.html:203
+#: templates/docentes.html:207
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: templates/docentes.html:204
+#: templates/docentes.html:208
 msgid "Energías"
 msgstr "Energies"
 
-#: templates/docentes.html:205
+#: templates/docentes.html:209
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: templates/docentes.html:206
+#: templates/docentes.html:210
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: templates/docentes.html:207
+#: templates/docentes.html:211
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: templates/docentes.html:222
+#: templates/docentes.html:226
 msgid "Canciones para los intervalos"
 msgstr "Cançons pels intervals"
 
-#: templates/docentes.html:226
+#: templates/docentes.html:230
 msgid "Editor de Esquemas Armónicos"
 msgstr "Editor d'Esquemes Harmònics"
 
-#: templates/docentes.html:241
+#: templates/docentes.html:245
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: templates/docentes.html:245
+#: templates/docentes.html:249
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: templates/docentes.html:259
+#: templates/docentes.html:263
 msgid "Masa y peso"
 msgstr "Massa i pes"
 
-#: templates/docentes.html:273
+#: templates/docentes.html:277
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: templates/docentes.html:278
+#: templates/docentes.html:282
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: templates/docentes.html:296
+#: templates/docentes.html:300
 msgid "Online:"
 msgstr "Online:"
 
-#: templates/docentes.html:308
+#: templates/docentes.html:312
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:315
+#: templates/docentes.html:319
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:316
+#: templates/docentes.html:320
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:317
+#: templates/docentes.html:321
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: templates/docentes.html:332
+#: templates/docentes.html:336
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: templates/docentes.html:333
+#: templates/docentes.html:337
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
@@ -2463,6 +2470,57 @@ msgstr "Recopilatori de trucs:"
 #: templates/index.html:265
 msgid "Edit con los trucos de"
 msgstr "Edit amb els trucs de"
+
+#: templates/lab_q_eq.html:2
+msgid "Laboratorio"
+msgstr "Laboratori"
+
+#: templates/lab_q_eq.html:6
+msgid "Observa el equilibrio dentro de una reacción química."
+msgstr "Observa l'equilibri dins una reacció química."
+
+#: templates/lab_q_eq.html:19
+msgid "Si clicas sobre la animación podrás pararla con la tecla"
+msgstr "Si cliques sobre l'animació podràs aturar-la amb la tecla"
+
+#: templates/lab_q_eq.html:19
+msgid "Espacio"
+msgstr "Espai"
+
+#: templates/lab_q_eq.html:24
+msgid "El elemento \\(A\\) es amarillo, el \\(B\\) azul"
+msgstr "L'element \\(A\\) és groc, el \\(B\\) blau"
+
+#: templates/lab_q_eq.html:25
+msgid "El complejo activado se indica en rojo"
+msgstr "El complex activat s'indica en vermell"
+
+#: templates/lab_q_eq.html:27
+msgid ""
+"Las moléculas sólo reaccionan si chocan de frente (con menos de "
+"\\(30^{\\circ}\\) de desviación)"
+msgstr ""
+"Les molècules només reaccionen si xoquen de cara (amb menys de "
+"\\(30^{\\circ}\\) de desviació)"
+
+#: templates/lab_q_eq.html:28
+msgid ""
+"Cuando reaccionan se intercambian uno de sus átomos (y una parte de su "
+"velocidad angular)"
+msgstr ""
+"Quan reaccionen s'intercanvien un dels seus àtoms (i una part de la velocitat angular)"
+
+#: templates/lab_q_eq.html:30
+msgid "La \\(Q\\) de la reacción la calculo así"
+msgstr "La \\(Q\\) de la reacció la calculo així"
+
+#: templates/lab_q_eq.html:31
+msgid "cantidad\\ de\\ X"
+msgstr "quantitat\\ d'X"
+
+#: templates/lab_q_eq.html:31
+msgid "Área\\ del\\ dibujo"
+msgstr "Àrea\\ del\\ dibuix"
 
 #: templates/logos.html:2
 msgid "Logotipos - Web de David Ruscalleda"

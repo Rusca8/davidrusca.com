@@ -1,0 +1,441 @@
+{% extends "base.html" %}
+{% block title %} {{ _('Laboratorio') }} {{ _('Equilibrio Químico') }} - Web de David Ruscalleda {% endblock %}
+{% block navpulseras %}active{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _('Equilibrio Químico') }}</h3>
+<p class="mt-2 text-center">{{ _('Observa el equilibrio dentro de una reacción química.') }}</p>
+
+{% set r0 = 0 %}
+{% set p10 = 30 %}
+{% set p20 = 30 %}
+<div class="card mx-2 border-c">
+  <div class="card-header">
+      <h5 class="text-center my-0">A₂ + B₂ ⇌ AB</h5>
+  </div>
+  <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+</div>
+<div class="card mx-2 border-c mt-2 pb-0">
+    <div class="card-body">
+        {{ _('Si clicas sobre la animación podrás pararla con la tecla') }} <code>{{ _('Espacio') }}</code>.<br>
+    </div>
+</div>
+<div class="card mx-2 border-c mt-2 pb-0">
+    <div class="card-body">
+        {{ _('El elemento \(A\) es amarillo, el \(B\) azul') }}.<br>
+        {{ _('El complejo activado se indica en rojo') }}.<br>
+        <br>
+        {{ _('Las moléculas sólo reaccionan si chocan de frente (con menos de \(30^{\circ}\) de desviación)') }}.<br>
+        {{ _('Cuando reaccionan se intercambian uno de sus átomos (y una parte de su velocidad angular)') }}.<br>
+        <br>
+        {{ _('La \(Q\) de la reacción la calculo así') }}:<br>
+        $$Q=\frac{[AB]^2}{[A][B]}\phantom{9999999}[X]=\frac{ {{ _('cantidad\ de\ X') }} }{ {{ _('Área\ del\ dibujo') }} }$$
+    </div>
+</div>
+
+<script>
+ ///////////// GLOBAL VARS //////////////
+ // timing
+ let fps = 60;
+ let t = Date.now();
+ let dt = 0;  // tiempo real que ha pasado
+ let kdt = 0;  // corrección para movimiento según dt
+ let pause = false;
+ let countdown = 1000;
+ // medidas
+ let cWidth;
+ let cHeight;
+ let u;
+ let m;
+ let r;
+ let d;
+ let gWidth;  // collision grid
+ let gHeight;
+ let gny = 4;  // filas
+ let gnx = 7;  // columnas
+ // reacción
+ let pr = 1;  // probabilidad de reacción de reactivos
+ let pp = 1;  // probabilidad de reacción de productos
+ let r0 = {{r0}}; // cantidad de reactivo inicial
+ let p10 = {{p10}};  // cantidad de producto1 inicial
+ let p20 = {{p20}};  // cantidad de producto2 inicial
+ let v0 = 6;  // velocidad movimiento inicial (módulo) !8
+ let w0 = 0.1;  // velocidad angular inicial molécula (media) !0.1
+ let rvw = 60;  // equivalencia entre v y w
+ let ae = Math.PI/6; // ángulo efectivo (si chocan a 180±ae, reaccionan)
+ // recuento
+ let recuento = {"r": r0, "p1": p10, "p2": p20};
+ let q;  // "Q" de la reacción (la "Kc" de no equilibrio)
+
+ ///////////////// CLASSES //////////////
+ class Molecula {
+   constructor(atoms, x, y, v=v0, a, w, sign, b){
+     // dibujo
+     this.atoms = atoms;  // [bola1, bola2]
+     // posición
+     this.x = x || mr+(cWidth-2*mr)*Math.random();
+     this.y = y || mr+(cHeight-2*mr)*Math.random();
+     // velocidad lineal
+     a = a || 2*Math.PI*Math.random();
+     this.vx = v*Math.cos(a);
+     this.vy = v*Math.sin(a);
+     // velocidad angular
+     sign = sign || (Math.random() < 0.5 ? -1 : 1);
+     this.w = w || w0*(1+0.5*(2*Math.random()-1))*sign;
+     this.b = b || 2*Math.PI*Math.random();
+     this.grid = 0;
+     this.hit = 0;
+     this.glow = false;
+   }
+
+   vx2w(k=2){  // añade w en función de vx
+     let imp = 2*k*(Math.abs(this.vx/v0));
+     this.w += imp*Math.sign(this.w)/rvw;
+   }
+
+   w2vx(k=2){  // quita w en función de w
+     let imp = k*(1+Math.abs(this.w/w0));
+     this.w -= imp*Math.sign(this.w)/rvw;
+   }
+
+   vy2w(k=2){
+     let imp = 2*k*(Math.abs(this.vy/v0));
+     this.w += imp*Math.sign(this.w)/rvw;
+   }
+
+   w2vy(k=2){
+     let imp = k*(1+Math.abs(this.w/w0));
+     this.w -= imp*Math.sign(this.w)/rvw;
+   }
+
+
+ }
+
+ //////////////// OBJECTS ///////////////
+ let moleculas = [];
+
+ /////////////////// inicio ////////////////////
+    window.onload = function(){
+        c=document.getElementById("app");
+        // medidas
+        cWidth = 2000;
+        cHeight = 1000;
+        c.width = cWidth;
+        c.height = cHeight;
+        u = cHeight/1200;     // unidad de medida
+        m = 20*u;  // margen laterales
+        r = 30*u;  // radio de los átomos
+        r2 = (r*1.5)**2;  // hago ya el cuadrado para las colisiones
+        d = r*0.4;  // distancia de enlace
+        mr = m+r;  // margen de rebote de las moléculas
+        v0 = v0*u;
+        gWidth = cWidth/gnx;
+        gHeight = cHeight/gny;
+
+        // inicialitza reacció
+        init_world();
+
+        // inicializa dibuix
+        cc=c.getContext("2d");
+        // init_collisions(c);  // si fes falta clicar la pantalla
+
+        // dibuix recurrent
+        update();
+        setInterval(update, Math.round(1000/fps));
+    }
+
+
+ /////////////////// init world //////////////////
+ function init_world(){
+    for(let i=0; i<r0; i++){
+        if(Math.round(Math.random())){
+            moleculas.push(new Molecula([1, 2]));
+        }else{
+            moleculas.push(new Molecula([2, 1]));
+        }
+    }
+    for(let i=0; i<p10; i++){
+        moleculas.push(new Molecula([1, 1]));
+    }
+    for(let i=0; i<p20; i++){
+        moleculas.push(new Molecula([2, 2]));
+    }
+ }
+
+
+ ////////////////// dibujo ////////////////////
+    function update(){
+        // timing
+        dt = Date.now()-t;
+        kdt = dt*fps/1000
+        t = Date.now();
+
+        // previos
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.lineWidth = 5*u;
+        cc.textBaseline = "middle";
+        cc.textAlign = "left";
+
+        // fondo
+        cc.fillStyle="white";
+        cc.fillRect(0, 0, c.width, c.height);
+
+        // borde
+        cc.strokeStyle = "black";
+        cc.strokeRect(m, m, cWidth-2*m, cHeight-2*m);
+
+        // recuento
+        cc.fillStyle="grey";
+        console.log(recuento);
+        cc.fillText("A₂: " + (recuento["p1"] || 0), 2*m, 3*m);
+        cc.fillText("B₂: " + (recuento["p2"] || 0), 2*m, 6*m);
+        cc.fillText("AB: " + (recuento["r"] || 0), 2*m, 9*m);
+        q = recuento["r"]**2 / (recuento["p1"]*recuento["p2"])
+        cc.fillText("Q: " + q.toFixed(2), 2*m, cHeight-3*m);
+
+        // moléculas
+        cc.fillStyle="lightblue";
+        for(let mol of moleculas){
+            drawMolec(cc, mol)
+            /* debugging
+            cc.fillStyle="red";
+            drawCircle(cc, mol.x-50*Math.sin(mol.b), mol.y+50*Math.cos(mol.b), r/4, true, true)
+            cc.fillStyle="red";
+            cc.fillText(mol.grid.toString(), mol.x+2*r, mol.y-2*r);
+            */
+        }
+        if(!pause){
+          if(countdown){
+              console.log(dt);
+              if(countdown > 0){
+                  countdown -= dt;
+              }else{
+                countdown = 0;
+              }
+          }else{
+            // cálculos mundo (para la siguiente)
+            move_world();
+
+            // collision detection
+            check_collisions();
+          }
+        }
+
+        /* collision grid (debugging)
+        cc.strokeStyle = "red";
+        for(let i=0; i<gnx; i++){
+            for(let j=0; j<gny; j++){
+                cc.strokeRect(i*gWidth, j*gHeight, gWidth, gHeight);
+            }
+        } */
+    }
+
+ //////////////// cálculos mundo ///////////////
+    function move_world(){
+        // updates
+        recuento = {};
+        for(let mol of moleculas){
+            // movimiento
+            move_molec(mol);
+            // ubicación
+            get_grid(mol);
+            // recuento
+            cuenta(mol, recuento);
+        }
+    }
+
+    function move_molec(mol){
+        mol.b = mod(mol.b + mol.w * kdt, 2*Math.PI);
+        mol.x += mol.vx * kdt;
+        mol.y += mol.vy * kdt;
+        keep_inside(mol);
+    }
+
+    function keep_inside(mol){
+        let imp;
+        // izquierda
+        if(mol.x<mr){
+            mol.x = 2*mr-mol.x;
+            mol.vx *= -1;
+            // w
+            if(Math.cos(mol.b)*Math.sin(mol.b)*mol.w>0){
+                mol.vx2w();
+            }else{
+                mol.w2vx();
+            }
+        // derecha
+        }else if(mol.x>cWidth-mr){
+            mol.x = 2*(cWidth-mr)-mol.x;
+            mol.vx *= -1;
+            // w
+            if(Math.cos(mol.b)*Math.sin(mol.b)*mol.w>0){
+                mol.vx2w();
+            }else{
+                mol.w2vx();
+            }
+        }
+        // arriba
+        if(mol.y<mr){
+            mol.y = 2*mr-mol.y;
+            mol.vy *= -1;
+            // w
+            if(Math.cos(mol.b)*Math.sin(mol.b)*mol.w<0){
+                mol.vy2w();
+            }else{
+                mol.w2vy();
+            }
+        // abajo
+        }else if(mol.y>cHeight-mr){
+            mol.y = 2*(cHeight-mr)-mol.y;
+            mol.vy *= -1;
+            // w
+            if(Math.cos(mol.b)*Math.sin(mol.b)*mol.w<0){
+                mol.vy2w();
+            }else{
+                mol.w2vy();
+            }
+        }
+    }
+
+    function get_grid(mol){
+        let map = 2 ** (Math.floor((mol.x-r)/gWidth)+8*Math.floor((mol.y-r)/gHeight));
+        map |= (2 ** (Math.floor((mol.x+r)/gWidth)+8*Math.floor((mol.y-r)/gHeight)));
+        map |= (2 ** (Math.floor((mol.x-r)/gWidth)+8*Math.floor((mol.y+r)/gHeight)));
+        map |= (2 ** (Math.floor((mol.x+r)/gWidth)+8*Math.floor((mol.y+r)/gHeight)));
+        mol.grid = map;
+        if(mol.hit > 0){
+          mol.hit -= 1;
+        }else{
+          mol.hit = 0;
+          mol.glow = false;
+        }
+    }
+
+    function check_collisions(){
+        for(let i=0; i<moleculas.length; i++){
+            for(let j=i+1; j<moleculas.length; j++){
+                // grid
+                if(moleculas[i].grid & moleculas[j].grid){
+                    let mol1 = moleculas[i];
+                    let mol2 = moleculas[j];
+                    // pitágoras
+                    if((mol1.x-mol2.x)**2+(mol1.y-mol2.y)**2 < r2){
+                        // no habían chocado aún
+                        if(!mol1.hit && !mol2.hit){
+                            let a1 = Math.atan2(mol1.vy, mol1.vx);
+                            let a2 = Math.atan2(mol2.vy, mol2.vx);
+                            let a12 = mod(a1-a2, 2*Math.PI);
+                            // choque efectivo
+                            if(a12 > Math.PI-ae && a12 < Math.PI+ae){
+                                mol1.glow = true;
+                                mol2.glow = true;
+                                // atom swap
+                                let at1 = [mol2.atoms[0], mol1.atoms[1]]
+                                let at2 = [mol1.atoms[0], mol2.atoms[1]]
+                                mol1.atoms = at1;
+                                mol2.atoms = at2;
+                                // w influence
+                                let w1 = mol1.w;
+                                let w2 = mol2.w;
+                                mol1.w -= 0.3*w2;
+                                mol2.w -= 0.3*w1;
+                                // TODO gestionar velocidades después del choque
+                                //let v1 = Math.sqrt(mol1.vx ** 2 + mol1.vy ** 2);
+                                //let v2 = Math.sqrt(mol1.vx ** 2 + mol1.vy ** 2);
+                            // choque lateral
+                            }else{
+                                let aux = mol1.vx;
+                                mol1.vx = mol2.vx;
+                                mol2.vx = aux;
+                                aux = mol1.vy;
+                                mol1.vy = mol2.vy;
+                                mol2.vy = aux;
+                                // TODO empujar en función de ángulo y w
+                                // (w pasa del que tenga más al que menos ?)
+                                // (v cambia ?)
+                            }
+                        }
+                        moleculas[i].hit = fps/10;  // no chocables durante 0.1s
+                        moleculas[j].hit = fps/10;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function cuenta(mol, recuento){
+        if((mol.atoms[0] != mol.atoms[1])){
+            recuento["r"] = (recuento["r"] || 0) + 1;
+        }else{
+            if(mol.atoms[0] == 1){
+                recuento["p1"] = (recuento["p1"] || 0) + 1;
+            }else{
+                recuento["p2"] = (recuento["p2"] || 0) + 1;
+            }
+        }
+    }
+
+ ////////////// drawing tools //////////////
+ // circles
+    function drawCircle(cc, x, y, r, stroke, fill){
+        cc.beginPath();
+        cc.arc(x, y, r, 0, 2 * Math.PI, false);
+        if(fill){
+            cc.fill();
+        }
+        if(stroke){
+            cc.stroke();
+        }
+    }
+ // molec
+    function drawMolec(cc, mol){
+        let c1, c2;
+        let dist;
+        if(mol.glow){
+            c1 = "red";
+            c2 = "red";
+            dist = 2*d;
+        }else{
+            dist = d;
+            c1 = getColor(mol.atoms[0]);
+            c2 = getColor(mol.atoms[1]);
+        }
+        cc.fillStyle = c1;
+        drawCircle(cc, mol.x-dist*Math.cos(mol.b), mol.y-dist*Math.sin(mol.b), r, true, true);
+        cc.fillStyle = c2;
+        drawCircle(cc, mol.x+dist*Math.cos(mol.b), mol.y+dist*Math.sin(mol.b), r, true, true);
+    }
+
+    //////////////// Utilities //////////////
+    function dec2bin(dec){
+        return (dec >>> 0).toString(2);
+    }
+    function mod(num,modulus) {  // Csaba Gabor (https://bytes.com/topic/javascript/answers/514703-javascript-fmod-wanted)
+        return ((num<0) ? Math.abs(modulus) : 0) + (num % modulus);
+    }
+    function getColor(c){
+        switch(c){
+          case 1:
+            return "#f2d252";
+          case 2:
+            return "#94b8d1";
+          case 3:
+            return "#8bc492";
+          default:
+            return "red";
+        }
+    }
+
+    ///////////////// KeyUp ////////////////
+    function canvas_hotkeys(e){
+        if(e.key == " "){
+            pause = !pause;
+        }
+    }
+    window.addEventListener("keydown", function(e){
+        if((e.key==" ") && document.activeElement==c){
+            e.preventDefault();
+        }
+    }, false);
+</script>
+{% endblock %}
