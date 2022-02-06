@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-22 23:09+0100\n"
+"POT-Creation-Date: 2022-02-06 18:50+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -2487,15 +2487,27 @@ msgstr "Si cliques sobre l'animació podràs aturar-la amb la tecla"
 msgid "Espacio"
 msgstr "Espai"
 
-#: templates/lab_q_eq.html:24
+#: templates/lab_q_eq.html:20
+msgid "Cuando está parada, puedes reiniciarla pulsando"
+msgstr "Quan està aturat, pots reiniciar-la prement"
+
+#: templates/lab_q_eq.html:20
+msgid "r"
+msgstr "r"
+
+#: templates/lab_q_eq.html:21
+msgid "Pulsa varias veces para elegir el patrón inicial"
+msgstr "Prem vàries vegades per escollir el patró inicial"
+
+#: templates/lab_q_eq.html:26
 msgid "El elemento \\(A\\) es amarillo, el \\(B\\) azul"
 msgstr "L'element \\(A\\) és groc, el \\(B\\) blau"
 
-#: templates/lab_q_eq.html:25
+#: templates/lab_q_eq.html:27
 msgid "El complejo activado se indica en rojo"
 msgstr "El complex activat s'indica en vermell"
 
-#: templates/lab_q_eq.html:27
+#: templates/lab_q_eq.html:29
 msgid ""
 "Las moléculas sólo reaccionan si chocan de frente (con menos de "
 "\\(30^{\\circ}\\) de desviación)"
@@ -2503,22 +2515,23 @@ msgstr ""
 "Les molècules només reaccionen si xoquen de cara (amb menys de "
 "\\(30^{\\circ}\\) de desviació)"
 
-#: templates/lab_q_eq.html:28
+#: templates/lab_q_eq.html:30
 msgid ""
 "Cuando reaccionan se intercambian uno de sus átomos (y una parte de su "
 "velocidad angular)"
 msgstr ""
-"Quan reaccionen s'intercanvien un dels seus àtoms (i una part de la velocitat angular)"
+"Quan reaccionen s'intercanvien un dels seus àtoms (i una part de la "
+"velocitat angular)"
 
-#: templates/lab_q_eq.html:30
+#: templates/lab_q_eq.html:32
 msgid "La \\(Q\\) de la reacción la calculo así"
 msgstr "La \\(Q\\) de la reacció la calculo així"
 
-#: templates/lab_q_eq.html:31
+#: templates/lab_q_eq.html:33
 msgid "cantidad\\ de\\ X"
 msgstr "quantitat\\ d'X"
 
-#: templates/lab_q_eq.html:31
+#: templates/lab_q_eq.html:33
 msgid "Área\\ del\\ dibujo"
 msgstr "Àrea\\ del\\ dibuix"
 

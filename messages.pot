@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-22 23:09+0100\n"
+"POT-Creation-Date: 2022-02-06 18:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2373,35 +2373,47 @@ msgstr ""
 msgid "Espacio"
 msgstr ""
 
-#: templates/lab_q_eq.html:24
+#: templates/lab_q_eq.html:20
+msgid "Cuando está parada, puedes reiniciarla pulsando"
+msgstr ""
+
+#: templates/lab_q_eq.html:20
+msgid "r"
+msgstr ""
+
+#: templates/lab_q_eq.html:21
+msgid "Pulsa varias veces para elegir el patrón inicial"
+msgstr ""
+
+#: templates/lab_q_eq.html:26
 msgid "El elemento \\(A\\) es amarillo, el \\(B\\) azul"
 msgstr ""
 
-#: templates/lab_q_eq.html:25
+#: templates/lab_q_eq.html:27
 msgid "El complejo activado se indica en rojo"
 msgstr ""
 
-#: templates/lab_q_eq.html:27
+#: templates/lab_q_eq.html:29
 msgid ""
 "Las moléculas sólo reaccionan si chocan de frente (con menos de "
 "\\(30^{\\circ}\\) de desviación)"
 msgstr ""
 
-#: templates/lab_q_eq.html:28
+#: templates/lab_q_eq.html:30
 msgid ""
 "Cuando reaccionan se intercambian uno de sus átomos (y una parte de su "
 "velocidad angular)"
 msgstr ""
 
-#: templates/lab_q_eq.html:30
+#: templates/lab_q_eq.html:32
 msgid "La \\(Q\\) de la reacción la calculo así"
 msgstr ""
 
-#: templates/lab_q_eq.html:31
+#: templates/lab_q_eq.html:33
 msgid "cantidad\\ de\\ X"
 msgstr ""
 
-#: templates/lab_q_eq.html:31
+#: templates/lab_q_eq.html:33
 msgid "Área\\ del\\ dibujo"
 msgstr ""
 
