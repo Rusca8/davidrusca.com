@@ -226,4 +226,5 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":  # això la fa córrer en local
-    app.run()
+    print("running local...")
+    app.run(debug=True)
