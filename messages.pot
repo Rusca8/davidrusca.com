@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-02-06 18:50+0100\n"
+"POT-Creation-Date: 2022-02-16 22:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,7 +114,7 @@ msgstr ""
 msgid "Braille Español/Catalán"
 msgstr ""
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:292
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:293
 msgid "Comarcas de Cataluña"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "Incluye:"
 msgstr ""
 
-#: templates/anki.html:227 templates/docentes.html:246
+#: templates/anki.html:227 templates/docentes.html:247
 msgid "Fracciones"
 msgstr ""
 
@@ -384,7 +384,7 @@ msgstr ""
 msgid "Raíces"
 msgstr ""
 
-#: templates/anki.html:230 templates/docentes.html:248
+#: templates/anki.html:230 templates/docentes.html:249
 msgid "Ecuaciones"
 msgstr ""
 
@@ -1859,21 +1859,21 @@ msgstr ""
 msgid "Prueba de acceso"
 msgstr ""
 
-#: templates/docentes.html:25 templates/docentes.html:179
+#: templates/docentes.html:25 templates/docentes.html:180
 msgid "Dibujo Técnico"
 msgstr ""
 
 #: templates/docentes.html:26 templates/docentes.html:31
-#: templates/docentes.html:43 templates/docentes.html:188
-#: templates/docentes.html:203
+#: templates/docentes.html:43 templates/docentes.html:189
+#: templates/docentes.html:204
 msgid "Tecnología"
 msgstr ""
 
-#: templates/docentes.html:34 templates/docentes.html:219
+#: templates/docentes.html:34 templates/docentes.html:220
 msgid "Grado Profesional de Música"
 msgstr ""
 
-#: templates/docentes.html:36 templates/docentes.html:223
+#: templates/docentes.html:36 templates/docentes.html:224
 msgid "Armonía"
 msgstr ""
 
@@ -1881,15 +1881,15 @@ msgstr ""
 msgid "Educación Secundaria (ESO)"
 msgstr ""
 
-#: templates/docentes.html:42 templates/docentes.html:260
+#: templates/docentes.html:42 templates/docentes.html:261
 msgid "Física y Química"
 msgstr ""
 
-#: templates/docentes.html:44 templates/docentes.html:289
+#: templates/docentes.html:44 templates/docentes.html:290
 msgid "Sociales"
 msgstr ""
 
-#: templates/docentes.html:45 templates/docentes.html:299
+#: templates/docentes.html:45 templates/docentes.html:300
 msgid "Inglés"
 msgstr ""
 
@@ -1897,11 +1897,11 @@ msgstr ""
 msgid "Educación Primaria (EP)"
 msgstr ""
 
-#: templates/docentes.html:53 templates/docentes.html:329
+#: templates/docentes.html:53 templates/docentes.html:330
 msgid "Misceláneo"
 msgstr ""
 
-#: templates/docentes.html:55 templates/docentes.html:333
+#: templates/docentes.html:55 templates/docentes.html:334
 #: templates/index.html:136
 msgid "Programación"
 msgstr ""
@@ -1910,13 +1910,11 @@ msgstr ""
 msgid "Mates Científicas"
 msgstr ""
 
-#: templates/docentes.html:68 templates/docentes.html:97
-#: templates/docentes.html:126 templates/docentes.html:143
-#: templates/docentes.html:275
-msgid "Formularios:"
+#: templates/docentes.html:68
+msgid "Esquemas y Formularios:"
 msgstr ""
 
-#: templates/docentes.html:70 templates/docentes.html:99
+#: templates/docentes.html:70 templates/docentes.html:100
 msgid "Límites"
 msgstr ""
 
@@ -1924,194 +1922,203 @@ msgstr ""
 msgid "Representación de funciones"
 msgstr ""
 
-#: templates/docentes.html:73 templates/docentes.html:104
+#: templates/docentes.html:73 templates/docentes.html:105
 msgid "Relación entre gráficas y derivadas"
 msgstr ""
 
 #: templates/docentes.html:75
+msgid "Discusión de Sistemas"
+msgstr ""
+
+#: templates/docentes.html:76
 msgid "Geometría 3D"
 msgstr ""
 
-#: templates/docentes.html:77 templates/docentes.html:106
-#: templates/docentes.html:204 templates/docentes.html:243
-#: templates/docentes.html:279 templates/docentes.html:317
+#: templates/docentes.html:78 templates/docentes.html:107
+#: templates/docentes.html:205 templates/docentes.html:244
+#: templates/docentes.html:280 templates/docentes.html:318
 msgid "Fichas:"
 msgstr ""
 
-#: templates/docentes.html:79 templates/docentes.html:108
-#: templates/docentes.html:247
+#: templates/docentes.html:80 templates/docentes.html:109
+#: templates/docentes.html:248
 msgid "Potencias y raíces"
 msgstr ""
 
-#: templates/docentes.html:80 templates/docentes.html:109
+#: templates/docentes.html:81 templates/docentes.html:110
 msgid "Sistemas 3D"
 msgstr ""
 
-#: templates/docentes.html:81 templates/docentes.html:110
+#: templates/docentes.html:82 templates/docentes.html:111
 msgid "Derivadas"
 msgstr ""
 
-#: templates/docentes.html:83 templates/docentes.html:112
-#: templates/docentes.html:147 templates/docentes.html:180
-#: templates/docentes.html:189
+#: templates/docentes.html:84 templates/docentes.html:113
+#: templates/docentes.html:148 templates/docentes.html:181
+#: templates/docentes.html:190
 msgid "Temario:"
 msgstr ""
 
-#: templates/docentes.html:85 templates/docentes.html:114
-#: templates/docentes.html:149 templates/docentes.html:182
-#: templates/docentes.html:191
+#: templates/docentes.html:86 templates/docentes.html:115
+#: templates/docentes.html:150 templates/docentes.html:183
+#: templates/docentes.html:192
 msgid "Temario optimizado"
 msgstr ""
 
-#: templates/docentes.html:89 templates/docentes.html:118
-#: templates/docentes.html:253
+#: templates/docentes.html:90 templates/docentes.html:119
+#: templates/docentes.html:254
 msgid "Funciones trigonométricas"
 msgstr ""
 
-#: templates/docentes.html:96
+#: templates/docentes.html:97
 msgid "Mates Sociales"
 msgstr ""
 
-#: templates/docentes.html:100
+#: templates/docentes.html:98 templates/docentes.html:127
+#: templates/docentes.html:144 templates/docentes.html:276
+msgid "Formularios:"
+msgstr ""
+
+#: templates/docentes.html:101
 msgid "Matemática Financiera"
 msgstr ""
 
-#: templates/docentes.html:102
+#: templates/docentes.html:103
 msgid "Mnemotecnia Financiera"
 msgstr ""
 
-#: templates/docentes.html:128
+#: templates/docentes.html:129
 msgid "Movimientos"
 msgstr ""
 
-#: templates/docentes.html:130
+#: templates/docentes.html:131
 msgid "Gráficos de MRUA"
 msgstr ""
 
-#: templates/docentes.html:132 templates/docentes.html:281
+#: templates/docentes.html:133 templates/docentes.html:282
 msgid "Fuerzas"
 msgstr ""
 
-#: templates/docentes.html:133
+#: templates/docentes.html:134
 msgid "Campo Gravitatorio y Eléctrico"
 msgstr ""
 
-#: templates/docentes.html:135
+#: templates/docentes.html:136
 msgid "Ondas"
 msgstr ""
 
-#: templates/docentes.html:145
+#: templates/docentes.html:146
 msgid "Termoquímica"
 msgstr ""
 
-#: templates/docentes.html:151 templates/docentes.html:265
-#: templates/docentes.html:290
+#: templates/docentes.html:152 templates/docentes.html:266
+#: templates/docentes.html:291
 msgid "Mnemotecnia:"
 msgstr ""
 
-#: templates/docentes.html:153 templates/docentes.html:267
+#: templates/docentes.html:154 templates/docentes.html:268
 msgid "Valencias de los Elementos"
 msgstr ""
 
-#: templates/docentes.html:157 templates/lab_q_eq.html:2
+#: templates/docentes.html:158 templates/lab_q_eq.html:2
 #: templates/lab_q_eq.html:5
 msgid "Equilibrio Químico"
 msgstr ""
 
-#: templates/docentes.html:164
+#: templates/docentes.html:165
 msgid "Economía de la Empresa"
 msgstr ""
 
-#: templates/docentes.html:165 templates/docentes.html:224
-#: templates/docentes.html:334 templates/index.html:96 templates/index.html:170
+#: templates/docentes.html:166 templates/docentes.html:225
+#: templates/docentes.html:335 templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr ""
 
-#: templates/docentes.html:167
+#: templates/docentes.html:168
 msgid "Asientos"
 msgstr ""
 
-#: templates/docentes.html:175 templates/docentes.html:199
+#: templates/docentes.html:176 templates/docentes.html:200
 msgid "Prueba de Acceso"
 msgstr ""
 
-#: templates/docentes.html:206
+#: templates/docentes.html:207
 msgid "Circuitos Eléctricos"
 msgstr ""
 
-#: templates/docentes.html:207
+#: templates/docentes.html:208
 msgid "Electrónica Digital"
 msgstr ""
 
-#: templates/docentes.html:208
+#: templates/docentes.html:209
 msgid "Energías"
 msgstr ""
 
-#: templates/docentes.html:209
+#: templates/docentes.html:210
 msgid "Pneumática"
 msgstr ""
 
-#: templates/docentes.html:210
+#: templates/docentes.html:211
 msgid "Telecomunicaciones"
 msgstr ""
 
-#: templates/docentes.html:211
+#: templates/docentes.html:212
 msgid "Máquinas de Combustión"
 msgstr ""
 
-#: templates/docentes.html:226
+#: templates/docentes.html:227
 msgid "Canciones para los intervalos"
 msgstr ""
 
-#: templates/docentes.html:230
+#: templates/docentes.html:231
 msgid "Editor de Esquemas Armónicos"
 msgstr ""
 
-#: templates/docentes.html:245
+#: templates/docentes.html:246
 msgid "Operaciones con Enteros"
 msgstr ""
 
-#: templates/docentes.html:249
+#: templates/docentes.html:250
 msgid "Proporcionalidad"
 msgstr ""
 
-#: templates/docentes.html:263
+#: templates/docentes.html:264
 msgid "Masa y peso"
 msgstr ""
 
-#: templates/docentes.html:277
+#: templates/docentes.html:278
 msgid "Rendimiento"
 msgstr ""
 
-#: templates/docentes.html:282
+#: templates/docentes.html:283
 msgid "Máquinas simples"
 msgstr ""
 
-#: templates/docentes.html:300
+#: templates/docentes.html:301
 msgid "Online:"
 msgstr ""
 
-#: templates/docentes.html:312
+#: templates/docentes.html:313
 msgid "Primaria"
 msgstr ""
 
-#: templates/docentes.html:319
+#: templates/docentes.html:320
 msgid "Operaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:320
+#: templates/docentes.html:321
 msgid "Ecuaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:321
+#: templates/docentes.html:322
 msgid "Operaciones en columna"
 msgstr ""
 
-#: templates/docentes.html:336
+#: templates/docentes.html:337
 msgid "Apuntes"
 msgstr ""
 
-#: templates/docentes.html:337
+#: templates/docentes.html:338
 msgid "Apuntes y Trucos"
 msgstr ""
 
