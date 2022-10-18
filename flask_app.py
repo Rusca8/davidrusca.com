@@ -5,6 +5,7 @@ from flask import send_from_directory
 from flask_babel import Babel  # traduccions
 
 import re
+import random
 
 import crypto as c
 
@@ -73,6 +74,35 @@ def logos():
 @app.route('/raquel/')
 def raquel():
     return redirect('/raquel/1')
+
+
+@app.route('/abril', methods=["GET", "POST"])
+@app.route('/abril/', methods=["GET", "POST"])
+def abril():
+    anims = ["contents", "enfadats", "relaxats", "tristos"]
+    ref = [3, 0, 0, 0, 1, 1, 1, 1, 3, 2, 2, 3]
+    print("Bon dia")
+    if request.method == "GET":
+        cavalls = list(range(12))
+        random.shuffle(cavalls)
+        return render_template("cavalls.html", cavalls=cavalls, anims=anims, ref=ref)
+    else:
+        correccions = {}
+        for anim in anims:
+            correccions[anim] = []
+        for i, x in enumerate(ref):
+            correccions[anims[x]].append(i)
+
+        respostes = {}
+        for anim in anims:
+            respostes[anim] = []
+            for key in request.form:
+                if key.startswith(anim):
+                    respostes[anim].append(int(key[len(anim):]))
+        for key in respostes:
+            respostes[key] = sorted(respostes[key])
+
+        return render_template("cavalls_r.html", respostes=respostes, correccions=correccions)
 
 
 @app.route('/raquel/<key>')
