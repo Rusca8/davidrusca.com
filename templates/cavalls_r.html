@@ -11,7 +11,16 @@
     <title>Resultats Cavalls</title>
   </head>
   <body>
-    <div class="bg-secondary sticky-top py-2 text-center text-light">
+    <div class="bg-secondary sticky-top py-2 text-center text-light border-bottom">
+        {% for anim in ref %}
+            {% if loop.index0 > 0 %}
+                •
+            {% endif %}
+            {% for c in ref[anim] %}
+                <img class="img-thumbnail" src="/static/img/cavalls_abril/c{{c}}.jpg" style="width:60px;">
+            {% endfor %}
+        {% endfor %}
+        <br>
         {% for anim in ref %}
             {% if loop.index0 > 0 %}
                 ·
