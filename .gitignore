@@ -12,8 +12,14 @@
 *.psd
 *.pdf
 
+#json
+*.json
+
 #altres
 *.apkg
+
+#fitxers en concret
+secrets.py
 
 #venv
 /.venvs

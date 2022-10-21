@@ -7,6 +7,7 @@ from flask_babel import Babel  # traduccions
 import re
 import random
 
+import utilities as utils
 import crypto as c
 
 app = Flask(__name__)
@@ -79,30 +80,58 @@ def raquel():
 @app.route('/abril', methods=["GET", "POST"])
 @app.route('/abril/', methods=["GET", "POST"])
 def abril():
-    anims = ["contents", "enfadats", "relaxats", "tristos"]
-    ref = [3, 0, 0, 0, 1, 1, 1, 1, 3, 2, 2, 3]
+    anims = [f"grup_{chr(c+97).upper()}" for c in range(7)]
+    print(anims)
     print("Bon dia")
     if request.method == "GET":
-        cavalls = list(range(12))
+        cavalls = list(range(15))
         random.shuffle(cavalls)
-        return render_template("cavalls.html", cavalls=cavalls, anims=anims, ref=ref)
+        return render_template("cavalls.html", cavalls=cavalls, anims=anims)
     else:
-        correccions = {}
-        for anim in anims:
-            correccions[anim] = []
-        for i, x in enumerate(ref):
-            correccions[anims[x]].append(i)
-
+        # getting the data
         respostes = {}
+        anim_noms = {}
         for anim in anims:
             respostes[anim] = []
-            for key in request.form:
+            for key, value in request.form.items():
                 if key.startswith(anim):
-                    respostes[anim].append(int(key[len(anim):]))
+                    if key.endswith("_nom"):
+                        anim_noms[anim] = value
+                    else:
+                        respostes[anim].append(int(key[len(anim):]))
         for key in respostes:
             respostes[key] = sorted(respostes[key])
 
-        return render_template("cavalls_r.html", respostes=respostes, correccions=correccions)
+        bloc_resposta = {}
+        for key, val in respostes.items():
+            if val:
+                bloc_resposta[anim_noms[key]] = val
+        print(bloc_resposta)
+        utils.add_to_json(bloc_resposta,
+                          "./static/json/cavalls_resultats.json")
+
+        return ("La seua contribució a la ciència hípica ha estat degudament enregistrada. <br>"
+               "Li ho agraïm sobremesura. ~ Abril <br><br><br><br><br><i>...aigües mil.</i>")
+
+
+@app.route('/abril/admin/', methods=["GET", "POST"])
+@app.route('/abril/admin/', methods=["GET", "POST"])
+def abril_admin():
+    if request.method == "GET":
+        return render_template("cavalls_pwd.html", incorrecte=False)
+    else:
+        print(request.form)
+        try:
+            from secrets import abril
+        except ImportError:
+            return "(pàgina no disponible)"
+        if request.form["password"] == abril:
+            respostes = utils.load_json("./static/json/cavalls_resultats.json")
+            dates = {key: utils.date(float(key)) for key in respostes}
+            ref_cavalls = utils.load_json("./static/json/cavalls_ref.json")
+            return render_template("cavalls_r.html", respostes=respostes, dates=dates, ref=ref_cavalls)
+        else:
+            return render_template("cavalls_pwd.html", incorrecte=True)
 
 
 @app.route('/raquel/<key>')
