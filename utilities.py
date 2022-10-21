@@ -1,9 +1,11 @@
 import json
 from datetime import datetime
+import os
 
 
 def add_to_json(new_data, filename='data.json'):
-    with open(filename, 'r+') as file:
+    root = os.path.dirname(__file__)
+    with open(os.path.join(root, filename), 'r+') as file:
         # First we load existing data into a dict.
         file_data = json.load(file)
         # Join new_data with file_data inside emp_details
@@ -15,7 +17,8 @@ def add_to_json(new_data, filename='data.json'):
 
 
 def load_json(filename='data.json'):
-    with open(filename, 'r') as file:
+    root = os.path.dirname(__file__)
+    with open(os.path.join(root, filename), 'r') as file:
         return json.load(file)
 
 
