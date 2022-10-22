@@ -91,9 +91,12 @@ def abril():
         # getting the data
         respostes = {}
         anim_noms = {}
+        experiencia = None
         for anim in anims:
             respostes[anim] = []
             for key, value in request.form.items():
+                if key == "experiencia":
+                    experiencia = value
                 if key.startswith(anim):
                     if key.endswith("_nom"):
                         anim_noms[anim] = value
@@ -107,7 +110,7 @@ def abril():
             if val:
                 bloc_resposta[anim_noms[key]] = val
         print(bloc_resposta)
-        utils.add_to_json(bloc_resposta,
+        utils.add_to_json({"exp": experiencia, "cavalls": bloc_resposta},
                           "./static/json/cavalls_resultats.json")
 
         return ("La seua contribució a la ciència hípica ha estat degudament enregistrada. <br>"

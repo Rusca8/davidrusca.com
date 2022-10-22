@@ -34,9 +34,11 @@
             <div class="card mb-2">
                 <h5 class="card-header">{{dates[entry]}}</h5>
                 <div class="card-body">
-                    {% for anim in respostes[entry] %}
+                    Experiència amb cavalls: <b>{{respostes[entry]["exp"]}}</b>.
+                    <hr>
+                    {% for anim in respostes[entry]["cavalls"] %}
                         Cavalls <b>{{anim}}</b>:
-                        {{ respostes[entry][anim] |join(", ") }}
+                        {{ respostes[entry]["cavalls"][anim] |join(", ") }}
                     <br>
                     {% endfor %}
                 </div>

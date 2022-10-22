@@ -61,6 +61,19 @@
 
     <!-- les coses necessiten NAME per aparèixer al POST -->
     <form action="#" target="_blank" method="post" id="formulari">
+      <div class="card py-1 px-2 mb-2" style="background-color: #ccddee;">
+        <div class="form-check form-check-inline form-inline">
+          <label class="form-check-label mr-3">Interactues habitualment amb cavalls?</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="experiencia" id="exp1" value="Sí" required>
+            <label class="form-check-label" for="exp1">Sí</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="experiencia" id="exp2" value="No" required>
+            <label class="form-check-label" for="exp2">No</label>
+          </div>
+        </div>
+      </div>
       {% for anim in anims %}
       <div class="card py-1 px-2 mb-2" style="background-color: #eeeeee;">
         <div class="form-check form-check-inline form-inline">
