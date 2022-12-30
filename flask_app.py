@@ -125,7 +125,7 @@ def abril_admin():
     else:
         print(request.form)
         try:
-            from secrets import abril
+            from secretos import abril
         except ImportError:
             return "(pàgina no disponible)"
         if request.form["password"] == abril:

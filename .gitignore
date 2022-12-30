@@ -19,7 +19,7 @@
 *.apkg
 
 #fitxers en concret
-secrets.py
+secretos.py
 
 #venv
 /.venvs
