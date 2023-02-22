@@ -211,6 +211,12 @@ def q_eq():
     return render_template("lab_q_eq.html")
 
 
+@app.route('/notion/data')
+@app.route('/notion/data/')
+def notion_data():
+    return render_template("./notion/data.html")
+
+
 @app.route('/braçalets')
 @app.route('/braçalets/')
 @app.route('/pulseras')

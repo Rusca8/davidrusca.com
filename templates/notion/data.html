@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data d'Avui</title>
+</head>
+<body>
+<div id="data">?</div>
+</body>
+<script>
+    div = document.getElementById("data");
+
+    var weekday = new Array(7);
+    weekday[0] = "☀️";
+    weekday[1] = "🌙";
+    weekday[2] = "🔥";
+    weekday[3] = "💧";
+    weekday[4] = "🌲";
+    weekday[5] = "⚜️";
+    weekday[6] = "⛰";
+
+    var today = new Date();
+    var hrs = today.getHours();
+    var dayOfWeek = weekday[today.getDay()];
+    var date = today.getDate() + "日" +(today.getMonth()+1) +'月' + " " +dayOfWeek;
+
+    div.innerHTML = date;
+</script>
+</html>
