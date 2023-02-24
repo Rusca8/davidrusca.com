@@ -34,9 +34,12 @@
 
     var today = new Date();
     var hrs = today.getHours();
+    var mins = today.getMinutes();
     var dayOfWeek = weekday[today.getDay()];
     var date = today.getDate() + "日" +(today.getMonth()+1) +'月' + " " +dayOfWeek;
 
-    div.innerHTML = date;
+    var time = hrs + ":" + mins;
+
+    div.innerHTML = date + " " + time;
 </script>
 </html>
