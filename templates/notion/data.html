@@ -23,7 +23,7 @@
 <script>
     div = document.getElementById("data");
 
-    var weekday = new Array(7);
+    let weekday = new Array(7);
     weekday[0] = "☀️";
     weekday[1] = "🌙";
     weekday[2] = "🔥";
@@ -32,14 +32,26 @@
     weekday[5] = "⚜️";
     weekday[6] = "⛰";
 
-    var today = new Date();
-    var hrs = today.getHours();
-    var mins = today.getMinutes();
-    var dayOfWeek = weekday[today.getDay()];
-    var date = today.getDate() + "日" +(today.getMonth()+1) +'月' + " " +dayOfWeek;
+    let today;
+    let hrs;
+    let mins;
+    let dayOfWeek;
+    let date;
+    let time;
 
-    var time = hrs + ":" + mins;
+    function update_clock(){
+        today = new Date();
+        hrs = today.getHours();
+        mins = today.getMinutes().toString().padStart(2, "0");
+        dayOfWeek = weekday[today.getDay()];
+        date = (today.getMonth()+1) + '月' + today.getDate() + "日" + " " + dayOfWeek;
 
-    div.innerHTML = date + " " + time;
+        time = hrs + ":" + mins;
+
+        div.innerHTML = date + " " + time;
+    }
+
+    update_clock();
+    setInterval(update_clock, 1000);
 </script>
 </html>
