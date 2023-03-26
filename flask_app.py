@@ -211,6 +211,16 @@ def q_eq():
     return render_template("lab_q_eq.html")
 
 
+@app.route('/bg/<bg>')
+def bg_dots(bg=None):
+    nom = random.choice(["Pernil", "Rinoceront", "Iogurt", "Marsupial", "Cacaolat", "Illuminati", "Llimac",
+                         "Rosegador", "Esperit", "Paquiderm", "Mussol"])
+    cognom = random.choice(["salat", "caducat", "estrafalari", "saborós", "sectari", "d'embogimenta", "llefiscós",
+                            "afamat", "misteriós", "refinat", "fastigós", "màgic", "estrident", "sorollós"])
+    if bg == "dots":
+        return render_template("/protos/dots.html", nom=f"{nom} {cognom}")
+
+
 @app.route('/notion/data')
 @app.route('/notion/data/')
 def notion_data():

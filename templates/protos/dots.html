@@ -1,0 +1,497 @@
+{% extends "base.html" %}
+{% block title %}Dots - Web de David Ruscalleda{% endblock %}
+
+{% block extra_head %}
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+{% endblock %}
+
+{% block content%}
+
+<div class="mx-2">
+
+<h1 class="text-center mt-2">[Dots]</h1>
+<h3 class="text-center mb-4">(Prototip)</h3>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+    </div>
+    <div class="col">
+      <div class="input-group input-group-sm mt-2 mb-1">
+        <div class="input-group-prepend">
+          <span class="input-group-text border-secondary bg-danger"></span>
+          <span class="input-group-text border-secondary">Jo </span>
+        </div>
+        <input id="nom" class="col" type="text" value="{{nom}}" onchange="nou_nom();">
+      </div>
+      <div class="input-group input-group-sm mt-0">
+        <div class="input-group-prepend">
+          <span class="input-group-text border-secondary bg-info"></span>
+          <span class="input-group-text border-secondary">vs </span>
+        </div>
+        <input id="vs" class="col readonly" type="text" value="-" readonly>
+      </div>
+      <br>
+      <div class="card border-secondary">
+        <div class="card-header py-0">
+          <i>En línia...</i>
+        </div>
+        <div class="card-body">
+          <span id="jo">🔹 {{nom}}</span> [jo]
+          <br>
+          <div id="tu">
+          </div>
+          <hr class="my-1 border-secondary">
+          <div id="ells">
+            🔸 ...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+  <p>
+    2 Jugadors
+  </p>
+  <!-- FIREBASE -->
+  <script>
+    //////////////////// FIREBASE //////////////////////
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAplBo72JhFl63lvk2mNxMFH_UZ4-k0y7A",
+      authDomain: "dots-86b59.firebaseapp.com",
+      databaseURL: "https://dots-86b59-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "dots-86b59",
+      storageBucket: "dots-86b59.appspot.com",
+      messagingSenderId: "249492034508",
+      appId: "1:249492034508:web:906b6e2293096928fc4369"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+
+    let playerId;
+    let playerRef;
+    let players = {};
+    let currentGame = null;
+    let games = {};
+
+    (function () {
+
+      // initialization
+      function initGame(){
+        console.log("init game...");
+        const allPlayersRef = firebase.database().ref('players');
+
+        // when changes occur...
+        allPlayersRef.on("value", (snapshot) => {
+          players = snapshot.val() || {};
+          console.log("something changed");
+          update_names();
+        });
+
+        // when a new node is added...
+        allPlayersRef.on("child_added", (snapshot) => {
+          console.log("someone new");
+        });
+
+        const allGamesRef = firebase.database().ref('games');
+
+        allGamesRef.on("value", (snapshot) => {
+          games = snapshot.val() || {};
+          console.log("game changed");
+          update_names();
+          Object.keys(games).forEach((g) => {
+            if(g == currentGame){
+              db_update_board();
+            }
+          });
+        });
+
+        allGamesRef.on("child_added", (snapshot) => {
+          console.log("game added");
+        });
+      }
+
+      // authentication
+      firebase.auth().onAuthStateChanged((user) => {
+        console.log(user);
+        if (user) {
+          console.log("logged in");
+          playerId = user.uid;
+          playerRef = firebase.database().ref('players/' + playerId);
+
+          playerRef.set({
+            name: "{{nom}}",
+            games: {now: "none"}
+          })
+
+          playerRef.onDisconnect().remove();
+
+          initGame();
+        } else {
+          console.log("logged out");
+        }
+      });
+
+      firebase.auth().signInAnonymously().catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(error(errorCode, errorMessage));
+      });
+
+    })();
+    ////////////////////////////// GAME ///////////////////////
+    //////////////// Global vars //////////////
+    let cWidth;
+    let cHeight;
+    let colors = ["#fab97f", //taronja
+    "#faea7f", //groc
+    "#a4c7f5", //blau
+    "#c995fc", //lila
+    "#ffffff", //blanc
+    "#fcccde", //rosa
+    "#e1fccc", // verd
+    "#ff0000"];//(gris fosc, neutre)
+    let c_select = "#8ae4e6";
+
+    //tablero
+    let n = 6;
+    let cols = n;
+    let rows = n;
+
+    let tool = 3;
+    let tool_names = {0: "Flip", 1: "Swap", 2: "Swap & 2-flip", 3: "Flip/Swap"}
+
+    let selected = -42;
+
+    // visualization
+    let back_visible = false;
+
+    //////////////// Clases ///////////////////
+    class Pieza {
+      constructor(colors, side){
+        this.colors = colors;
+        this.side = side;
+      }
+
+      flip(){
+        this.side = this.side == 0?1:0;
+      }
+    }
+
+    /////////////// Objects ///////////////////
+    let fichas = [];
+
+    ////////////////// inicio /////////////////
+    window.onload = function(){
+      // dom
+      c = document.getElementById("app");
+      jo = document.getElementById("jo");
+      vs = document.getElementById("vs");
+      nom = document.getElementById("nom");
+      ells = document.getElementById("ells");
+
+      // medidas
+      cWidth = 650;
+      cHeight = 500;
+      c.width = cWidth;
+      c.height = cHeight;
+      u = cHeight/1200;  // unidad de medidas
+      m = 20*u;  // margen laterales
+      rCell = 140*u;  // medida casillas
+      r = rCell*0.70/2;  // radio fichas
+
+      // inicia dibujo
+      cc = c.getContext("2d");
+
+      // inicialitza peces
+      init_board();
+
+      // dibujo recurrente (creo que sólo on_event, así que nada)
+      update();
+      //setInterval(update, Math.round(1000/fps));
+
+      c.addEventListener("click", onClick, false);
+    }
+
+    /////////////////// init board ////////////
+    function init_board(){
+      for(let i=0; i<cols*rows; i++){
+        // all permutations
+        fcolor1 = Math.min(Math.floor(i/n), colors.length);
+        fcolor2 = Math.min(i%n, colors.length);
+        fichas.push(new Pieza([fcolor1, fcolor2], Math.random()<0.5?0:1));
+      }
+      shuffle(fichas);
+    }
+
+    /////////////////// dibujo ///////////////
+    function update(){
+      // previos
+      cc.lineWidth = 5*u;
+      cc.font = (40*u).toString() + "px Courier New";
+      cc.textBaseline = "middle";
+      cc.textAlign = "center";
+
+      // fondo
+      cc.fillStyle = "white";
+      cc.fillRect(0, 0, cWidth, cHeight);
+
+      // borde
+      cc.strokeStyle = "black";
+      cc.strokeRect(m, m, cWidth-2*m, cHeight-2*m);
+
+      // fichas
+      i = 0;
+      for(let f of fichas){
+        pos = getPosition(i)
+        // UI under
+        if(i == selected){
+          cc.fillStyle = c_select;
+          drawCircle(cc, pos[0], pos[1], r*1.2, false, true);
+        }
+
+        //exterior (back)
+        cc.strokeStyle = "black";
+        if(back_visible){
+          cc.fillStyle = getColor(f, 1);
+        }else{
+          if(f.side == 1){
+            cc.fillStyle = "#bbbbbb";
+          }else{
+            cc.fillStyle = "#888888";
+          }
+        }
+        drawCircle(cc, pos[0], pos[1], r, true, true);
+        //interior (front)
+        cc.fillStyle = getColor(f, 0);
+        drawCircle(cc, pos[0], pos[1], r*0.7, true, true);
+        i++;
+      }
+
+      // menú / debugging info
+      cc.fillStyle = "black";
+      cc.fillText(tool_names[tool], cWidth-20*m, 7*m);
+
+    }
+
+    ////////////// drawing tools //////////////
+    // circles
+    function drawCircle(cc, x, y, r, stroke, fill){
+      cc.beginPath();
+      cc.arc(x, y, r, 0, 2 * Math.PI, false);
+      if(fill){
+          cc.fill();
+      }
+      if(stroke){
+          cc.stroke();
+      }
+    }
+
+    function getColor(f, side){
+      return colors[f.colors[f.side==side?0:1]]
+    }
+
+    function getCoordinates(n){
+        return [n%rows, Math.floor(n/cols)];
+    }
+
+    function getPosition(n){
+      coord = getCoordinates(n);
+      x = m+(1+coord[1]+0.5)*rCell;
+      y = cHeight/2-rCell*rows/2+(coord[0]+0.5)*rCell;
+      return [x, y];
+    }
+
+    ///////////////// KeyUp ////////////////
+    function canvas_hotkeys(e){
+        switch(e.key){
+          case "f":  // flip coin
+            tool = 0;
+            break;
+          case "s":  // swap coins (no flip)
+            tool = 1;
+            break;
+          case "x":  // swap coins (flip both)
+            tool = 2;
+            break;
+          case "m":  // flip or swap (multitool) [flips if swap same]
+            tool = 3;
+            break;
+          case "o":
+            back_visible = !back_visible;
+        }
+        update();
+    }
+    window.addEventListener("keydown", function(e){
+        if((e.key==" ") && document.activeElement==c){
+            e.preventDefault();
+        }
+    }, false);
+
+    /////////////////// OnClick ////////////////
+    function onClick(e) {
+          const rect = c.getBoundingClientRect();
+          const relX = event.clientX - rect.left;
+          const relY = event.clientY - rect.top;
+          xCur = relX * c.width / rect.width;
+          yCur = relY * c.height / rect.height;
+
+        // main
+        let found = false;
+        i = 0;
+        for(let f of fichas){
+          pos = getPosition(i);
+          if(r ** 2 > (pos[0]-xCur) ** 2 + (pos[1]-yCur) ** 2){
+            found = true;
+            if(tool == 0){
+              f.flip();
+            // other single select tools
+            // select-2 tools
+            }else{
+              if(selected < 0){ // no selection: select first
+                selected = i;
+              }else{  // selecting second, swap
+                if(tool == 3 && i == selected){
+                    f.flip();
+                }else{
+                  aux = fichas[i];
+                  fichas[i] = fichas[selected];
+                  fichas[selected] = aux;
+                  if(tool == 2){
+                    fichas[selected].flip();
+                    fichas[i].flip();
+                  }
+                }
+                selected = -42;
+              }
+            }
+            break;
+          }
+          i++;
+        }
+        if(!found){
+          selected = -42;
+        }
+        update();
+        if(currentGame){
+          upload_board();
+        }
+    }
+    ///////////////////// Utilities /////////////////////
+    function shuffle(array) {  // Fisher-Yates
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    //////////////////// html UI ///////////////////
+    function nou_nom(){
+      jo.innerHTML = "🔹 " + nom.value;
+      players[playerId].name = nom.value;
+      playerRef.set(players[playerId]);
+    }
+
+    function nova_partida(vs_uid){
+      console.log("partida amb " + vs_uid);
+      game_id = playerId + vs_uid;
+      games[game_id] = {
+        status: "waiting",
+        player1: playerId,
+        player2: vs_uid,
+        board: get_board_state()
+      }
+      gameRef = firebase.database().ref("/games/" + game_id);
+      gameRef.set(games[game_id]);
+      players[playerId].games[vs_uid] = game_id;
+      playerRef.set(players[playerId]);
+      players[vs_uid].games[playerId] = game_id;
+      vsRef = firebase.database().ref("players/" + vs_uid + "/games/" + playerId);
+      vsRef.set(players[vs_uid].games[playerId]);
+    }
+
+    function acceptar_partida(game_id){
+      console.log("acceptada partida" + game_id);
+      games[game_id].status = "playing";
+      gameRef = firebase.database().ref("/games/" + game_id);
+      gameRef.set(games[game_id]);
+      mostrar_partida(game_id);
+      shuffle(fichas);
+      upload_board();
+    }
+
+    function mostrar_partida(game_id){
+      currentGame = game_id; // joc actiu
+      for(let p of [games[game_id].player1, games[game_id].player2]){
+        console.log("checking " + p);
+        if(p != playerId){
+          vs.value = players[p].name;
+        }
+      }
+      update_names();
+      db_update_board();
+    }
+
+    function get_board_state(){
+      let board_state = [];
+      for(let f of fichas){
+        board_state.push([f.colors, f.side]);
+      }
+      return board_state;
+    }
+
+    function upload_board(){
+      games[currentGame].board = get_board_state();
+      gameRef = firebase.database().ref("/games/" + currentGame);
+      gameRef.set(games[currentGame]);
+    }
+
+    function db_update_board(){
+      i = 0;
+      for(let f of fichas){
+        fi = games[currentGame].board[i];
+        fichas[i] = new Pieza(fi[0], fi[1]);
+        i++;
+      }
+      update();
+    }
+
+    function update_names(){
+      ells.innerHTML = ""
+      Object.keys(players).forEach((p) => {
+        if(p != playerId){
+          if(p in players[playerId].games){
+            game_id = players[playerId].games[p]
+            g = games[game_id];
+            if(g.status == "waiting"){
+              if(g.player1 == playerId){
+                link = " [esperant...]";
+              }else{
+                link = " [<a href='javascript:acceptar_partida(" + '"' + game_id + '"' + ")'>acceptar</a>]";
+              }
+            }else{
+              if(game_id == currentGame){
+                link = " [actiu]"
+              }else{
+                link = " [<a href='javascript:mostrar_partida(" + '"' + game_id + '"' + ")'>mostrar</a>]";
+              }
+            }
+          }else{
+            link = " [<a href='javascript:nova_partida(" + '"' + p + '"' + ")'>juguem</a>]"
+          }
+          ells.innerHTML += "🔸 " + players[p]["name"] + link + "<br>"
+        }
+      })
+    }
+ </script>
+{% endblock %}
+
+</div>
