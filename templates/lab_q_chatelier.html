@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block title %} {{ _('Laboratorio') }} {{ _('Le Châtelier') }} - Web de David Ruscalleda {% endblock %}
 {% block content %}
-<h3 class="mt-3 text-center">Le Châtelier</h3>
-<p class="mt-2 text-center">{{ _('Observa el equilibrio dentro de una reacción química.') }}</p>
+<h3 class="mt-3 text-center" style="user-select:none;">Le Châtelier</h3>
+<p class="mt-2 text-center" style="user-select:none;">{{ _('Observa el equilibrio dentro de una reacción química.') }}</p>
 
-<div class="card mx-2 border-c">
+<div class="card mx-2 border-c" style="user-select:none;">
   <div class="card-header">
       <h5 class="text-center my-0">Efecte de la temperatura sobre la reacció.</h5>
   </div>
   <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
 </div>
 <div class="card mx-2 border-c mt-2 pb-0">
-    <div class="card-body">
+    <div class="card-body" style="user-select:none;">
         {{ _('Si clicas sobre la animación podrás pararla con la tecla') }} <code>{{ _('Espacio') }}</code>.<br>
         {{ _('También podrás subir la temperatura pulsando') }} <code>{{ _('+') }}</code> {{ _('y bajarla pulsando') }} <code>{{ _('-') }}</code>.
     </div>
@@ -98,7 +98,7 @@
  }
 
  class Smoothimation{
-   constructor(speed, n=0){
+   constructor(speed=0.1, n=0){
      this.speed = speed;
      this.n = n;
      this.chasing = n;
@@ -112,7 +112,7 @@
      this.chasing = chase;
    }
 
-   teleport(n){
+   set(n){
      this.n = n;
    }
  }
@@ -126,9 +126,31 @@
    }
  }
 
+ class Imagen {
+   constructor(src, title="img"){
+     this.img = new Image();
+     this.img.src = src;
+     this.ready = false;
+
+     this.img.onload = () => {
+       this.ready = true;
+     }
+   }
+ }
+
 
  //////////////// OBJECTS ///////////////
  let moleculas = [];
+
+ // img
+ const img_gel = new Imagen("/static/img/labs/chatelier/gel.png", "gel");
+ const img_foc = new Imagen("/static/img/labs/chatelier/foc.png", "foc");
+ let bR = 80;
+ let br = bR*0.6;
+ let focX;
+ let focY;
+ let gelX;
+ let gelY;
 
  /////////////////// inicio ////////////////////
     window.onload = function(){
@@ -139,6 +161,12 @@
         c.width = cWidth;
         c.height = cHeight;
         u = cHeight/1200;     // unidad de medida
+        // ui
+        gelX = cWidth - 3*m - bR;
+        gelY = cHeight - 3*m - bR;
+        focX = cWidth - 5*m - 3*bR;
+        focY = gelY;
+
         // colisiones
         hProds = cHeight/4
         prods = new Box(cWidth/2, cHeight-hProds, cWidth/2+100, hProds+100);
@@ -148,10 +176,12 @@
         wall = new Box(prods.x-wWall/2, cHeight-hWall, wWall, hWall+uWall);
 
         // smooth animation
-        eqDot = new Smoothimation(0.1);
-        yEmReact = new Smoothimation(0.1);
-        yEmProd = new Smoothimation(0.1);
-        yEmTotal = new Smoothimation(0.1);
+        eqDot = new Smoothimation();
+        yEmReact = new Smoothimation();
+        yEmProd = new Smoothimation();
+        yEmTotal = new Smoothimation();
+        glowFoc = new Smoothimation(0.15);
+        glowGel = new Smoothimation(0.15);
 
 
         // inicialitza reacció
@@ -165,6 +195,9 @@
         // dibuix recurrent
         update();
         setInterval(update, Math.round(1000/fps));
+
+        // clicks
+        c.addEventListener("click", onClick, false);
     }
 
 
@@ -211,7 +244,7 @@
         cc.fillRect(prods.x+r, prods.y+r, prods.w-2*r, prods.h-2*r);
         cc.fillStyle = "#cfcfcf";
         cc.font = "bold " + (150*u).toString() + "px Courier New";
-        cc.fillText("∆H", c.width*3/4, prods.y+hProds/2+m);
+        cc.fillText("∆H", c.width*0.66, prods.y+hProds/2+m);
 
         cc.fillStyle = "lightgrey";
         cc.fillRect(wall.x+r, wall.y+r, wall.w-2*r, wall.h-2*r);
@@ -307,8 +340,27 @@
         cc.fillStyle = "white";
         eqDot.chase((n-recuento["react"])/n);
         eqDot.update();
-        console.log(eqDot);
         drawCircle(cc, xEqLine+wEqLine*eqDot.n, yEqLine, r*0.7, true, true);
+
+        // UI
+        cc.lineWidth = 5;
+        cc.strokeStyle = "black";
+        cc.fillStyle = lerpColor([133, 255, 231], [255, 255, 255], glowGel.n);
+        glowGel.update();
+        drawCircle(cc, gelX, gelY, bR, true, true);
+        cc.lineWidth = 7;
+        cc.strokeStyle = "#1bace0";
+        drawCircle(cc, gelX, gelY, bR*0.92, true, false);
+        drawImage(cc, img_gel, gelX-br, gelY-br, br*2, br*2);
+        cc.lineWidth = 5;
+        cc.strokeStyle = "black";
+        cc.fillStyle = lerpColor([255, 192, 74], [255, 255, 255], glowFoc.n);
+        glowFoc.update();
+        drawCircle(cc, focX, focY, bR, true, true);
+        cc.lineWidth = 7;
+        cc.strokeStyle = "red";
+        drawCircle(cc, focX, focY, bR*0.92, true, false);
+        drawImage(cc, img_foc, focX-br, focY-br, br*2, br*2);
 
         /* collision grid (debugging)
         cc.strokeStyle = "red";
@@ -445,6 +497,17 @@
       }
     }
 
+function raiseEnergy(amount){
+  if(amount > 0){
+    for(let mol of moleculas){
+      mol.em += amount;
+    }
+  }else{
+    for(let mol of moleculas){
+      mol.setTrueEm(Math.max(mol.getTrueEm()+amount, 0));
+    }
+  }
+}
 
  ////////////// drawing tools //////////////
  // circles
@@ -521,6 +584,46 @@
       }
   }
 
+  function drawImage(cc, imagen, x, y, w, h){
+    if(imagen.ready){
+      if(w && h){
+        cc.drawImage(imagen.img, x, y, w, h);
+      }else{
+        cc.drawImage(imagen.img, x, y);
+      }
+    }else{
+      cc.fillText("(" + imagen.title + ")", x, y);
+    }
+  }
+
+
+  function lerpColor(rgb1, rgb2, t){
+    let colR = Math.round(rgb1[0]*t + rgb2[0]*(1-t));
+    let colG = Math.round(rgb1[1]*t + rgb2[1]*(1-t));
+    let colB = Math.round(rgb1[2]*t + rgb2[2]*(1-t));
+    return "rgb(" + colR + ", " + colG + ", " + colB + ")";
+  }
+
+    ///////////////// Click ////////////////
+    function onClick(e) {
+          const rect = c.getBoundingClientRect();
+          const relX = event.clientX - rect.left;
+          const relY = event.clientY - rect.top;
+          xCur = relX * c.width / rect.width;
+          yCur = relY * c.height / rect.height;
+
+          // hot
+          if(Math.pow(xCur-focX, 2) + Math.pow(yCur-focY, 2) < Math.pow(bR, 2)){
+            raiseEnergy(100);
+            glowFoc.set(1);
+            glowFoc.chase(0);
+          }else if(Math.pow(xCur-gelX, 2) + Math.pow(yCur-gelY, 2) < Math.pow(bR, 2)){
+            raiseEnergy(-100);
+            glowGel.set(1);
+            glowGel.chase(0);
+          }
+    }
+
     ///////////////// KeyUp ////////////////
     function canvas_hotkeys(e){
         switch(e.key){
@@ -532,14 +635,10 @@
                 pause = !pause;
                 break;
             case "+":
-              for(let mol of moleculas){
-                mol.em += 100;
-              }
+              raiseEnergy(100);
               break;
             case "-":
-              for(let mol of moleculas){
-                mol.setTrueEm(Math.max(mol.getTrueEm()-100, 0));
-              }
+              raiseEnergy(-100);
               break;
         }
     }
