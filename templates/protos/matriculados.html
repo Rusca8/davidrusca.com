@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Dots - Web de David Ruscalleda{% endblock %}
+{% block title %}Matriculados - Web de David Ruscalleda{% endblock %}
 
 {% block extra_head %}
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -11,7 +11,7 @@
 
 <div class="mx-2">
 
-<h1 class="text-center mt-2">[Dots]</h1>
+<h1 class="text-center mt-2">[Matriculados]</h1>
 <h3 class="text-center mb-4">(Prototip)</h3>
 
 <div class="container">
@@ -63,13 +63,13 @@
     //////////////////// FIREBASE //////////////////////
     // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyAplBo72JhFl63lvk2mNxMFH_UZ4-k0y7A",
-      authDomain: "dots-86b59.firebaseapp.com",
-      databaseURL: "https://dots-86b59-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "dots-86b59",
-      storageBucket: "dots-86b59.appspot.com",
-      messagingSenderId: "249492034508",
-      appId: "1:249492034508:web:906b6e2293096928fc4369"
+      apiKey: "AIzaSyC_z8xOu9Zm38AEYKFelsfr67XuPIsEyAQ",
+      authDomain: "matriculados-bf687.firebaseapp.com",
+      databaseURL: "https://matriculados-bf687-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "matriculados-bf687",
+      storageBucket: "matriculados-bf687.appspot.com",
+      messagingSenderId: "63946024344",
+      appId: "1:63946024344:web:f82b295694a476f1ffb7ed"
     };
 
     // Initialize Firebase
@@ -122,7 +122,7 @@
 
       // authentication
       firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
+        console.log("USER", user);
         if (user) {
           console.log("logged in");
           playerId = user.uid;
@@ -152,34 +152,30 @@
     //////////////// Global vars //////////////
     let cWidth;
     let cHeight;
-    let colors = ["#fab97f", //taronja
-    "#faea7f", //groc
-    "#a4c7f5", //blau
-    "#c995fc", //lila
-    "#ffffff", //blanc
-    "#fcccde", //rosa
-    "#e1fccc", // verd
-    "#ff0000"];//(gris fosc, neutre)
-    let c_select = "#8ae4e6";
 
     //tablero
-    let n = 6;
-    let cols = n;
-    let rows = n;
-
-    let tool = 3;
-    let tool_names = {0: "Flip", 1: "Swap", 2: "Swap & 2-flip", 3: "Flip/Swap"}
-
-    let selected = -42;
+    let cols = 4;
+    let rows = 9;
+    let n_players = 5;
 
     // visualization
+    let selected = -42;
     let back_visible = false;
+    let tools = {0: "flip", 1: "select/flip"};
+    let tool = 1;
+
+    // otras
+    let op_letras = ["A", "B", "C", "D", "E"];
+    let alt_countries = ["F", "P", "D", "I"];
+    let current_card = null;
 
     //////////////// Clases ///////////////////
-    class Pieza {
-      constructor(colors, side){
-        this.colors = colors;
-        this.side = side;
+    class Carta {
+      constructor(num, lletres, side, country){
+        this.num = num;
+        this.lletres = lletres;
+        this.side = side || 1;  // visible
+        this.country = country || "E";
       }
 
       flip(){
@@ -187,8 +183,24 @@
       }
     }
 
+    class Button {
+      constructor(x, y, w, h, code){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.code = code
+      }
+    }
+
     /////////////// Objects ///////////////////
-    let fichas = [];
+    let deck_size = 100;
+    let deck = [];
+    let grid_cards = [];
+    const player_piles = [];
+    for (let i = 0; i < n_players; i++) {
+      player_piles.push([]);
+    }
 
     ////////////////// inicio /////////////////
     window.onload = function(){
@@ -206,8 +218,20 @@
       c.height = cHeight;
       u = cHeight/1200;  // unidad de medidas
       m = 20*u;  // margen laterales
-      rCell = 140*u;  // medida casillas
-      r = rCell*0.70/2;  // radio fichas
+      wCard = 260*u;  // ancho carta
+      hCard = 60*u;  // alto carta
+      mC = 20*u;  // margen entre cartas
+      // Players piles
+      hPlayers = 160*u;
+      // UI
+      xDeck = 200*u;
+      yDeck = 100*u;
+      ui_buttons = [];
+      ui_buttons.push(new Button(xDeck, yDeck, wCard, hCard, "deck"));
+      for(let i=0; i<n_players; i++){
+        ui_buttons.push(new Button(xDeck+wCard+3*m+(hCard+m)*i, yDeck, hCard, hCard, "p"+i.toString()));
+      }
+      ui_buttons.push(new Button(xDeck+wCard+3*m+(hCard+m)*n_players, yDeck, hCard, hCard, "x"));
 
       // inicia dibujo
       cc = c.getContext("2d");
@@ -224,13 +248,66 @@
 
     /////////////////// init board ////////////
     function init_board(){
-      for(let i=0; i<cols*rows; i++){
-        // all permutations
-        fcolor1 = Math.min(Math.floor(i/n), colors.length);
-        fcolor2 = Math.min(i%n, colors.length);
-        fichas.push(new Pieza([fcolor1, fcolor2], Math.random()<0.5?0:1));
+      for(let i=0; i<deck_size; i++){
+        num = Math.floor(Math.random()*9999);
+        letras = "";
+        for(let j=0; j<3; j++){
+          letras += op_letras[Math.floor(Math.random()*op_letras.length)]
+        }
+        if(Math.random()>0.8){
+          country = alt_countries[Math.floor(Math.random()*alt_countries.length)];
+        }else{
+          country = "E";
+        }
+        deck.push(new Carta(num, letras, 0, country));
       }
-      shuffle(fichas);
+      reset_board();
+    }
+
+    function pop_card(selected){
+      let card;
+      selected = selected || -42;
+      if(selected<0 && selected >= -n_players){
+        if(player_piles[-selected-1].length<1){
+          return null;
+        }
+        return player_piles[-selected-1].pop();
+      }else if(selected == -100){
+        card = current_card;
+        current_card = pop_card();
+        return card;
+      }else if(selected >= 0){
+        card = grid_cards[selected];
+        grid_cards[selected] = pop_card();
+        return card;
+      }
+      card = deck.pop();
+      card.side = 0;
+      return card || new Carta(0, "!!!", 0, "?");
+    }
+
+    function reset_board(){
+      // return cards to main deck
+      for(let card of grid_cards){
+        deck.push(card);
+      }
+      grid_cards = [];
+      i = 0;
+      for(let pile of player_piles){
+        for(let card of pile){
+          deck.push(card);
+        }
+        player_piles[i] = [];
+        i++;
+      }
+      // shuffle deck
+      shuffle(deck);
+      // deal new grid
+      for(let i=0; i<cols*rows; i++){
+        grid_cards.push(pop_card());
+      }
+      // deal new current card
+      current_card = pop_card();
     }
 
     /////////////////// dibujo ///////////////
@@ -251,36 +328,59 @@
 
       // fichas
       i = 0;
-      for(let f of fichas){
-        pos = getPosition(i)
-        // UI under
-        if(i == selected){
-          cc.fillStyle = c_select;
-          drawCircle(cc, pos[0], pos[1], r*1.2, false, true);
-        }
+      for(let card of grid_cards){
+        console.log("Drawing cards");
+        [x, y] = getPosition(i)
 
-        //exterior (back)
-        cc.strokeStyle = "black";
-        if(back_visible){
-          cc.fillStyle = getColor(f, 1);
-        }else{
-          if(f.side == 1){
-            cc.fillStyle = "#bbbbbb";
-          }else{
-            cc.fillStyle = "#888888";
-          }
-        }
-        drawCircle(cc, pos[0], pos[1], r, true, true);
-        //interior (front)
-        cc.fillStyle = getColor(f, 0);
-        drawCircle(cc, pos[0], pos[1], r*0.7, true, true);
+        draw_card(card, x, y, selected==i);
         i++;
       }
 
       // menú / debugging info
       cc.fillStyle = "black";
-      cc.fillText(tool_names[tool], cWidth-20*m, 7*m);
+      cc.fillText(tools[tool], cWidth-20*m, 7*m);
+      //deck
+      if(current_card){
+        draw_card(current_card, xDeck, yDeck, selected == -100);
+      }
+      // player buttons
+      cc.strokeStyle = "black";
+      i = 0;
+      for(let b of ui_buttons){
+        if(b.code.startsWith("p") || b.code == "x"){
+          if(b.code == "x"){
+            cc.fillStyle = "darksalmon";
+          }else{
+            cc.fillStyle = "lightblue";
+          }
+          cc.fillRect(b.x, b.y, b.w, b.h);
+          cc.strokeRect(b.x, b.y, b.w, b.h);
+          cc.fillStyle = "black";
+          cc.fillText(b.code, b.x+b.w/2, b.y+b.h/2);
+        }
+        i++;
+      }
 
+      //Player piles
+      cc.strokeStyle = "black";
+      cc.strokeRect(m, cHeight-m, cWidth-2*m, -hPlayers);
+      cc.strokeRect(m, cHeight-m, cWidth-2*m, -hPlayers);
+      i = 0;
+      for(let pile of player_piles){
+        cc.font = (40*u).toString() + "px Courier New";
+        [x, y] = getPilePosition(i);
+        console.log(i, x, y);
+        if(pile.length>0){
+          draw_card(pile[pile.length-1], x, y, selected==-i-1);
+        }else{
+          cc.strokeRect(x, y, wCard, hCard);
+        }
+        cc.fillStyle = "black";
+        cc.font = (30*u).toString() + "px Courier New";
+        cc.fillText("cartes: " + pile.length.toString(), x+wCard/2, y-20*u);
+        cc.fillText("Jugador " + i.toString(), x+wCard/2, y+hCard+20*u);
+        i++;
+      }
     }
 
     ////////////// drawing tools //////////////
@@ -296,38 +396,71 @@
       }
     }
 
-    function getColor(f, side){
-      return colors[f.colors[f.side==side?0:1]]
+    function draw_card(card, x, y, selected){
+      // selection
+      if(selected){
+        cc.fillStyle = "orange";
+        cc.fillRect(x-5*u, y-5*u, wCard+10*u, hCard+10*u);
+      }
+      if(card.side == 1){
+        cc.fillStyle = "white";
+      }else{
+        cc.fillStyle = "lightgrey";
+      }
+      cc.fillRect(x, y, wCard, hCard);
+
+      if(card.side == 1 || back_visible){
+        // country banner
+        cc.fillStyle = "#285bd1";  // europe blue
+        cc.fillRect(x, y, 38*u, hCard);
+        cc.strokeStyle = "#f7d62d";  // europe yell
+        cc.lineWidth = 4*u;
+        drawCircle(cc, x+19*u, y+17*u, 8*u, true, false);
+        cc.fillStyle = "white";
+        cc.font = (30*u).toString() + "px Courier New";
+        cc.fillText(card.country, x+19*u, y+hCard*0.72)
+        // plate
+        cc.fillStyle = "black";
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.fillText(card.num.toString().padStart(4, "0") + " " + card.lletres,
+                    x+wCard/2+18*u, y+hCard/2+2*u);
+      }
+
+
+      cc.lineWidth = 3*u;
+      cc.strokeStyle = "black";
+      cc.strokeRect(x, y, wCard, hCard);
     }
 
     function getCoordinates(n){
-        return [n%rows, Math.floor(n/cols)];
+        return [Math.floor(n/cols), n%cols];
     }
 
     function getPosition(n){
       coord = getCoordinates(n);
-      x = m+(1+coord[1]+0.5+mCard)*rCell;
-      y = cHeight/2-rCell*rows/2+(coord[0]+0.5)*rCell;
+      x = m+(coord[1]+0.2)*(wCard+mC);
+      y = cHeight-(hCard+mC)*(rows+3)+(coord[0]+0.5)*(hCard+mC);
       return [x, y];
+    }
+
+    function getPilePosition(player_num){
+      x = 2.5*mC + (wCard+mC*2)*player_num;
+      y = cHeight-hPlayers/2-hCard/2-m;
+      return [x, y]
     }
 
     ///////////////// KeyUp ////////////////
     function canvas_hotkeys(e){
         switch(e.key){
-          case "f":  // flip coin
-            tool = 0;
-            break;
-          case "s":  // swap coins (no flip)
+          case "s":
             tool = 1;
             break;
-          case "x":  // swap coins (flip both)
-            tool = 2;
-            break;
-          case "m":  // flip or swap (multitool) [flips if swap same]
-            tool = 3;
+          case "f":
+            tool = 0;
             break;
           case "o":
             back_visible = !back_visible;
+            break;
         }
         update();
     }
@@ -345,33 +478,85 @@
           xCur = relX * c.width / rect.width;
           yCur = relY * c.height / rect.height;
 
-        // main
+        // MAIN
+        // ui buttons
         let found = false;
+        for(let b of ui_buttons){
+          if(xCur > b.x && xCur < b.x+b.w && yCur >b.y && yCur < b.y+b.h){
+            found = true;
+            if(b.code.startsWith("p")){
+              p = parseInt(b.code.slice(1));
+              if(selected<0 && selected >= -n_players){  // p1: -1, p2: -2, ...
+                if(player_piles[-selected-1].length<1){
+                  break;
+                }
+                player_piles[p].push(player_piles[-selected-1].pop());
+                selected = -42;
+
+              }else if(selected == -100){  // default: current card
+                if(current_card.side == 0){
+                  break;
+                }
+                player_piles[p].push(current_card);
+                current_card = pop_card();
+                selected = -42;
+
+              }else if(selected>=0){  // selected from grid
+                if(grid_cards[selected].side == 0){
+                  break;
+                }
+                player_piles[p].push(grid_cards[selected]);
+                grid_cards[selected] = pop_card();
+                selected = -42;
+              }
+
+              break;
+            }else{
+              switch(b.code){
+                case "deck":
+                  current_card.flip();
+                  selected = -100;
+                  break;
+                case "x":
+                  card = pop_card(selected);
+                  if(card){
+                    deck.unshift(card);
+                  }
+                  selected = -42;
+              }
+            }
+          }
+        }
+
+        // piles
+        for(let i=0; i<n_players; i++){
+          [x, y] = getPilePosition(i);
+          if(xCur > x && xCur < x+wCard && yCur > y && yCur < y + hCard){
+            found = true;
+            if(player_piles[i].length>0){
+              selected = -i-1;
+            }
+          }
+        }
+
+        // cards
         i = 0;
-        for(let f of fichas){
+        for(let card of grid_cards){
           pos = getPosition(i);
-          if(r ** 2 > (pos[0]-xCur) ** 2 + (pos[1]-yCur) ** 2){
+          if(xCur > pos[0] && xCur < pos[0] + wCard
+             && yCur > pos[1] && yCur < pos[1] + hCard){
             found = true;
             if(tool == 0){
-              f.flip();
-            // other single select tools
-            // select-2 tools
+              card.flip();
             }else{
-              if(selected < 0){ // no selection: select first
-                selected = i;
-              }else{  // selecting second, swap
-                if(tool == 3 && i == selected){
-                    f.flip();
-                }else{
-                  aux = fichas[i];
-                  fichas[i] = fichas[selected];
-                  fichas[selected] = aux;
-                  if(tool == 2){
-                    fichas[selected].flip();
-                    fichas[i].flip();
-                  }
-                }
+              if(selected == i){
+                card.flip();
                 selected = -42;
+              }else{
+                if(card.side == 0){
+                  card.flip();
+                }
+                selected = i;
               }
             }
             break;
@@ -381,6 +566,7 @@
         if(!found){
           selected = -42;
         }
+
         update();
         if(currentGame){
           upload_board();
@@ -424,7 +610,7 @@
       gameRef = firebase.database().ref("/games/" + game_id);
       gameRef.set(games[game_id]);
       mostrar_partida(game_id);
-      shuffle(fichas);
+      reset_board();
       upload_board();
     }
 
@@ -441,9 +627,15 @@
     }
 
     function get_board_state(){
-      let board_state = [];
-      for(let f of fichas){
-        board_state.push([f.colors, f.side]);
+      let board_state = {
+        grid: [],
+        deck: [],
+      };
+      for(let card of grid_cards){
+        board_state.grid.push([card.num, card.lletres, card.side, card.country]);
+      }
+      for(let card of deck){
+        board_state.deck.push([card.num, card.lletres, card.side, card.country]);
       }
       return board_state;
     }
@@ -455,12 +647,14 @@
     }
 
     function db_update_board(){
-      i = 0;
-      for(let f of fichas){
-        fi = games[currentGame].board[i];
-        fichas[i] = new Pieza(fi[0], fi[1]);
-        i++;
-      }
+      Object.keys(games[currentGame].board.grid).forEach((card) => {
+        grid_cards = []
+        grid_cards.push(new Carta(card[0], card[1], card[2], card[3]));
+      });
+      Object.keys(games[currentGame].board.deck).forEach((card) => {
+        deck = []
+        deck.push(new Carta(card[0], card[1], card[2], card[3]));
+      });
       update();
     }
 

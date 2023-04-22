@@ -211,6 +211,12 @@ def q_eq():
     return render_template("lab_q_eq.html")
 
 
+@app.route('/labs/q/chatelier')
+@app.route('/labs/q/chatelier/')
+def q_chatelier():
+    return render_template("lab_q_chatelier.html")
+
+
 @app.route('/bg/<bg>')
 def bg_dots(bg=None):
     nom = random.choice(["Pernil", "Rinoceront", "Iogurt", "Marsupial", "Cacaolat", "Illuminati", "Llimac",
@@ -219,6 +225,10 @@ def bg_dots(bg=None):
                             "afamat", "misteriós", "refinat", "fastigós", "màgic", "estrident", "sorollós"])
     if bg == "dots":
         return render_template("/protos/dots.html", nom=f"{nom} {cognom}")
+    elif bg == "matriculados":
+        return render_template("/protos/matriculados.html", nom=f"{nom} {cognom}")
+    else:
+        return render_template('404.html')
 
 
 @app.route('/notion/data')

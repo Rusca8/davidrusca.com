@@ -1,0 +1,539 @@
+{% extends "base.html" %}
+{% block title %} {{ _('Laboratorio') }} {{ _('Equilibrio Químico') }} - Web de David Ruscalleda {% endblock %}
+{% block navpulseras %}active{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">Le Châtelier</h3>
+<p class="mt-2 text-center">{{ _('Observa el equilibrio dentro de una reacción química.') }}</p>
+
+<div class="card mx-2 border-c">
+  <div class="card-header">
+      <h5 class="text-center my-0">Efecte de la temperatura sobre la reacció.</h5>
+  </div>
+  <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+</div>
+<div class="card mx-2 border-c mt-2 pb-0">
+    <div class="card-body">
+        {{ _('Si clicas sobre la animación podrás pararla con la tecla') }} <code>{{ _('Espacio') }}</code>.<br>
+        {{ _('También podrás subir la temperatura pulsando') }} <code>{{ _('+') }}</code> {{ _('y bajarla pulsando') }} <code>{{ _('-') }}</code>.
+    </div>
+</div>
+
+<script>
+ ///////////// GLOBAL VARS //////////////
+ // timing
+ let fps = 60;
+ let t = Date.now();
+ let dt = 0;  // tiempo real que ha pasado
+ let kdt = 0;  // corrección para movimiento según dt
+ let pause = false;
+ let countdown = 1000;
+
+ // medidas
+ let cWidth;
+ let cHeight;
+ let xWall;
+ let hWall;
+ let m = 15;
+ let r = 10;
+ let mr = m+r;
+ let tapado = false;
+
+ // world
+ let n = 100;
+ let indet = 60;  // heisenberg (Em)
+
+ // constants
+ let g = 4;
+
+ // info
+ let recuento = {"react": 0, "prod": 0, "Emreact": 0, "Emprod": 0};
+
+
+ ///////////////// CLASSES //////////////
+ class Molecula {
+   constructor(x, y, vx, vy, r=10){
+     this.x = x;
+     this.y = y;
+     this.vx = vx;
+     this.vy = vy;
+     this.vymax = vy;
+     this.em = vy*vy/2;  // Em = Ec + Ep = v^2/2 + g∆h [m=1]
+     this.x0 = x;
+     this.y0 = y;
+   }
+
+   setX(x, teleport=false){
+     this.x0 = teleport?x:this.x;
+     this.x = x;
+   }
+
+   setY(y, teleport=false){
+     this.y0 = teleport?y:this.y;
+     this.y = y;
+   }
+
+   fixSpeed(flipsign=1){
+     this.vy = flipsign * Math.sign(this.vy) * Math.sqrt(Math.abs((this.em-g*(cHeight-this.y))*2));
+   }
+
+   prod(){
+     return this.x > cWidth/2;
+   }
+
+   getTrueEm(){
+     if(this.prod()){
+       return this.em - g*hProds;
+     }else{
+       return this.em;
+     }
+   }
+
+   setTrueEm(em){
+     if(this.prod()){
+       this.em = em + g*hProds;
+     }else{
+       this.em = em;
+     }
+   }
+
+ }
+
+ class Smoothimation{
+   constructor(speed, n=0){
+     this.speed = speed;
+     this.n = n;
+     this.chasing = n;
+   }
+
+   update(){
+     this.n = this.chasing*this.speed + this.n*(1-this.speed);
+   }
+
+   chase(chase){
+     this.chasing = chase;
+   }
+
+   teleport(n){
+     this.n = n;
+   }
+ }
+
+ class Box {
+   constructor(x, y, w, h){
+     this.x = x;
+     this.y = y;
+     this.w = w;
+     this.h = h;
+   }
+ }
+
+
+ //////////////// OBJECTS ///////////////
+ let moleculas = [];
+
+ /////////////////// inicio ////////////////////
+    window.onload = function(){
+        c=document.getElementById("app");
+        // medidas
+        cWidth = 2000;
+        cHeight = 1000;
+        c.width = cWidth;
+        c.height = cHeight;
+        u = cHeight/1200;     // unidad de medida
+        // colisiones
+        hProds = cHeight/4
+        prods = new Box(cWidth/2, cHeight-hProds, cWidth/2+100, hProds+100);
+        uWall = 100;
+        wWall = cWidth/20;
+        hWall = hProds + 80;
+        wall = new Box(prods.x-wWall/2, cHeight-hWall, wWall, hWall+uWall);
+
+        // smooth animation
+        eqDot = new Smoothimation(0.1);
+        yEmReact = new Smoothimation(0.1);
+        yEmProd = new Smoothimation(0.1);
+        yEmTotal = new Smoothimation(0.1);
+
+
+        // inicialitza reacció
+        init_world();
+
+        // inicializa dibuix
+        cc=c.getContext("2d");
+
+        // init_collisions(c);  // si fes falta clicar la pantalla
+
+        // dibuix recurrent
+        update();
+        setInterval(update, Math.round(1000/fps));
+    }
+
+
+ /////////////////// init world //////////////////
+ function init_world(){
+   console.log("initialization...");
+    for(let i=0; i<n; i++){
+      x = Math.floor(Math.random() * wall.x);
+      y = cHeight-mr;
+      vx = (Math.random()<0.5?1:-1) * Math.random() * 10 + 20;
+      vy = - (Math.random() * 20 + 50);
+      moleculas.push(new Molecula(x, y, vx, vy, r));
+    }
+ }
+
+
+ ////////////////// dibujo ////////////////////
+    function update(){
+        // timing
+        dt = Date.now()-t;
+        kdt = dt*fps/1000;
+        t = Date.now();
+
+        // previos
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.lineWidth = 5*u;
+        cc.textBaseline = "middle";
+        cc.textAlign = "left";
+
+        // fondo
+        cc.fillStyle="#e4f5f3";  // prods
+        cc.fillRect(0, 0, c.width, c.height);
+        cc.fillStyle="#f5eee4";
+        cc.fillRect(0, 0, c.width/2, c.height);
+
+        // muros y bloques de colisión
+        cc.fillStyle = "lightgrey";
+        cc.fillRect(wall.x+r, wall.y+r, wall.w-2*r, wall.h-2*r);
+        cc.fillRect(prods.x+r, prods.y+r, prods.w-2*r, prods.h-2*r);
+
+        // em levels
+        let emLineW = cWidth/2;
+        let emLineHole = 60;
+
+        let avgEmTotal = Math.round((recuento["Emreact"]+recuento["Emprod"])/n);
+        yEmTotal.chase(cHeight-avgEmTotal/g);
+        yEmTotal.update();
+        cc.lineWidth = 1;
+        cc.strokeStyle = "white";
+        drawLine(cc, [[0, yEmTotal.n], [cWidth, yEmTotal.n]]);
+        if(recuento["react"]){
+          cc.lineWidth = 1;
+          let avgEmReact = Math.round(recuento["Emreact"]/recuento["react"]);
+          //console.log("EmREACT", recuento["Emreact"], "REACT", recuento["react"], "AVG", avgEmReact);
+          yEmReact.chase(cHeight-avgEmReact/g);
+          yEmReact.update();
+          cc.strokeStyle = "red";
+          drawLine(cc, [[0, yEmReact.n], [emLineW-emLineHole, yEmReact.n]]);
+          cc.textAlign = "left";
+          cc.fillStyle = "red";
+          cc.font = (30*u).toString() + "px Courier New";
+          cc.fillText((Math.round(avgEmReact/100).toString() + "ºC"), emLineW-emLineHole, yEmReact.n);
+        }
+        if(recuento["prod"]){
+          cc.lineWidth = 1;
+          let avgEmProd = Math.round(recuento["Emprod"]/recuento["prod"]);
+          //console.log("EmREACT", recuento["Emreact"], "REACT", recuento["react"], "AVG", avgEmReact);
+          yEmProd.chase(cHeight-avgEmProd/g);
+          yEmProd.update();
+          cc.strokeStyle = "#1bace0";
+          drawLine(cc, [[cWidth/2+emLineHole, yEmProd.n], [cWidth/2 + emLineW+emLineHole, yEmProd.n]]);
+          cc.textAlign = "right";
+          cc.fillStyle = "#1bace0";
+          cc.font = (30*u).toString() + "px Courier New";
+          cc.fillText((Math.round(avgEmProd/100).toString() + "ºC"), cWidth/2+emLineHole, yEmProd.n);
+        }
+
+
+        // moléculas
+        cc.fillStyle="lightblue";
+        for(let mol of moleculas){
+            drawMolec(cc, mol);
+        }
+        if(!pause){
+          if(countdown){
+              if(countdown > 0){
+                  countdown -= dt;
+              }else{
+                countdown = 0;
+              }
+          }else{
+            // cálculos mundo (para la siguiente)
+            move_world();
+
+          }
+        }
+
+        // borde
+        cc.strokeStyle = "black";
+        if(tapado){
+          cc.strokeRect(m, m, cWidth-2*m, cHeight-2*m);
+        }else{
+          cc.strokeRect(m, -m, cWidth-2*m, cHeight);
+        }
+
+        // overlay
+        cc.strokeStyle = "black";
+        cc.lineWidth = 2;
+        let yEqLine = 6*m;
+        let wEqLine = cWidth/3;
+        let xEqLine = cWidth/2-wEqLine/2;
+        drawLine(cc, [[xEqLine, yEqLine], [xEqLine+wEqLine, yEqLine]]);
+
+        cc.fillStyle = "red";
+        drawCircle(cc, xEqLine, yEqLine, r, true, true);
+        cc.textAlign = "right";
+        cc.font = (50*u).toString() + "px Courier New";
+        cc.fillText(recuento["react"], xEqLine-4*r, yEqLine);
+
+        cc.fillStyle = "#1bace0";
+        drawCircle(cc, xEqLine+wEqLine, yEqLine, r, true, true);
+        cc.textAlign = "left";
+        cc.font = (50*u).toString() + "px Courier New";
+        cc.fillText(recuento["prod"], xEqLine+wEqLine+4*r, yEqLine);
+
+        cc.fillStyle = "white";
+        eqDot.chase((n-recuento["react"])/n);
+        eqDot.update();
+        console.log(eqDot);
+        drawCircle(cc, xEqLine+wEqLine*eqDot.n, yEqLine, r*0.7, true, true);
+
+        /* collision grid (debugging)
+        cc.strokeStyle = "red";
+        for(let i=0; i<gnx; i++){
+            for(let j=0; j<gny; j++){
+                cc.strokeRect(i*gWidth, j*gHeight, gWidth, gHeight);
+            }
+        } */
+    }
+
+ //////////////// cálculos mundo ///////////////
+    function move_world(){
+        // updates
+        recuento = {"react": 0, "prod": 0, "Emreact": 0, "Emprod": 0};
+        for(let mol of moleculas){
+            // movimiento
+            move_molec(mol);
+            // recuento
+            recuento[mol.prod()?"prod":"react"] += 1;
+            recuento[mol.prod()?"Emprod":"Emreact"] += mol.getTrueEm();
+        }
+        // heat transfer
+        for(let i=0; i<moleculas.length; i++){
+          let mol1 = moleculas[i];
+          let mol2 = moleculas[i>0?i-1:moleculas.length-1];
+
+          let diff = mol1.getTrueEm() - mol2.getTrueEm();
+
+          // to the mean
+          let transfer = 0.1 * diff;
+          mol1.em -= transfer;
+          mol2.em += transfer;
+
+          // rand
+          let randDiff = Math.random() * 40 * (Math.random()<0.5?1:-1);
+          mol1.em -= randDiff;
+          mol2.em += randDiff;
+
+        }
+    }
+
+    function move_molec(mol, pbspeed=1){
+        kdt *= pbspeed;
+        // gravity
+        mol.vy += g * kdt;
+        //console.log(mol.vy);
+        // movement
+        mol.setX(mol.x + mol.vx * kdt);
+        mol.setY(mol.y + mol.vy * kdt);
+        keep_outside(mol, wall);
+        keep_outside(mol, prods);
+        keep_inside(mol);
+    }
+
+    function keep_inside(mol){
+        let imp;
+        // izquierda
+        if(mol.x<mr){
+            mol.x = 2*mr-mol.x;
+            mol.vx *= -1;
+        // derecha
+        }else if(mol.x>cWidth-mr){
+            mol.x = 2*(cWidth-mr)-mol.x;
+            mol.vx *= -1;
+        }
+        // arriba
+        if(mol.y<mr){
+          if(tapado){
+            mol.y = 2*mr-mol.y;
+            mol.vy *= -1;
+          }
+        // abajo
+        }else if(mol.y>cHeight-mr){
+            mol.y = 2*(cHeight-mr)-mol.y;
+            mol.fixSpeed(-1);
+        }
+    }
+
+    function keep_outside(mol, box, debug=false){
+      //trajectòria: y = mx + n
+      let pend = mol.vy/mol.vx;
+      let ord = mol.y - pend*mol.x;
+      let boxX = box.x - mol.r;
+      let boxY = box.y - mol.r;
+
+      if(debug){
+        cc.strokeStyle = "cyan";
+        drawCircle(cc, mol.x0, mol.y0, 10, true, false);
+        cc.strokeStyle = "pink";
+        drawLine(cc, [[-1000, pend*-1000 + ord], [1000, pend*1000+ord]]);
+      }
+
+      if(mol.vx > 0){  // bounce left
+        if(mol.x >= box.x && mol.x0 <= box.x){
+          cc.strokeStyle = "purple";
+          drawCircle(cc, mol.x0, mol.y0, 10, true, false);
+          let d1 = pend * box.x + ord - box.y;
+          if(0 < d1 && d1 < box.h){
+              mol.vx *= -1;
+              mol.x = box.x;
+            return
+          }
+        }
+      }else{  // bounce right
+        if(mol.x <= box.x+box.w && mol.x0 >= box.x+box.w){
+          let d3 = pend * (box.x + box.w) + ord - box.y;
+          if(0 < d3 && d3 < box.h){
+            if(mol.x < box.x + box.w){
+              mol.vx *= -1;
+              mol.x = box.x+box.w;
+            }
+            return
+          }
+        }
+      }
+      if(mol.vy > 0){  // bounce top
+        if(mol.y >= box.y && mol.y0 <= box.y){
+          let d2 = (box.y - ord)/pend - box.x;
+          if(0 < d2 && d2 < box.w){
+            mol.fixSpeed(-1);
+            mol.y = box.y;
+            return
+          }
+        }
+      }else{  // bounce bottom
+        if(mol.y <= box.y+box.h && mol.y0 >= box.y+box.h){
+          let d4 = (box.y+box.h - ord)/pend - box.x;
+          if(0 < d4 && d4 < box.w){
+            mol.vy *= -1;
+            mol.y = box.y+box.h;
+            return
+          }
+        }
+      }
+    }
+
+
+ ////////////// drawing tools //////////////
+ // circles
+    function drawCircle(cc, x, y, r, stroke, fill){
+        cc.beginPath();
+        cc.arc(x, y, r, 0, 2 * Math.PI, false);
+        if(fill){
+            cc.fill();
+        }
+        if(stroke){
+            cc.stroke();
+        }
+    }
+
+  // lines
+    function drawLine(cc, points){
+      if(points.length < 2){
+        return
+      }
+      cc.beginPath();
+      cc.moveTo(points[0][0], points[0][1]);
+      for(let p of points.slice(1)){
+        cc.lineTo(p[0], p[1]);
+      }
+      cc.stroke();
+    }
+
+ // molec
+  function drawMolec(cc, mol, debug=false){
+    if(debug){
+      debug_config = {"collision": false, "em": true};
+      if(debug_config["collision"]){
+        // collision debug
+        cc.strokeStyle = "lightblue";
+        cc.lineWidth = 2;
+        drawLine(cc, [[mol.x-100*mol.vx, mol.y-100*mol.vy], [mol.x+20*mol.vx, mol.y+20*mol.vy]]);
+        drawLine(cc, [[0, mol.y],[cWidth, mol.y]]);
+        cc.strokeStyle = "grey";
+        cc.lineWidth = 3;
+        drawLine(cc, [[mol.x, mol.y], [mol.x-5*mol.vx, mol.y-5*mol.vy]]);
+      }
+      if(debug_config["em"]){
+        cc.font = (30*u).toString() + "px Courier New";
+        cc.fillStyle = "black";
+        cc.fillText(Math.round(mol.em), mol.x+10, mol.y+10);
+        cc.fillStyle = "blue";
+        cc.fillText(Math.round(mol.getTrueEm()), mol.x+10, mol.y+40);
+      }
+    }
+    cc.lineWidth = 3;
+    // molec
+    cc.fillStyle = mol.prod()?"#1bace0":"red";
+    cc.strokeStyle = "black";
+    if(mol.y > -r){  // visible
+      drawCircle(cc, mol.x, mol.y, r, true, true);
+    }else{  // high above
+      let triy = m/3;
+      drawTriangle(cc, mol.x, triy, mol.x-m/2, triy+0.7*m, mol.x+m/2, triy+0.7*m, false, true);
+    }
+
+  }
+
+  function drawTriangle(cc, x1, y1, x2, y2, x3, y3, stroke=true, fill=true){
+      cc.beginPath();
+      cc.moveTo(x1, y1);
+      cc.lineTo(x2, y2);
+      cc.lineTo(x3, y3);
+      cc.closePath();
+      if(fill){
+        cc.fill();
+      }
+      if(stroke){
+        cc.stroke();
+      }
+  }
+
+    ///////////////// KeyUp ////////////////
+    function canvas_hotkeys(e){
+        switch(e.key){
+            case " ":
+            case "p":
+                if(pause){
+                    new_pattern = false;
+                }
+                pause = !pause;
+                break;
+            case "+":
+              for(let mol of moleculas){
+                mol.em += 100;
+              }
+              break;
+            case "-":
+              for(let mol of moleculas){
+                mol.setTrueEm(Math.max(mol.getTrueEm()-100, 0));
+              }
+              break;
+        }
+    }
+    window.addEventListener("keydown", function(e){
+        if((e.key==" ") && document.activeElement==c){
+            e.preventDefault();
+        }
+    }, false);
+</script>
+{% endblock %}
