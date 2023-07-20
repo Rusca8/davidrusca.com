@@ -1,0 +1,335 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <!-- ➊ 外部スクリプト読み込み (three.js 本体) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.139.2/build/three.module.js"
+        }
+      }
+    </script>
+
+    <!-- three.jsのサンプルプログラム -->
+    <script type="module">
+      const myCanvas = document.querySelector('#myCanvas');
+
+      import * as THREE from 'three';
+      import { OrbitControls } from 'https://unpkg.com/three@0.139.2/examples/jsm/controls/OrbitControls.js';
+      import { FontLoader } from 'https://unpkg.com/three@0.139.2/examples/jsm/loaders/FontLoader.js';
+      import { TextGeometry } from 'https://unpkg.com/three@0.139.2/examples/jsm/geometries/TextGeometry.js';
+      import { PointerLockControls } from 'https://threejs.org/examples/jsm/controls/PointerLockControls.js';
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight);
+
+      var renderer = new THREE.WebGLRenderer({antialias: true, canvas: myCanvas});
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.BasicShadowMap;
+      $('body').append(renderer.domElement);
+
+      var clock = new THREE.Clock(true);
+
+      // controls
+      var raycaster = new THREE.Raycaster();
+      var mouse = new THREE.Vector2()
+      document.addEventListener('mousemove', onDocumentMouseMove, false);
+      window.addEventListener('resize', onWindowResize, false);
+      document.addEventListener('mousedown', onMouseDown, false);
+
+      // DATOS Y COSAS
+      let balanc = {
+        "Investigació i desenvolupament": "Intangible",
+        "Concessions administratives": "Intangible",
+        "Aplicacions informàtiques": "Intangible",
+
+        "Terrenys i béns naturals": "Material",
+        "Construccions": "Material",
+        "Instal·lacions tècniques": "Material",
+        "Maquinària": "Material",
+        "Utillatge": "Material",
+        "Mobiliari": "Material",
+        "Elements de transport": "Material",
+        "Equips per processos d'informació": "Material",
+        "Altre immobilitzat material": "Material",
+
+        "Inversions en terrenys i béns": "Immobiliàries",
+        "Inversions en construccions": "Immobiliàries",
+
+        "Inversions financeres a l/t": "Financeres",
+
+        "Comercials": "Existències",
+        "Matèries primeres": "Existències",
+        "Productes en curs": "Existències",
+        "Productes acabats": "Existències",
+
+        "Clients": "Realitzable",
+        "Deutors": "Realitzable",
+        "HP deutora per conceptes fiscals": "Realitzable",
+        "Organismes SS deutors": "Realitzable",
+
+        "Bancs i inst. de crèdit": "Disponible",
+        "Caixa": "Disponible",
+
+        "Capital / Capital social": "Patrimoni net",
+        "Reserves": "Patrimoni net",
+        "Resultat de l'exercici": "Patrimoni net",
+
+        "Proveïdors d'immobilitzat l/t": "PNC",
+        "Deutes l/t amb entitats de crèdit": "PNC",
+
+        "Proveïdors": "PC",
+        "Creditors prestació de serveis": "PC",
+        "Proveïdors d'immobilitzat c/t": "PC",
+        "Deutes c/t amb entitats de crèdit": "PC",
+        "Deutes a curt termini": "PC",
+        "HP creditora per conceptes fiscals": "PC",
+        "Organismes SS creditors": "PC"
+      }
+
+      // UTILITIES
+      function choose(choices) {
+        var index = Math.floor(Math.random() * choices.length);
+        return choices[index];
+      }
+
+      // OBJETO CUBO
+      var geometry = new THREE.BoxGeometry(2, 2, 2);
+      var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+      var sunMaterial = new THREE.MeshPhongMaterial({color: 0xffff00});
+      var marsMaterial = new THREE.MeshPhongMaterial({color: 0xff9944});
+
+      // CUBO DE EJEMPLO
+      var cube = new THREE.Mesh(geometry, sunMaterial);
+      scene.add(cube);
+
+      cube.position.z = -25;
+      cube.position.y += 10
+      cube.rotation.x = 10;
+      cube.rotation.y = 5;
+
+      // SUELO
+      var suelometry = new THREE.CylinderGeometry(20, 50, 3, 32);
+      var suelerial = new THREE.MeshPhongMaterial({color: 0x669900});
+      var suelo = new THREE.Mesh(suelometry, suelerial);
+      scene.add(suelo);
+
+      suelo.position.z = -10;
+      suelo.position.y = -15;
+
+      // CUBO ROTATORIO
+      var rotaCube = new THREE.Mesh(geometry, marsMaterial);
+      scene.add(rotaCube);
+
+      rotaCube.rotation.x = 10;
+      rotaCube.rotation.y = 5;
+      rotaCube.position.y = -20;
+
+      var angle = Math.PI/3;
+      var shootingRadius = 200;
+
+      // CUBO SALTARÍN
+
+      var saltaAngle = Math.PI/3;
+      var saltaRadius = shootingRadius;
+
+      var gravity = 9.8;
+      var saltaH = 13;
+      var saltaVO = Math.sqrt(2*gravity*saltaH)
+
+      var saltaVY = saltaVO;
+
+      // TEXTO
+      const fontLoader = new FontLoader();
+      let textPromise;
+
+      class Text3D {
+        constructor(text, loader, [x, y, z]=[0, 0, 0]){
+          this.text = text;
+          this.last_x = x;
+          this.last_y = y;
+          this.last_z = z;
+          this.last_rx = 0;
+          this.last_ry = 0;
+          this.last_rz = 0;
+          // font converter: https://gero3.github.io/facetype.js/
+          // characters: // "qwertyuiopasdfghjklñzxcvbnmç,.:()àèéíïòóúü·!?;QWERTYUIOPASDFGHJKLÑÇZXCVBNMÀÈÉÍÏÒÓÚÜ/ '"
+          this.promise = new Promise((resolve) => {
+            fontLoader.load(
+              '/static/json/fonts/Nunito_Bold.json',
+              (droidFont) => {
+                const textGeometry = new TextGeometry(text, {
+                  height: 0.3,
+                  size: 1.3,
+                  font: droidFont,
+                });
+                const textMaterial = new THREE.MeshPhongMaterial();
+                this.mesh = new THREE.Mesh(textGeometry, textMaterial);
+                this.mesh.position.x = x;
+                this.mesh.position.z = y;
+                this.mesh.position.y = z;
+                resolve();
+              }
+            );
+          });
+        }
+
+        add_to(scene){
+          this.promise.then(() => {
+            scene.add(this.mesh);
+          })
+        }
+
+        set x(x){
+          this.last_x = x;
+          this.promise.then(() => {
+            this.mesh.position.x = x;
+          })
+        }
+        set y(y){
+          this.last_y = y;
+          this.promise.then(() => {
+            this.mesh.position.y = y;
+          })
+        }
+        set z(z){
+          this.last_z = z;
+          this.promise.then(() => {
+            this.mesh.position.z = z;
+          })
+        }
+
+        set rx(rx){
+          this.last_rx = rx;
+          this.promise.then(() => {
+            this.mesh.rotation.x = rx;
+          })
+        }
+        set ry(ry){
+          this.last_ry = ry;
+          this.promise.then(() => {
+            this.mesh.rotation.y = ry;
+          })
+        }
+        set rz(rz){
+          this.last_rz = rz;
+          this.promise.then(() => {
+            this.mesh.rotation.z = rz;
+          })
+        }
+
+        get x(){return this.last_x;}
+        get y(){return this.last_y;}
+        get z(){return this.last_z;}
+
+        get rx(){return this.last_rx;};
+        get ry(){return this.last_ry;};
+        get rz(){return this.last_rz;};
+
+        erase(){
+          this.promise.then(() => {
+            console.log("Removing: " + this.text);
+            scene.remove(this.mesh);
+          });
+        };
+      }
+
+      var flyText = new Text3D("Proveïdors", fontLoader);
+      flyText.add_to(scene);
+      flyText.rx += Math.PI;
+
+
+      // LUCES
+      var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+
+      var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+      directionalLight.position.x = 3;
+      directionalLight.position.y = 4;
+      directionalLight.position.z = 4;
+      scene.add(directionalLight);
+
+      var animate = function(){
+        var delta = clock.getDelta();
+
+        // normal cube
+        cube.rotation.x += 3 * delta;
+        cube.rotation.y += 1 * delta;
+
+        // rotaCube
+        angle += Math.PI/2 * delta;
+        if(angle > Math.PI*5/6){
+          angle = Math.PI/6;
+        }
+        rotaCube.position.x = shootingRadius * Math.cos(angle);
+        rotaCube.position.z = -shootingRadius * Math.sin(angle);
+
+        // flyText
+        flyText.y += saltaVY * delta;
+        saltaVY -= gravity * delta;
+        if(flyText.z > 0){
+          flyText.y = -50;
+          saltaVY = saltaVO;
+          saltaRadius = shootingRadius;
+          saltaAngle = Math.random() * Math.PI/2 + Math.PI/4;
+          // new text
+          flyText.erase()
+          flyText = new Text3D(choose(Object.keys(balanc)), fontLoader);
+          flyText.add_to(scene);
+          flyText.rx += Math.PI*1.2;
+        }
+        saltaRadius -= shootingRadius*0.3 * delta;
+        flyText.x = saltaRadius * Math.cos(saltaAngle)-flyText.text.length/2;
+        flyText.z = -saltaRadius * Math.sin(saltaAngle);
+
+        flyText.rx -= 7*delta;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+
+      // CONTROLS FUNCTIONS (TODO no m'he parat a fer-hi res)
+      function onDocumentMouseMove(event) {
+          event.preventDefault();
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      }
+
+      function onWindowResize() {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function manageRaycasterIntersections(scene, camera) {
+          camera.updateMatrixWorld();
+          raycaster.setFromCamera(mouse, camera);
+          var intersects = raycaster.intersectObjects(scene.children);
+
+          if (intersects.length > 0) {
+              console.log(intersects);
+          }
+          else {
+
+          }
+      }
+
+      function onMouseDown(event){
+         console.log("mouse position: (" + mouse.x + ", "+ mouse.y + ")");
+         manageRaycasterIntersections(scene, camera);
+      }
+
+      animate();
+    </script>
+  </head>
+
+  <!-- ➍ three.jsの描画先canvas -->
+  <body>
+    <canvas id="myCanvas" style="width: 100%; height: 100%"></canvas>
+  </body>
+</html>

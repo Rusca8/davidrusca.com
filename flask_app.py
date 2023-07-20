@@ -211,6 +211,12 @@ def q_eq():
     return render_template("lab_q_eq.html")
 
 
+@app.route('/jsg/ede')
+@app.route('/jsg/ede/')
+def jsg_ede():
+    return render_template("/js_games/FPEdE.html")
+
+
 @app.route('/labs/q/chatelier')
 @app.route('/labs/q/chatelier/')
 def q_chatelier():
