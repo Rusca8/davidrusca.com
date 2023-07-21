@@ -73,6 +73,12 @@ def logos():
     return render_template("logos.html")
 
 
+@app.route('/climatetracker')
+@app.route('/climatetracker/')
+def climate_tracker():
+    return render_template("climate_tracker.html")
+
+
 @app.route('/raquel')
 @app.route('/raquel/')
 def raquel():

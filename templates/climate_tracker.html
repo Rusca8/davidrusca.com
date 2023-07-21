@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Climate Tracker Infographic - Web de David Ruscalleda') }}{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _("Infográfico para Climate Tracker") }}</h3>
+<p class="text-center">{{ _("Sobre los puntos de no retorno y el informe del IPCC.") }}</p>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+
+      <div class="col-sm-6">
+          <div class="card mt-2 border-c">
+            <img class="card-img-top" src="/static/img/tippingpoints.png" alt="Logo Som Energia">
+          </div>
+      </div>
+
+        <div class="col-sm-6">
+            <div class="card mt-2 border-c">
+                <h5 class="card-header">1.5ºC and the Earth's Tipping Points</h5>
+                <div class="card-body">
+                    <p>
+                        {{ _('We are talking a lot about the importance of knowing what will happen if global warming reaches certain thresholds, such as +1.5ºC or +2ºC.
+                        This is not just because having those increments in temperature would have bad consequences (which it would), but specially because we can’t just bring the temperature back down and hope they’ll be fine again.
+                        We like to think of it like dominoes: we’d better not topple them, or we’ll have quite a lot of work trying to set them back up again.') }}<br>
+                        <br>
+                        <i>{{ _('~ David Ruscalleda was born in Spain. He has a Master’s Degree in Smart Cities, and a deep lifelong interest in exploring all forms of creativity.
+                            He’s convinced that anything would be easy to understand if we could just find the perfect way to explain it.') }}</i>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mt-3 border-c">
+                <div class="card-body">
+                    {{ _('Diseñado para el proceso de selección de una oferta de trabajo en la revista.
+                    Estuvo un tiempo colgado como un artículo más en el blog de la revista, pero ya hace tiempo que hicieron limpieza y lo quitaron.') }}
+                    <br>
+                    (<a href="http://climatetracker.org/1-5-degrees-earths-tipping-points/">http://climatetracker.org/1-5-degrees-earths-tipping-points/</a>)
+                    <br>
+                    <br>
+                    <i>{{ _('PD: La chica de los dominós es Lily Hevesh (artista del dominó y youtuber). Le hizo ilusión verlo. jajaj') }}</i>
+                </div>
+            </div>
+            <div class="card mt-3 py-0 border-c">
+                <div class="card-body mt-0 py-0 px-2">
+                    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">omg this is AWESOME!! 😂👍 I wonder how many people will get it haha</p>&mdash; Lily Hevesh (@Hevesh5) <a href="https://twitter.com/Hevesh5/status/1000059703743909890?ref_src=twsrc%5Etfw">May 25, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
