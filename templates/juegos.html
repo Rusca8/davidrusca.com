@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Juegos de Mesa') }} - David Ruscalleda{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _('Juegos de Mesa') }} </h3>
+<p class="text-center">{{ _('Recursos para juegos existentes, y (próximamente) diseños propios.') }} </p>
+
+<div class="card border-c bg-light mb-2 mx-2"><b id="Recursos"></b>
+    <h5 class="card-header">{{ _('Recursos para juegos existentes') }}</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="DnD5e"></b>
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Dragones y Mazmorras (5ª Edición)') }}</h5>
+            <hr>
+            <b>{{ _('Listas Resumen de Conjuros') }} (PHB):</b>
+            <ul>
+                <li><a href="/static/pdf/conjuros_Todos.pdf" target="_blank">DnD 5e - {{ _('Todos los Conjuros') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Bardo.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Bardo') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Brujo.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Brujo') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Clerigo.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Clérigo') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Druida.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Druida') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Explorador.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Explorador') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Hechicero.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Hechicero') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Mago.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Mago') }} [ES]</a></li>
+                <li><a href="/static/pdf/conjuros_Paladin.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Paladin') }} [ES]</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
