@@ -6,27 +6,147 @@
 <h3 class="mt-3 text-center">{{ _('Composición') }}</h3>
 <p class="text-center">{{ _('Recopilatorio de cosas que he compuesto.') }}</p>
 
-<div class="card border-c ml-2 mr-2" id="calamar">
+<div class="card border-c mx-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5>{{ _('Índice') }}</h5>
+            <table class="table-borderless">
+                <tr>
+                    <td class="text-right">{{ _('Enero') }} - {{ _('Diciembre') }} 2020:
+                    </td><td class="px-2">
+                        <a href="#motivos20">{{ _('12 Motivos de Fin de Año') }} (2020)</a>
+                    </td><td>
+                        <small>[2 Fl]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Abril 2019:
+                    </td><td class="px-2">
+                        <a href="#calamar">{{ _('El Calamar y la Merluza') }}</a>
+                    </td><td>
+                        <small>[Picc, Pno]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Enero') }} - {{ _('Mayo') }} 2019:
+                    </td><td class="px-2">
+                        <a href="#motivos19">{{ _('12 Motivos de Fin de Año') }} (2019)</a>
+                    </td><td>
+                        <small>[2 Vln]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Mayo') }} - {{ _('Junio') }} 2019:
+                    </td><td class="px-2">
+                        <a href="#fuga3">Fuga nº3</a>
+                    </td><td>
+                        <small>[2 Tpt, 2 Tbn]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Febrero') }} - Abril 2019:
+                    </td><td class="px-2">
+                        <a href="#fuga2">Fuga nº2 {{ _('en Mi Frigio') }}</a>
+                    </td><td>
+                        <small>[Fl, Cl, Tpa]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Diciembre') }} 2018 - {{ _('Enero') }} 2019:
+                    </td><td class="px-2">
+                        <a href="#fuga1">Fuga nº1 en Sol M</a>
+                    </td><td>
+                        <small>[Vln, Vla, Vcl]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Marzo') }} - {{ _('Junio') }} 2018:
+                    </td><td class="px-2">
+                        <a href="#quintal">{{ _('Quintal para Cuerda') }}</a>
+                    </td><td>
+                        <small>[Orq. C.]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Noviembre') }} 2017 - {{ _('Enero') }} 2018:
+                    </td><td class="px-2">
+                        <a href="#quartetacinc">{{ _('Cuarteto a Cinco en Sib M') }}</a>
+                    </td><td>
+                        <small>[Fl, Ob, Cl, Fg]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Abril 2013:
+                    </td><td class="px-2">
+                        <a href="#anhel">Anhel d'Arquet</a>
+                    </td><td>
+                        <small>[Orq. C.]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Desembre') }} 2011 | {{ _('Març') }} 2012:
+                    </td><td class="px-2">
+                        <a href="#quansol">Quan es Desperta el Sol</a>
+                    </td><td>
+                        <small>[2 Fl]</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">{{ _('Juliol') }} 2011 | Octubre 2011:
+                    </td><td class="px-2">
+                        <a href="#quanestels">Quan els Estels es Ponen</a>
+                    </td><td>
+                        <small>[2 Fl]</small>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+<div class="card border-c ml-2 mr-2 mt-2"><b id="motivos20"></b>
+    <h5 class="card-header">
+        {{ _('12 Motivos de Fin de Año') }} (2020)
+    </h5>
     <div class="card-body">
         <p>
-            <b>{{ _('El Calamar y la Merluza') }}</b><br>
+            <i>{{ _('Dúos cortos para dos flautas') }} ({{ _('Enero') }} - {{ _('Diciembre') }} 2020).</i>
+        </p>
+        <p>
+            {{ _('En 2020 decidí repetir la experiencia de 2019.') }}
+            <br>
+            {{ _('El 1 de Enero improvisé 12 nuevos motivos, que convertí en dúos de flauta a lo largo del año.') }}
+        </p>
+        <a href="https://soundcloud.com/david-ruscalleda-g-mez/12-motius-de-cap-dany-ii-2020" target="_blank" class="btn btn-outline-success btn-sm mb-2" role="button">SC: {{ _('Audio') }} VST</a>
+        <a href="https://www.youtube.com/watch?v=DAK9sSww2vs" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Pieza') }}</a>
+        <a href="/static/pdf/Motius2020_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+    </div>
+</div>
+
+<div class="card border-c ml-2 mr-2 mt-2"><b id="calamar"></b>
+    <h5 class="card-header">
+        {{ _('El Calamar y la Merluza') }}
+    </h5>
+    <div class="card-body">
+        <p>
             <i>{{ _('Para flautín y piano') }} (Abril 2019).</i>
         </p>
         <p>
             {{ _('Basado en un poema de Enric Larreula bajo el mismo nombre.') }}<br>
             {{ _('La pieza explora las posibilidades la autoreferencia y lleva al límite el concepto de leitmotiv.') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=WRzSkPvHuUc" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza') }}</a>
-        <a href="https://www.youtube.com/watch?v=BkiJLnk_QzE" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Análisis') }}</a>
-        <a href="/static/pdf/Calamars_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
-        <a href="/static/pdf/Calamars_picc.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Flautín') }}</a>
+        <a href="https://www.youtube.com/watch?v=WRzSkPvHuUc" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Pieza') }}</a>
+        <a href="https://www.youtube.com/watch?v=BkiJLnk_QzE" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Análisis') }}</a>
+        <a href="/static/pdf/Calamars_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+        <a href="/static/pdf/Calamars_picc.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Flautín') }}</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="motivos19">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="motivos19"></b>
+    <h5 class="card-header">
+        {{ _('12 Motivos de Fin de Año') }} (2019)
+    </h5>
     <div class="card-body">
         <p>
-            <b>{{ _('12 Motivos de Fin de Año') }} (2019)</b><br>
             <i>{{ _('Dúos cortos para dos violines') }} ({{ _('Enero') }} - {{ _('Mayo') }} 2019).</i>
         </p>
         <p>
@@ -34,15 +154,17 @@
             <br>
             {{ _('Luego cada mes (en realidad más rápido) hice un dúo corto con cada uno de ellos.') }}<br>
         </p>
-        <a href="https://www.youtube.com/watch?v=P6VzrDUu4qs" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza') }}</a>
-        <a href="/static/pdf/Motius2019_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
+        <a href="https://www.youtube.com/watch?v=P6VzrDUu4qs" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Pieza') }}</a>
+        <a href="/static/pdf/Motius2019_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="fuga3">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="fuga3"></b>
+    <h5 class="card-header">
+        Fuga nº3
+    </h5>
     <div class="card-body">
         <p>
-            <b>Fuga nº3</b><br>
             <i>{{ _('Para dos trompetas y dos trombones') }} ({{ _('Mayo') }} - {{ _('Junio') }} 2019).</i>
         </p>
         <p>
@@ -50,44 +172,51 @@
             {{ _('La fuga va pasando de un eje a otro, usando sólo las notas incluídas en los acordes de ese eje.') }}<br>
             {{ _('(en algún caso puntual hay alguna nota estraña, pero es tratada correctamente como tal)') }}
         </p>
-        <a href="/static/pdf/Fuga3a4_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
+        <a href="https://soundcloud.com/david-ruscalleda-g-mez/fuga-n-3" target="_blank" class="btn btn-outline-success btn-sm mb-2" role="button">SC: {{ _('Audio') }} VST</a>
+        <a href="/static/pdf/Fuga3a4_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="fuga2">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="fuga2"></b>
+    <h5 class="card-header">
+        Fuga nº2 {{ _('en Mi Frigio') }}
+    </h5>
     <div class="card-body">
         <p>
-            <b>Fuga nº2 {{ _('en Mi Frigio') }}</b><br>
             <i>{{ _('Para flauta, clarinete y trompa') }} ({{ _('Febrero') }} - Abril 2019).</i>
         </p>
         <p>
             {{ _('Lenta y melancólica, con armonía por cuartas y quintas.') }}<br>
             {{ _('El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=Hw7V3TwLIc4" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza anotada') }}</a>
-        <a href="/static/pdf/Fuga2MiFrigio_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
+        <a href="https://www.youtube.com/watch?v=Hw7V3TwLIc4" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Pieza anotada') }}</a>
+        <a href="/static/pdf/Fuga2MiFrigio_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="fuga1">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="fuga1"></b>
+    <h5 class="card-header">
+        Fuga nº1 en Sol M
+    </h5>
     <div class="card-body">
         <p>
-            <b>Fuga nº1 en Sol M</b><br>
             <i>{{ _('Para trio de cuerda') }} ({{ _('Diciembre') }} 2018 - {{ _('Enero') }} 2019).</i>
         </p>
         <p>
             {{ _('Siguiendo la estructura de las fugas de escuela francesa.') }}<br>
             {{ _('El vídeo tiene la partitura con el sonido, y anotaciones sobre la estructura (a modo de análisis).') }}
         </p>
-        <a href="https://www.youtube.com/watch?v=UstvUnPDcac" target="_blank" class="btn btn-outline-danger btn-sm" role="button">YT: {{ _('Pieza anotada') }}</a>
-        <a href="/static/pdf/Fuga1SolM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
+        <a href="https://www.youtube.com/watch?v=UstvUnPDcac" target="_blank" class="btn btn-outline-danger btn-sm mb-2" role="button">YT: {{ _('Pieza anotada') }}</a>
+        <a href="/static/pdf/Fuga1SolM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="quintal">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="quintal"></b>
+    <h5 class="card-header">
+        {{ _('Quintal para Cuerda') }}
+    </h5>
     <div class="card-body">
         <p>
-            <b>{{ _('Quintal para Cuerda') }}</b><br>
             <i>{{ _('Para orquesta de cuerda') }} ({{ _('Marzo') }} - {{ _('Junio') }} 2018).</i>
         </p>
         <p>
@@ -95,25 +224,102 @@
             <br>
             {{ _('La pieza fue mi primer contacto serio con la escritura para orquesta de cuerda.') }}
         </p>
-        <i>{{ _('Un rato que tenga saco las partituras y la cuelgo...') }}</i>
+        <p>
+            <i>{{ _('Lleva técnicas extendidas (p.ej. harmónicos) que el audio (VST) no refleja en absoluto.') }}</i>
+        </p>
+        <a href="https://soundcloud.com/david-ruscalleda-g-mez/quintal-per-a-corda" target="_blank" class="btn btn-outline-success btn-sm mb-2" role="button">SC: {{ _('Audio') }} VST</a>
+        <a href="/static/pdf/Quintal_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+        <a href="/static/pdf/Quintal_v1.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violín') }} 1</a>
+        <a href="/static/pdf/Quintal_v2.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violín') }} 2</a>
+        <a href="/static/pdf/Quintal_vla.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Viola') }}</a>
+        <a href="/static/pdf/Quintal_vc.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violoncelo') }}</a>
+        <a href="/static/pdf/Quintal_cb.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Contrabajo') }}</a>
     </div>
 </div>
 
-<div class="card border-c ml-2 mr-2 mt-2" id="quartetacinc">
+<div class="card border-c ml-2 mr-2 mt-2"><b id="quartetacinc"></b>
+    <h5 class="card-header">
+        {{ _('Cuarteto a Cinco en Sib M') }}
+    </h5>
     <div class="card-body">
         <p>
-            <b>{{ _('Cuarteto a Cinco en Sib M') }}</b><br>
             <i>{{ _('Para cuarteto de viento madera') }} ({{ _('Noviembre') }} 2017 - {{ _('Enero') }} 2018).</i>
         </p>
         <p>
             {{ _('Movimiento lento en cinco por cuatro.') }}<br>
             {{ _('La pieza fue mi primer contacto serio con la escritura para cuarteto de viento.') }}
         </p>
-        <a href="/static/pdf/QuartetSibM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: General</a>
-        <a href="/static/pdf/QuartetSibM_fl.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Flauta</a>
-        <a href="/static/pdf/QuartetSibM_ob.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Oboe') }}</a>
-        <a href="/static/pdf/QuartetSibM_cl.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: {{ _('Clarinete') }}</a>
-        <a href="/static/pdf/QuartetSibM_fg.pdf" target="_blank" class="btn btn-outline-info btn-sm" role="button">PDF: Fagot</a>
+        <a href="https://soundcloud.com/david-ruscalleda-g-mez/quartet-a-cinc" target="_blank" class="btn btn-outline-success btn-sm mb-2" role="button">SC: {{ _('Audio') }} VST</a>
+        <a href="/static/pdf/QuartetSibM_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+        <a href="/static/pdf/QuartetSibM_fl.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: Flauta</a>
+        <a href="/static/pdf/QuartetSibM_ob.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Oboe') }}</a>
+        <a href="/static/pdf/QuartetSibM_cl.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Clarinete') }}</a>
+        <a href="/static/pdf/QuartetSibM_fg.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: Fagot</a>
+    </div>
+</div>
+
+<div class="card border-c ml-2 mr-2 mt-2"><b id="anhel"></b>
+    <h5 class="card-header">
+        Anhel d'Arquet
+    </h5>
+    <div class="card-body">
+        <p>
+            <i>{{ _('Para orquesta de cuerda') }} (Abril 2013).</i>
+        </p>
+        <p>
+            {{ _('Pieza compuesta para el concurso de composición del Conservatorio de Música de Girona.') }}<br>
+            {{ _('Fui el único que se presentó y decidieron dejar el premio desierto.') }}<br><br>
+            <i>{{ _('Un día que tenga tiempo tengo que ponerle mejor las articulaciones y esas cosas.') }}</i>
+        </p>
+        <a href="https://soundcloud.com/david-ruscalleda-g-mez/anhel-darquet" target="_blank" class="btn btn-outline-success btn-sm mb-2" role="button">SC: {{ _('Audio') }} VST</a>
+        <a href="/static/pdf/AnheldArquet_general.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+        <a href="/static/pdf/AnheldArquet_v1.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violín') }} 1</a>
+        <a href="/static/pdf/AnheldArquet_v2.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violín') }} 2</a>
+        <a href="/static/pdf/AnheldArquet_vla.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Viola') }}</a>
+        <a href="/static/pdf/AnheldArquet_vc.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Violoncelo') }}</a>
+        <a href="/static/pdf/AnheldArquet_cb.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: {{ _('Contrabajo') }}</a>
+    </div>
+</div>
+
+<div class="card border-c ml-2 mr-2 mt-2"><b id="quansol"></b>
+    <h5 class="card-header">
+        Quan es Desperta el Sol
+    </h5>
+    <div class="card-body">
+        <p>
+            <i>{{ _('Para dúo de flautas') }} ({{ _('Desembre') }} 2011 | {{ _('Març') }} 2012).</i>
+        </p>
+        <p>
+            {{ _('De la suite inacabada Quan el Món es Mou.') }}<br><br>
+            <i>{{ _('Un día que tenga tiempo tengo que ponerle articulaciones y esas cosas.') }}</i>
+        </p>
+        <a href="/static/pdf/QuanEsDespertaElSol.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
+    </div>
+</div>
+
+<div class="card border-c ml-2 mr-2 mt-2"><b id="quanestels"></b>
+    <h5 class="card-header">
+        Quan els Estels es Ponen
+    </h5>
+    <div class="card-body">
+        <p>
+            <i>{{ _('Para dúo de flautas') }} ({{ _('Juliol') }} 2011 | Octubre 2011).</i>
+        </p>
+        <p>
+            {{ _('Tenía que formar parte de una suite de 4 movimientos, de los cuales sólo llegué a componer 2.') }}<br>
+            {{ _('Llevan la voz difícil en la Flauta 2 porque solíamos tocarlas con mi prima y a ella le iba mejor leer de arriba. ajajaj') }}
+        </p>
+            <b>Suite Quan el Món es Mou:</b><br>
+            <ol>
+                <li>Quan els estels es ponen</li>
+                <li>Quan es desperta el sol</li>
+                <li><strike>Quan els ocells canten per l'alba</strike></li>
+                <li><strike>Quan cada instant és nou</strike></li>
+            </ol>
+            <p>
+                <i>{{ _('Un día que tenga tiempo tengo que ponerle articulaciones y esas cosas.') }}</i>
+            </p>
+        <a href="/static/pdf/QuanElsEstelsEsPonen.pdf" target="_blank" class="btn btn-outline-info btn-sm mb-2" role="button">PDF: General</a>
     </div>
 </div>
 
