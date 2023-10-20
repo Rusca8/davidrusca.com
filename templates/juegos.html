@@ -2,7 +2,24 @@
 {% block title %}{{ _('Juegos de Mesa') }} - David Ruscalleda{% endblock %}
 {% block content %}
 <h3 class="mt-3 text-center">{{ _('Juegos de Mesa') }} </h3>
-<p class="text-center">{{ _('Recursos para juegos existentes, y (próximamente) diseños propios.') }} </p>
+<p class="text-center">{{ _('Diseños propios y Recursos para juegos existentes.') }} </p>
+
+<div class="card border-c bg-light mb-2 mx-2"><b id="Diseños"></b>
+    <h5 class="card-header">{{ _('Diseños propios') }}</h5>
+    <div class="card-columns">
+            <div class="card border-c mx-2 my-2"><b id="Impedimentos"></b>
+                <img class="card-img-top" src="/static/img/bg/impedimentos.png" alt="Thumbnail Impedimentos">
+                <div class="card-body">
+                    <h5 class="card-title">Impedimentos</h5>
+                        Los jugadores tendrán que moverse a través de un laberinto cambiante para intentar conseguir sus cuatro cubitos antes que los demás.
+                    <br><br>
+                    <a href="/static/pdf/bg/ss_impedimentos.pdf" class="btn btn-outline-primary btn-sm btn-block" role="button">Hoja de Ventas</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card border-c bg-light mb-2 mx-2"><b id="Recursos"></b>
     <h5 class="card-header">{{ _('Recursos para juegos existentes') }}</h5>
