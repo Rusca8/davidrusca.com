@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-22 12:10+0200\n"
+"POT-Creation-Date: 2023-10-20 12:17+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -114,6 +114,7 @@ msgid "Barajas"
 msgstr "Baralles"
 
 #: templates/anki.html:70 templates/ankicode.html:12 templates/docentes.html:12
+#: templates/music.html:11
 msgid "Índice"
 msgstr "Índex"
 
@@ -121,7 +122,7 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:302
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:316
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
@@ -351,7 +352,8 @@ msgstr "Altres"
 msgid "Mnemotecnia"
 msgstr "Mnemotècnia"
 
-#: templates/anki.html:195 templates/music.html:46 templates/music.html:91
+#: templates/anki.html:195 templates/music.html:38 templates/music.html:62
+#: templates/music.html:168 templates/music.html:220
 msgid "Junio"
 msgstr "Juny"
 
@@ -371,7 +373,8 @@ msgstr ""
 msgid "Imagen"
 msgstr "Imatge"
 
-#: templates/anki.html:220 templates/anki.html:376 templates/music.html:106
+#: templates/anki.html:220 templates/anki.html:376 templates/music.html:70
+#: templates/music.html:246
 msgid "Noviembre"
 msgstr "Novembre"
 
@@ -391,7 +394,7 @@ msgstr "Identificar què és un error i què no ho és."
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:227 templates/docentes.html:256
+#: templates/anki.html:227 templates/docentes.html:267
 msgid "Fracciones"
 msgstr "Fraccions"
 
@@ -403,7 +406,7 @@ msgstr "Potències"
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:230 templates/docentes.html:258
+#: templates/anki.html:230 templates/docentes.html:269
 msgid "Ecuaciones"
 msgstr "Equacions"
 
@@ -522,7 +525,8 @@ msgstr "Fórmula"
 msgid "Variables"
 msgstr "Variables"
 
-#: templates/anki.html:321 templates/anki.html:466 templates/music.html:76
+#: templates/anki.html:321 templates/anki.html:466 templates/music.html:14
+#: templates/music.html:54 templates/music.html:112 templates/music.html:203
 msgid "Diciembre"
 msgstr "Desembre"
 
@@ -590,7 +594,7 @@ msgstr "Per identificar al dibuix quin és quin."
 msgid "Nombre"
 msgstr "Nom"
 
-#: templates/anki.html:398 templates/music.html:61
+#: templates/anki.html:398 templates/music.html:46 templates/music.html:186
 msgid "Febrero"
 msgstr "Febrer"
 
@@ -680,7 +684,7 @@ msgstr ""
 "columna de \"programades\" diuen \"Noves\" i fer: botó dret / reprogramar"
 " / al final de la cua."
 
-#: templates/anki.html:439 templates/music.html:91
+#: templates/anki.html:439 templates/music.html:62 templates/music.html:220
 msgid "Marzo"
 msgstr "Març"
 
@@ -728,8 +732,9 @@ msgstr "En català els accents van una mica diferents, així que els hi vaig afe
 msgid "Significado"
 msgstr "Significat"
 
-#: templates/anki.html:489 templates/music.html:30 templates/music.html:76
-#: templates/music.html:106
+#: templates/anki.html:489 templates/music.html:14 templates/music.html:30
+#: templates/music.html:54 templates/music.html:70 templates/music.html:112
+#: templates/music.html:150 templates/music.html:203 templates/music.html:246
 msgid "Enero"
 msgstr "Gener"
 
@@ -1919,11 +1924,15 @@ msgstr "docents"
 msgid "Docentes"
 msgstr "Docents"
 
-#: templates/base.html:55 templates/index.html:129 templates/index.html:145
+#: templates/base.html:55
+msgid "Juegos"
+msgstr "Jocs"
+
+#: templates/base.html:58 templates/index.html:129 templates/index.html:145
 msgid "pulseras"
 msgstr "braçalets"
 
-#: templates/base.html:55 templates/pulseras.html:2
+#: templates/base.html:58 templates/pulseras.html:2
 msgid "Pulseras"
 msgstr "Braçalets"
 
@@ -1942,6 +1951,56 @@ msgid ""
 msgstr ""
 "Per a l'escape room \"El Misteri del Col·lecionista de Contes\" de "
 "jugarXjugar per a la Diputació de Girona."
+
+#: templates/climate_tracker.html:2
+msgid "Climate Tracker Infographic - Web de David Ruscalleda"
+msgstr ""
+
+#: templates/climate_tracker.html:4
+#, fuzzy
+msgid "Infográfico para Climate Tracker"
+msgstr "Article per Climate Tracker"
+
+#: templates/climate_tracker.html:5
+msgid "Sobre los puntos de no retorno y el informe del IPCC."
+msgstr "Sobre els punts de no retorn i l'informe de l'IPCC"
+
+#: templates/climate_tracker.html:21
+msgid ""
+"We are talking a lot about the importance of knowing what will happen if "
+"global warming reaches certain thresholds, such as +1.5ºC or +2ºC.\n"
+"                        This is not just because having those increments "
+"in temperature would have bad consequences (which it would), but "
+"specially because we can’t just bring the temperature back down and hope "
+"they’ll be fine again.\n"
+"                        We like to think of it like dominoes: we’d better"
+" not topple them, or we’ll have quite a lot of work trying to set them "
+"back up again."
+msgstr ""
+
+#: templates/climate_tracker.html:25
+msgid ""
+"~ David Ruscalleda was born in Spain. He has a Master’s Degree in Smart "
+"Cities, and a deep lifelong interest in exploring all forms of "
+"creativity.\n"
+"                            He’s convinced that anything would be easy to"
+" understand if we could just find the perfect way to explain it."
+msgstr ""
+
+#: templates/climate_tracker.html:33
+msgid ""
+"Diseñado para el proceso de selección de una oferta de trabajo en la "
+"revista.\n"
+"                    Estuvo un tiempo colgado como un artículo más en el "
+"blog de la revista, pero ya hace tiempo que hicieron limpieza y lo "
+"quitaron."
+msgstr ""
+
+#: templates/climate_tracker.html:39
+msgid ""
+"PD: La chica de los dominós es Lily Hevesh (artista del dominó y "
+"youtuber). Le hizo ilusión verlo. jajaj"
+msgstr ""
 
 #: templates/docentes.html:7
 msgid "Recursos Docentes"
@@ -1971,21 +2030,21 @@ msgstr "Economia de l'empresa"
 msgid "Prueba de acceso"
 msgstr "Prova d'accés"
 
-#: templates/docentes.html:25 templates/docentes.html:189
+#: templates/docentes.html:25 templates/docentes.html:195
 msgid "Dibujo Técnico"
 msgstr "Dibuix Tècnic"
 
 #: templates/docentes.html:26 templates/docentes.html:31
-#: templates/docentes.html:43 templates/docentes.html:198
-#: templates/docentes.html:213
+#: templates/docentes.html:43 templates/docentes.html:205
+#: templates/docentes.html:221
 msgid "Tecnología"
 msgstr "Tecnologia"
 
-#: templates/docentes.html:34 templates/docentes.html:229
+#: templates/docentes.html:34 templates/docentes.html:238
 msgid "Grado Profesional de Música"
 msgstr "Grau Professional de Música"
 
-#: templates/docentes.html:36 templates/docentes.html:233
+#: templates/docentes.html:36 templates/docentes.html:242
 msgid "Armonía"
 msgstr "Harmonia"
 
@@ -1993,15 +2052,15 @@ msgstr "Harmonia"
 msgid "Educación Secundaria (ESO)"
 msgstr "Educació Secundària (ESO)"
 
-#: templates/docentes.html:42 templates/docentes.html:270
+#: templates/docentes.html:42 templates/docentes.html:281
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: templates/docentes.html:44 templates/docentes.html:299
+#: templates/docentes.html:44 templates/docentes.html:312
 msgid "Sociales"
 msgstr "Socials"
 
-#: templates/docentes.html:45 templates/docentes.html:309
+#: templates/docentes.html:45 templates/docentes.html:323
 msgid "Inglés"
 msgstr "Anglès"
 
@@ -2009,11 +2068,11 @@ msgstr "Anglès"
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: templates/docentes.html:53 templates/docentes.html:339
+#: templates/docentes.html:53 templates/docentes.html:355
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: templates/docentes.html:55 templates/docentes.html:343
+#: templates/docentes.html:55 templates/docentes.html:359
 #: templates/index.html:136
 msgid "Programación"
 msgstr "Programació"
@@ -2022,232 +2081,236 @@ msgstr "Programació"
 msgid "Mates Científicas"
 msgstr "Mates Científiques"
 
-#: templates/docentes.html:68
+#: templates/docentes.html:69
 msgid "Esquemas y Formularios:"
 msgstr "Esquemes i Formularis:"
 
-#: templates/docentes.html:70 templates/docentes.html:102
+#: templates/docentes.html:71 templates/docentes.html:104
 msgid "Límites"
 msgstr "Límits"
 
-#: templates/docentes.html:71
+#: templates/docentes.html:72
 msgid "Representación de funciones"
 msgstr "Representació de funcions"
 
-#: templates/docentes.html:73 templates/docentes.html:107
+#: templates/docentes.html:74 templates/docentes.html:109
 msgid "Relación entre gráficas y derivadas"
 msgstr "Relació entre gràfiques i derivades"
 
-#: templates/docentes.html:75
+#: templates/docentes.html:76
 msgid "Discusión de Sistemas"
 msgstr "Discussió de Sistemes"
 
-#: templates/docentes.html:76 templates/docentes.html:108
+#: templates/docentes.html:77 templates/docentes.html:110
 msgid "Optimización"
 msgstr "Optimització"
 
-#: templates/docentes.html:77
+#: templates/docentes.html:78
 msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
-#: templates/docentes.html:79 templates/docentes.html:110
-#: templates/docentes.html:214 templates/docentes.html:253
-#: templates/docentes.html:289 templates/docentes.html:327
+#: templates/docentes.html:80 templates/docentes.html:112
+#: templates/docentes.html:223 templates/docentes.html:264
+#: templates/docentes.html:302 templates/docentes.html:343
 msgid "Fichas:"
 msgstr "Fitxes:"
 
-#: templates/docentes.html:81 templates/docentes.html:112
+#: templates/docentes.html:82 templates/docentes.html:114
 msgid "Ficha de Derivadas Definitiva"
 msgstr "Fitxa de Derivades Definitiva"
 
-#: templates/docentes.html:82 templates/docentes.html:113
-#: templates/docentes.html:257
+#: templates/docentes.html:83 templates/docentes.html:115
+#: templates/docentes.html:268
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
-#: templates/docentes.html:83 templates/docentes.html:114
+#: templates/docentes.html:84 templates/docentes.html:116
 msgid "Sistemas 3D"
 msgstr "Sistemes 3D"
 
-#: templates/docentes.html:84 templates/docentes.html:115
+#: templates/docentes.html:85 templates/docentes.html:117
 msgid "Derivadas"
 msgstr "Derivades"
 
-#: templates/docentes.html:86 templates/docentes.html:117
-#: templates/docentes.html:156 templates/docentes.html:190
-#: templates/docentes.html:199
+#: templates/docentes.html:87 templates/docentes.html:119
+#: templates/docentes.html:160 templates/docentes.html:197
+#: templates/docentes.html:207
 msgid "Temario:"
 msgstr "Temari:"
 
-#: templates/docentes.html:88 templates/docentes.html:119
-#: templates/docentes.html:158 templates/docentes.html:192
-#: templates/docentes.html:201
+#: templates/docentes.html:89 templates/docentes.html:121
+#: templates/docentes.html:162 templates/docentes.html:199
+#: templates/docentes.html:209
 msgid "Temario optimizado"
 msgstr "Temari optimitzat"
 
-#: templates/docentes.html:92 templates/docentes.html:123
-#: templates/docentes.html:263
+#: templates/docentes.html:93 templates/docentes.html:125
+#: templates/docentes.html:274
 msgid "Funciones trigonométricas"
 msgstr "Funcions trigonomètriques"
 
-#: templates/docentes.html:99
+#: templates/docentes.html:100
 msgid "Mates Sociales"
 msgstr "Mates Socials"
 
-#: templates/docentes.html:100 templates/docentes.html:131
-#: templates/docentes.html:152 templates/docentes.html:285
+#: templates/docentes.html:102 templates/docentes.html:134
+#: templates/docentes.html:156 templates/docentes.html:298
 msgid "Formularios:"
 msgstr "Formularis"
 
-#: templates/docentes.html:103
+#: templates/docentes.html:105
 msgid "Matemática Financiera"
 msgstr "Matemàtica Financera"
 
-#: templates/docentes.html:105
+#: templates/docentes.html:107
 msgid "Mnemotecnia Financiera"
 msgstr "Mnemotècnia Financera"
 
-#: templates/docentes.html:133
+#: templates/docentes.html:136
 msgid "Movimientos"
 msgstr "Moviments"
 
-#: templates/docentes.html:135
+#: templates/docentes.html:138
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de MRUA"
 
-#: templates/docentes.html:137 templates/docentes.html:291
+#: templates/docentes.html:140 templates/docentes.html:304
 msgid "Fuerzas"
 msgstr "Forces"
 
-#: templates/docentes.html:138
+#: templates/docentes.html:141
 msgid "Campo Gravitatorio y Eléctrico"
 msgstr "Camp Gravitatori i Elèctric"
 
-#: templates/docentes.html:140
+#: templates/docentes.html:143
 msgid "Ondas"
 msgstr "Ones"
 
-#: templates/docentes.html:148 templates/docentes.html:174
-#: templates/docentes.html:234 templates/docentes.html:344
+#: templates/docentes.html:152 templates/docentes.html:180
+#: templates/docentes.html:244 templates/docentes.html:361
 #: templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr "Apunts:"
 
-#: templates/docentes.html:150
+#: templates/docentes.html:154
 msgid "Números cuánticos"
 msgstr "Nombres quàntics"
 
-#: templates/docentes.html:154
+#: templates/docentes.html:158
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: templates/docentes.html:160 templates/docentes.html:275
-#: templates/docentes.html:300
+#: templates/docentes.html:164 templates/docentes.html:287
+#: templates/docentes.html:314
 msgid "Mnemotecnia:"
 msgstr "Mnemotècnia:"
 
-#: templates/docentes.html:162 templates/docentes.html:277
+#: templates/docentes.html:166 templates/docentes.html:289
 msgid "Valencias de los Elementos"
 msgstr "Valències dels Elements"
 
-#: templates/docentes.html:166 templates/lab_q_chatelier.html:2
-#: templates/lab_q_eq.html:2 templates/lab_q_eq.html:5
+#: templates/docentes.html:170 templates/lab_q_eq.html:2
+#: templates/lab_q_eq.html:4
 msgid "Equilibrio Químico"
 msgstr "Equilibri Químic"
 
-#: templates/docentes.html:173
+#: templates/docentes.html:171 templates/lab_q_chatelier.html:2
+msgid "Le Châtelier"
+msgstr ""
+
+#: templates/docentes.html:178
 msgid "Economía de la Empresa"
 msgstr "Economia de l'Empresa"
 
-#: templates/docentes.html:176
+#: templates/docentes.html:182
 msgid "Asientos"
 msgstr "Assentaments"
 
-#: templates/docentes.html:177
+#: templates/docentes.html:183
 msgid "Fuentes de Financiación"
 msgstr "Fonts de Finançament"
 
-#: templates/docentes.html:185 templates/docentes.html:209
+#: templates/docentes.html:191 templates/docentes.html:217
 msgid "Prueba de Acceso"
 msgstr "Prova d'Accés"
 
-#: templates/docentes.html:216
+#: templates/docentes.html:225
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: templates/docentes.html:217
+#: templates/docentes.html:226
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: templates/docentes.html:218
+#: templates/docentes.html:227
 msgid "Energías"
 msgstr "Energies"
 
-#: templates/docentes.html:219
+#: templates/docentes.html:228
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: templates/docentes.html:220
+#: templates/docentes.html:229
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: templates/docentes.html:221
+#: templates/docentes.html:230
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: templates/docentes.html:236
+#: templates/docentes.html:246
 msgid "Canciones para los intervalos"
 msgstr "Cançons pels intervals"
 
-#: templates/docentes.html:240
+#: templates/docentes.html:250
 msgid "Editor de Esquemas Armónicos"
 msgstr "Editor d'Esquemes Harmònics"
 
-#: templates/docentes.html:255
+#: templates/docentes.html:266
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: templates/docentes.html:259
+#: templates/docentes.html:270
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: templates/docentes.html:273
+#: templates/docentes.html:285
 msgid "Masa y peso"
 msgstr "Massa i pes"
 
-#: templates/docentes.html:287
+#: templates/docentes.html:300
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: templates/docentes.html:292
+#: templates/docentes.html:305
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: templates/docentes.html:310
+#: templates/docentes.html:325
 msgid "Online:"
 msgstr "Online:"
 
-#: templates/docentes.html:322
+#: templates/docentes.html:337
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:329
+#: templates/docentes.html:345
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:330
+#: templates/docentes.html:346
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:331
+#: templates/docentes.html:347
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: templates/docentes.html:346
+#: templates/docentes.html:363
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: templates/docentes.html:347
+#: templates/docentes.html:364
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
@@ -2271,7 +2334,7 @@ msgstr "Aquestes d'aquí en són algunes (estrelletes a les novetats ✨)"
 msgid "Fugas comentadas:"
 msgstr "Fugues comentades:"
 
-#: templates/index.html:68 templates/music.html:60
+#: templates/index.html:68 templates/music.html:48 templates/music.html:182
 msgid "en Mi Frigio"
 msgstr "en Mi Frigi"
 
@@ -2359,7 +2422,7 @@ msgstr ""
 msgid "Editor de pulseras de abalorios"
 msgstr "Editor de braçalets de granadura"
 
-#: templates/index.html:140 templates/index.html:226
+#: templates/index.html:140 templates/index.html:241
 msgid "Generador de fichas de mates"
 msgstr "Generador de fitxes de mates"
 
@@ -2439,75 +2502,149 @@ msgstr "Cartell per l'extraescolar d'Antaviana"
 msgid "Logotipos"
 msgstr "Logotips"
 
+#: templates/index.html:208 templates/juegos.html:2 templates/juegos.html:5
+msgid "Juegos de Mesa"
+msgstr "Jocs de Taula"
+
+#: templates/index.html:210
+#, fuzzy
+msgid "Recursos:"
+msgstr "Recursos Anki"
+
 #: templates/index.html:212
+msgid "Listas de Conjuros de DnD 5e"
+msgstr "Llistes d'encanteris de DnD 5e"
+
+#: templates/index.html:214
+#, fuzzy
+msgid "Diseño:"
+msgstr "Dissenys"
+
+#: templates/index.html:227
 msgid "Cosas que he construído, en"
 msgstr "Coses que he construït, a"
 
-#: templates/index.html:220
+#: templates/index.html:235
 msgid "Recursos docentes"
 msgstr "Recursos docents"
 
-#: templates/index.html:222
+#: templates/index.html:237
 msgid "Fichas y formularios:"
 msgstr "Fitxes i formularis:"
 
-#: templates/index.html:224
+#: templates/index.html:239
 msgid "Formulario de movimientos"
 msgstr "Formulari de moviments"
 
-#: templates/index.html:225
+#: templates/index.html:240
 msgid "Ficha de circuitos eléctricos de Ciclo Formativo"
 msgstr "Fitxa de circuits elèctrics de Cicle Formatiu"
 
-#: templates/index.html:228
+#: templates/index.html:243
 msgid "Todas las fichas y formularios"
 msgstr "Totes les fitxes i formularis"
 
-#: templates/index.html:238
+#: templates/index.html:253
 msgid "Campeón de Francia de Multi"
 msgstr "Campió de França de Multi"
 
-#: templates/index.html:239
+#: templates/index.html:254
 msgid "Memorizo un cubo en 35 segundos"
 msgstr "Memoritzo un cub en 35 segons"
 
-#: templates/index.html:240
+#: templates/index.html:255
 msgid "Resuelvo un cubo en 20 segundos con una mano"
 msgstr "Resolc un cub en 20 segons amb una mà"
 
-#: templates/index.html:241
+#: templates/index.html:256
 msgid "Resolviendo cubos bajo el agua sin respirar"
 msgstr "Resolent cubs sota l'aigua sense respirar"
 
-#: templates/index.html:245
+#: templates/index.html:260
 msgid "Mis tiempos oficiales"
 msgstr "Els meus temps oficials"
 
-#: templates/index.html:255
+#: templates/index.html:270
 msgid "Estudio de la notación:"
 msgstr "Estudi de la notació:"
 
-#: templates/index.html:261
+#: templates/index.html:276
 msgid "Recopilatorio de trucos:"
 msgstr "Recopilatori de trucs:"
 
-#: templates/index.html:265
+#: templates/index.html:280
 msgid "Edit con los trucos de"
 msgstr "Edit amb els trucs de"
+
+#: templates/juegos.html:6
+msgid "Diseños propios y Recursos para juegos existentes."
+msgstr "Dissenys propis i Recursos per a jocs existents."
+
+#: templates/juegos.html:9
+msgid "Diseños propios"
+msgstr "Dissenys propis"
+
+#: templates/juegos.html:26
+msgid "Recursos para juegos existentes"
+msgstr "Recursos per a jocs existents"
+
+#: templates/juegos.html:30
+msgid "Dragones y Mazmorras (5ª Edición)"
+msgstr ""
+
+#: templates/juegos.html:32
+msgid "Listas Resumen de Conjuros"
+msgstr "Llistes Resum d'Encanteris"
+
+#: templates/juegos.html:34
+msgid "Todos los Conjuros"
+msgstr "Tots els Encanteris"
+
+#: templates/juegos.html:35
+msgid "Conjuros de Bardo"
+msgstr "Encanteris del Bard"
+
+#: templates/juegos.html:36
+msgid "Conjuros de Brujo"
+msgstr "Encanteris del Bruixot"
+
+#: templates/juegos.html:37
+msgid "Conjuros de Clérigo"
+msgstr "Encanteris del Clergue"
+
+#: templates/juegos.html:38
+msgid "Conjuros de Druida"
+msgstr "Encanteris del Druida"
+
+#: templates/juegos.html:39
+msgid "Conjuros de Explorador"
+msgstr "Encanteris de l'Explorador"
+
+#: templates/juegos.html:40
+msgid "Conjuros de Hechicero"
+msgstr "Encanteris del Fetiller"
+
+#: templates/juegos.html:41
+msgid "Conjuros de Mago"
+msgstr "Encanteris del Mag"
+
+#: templates/juegos.html:42
+msgid "Conjuros de Paladin"
+msgstr "Encanteris del Paladí"
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 msgid "Laboratorio"
 msgstr "Laboratori"
 
-#: templates/lab_q_chatelier.html:6 templates/lab_q_eq.html:6
+#: templates/lab_q_chatelier.html:5 templates/lab_q_eq.html:5
 msgid "Observa el equilibrio dentro de una reacción química."
 msgstr "Observa l'equilibri dins una reacció química."
 
-#: templates/lab_q_chatelier.html:16 templates/lab_q_eq.html:19
+#: templates/lab_q_chatelier.html:16 templates/lab_q_eq.html:18
 msgid "Si clicas sobre la animación podrás pararla con la tecla"
 msgstr "Si cliques sobre l'animació podràs aturar-la amb la tecla"
 
-#: templates/lab_q_chatelier.html:16 templates/lab_q_eq.html:19
+#: templates/lab_q_chatelier.html:16 templates/lab_q_eq.html:18
 msgid "Espacio"
 msgstr "Espai"
 
@@ -2527,27 +2664,27 @@ msgstr "i baixar-la prement"
 msgid "-"
 msgstr ""
 
-#: templates/lab_q_eq.html:20
+#: templates/lab_q_eq.html:19
 msgid "Cuando está parada, puedes reiniciarla pulsando"
 msgstr "Quan està aturat, pots reiniciar-la prement"
 
-#: templates/lab_q_eq.html:20
+#: templates/lab_q_eq.html:19
 msgid "r"
 msgstr "r"
 
-#: templates/lab_q_eq.html:21
+#: templates/lab_q_eq.html:20
 msgid "Pulsa varias veces para elegir el patrón inicial"
 msgstr "Prem vàries vegades per escollir el patró inicial"
 
-#: templates/lab_q_eq.html:26
+#: templates/lab_q_eq.html:25
 msgid "El elemento \\(A\\) es amarillo, el \\(B\\) azul"
 msgstr "L'element \\(A\\) és groc, el \\(B\\) blau"
 
-#: templates/lab_q_eq.html:27
+#: templates/lab_q_eq.html:26
 msgid "El complejo activado se indica en rojo"
 msgstr "El complex activat s'indica en vermell"
 
-#: templates/lab_q_eq.html:29
+#: templates/lab_q_eq.html:28
 msgid ""
 "Las moléculas sólo reaccionan si chocan de frente (con menos de "
 "\\(30^{\\circ}\\) de desviación)"
@@ -2555,7 +2692,7 @@ msgstr ""
 "Les molècules només reaccionen si xoquen de cara (amb menys de "
 "\\(30^{\\circ}\\) de desviació)"
 
-#: templates/lab_q_eq.html:30
+#: templates/lab_q_eq.html:29
 msgid ""
 "Cuando reaccionan se intercambian uno de sus átomos (y una parte de su "
 "velocidad angular)"
@@ -2563,15 +2700,15 @@ msgstr ""
 "Quan reaccionen s'intercanvien un dels seus àtoms (i una part de la "
 "velocitat angular)"
 
-#: templates/lab_q_eq.html:32
+#: templates/lab_q_eq.html:31
 msgid "La \\(Q\\) de la reacción la calculo así"
 msgstr "La \\(Q\\) de la reacció la calculo així"
 
-#: templates/lab_q_eq.html:33
+#: templates/lab_q_eq.html:32
 msgid "cantidad\\ de\\ X"
 msgstr "quantitat\\ d'X"
 
-#: templates/lab_q_eq.html:33
+#: templates/lab_q_eq.html:32
 msgid "Área\\ del\\ dibujo"
 msgstr "Àrea\\ del\\ dibuix"
 
@@ -2639,19 +2776,75 @@ msgstr "Composició"
 msgid "Recopilatorio de cosas que he compuesto."
 msgstr "Recopilatori de coses que he compost."
 
-#: templates/music.html:12
+#: templates/music.html:16 templates/music.html:32 templates/music.html:108
+#: templates/music.html:146
+msgid "12 Motivos de Fin de Año"
+msgstr "12 Motius de Cap d'Any"
+
+#: templates/music.html:24 templates/music.html:127
 msgid "El Calamar y la Merluza"
 msgstr "El Calamars i el Lluç"
 
-#: templates/music.html:13
+#: templates/music.html:30 templates/music.html:38 templates/music.html:150
+#: templates/music.html:168
+msgid "Mayo"
+msgstr "Maig"
+
+#: templates/music.html:64 templates/music.html:216
+msgid "Quintal para Cuerda"
+msgstr "Quintal per Corda"
+
+#: templates/music.html:72 templates/music.html:242
+msgid "Cuarteto a Cinco en Sib M"
+msgstr "Quartet a Cinc en Sib M"
+
+#: templates/music.html:86 templates/music.html:290
+#, fuzzy
+msgid "Desembre"
+msgstr "Setembre"
+
+#: templates/music.html:86 templates/music.html:290
+msgid "Març"
+msgstr ""
+
+#: templates/music.html:94 templates/music.html:306
+msgid "Juliol"
+msgstr ""
+
+#: templates/music.html:112
+#, fuzzy
+msgid "Dúos cortos para dos flautas"
+msgstr "Duets curts per a dos violins"
+
+#: templates/music.html:115
+msgid "En 2020 decidí repetir la experiencia de 2019."
+msgstr ""
+
+#: templates/music.html:117
+msgid ""
+"El 1 de Enero improvisé 12 nuevos motivos, que convertí en dúos de flauta"
+" a lo largo del año."
+msgstr ""
+
+#: templates/music.html:119 templates/music.html:175 templates/music.html:230
+#: templates/music.html:252 templates/music.html:274
+#, fuzzy
+msgid "Audio"
+msgstr "Juny"
+
+#: templates/music.html:120 templates/music.html:137 templates/music.html:157
+msgid "Pieza"
+msgstr "Peça"
+
+#: templates/music.html:131
 msgid "Para flautín y piano"
 msgstr "Per a flautí i piano"
 
-#: templates/music.html:16
+#: templates/music.html:134
 msgid "Basado en un poema de Enric Larreula bajo el mismo nombre."
 msgstr "Basat en un poema d'Enric Larreula amb el mateix nom."
 
-#: templates/music.html:17
+#: templates/music.html:135
 msgid ""
 "La pieza explora las posibilidades la autoreferencia y lleva al límite el"
 " concepto de leitmotiv."
@@ -2659,31 +2852,19 @@ msgstr ""
 "La peça explora les possibilitats de l'autoreferència i porta al límit el"
 " concepte de leitmotiv."
 
-#: templates/music.html:19 templates/music.html:37
-msgid "Pieza"
-msgstr "Peça"
-
-#: templates/music.html:20
+#: templates/music.html:138
 msgid "Análisis"
 msgstr "Anàlisi"
 
-#: templates/music.html:22
+#: templates/music.html:140
 msgid "Flautín"
 msgstr "Flautí"
 
-#: templates/music.html:29
-msgid "12 Motivos de Fin de Año"
-msgstr "12 Motius de Cap d'Any"
-
-#: templates/music.html:30
+#: templates/music.html:150
 msgid "Dúos cortos para dos violines"
 msgstr "Duets curts per a dos violins"
 
-#: templates/music.html:30 templates/music.html:46
-msgid "Mayo"
-msgstr "Maig"
-
-#: templates/music.html:33
+#: templates/music.html:153
 msgid ""
 "En 2019 en lugar de comer uvas con las campanadas, improvisé 12 motivos "
 "musicales al piano."
@@ -2691,7 +2872,7 @@ msgstr ""
 "El 2019 en lloc de menjar raïm amb les campanades, vaig improvisar 12 "
 "motius musicals al piano."
 
-#: templates/music.html:35
+#: templates/music.html:155
 msgid ""
 "Luego cada mes (en realidad más rápido) hice un dúo corto con cada uno de"
 " ellos."
@@ -2699,15 +2880,15 @@ msgstr ""
 "Després cada mes (en realitat més ràpid) vaig fer un duet curt amb "
 "cadascun."
 
-#: templates/music.html:46
+#: templates/music.html:168
 msgid "Para dos trompetas y dos trombones"
 msgstr "Per dues trompetes i dos trombons"
 
-#: templates/music.html:49
+#: templates/music.html:171
 msgid "Inspirada en el sistema de ejes de Bartók."
 msgstr "Inspirada en el sistema d'eixos de Bartók."
 
-#: templates/music.html:50
+#: templates/music.html:172
 msgid ""
 "La fuga va pasando de un eje a otro, usando sólo las notas incluídas en "
 "los acordes de ese eje."
@@ -2715,7 +2896,7 @@ msgstr ""
 "La fuga va passant d'un eix a l'altre, utilitzant només les notes "
 "incloses en els acords de cada eix."
 
-#: templates/music.html:51
+#: templates/music.html:173
 msgid ""
 "(en algún caso puntual hay alguna nota estraña, pero es tratada "
 "correctamente como tal)"
@@ -2723,15 +2904,15 @@ msgstr ""
 "(en algun cas puntual hi ha alguna nota estranya, però és tractada "
 "correctament com a tal)"
 
-#: templates/music.html:61
+#: templates/music.html:186
 msgid "Para flauta, clarinete y trompa"
 msgstr "Per flauta, clarinet i trompa"
 
-#: templates/music.html:64
+#: templates/music.html:189
 msgid "Lenta y melancólica, con armonía por cuartas y quintas."
 msgstr "Lenta i melancòlica, amb harmonia per quartes i quintes."
 
-#: templates/music.html:65 templates/music.html:80
+#: templates/music.html:190 templates/music.html:207
 msgid ""
 "El vídeo tiene la partitura con el sonido, y anotaciones sobre la "
 "estructura (a modo de análisis)."
@@ -2739,31 +2920,27 @@ msgstr ""
 "El vídeo té la partitura amb el so, i anotacions sobre l'estructura (a "
 "mode d'anàlisi)."
 
-#: templates/music.html:67 templates/music.html:82
+#: templates/music.html:192 templates/music.html:209
 msgid "Pieza anotada"
 msgstr "Peça anotada"
 
-#: templates/music.html:76
+#: templates/music.html:203
 msgid "Para trio de cuerda"
 msgstr "Per a trio de corda"
 
-#: templates/music.html:79
+#: templates/music.html:206
 msgid "Siguiendo la estructura de las fugas de escuela francesa."
 msgstr "Seguint l'estructura de les fugues d'escola francesa."
 
-#: templates/music.html:90
-msgid "Quintal para Cuerda"
-msgstr "Quintal per Corda"
-
-#: templates/music.html:91
+#: templates/music.html:220 templates/music.html:267
 msgid "Para orquesta de cuerda"
 msgstr "Per a orquestra de corda"
 
-#: templates/music.html:94
+#: templates/music.html:223
 msgid "Pieza en armonía por quintas y cuartas."
 msgstr "Peça en harmonia per quintes i quartes."
 
-#: templates/music.html:96
+#: templates/music.html:225
 msgid ""
 "La pieza fue mi primer contacto serio con la escritura para orquesta de "
 "cuerda."
@@ -2771,23 +2948,38 @@ msgstr ""
 "La peça va ser el meu primer contacte seriós amb l'estructura per "
 "orquestra de corda."
 
-#: templates/music.html:98
-msgid "Un rato que tenga saco las partituras y la cuelgo..."
-msgstr "Una estona que tingui trec les partitures i la penjo..."
+#: templates/music.html:228
+msgid ""
+"Lleva técnicas extendidas (p.ej. harmónicos) que el audio (VST) no "
+"refleja en absoluto."
+msgstr ""
 
-#: templates/music.html:105
-msgid "Cuarteto a Cinco en Sib M"
-msgstr "Quartet a Cinc en Sib M"
+#: templates/music.html:232 templates/music.html:233 templates/music.html:276
+#: templates/music.html:277
+msgid "Violín"
+msgstr ""
 
-#: templates/music.html:106
+#: templates/music.html:234 templates/music.html:278
+msgid "Viola"
+msgstr ""
+
+#: templates/music.html:235 templates/music.html:279
+msgid "Violoncelo"
+msgstr ""
+
+#: templates/music.html:236 templates/music.html:280
+msgid "Contrabajo"
+msgstr ""
+
+#: templates/music.html:246
 msgid "Para cuarteto de viento madera"
 msgstr "Per a quartet de vent fusta"
 
-#: templates/music.html:109
+#: templates/music.html:249
 msgid "Movimiento lento en cinco por cuatro."
 msgstr "Moviment lent en cinc per quatre."
 
-#: templates/music.html:110
+#: templates/music.html:250
 msgid ""
 "La pieza fue mi primer contacto serio con la escritura para cuarteto de "
 "viento."
@@ -2795,13 +2987,53 @@ msgstr ""
 "La peça va ser el meu primer contacte seriós amb l'escriptura per quartet"
 " de vent."
 
-#: templates/music.html:114
+#: templates/music.html:255
 msgid "Oboe"
 msgstr "Oboè"
 
-#: templates/music.html:115
+#: templates/music.html:256
 msgid "Clarinete"
 msgstr "Clarinet"
+
+#: templates/music.html:270
+msgid ""
+"Pieza compuesta para el concurso de composición del Conservatorio de "
+"Música de Girona."
+msgstr ""
+
+#: templates/music.html:271
+msgid "Fui el único que se presentó y decidieron dejar el premio desierto."
+msgstr ""
+
+#: templates/music.html:272
+msgid ""
+"Un día que tenga tiempo tengo que ponerle mejor las articulaciones y esas"
+" cosas."
+msgstr ""
+
+#: templates/music.html:290 templates/music.html:306
+msgid "Para dúo de flautas"
+msgstr ""
+
+#: templates/music.html:293
+msgid "De la suite inacabada Quan el Món es Mou."
+msgstr ""
+
+#: templates/music.html:294 templates/music.html:320
+msgid "Un día que tenga tiempo tengo que ponerle articulaciones y esas cosas."
+msgstr ""
+
+#: templates/music.html:309
+msgid ""
+"Tenía que formar parte de una suite de 4 movimientos, de los cuales sólo "
+"llegué a componer 2."
+msgstr ""
+
+#: templates/music.html:310
+msgid ""
+"Llevan la voz difícil en la Flauta 2 porque solíamos tocarlas con mi "
+"prima y a ella le iba mejor leer de arriba. ajajaj"
+msgstr ""
 
 #: templates/pulseras.html:5
 msgid "Pulseras de abalorios"
@@ -2957,4 +3189,7 @@ msgstr "Les dades dels vidrets"
 
 #~ msgid "Alcachofas Babel"
 #~ msgstr "Carxofes Babel"
+
+#~ msgid "Un rato que tenga saco las partituras y la cuelgo..."
+#~ msgstr "Una estona que tingui trec les partitures i la penjo..."
 
