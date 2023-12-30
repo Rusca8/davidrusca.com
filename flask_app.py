@@ -79,6 +79,12 @@ def bg():
     return render_template("juegos.html")
 
 
+@app.route('/bg/ogl')
+@app.route('/bg/ogl/')
+def bg_ogl():
+    return render_template("ogl.html")
+
+
 @app.route('/climatetracker')
 @app.route('/climatetracker/')
 def climate_tracker():
