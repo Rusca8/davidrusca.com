@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-20 12:17+0200\n"
+"POT-Creation-Date: 2023-12-30 12:44+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -122,7 +122,7 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:316
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:317
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
@@ -2056,11 +2056,11 @@ msgstr "Educació Secundària (ESO)"
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: templates/docentes.html:44 templates/docentes.html:312
+#: templates/docentes.html:44 templates/docentes.html:313
 msgid "Sociales"
 msgstr "Socials"
 
-#: templates/docentes.html:45 templates/docentes.html:323
+#: templates/docentes.html:45 templates/docentes.html:324
 msgid "Inglés"
 msgstr "Anglès"
 
@@ -2068,11 +2068,11 @@ msgstr "Anglès"
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: templates/docentes.html:53 templates/docentes.html:355
+#: templates/docentes.html:53 templates/docentes.html:356
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: templates/docentes.html:55 templates/docentes.html:359
+#: templates/docentes.html:55 templates/docentes.html:360
 #: templates/index.html:136
 msgid "Programación"
 msgstr "Programació"
@@ -2111,7 +2111,7 @@ msgstr "Geometria 3D"
 
 #: templates/docentes.html:80 templates/docentes.html:112
 #: templates/docentes.html:223 templates/docentes.html:264
-#: templates/docentes.html:302 templates/docentes.html:343
+#: templates/docentes.html:302 templates/docentes.html:344
 msgid "Fichas:"
 msgstr "Fitxes:"
 
@@ -2187,7 +2187,7 @@ msgid "Ondas"
 msgstr "Ones"
 
 #: templates/docentes.html:152 templates/docentes.html:180
-#: templates/docentes.html:244 templates/docentes.html:361
+#: templates/docentes.html:244 templates/docentes.html:362
 #: templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr "Apunts:"
@@ -2201,7 +2201,7 @@ msgid "Termoquímica"
 msgstr "Termoquímica"
 
 #: templates/docentes.html:164 templates/docentes.html:287
-#: templates/docentes.html:314
+#: templates/docentes.html:315
 msgid "Mnemotecnia:"
 msgstr "Mnemotècnia:"
 
@@ -2282,35 +2282,35 @@ msgstr "Massa i pes"
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: templates/docentes.html:305
+#: templates/docentes.html:305 templates/docentes.html:306
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: templates/docentes.html:325
+#: templates/docentes.html:326
 msgid "Online:"
 msgstr "Online:"
 
-#: templates/docentes.html:337
+#: templates/docentes.html:338
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:345
+#: templates/docentes.html:346
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:346
+#: templates/docentes.html:347
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:347
+#: templates/docentes.html:348
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: templates/docentes.html:363
+#: templates/docentes.html:364
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: templates/docentes.html:364
+#: templates/docentes.html:365
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
@@ -2584,53 +2584,61 @@ msgstr "Dissenys propis i Recursos per a jocs existents."
 msgid "Diseños propios"
 msgstr "Dissenys propis"
 
-#: templates/juegos.html:26
+#: templates/juegos.html:39
 msgid "Recursos para juegos existentes"
 msgstr "Recursos per a jocs existents"
 
-#: templates/juegos.html:30
+#: templates/juegos.html:43
 msgid "Dragones y Mazmorras (5ª Edición)"
 msgstr ""
 
-#: templates/juegos.html:32
+#: templates/juegos.html:48
 msgid "Listas Resumen de Conjuros"
 msgstr "Llistes Resum d'Encanteris"
 
-#: templates/juegos.html:34
+#: templates/juegos.html:50 templates/juegos.html:65
 msgid "Todos los Conjuros"
 msgstr "Tots els Encanteris"
 
-#: templates/juegos.html:35
+#: templates/juegos.html:51 templates/juegos.html:66
+msgid "Conjuros de Artificiero"
+msgstr "Encanteris de l'Artificier"
+
+#: templates/juegos.html:52 templates/juegos.html:67
 msgid "Conjuros de Bardo"
 msgstr "Encanteris del Bard"
 
-#: templates/juegos.html:36
+#: templates/juegos.html:53 templates/juegos.html:68
 msgid "Conjuros de Brujo"
 msgstr "Encanteris del Bruixot"
 
-#: templates/juegos.html:37
+#: templates/juegos.html:54 templates/juegos.html:69
 msgid "Conjuros de Clérigo"
 msgstr "Encanteris del Clergue"
 
-#: templates/juegos.html:38
+#: templates/juegos.html:55 templates/juegos.html:70
 msgid "Conjuros de Druida"
 msgstr "Encanteris del Druida"
 
-#: templates/juegos.html:39
+#: templates/juegos.html:56 templates/juegos.html:71
 msgid "Conjuros de Explorador"
 msgstr "Encanteris de l'Explorador"
 
-#: templates/juegos.html:40
+#: templates/juegos.html:57 templates/juegos.html:72
 msgid "Conjuros de Hechicero"
 msgstr "Encanteris del Fetiller"
 
-#: templates/juegos.html:41
+#: templates/juegos.html:58 templates/juegos.html:73
 msgid "Conjuros de Mago"
 msgstr "Encanteris del Mag"
 
-#: templates/juegos.html:42
+#: templates/juegos.html:59 templates/juegos.html:74
 msgid "Conjuros de Paladin"
 msgstr "Encanteris del Paladí"
+
+#: templates/juegos.html:63
+msgid "Cartas de Conjuros"
+msgstr "Cartes d'Encanteris"
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 msgid "Laboratorio"

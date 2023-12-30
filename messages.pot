@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-20 12:17+0200\n"
+"POT-Creation-Date: 2023-12-30 12:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Braille Español/Catalán"
 msgstr ""
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:316
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:317
 msgid "Comarcas de Cataluña"
 msgstr ""
 
@@ -1943,11 +1943,11 @@ msgstr ""
 msgid "Física y Química"
 msgstr ""
 
-#: templates/docentes.html:44 templates/docentes.html:312
+#: templates/docentes.html:44 templates/docentes.html:313
 msgid "Sociales"
 msgstr ""
 
-#: templates/docentes.html:45 templates/docentes.html:323
+#: templates/docentes.html:45 templates/docentes.html:324
 msgid "Inglés"
 msgstr ""
 
@@ -1955,11 +1955,11 @@ msgstr ""
 msgid "Educación Primaria (EP)"
 msgstr ""
 
-#: templates/docentes.html:53 templates/docentes.html:355
+#: templates/docentes.html:53 templates/docentes.html:356
 msgid "Misceláneo"
 msgstr ""
 
-#: templates/docentes.html:55 templates/docentes.html:359
+#: templates/docentes.html:55 templates/docentes.html:360
 #: templates/index.html:136
 msgid "Programación"
 msgstr ""
@@ -1998,7 +1998,7 @@ msgstr ""
 
 #: templates/docentes.html:80 templates/docentes.html:112
 #: templates/docentes.html:223 templates/docentes.html:264
-#: templates/docentes.html:302 templates/docentes.html:343
+#: templates/docentes.html:302 templates/docentes.html:344
 msgid "Fichas:"
 msgstr ""
 
@@ -2074,7 +2074,7 @@ msgid "Ondas"
 msgstr ""
 
 #: templates/docentes.html:152 templates/docentes.html:180
-#: templates/docentes.html:244 templates/docentes.html:361
+#: templates/docentes.html:244 templates/docentes.html:362
 #: templates/index.html:96 templates/index.html:170
 msgid "Apuntes:"
 msgstr ""
@@ -2088,7 +2088,7 @@ msgid "Termoquímica"
 msgstr ""
 
 #: templates/docentes.html:164 templates/docentes.html:287
-#: templates/docentes.html:314
+#: templates/docentes.html:315
 msgid "Mnemotecnia:"
 msgstr ""
 
@@ -2169,35 +2169,35 @@ msgstr ""
 msgid "Rendimiento"
 msgstr ""
 
-#: templates/docentes.html:305
+#: templates/docentes.html:305 templates/docentes.html:306
 msgid "Máquinas simples"
 msgstr ""
 
-#: templates/docentes.html:325
+#: templates/docentes.html:326
 msgid "Online:"
 msgstr ""
 
-#: templates/docentes.html:337
+#: templates/docentes.html:338
 msgid "Primaria"
 msgstr ""
 
-#: templates/docentes.html:345
+#: templates/docentes.html:346
 msgid "Operaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:346
+#: templates/docentes.html:347
 msgid "Ecuaciones sencillas"
 msgstr ""
 
-#: templates/docentes.html:347
+#: templates/docentes.html:348
 msgid "Operaciones en columna"
 msgstr ""
 
-#: templates/docentes.html:363
+#: templates/docentes.html:364
 msgid "Apuntes"
 msgstr ""
 
-#: templates/docentes.html:364
+#: templates/docentes.html:365
 msgid "Apuntes y Trucos"
 msgstr ""
 
@@ -2467,52 +2467,60 @@ msgstr ""
 msgid "Diseños propios"
 msgstr ""
 
-#: templates/juegos.html:26
+#: templates/juegos.html:39
 msgid "Recursos para juegos existentes"
 msgstr ""
 
-#: templates/juegos.html:30
+#: templates/juegos.html:43
 msgid "Dragones y Mazmorras (5ª Edición)"
 msgstr ""
 
-#: templates/juegos.html:32
+#: templates/juegos.html:48
 msgid "Listas Resumen de Conjuros"
 msgstr ""
 
-#: templates/juegos.html:34
+#: templates/juegos.html:50 templates/juegos.html:65
 msgid "Todos los Conjuros"
 msgstr ""
 
-#: templates/juegos.html:35
+#: templates/juegos.html:51 templates/juegos.html:66
+msgid "Conjuros de Artificiero"
+msgstr ""
+
+#: templates/juegos.html:52 templates/juegos.html:67
 msgid "Conjuros de Bardo"
 msgstr ""
 
-#: templates/juegos.html:36
+#: templates/juegos.html:53 templates/juegos.html:68
 msgid "Conjuros de Brujo"
 msgstr ""
 
-#: templates/juegos.html:37
+#: templates/juegos.html:54 templates/juegos.html:69
 msgid "Conjuros de Clérigo"
 msgstr ""
 
-#: templates/juegos.html:38
+#: templates/juegos.html:55 templates/juegos.html:70
 msgid "Conjuros de Druida"
 msgstr ""
 
-#: templates/juegos.html:39
+#: templates/juegos.html:56 templates/juegos.html:71
 msgid "Conjuros de Explorador"
 msgstr ""
 
-#: templates/juegos.html:40
+#: templates/juegos.html:57 templates/juegos.html:72
 msgid "Conjuros de Hechicero"
 msgstr ""
 
-#: templates/juegos.html:41
+#: templates/juegos.html:58 templates/juegos.html:73
 msgid "Conjuros de Mago"
 msgstr ""
 
-#: templates/juegos.html:42
+#: templates/juegos.html:59 templates/juegos.html:74
 msgid "Conjuros de Paladin"
+msgstr ""
+
+#: templates/juegos.html:63
+msgid "Cartas de Conjuros"
 msgstr ""
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
