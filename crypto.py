@@ -1,6 +1,7 @@
 '''
 Texto críptico para el cumple de Raquel. Traductor py.
 '''
+import random
 
 
 def cesar(text, key):
@@ -143,3 +144,21 @@ Pero te lo dejo aquí, que si has llegado casi te lo mereces ;)<br><br>
 '''
 
 
+def new_transposition_alphabet(plaintext="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+    alpha = [c for c in plaintext]
+    for i in range(len(alpha)-1):
+        j = random.randint(i+1, len(alpha)-1)
+        alpha[i], alpha[j] = alpha[j], alpha[i]
+    else:
+        if alpha[-1] == plaintext[-1]:
+            j = random.randint(0, len(alpha)-2)
+            alpha[-1], alpha[j] = alpha[j], alpha[-1]
+    return "".join(alpha)
+
+
+def get_frequencies(text, only_alpha=True):
+    freqs = {}
+    for c in text:
+        if c.isalpha():
+            freqs[c] = freqs.get(c, 0) + 1
+    return freqs

@@ -6,7 +6,9 @@ from flask_babel import Babel  # traduccions
 
 import re
 import random
+from unidecode import unidecode
 
+import crypto
 import utilities as utils
 import crypto as c
 
@@ -197,6 +199,21 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
     except:
         return render_template("nelson26.html", quantes=26, files_de=10, segons=2)
     return render_template("nelson26.html", quantes=key, files_de=files_de, segons=segons)
+
+
+@app.route('/catagrama/')
+@app.route('/catagrama')
+def catagrama():
+    quote = "Un conflicte no s'acaba amb la victòria dels oprimits, s'acaba amb l'empatia dels opressors."
+    author = "David Ruscalleda"
+    plain = unidecode(quote).upper()
+    plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alpha = crypto.new_transposition_alphabet(plainphabet)
+    cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
+    print(cypher)
+    freqs = crypto.get_frequencies(cypher)
+    return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
+                           plainphabet=plainphabet, author=author)
 
 
 @app.route('/ktn')

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CATAGRAMES</title>
+    <script>
+        //////// Classes ///////
+        class letterBox {
+          constructor(x, y, w, h, cypherLetter, num){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.letter = cypherLetter;
+            this.num = num;
+          }
+        }
+        //////// GLOBAL VARS //////
+        var cWidth;
+        var cHeight;
+        var u;
+        var colors = {
+          "bg": "#539cb8",
+          "bg_correct": "#78b853",
+          "bg_wrong": "#b8535a",
+          "main": "#7cc9e6",
+          "main_correct": "#a3e67c",
+          "main_wrong": "#e67c83",
+          "active": "#444444",
+          "collateral": "#888888",
+        }
+        var cc;
+
+        // main space
+        var gX;
+        var gY;
+        var gW;
+        var gH;
+
+        // quote measures
+        var quoteY;
+        var MONO;
+        var plainH;
+        var heatH;
+        var cypherH;
+        var qLineH;
+
+        // game
+        var quote = {{quote | tojson}};
+        var author = {{author | tojson}};
+        var plain = {{plain | tojson}};
+        var alpha = {{alpha | tojson}};
+        var plainphabet = {{plainphabet | tojson}};
+        var cypher = {{cypher | tojson}};
+        var freqs = {{freqs | tojson}};
+        var userAlpha = "Ç".repeat(alpha.length);
+        var maxFreq;
+
+        // UI
+        var quoteBoxes = [];
+        var activeBox = 0;
+        var correction = 0;  // -1 mal, 0 neutro, 1 bien
+
+        // UI debug
+        var pressed = [0, 0];
+
+        ///////// onload //////
+        window.onload = function(){
+            c=document.getElementById("app");
+
+            // medidas
+            set_measures();
+
+            // precálculos
+            maxFreq = getMaxFreq();
+
+            // drawing init
+            cc = c.getContext("2d");
+            update();
+            setInterval(update, 1000);  // fallback update 1s (normalmente será onclick)
+
+            // ui init
+            init_quote_boxes();
+            init_collisions(c);
+
+            // prevent space going down
+            window.addEventListener("keydown", function(e){
+                if((e.key==" ") && document.activeElement==c){
+                    e.preventDefault();
+                }
+            }, false);
+
+            // on resize
+            window.addEventListener("resize", function(){
+              set_measures();
+              init_quote_boxes();
+              update();
+            }, true);
+        }
+
+        function set_measures(){
+          let resolution = 5;
+          c.width = window.innerWidth * resolution;
+          c.height = window.innerHeight * resolution;
+          cWidth = c.width;
+          cHeight = c.height;
+          u = cHeight/500;
+
+          // main space w/h
+          gH = cHeight;
+          gW = cWidth < cHeight ? cWidth : cHeight/1.3;
+          gY = 0;
+          gX = cWidth/2 - gW/2;
+
+          // UI elements
+          quoteY = 75*u;
+          MONO = 15*u;
+          plainH = MONO*1;
+          heatH = MONO*0.6;
+          cypherH = MONO*0.8;
+          qLineH = (plainH + heatH + cypherH) * 1.1;
+        }
+
+        ///////// Update ////////
+        function update(){
+            // style setup
+            cc.lineWidth = 1*u;
+            cc.textBaseline = "middle";
+            cc.textAlign = "center"
+
+            // bg
+            cc.fillStyle= correction < 0 ? colors.bg_wrong
+                            : correction > 0 ? colors.bg_correct
+                            : colors.bg;
+            cc.fillRect(0, 0, c.width, c.height);
+
+            // main portrait
+            cc.fillStyle=correction < 0 ? colors.main_wrong
+                            : correction > 0 ? colors.main_correct
+                            : colors.main;
+            cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
+
+            // title
+            cc.font = font("Helvetica", 30, bold=true);
+            cc.fillStyle = "white";
+            cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
+            cc.fillStyle = "white";
+            cc.font = font("Helvetica", 10, bold=true);
+            cc.textAlign = "left"
+            cc.fillText(author, gX + MONO, quoteY-12*u);
+            cc.font = font("Helvetica", 10);
+            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, cHeight-50*u);
+            cc.textAlign = "center"
+
+            // quote
+            draw_quote();
+
+            // ////// DEBUGGING //////
+            // alphabets debug
+            cc.fillStyle = "purple";
+            //cc.fillRect(pressed[0]-2*u, pressed[1]-2*u, 4*u, 4*u);
+        }
+
+        function font(family, pt, bold=false, italic=false){
+          let type = "";
+          if(italic){
+            type += "italic ";
+          }
+          if(bold){
+            type += "bold ";
+          }
+          return type + (pt*u).toString() + "px " + family;
+        }
+
+        function monofont(family, pt){
+          return (MONO*pt/20).toString() + "px " + family;
+        }
+
+        function draw_quote(){
+          for(let box of quoteBoxes){
+            draw_letterbox(box);
+          }
+        }
+
+        function draw_letterbox(box){
+          let x = box.x;
+          let y = box.y;
+          let letter = box.letter;
+          let plainBG;
+          let plainColor;
+          if(box.num == activeBox){
+            plainBG = colors["active"];
+            plainColor = "#ffffff";
+          }else if(box.letter == quoteBoxes[activeBox].letter){
+            plainBG = colors["collateral"];
+            plainColor = "#ffffff";
+          }else{
+            plainBG = "white";
+            plainColor = "black";
+          }
+          if(alpha.includes(letter)){
+            // main
+            cc.fillStyle = plainBG;
+            cc.fillRect(x, y, MONO, plainH);
+            cc.font = monofont("Courier", 20);
+            cc.fillStyle = plainColor;
+            let plainletter = ralph(letter, alpha, userAlpha);
+            if(plainletter != "Ç"){
+              cc.fillText(plainletter, x+MONO/2, y+plainH/2);
+            }
+            // cipher
+            cc.fillStyle = "lightgrey";
+            cc.fillRect(x, y+plainH+heatH, MONO, cypherH);
+            cc.font = monofont("Courier", 16);
+            cc.fillStyle = "black"
+            cc.fillText(letter, x+MONO/2, y+plainH+heatH+cypherH/2)
+            // heatmap
+            cc.fillStyle = freqColor(letter);
+            cc.fillRect(x, y+plainH, MONO, heatH);
+            cc.strokeRect(x, y+plainH, MONO, heatH);
+            cc.font = monofont("Courier", 10);
+            cc.fillStyle = "black";
+            cc.fillText(freqs[letter], x+MONO/2, y+plainH+heatH/2);
+            // global border
+            cc.strokeStyle = "black";
+            cc.strokeRect(x, y, MONO, plainH+heatH+cypherH);
+          }else{
+            cc.fillStyle = "black";
+            cc.font = font("Courier", 14);
+            cc.fillText(letter, x+MONO/2, y+plainH/2);
+          }
+        }
+
+        function getMaxFreq(){
+          let max = 1;
+          for(let [letter, quantity] of Object.entries(freqs)){
+            max = Math.max(max, quantity);
+          }
+          return max;
+        }
+
+        function freqColor(letter){
+          let lowest = [250, 230, 55];  // amarillo
+          let highest = [250, 81, 55];  // rojo
+          let k = freqs[letter] / maxFreq;
+
+          let color = [lowest[0]*(1-k) + highest[0]*k,
+                       lowest[1]*(1-k) + highest[1]*k,
+                       lowest[2]*(1-k) + highest[2]*k,
+                       ];
+          return "rgb("+ color[0] + "," + color[1] + "," + color[2] + ")";
+        }
+
+        function ralph(letter, older, newer){
+          // replace alphabet
+          return newer[older.indexOf(letter)];
+        }
+
+        function place_letter(letter){
+          let cypherLetter = quoteBoxes[activeBox].letter;
+          if(userAlpha.includes(letter)){
+            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "Ç");
+          }
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(cypherLetter), letter);
+        }
+
+        function replace_at_index(string, index, char){
+          let newString = string.substring(0, index) + char + string.substring(index+1);
+          return newString;
+        }
+
+        function to_next_empty(){
+          for(j=1; j<quoteBoxes.length; j++){
+            let k = (activeBox+j) % quoteBoxes.length;
+            if(alpha.includes(quoteBoxes[k].letter)){  // és lletra
+              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "Ç"){
+                activeBox = k;
+                return;
+              }
+            }
+          }
+          // else
+          check_quote();
+        }
+
+        function check_quote(){
+          // strip unused
+          let guessed = userAlpha;
+          guessed = guessed.replaceAll("Ç", "");
+          // strip non appearing
+          let correct = plainphabet;
+          for(let lletra of plainphabet){
+            if(!plain.includes(lletra)){
+              correct = correct.replace(lletra, "");
+            }
+          }
+          console.log(guessed);
+          console.log(correct);
+          correction = guessed == correct ? 1 : -1;
+        }
+
+
+        ///////////////// KeyUp ////////////////
+        function canvas_hotkeys(e){
+            let upperKey = e.key.toUpperCase();
+            if(alpha.includes(upperKey)){
+              place_letter(upperKey);
+              correction = 0;
+              to_next_empty();
+            }else if(e.key == "Backspace"){
+              userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "Ç");
+              correction = 0;
+            }
+            update();
+        }
+
+        /////////// Clicks ////////////
+        // Init quoteBoxes
+        function init_quote_boxes(){
+          quoteBoxes = [];
+          let words = cypher.split(" ");
+          let x = gX+MONO;
+          let y = quoteY;
+          let i=0;
+          for(let word of words){
+            if(x + (word.length+3) * MONO> gX + gW){
+              x = gX+MONO;
+              y += qLineH;
+            }
+            for(let letter of word){
+              quoteBoxes.push(new letterBox(x, y, MONO, plainH + heatH + cypherH, letter, i));
+              x += MONO;
+              i++;
+            }
+            x += MONO;
+          }
+          update();
+        }
+        // Collisions (partially StackOverflow)
+        function init_collisions(c){
+            c.addEventListener('click', function(event){
+                /* x = event.pageX - (c.offsetLeft + c.clientLeft);
+                y = event.pageY - (c.offsetTop + c.clientTop); */
+                const rect = c.getBoundingClientRect();
+                const relX = event.clientX - rect.left;
+                const relY = event.clientY - rect.top;
+                x = relX * c.width / rect.width;
+                y = relY * c.height / rect.height;
+                //prompt(bolitas[0].x + ":" + bw + " // " + x + ", " + y);
+                xcur = x;
+                ycur = y;
+                pressed = [xcur, ycur];
+                let i = 0;
+                for(let b of quoteBoxes){
+                    if(x > b.x && x < b.x+b.w && y > b.y && y < b.y+b.h){
+                        activeBox = i;
+                        update();
+                        return;
+                    }
+                    i++;
+                }
+                update();
+            }, false);
+        }
+    </script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);" style="width: 100%; height: 100%; display: block;"></canvas>
+</body>
+</html>
