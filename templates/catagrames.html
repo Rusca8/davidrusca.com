@@ -67,9 +67,15 @@
         var maxFreq;
 
         // UI
+        var quertyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM<<"];
+        var quertyY;
+        var keyW;
+        var keyH;
+        //
         var quoteBoxes = [];
         var activeBox = 0;
         var quertyKeys = [];
+        //
         var correction = 0;  // -1 mal, 0 neutro, 1 bien
 
         // UI debug
@@ -109,6 +115,8 @@
               init_querty();
               update();
             }, true);
+
+            update();
         }
 
         function set_measures(){
@@ -127,6 +135,9 @@
 
           // UI elements
           quoteY = 75*u;
+          keyW = gW/(quertyRows[0].length+1);
+          keyH = keyW * 0.8;
+          quertyY = cHeight-(0.2+quertyRows.length)*keyH;
           MONO = 15*u;
           plainH = MONO*1;
           heatH = MONO*0.6;
@@ -137,9 +148,10 @@
         ///////// Update ////////
         function update(){
             // style setup
-            cc.lineWidth = 1*u;
             cc.textBaseline = "middle";
-            cc.textAlign = "center"
+            cc.textAlign = "center";
+            cc.lineJoin = 'miter';
+            cc.miterLimit = 2;
 
             // bg
             cc.fillStyle= correction < 0 ? colors.bg_wrong
@@ -154,6 +166,7 @@
             cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
 
             // title
+            cc.lineWidth = 1*u;
             cc.font = font("Helvetica", 30, bold=true);
             cc.fillStyle = "white";
             cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
@@ -162,13 +175,12 @@
             cc.textAlign = "left"
             cc.fillText(author, gX + MONO, quoteY-12*u);
             cc.font = font("Helvetica", 10);
-            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, cHeight-150*u);
+            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, quertyY-2*MONO);
             cc.textAlign = "center"
 
-            // quote
+            // main UI
+            cc.lineWidth = 1*u;
             draw_quote();
-
-            // querty
             draw_querty();
 
             // ////// DEBUGGING //////
@@ -273,10 +285,27 @@
             h -= m;
             w -= m;
             cc.fillStyle = userAlpha.includes(k.letter) ? colors["collateral"] : "white";
-            cc.fillRect(x-w/2, y-h/2, w, h);
-            cc.strokeRect(x-w/2, y-h/2, w, h);
-            cc.fillStyle = "black";
-            cc.fillText(k.letter, k.x, k.y);
+            roundRect(cc, x-w/2, y-h/2, w, h, h/10);
+            if(k.letter == "<"){
+              cc.fillStyle = "#bbbbbb";
+              cc.font = monofont("Helvetica", 20);
+              cc.fillText("elimina", x, y+h*0.02);
+            }else{
+              cc.fillStyle = "black";
+              cc.font = monofont("Helvetica", 22);
+              cc.fillText(k.letter, x, y+h*0.04);
+            }
+          }
+        }
+
+        function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.roundRect(x, y, w, h, r);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
           }
         }
 
@@ -394,10 +423,7 @@
 
         function init_querty(){
            quertyKeys = [];
-           let quertyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM<<"];
-           let keyW = gW/(quertyRows[0].length+1);
-           let keyH = keyW * 0.8;
-           let y = cHeight-(0.2+quertyRows.length)*keyH;
+           let y = quertyY;
            for(let row of quertyRows){
              i = 0;
              let x0 = gX+gW/2-keyW*(row.length-1)/2;
