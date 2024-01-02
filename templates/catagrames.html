@@ -36,8 +36,9 @@
           "main": "#4bb4db",
           "main_correct": "#80db4b",
           "main_wrong": "#db4b55",
-          "active": "#444444",
-          "collateral": "#888888",
+          "active": "#24404d",
+          "collateral": "#70909e",
+          "quertyshade": "#99b9c7",
         }
         var cc;
 
@@ -288,7 +289,7 @@
             }
             h -= m;
             w -= m;
-            cc.fillStyle = userAlpha.includes(k.letter) ? colors["collateral"] : "white";
+            cc.fillStyle = userAlpha.includes(k.letter) ? colors.quertyshade : "white";
             roundRect(cc, x-w/2, y-h/2, w, h, h/10);
             if(k.letter == "<"){
               cc.fillStyle = "#bbbbbb";
@@ -374,6 +375,24 @@
           check_quote();
         }
 
+        function to_next(right=true){
+          let k;
+          for(j=1; j<quoteBoxes.length;j++){
+            if(right){
+              k = (activeBox+j) % quoteBoxes.length;
+            }else{
+              k = (activeBox-j) % quoteBoxes.length;
+              if(k<0){
+                k += quoteBoxes.length;
+              }
+            }
+            if(alpha.includes(quoteBoxes[k].letter)){
+              activeBox = k;
+              return;
+            }
+          }
+        }
+
         function check_quote(){
           // strip unused
           let guessed = userAlpha;
@@ -398,6 +417,10 @@
               place_letter(upperKey);
             }else if(e.key == "Backspace"){
               delete_letter();
+            }else if(e.key == "ArrowLeft"){
+              to_next(right=false);
+            }else if(e.key == "ArrowRight"){
+              to_next();
             }
             update();
         }
