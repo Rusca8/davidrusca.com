@@ -135,8 +135,8 @@
 
           // UI elements
           quoteY = 75*u;
-          keyW = gW/(quertyRows[0].length+1);
-          keyH = keyW * 0.8;
+          keyW = gW/(quertyRows[0].length+0.4);
+          keyH = keyW * 0.95;
           quertyY = cHeight-(0.2+quertyRows.length)*keyH;
           MONO = 15*u;
           plainH = MONO*1;
@@ -174,7 +174,7 @@
             cc.font = font("Helvetica", 10, bold=true);
             cc.textAlign = "left"
             cc.fillText(author, gX + MONO, quoteY-12*u);
-            cc.font = font("Helvetica", 10);
+            cc.font = monofont("Helvetica", 12);
             cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, quertyY-2*MONO);
             cc.textAlign = "center"
 
@@ -288,7 +288,7 @@
             roundRect(cc, x-w/2, y-h/2, w, h, h/10);
             if(k.letter == "<"){
               cc.fillStyle = "#bbbbbb";
-              cc.font = monofont("Helvetica", 20);
+              cc.font = monofont("Helvetica", 17);
               cc.fillText("elimina", x, y+h*0.02);
             }else{
               cc.fillStyle = "black";
