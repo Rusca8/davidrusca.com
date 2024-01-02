@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CATAGRAMES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <title>CATAGRAMA del dia</title>
     <script>
         //////// Classes ///////
         class letterBox {
@@ -13,6 +14,15 @@
             this.h = h;
             this.letter = cypherLetter;
             this.num = num;
+          }
+        }
+        class quertyKey {
+          constructor(x, y, w, h, letter){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.letter = letter;
           }
         }
         //////// GLOBAL VARS //////
@@ -59,6 +69,7 @@
         // UI
         var quoteBoxes = [];
         var activeBox = 0;
+        var quertyKeys = [];
         var correction = 0;  // -1 mal, 0 neutro, 1 bien
 
         // UI debug
@@ -81,6 +92,7 @@
 
             // ui init
             init_quote_boxes();
+            init_querty();
             init_collisions(c);
 
             // prevent space going down
@@ -94,6 +106,7 @@
             window.addEventListener("resize", function(){
               set_measures();
               init_quote_boxes();
+              init_querty();
               update();
             }, true);
         }
@@ -149,11 +162,14 @@
             cc.textAlign = "left"
             cc.fillText(author, gX + MONO, quoteY-12*u);
             cc.font = font("Helvetica", 10);
-            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, cHeight-50*u);
+            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, cHeight-150*u);
             cc.textAlign = "center"
 
             // quote
             draw_quote();
+
+            // querty
+            draw_querty();
 
             // ////// DEBUGGING //////
             // alphabets debug
@@ -231,6 +247,39 @@
           }
         }
 
+        function draw_querty(){
+          let backdrawn = false;
+          let x;
+          let y;
+          let w;
+          let h;
+          let m;
+          for(let k of quertyKeys){
+            m = k.w*0.1;
+            h = k.h;
+            y = k.y;
+            if(k.letter == "<"){
+              if(backdrawn){
+                continue;
+              }else{
+                w = 2*k.w;
+                x = k.x+k.w/2;
+                backdrawn = true;
+              }
+            }else{
+              w = k.w;
+              x = k.x;
+            }
+            h -= m;
+            w -= m;
+            cc.fillStyle = userAlpha.includes(k.letter) ? colors["collateral"] : "white";
+            cc.fillRect(x-w/2, y-h/2, w, h);
+            cc.strokeRect(x-w/2, y-h/2, w, h);
+            cc.fillStyle = "black";
+            cc.fillText(k.letter, k.x, k.y);
+          }
+        }
+
         function getMaxFreq(){
           let max = 1;
           for(let [letter, quantity] of Object.entries(freqs)){
@@ -262,11 +311,20 @@
             userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "Ç");
           }
           userAlpha = replace_at_index(userAlpha, alpha.indexOf(cypherLetter), letter);
+
+          // reset correction & search for next
+          correction = 0;
+          to_next_empty();
         }
 
         function replace_at_index(string, index, char){
           let newString = string.substring(0, index) + char + string.substring(index+1);
           return newString;
+        }
+
+        function delete_letter(){
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "Ç");
+          correction = 0;
         }
 
         function to_next_empty(){
@@ -305,11 +363,8 @@
             let upperKey = e.key.toUpperCase();
             if(alpha.includes(upperKey)){
               place_letter(upperKey);
-              correction = 0;
-              to_next_empty();
             }else if(e.key == "Backspace"){
-              userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "Ç");
-              correction = 0;
+              delete_letter();
             }
             update();
         }
@@ -336,6 +391,23 @@
           }
           update();
         }
+
+        function init_querty(){
+           quertyKeys = [];
+           let quertyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM<<"];
+           let keyW = gW/(quertyRows[0].length+1);
+           let keyH = keyW * 0.8;
+           let y = cHeight-(0.2+quertyRows.length)*keyH;
+           for(let row of quertyRows){
+             i = 0;
+             let x0 = gX+gW/2-keyW*(row.length-1)/2;
+             for(let letter of row){
+               quertyKeys.push(new quertyKey(x0+keyW*i, y, keyW, keyH, letter));
+               i++;
+             }
+             y += keyH;
+           }
+        }
         // Collisions (partially StackOverflow)
         function init_collisions(c){
             c.addEventListener('click', function(event){
@@ -352,12 +424,23 @@
                 pressed = [xcur, ycur];
                 let i = 0;
                 for(let b of quoteBoxes){
-                    if(x > b.x && x < b.x+b.w && y > b.y && y < b.y+b.h){
+                    if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){  // rollin LTR: bulk discard (last 2 conditions checked only if found)
                         activeBox = i;
                         update();
                         return;
                     }
                     i++;
+                }
+                for(let k of quertyKeys){
+                  if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
+                    if(alpha.includes(k.letter)){
+                      place_letter(k.letter);
+                    }else{
+                      delete_letter();
+                    }
+                    update();
+                    return;
+                  }
                 }
                 update();
             }, false);
