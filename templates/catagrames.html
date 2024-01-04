@@ -80,6 +80,9 @@
         var quertyKeys = [];
         //
         var correction = 0;  // -1 mal, 0 neutro, 1 bien
+        //
+        var t_start;
+        var t_end;
 
         // UI debug
         var pressed = [0, 0];
@@ -120,6 +123,10 @@
             }, true);
 
             update();
+
+            // start clock
+            t_start = Date.now();
+            t_end = Date.now() - 42;
         }
 
         function set_measures(){
@@ -178,6 +185,10 @@
             cc.font = font("Helvetica", 30, bold=true);
             cc.fillStyle = "white";
             cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
+            if(correction == 1){
+              cc.font = font("Helvetica", 10);
+              cc.fillText("Resolt en " + get_time(t_end, t_start), gX+gW/2, 45*u);
+            }
             cc.font = font("Helvetica", 10, bold=true);
             cc.textAlign = "left"
             cc.fillStyle = "rgba(255, 255, 255, 0.5)";
@@ -413,8 +424,22 @@
           console.log(guessed);
           console.log(correct);
           correction = guessed == correct ? 1 : -1;
+          if(correction == 1 && t_end < t_start){
+            t_end = Date.now();
+          }
         }
 
+        function get_time(end, start){
+          let msec = end - start;
+          //
+          let sec = Math.floor(msec / 1000);
+          msec -= sec * 1000;
+          //
+          let min = Math.floor(sec / 60);
+          sec -= min * 60;
+
+          return time_text = min + ":" + sec.toString().padStart(2, "0");
+        }
 
         ///////////////// KeyUp ////////////////
         function canvas_hotkeys(e){
