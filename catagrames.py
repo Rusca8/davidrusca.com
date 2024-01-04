@@ -1,4 +1,5 @@
 import json
+import utilities
 
 cita_def = {"autor": "L'hem liat parda",
             "cita":  "En David va calcular alguna cosa malament i ara no ha sortit la frase de veritat. Plorem junts."
@@ -6,10 +7,8 @@ cita_def = {"autor": "L'hem liat parda",
 
 
 def get_from_archive(archive_id="Today"):
-    with open("./static/json/catagrama/archive.json") as f:
-        archive = json.load(f)
-    with open("./static/json/catagrama/quotes.json") as f:
-        quotes = json.load(f)
+    archive = utilities.load_json("./static/json/catagrama/archive.json")
+    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     if archive_id == "Today":  # picks last non-special (i.e. 10 chars, as in YYYY-MM-DD)
         archive_id = next(x for x in sorted(archive, reverse=True) if len(x) == 10)
@@ -23,10 +22,8 @@ def get_from_archive(archive_id="Today"):
 
 
 def get_archive_index():
-    with open("./static/json/catagrama/archive.json") as f:
-        archive = json.load(f)
-    with open("./static/json/catagrama/quotes.json") as f:
-        quotes = json.load(f)
+    archive = utilities.load_json("./static/json/catagrama/archive.json")
+    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     for k, v in archive.items():
         archive[k]["autor"] = quotes.get(v["id"], cita_def)["autor"]
