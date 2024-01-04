@@ -15,7 +15,8 @@
 </div>
 <div class="archive py-4">
     {% for archive_id, quote in quotes|dictsort %}
-    <div class="text-center"><a href="/catagrama/a/{{archive_id}}"><span class="num"><b>#{{quote["num"]}}</b></span> <b>{{quote["autor"]}}</b> · <span class="id">{{archive_id}}</span></a></div>
+        {% set url = '' if loop.last else '/a/' + archive_id %}
+    <div class="text-center"><a href="/catagrama{{url}}"><span class="num"><b>#{{quote["num"]}}</b></span> <b>{{quote["autor"]}}</b> · <span class="id">{{'Avui' if loop.last else archive_id}}</span></a></div>
     {% endfor %}
 </div>
 
