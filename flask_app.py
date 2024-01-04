@@ -204,8 +204,8 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
 @app.route('/catagrama/')
 @app.route('/catagrama')
 def catagrama():
-    quote = "Un conflicte no s'acaba amb la victòria dels oprimits, s'acaba amb l'empatia dels opressors."
-    author = "David Ruscalleda"
+    quote = "Qui truca a la porta del jardí? Algú que ha menjat la fruita i n'ha tastat els seus misteris."
+    author = "ATLA"
     plain = unidecode(quote).upper()
     plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alpha = crypto.new_transposition_alphabet(plainphabet)
