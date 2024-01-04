@@ -201,18 +201,35 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
     return render_template("nelson26.html", quantes=key, files_de=files_de, segons=segons)
 
 
+@app.route('/catagrama/arxiu')
+@app.route('/catagrama/arxiu/')
+def catagrama_arxiu():
+    import catagrames as cg
+
+    quotes = cg.get_archive_index()
+    return render_template("catagrama_arxiu.html", quotes=quotes)
+
+
 @app.route('/catagrama/')
 @app.route('/catagrama')
-def catagrama():
-    quote = "Qui truca a la porta del jardí? Algú que ha menjat la fruita i n'ha tastat els seus misteris."
-    author = "ATLA"
+@app.route('/catagrama/a/<archive_id>')
+@app.route('/catagrama/a/<archive_id>/')
+def catagrama(archive_id="Today"):
+    import catagrames as cg
+
+    cita = cg.get_from_archive(archive_id)
+    quote = cita["cita"]
+    author = cita["autor"]
+    num = cita["num"]
+
     plain = unidecode(quote).upper()
     plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alpha = crypto.new_transposition_alphabet(plainphabet)
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
     freqs = crypto.get_frequencies(cypher)
+
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
-                           plainphabet=plainphabet, author=author)
+                           plainphabet=plainphabet, author=author, num=num)
 
 
 @app.route('/ktn')

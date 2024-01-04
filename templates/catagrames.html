@@ -60,6 +60,7 @@
         // game
         var quote = {{quote | tojson}};
         var author = {{author | tojson}};
+        var quote_num = "#" + {{num | tojson}};
         var plain = {{plain | tojson}};
         var alpha = {{alpha | tojson}};
         var plainphabet = {{plainphabet | tojson}};
@@ -160,9 +161,10 @@
             cc.miterLimit = 2;
 
             // bg
-            cc.fillStyle= correction < 0 ? colors.bg_wrong
+            let bg_color = correction < 0 ? colors.bg_wrong
                             : correction > 0 ? colors.bg_correct
                             : colors.bg;
+            cc.fillStyle = bg_color;
             cc.fillRect(0, 0, c.width, c.height);
 
             // main portrait
@@ -176,10 +178,13 @@
             cc.font = font("Helvetica", 30, bold=true);
             cc.fillStyle = "white";
             cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
-            cc.fillStyle = "white";
             cc.font = font("Helvetica", 10, bold=true);
             cc.textAlign = "left"
-            cc.fillText(author, gX + MONO, quoteY-12*u);
+            cc.fillStyle = "rgba(255, 255, 255, 0.5)";
+            cc.fillText(quote_num, gX + MONO, quoteY-12*u);
+            cc.fillStyle = "white";
+            let quote_num_len = cc.measureText(quote_num).width;
+            cc.fillText(author, gX + MONO + quote_num_len + 4*u, quoteY-12*u);
             cc.font = font("Helvetica", 10);
             cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, quertyY-2*MONO);
             cc.textAlign = "center"
@@ -260,7 +265,7 @@
             cc.strokeRect(x, y, MONO, plainH+heatH+cypherH);
           }else{
             cc.fillStyle = "black";
-            cc.font = font("Courier", 14);
+            cc.font = monofont("Courier", 20);
             cc.fillText(letter, x+MONO/2, y+plainH/2);
           }
         }
@@ -439,7 +444,7 @@
               x = gX+MONO;
               y += qLineH;
               // check for keyboard overlap = make smaller
-              if(y > quertyY-keyH){
+              if(y + qLineH > quertyY-keyH){
                 MONO *= 0.8;
                 console.log(MONO);
                 set_quote_measures();
@@ -452,7 +457,7 @@
               x += MONO;
               i++;
             }
-            x += MONO;
+            x += MONO*2/3;
           }
           update();
         }

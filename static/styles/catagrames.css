@@ -1,0 +1,26 @@
+
+body {
+    background-color: #1990bd;
+    color: white;
+}
+
+.archive {
+    background-color: #4bb4db;
+    height: 100%;
+}
+
+a {
+ color: white;
+}
+
+a:hover{
+ text-decoration: none;
+}
+
+.num {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.id {
+    color: #1990bd;
+}
