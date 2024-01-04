@@ -201,12 +201,20 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
     return render_template("nelson26.html", quantes=key, files_de=files_de, segons=segons)
 
 
+@app.route('/catagrama/admin')
+def catagrama_admin():
+    import catagrames as cg
+
+    queue = cg.get_quotes_on_queue()
+    return render_template('catagrama_admin.html', queue=queue)
+
+
 @app.route('/catagrama/arxiu')
 @app.route('/catagrama/arxiu/')
 def catagrama_arxiu():
     import catagrames as cg
 
-    quotes = cg.get_archive_index()
+    quotes = cg.get_archive()
     return render_template("catagrama_arxiu.html", quotes=quotes)
 
 
@@ -222,7 +230,7 @@ def catagrama(archive_id="Today"):
     author = cita["autor"]
     num = cita["num"]
 
-    plain = unidecode(quote).upper()
+    plain = unidecode(quote).upper().replace("*", "·")
     plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alpha = crypto.new_transposition_alphabet(plainphabet)
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])

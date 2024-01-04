@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catagrames: Admin</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles/catagrames.css">
+</head>
+<body class="mx-3">
+<div class="header">
+    <h1 class="text-center pt-3 mb-0"><b>CATAGRAMA</b></h1>
+    <h5 class="text-center mt-0 pb-3">plana d'administrador</h5>
+</div>
+<div class="archive py-0">
+    <table>
+            <tr class="bb-thick">
+                <td class="px-2 text-center id">#</td>
+                <td class="num px-2 text-center">id</td>
+                <td class="px-2"><b>Autor</b></td>
+                <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
+            </tr>
+        {% for queue_id, quote in queue|dictsort %}
+            <tr>
+                <td class="px-2 text-center id">{{ queue_id }}</td>
+                <td class="num px-2 text-center">{{ quote['id'] }}</td>
+                <td class="px-2"><b>{{ quote['autor'] }}</b></td>
+                <td class="mono px-2">{{ quote['cita'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

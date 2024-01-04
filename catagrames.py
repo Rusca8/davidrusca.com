@@ -21,7 +21,7 @@ def get_from_archive(archive_id="Today"):
     return quote
 
 
-def get_archive_index():
+def get_archive():
     archive = utilities.load_json("./static/json/catagrama/archive.json")
     quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
@@ -31,3 +31,13 @@ def get_archive_index():
     return archive
 
 
+def get_quotes_on_queue():
+    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
+    queue = utilities.load_json("./static/json/catagrama/queue.json")
+
+    queued_quotes = {}
+    for i, quote_id in enumerate(queue):
+        queued_quotes[i] = quotes.get(quote_id, cita_def)
+        queued_quotes[i]["id"] = quote_id
+
+    return queued_quotes
