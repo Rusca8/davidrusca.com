@@ -272,7 +272,7 @@ def catagrama(archive_id="Today"):
     author = cita["autor"]
     num = cita["num"]
 
-    plain = unidecode(quote).upper().replace("*", "·")
+    plain = unidecode(quote).upper().replace("*", "·").replace("...", "…")
     plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alpha = crypto.new_transposition_alphabet(plainphabet)
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
