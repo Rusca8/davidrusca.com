@@ -12,25 +12,80 @@
     <h1 class="text-center pt-3 mb-0"><b>CATAGRAMA</b></h1>
     <h5 class="text-center mt-0 pb-3">plana d'administrador</h5>
 </div>
-<div class="archive py-0">
-    <table>
-            <tr class="bb-thick">
-                <td class="px-2 text-center id">#</td>
-                <td class="num px-2 text-center">id</td>
-                <td class="px-2"><b>Autor</b></td>
-                <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-            </tr>
-        {% for queue_id, quote in queue|dictsort %}
-            <tr>
-                <td class="px-2 text-center id">{{ queue_id }}</td>
+<hr>
+Admin key: <input type="password" class="ml-2" id="admin_key">
+<hr>
+<div class="py-0">
+
+    <!-- ARCHIVED -->
+    <div class="mt-2">
+        <b class="ml-1">Arxiu</b>
+    </div>
+
+    <table class="lil-table">
+        <tr class="bb-thick archived-header">
+            <td class="px-2 text-center id"><b>#</b></td>
+            <td class="num px-2 text-center">quote_id</td>
+            <td class="px-2"><b>Autor</b></td>
+            <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
+            <td class="px-2 text-center id"><b>Data</b></td>
+        </tr>
+        {% for num, quote in archive|dictsort %}
+            <tr class="archived">
+                <td class="px-2 text-center id"><b>{{ num }}</b></td>
                 <td class="num px-2 text-center">{{ quote['id'] }}</td>
                 <td class="px-2"><b>{{ quote['autor'] }}</b></td>
                 <td class="mono px-2">{{ quote['cita'] }}</td>
+                <td class="num px-2 text-center id"><b>{{ quote['archive_id'] }}</b></td>
             </tr>
         {% endfor %}
     </table>
-</div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- QUEUE -->
+    <div class="mt-2">
+        <b class="ml-1">En cua</b>  <span id="queue-feedback"></span>
+    </div>
+
+    {% include '/catagrama/queue_table.html' %}
+
+    <!-- POOL -->
+    <div class="mt-2">
+        <b class="ml-1">Pendents</b>  <span id="pool-feedback"></span>
+    </div>
+
+    {% include '/catagrama/pool_table.html' %}
+
+</div>
+<script>
+    function ajax(url='', place_id='ajax', feedback_id='ajax_feedback', and_refresh=[]){
+        let req = new XMLHttpRequest();
+        let result = document.getElementById(place_id);
+        let feedback = document.getElementById(feedback_id);
+        let admin_key = document.getElementById("admin_key").value;
+
+
+        req.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200) {
+                result.innerHTML = this.responseText;
+                feedback.innerHTML = "";
+
+                // recursive bulk refresh of (asked for) affected tables
+                for(let table of and_refresh){
+                    refresh(table);
+                }
+            }else{
+                feedback.innerHTML = "...";
+            }
+        }
+
+        console.log('/catagrama/ajax/' + url + "?p=" + admin_key);
+        req.open('GET', '/catagrama/ajax/' + url + "?p=" + admin_key, true);
+        req.send();
+    }
+
+    function refresh(table) {
+        ajax(table, table + '-table', table + '-feedback');
+    }
+</script>
 </body>
 </html>

@@ -205,8 +205,50 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
 def catagrama_admin():
     import catagrames as cg
 
-    queue = cg.get_quotes_on_queue()
-    return render_template('catagrama_admin.html', queue=queue)
+    archive = cg.get_quotes_on_archive()
+    queue = cg.get_quotes_on_queue(num_after_archive=True)
+    pool = cg.get_quotes_pool()
+    return render_template('catagrama_admin.html', queue=queue, archive=archive, pool=pool)
+
+
+@app.route('/catagrama/ajax')
+@app.route('/catagrama/ajax/<datos>')
+def catagrama_ajax(datos="hello_world"):
+    import catagrames as cg
+    from secretos import catagrama_ajax
+
+    match datos.split("_"):
+        case ["queue"]:
+            queue = cg.get_quotes_on_queue(num_after_archive=True)
+            return render_template("/catagrama/queue_table.html", queue=queue)
+        case ["pool"]:
+            pool = cg.get_quotes_pool()
+            return render_template("/catagrama/pool_table.html", pool=pool)
+
+        case ["queue", quote_id, move]:
+            permission = ""
+            if request.args.get("p", "") != catagrama_ajax:
+                print("failed auth")
+                permission = "Requires key"
+            else:
+                if move == "remove":
+                    cg.remove_from_queue(quote_id)
+                else:
+                    cg.move_in_queue(quote_id, move)
+            queue = cg.get_quotes_on_queue(num_after_archive=True)
+            return render_template("/catagrama/queue_table.html", queue=queue, permission=permission)
+
+        case ["pool", quote_id, move]:
+            permission = ""
+            if request.args.get("p", "") != catagrama_ajax:
+                print("failed auth")
+                permission = "Requires key"
+            else:
+                cg.add_to_queue(quote_id, move)
+            pool = cg.get_quotes_pool()
+            return render_template("/catagrama/pool_table.html", pool=pool, permission=permission)
+        case _:
+            return "Pernils pernils que venen per AJAX"
 
 
 @app.route('/catagrama/arxiu')

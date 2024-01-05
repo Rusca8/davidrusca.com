@@ -28,6 +28,7 @@ a:hover{
 table, tr {
     width: 100%;
     border: 1px solid #1990bd;
+    background-color: #4bb4db;
 }
 
 td {
@@ -40,4 +41,28 @@ td {
 
 .bb-thick {
     border-bottom: 4px solid #1990bd;
+}
+
+.lil-table {
+    font-size: smaller;
+}
+
+.archived {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.archived-header {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.queued {
+    background-color: rgba(70, 30, 30, 0.5);
+}
+
+.queued-header {
+    background-color: rgba(70, 30, 30, 0.7);
+}
+
+.hand {
+    cursor: pointer;
 }

@@ -18,8 +18,14 @@ def add_to_json(new_data, filename='data.json'):
 
 def load_json(filename='data.json'):
     root = os.path.dirname(__file__)
-    with open(os.path.join(root, filename), 'r') as file:
+    with open(os.path.join(root, filename), mode='r') as file:
         return json.load(file)
+
+
+def dump_json(data, filename='data.json'):
+    root = os.path.dirname(__file__)
+    with open(os.path.join(root, filename), mode='w') as file:
+        json.dump(data, file)
 
 
 def date(ts):
