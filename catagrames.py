@@ -1,14 +1,23 @@
-import json
 import utilities
 
+from threading import RLock
+
+# locks (careful: A-Z acquire Z-A release)
+archive_lock = RLock()
+queue_lock = RLock()
+quotes_lock = RLock()
+
+# globals
 cita_def = {"autor": "L'hem liat parda",
             "cita":  "En David va calcular alguna cosa malament i ara no ha sortit la frase de veritat. Plorem junts."
             },
 
 
 def get_from_archive(archive_id="Today"):
-    archive = utilities.load_json("./static/json/catagrama/archive.json")
-    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
+    with archive_lock:
+        with quotes_lock:
+            archive = utilities.load_json("./static/json/catagrama/archive.json")
+            quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     if archive_id == "Today":  # picks last non-special (i.e. 10 chars, as in YYYY-MM-DD)
         archive_id = next(x for x in sorted(archive, reverse=True) if len(x) == 10)
@@ -22,8 +31,10 @@ def get_from_archive(archive_id="Today"):
 
 
 def get_archive():
-    archive = utilities.load_json("./static/json/catagrama/archive.json")
-    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
+    with archive_lock:
+        with quotes_lock:
+            archive = utilities.load_json("./static/json/catagrama/archive.json")
+            quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     for k, v in archive.items():
         archive[k]["autor"] = quotes.get(v["id"], cita_def)["autor"]
@@ -32,12 +43,15 @@ def get_archive():
 
 
 def get_quotes_on_queue(start=1, num_after_archive=False):
-    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
-    queue = utilities.load_json("./static/json/catagrama/queue.json")
+    with archive_lock:
+        if num_after_archive:
+            archive = utilities.load_json("./static/json/catagrama/archive.json")
+            start = len(archive) + 1
 
-    if num_after_archive:
-        archive = utilities.load_json("./static/json/catagrama/archive.json")
-        start = len(archive) + 1
+        with queue_lock:
+            with quotes_lock:
+                queue = utilities.load_json("./static/json/catagrama/queue.json")
+                quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     queued_quotes = {}
     for i, quote_id in enumerate(queue, start=start):
@@ -48,8 +62,10 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
 
 
 def get_quotes_on_archive():
-    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
-    archive = utilities.load_json("./static/json/catagrama/archive.json")
+    with archive_lock:
+        with quotes_lock:
+            archive = utilities.load_json("./static/json/catagrama/archive.json")
+            quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     archived_quotes = {}
     for date, archive_data in archive.items():
@@ -63,9 +79,12 @@ def get_quotes_on_archive():
 
 
 def get_quotes_pool():
-    quotes = utilities.load_json("./static/json/catagrama/quotes.json")
-    archive = utilities.load_json("./static/json/catagrama/archive.json")
-    queue = utilities.load_json("./static/json/catagrama/queue.json")
+    with archive_lock:
+        with queue_lock:
+            with quotes_lock:
+                archive = utilities.load_json("./static/json/catagrama/archive.json")
+                queue = utilities.load_json("./static/json/catagrama/queue.json")
+                quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     archived_quote_ids = [v.get("id", "-42") for v in archive.values()]
 
@@ -79,42 +98,45 @@ def get_quotes_pool():
 
 
 def move_in_queue(quote_id, move):
-    queue_file = "./static/json/catagrama/queue.json"
-    queue = utilities.load_json(queue_file)
+    with queue_lock:
+        queue_file = "./static/json/catagrama/queue.json"
+        queue = utilities.load_json(queue_file)
 
-    if move == "up":
-        index = queue.index(quote_id)
-        index = max(0, index-1)
-        queue = [q for q in queue if q != quote_id]
-        queue = queue[:index] + [quote_id] + queue[index:]
-    elif move == "down":
-        index = queue.index(quote_id)
-        index = min(index+1, len(queue))
-        queue = [q for q in queue if q != quote_id]
-        queue = queue[:index] + [quote_id] + queue[index:]
-    elif move == "top":
-        queue = [quote_id] + [q for q in queue if q != quote_id]
-    elif move == "bottom":
-        queue = [q for q in queue if q != quote_id] + [quote_id]
+        if move == "up":
+            index = queue.index(quote_id)
+            index = max(0, index-1)
+            queue = [q for q in queue if q != quote_id]
+            queue = queue[:index] + [quote_id] + queue[index:]
+        elif move == "down":
+            index = queue.index(quote_id)
+            index = min(index+1, len(queue))
+            queue = [q for q in queue if q != quote_id]
+            queue = queue[:index] + [quote_id] + queue[index:]
+        elif move == "top":
+            queue = [quote_id] + [q for q in queue if q != quote_id]
+        elif move == "bottom":
+            queue = [q for q in queue if q != quote_id] + [quote_id]
 
-    utilities.dump_json(queue, queue_file)
-
-
-def add_to_queue(quote_id, move="add"):
-    queue_file = "./static/json/catagrama/queue.json"
-    queue = utilities.load_json(queue_file)
-
-    if move == "top":
-        move_in_queue(quote_id, move="top")
-    else:
-        queue.append(quote_id)
         utilities.dump_json(queue, queue_file)
 
 
+def add_to_queue(quote_id, move="add"):
+    with queue_lock:
+        queue_file = "./static/json/catagrama/queue.json"
+        queue = utilities.load_json(queue_file)
+
+        if move == "top":
+            move_in_queue(quote_id, move="top")  # requires recursive thread locking (needs RLock vs Lock)
+        else:
+            queue.append(quote_id)
+            utilities.dump_json(queue, queue_file)
+
+
 def remove_from_queue(quote_id):
-    queue_file = "./static/json/catagrama/queue.json"
-    queue = utilities.load_json(queue_file)
+    with queue_lock:
+        queue_file = "./static/json/catagrama/queue.json"
+        queue = utilities.load_json(queue_file)
 
-    queue = [q for q in queue if q != quote_id]
+        queue = [q for q in queue if q != quote_id]
 
-    utilities.dump_json(queue, queue_file)
+        utilities.dump_json(queue, queue_file)

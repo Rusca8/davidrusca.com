@@ -71,11 +71,6 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
             if(this.readyState == 4 && this.status == 200) {
                 result.innerHTML = this.responseText;
                 feedback.innerHTML = "";
-
-                // recursive bulk refresh of (asked for) affected tables
-                for(let table of and_refresh){
-                    refresh(table);
-                }
             }else{
                 feedback.innerHTML = "...";
             }
@@ -84,6 +79,11 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
         console.log('/catagrama/ajax/' + url + "?p=" + admin_key);
         req.open('GET', '/catagrama/ajax/' + url + "?p=" + admin_key, true);
         req.send();
+
+        // recursive bulk refresh of (asked for) affected tables
+        for(let table of and_refresh){
+            refresh(table);
+        }
     }
 
     function refresh(table) {
