@@ -33,6 +33,12 @@
             this.letter = letter;
           }
         }
+        class AjaxRequest {
+          constructor(result, done=false){
+            this.result = result;
+            this.done = done;
+          }
+        }
         //////// GLOBAL VARS //////
         var cWidth;
         var cHeight;
@@ -68,6 +74,7 @@
         var quote = {{quote | tojson}};
         var author = {{author | tojson}};
         var quote_num = "#" + {{num | tojson}};
+        var quote_id = {{quote_id | tojson}};
         var plain = {{plain | tojson}};
         var alpha = {{alpha | tojson}};
         var plainphabet = {{plainphabet | tojson}};
@@ -90,9 +97,13 @@
         //
         var t_start;
         var t_end;
+        var t_pause_start = -42;
 
         // UI debug
         var pressed = [0, 0];
+
+        // AJAX
+        var submitTime = new AjaxRequest();
 
         ///////// onload //////
         window.onload = function(){
@@ -193,8 +204,13 @@
             cc.fillStyle = "white";
             cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
             if(correction == 1){
-              cc.font = font("Helvetica", 10);
+              cc.font = font("Helvetica", 13);
               cc.fillText("Resolt en " + get_time(t_end, t_start), gX+gW/2, 45*u);
+            }else{
+              /* debugging timer
+              cc.font = font("Helvetica", 15);
+              cc.fillText(get_time(Date.now(), t_start), gX+gW/2, 45*u);
+              */
             }
             cc.font = font("Helvetica", 10, bold=true);
             cc.textAlign = "left"
@@ -428,11 +444,10 @@
               correct = correct.replace(lletra, "");
             }
           }
-          console.log(guessed);
-          console.log(correct);
           correction = guessed == correct ? 1 : -1;
           if(correction == 1 && t_end < t_start){
             t_end = Date.now();
+            ajax("submit_time_" + quote_id + "_" + (t_end-t_start).toString(), submitTime);
           }
         }
 
@@ -447,6 +462,18 @@
 
           return time_text = min + ":" + sec.toString().padStart(2, "0");
         }
+
+        // unfocus
+        window.addEventListener("blur", function(){
+          t_pause_start = Date.now();
+        }, true);
+        // refocus
+        window.addEventListener("focus", function(){
+          if(t_pause_start != -42 && correction != 1){
+            t_start += Date.now() - t_pause_start;  // compensate for pause time
+          }
+          t_pause_start = -42;
+        }, true);
 
         ///////////////// KeyUp ////////////////
         function canvas_hotkeys(e){
@@ -511,39 +538,60 @@
         // Collisions (partially StackOverflow)
         function init_collisions(c){
             c.addEventListener('click', function(event){
-                /* x = event.pageX - (c.offsetLeft + c.clientLeft);
-                y = event.pageY - (c.offsetTop + c.clientTop); */
                 const rect = c.getBoundingClientRect();
                 const relX = event.clientX - rect.left;
                 const relY = event.clientY - rect.top;
                 x = relX * c.width / rect.width;
                 y = relY * c.height / rect.height;
-                //prompt(bolitas[0].x + ":" + bw + " // " + x + ", " + y);
+
                 xcur = x;
                 ycur = y;
                 pressed = [xcur, ycur];
-                let i = 0;
-                for(let b of quoteBoxes){
-                    if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){  // rollin LTR: bulk discard (last 2 conditions checked only if found)
-                        activeBox = i;
-                        update();
-                        return;
+
+                if(correction != 1){
+                  let i = 0;
+                  for(let b of quoteBoxes){
+                      if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){  // rollin LTR: bulk discard (last 2 conditions checked only if found)
+                          activeBox = i;
+                          update();
+                          return;
+                      }
+                      i++;
+                  }
+                  for(let k of quertyKeys){
+                    if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
+                      if(alpha.includes(k.letter)){
+                        place_letter(k.letter);
+                      }else{
+                        delete_letter();
+                      }
+                      update();
+                      return;
                     }
-                    i++;
-                }
-                for(let k of quertyKeys){
-                  if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
-                    if(alpha.includes(k.letter)){
-                      place_letter(k.letter);
-                    }else{
-                      delete_letter();
-                    }
-                    update();
-                    return;
                   }
                 }
+
                 update();
             }, false);
+        }
+
+        ///////////////// AJAX HANDLER //////////////
+
+        function ajax(url='', ajax_result=new AjaxRequest()){
+          let req = new XMLHttpRequest();
+
+          req.onreadystatechange = function(){
+              if(this.readyState == 4 && this.status == 200) {
+                  ajax_result.result = this.responseText;
+                  ajax_result.done = true;
+              }else{
+                  ajax_result.done = false;
+              }
+          }
+
+          console.log('/catagrama/ajax/' + url);
+          req.open('GET', '/catagrama/ajax/' + url, true);
+          req.send();
         }
     </script>
 </head>

@@ -1,11 +1,14 @@
-import utilities
-
+import time
+from datetime import datetime, timedelta
 from threading import RLock
+
+import utilities
 
 # locks (careful: A-Z acquire Z-A release)
 archive_lock = RLock()
 queue_lock = RLock()
 quotes_lock = RLock()
+stats_lock = RLock()
 
 # globals
 cita_def = {"autor": "L'hem liat parda",
@@ -27,6 +30,7 @@ def get_from_archive(archive_id="Today"):
 
     quote = quotes.get(quote_id, cita_def)
     quote["num"] = quote_num
+    quote["id"] = quote_id
     return quote
 
 
@@ -140,3 +144,52 @@ def remove_from_queue(quote_id):
         queue = [q for q in queue if q != quote_id]
 
         utilities.dump_json(queue, queue_file)
+
+
+def get_stats(quote_id, format_times=False):
+    """Gets stats dictionary of a given quote_id
+
+    STATS:
+        times: {"unix-timestamp": ms-till-solved (int)}
+    """
+    with stats_lock:
+        stats_file = f"./static/json/catagrama/stats/stats_{quote_id}.json"
+        utilities.touch_file(stats_file)  # make sure it exists
+
+        stats = utilities.load_json(stats_file)
+
+    # add calculated stats
+    stats["times"] = stats.get("times", {})
+    if stats["times"]:
+        # avg
+        stats["avg"] = sum(int(t) for t in stats["times"]) / len(stats["times"])
+        # best
+        stats["best"] = min(stats["times"])
+        # worst
+        stats["worst"] = max(stats["times"])
+        # formated times list
+    if format_times:
+        formated_times = []
+        for timestamp, solve_time in stats["times"].items():
+            date = f"{datetime.fromtimestamp(int(timestamp)):%Y-%m-%d · %H:%M:%S}"
+            solve_time = f"{timedelta(milliseconds=solve_time)}"
+            if len(solve_time) > 10:
+                solve_time = solve_time[:10]
+            formated_times.append([date, solve_time])
+        stats["formated_times"] = formated_times
+
+    return stats
+
+
+def stats_submit_time(quote_id, solve_time):
+    """Adds solve time {"unix-timestamp": milliseconds} to quote stats"""
+    with stats_lock:
+        stats_file = f"./static/json/catagrama/stats/stats_{quote_id}.json"
+        utilities.touch_file(stats_file)  # make sure it exists
+
+        stats = utilities.load_json(stats_file)
+
+        stats["times"] = stats.get("times", {})
+        stats["times"][f"{int(time.time())}"] = int(solve_time)
+
+        utilities.dump_json(stats, stats_file)

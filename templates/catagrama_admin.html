@@ -20,29 +20,23 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
 <hr>
 <div class="py-0">
 
-    <!-- ARCHIVED -->
-    <div class="mt-2">
-        <b class="ml-1">Arxiu</b>
+    <!-- invisible, flying (STATS) div -->
+    <div class="card invisipopup d-none" id="stats-popup">
+        <h5 class="card-header py-0 px-2" onclick="hide('stats-popup');">
+            <span class="float-left py-1">Quote stats</span>
+            <big class="float-right">×</big>
+        </h5>
+        <div class="card-body py-2 px-3 overflow-auto">
+                <span id="stats">STATS</span>
+        </div>
     </div>
 
-    <table class="lil-table">
-        <tr class="bb-thick archived-header">
-            <td class="px-2 text-center id"><b>#</b></td>
-            <td class="num px-2 text-center">quote_id</td>
-            <td class="px-2"><b>Autor</b></td>
-            <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-            <td class="px-2 text-center id"><b>Data</b></td>
-        </tr>
-        {% for num, quote in archive|dictsort %}
-            <tr class="archived">
-                <td class="px-2 text-center id"><b>{{ num }}</b></td>
-                <td class="num px-2 text-center">{{ quote['id'] }}</td>
-                <td class="px-2"><b>{{ quote['autor'] }}</b></td>
-                <td class="mono px-2">{{ quote['cita'] }}</td>
-                <td class="num px-2 text-center id"><b>{{ quote['archive_id'] }}</b></td>
-            </tr>
-        {% endfor %}
-    </table>
+    <!-- ARCHIVED -->
+    <div class="mt-2">
+        <b class="ml-1">Arxiu</b> <span id="archive-feedback"></span>
+    </div>
+
+    {% include '/catagrama/archive_table.html' %}
 
     <!-- QUEUE -->
     <div class="mt-2">
@@ -88,6 +82,13 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
 
     function refresh(table) {
         ajax(table, table + '-table', table + '-feedback');
+    }
+
+    function hide(object_id){
+       document.getElementById(object_id).classList.add("d-none");
+    }
+    function show(object_id){
+       document.getElementById(object_id).classList.remove("d-none");
     }
 </script>
 </body>

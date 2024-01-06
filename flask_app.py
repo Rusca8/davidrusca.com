@@ -218,6 +218,13 @@ def catagrama_ajax(datos="hello_world"):
     from secretos import catagrama_ajax
 
     match datos.split("_"):
+        case ["stats", quote_id]:
+            stats = cg.get_stats(quote_id, format_times=True)
+            return render_template('/catagrama/quote_stats.html', stats=stats, quote_id=quote_id)
+        case ["submit", "time", quote_id, solve_time]:
+            cg.stats_submit_time(quote_id, solve_time)
+            return cg.get_stats(quote_id)
+
         case ["queue"]:
             queue = cg.get_quotes_on_queue(num_after_archive=True)
             return render_template("/catagrama/queue_table.html", queue=queue)
@@ -268,6 +275,7 @@ def catagrama(archive_id="Today"):
     import catagrames as cg
 
     cita = cg.get_from_archive(archive_id)
+    quote_id = cita["id"]
     quote = cita["cita"]
     author = cita["autor"]
     num = cita["num"]
@@ -279,7 +287,7 @@ def catagrama(archive_id="Today"):
     freqs = crypto.get_frequencies(cypher)
 
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
-                           plainphabet=plainphabet, author=author, num=num)
+                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id)
 
 
 @app.route('/ktn')

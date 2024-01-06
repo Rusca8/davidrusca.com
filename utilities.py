@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import os
+from pathlib import Path
 
 
 def add_to_json(new_data, filename='data.json'):
@@ -30,3 +31,14 @@ def dump_json(data, filename='data.json'):
 
 def date(ts):
     return datetime.fromtimestamp(ts)
+
+
+def touch_file(filename="data.json", default_content=None):
+    root = os.path.dirname(__file__)
+    path = os.path.join(root, filename)
+    if not os.path.exists(path):
+        print("Creating file for:", path)
+        if default_content is None:
+            default_content = {}
+        with open(path, "a") as file:
+            json.dump(default_content, file)

@@ -1,0 +1,9 @@
+{# Generates quote stats summary for admin view #}
+
+<b>quote_id:</b> {{ quote_id }} · <b>solves:</b> {{ stats['times']|length }}<br><br>
+<b>Times:</b><br>
+{% if 'formated_times' in stats %}
+    {% for k, v in stats['formated_times'] %}
+    · <span style="color:#1990bd;">{{k}}</span> · {{v}}<br>
+    {% endfor %}
+{% endif %}
