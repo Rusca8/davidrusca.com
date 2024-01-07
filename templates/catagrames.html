@@ -702,7 +702,7 @@
             var crop = document.createElement('canvas');
             crop.width = shareW;
             crop.height = shareH;
-            let x = gX;
+            let x = gX + (gW-shareW)/2;
             let y = (gW - shareW)/2;
             crop.getContext('2d').drawImage(c, x, y, shareW, shareH, 0, 0, shareW, shareH);
             const DATA_URL = crop.toDataURL();
