@@ -430,7 +430,7 @@
               if(share_available){
                 text = "Prova de Compartir";
               }else{
-                text = "(WIP)";
+                text = "'Compartir' no disponible";
               }
             }else{
               text = show_share_square ? "Veure frase" : "Veure resultat";
@@ -702,7 +702,7 @@
             var crop = document.createElement('canvas');
             crop.width = shareW;
             crop.height = shareH;
-            let x = gX - shareW/2;
+            let x = gX;
             let y = (gW - shareW)/2;
             crop.getContext('2d').drawImage(c, x, y, shareW, shareH, 0, 0, shareW, shareH);
             const DATA_URL = crop.toDataURL();
