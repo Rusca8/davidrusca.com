@@ -196,6 +196,7 @@ def stats_submit_time(quote_id, solve_time):
 
 
 def add_new_quote_to_archive():
+    """ de moment estem de proves :) """
     with archive_lock:
         with queue_lock:
             with quotes_lock:
@@ -204,5 +205,4 @@ def add_new_quote_to_archive():
                 quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
                 quote_id = queue[0]
-                print(quote_id)
-                print(quotes.get(queue[0]))
+                utilities.touch_file(f"./static/json/catagrama/hauria_afegit_a_larxiu_la_cita_{quote_id}.txt")
