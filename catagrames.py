@@ -193,3 +193,16 @@ def stats_submit_time(quote_id, solve_time):
         stats["times"][f"{int(time.time())}"] = int(solve_time)
 
         utilities.dump_json(stats, stats_file)
+
+
+def add_new_quote_to_archive():
+    with archive_lock:
+        with queue_lock:
+            with quotes_lock:
+                archive = utilities.load_json("./static/json/catagrama/archive.json")
+                queue = utilities.load_json("./static/json/catagrama/queue.json")
+                quotes = utilities.load_json("./static/json/catagrama/quotes.json")
+
+                quote_id = queue[0]
+                print(quote_id)
+                print(quotes.get(queue[0]))
