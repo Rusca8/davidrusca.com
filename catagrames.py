@@ -12,8 +12,8 @@ stats_lock = RLock()
 
 # globals
 cita_def = {"autor": "L'hem liat parda",
-            "cita":  "En David va calcular alguna cosa malament i ara no ha sortit la frase de veritat. Plorem junts."
-            },
+            "cita":  "En David va calcular alguna cosa malament i ara no ha sortit la frase de veritat. Plorem junts.",
+            }
 
 
 def get_from_archive(archive_id="Today"):

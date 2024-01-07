@@ -75,6 +75,8 @@
         var author = {{author | tojson}};
         var quote_num = "#" + {{num | tojson}};
         var quote_id = {{quote_id | tojson}};
+        var archive_id = {{archive_id | tojson}};
+        console.log("Catagrama: " + archive_id);
         var plain = {{plain | tojson}};
         var alpha = {{alpha | tojson}};
         var plainphabet = {{plainphabet | tojson}};
@@ -98,6 +100,14 @@
         var t_start;
         var t_end;
         var t_pause_start = -42;
+        //
+        var show_share_square = false;
+        var shareW;
+        var shareH;
+        var endbY;
+        var endButtons = [];
+        //
+        var share_available = navigator.share;
 
         // UI debug
         var pressed = [0, 0];
@@ -123,6 +133,7 @@
             // ui init
             init_quote_boxes();
             init_querty();
+            init_end_buttons();
             init_collisions(c);
 
             // prevent space going down
@@ -137,6 +148,7 @@
               set_measures();
               init_quote_boxes();
               init_querty();
+              init_end_buttons();
               update();
             }, true);
 
@@ -160,17 +172,22 @@
 
           // main space w/h
           gH = cHeight;
-          gW = cWidth < cHeight ? cWidth : cHeight/1.3;
+          gW = cWidth < cHeight/1.3 ? cWidth : cHeight/1.3;
           gY = 0;
           gX = cWidth/2 - gW/2;
 
           // UI elements
-          quoteY = 75*u;
+          quoteY = 85*u;
           keyW = gW/(quertyRows[0].length+0.4);
           keyH = keyW * 0.95;
           quertyY = cHeight-(0.2+quertyRows.length)*keyH;
           MONO = 15*u;
           set_quote_measures();
+
+          //
+          shareW = gW*0.95;
+          shareH = shareW;
+          endbY = gW;
         }
 
         function set_quote_measures(){
@@ -201,35 +218,45 @@
                             : colors.main;
             cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
 
-            // title
-            cc.lineWidth = 1*u;
-            cc.font = font("Helvetica", 30, bold=true);
-            cc.fillStyle = "white";
-            cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
-            if(correction == 1){
+            // title and info
+            if(!show_share_square){
+              cc.lineWidth = 1*u;
+              cc.font = font("Helvetica", 30, bold=true);
+              cc.fillStyle = "white";
+              cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
+              //
+              let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
+              if(correction == 1){
+                de_quan += " · Resolt en: " + get_time(t_end, t_start)
+              }
               cc.font = font("Helvetica", 13);
-              cc.fillText("Resolt en " + get_time(t_end, t_start), gX+gW/2, 45*u);
-            }else{
-              /* debugging timer
-              cc.font = font("Helvetica", 15);
-              cc.fillText(get_time(Date.now(), t_start), gX+gW/2, 45*u);
-              */
+              cc.fillText(de_quan, gX+gW/2, 45*u);
+              //
+              cc.font = font("Helvetica", 10, bold=true);
+              cc.textAlign = "left"
+              cc.fillStyle = "rgba(255, 255, 255, 0.5)";
+              cc.fillText(quote_num, gX + MONO, quoteY-12*u);
+              cc.fillStyle = "white";
+              let quote_num_len = cc.measureText(quote_num).width;
+              cc.fillText(author, gX + MONO + quote_num_len + 4*u, quoteY-12*u);
+              cc.font = font("Helvetica", 10);
+              cc.textAlign = "center"
             }
-            cc.font = font("Helvetica", 10, bold=true);
-            cc.textAlign = "left"
-            cc.fillStyle = "rgba(255, 255, 255, 0.5)";
-            cc.fillText(quote_num, gX + MONO, quoteY-12*u);
-            cc.fillStyle = "white";
-            let quote_num_len = cc.measureText(quote_num).width;
-            cc.fillText(author, gX + MONO + quote_num_len + 4*u, quoteY-12*u);
-            cc.font = font("Helvetica", 10);
-            cc.fillText("WIP: això serà un trencaclosques diari rollo Wordle o Paraulògic. Aviat :)", gX + MONO, quertyY-2*MONO);
-            cc.textAlign = "center"
 
             // main UI
             cc.lineWidth = 1*u;
-            draw_quote();
-            draw_querty();
+            if(!show_share_square){
+              draw_quote();
+            }
+            if(correction!=1){
+              draw_querty();
+            }else{
+              draw_end_buttons();
+            }
+            // overlay
+            if(show_share_square){
+              draw_share_square();
+            }
 
             // ////// DEBUGGING //////
             // alphabets debug
@@ -348,6 +375,71 @@
           }
         }
 
+        function draw_share_square(){
+          let w = shareW;
+          let h = shareH;
+          let x = gX+(gW-w)/2;
+          let y = (gW-w)/2;
+          let sq_u = h/340;
+
+          let band_y = y+h*0.2;
+          let band_h = h*0.22;
+
+          let time_y = band_y + band_h + 115*sq_u;
+
+          // main square
+          cc.fillStyle = colors["main"];
+          cc.fillRect(x, y, w, h);
+          cc.strokeStyle = "black";
+          cc.strokeRect(x, y, w, h);
+          // TOP
+          cc.font = font("Helvetica", 30, bold=true);
+          cc.fillStyle = "white";
+          cc.fillText("CATAGRAMA", x+w/2, y+30*sq_u);
+          cc.font = font("Helvetica", 13);
+          let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
+          cc.fillText(de_quan, x+w/2, y+50*sq_u);
+          // MID
+          cc.fillStyle = colors["bg"];
+          cc.fillRect(x, band_y, w, band_h);
+          cc.strokeRect(x, band_y, w, band_h);
+          //
+          cc.fillStyle = "rgba(255, 255, 255, 0.6)";
+          cc.font = font("Helvetica", 40, bold=true)
+          cc.fillText(quote_num, x+w/2, band_y+band_h*0.35);
+          //
+          cc.fillStyle = "white";
+          cc.font = font("Helvetica", 18, bold=true)
+          cc.fillText(author, x+w/2, band_y+band_h*0.77);
+          // BOTTOM
+          cc.font = font("Helvetica", 30);
+          cc.fillText("RESOLT EN", x+w/2, time_y - 60*sq_u);
+          cc.font = font("Courier", 80, bold=true);
+          cc.fillText(get_time(t_end, t_start), x+w/2, time_y);
+        }
+
+        function draw_end_buttons(){
+          for(let b of endButtons){
+            let m = 2*u;
+            cc.fillStyle = "white";
+            roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
+            cc.font = font("Helvetica", 20);
+            cc.fillStyle = "black";
+            let text = "";
+            if(b.letter == "Share"){
+              if(share_available){
+                text = "Prova de Compartir";
+              }else{
+                text = "(WIP)";
+              }
+            }else{
+              text = show_share_square ? "Veure frase" : "Veure resultat";
+            }
+
+            cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
+          }
+        }
+
         function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
           cc.beginPath();
           cc.roundRect(x, y, w, h, r);
@@ -453,6 +545,7 @@
           if(correction == 1 && t_end < t_start){
             t_end = Date.now();
             ajax("submit_time_" + quote_id + "_" + (t_end-t_start).toString(), submitTime);
+            show_share_square = true;
           }
         }
 
@@ -542,6 +635,16 @@
              y += keyH;
            }
         }
+
+        function init_end_buttons(){
+          endButtons = [];
+          let y = endbY;
+          let w = shareW;
+          let x = gX + (gW-w)/2;
+          let h = (gH - endbY)/2.5;
+          endButtons.push(new quertyKey(x, y, w, h, "Share"));
+          endButtons.push(new quertyKey(x, y+h, w, h, "ToggleShow"));
+        }
         // Collisions (partially StackOverflow)
         function init_collisions(c){
             c.addEventListener('click', function(event){
@@ -576,10 +679,56 @@
                       return;
                     }
                   }
+                }else{  // solved
+                  for(let b of endButtons){
+                    if(y < b.y+b.h && y > b.y && x < b.x+b.w && x > b.x){
+                      if(b.letter == "Share"){
+                        show_share_square = true;
+                        share();
+                      }else{
+                        show_share_square = !show_share_square;
+                      }
+                    }
+                  }
                 }
 
                 update();
             }, false);
+        }
+
+        /////////////// SHARE HANDLER ///////////////
+        async function share(){
+          if(navigator.share){
+            var crop = document.createElement('canvas');
+            crop.width = shareW;
+            crop.height = shareH;
+            let x = gX - shareW/2;
+            let y = (gW - shareW)/2;
+            crop.getContext('2d').drawImage(c, x, y, shareW, shareH, 0, 0, shareW, shareH);
+            const DATA_URL = crop.toDataURL();
+            const BLOB = await (await fetch(DATA_URL)).blob();
+            const FILES_ARRAY = [
+              new File(
+                [BLOB],
+                "shared.png",
+                {
+                  type: BLOB.type,
+                  lastModified: new Date().getTime()
+                }
+              )
+            ];
+            const SHARE_DATA = {
+              files: FILES_ARRAY,
+            };
+            try {
+              navigator.share(SHARE_DATA);
+            }catch{
+              share_available = false;
+            }
+          }else{
+            console.log("no share");
+            share_available = false;
+          }
         }
 
         ///////////////// AJAX HANDLER //////////////

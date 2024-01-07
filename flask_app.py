@@ -1,6 +1,6 @@
 
 from flask import Flask
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, make_response
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
 
@@ -22,7 +22,7 @@ babel = Babel(app)
 # Compilar de nuevo:                  $ pybabel compile -d translations
 #
 # OJO: si te marca [#, fuzzy] es que ha medio-traducido por tí y tienes que quitar eso cuando lo revises.
- 
+
 
 @babel.localeselector
 def get_locale():
@@ -286,7 +286,7 @@ def catagrama(archive_id="Today"):
     freqs = crypto.get_frequencies(cypher)
 
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
-                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id)
+                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=archive_id)
 
 
 @app.route('/ktn')
