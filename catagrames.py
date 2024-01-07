@@ -204,5 +204,16 @@ def add_new_quote_to_archive():
                 queue = utilities.load_json("./static/json/catagrama/queue.json")
                 quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
-                quote_id = queue[0]
-                utilities.touch_file(f"./static/json/catagrama/hauria_afegit_a_larxiu_la_cita_{quote_id}.txt")
+                archive_id = f"{datetime.fromtimestamp(time.time()):%Y-%m-%d}"
+                num = f'{max(int(v["num"]) for v in archive.values()) + 1}'
+
+                if archive_id in archive:
+                    print("Avui ja hi ha una frase")
+                else:
+                    if not queue:
+                        print("Auxili s'ha acabat la cua, haurem d'avisar en David.")
+                    else:
+                        quote_id = queue[0]
+                        print(f'[archive new would be] "{archive_id}": (num:{num}, id:{quote_id})')
+                        print(quotes.get(quote_id, cita_def))
+                        print("Remember to remove [quote_id] from the queue")
