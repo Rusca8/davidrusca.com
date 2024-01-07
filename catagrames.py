@@ -207,13 +207,17 @@ def add_new_quote_to_archive():
                 archive_id = f"{datetime.fromtimestamp(time.time()):%Y-%m-%d}"
                 num = f'{max(int(v["num"]) for v in archive.values()) + 1}'
 
-                if archive_id in archive:
+                if archive_id in archive:  # si alteres això, vigila amb sobreescriure dies sense voler
                     print("Avui ja hi ha una frase")
                 else:
                     if not queue:
                         print("Auxili s'ha acabat la cua, haurem d'avisar en David.")
                     else:
-                        quote_id = queue[0]
-                        print(f'[archive new would be] "{archive_id}": (num:{num}, id:{quote_id})')
-                        print(quotes.get(quote_id, cita_def))
-                        print("Remember to remove [quote_id] from the queue")
+                        quote_id = queue.pop(0)  # get and remove first element
+                        print(f'[new archive entry] "{archive_id}": (num:{num}, id:{quote_id})')
+                        archive[archive_id] = {"num": num, "id": quote_id}
+                        quote = quotes.get(quote_id, cita_def)
+                        print(f" · ({quote.get('autor','Qui?')}) {quote.get('cita', 'Què va dir?')}")
+
+                        utilities.dump_json(queue, "./static/json/catagrama/queue.json")
+                        utilities.dump_json(archive, "./static/json/catagrama/archive.json")
