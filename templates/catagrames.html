@@ -80,11 +80,11 @@
         var plainphabet = {{plainphabet | tojson}};
         var cypher = {{cypher | tojson}};
         var freqs = {{freqs | tojson}};
-        var userAlpha = "Ç".repeat(alpha.length);
+        var userAlpha = "?".repeat(alpha.length);
         var maxFreq;
 
         // UI
-        var quertyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM<<"];
+        var quertyRows = ["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<<"];
         var quertyY;
         var keyW;
         var keyH;
@@ -264,10 +264,10 @@
           let letter = box.letter;
           let plainBG;
           let plainColor;
-          if(box.num == activeBox){
+          if(box.num == activeBox && correction != 1){
             plainBG = colors["active"];
             plainColor = "#ffffff";
-          }else if(box.letter == quoteBoxes[activeBox].letter){
+          }else if(box.letter == quoteBoxes[activeBox].letter && correction != 1){
             plainBG = colors["collateral"];
             plainColor = "#ffffff";
           }else{
@@ -281,7 +281,7 @@
             cc.font = monofont("Courier", 20);
             cc.fillStyle = plainColor;
             let plainletter = ralph(letter, alpha, userAlpha);
-            if(plainletter != "Ç"){
+            if(plainletter != "?"){
               cc.fillText(plainletter, x+MONO/2, y+plainH/2);
             }
             // cipher
@@ -289,7 +289,9 @@
             cc.fillRect(x, y+plainH+heatH, MONO, cypherH);
             cc.font = monofont("Courier", 16);
             cc.fillStyle = "black"
-            cc.fillText(letter, x+MONO/2, y+plainH+heatH+cypherH/2)
+            let offset = letter == "Ç" ? cypherH*0.44 :
+                         letter == "Q" ? cypherH*0.45 : cypherH*0.5;
+            cc.fillText(letter, x+MONO/2, y+plainH+heatH+offset)
             // heatmap
             cc.fillStyle = freqColor(letter);
             cc.fillRect(x, y+plainH, MONO, heatH);
@@ -385,7 +387,7 @@
         function place_letter(letter){
           let cypherLetter = quoteBoxes[activeBox].letter;
           if(userAlpha.includes(letter)){
-            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "Ç");
+            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "?");
           }
           userAlpha = replace_at_index(userAlpha, alpha.indexOf(cypherLetter), letter);
 
@@ -400,7 +402,7 @@
         }
 
         function delete_letter(){
-          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "Ç");
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "?");
           correction = 0;
         }
 
@@ -408,7 +410,7 @@
           for(j=1; j<quoteBoxes.length; j++){
             let k = (activeBox+j) % quoteBoxes.length;
             if(alpha.includes(quoteBoxes[k].letter)){  // és lletra
-              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "Ç"){
+              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "?"){
                 activeBox = k;
                 return;
               }
@@ -439,7 +441,7 @@
         function check_quote(){
           // strip unused
           let guessed = userAlpha;
-          guessed = guessed.replaceAll("Ç", "");
+          guessed = guessed.replaceAll("?", "");
           // strip non appearing
           let correct = plainphabet;
           for(let lletra of plainphabet){

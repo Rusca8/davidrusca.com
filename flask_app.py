@@ -6,7 +6,6 @@ from flask_babel import Babel  # traduccions
 
 import re
 import random
-from unidecode import unidecode
 
 import crypto
 import utilities as utils
@@ -280,9 +279,9 @@ def catagrama(archive_id="Today"):
     author = cita["autor"]
     num = cita["num"]
 
-    plain = unidecode(quote).upper().replace("*", "·").replace("...", "…")
-    plainphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    alpha = crypto.new_transposition_alphabet(plainphabet)
+    plain = crypto.unidecode_but(quote.upper(), preserve="Ç·", post_replace={"...": "…"})
+    plainphabet, alpha = crypto.new_transposition_alphabet("ABCÇDEFGHIJKLMNOPQRSTUVWXYZ",
+                                                           return_plain=True, quote=plain, avoid="Ç")
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
     freqs = crypto.get_frequencies(cypher)
 

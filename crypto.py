@@ -2,6 +2,7 @@
 Texto críptico para el cumple de Raquel. Traductor py.
 '''
 import random
+from unidecode import unidecode
 
 
 def cesar(text, key):
@@ -144,15 +145,39 @@ Pero te lo dejo aquí, que si has llegado casi te lo mereces ;)<br><br>
 '''
 
 
-def new_transposition_alphabet(plaintext="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+def new_transposition_alphabet(plaintext="ABCDEFGHIJKLMNOPQRSTUVWXYZ", return_plain=False, quote=None, avoid=""):
+    """ Transposes plaintext so that letters aren't in their original places.
+        If quote and avoid, tries to swap the "avoid" letters for letters not in the quote
+    """
+    # get letters not in quote, to swap for the "avoid" ones
+    non_quote_letters = []
+    if quote is not None and avoid:
+        non_quote_letters = [c for c in plaintext if c not in quote]
+
+    # filter avoided
+    avoid = [c for c in avoid if c in plaintext]
+
+    # place the unused ones on front
+    plaintext = "".join(non_quote_letters) + "".join(c for c in plaintext if c not in non_quote_letters)
+
+    # swapping (LTRand(R))
     alpha = [c for c in plaintext]
     for i in range(len(alpha)-1):
-        j = random.randint(i+1, len(alpha)-1)
+        if i < len(avoid) and i < len(non_quote_letters):  # if non_quote
+            still_unavoided = [c for c in alpha[i:] if c in avoid]
+            if still_unavoided:
+                j = alpha.index(random.choice(still_unavoided))
+            else:
+                j = random.randint(i+1, len(alpha)-1)
+        else:
+            j = random.randint(i+1, len(alpha)-1)
         alpha[i], alpha[j] = alpha[j], alpha[i]
     else:
         if alpha[-1] == plaintext[-1]:
             j = random.randint(0, len(alpha)-2)
             alpha[-1], alpha[j] = alpha[j], alpha[-1]
+    if return_plain:
+        return plaintext, alpha
     return "".join(alpha)
 
 
@@ -162,3 +187,13 @@ def get_frequencies(text, only_alpha=True):
         if c.isalpha():
             freqs[c] = freqs.get(c, 0) + 1
     return freqs
+
+
+def unidecode_but(text, preserve="", post_replace=None):
+    text = "".join(c if c in preserve else unidecode(c) for c in text)
+
+    if post_replace:
+        for old, new in post_replace.items():
+            text = text.replace(old, new)
+
+    return text
