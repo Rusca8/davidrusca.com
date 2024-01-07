@@ -478,14 +478,16 @@
         ///////////////// KeyUp ////////////////
         function canvas_hotkeys(e){
             let upperKey = e.key.toUpperCase();
-            if(alpha.includes(upperKey)){
-              place_letter(upperKey);
-            }else if(e.key == "Backspace"){
-              delete_letter();
-            }else if(e.key == "ArrowLeft"){
-              to_next(right=false);
-            }else if(e.key == "ArrowRight"){
-              to_next();
+            if(correction != 1){
+              if(alpha.includes(upperKey)){
+                place_letter(upperKey);
+              }else if(e.key == "Backspace"){
+                delete_letter();
+              }else if(e.key == "ArrowLeft"){
+                to_next(right=false);
+              }else if(e.key == "ArrowRight"){
+                to_next();
+              }
             }
             update();
         }
