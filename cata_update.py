@@ -1,6 +1,6 @@
 import catagrames as cg
 
-print("Actualitzant la frase del catagrama... (de mentida, de moment)")
+print("Actualitzant la frase del catagrama...")
 
 try:
     cg.add_new_quote_to_archive()
