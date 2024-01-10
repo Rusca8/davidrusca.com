@@ -187,7 +187,7 @@
           //
           shareW = gW*0.95;
           shareH = shareW;
-          endbY = gW;
+          endbY = quertyY;
         }
 
         function set_quote_measures(){
@@ -641,10 +641,11 @@
           let y = endbY;
           let w = shareW;
           let x = gX + (gW-w)/2;
-          let h = (gH - endbY)/2.5;
+          let h = (gH*0.95 - endbY)/2;
           endButtons.push(new quertyKey(x, y, w, h, "Share"));
           endButtons.push(new quertyKey(x, y+h, w, h, "ToggleShow"));
         }
+
         // Collisions (partially StackOverflow)
         function init_collisions(c){
             c.addEventListener('click', function(event){
