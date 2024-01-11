@@ -421,21 +421,25 @@
         function draw_end_buttons(){
           for(let b of endButtons){
             let m = 2*u;
-            cc.fillStyle = "white";
-            roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
-            cc.font = font("Helvetica", 20);
-            cc.fillStyle = "black";
             let text = "";
+            let bg_color = "white";
+            let txt_color = "black";
             if(b.letter == "Share"){
               if(share_available){
-                text = "Prova de Compartir";
+                text = "Comparteix";
               }else{
-                text = "'Compartir' no disponible";
+                text = "Comparteix";
+                bg_color = colors["quertyshade"];
+                txt_color = colors["collateral"];
               }
             }else{
               text = show_share_square ? "Veure frase" : "Veure resultat";
             }
+            cc.fillStyle = bg_color;
+            roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
 
+            cc.font = font("Helvetica", 20);
+            cc.fillStyle = txt_color;
             cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
           }
         }
