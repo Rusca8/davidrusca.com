@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-30 12:44+0100\n"
+"POT-Creation-Date: 2024-01-12 15:30+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -1912,27 +1912,27 @@ msgid ""
 "revés'</code>."
 msgstr "Funciona com a l'exemple i <code>'també \"funciona\" al revés'</code>."
 
-#: templates/base.html:43
+#: templates/base.html:46
 msgid "Inicio"
 msgstr "Inici"
 
-#: templates/base.html:49
+#: templates/base.html:52
 msgid "docentes"
 msgstr "docents"
 
-#: templates/base.html:49 templates/docentes.html:2
+#: templates/base.html:52 templates/docentes.html:2
 msgid "Docentes"
 msgstr "Docents"
 
-#: templates/base.html:55
+#: templates/base.html:58
 msgid "Juegos"
 msgstr "Jocs"
 
-#: templates/base.html:58 templates/index.html:129 templates/index.html:145
+#: templates/base.html:61 templates/index.html:129 templates/index.html:145
 msgid "pulseras"
 msgstr "braçalets"
 
-#: templates/base.html:58 templates/pulseras.html:2
+#: templates/base.html:61 templates/pulseras.html:2
 msgid "Pulseras"
 msgstr "Braçalets"
 
@@ -2188,7 +2188,7 @@ msgstr "Ones"
 
 #: templates/docentes.html:152 templates/docentes.html:180
 #: templates/docentes.html:244 templates/docentes.html:362
-#: templates/index.html:96 templates/index.html:170
+#: templates/index.html:96 templates/index.html:171
 msgid "Apuntes:"
 msgstr "Apunts:"
 
@@ -2350,7 +2350,7 @@ msgstr "Vídeo de la peça (amb partitura)"
 msgid "Los secretos compositivos que esconde (subs ES)"
 msgstr "Els secrets compositius que amaga"
 
-#: templates/index.html:75 templates/index.html:90 templates/index.html:162
+#: templates/index.html:75 templates/index.html:90 templates/index.html:163
 msgid "Tutoriales:"
 msgstr "Tutorials:"
 
@@ -2422,7 +2422,7 @@ msgstr ""
 msgid "Editor de pulseras de abalorios"
 msgstr "Editor de braçalets de granadura"
 
-#: templates/index.html:140 templates/index.html:241
+#: templates/index.html:140 templates/index.html:243
 msgid "Generador de fichas de mates"
 msgstr "Generador de fitxes de mates"
 
@@ -2430,159 +2430,162 @@ msgstr "Generador de fitxes de mates"
 msgid "Esta misma web, que también es artesanal"
 msgstr "Aquesta mateixa web, que també és artesanal"
 
-#: templates/index.html:149
+#: templates/index.html:150
 msgid "Juego matemático (descomposición)"
 msgstr "Joc matemàtic (descomposició)"
 
-#: templates/index.html:150
+#: templates/index.html:151
 msgid "Editor de esquemas musicales"
 msgstr "Editor d'esquemes musicals"
 
-#: templates/index.html:152
+#: templates/index.html:153
 msgid "Rusca8 en GitHub"
 msgstr "Rusca8 a GitHub"
 
-#: templates/index.html:164
+#: templates/index.html:165
 msgid "La app para estudiar sin esfuerzo"
 msgstr "L'app per a estudiar sense esforç"
 
-#: templates/index.html:165
+#: templates/index.html:166
 msgid "Crea tus propias barajas"
 msgstr "Crea les teves pròpies baralles"
 
-#: templates/index.html:172
+#: templates/index.html:173
 msgid "Cómo instalarlo y usarlo"
 msgstr "Com instal·lar-lo i fer-lo servir"
 
-#: templates/index.html:173
+#: templates/index.html:174
 msgid "Hacer tus propias tarjetas"
 msgstr "Fer les teves pròpies targetes"
 
-#: templates/index.html:176
+#: templates/index.html:177
 msgid "Barajas y Tutoriales"
 msgstr "Baralles i Tutorials"
 
-#: templates/index.html:182
+#: templates/index.html:183
 msgid "Diseño gráfico"
 msgstr "Disseny gràfic"
 
-#: templates/index.html:184
+#: templates/index.html:185
 msgid "Infografía:"
 msgstr "Infografia:"
 
-#: templates/index.html:186
+#: templates/index.html:187
 msgid "Artículo para Climate Tracker"
 msgstr "Article per Climate Tracker"
 
-#: templates/index.html:188
+#: templates/index.html:189
 msgid "Logotipos:"
 msgstr "Logotips:"
 
-#: templates/index.html:190
+#: templates/index.html:191
 msgid "Propuesta de logotipo para Som Energia"
 msgstr "Proposta de logotip per Som Energia"
 
-#: templates/index.html:191
+#: templates/index.html:192
 msgid "Nuevo logotipo para el grupo Antaviana"
 msgstr "Nou logotip pel grup Antaviana"
 
-#: templates/index.html:192
+#: templates/index.html:193
 msgid "Propuestas para TwoSetViolin"
 msgstr "Propostes per TwoSetViolin"
 
-#: templates/index.html:198
+#: templates/index.html:199
 msgid "Carteles:"
 msgstr "Cartells:"
 
-#: templates/index.html:200
+#: templates/index.html:201
 msgid "Cartel para la extraescolar de Antaviana"
 msgstr "Cartell per l'extraescolar d'Antaviana"
 
-#: templates/index.html:202
+#: templates/index.html:203
 msgid "Logotipos"
 msgstr "Logotips"
 
-#: templates/index.html:208 templates/juegos.html:2 templates/juegos.html:5
+#: templates/index.html:209 templates/juegos.html:2 templates/juegos.html:5
 msgid "Juegos de Mesa"
 msgstr "Jocs de Taula"
 
-#: templates/index.html:210
+#: templates/index.html:211
 #, fuzzy
 msgid "Recursos:"
 msgstr "Recursos Anki"
 
-#: templates/index.html:212
+#: templates/index.html:213
 msgid "Listas de Conjuros de DnD 5e"
 msgstr "Llistes d'encanteris de DnD 5e"
 
 #: templates/index.html:214
-#, fuzzy
-msgid "Diseño:"
-msgstr "Dissenys"
+msgid "Cartas de Conjuros de DnD 5e"
+msgstr "Cartes d'encanteris de DnD 5e"
 
-#: templates/index.html:227
+#: templates/index.html:216
+msgid "Diseño:"
+msgstr "Disseny:"
+
+#: templates/index.html:218 templates/juegos.html:9
+msgid "Diseños propios"
+msgstr "Dissenys propis"
+
+#: templates/index.html:229
 msgid "Cosas que he construído, en"
 msgstr "Coses que he construït, a"
 
-#: templates/index.html:235
+#: templates/index.html:237
 msgid "Recursos docentes"
 msgstr "Recursos docents"
 
-#: templates/index.html:237
+#: templates/index.html:239
 msgid "Fichas y formularios:"
 msgstr "Fitxes i formularis:"
 
-#: templates/index.html:239
+#: templates/index.html:241
 msgid "Formulario de movimientos"
 msgstr "Formulari de moviments"
 
-#: templates/index.html:240
+#: templates/index.html:242
 msgid "Ficha de circuitos eléctricos de Ciclo Formativo"
 msgstr "Fitxa de circuits elèctrics de Cicle Formatiu"
 
-#: templates/index.html:243
+#: templates/index.html:245
 msgid "Todas las fichas y formularios"
 msgstr "Totes les fitxes i formularis"
 
-#: templates/index.html:253
+#: templates/index.html:255
 msgid "Campeón de Francia de Multi"
 msgstr "Campió de França de Multi"
 
-#: templates/index.html:254
+#: templates/index.html:256
 msgid "Memorizo un cubo en 35 segundos"
 msgstr "Memoritzo un cub en 35 segons"
 
-#: templates/index.html:255
+#: templates/index.html:257
 msgid "Resuelvo un cubo en 20 segundos con una mano"
 msgstr "Resolc un cub en 20 segons amb una mà"
 
-#: templates/index.html:256
+#: templates/index.html:258
 msgid "Resolviendo cubos bajo el agua sin respirar"
 msgstr "Resolent cubs sota l'aigua sense respirar"
 
-#: templates/index.html:260
+#: templates/index.html:262
 msgid "Mis tiempos oficiales"
 msgstr "Els meus temps oficials"
 
-#: templates/index.html:270
+#: templates/index.html:272
 msgid "Estudio de la notación:"
 msgstr "Estudi de la notació:"
 
-#: templates/index.html:276
+#: templates/index.html:278
 msgid "Recopilatorio de trucos:"
 msgstr "Recopilatori de trucs:"
 
-#: templates/index.html:280
+#: templates/index.html:282
 msgid "Edit con los trucos de"
 msgstr "Edit amb els trucs de"
 
 #: templates/juegos.html:6
 msgid "Diseños propios y Recursos para juegos existentes."
 msgstr "Dissenys propis i Recursos per a jocs existents."
-
-#: templates/juegos.html:9
-msgid "Diseños propios"
-msgstr "Dissenys propis"
 
 #: templates/juegos.html:39
 msgid "Recursos para juegos existentes"
