@@ -10,13 +10,13 @@
     </tr>
 
     {% for queue_id, quote in queue|dictsort %}
-        <tr class="queued">
+        <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-2 text-center">{{ queue_id }}</td>
             <td class="num px-2 text-center">{{ quote['id'] }}</td>
-            <td class="px-2"><b>{{ quote['autor'] }}</b></td>
+            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
             <td class="mono px-2">{{ quote['cita'] }}</td>
             {% set quote_id = quote['id'] %}
-            <td class=" text-center px-1">
+            <td class=" text-center px-1" style="white-space:nowrap;">
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_top', 'queue-table', 'queue-feedback');"> ⏫ </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_up', 'queue-table', 'queue-feedback');"> 🔼 </span>
                 <span class="hand" onclick="console.log('choose_pos')"> *️⃣ </span>

@@ -7,16 +7,16 @@
         <td class="px-2"><b>Autor</b></td>
         <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
         <td class="px-2 text-center id"><b>Data</b></td>
-        <td></td>
+        <td class="text-center">ⓘ</td>
     </tr>
-    {% for num, quote in archive|dictsort %}
+    {% for num, quote in archive.items()|sort(attribute="0|int") %}
         {% set quote_id = quote['id'] %}
-        <tr class="archived">
+        <tr class="archived{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-2 text-center id"><b>{{ num }}</b></td>
             <td class="num px-2 text-center">{{ quote_id }}</td>
-            <td class="px-2"><b>{{ quote['autor'] }}</b></td>
+            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
             <td class="mono px-2">{{ quote['cita'] }}</td>
-            <td class="num px-2 text-center id"><b>{{ quote['archive_id'] }}</b></td>
+            <td class="num px-2 text-center id" style="white-space:nowrap;"><b>{{ quote['archive_id'] }}</b></td>
             <td class="px-1 text-center">
                 <span class="hand" onclick="ajax('stats_{{quote_id}}', 'stats', 'archive-feedback'); show('stats-popup');">📊</span>
             </td>

@@ -2,6 +2,7 @@
 body {
     background-color: #1990bd;
     color: white;
+    font-size: 100%;
 }
 
 .archive {
@@ -44,11 +45,14 @@ td {
 }
 
 .lil-table {
-    font-size: smaller;
+    font-size: 0.7em;
 }
 
 .archived {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.45);
+}
+.archived-other {
+    background-color: rgba(0, 0, 0, 0.55);
 }
 
 .archived-header {
@@ -56,11 +60,27 @@ td {
 }
 
 .queued {
-    background-color: rgba(70, 30, 30, 0.5);
+    background-color: rgba(70, 30, 30, 0.45);
+}
+
+.queued-other {
+    background-color: rgba(70, 30, 30, 0.55);
 }
 
 .queued-header {
     background-color: rgba(70, 30, 30, 0.7);
+}
+
+.pooled {
+    background-color: rgba(180, 100, 0, 0.40);
+}
+
+.pooled-other {
+    background-color: rgba(180, 100, 0, 0.50);
+}
+
+.pooled-header {
+    background-color: rgba(180, 100, 0, 0.65);
 }
 
 .invisipopup {

@@ -424,17 +424,23 @@
             let text = "";
             let bg_color = "white";
             let txt_color = "black";
-            if(b.letter == "Share"){
-              if(share_available){
-                text = "Comparteix";
-              }else{
-                text = "Comparteix";
-                bg_color = colors["quertyshade"];
-                txt_color = colors["collateral"];
-              }
-            }else{
-              text = show_share_square ? "Veure frase" : "Veure resultat";
+            switch (b.letter) {
+              case "Share":
+                if(share_available){
+                  text = "Comparteix";
+                }else{
+                  text = "Comparteix";
+                  bg_color = colors["quertyshade"];
+                  txt_color = colors["collateral"];
+                }
+                break;
+              case "ToggleShow":
+                text = show_share_square ? "Veure frase" : "Veure resultat";
+                break;
+              default:
+                text = b.letter
             }
+
             cc.fillStyle = bg_color;
             roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
 
@@ -646,7 +652,8 @@
           let w = shareW;
           let x = gX + (gW-w)/2;
           let h = (gH*0.95 - endbY)/2;
-          endButtons.push(new quertyKey(x, y, w, h, "Share"));
+          endButtons.push(new quertyKey(x, y, w*0.75, h, "Share"));
+          endButtons.push(new quertyKey(x+w*0.75, y, w*0.25, h, "Antics"));
           endButtons.push(new quertyKey(x, y+h, w, h, "ToggleShow"));
         }
 
@@ -690,6 +697,8 @@
                       if(b.letter == "Share"){
                         show_share_square = true;
                         share();
+                      }else if(b.letter == "Antics"){
+                        window.open("/catagrama/arxiu", "_blank");
                       }else{
                         show_share_square = !show_share_square;
                       }
