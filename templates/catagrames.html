@@ -115,6 +115,8 @@
         //
         var show_info_panel = false;
         var show_share_square = false;
+        var show_end = false
+        var show_end_delay = 1000;  // ms
         var shareW;
         var shareH;
         var endbY;
@@ -147,7 +149,7 @@
             // drawing init
             cc = c.getContext("2d");
             update();
-            setInterval(update, 1000);  // fallback update 1s (normalmente será onclick)
+            setInterval(update, 500);  // fallback update 1s (normalmente será onclick)
 
             // ui init
             init_quote_boxes();
@@ -238,7 +240,7 @@
             cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
 
             // title and info
-            if(!show_share_square){
+            if(!(show_share_square && show_end)){
               cc.lineWidth = 1*u;
               cc.font = font("Helvetica", 30, bold=true);
               cc.fillStyle = "white";
@@ -269,7 +271,7 @@
 
             // main UI
             cc.lineWidth = 1*u;
-            if(!show_share_square){
+            if(!(show_share_square && show_end)){
               draw_quote();
             }
             if(!show_info_panel){
@@ -281,7 +283,11 @@
             }
             // overlay
             if(show_share_square){
-              draw_share_square();
+              if(show_end){
+                draw_share_square();
+              }else if(Date.now() > t_end + show_end_delay){  // té poc sentit si els fps no acompane
+                show_end = true;
+              }
             }
             if(show_info_panel){
               draw_info_panel();
@@ -563,7 +569,7 @@
                 }
                 break;
               case "ToggleShow":
-                text = show_share_square ? "Veure frase" : "Veure resultat";
+                text = show_share_square && show_end ? "Veure frase" : "Veure resultat";
                 break;
               case "Antics":
               case "Kofi":
@@ -863,7 +869,14 @@
                       }else if(b.letter == "Kofi"){
                         window.open("https://ko-fi.com/rusca", "_blank");
                       }else{
-                        show_share_square = !show_share_square;
+                        if(!show_end){
+                          show_end = true;
+                          show_share_square = true;
+                          update();
+                          break;
+                        }else{
+                          show_share_square = !show_share_square;
+                        }
                       }
                     }
                   }
