@@ -39,6 +39,18 @@
             this.done = done;
           }
         }
+        class Imagen {
+          constructor(src, title="img"){
+            this.img = new Image();
+            this.img.src = src;
+            this.ready = false;
+
+            this.img.onload = () => {
+              this.ready = true;
+            }
+          }
+        }
+
         //////// GLOBAL VARS //////
         var cWidth;
         var cHeight;
@@ -101,6 +113,7 @@
         var t_end;
         var t_pause_start = -42;
         //
+        var show_info_panel = false;
         var show_share_square = false;
         var shareW;
         var shareH;
@@ -108,6 +121,11 @@
         var endButtons = [];
         //
         var share_available = navigator.share;
+        //
+        const img_info = new Imagen("/static/img/catagrama/how_to.png", "?")
+        const img_arxiu = new Imagen("/static/img/catagrama/archive.png", "arxiu")
+        const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
+        const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "arxiu")
 
         // UI debug
         var pressed = [0, 0];
@@ -224,13 +242,18 @@
               cc.font = font("Helvetica", 30, bold=true);
               cc.fillStyle = "white";
               cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
+              // info
+              drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
+              drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
               //
               let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
               if(correction == 1){
                 de_quan += " · Resolt en: " + get_time(t_end, t_start)
               }
-              cc.font = font("Helvetica", 13);
-              cc.fillText(de_quan, gX+gW/2, 45*u);
+              if(!show_info_panel){
+                cc.font = font("Helvetica", 13);
+                cc.fillText(de_quan, gX+gW/2, 45*u);
+              }
               //
               cc.font = font("Helvetica", 10, bold=true);
               cc.textAlign = "left"
@@ -248,14 +271,19 @@
             if(!show_share_square){
               draw_quote();
             }
-            if(correction!=1){
-              draw_querty();
-            }else{
-              draw_end_buttons();
+            if(!show_info_panel){
+              if(correction!=1){
+                draw_querty();
+              }else{
+                draw_end_buttons();
+              }
             }
             // overlay
             if(show_share_square){
               draw_share_square();
+            }
+            if(show_info_panel){
+              draw_info_panel();
             }
 
             // ////// DEBUGGING //////
@@ -277,6 +305,22 @@
 
         function monofont(family, pt){
           return (MONO*pt/20).toString() + "px " + family;
+        }
+
+        function drawImage(cc, imagen, x, y, w, h, center=false){
+          if(center){
+            x -= w/2;
+            y -= h/2;
+          }
+          if(imagen.ready){
+            if(w && h){
+              cc.drawImage(imagen.img, x, y, w, h);
+            }else{
+              cc.drawImage(imagen.img, x, y);
+            }
+          }else{
+            cc.fillText("(" + imagen.title + ")", x, y);
+          }
         }
 
         function draw_quote(){
@@ -364,15 +408,98 @@
             cc.fillStyle = userAlpha.includes(k.letter) ? colors.quertyshade : "white";
             roundRect(cc, x-w/2, y-h/2, w, h, h/10);
             if(k.letter == "<"){
+              drawImage(cc, img_backspace, x-h*0.05, y, h*0.73, h*0.73, center=true);
+              /*
               cc.fillStyle = "#bbbbbb";
               cc.font = font("Helvetica", 15);
-              cc.fillText("elimina", x, y+h*0.02);
+              cc.fillText("elimina", x, y+h*0.02);*/
             }else{
               cc.fillStyle = "black";
               cc.font = font("Helvetica", 22);
               cc.fillText(k.letter, x, y+h*0.04);
             }
           }
+        }
+
+        function draw_info_panel(){
+          let w = shareW;
+          let h = shareH*1.16;
+          let x = gX + (gW-w)/2;
+          let y = (gW-w)/2+w*0.13;
+          let sq_u = w/340;
+          let m = sq_u*15;
+          let hm = sq_u*10;
+          let fsize = 11.8;
+          let il = sq_u*fsize*1.1;
+
+          cc.fillStyle = colors["bg"];
+          cc.fillRect(x, y, w, h);
+          cc.strokeRect(x, y, w, h);
+          //
+          cc.textAlign = "left";
+          cc.fillStyle = "white";
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Què és aquesta bruixeria?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("És un criptograma. És a dir, una frase amagada a base d'aplicar-li", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("un xifratge per substitució monoalfabètica aleatòria.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("No ho he entès!", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("He canviat les lletres de la frase de veritat per unes altres.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("Per exemple, potser totes les F grises són en realitat la lletra A.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("La teva feina és descobrir quina lletra de veritat és cada lletra grisa.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Bua bro, ca difisil, no? :(", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Depèn del dia. N'hi ha de molt fàcils i n'hi ha que et bulliran el cap.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("Les frases curtes solen ser més complicades, sobre tot si fan servir", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("paraules rares o si fan servir molt una lletra que és poc típica.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Espera, i aquests números de coloraines?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Són només un recompte de quantes lletres iguals hi ha.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Hm, d'acord. Com ho intento?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Fixa't en els apòstrofs, punts volats, guionets i en les lletres dobles.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("En llocs així no són gaires, les lletres que hi podrien encaixar.", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("Fixa't en les paraules curtes. En què podrien ser, i en si hi ha", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("paraules curtes diferents que tinguin lletres en comú.", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("I també en els números. En català escrit les lletres més habituals", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("són EA/ITS, en aquest ordre (tot i que a les frases mai se sap).", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("Finalment, l'autor de la frase et pot donar pistes sobre el tema", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("de les paraules que busques, i també pots fixar-te en la gramàtica", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("i el sentit de la frase en conjunt. Les paraules no viuen aïllades. ;)", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+
         }
 
         function draw_share_square(){
@@ -437,6 +564,8 @@
               case "ToggleShow":
                 text = show_share_square ? "Veure frase" : "Veure resultat";
                 break;
+              case "Antics":
+                text = "";
               default:
                 text = b.letter
             }
@@ -444,9 +573,13 @@
             cc.fillStyle = bg_color;
             roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
 
-            cc.font = font("Helvetica", 20);
-            cc.fillStyle = txt_color;
-            cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
+            if(b.letter == "Antics"){
+              drawImage(cc, img_arxiu_b, b.x+b.w/2, b.y+b.h/2, b.h*0.7, b.h*0.7, center=true);
+            }else{
+              cc.font = font("Helvetica", 20);
+              cc.fillStyle = txt_color;
+              cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
+            }
           }
         }
 
@@ -652,8 +785,8 @@
           let w = shareW;
           let x = gX + (gW-w)/2;
           let h = (gH*0.95 - endbY)/2;
-          endButtons.push(new quertyKey(x, y, w*0.75, h, "Share"));
-          endButtons.push(new quertyKey(x+w*0.75, y, w*0.25, h, "Antics"));
+          endButtons.push(new quertyKey(x, y, w-h, h, "Share"));
+          endButtons.push(new quertyKey(x+w-h, y, h, h, "Antics"));
           endButtons.push(new quertyKey(x, y+h, w, h, "ToggleShow"));
         }
 
@@ -670,7 +803,26 @@
                 ycur = y;
                 pressed = [xcur, ycur];
 
-                if(correction != 1){
+                if(show_info_panel){
+                  show_info_panel = false;
+                  update();
+                  return;
+                }
+
+                if(!show_share_square){
+                  if(y < 50*u){  // top menu
+                    if(x < gX+50*u){  // archive
+                        window.open("/catagrama/arxiu", "_blank");
+                        return;
+                    }else if(x > gX+gW-50*u){  // info
+                        show_info_panel = true;
+                        update();
+                        return;
+                    }
+                  }
+                }
+                if(correction != 1){  // playing
+                  // quote
                   let i = 0;
                   for(let b of quoteBoxes){
                       if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){  // rollin LTR: bulk discard (last 2 conditions checked only if found)
@@ -680,6 +832,7 @@
                       }
                       i++;
                   }
+                  // keyboard
                   for(let k of quertyKeys){
                     if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
                       if(alpha.includes(k.letter)){
@@ -695,8 +848,10 @@
                   for(let b of endButtons){
                     if(y < b.y+b.h && y > b.y && x < b.x+b.w && x > b.x){
                       if(b.letter == "Share"){
-                        show_share_square = true;
-                        share();
+                        if(share_available){
+                          show_share_square = true;
+                          share();
+                        }
                       }else if(b.letter == "Antics"){
                         window.open("/catagrama/arxiu", "_blank");
                       }else{
