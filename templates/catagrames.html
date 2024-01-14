@@ -125,7 +125,8 @@
         const img_info = new Imagen("/static/img/catagrama/how_to.png", "?")
         const img_arxiu = new Imagen("/static/img/catagrama/archive.png", "arxiu")
         const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
-        const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "arxiu")
+        const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "<-")
+        const img_kofi = new Imagen("/static/img/catagrama/kofi.png", "kofi")
 
         // UI debug
         var pressed = [0, 0];
@@ -565,7 +566,9 @@
                 text = show_share_square ? "Veure frase" : "Veure resultat";
                 break;
               case "Antics":
+              case "Kofi":
                 text = "";
+                break;
               default:
                 text = b.letter
             }
@@ -575,6 +578,8 @@
 
             if(b.letter == "Antics"){
               drawImage(cc, img_arxiu_b, b.x+b.w/2, b.y+b.h/2, b.h*0.7, b.h*0.7, center=true);
+            }else if(b.letter == "Kofi"){
+              drawImage(cc, img_kofi, b.x+b.w*0.54, b.y+b.h/2, b.h*0.7, b.h*0.7, center=true);
             }else{
               cc.font = font("Helvetica", 20);
               cc.fillStyle = txt_color;
@@ -787,7 +792,8 @@
           let h = (gH*0.95 - endbY)/2;
           endButtons.push(new quertyKey(x, y, w-h, h, "Share"));
           endButtons.push(new quertyKey(x+w-h, y, h, h, "Antics"));
-          endButtons.push(new quertyKey(x, y+h, w, h, "ToggleShow"));
+          endButtons.push(new quertyKey(x+h, y+h, w-h, h, "ToggleShow"));
+          endButtons.push(new quertyKey(x, y+h, h, h, "Kofi"));
         }
 
         // Collisions (partially StackOverflow)
@@ -854,6 +860,8 @@
                         }
                       }else if(b.letter == "Antics"){
                         window.open("/catagrama/arxiu", "_blank");
+                      }else if(b.letter == "Kofi"){
+                        window.open("https://ko-fi.com/rusca", "_blank");
                       }else{
                         show_share_square = !show_share_square;
                       }
