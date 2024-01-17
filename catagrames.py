@@ -61,6 +61,8 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
     for i, quote_id in enumerate(queue, start=start):
         queued_quotes[i] = quotes.get(quote_id, cita_def)
         queued_quotes[i]["id"] = quote_id
+        expected_date = datetime.fromtimestamp(time.time()) + timedelta(days=i-start+1) - timedelta(hours=4)
+        queued_quotes[i]["expected_date"] = f"{expected_date:%Y-%m-%d} {utilities.emojiday(expected_date)}"
 
     return queued_quotes
 
@@ -122,6 +124,25 @@ def move_in_queue(quote_id, move):
             queue = [q for q in queue if q != quote_id] + [quote_id]
 
         utilities.dump_json(queue, queue_file)
+
+
+def insert_in_queue(quote_id, index):
+    if not isinstance(index, int):
+        print("l'índex d'inserció no era enter")
+        return
+
+    with archive_lock:
+        with queue_lock:
+            archive = utilities.load_json("./static/json/catagrama/archive.json")
+            queue_file = "./static/json/catagrama/queue.json"
+            queue = utilities.load_json(queue_file)
+
+            start = len(archive)
+            index = min(max(0, index-start-1), len(queue))
+            queue = [q for q in queue if q != quote_id]
+            queue = queue[:index] + [quote_id] + queue[index:]
+
+            utilities.dump_json(queue, queue_file)
 
 
 def add_to_queue(quote_id, move="add"):

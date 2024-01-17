@@ -3,23 +3,23 @@
 <table class="lil-table" id="archive-table">
     <tr class="bb-thick archived-header">
         <td class="px-2 text-center id"><b>#</b></td>
-        <td class="num px-2 text-center">quote_id</td>
+        <td class="px-2 text-center num">Data</td>
+        <td class="text-center table-controls">ⓘ</td>
         <td class="px-2"><b>Autor</b></td>
         <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-        <td class="px-2 text-center id"><b>Data</b></td>
-        <td class="text-center">ⓘ</td>
+        <td class="num px-2 text-center">quote_id</td>
     </tr>
     {% for num, quote in archive.items()|sort(attribute="0|int") %}
         {% set quote_id = quote['id'] %}
         <tr class="archived{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-2 text-center id"><b>{{ num }}</b></td>
-            <td class="num px-2 text-center">{{ quote_id }}</td>
-            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
-            <td class="mono px-2">{{ quote['cita'] }}</td>
-            <td class="num px-2 text-center id" style="white-space:nowrap;"><b>{{ quote['archive_id'] }}</b></td>
-            <td class="px-1 text-center">
+            <td class="num px-2 text-center num" style="white-space:nowrap;">{{ quote['archive_id'] }}</td>
+            <td class="px-1 text-center table-controls">
                 <span class="hand" onclick="ajax('stats_{{quote_id}}', 'stats', 'archive-feedback'); show('stats-popup');">📊</span>
             </td>
+            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
+            <td class="mono px-2">{{ quote['cita'] }}</td>
+            <td class="num px-2 text-center">{{ quote_id }}</td>
         </tr>
     {% endfor %}
 </table>

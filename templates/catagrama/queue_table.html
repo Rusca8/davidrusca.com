@@ -3,29 +3,31 @@
 <table class="lil-table" id="queue-table">
     <tr class="bb-thick queued-header">
         <td class="px-2 text-center">#</td>
-        <td class="num px-2 text-center">quote_id</td>
+        <td class="num px-2 text-center">programada</td>
+        <td colspan="2" class="text-center table-controls"><span>{{permission or 'Controls'}}</span></td>
         <td class="px-2"><b>Autor</b></td>
         <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-        <td colspan="2" class="text-center"><span>{{permission or 'Controls'}}</span></td>
+        <td class="num px-2 text-center">quote_id</td>
     </tr>
 
     {% for queue_id, quote in queue|dictsort %}
+        {% set quote_id = quote['id'] %}
         <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-2 text-center">{{ queue_id }}</td>
-            <td class="num px-2 text-center">{{ quote['id'] }}</td>
-            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
-            <td class="mono px-2">{{ quote['cita'] }}</td>
-            {% set quote_id = quote['id'] %}
-            <td class=" text-center px-1" style="white-space:nowrap;">
+            <td class="num pl-1 text-center">{{ quote['expected_date'] }}</td>
+            <td class=" text-center px-1 table-controls" style="white-space:nowrap;">
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_top', 'queue-table', 'queue-feedback');"> ⏫ </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_up', 'queue-table', 'queue-feedback');"> 🔼 </span>
-                <span class="hand" onclick="console.log('choose_pos')"> *️⃣ </span>
+                <span class="hand" onclick="choose_position('{{quote_id}}');"> *️⃣ </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_down', 'queue-table', 'queue-feedback');"> 🔽 </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_bottom', 'queue-table', 'queue-feedback');"> ⏬ </span>
             </td>
-            <td class=" text-center px-1">
+            <td class=" text-center px-1 table-controls">
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_remove', 'queue-table', 'queue-feedback', ['pool']);">✕</span>
             </td>
+            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
+            <td class="mono px-2">{{ quote['cita'] }}</td>
+            <td class="num px-2 text-center">{{ quote['id'] }}</td>
         </tr>
     {% endfor %}
 </table>

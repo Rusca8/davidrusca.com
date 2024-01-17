@@ -42,3 +42,8 @@ def touch_file(filename="data.json", default_content=None):
             default_content = {}
         with open(path, "a") as file:
             json.dump(default_content, file)
+
+
+def emojiday(date):
+    """From datetime"""
+    return ["☀️", "🌙", "🔥", "💧", "🌲", "⚜️", "⛰"][int(f"{date:%w}")]
