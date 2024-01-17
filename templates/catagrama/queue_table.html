@@ -4,7 +4,7 @@
     <tr class="bb-thick queued-header">
         <td class="px-2 text-center">#</td>
         <td class="num px-2 text-center">programada</td>
-        <td colspan="2" class="text-center table-controls"><span>{{permission or 'Controls'}}</span></td>
+        <td colspan="3" class="text-center table-controls"><span>{{permission or 'Controls'}}</span></td>
         <td class="px-2"><b>Autor</b></td>
         <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
         <td class="num px-2 text-center">quote_id</td>
@@ -12,13 +12,26 @@
 
     {% for queue_id, quote in queue|dictsort %}
         {% set quote_id = quote['id'] %}
+        {% set fixed_class = 'fixed-right' if quote['fixed']|int == queue_id|int else 'fixed-wrong' if quote['fixed'] else '' %}
+        {% set quote_fixed = quote['fixed'] %}
         <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
-            <td class="px-2 text-center">{{ queue_id }}</td>
-            <td class="num pl-1 text-center">{{ quote['expected_date'] }}</td>
+            <td class="px-2 text-center {{ fixed_class }}">{{ queue_id }}</td>
+            <td class="num pl-1 text-center {{fixed_class}}">{{ quote['expected_date'] }}</td>
+            <td class=" text-center px-1 table-controls">
+                {% if fixed_class == 'fixed-right' %}
+                    <span class="hand" onclick="ajax('queue_{{quote_id}}_release', 'queue-table', 'queue-feedback', ['pool']);">🔒</span>
+                {% else %}
+                    <span class="hand" onclick="ajax('queue_{{quote_id}}_fixto{{queue_id}}', 'queue-table', 'queue-feedback', ['pool']);">🔓</span>
+                {% endif %}
+            </td>
             <td class=" text-center px-1 table-controls" style="white-space:nowrap;">
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_top', 'queue-table', 'queue-feedback');"> ⏫ </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_up', 'queue-table', 'queue-feedback');"> 🔼 </span>
-                <span class="hand" onclick="choose_position('{{quote_id}}');"> *️⃣ </span>
+                {% if fixed_class == 'fixed-wrong' %}
+                    <span class="hand" onclick="choose_position('{{quote_id}}', '{{quote_fixed}}');"> ️✴️ </span>
+                {% else %}
+                    <span class="hand" onclick="choose_position('{{quote_id}}');"> *️⃣ </span>
+                {% endif %}
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_down', 'queue-table', 'queue-feedback');"> 🔽 </span>
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_bottom', 'queue-table', 'queue-feedback');"> ⏬ </span>
             </td>

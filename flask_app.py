@@ -245,6 +245,11 @@ def catagrama_ajax(datos="hello_world"):
                         cg.insert_in_queue(quote_id, index)
                     except Exception as e:
                         print("failed queue insertion", e)
+                elif move == "release":
+                    cg.release_from_position(quote_id)
+                elif "fixto" in move:
+                    position = move[5:]
+                    cg.fix_to_position(quote_id, position)
                 else:
                     cg.move_in_queue(quote_id, move)
             queue = cg.get_quotes_on_queue(num_after_archive=True)

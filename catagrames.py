@@ -6,6 +6,7 @@ import utilities
 
 # locks (careful: A-Z acquire Z-A release)
 archive_lock = RLock()
+fixed_lock = RLock()
 queue_lock = RLock()
 quotes_lock = RLock()
 stats_lock = RLock()
@@ -47,6 +48,9 @@ def get_archive():
 
 
 def get_quotes_on_queue(start=1, num_after_archive=False):
+    with fixed_lock:  # no lo hago alfabético porque es una consulta independiente
+        fixed = utilities.load_json("./static/json/catagrama/fixed_in_queue.json")
+
     with archive_lock:
         if num_after_archive:
             archive = utilities.load_json("./static/json/catagrama/archive.json")
@@ -63,6 +67,7 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
         queued_quotes[i]["id"] = quote_id
         expected_date = datetime.fromtimestamp(time.time()) + timedelta(days=i-start+1) - timedelta(hours=4)
         queued_quotes[i]["expected_date"] = f"{expected_date:%Y-%m-%d} {utilities.emojiday(expected_date)}"
+        queued_quotes[i]["fixed"] = fixed.get(quote_id, "")
 
     return queued_quotes
 
@@ -165,6 +170,24 @@ def remove_from_queue(quote_id):
         queue = [q for q in queue if q != quote_id]
 
         utilities.dump_json(queue, queue_file)
+
+
+def fix_to_position(quote_id, position):
+    with fixed_lock:
+        fixed_file = "./static/json/catagrama/fixed_in_queue.json"
+        fixed = utilities.load_json(fixed_file)
+
+        fixed[quote_id] = position
+        utilities.dump_json(fixed, fixed_file)
+
+
+def release_from_position(quote_id):
+    with fixed_lock:
+        fixed_file = "./static/json/catagrama/fixed_in_queue.json"
+        fixed = utilities.load_json(fixed_file)
+
+        fixed = {k: v for k, v in fixed.items() if k != quote_id}
+        utilities.dump_json(fixed, fixed_file)
 
 
 def get_stats(quote_id, format_times=False):

@@ -85,9 +85,13 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
         ajax(table, table + '-table', table + '-feedback');
     }
 
-    function choose_position(quote_id){
-        let index = prompt("Nova posició?");
-        ajax('queue_' + quote_id + '_insert' + index, 'queue-table', 'queue-feedback');
+    function choose_position(quote_id, index){
+        if(index == undefined){
+            index = prompt("Nova posició?");
+        }
+        if(index != undefined){
+            ajax('queue_' + quote_id + '_insert' + index, 'queue-table', 'queue-feedback');
+        }
     }
 
     function hide(object_id){

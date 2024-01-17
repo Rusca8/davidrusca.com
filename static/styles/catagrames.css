@@ -19,7 +19,7 @@ a:hover{
 }
 
 .num {
-    color: rgba(145, 165, 185, 1);
+    color: rgba(155, 175, 195, 1);
 }
 
 .id {
@@ -85,6 +85,14 @@ td {
 
 .table-controls {
     background-color: rgba(0, 0, 0, 0.3);
+}
+
+.fixed-right {
+    background-color: rgba(0, 200, 0, 0.2);
+}
+
+.fixed-wrong {
+    background-color: rgba(200, 0, 0, 0.2);
 }
 
 .invisipopup {
