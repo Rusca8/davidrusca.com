@@ -22,6 +22,10 @@ a:hover{
     color: rgba(155, 175, 195, 1);
 }
 
+.arxiu-num {
+    color: rgba(175, 217, 235);
+}
+
 .id {
     color: #1990bd;
 }
