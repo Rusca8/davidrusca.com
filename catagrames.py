@@ -79,12 +79,15 @@ def get_quotes_on_archive():
             quotes = utilities.load_json("./static/json/catagrama/quotes.json")
 
     archived_quotes = {}
+    ii = 0
     for date, archive_data in archive.items():
         i = archive_data["num"]
         quote_id = archive_data["id"]
         archived_quotes[i] = quotes.get(quote_id, cita_def)
         archived_quotes[i]["id"] = quote_id
         archived_quotes[i]["archive_id"] = date
+        archived_quotes[i]["emojiday"] = utilities.emojiday(datetime.fromtimestamp(1704279600) + timedelta(days=ii))
+        ii += 1
 
     return archived_quotes
 

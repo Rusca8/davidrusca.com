@@ -2,22 +2,23 @@
 
 <table class="lil-table mb-4" id="pool-table">
     <tr class="bb-thick pooled-header">
-        <td class="num px-2 text-center">quote_id</td>
+        <td colspan="2" class="text-center table-controls">{{permission or 'Controls'}}</td>
         <td class="px-2"><b>Autor</b></td>
         <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-        <td colspan="2" class="text-center">{{permission or 'Controls'}}</td>
+        <td class="num px-1 text-center">quote_id</td>
     </tr>
 
     {% for quote_id, quote in pool.items()|sort(attribute="1.autor") if quote_id != "DEFAULT" %}
     <tr class="pooled{{ '-other' if loop.index % 2 else '' }}">
-        <td class="num px-2 text-center">{{ quote_id }}</td>
-        <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
-        <td class="mono px-2">{{ quote['cita'] }}</td>
-        <td class=" text-center px-1" style="white-space:nowrap;">
+        <td class=" text-center px-1 table-controls" style="white-space:nowrap;">
             <span class="hand" onclick="ajax('pool_{{quote_id}}_top', 'pool-table', 'pool-feedback', ['queue']);">⏫</span>
+            <span class="hand" onclick="choose_position_pool('{{quote_id}}');">*️⃣</span>
             <span class="hand" onclick="ajax('pool_{{quote_id}}_add', 'pool-table', 'pool-feedback', ['queue']);">🔼</span>
         </td>
-        <td class=" text-center px-1">⏸️</td>
+        <td class="text-center px-1 table-controls">⏸️</td>
+        <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
+        <td class="mono px-2">{{ quote['cita'] }}</td>
+        <td class="num px-1 text-center">{{ quote_id }}</td>
     </tr>
     {% endfor %}
 </table>

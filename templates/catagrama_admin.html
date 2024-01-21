@@ -94,6 +94,15 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
         }
     }
 
+    function choose_position_pool(quote_id, index){
+        if(index == undefined){
+            index = prompt("Nova posició?");
+        }
+        if(index != undefined){
+            ajax('queue_' + quote_id + '_insert' + index, 'queue-table', 'queue-feedback', ['pool']);
+        }
+    }
+
     function hide(object_id){
        document.getElementById(object_id).classList.add("d-none");
     }
