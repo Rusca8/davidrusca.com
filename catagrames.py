@@ -266,5 +266,5 @@ def add_new_quote_to_archive():
                         quote = quotes.get(quote_id, cita_def)
                         print(f" · ({quote.get('autor','Qui?')}) {quote.get('cita', 'Què va dir?')}")
 
-                        utilities.dump_json(queue, "./static/json/catagrama/queue.json")
-                        utilities.dump_json(archive, "./static/json/catagrama/archive.json")
+                        utilities.dump_json(queue, queue_file)
+                        utilities.dump_json(archive, archive_file)
