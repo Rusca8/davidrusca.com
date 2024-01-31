@@ -16,6 +16,9 @@
     <h1 class="text-center pt-3 mb-0"><b>CATAGRAMA</b></h1>
     <h5 class="text-center mt-0 pb-3">arxiu dels catagrames de dies anteriors</h5>
 </div>
+<div class="archive py-2 mb-2">
+    Hola
+</div>
 <div class="archive py-4">
     {% for archive_id, quote in quotes|dictsort %}
         {% set url = '' if loop.last else '/a/' + archive_id %}

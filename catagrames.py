@@ -233,6 +233,10 @@ def get_stats(quote_id, format_times=False):
             solve_time = f"{timedelta(milliseconds=solve_time)}"
             if len(solve_time) > 10:
                 solve_time = solve_time[:10]
+            *h, m, s = solve_time.split(":")
+            h = "" if h == ["0"] else ":".join(h) + "h"
+            m = "" if m == "00" else f"{int(m)}" + "m"
+            solve_time = f"{h} {m} {s}s"
             formated_times.append([date, solve_time])
         stats["formated_times"] = formated_times
 

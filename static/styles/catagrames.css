@@ -115,7 +115,7 @@ td {
 }
 
 .invisipopup {
-    position: absolute;
+    position: fixed;
     left: 30%;
     top: 30%;
     width: 40%;
