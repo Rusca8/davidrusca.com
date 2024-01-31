@@ -2,6 +2,7 @@
 
 <table class="lil-table" id="queue-table">
     <tr class="bb-thick queued-header">
+        <td class="px-1"></td>
         <td class="px-2 text-center">#</td>
         <td class="num px-2 text-center">programada</td>
         <td colspan="3" class="text-center table-controls"><span>{{permission or 'Controls'}}</span></td>
@@ -14,7 +15,11 @@
         {% set quote_id = quote['id'] %}
         {% set fixed_class = 'fixed-right' if quote['fixed']|int == queue_id|int else 'fixed-wrong' if quote['fixed'] else '' %}
         {% set quote_fixed = quote['fixed'] %}
+        {% set watched_info = quote['watched_info']['nom'] if quote['watched_info'] else '' %}
+        {% set watched_class = ('watched-info-right' if fixed_class == 'fixed-right' else 'watched-info-wrong') if watched_info else fixed_class %}
+        {% set watch_emoji = quote['watched_info'].get('emoji', '📅') if quote['watched_info'] else '' %}
         <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
+            <td class="px-0 text-center {{ watched_class }}" title="{{watched_info}}">{{ watch_emoji }}</td>
             <td class="px-2 text-center {{ fixed_class }}">{{ queue_id }}</td>
             <td class="num pl-1 text-center {{fixed_class}}">{{ quote['expected_date'] }}</td>
             <td class=" text-center px-1 table-controls">

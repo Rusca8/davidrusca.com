@@ -99,6 +99,21 @@ td {
     background-color: rgba(200, 0, 0, 0.4);
 }
 
+.watched-info {
+    background-color: rgba(240, 240, 240, 1);
+    cursor: pointer;
+}
+
+.watched-info-right {
+    background-color: rgba(130, 250, 130, 1);
+    cursor: pointer;
+}
+
+.watched-info-wrong {
+    background-color: rgba(250, 130, 130, 1);
+    cursor: pointer;
+}
+
 .invisipopup {
     position: absolute;
     left: 30%;

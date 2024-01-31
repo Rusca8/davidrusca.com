@@ -10,6 +10,7 @@ fixed_lock = RLock()
 queue_lock = RLock()
 quotes_lock = RLock()
 stats_lock = RLock()
+watched_lock = RLock()
 
 # globals
 cita_def = {"autor": "L'hem liat parda",
@@ -21,6 +22,7 @@ archive_file = "./static/json/catagrama/archive.json"
 fixed_file = "./static/json/catagrama/fixed_in_queue.json"
 queue_file = "./static/json/catagrama/queue.json"
 quotes_file = "./static/json/catagrama/quotes.json"
+watched_file = "./static/json/catagrama/watched_dates.json"
 
 
 def get_from_archive(archive_id="Today"):
@@ -56,6 +58,8 @@ def get_archive():
 def get_quotes_on_queue(start=1, num_after_archive=False):
     with fixed_lock:  # no lo hago alfabético porque es una consulta independiente
         fixed = utilities.load_json(fixed_file)
+    with watched_lock:  # no lo hago alfabético porque es una consulta independiente
+        watched = utilities.load_json(watched_file)
 
     with archive_lock:
         if num_after_archive:
@@ -74,11 +78,16 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
         expected_date = datetime.fromtimestamp(time.time()) + timedelta(days=i-start+1) - timedelta(hours=4)
         queued_quotes[i]["expected_date"] = f"{expected_date:%Y-%m-%d} {utilities.emojiday(expected_date)}"
         queued_quotes[i]["fixed"] = fixed.get(quote_id, "")
+        if f"{expected_date:%m-%d}" in watched:
+            queued_quotes[i]["watched_info"] = watched[f"{expected_date:%m-%d}"]
 
     return queued_quotes
 
 
 def get_quotes_on_archive():
+    with watched_lock:  # no lo hago alfabético porque es una consulta independiente
+        watched = utilities.load_json(watched_file)
+
     with archive_lock:
         with quotes_lock:
             archive = utilities.load_json(archive_file)
@@ -93,6 +102,8 @@ def get_quotes_on_archive():
         archived_quotes[i]["id"] = quote_id
         archived_quotes[i]["archive_id"] = date
         archived_quotes[i]["emojiday"] = utilities.emojiday(datetime.fromtimestamp(1704279600) + timedelta(days=ii))
+        if date[5:10] in watched:
+            archived_quotes[i]["watched_info"] = watched[date[5:]]
         ii += 1
 
     return archived_quotes
