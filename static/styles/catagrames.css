@@ -8,7 +8,6 @@ body {
 .archive {
     background-color: #4bb4db;
     height: 100%;
-    cursor: pointer;
 }
 
 .archive-quote:hover {
@@ -36,6 +35,7 @@ a {
 
 a:hover{
  text-decoration: none;
+ color: white;
 }
 
 .num {
