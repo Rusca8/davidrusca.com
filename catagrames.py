@@ -51,7 +51,9 @@ def get_archive():
             quotes = utilities.load_json(quotes_file)
 
     for k, v in archive.items():
+        stats = get_stats(v["id"])
         archive[k]["autor"] = quotes.get(v["id"], cita_def)["autor"]
+        archive[k]["solves"] = len(stats.get("times", {}))
 
     return archive
 

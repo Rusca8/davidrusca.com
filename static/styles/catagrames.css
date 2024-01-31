@@ -21,12 +21,21 @@ body {
     cursor: pointer;
     position: sticky;
     top: 0;
-    box-shadow: 0em 0.5em 1em -0.5em rgba(0,0,0,0.4);
+    box-shadow: 0em 0.5em 1em -0.5em rgba(0, 50, 50, 0.4);
 }
 
 .archive-today:hover {
     background-color: #005370;
     height: 100%;
+}
+
+.archive-footer {
+    background-color: #006b91;
+    height: 100%;
+    cursor: pointer;
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0em -0.5em 1em -0.5em rgba(0, 50, 50, 0.2);
 }
 
 a {
@@ -152,4 +161,8 @@ td {
 
 .hand {
     cursor: pointer;
+}
+
+.solves {
+    color: rgba(250,250,250,0.5);
 }
