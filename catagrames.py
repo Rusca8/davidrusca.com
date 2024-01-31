@@ -40,6 +40,7 @@ def get_from_archive(archive_id="Today"):
     quote = quotes.get(quote_id, cita_def)
     quote["num"] = quote_num
     quote["id"] = quote_id
+    quote["archive_id"] = archive_id
     return quote
 
 
@@ -220,23 +221,18 @@ def get_stats(quote_id, format_times=False):
     stats["times"] = stats.get("times", {})
     if stats["times"]:
         # avg
-        stats["avg"] = sum(int(t) for t in stats["times"]) / len(stats["times"])
+        stats["avg"] = utilities.format_solve_time(sum(int(t) for t in stats["times"].values()) / len(stats["times"]))
         # best
-        stats["best"] = min(stats["times"])
+        stats["best"] = utilities.format_solve_time(min(stats["times"].values()))
         # worst
-        stats["worst"] = max(stats["times"])
-        # formated times list
+        stats["worst"] = utilities.format_solve_time(max(stats["times"].values()))
+
+    # formated times list
     if format_times:
         formated_times = []
         for timestamp, solve_time in stats["times"].items():
             date = f"{datetime.fromtimestamp(int(timestamp)):%Y-%m-%d · %H:%M:%S}"
-            solve_time = f"{timedelta(milliseconds=solve_time)}"
-            if len(solve_time) > 10:
-                solve_time = solve_time[:10]
-            *h, m, s = solve_time.split(":")
-            h = "" if h == ["0"] else ":".join(h) + "h"
-            m = "" if m == "00" else f"{int(m)}" + "m"
-            solve_time = f"{h} {m} {s}s"
+            solve_time = utilities.format_solve_time(solve_time)
             formated_times.append([date, solve_time])
         stats["formated_times"] = formated_times
 

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 from pathlib import Path
 
@@ -47,3 +47,13 @@ def touch_file(filename="data.json", default_content=None):
 def emojiday(date):
     """From datetime"""
     return ["☀️", "🌙", "🔥", "💧", "🌲", "⚜️", "⛰"][int(f"{date:%w}")]
+
+
+def format_solve_time(solve_time):
+    solve_time = f"{timedelta(milliseconds=solve_time)}"
+    if len(solve_time) > 10:
+        solve_time = solve_time[:10]
+    *h, m, s = solve_time.split(":")
+    h = "" if h == ["0"] else ":".join(h) + "h"
+    m = "" if m == "00" else f"{int(m)}" + "m"
+    return f"{h} {m} {s}s"

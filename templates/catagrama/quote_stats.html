@@ -1,6 +1,8 @@
 {# Generates quote stats summary for admin view #}
 
-<b>quote_id:</b> {{ quote_id }} · <b>solves:</b> {{ stats['times']|length }}<br><br>
+<b>quote_id:</b> <span style="color:#a8a8a8;">{{ quote_id }}</span> · <b>solves:</b> <span style="color:#b31e9d;">{{ stats['times']|length }}</span><br>
+<b>best:</b> <span style="color:#2ab31e;">{{ stats['best'] or '-' }}</span> | <b>avg:</b> <span style="color:#b3ac1e;">{{ stats['avg'] or '-'}}</span> | <b>worst:</b> <span style="color:#b31e1e;">{{ stats['worst'] or '-'}}</span>
+<br><br>
 <b>Times:</b><br>
 {% if 'formated_times' in stats %}
     {% for k, v in stats['formated_times'] %}

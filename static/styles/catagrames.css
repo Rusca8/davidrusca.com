@@ -8,6 +8,26 @@ body {
 .archive {
     background-color: #4bb4db;
     height: 100%;
+    cursor: pointer;
+}
+
+.archive-quote:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 100%;
+}
+
+.archive-today {
+    background-color: #006b91;
+    height: 100%;
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+    box-shadow: 0em 0.5em 1em -0.5em rgba(0,0,0,0.4);
+}
+
+.archive-today:hover {
+    background-color: #005370;
+    height: 100%;
 }
 
 a {
@@ -28,6 +48,10 @@ a:hover{
 
 .id {
     color: #1990bd;
+}
+
+.id-today {
+    color: #38a2c9;
 }
 
 table, tr {

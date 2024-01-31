@@ -274,7 +274,8 @@ def catagrama_arxiu():
     import catagrames as cg
 
     quotes = cg.get_archive()
-    return render_template("catagrama_arxiu.html", quotes=quotes)
+    today = cg.get_from_archive()
+    return render_template("catagrama_arxiu.html", quotes=quotes, today=today)
 
 
 @app.route('/catagrama/')

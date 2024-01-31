@@ -11,18 +11,18 @@
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_arxiu_favicon.png">
 </head>
-<body class="mx-3">
+<body>
 <div class="header">
     <h1 class="text-center pt-3 mb-0"><b>CATAGRAMA</b></h1>
     <h5 class="text-center mt-0 pb-3">arxiu dels catagrames de dies anteriors</h5>
 </div>
-<div class="archive py-2 mb-2">
-    Hola
+<div class="archive-today text-center py-2" onclick="window.open('/catagrama', '_blank')">
+    <span class="id-today"> Catagrama d'Avui ⟹ </span><span class="arxiu-num"><b>#{{today["num"]}}</b></span> <b>{{today["autor"]}}</b> · <span class="id-today">{{ today["archive_id"] }}</span>
 </div>
 <div class="archive py-4">
     {% for archive_id, quote in quotes|dictsort %}
         {% set url = '' if loop.last else '/a/' + archive_id %}
-    <div class="text-center"><a href="/catagrama{{url}}"><span class="arxiu-num"><b>#{{quote["num"]}}</b></span> <b>{{quote["autor"]}}</b> · <span class="id">{{'Avui' if loop.last else archive_id}}</span></a></div>
+    <div class="text-center archive-quote" onclick="window.open('/catagrama{{url}}', '_blank')"><span class="arxiu-num"><b>#{{quote["num"]}}</b></span> <b>{{quote["autor"]}}</b> · <span class="id">{{'Avui' if loop.last else archive_id}}</span></div>
     {% endfor %}
 </div>
 
