@@ -53,7 +53,7 @@ def get_archive():
     for k, v in archive.items():
         stats = get_stats(v["id"])
         archive[k]["autor"] = quotes.get(v["id"], cita_def)["autor"]
-        archive[k]["solves"] = len(stats.get("times", {}))
+        archive[k]["solves"] = len([t for t in stats.get("times", {}).values() if t > 10000])
 
     return archive
 
