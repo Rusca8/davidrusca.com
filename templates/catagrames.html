@@ -101,7 +101,7 @@
         var maxFreq;
 
         // UI
-        var quertyRows = ["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<<"];
+        var quertyRows = ["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<<^"];
         var quertyY;
         var keyW;
         var keyH;
@@ -132,6 +132,7 @@
         const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
         const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "<-")
         const img_restore = new Imagen("/static/img/catagrama/restore.png", "desfer")
+        const img_clear = new Imagen("/static/img/catagrama/clear.png", "buida")
         const img_kofi = new Imagen("/static/img/catagrama/kofi.png", "kofi")
 
         // UI debug
@@ -252,7 +253,7 @@
               // info
               drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
               drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
-              if(userAlphaHistory.length){
+              if(userAlphaHistory.length && correction != 1){
                 drawImage(cc, img_restore, gX+gW-23*u, 23*u+30*u, 22*u, 22*u, true);
                 draw_restore_dots(gX+gW-23*u, 23*u+30*u, 11*u);
               }
@@ -454,6 +455,8 @@
               cc.fillStyle = "#bbbbbb";
               cc.font = font("Helvetica", 15);
               cc.fillText("elimina", x, y+h*0.02);*/
+            }else if(k.letter == "^"){
+              drawImage(cc, img_clear, x, y, h*0.73, h*0.73, center=true);
             }else{
               cc.fillStyle = "black";
               cc.font = font("Helvetica", 22);
@@ -670,8 +673,10 @@
         }
 
         function place_letter(letter){
-          add_to_history();
           let cypherLetter = quoteBoxes[activeBox].letter;
+          if(userAlpha[alpha.indexOf(cypherLetter)] != letter){
+            add_to_history();
+          }
           if(userAlpha.includes(letter)){
             userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "?");
           }
@@ -683,14 +688,28 @@
         }
 
         function delete_letter(){
-          add_to_history();
+          let cypherLetter = quoteBoxes[activeBox].letter;
+          if(userAlpha[alpha.indexOf(cypherLetter)] != "?"){
+            add_to_history();
+          }
           userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "?");
           correction = 0;
         }
 
+        function clear_all(){
+          if(userAlpha != "?".repeat(userAlpha.length)){
+            add_to_history();
+          }
+          userAlpha = "?".repeat(userAlpha.length);
+        }
+
         function add_to_history(){
+          if(userAlphaHistory.length && userAlphaHistory.slice(-1) == userAlpha){
+            return;
+          }
           userAlphaHistory.push(userAlpha);
           userAlphaSelectHistory.push(activeBox);
+          // trim
           if(userAlphaHistory.length > maxHistory){
             userAlphaHistory = userAlphaHistory.slice(userAlphaHistory.length-maxHistory);
             userAlphaSelectHistory = userAlphaSelectHistory.slice(userAlphaHistory.length-maxHistory);
@@ -791,8 +810,10 @@
                 to_next(right=false);
               }else if(e.key == "ArrowRight"){
                 to_next();
-              }else if(e.key == "0"){
+              }else if(e.key == "1"){
                 restore_last_history();
+              }else if(e.key == "0"){
+                clear_all();
               }
             }
             update();
@@ -887,7 +908,9 @@
                     }
                   }else if(y < 70*u){  // subtop menu
                     if(x > gX+gW-50*u && userAlphaHistory.length){
-                      restore_last_history();
+                      if(correction != 1){
+                        restore_last_history();
+                      }
                       update();
                       return;
                     }
@@ -909,6 +932,8 @@
                     if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
                       if(alpha.includes(k.letter)){
                         place_letter(k.letter);
+                      }else if(k.letter == "^"){
+                        clear_all();
                       }else{
                         delete_letter();
                       }
