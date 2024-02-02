@@ -95,6 +95,9 @@
         var cypher = {{cypher | tojson}};
         var freqs = {{freqs | tojson}};
         var userAlpha = "?".repeat(alpha.length);
+        var userAlphaHistory = [];
+        var userAlphaSelectHistory = [];
+        var maxHistory = 6;
         var maxFreq;
 
         // UI
@@ -128,6 +131,7 @@
         const img_arxiu = new Imagen("/static/img/catagrama/archive.png", "arxiu")
         const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
         const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "<-")
+        const img_restore = new Imagen("/static/img/catagrama/restore.png", "desfer")
         const img_kofi = new Imagen("/static/img/catagrama/kofi.png", "kofi")
 
         // UI debug
@@ -248,7 +252,12 @@
               // info
               drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
               drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
+              if(userAlphaHistory.length){
+                drawImage(cc, img_restore, gX+gW-23*u, 23*u+30*u, 22*u, 22*u, true);
+                draw_restore_dots(gX+gW-23*u, 23*u+30*u, 11*u);
+              }
               //
+              cc.fillStyle = "white";
               let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
               if(correction == 1){
                 de_quan += " · Resolt en: " + get_time(t_end, t_start)
@@ -327,6 +336,31 @@
             }
           }else{
             cc.fillText("(" + imagen.title + ")", x, y);
+          }
+        }
+
+        function drawCircle(cc, x, y, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.arc(x, y, r, 0, 2 * Math.PI, false);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function draw_restore_dots(cx, cy, r){
+          let anglemax = Math.PI/3;
+          let dangle = (2*anglemax)/maxHistory;
+          let anglei = -dangle*userAlphaHistory.length/2 + Math.PI*4/5;
+          let d = r*1.2;
+          cc.fillStyle = "rgba(255, 255, 255, 0.7)";
+          for(i=0; i<(userAlphaHistory.length-1); i++){
+            let angle = anglei + dangle*(i+1);
+            let x = cx + d*Math.sin(angle);
+            let y = cy + d*Math.cos(angle);
+            drawCircle(cc, x, y, r*0.10, false, true);
           }
         }
 
@@ -630,7 +664,13 @@
           return newer[older.indexOf(letter)];
         }
 
+        function replace_at_index(string, index, char){
+          let newString = string.substring(0, index) + char + string.substring(index+1);
+          return newString;
+        }
+
         function place_letter(letter){
+          add_to_history();
           let cypherLetter = quoteBoxes[activeBox].letter;
           if(userAlpha.includes(letter)){
             userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "?");
@@ -642,14 +682,26 @@
           to_next_empty();
         }
 
-        function replace_at_index(string, index, char){
-          let newString = string.substring(0, index) + char + string.substring(index+1);
-          return newString;
-        }
-
         function delete_letter(){
+          add_to_history();
           userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "?");
           correction = 0;
+        }
+
+        function add_to_history(){
+          userAlphaHistory.push(userAlpha);
+          userAlphaSelectHistory.push(activeBox);
+          if(userAlphaHistory.length > maxHistory){
+            userAlphaHistory = userAlphaHistory.slice(userAlphaHistory.length-maxHistory);
+            userAlphaSelectHistory = userAlphaSelectHistory.slice(userAlphaHistory.length-maxHistory);
+          }
+        }
+
+        function restore_last_history(){
+          if(userAlphaHistory.length){
+            userAlpha = userAlphaHistory.pop();
+            activeBox = userAlphaSelectHistory.pop();
+          }
         }
 
         function to_next_empty(){
@@ -739,6 +791,8 @@
                 to_next(right=false);
               }else if(e.key == "ArrowRight"){
                 to_next();
+              }else if(e.key == "0"){
+                restore_last_history();
               }
             }
             update();
@@ -822,14 +876,20 @@
                 }
 
                 if(!show_share_square){
-                  if(y < 50*u){  // top menu
+                  if(y < 36*u){  // top menu
                     if(x < gX+50*u){  // archive
                         window.open("/catagrama/arxiu", "_blank");
                         return;
                     }else if(x > gX+gW-50*u){  // info
-                        show_info_panel = true;
-                        update();
-                        return;
+                      show_info_panel = true;
+                      update();
+                      return;
+                    }
+                  }else if(y < 70*u){  // subtop menu
+                    if(x > gX+gW-50*u && userAlphaHistory.length){
+                      restore_last_history();
+                      update();
+                      return;
                     }
                   }
                 }
