@@ -1,15 +1,17 @@
 {# Generates an interactive archive table from the archived quotes #}
 
-<table class="lil-table" id="archive-table">
-    <tr class="bb-thick archived-header">
-        <td class="px-1"></td>
-        <td class="px-2 text-center">#</td>
-        <td class="px-1 text-center num">Data</td>
-        <td class="text-center table-controls">ⓘ</td>
-        <td class="px-2"><b>Autor</b></td>
-        <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-        <td class="num px-2 text-center">quote_id</td>
+<div class="table-wrapper-scroll-y archive-scrollbar" id="archive-table-scroll">
+<table class="lil-table table-fix-head">
+    <tr class="bb-thick">
+        <td class="px-1 archived-header"></td>
+        <td class="px-2 text-center archived-header">#</td>
+        <td class="px-1 text-center num archived-header">Data</td>
+        <td class="text-center table-controls archived-header">ⓘ</td>
+        <td class="px-2 archived-header"><b>Autor</b></td>
+        <td class="mono px-2 archived-header">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
+        <td class="num px-2 text-center archived-header">quote_id</td>
     </tr>
+    <tr><td class="end-of-table" colspan="7"></td></tr>
     {% for num, quote in archive.items()|sort(attribute="0|int") %}
         {% set quote_id = quote['id'] %}
         {% set watched_info = quote['watched_info']['nom'] if quote['watched_info'] else '' %}
@@ -26,4 +28,6 @@
             <td class="num px-2 text-center">{{ quote_id }}</td>
         </tr>
     {% endfor %}
+    <tr><td class="end-of-table" colspan="7"></td></tr>
 </table>
+</div>

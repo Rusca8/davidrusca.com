@@ -98,7 +98,7 @@ td {
 }
 
 .archived-header {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(30, 53, 64, 1);
 }
 
 .queued {
@@ -110,7 +110,7 @@ td {
 }
 
 .queued-header {
-    background-color: rgba(70, 30, 30, 0.7);
+    background-color: rgba(76, 76, 86, 1);
 }
 
 .pooled {
@@ -126,7 +126,7 @@ td {
 }
 
 .table-controls {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(33, 33, 33, 1);
 }
 
 .fixed-right {
@@ -162,6 +162,7 @@ td {
     color: black;
     white-space: nowrap;
     font-size: 0.7em;
+    z-index: 2;
 }
 
 .hand {
@@ -170,4 +171,30 @@ td {
 
 .solves {
     color: rgba(250,250,250,0.5);
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.archive-scrollbar{
+    position: relative;
+    height: 207px;
+    overflow: auto;
+}
+
+.queue-scrollbar{
+    position: relative;
+    height: 527px;
+    overflow: auto;
+}
+
+.table-fix-head    { overflow: auto; height: 100px; }
+.table-fix-head .archived-header { position: sticky; top: 0; }
+.table-fix-head .queued-header { position: sticky; top: 0; }
+.table-fix-head .pooled-header { position: sticky; top: 0; }
+
+.end-of-table {
+    height: 1px;
+    background: white;
 }

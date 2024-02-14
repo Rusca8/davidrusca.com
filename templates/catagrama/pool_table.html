@@ -1,6 +1,7 @@
 {# Generates an interactive queue table from the queued quotes #}
 
-<table class="lil-table mb-4" id="pool-table">
+<div class="table-wrapper-scroll-y pool-scrollbar" id="pool-table-scroll">
+<table class="lil-table mb-4">
     <tr class="bb-thick pooled-header">
         <td colspan="2" class="text-center table-controls">{{permission or 'Controls'}}</td>
         <td class="px-2"><b>Autor</b></td>
@@ -22,3 +23,4 @@
     </tr>
     {% endfor %}
 </table>
+</div>

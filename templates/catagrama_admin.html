@@ -17,6 +17,7 @@
 </div>
 <hr>
 Admin key: <input type="password" class="ml-2" id="admin_key">
+&nbsp;&nbsp; <span class="hand" onclick="refreshes();"><big>🔄</big></span>
 <hr>
 <div class="py-0">
 
@@ -36,34 +37,50 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
         <b class="ml-1">Arxiu</b> <span id="archive-feedback"></span>
     </div>
 
-    {% include '/catagrama/archive_table.html' %}
+    <div id="archive-table">
+        {% include '/catagrama/archive_table.html' %}
+    </div>
 
     <!-- QUEUE -->
     <div class="mt-2">
         <b class="ml-1">En cua</b>  <span id="queue-feedback"></span>
     </div>
 
-    {% include '/catagrama/queue_table.html' %}
+    <div id="queue-table">
+        {% include '/catagrama/queue_table.html' %}
+    </div>
 
     <!-- POOL -->
     <div class="mt-2">
         <b class="ml-1">Pendents</b>  <span id="pool-feedback"></span>
     </div>
 
-    {% include '/catagrama/pool_table.html' %}
+    <div id="pool-table">
+        {% include '/catagrama/pool_table.html' %}
+    </div>
 
 </div>
 <script>
     function ajax(url='', place_id='ajax', feedback_id='ajax_feedback', and_refresh=[]){
         let req = new XMLHttpRequest();
         let result = document.getElementById(place_id);
+        let scroll_element = document.getElementById(place_id + "-scroll");
         let feedback = document.getElementById(feedback_id);
         let admin_key = document.getElementById("admin_key").value;
 
+        try{
+            let scroll = scroll_element.scrollTop;
+            //console.log('pre-scroll (' + place_id + ')' + scroll);
+        }catch{let scroll = 0}
 
         req.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200) {
                 result.innerHTML = this.responseText;
+                try{
+                    //console.log('post-scroll (' + place_id + ')' + scroll);
+                    scroll_element = document.getElementById(place_id + "-scroll"); //requery, cause replaced
+                    scroll_element.scrollTop = scroll;
+                }catch{};
                 feedback.innerHTML = "";
 
                 // recursive bulk refresh of (asked for) affected tables
@@ -76,13 +93,22 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
             }
         }
 
-        console.log('/catagrama/ajax/' + url + "?p=" + admin_key);
+        //console.log('/catagrama/ajax/' + url + "?p=" + admin_key);
         req.open('GET', '/catagrama/ajax/' + url + "?p=" + admin_key, true);
         req.send();
     }
 
     function refresh(table) {
         ajax(table, table + '-table', table + '-feedback');
+    }
+
+    function refreshes(tables="all"){
+        if(tables=="all"){
+            tables = ["archive", "queue", "pool"];
+        }
+        for(let table of tables){
+            refresh(table);
+        }
     }
 
     function choose_position(quote_id, index){
@@ -109,6 +135,16 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
     function show(object_id){
        document.getElementById(object_id).classList.remove("d-none");
     }
+
+    /*
+    let elem = document.getElementById("queue-table-scroll");
+    elem.addEventListener("scroll", (event) => {
+        console.log(elem.scrollTop);
+    });
+    */
+
+    var archi = document.getElementById("archive-table-scroll");
+    archi.scrollTop = archi.scrollHeight;
 </script>
 </body>
 </html>

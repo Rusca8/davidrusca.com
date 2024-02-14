@@ -1,16 +1,20 @@
 {# Generates an interactive queue table from the queued quotes #}
 
-<table class="lil-table" id="queue-table">
-    <tr class="bb-thick queued-header">
-        <td class="px-1"></td>
-        <td class="px-2 text-center">#</td>
-        <td class="num px-2 text-center">programada</td>
-        <td colspan="3" class="text-center table-controls"><span>{{permission or 'Controls'}}</span></td>
-        <td class="px-2"><b>Autor</b></td>
-        <td class="mono px-2">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
-        <td class="num px-2 text-center">quote_id</td>
-    </tr>
-
+<div class="table-wrapper-scroll-y queue-scrollbar" id="queue-table-scroll">
+<table class="lil-table table-fix-head">
+    <thead>
+        <tr class="bb-thick">
+            <td class="px-1 queued-header"></td>
+            <td class="px-2 text-center queued-header">#</td>
+            <td class="num px-2 text-center queued-header">programada</td>
+            <td colspan="3" class="text-center queued-header table-controls"><span>{{permission or 'Controls'}}</span></td>
+            <td class="px-2 queued-header"><b>Autor</b></td>
+            <td class="mono px-2 queued-header">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
+            <td class="num px-2 text-center queued-header">quote_id</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr><td class="end-of-table" colspan="9"></td></tr>
     {% for queue_id, quote in queue|dictsort %}
         {% set quote_id = quote['id'] %}
         {% set fixed_class = 'fixed-right' if quote['fixed']|int == queue_id|int else 'fixed-wrong' if quote['fixed'] else '' %}
@@ -21,7 +25,7 @@
         <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-0 text-center {{ watched_class }}" title="{{watched_info}}">{{ watch_emoji }}</td>
             <td class="px-2 text-center {{ fixed_class }}">{{ queue_id }}</td>
-            <td class="num pl-1 text-center {{fixed_class}}">{{ quote['expected_date'] }}</td>
+            <td class="num pl-1 text-center {{fixed_class}}" style="white-space:nowrap;">{{ quote['expected_date'] }}</td>
             <td class=" text-center px-1 table-controls">
                 {% if fixed_class == 'fixed-right' %}
                     <span class="hand" onclick="ajax('queue_{{quote_id}}_release', 'queue-table', 'queue-feedback', ['pool']);">🔒</span>
@@ -47,5 +51,9 @@
             <td class="mono px-2">{{ quote['cita'] }}</td>
             <td class="num px-2 text-center">{{ quote['id'] }}</td>
         </tr>
+    </tbody>
     {% endfor %}
+    <tr><td class="end-of-table" colspan="9"></td></tr>
 </table>
+</div>
+<small><i> ~ Hi ha {{ queue|length }} cites preparades.</i></small>

@@ -230,6 +230,9 @@ def catagrama_ajax(datos="hello_world"):
         case ["pool"]:
             pool = cg.get_quotes_pool()
             return render_template("/catagrama/pool_table.html", pool=pool)
+        case ["archive"]:
+            archive = cg.get_quotes_on_archive()
+            return render_template("/catagrama/archive_table.html", archive=archive)
 
         case ["queue", quote_id, move]:
             permission = ""
