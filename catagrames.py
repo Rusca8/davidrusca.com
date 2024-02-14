@@ -21,8 +21,8 @@ cita_def = {"autor": "L'hem liat parda",
 archive_file = "./static/json/catagrama/archive.json"
 fixed_file = "./static/json/catagrama/fixed_in_queue.json"
 queue_file = "./static/json/catagrama/queue.json"
-quotes_file = "./static/json/catagrama/quotes.json"
-watched_file = "./static/json/catagrama/watched_dates.json"
+quotes_file = "./static/json/catagrama/local_to_cloud/quotes.json"
+watched_file = "./static/json/catagrama/local_to_cloud/watched_dates.json"
 
 
 def get_from_archive(archive_id="Today"):
