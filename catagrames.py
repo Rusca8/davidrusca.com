@@ -1,4 +1,5 @@
 import time
+import random
 from datetime import datetime, timedelta
 from threading import RLock
 
@@ -10,6 +11,8 @@ fixed_lock = RLock()
 queue_lock = RLock()
 quotes_lock = RLock()
 stats_lock = RLock()
+viqui_lock = RLock()
+vqchoices_lock = RLock()
 watched_lock = RLock()
 
 # globals
@@ -17,11 +20,15 @@ cita_def = {"autor": "L'hem liat parda",
             "cita":  "En David va calcular alguna cosa malament i ara no ha sortit la frase de veritat. Plorem junts.",
             }
 
+cita_debug = {"autor": "Curtis Quotis", "cita": "La Mandarina Manda Rina"}
+
 
 archive_file = "./static/json/catagrama/archive.json"
 fixed_file = "./static/json/catagrama/fixed_in_queue.json"
 queue_file = "./static/json/catagrama/queue.json"
 quotes_file = "./static/json/catagrama/local_to_cloud/quotes.json"
+viqui_file = "./static/json/catagrama/local_to_cloud/viquidites.json"
+vqchoices_file = "./static/json/catagrama/viqui_choices.json"
 watched_file = "./static/json/catagrama/local_to_cloud/watched_dates.json"
 
 
@@ -42,6 +49,36 @@ def get_from_archive(archive_id="Today"):
     quote["id"] = quote_id
     quote["archive_id"] = archive_id
     return quote
+
+
+def get_random_vq(vq_id="RAND"):
+    with viqui_lock:
+        viquidites = utilities.load_json(viqui_file)
+    with vqchoices_lock:
+        vqchoices = utilities.load_json(vqchoices_file)
+    vqchoices_ids = vqchoices.get("baneadas", []) + vqchoices.get("aceptadas", []) + vqchoices.get("reguleras", [])
+
+    if vq_id == "RAND":
+        vq_id = random.choice([vq_id for vq_id in viquidites if vq_id not in vqchoices_ids])
+
+    quote = viquidites.get(vq_id, cita_def)
+    quote["num"] = "X"
+    quote["id"] = vq_id
+    quote["archive_id"] = vq_id
+    return quote
+
+
+def vq_submit_choice(vq_id, choice):
+    valid_choice_options = ["aceptadas", "baneadas", "reguleras"]
+    with vqchoices_lock:
+        vqchoices = utilities.load_json(vqchoices_file)
+        if choice in valid_choice_options:
+            for op in valid_choice_options:  # clean it from the other lists
+                vqchoices[op] = [q for q in vqchoices[op] if q != vq_id]
+            vqchoices[choice] = vqchoices.get(choice, []) + [vq_id]  # append
+        else:
+            return
+        utilities.dump_json(vqchoices, vqchoices_file)
 
 
 def get_archive():

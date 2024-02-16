@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- to avoid 300ms touchscreen delay... -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <title>CATAGRAMA del dia</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_favicon.png">
+    <!--icon for home screen -->
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/static/icons/catagrama128.png">
+    <link rel="shortcut icon" sizes="128x128" href="/static/icons/catagrama128.png">
+
+    <script>
+        //////// Classes ///////
+        class letterBox {
+          constructor(x, y, w, h, cypherLetter, num){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.letter = cypherLetter;
+            this.num = num;
+          }
+        }
+        class quertyKey {
+          constructor(x, y, w, h, letter){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.letter = letter;
+          }
+        }
+        class AjaxRequest {
+          constructor(result, done=false){
+            this.result = result;
+            this.done = done;
+          }
+        }
+        class Imagen {
+          constructor(src, title="img"){
+            this.img = new Image();
+            this.img.src = src;
+            this.ready = false;
+
+            this.img.onload = () => {
+              this.ready = true;
+            }
+          }
+        }
+
+        //////// GLOBAL VARS //////
+        var cWidth;
+        var cHeight;
+        var u;
+        var colors = {
+          "bg": "#1990bd",
+          "bg_correct": "#55bd19",
+          "bg_wrong": "#bd1924",
+          "main": "#4bb4db",
+          "main_correct": "#80db4b",
+          "main_wrong": "#db4b55",
+          "active": "#24404d",
+          "collateral": "#70909e",
+          "quertyshade": "#99b9c7",
+        }
+        var cc;
+
+        // main space
+        var gX;
+        var gY;
+        var gW;
+        var gH;
+
+        // quote measures
+        var quoteY;
+        var MONO;
+        var plainH;
+        var heatH;
+        var cypherH;
+        var qLineH;
+
+        // game
+        var quote = {{quote | tojson}};
+        var author = {{author | tojson}};
+        var quote_num = "#" + {{num | tojson}};
+        var quote_id = {{quote_id | tojson}};
+        var archive_id = {{archive_id | tojson}};
+        console.log("Catagrama: " + archive_id);
+        var plain = {{plain | tojson}};
+        var alpha = {{alpha | tojson}};
+        var plainphabet = {{plainphabet | tojson}};
+        var cypher = {{cypher | tojson}};
+        var freqs = {{freqs | tojson}};
+        var userAlpha = "?".repeat(alpha.length);
+        var userAlphaHistory = [];
+        var userAlphaSelectHistory = [];
+        var maxHistory = 6;
+        var maxFreq;
+
+        // UI
+        var quertyRows = ["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<<^"];
+        var quertyY;
+        var keyW;
+        var keyH;
+        //
+        var quoteBoxes = [];
+        var activeBox = 0;
+        var quertyKeys = [];
+        //
+        var correction = 0;  // -1 mal, 0 neutro, 1 bien
+        //
+        var t_start;
+        var t_end;
+        var t_pause_start = -42;
+        //
+        var show_info_panel = false;
+        var show_share_square = false;
+        var show_end = false
+        var show_end_delay = 1000;  // ms
+        var shareW;
+        var shareH;
+        var endbY;
+        var endButtons = [];
+        //
+        var share_available = navigator.share;
+        //
+        const img_info = new Imagen("/static/img/catagrama/how_to.png", "?")
+        const img_arxiu = new Imagen("/static/img/catagrama/archive.png", "arxiu")
+        const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
+        const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "<-")
+        const img_restore = new Imagen("/static/img/catagrama/restore.png", "desfer")
+        const img_clear = new Imagen("/static/img/catagrama/clear.png", "buida")
+        const img_kofi = new Imagen("/static/img/catagrama/kofi.png", "kofi")
+
+        // UI debug
+        var pressed = [0, 0];
+
+        // AJAX
+        var submitTime = new AjaxRequest();
+        var submitChoice = new AjaxRequest();
+
+        ///////// onload //////
+        window.onload = function(){
+            c=document.getElementById("app");
+
+            // medidas
+            set_measures();
+
+            // precálculos
+            maxFreq = getMaxFreq();
+
+            // drawing init
+            cc = c.getContext("2d");
+            update();
+            setInterval(update, 500);  // fallback update 1s (normalmente será onclick)
+
+            // ui init
+            init_quote_boxes();
+            init_querty();
+            init_end_buttons();
+            init_collisions(c);
+
+            // prevent space going down
+            window.addEventListener("keydown", function(e){
+                if((e.key==" ") && document.activeElement==c){
+                    e.preventDefault();
+                }
+            }, false);
+
+            // on resize
+            window.addEventListener("resize", function(){
+              set_measures();
+              init_quote_boxes();
+              init_querty();
+              init_end_buttons();
+              update();
+            }, true);
+
+            update();
+
+            // start clock
+            t_start = Date.now();
+            t_end = Date.now() - 42;
+
+            // focus
+            c.focus();
+        }
+
+        function set_measures(){
+          let resolution = 5;
+          c.width = window.innerWidth * resolution;
+          c.height = window.innerHeight * resolution;
+          cWidth = c.width;
+          cHeight = c.height;
+          u = cHeight/500;
+
+          // main space w/h
+          gH = cHeight;
+          gW = cWidth < cHeight/1.3 ? cWidth : cHeight/1.3;
+          gY = 0;
+          gX = cWidth/2 - gW/2;
+
+          // UI elements
+          quoteY = 85*u;
+          keyW = gW/(quertyRows[0].length+0.4);
+          keyH = keyW * 0.95;
+          quertyY = cHeight-(0.2+quertyRows.length)*keyH;
+          MONO = 15*u;
+          set_quote_measures();
+
+          //
+          shareW = gW*0.95;
+          shareH = shareW;
+          endbY = quertyY;
+        }
+
+        function set_quote_measures(){
+          plainH = MONO*1;
+          heatH = MONO*0.6;
+          cypherH = MONO*0.8;
+          qLineH = (plainH + heatH + cypherH) * 1.1;
+        }
+
+        ///////// Update ////////
+        function update(){
+            // style setup
+            cc.textBaseline = "middle";
+            cc.textAlign = "center";
+            cc.lineJoin = 'miter';
+            cc.miterLimit = 2;
+
+            // bg
+            let bg_color = correction < 0 ? colors.bg_wrong
+                            : correction > 0 ? colors.bg_correct
+                            : colors.bg;
+            cc.fillStyle = bg_color;
+            cc.fillRect(0, 0, c.width, c.height);
+
+            // main portrait
+            cc.fillStyle=correction < 0 ? colors.main_wrong
+                            : correction > 0 ? colors.main_correct
+                            : colors.main;
+            cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
+
+            // title and info
+            if(!(show_share_square && show_end)){
+              cc.lineWidth = 1*u;
+              cc.font = font("Helvetica", 30, bold=true);
+              cc.fillStyle = "white";
+              cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
+              // info
+              drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
+              drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
+              if(userAlphaHistory.length && correction != 1){
+                drawImage(cc, img_restore, gX+gW-23*u, 23*u+30*u, 22*u, 22*u, true);
+                draw_restore_dots(gX+gW-23*u, 23*u+30*u, 11*u);
+              }
+              //
+              cc.fillStyle = "white";
+              let de_quan = archive_id == "Today" ? "DEL DIA" : "VQ-Rand: " + archive_id;
+              if(correction == 1){
+                de_quan += " · Resolt en: " + get_time(t_end, t_start)
+              }
+              if(!show_info_panel){
+                cc.font = font("Helvetica", 13);
+                cc.fillText(de_quan, gX+gW/2, 45*u);
+              }
+              //
+              cc.font = font("Helvetica", 10, bold=true);
+              cc.textAlign = "left"
+              cc.fillStyle = "rgba(255, 255, 255, 0.5)";
+              cc.fillText(quote_num, gX + MONO, quoteY-12*u);
+              cc.fillStyle = "white";
+              let quote_num_len = cc.measureText(quote_num).width;
+              cc.fillText(author, gX + MONO + quote_num_len + 4*u, quoteY-12*u);
+              cc.font = font("Helvetica", 10);
+              cc.textAlign = "center"
+            }
+
+            // main UI
+            cc.lineWidth = 1*u;
+            if(!(show_share_square && show_end)){
+              draw_quote();
+            }
+            if(!show_info_panel){
+              if(correction!=1){
+                draw_querty();
+              }else{
+                draw_end_buttons();
+              }
+            }
+            // overlay
+            if(show_share_square){
+              if(show_end){
+                draw_share_square();
+              }else if(Date.now() > t_end + show_end_delay){  // té poc sentit si els fps no acompane
+                show_end = true;
+              }
+            }
+            if(show_info_panel){
+              draw_info_panel();
+            }
+
+            // ////// DEBUGGING //////
+            // alphabets debug
+            cc.fillStyle = "purple";
+            //cc.fillRect(pressed[0]-2*u, pressed[1]-2*u, 4*u, 4*u);
+        }
+
+        function font(family, pt, bold=false, italic=false){
+          let type = "";
+          if(italic){
+            type += "italic ";
+          }
+          if(bold){
+            type += "bold ";
+          }
+          return type + (pt*gW/400).toString() + "px " + family;
+        }
+
+        function monofont(family, pt){
+          return (MONO*pt/20).toString() + "px " + family;
+        }
+
+        function drawImage(cc, imagen, x, y, w, h, center=false){
+          if(center){
+            x -= w/2;
+            y -= h/2;
+          }
+          if(imagen.ready){
+            if(w && h){
+              cc.drawImage(imagen.img, x, y, w, h);
+            }else{
+              cc.drawImage(imagen.img, x, y);
+            }
+          }else{
+            cc.fillText("(" + imagen.title + ")", x, y);
+          }
+        }
+
+        function drawCircle(cc, x, y, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.arc(x, y, r, 0, 2 * Math.PI, false);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function draw_restore_dots(cx, cy, r){
+          let anglemax = Math.PI/3;
+          let dangle = (2*anglemax)/maxHistory;
+          let anglei = -dangle*userAlphaHistory.length/2 + Math.PI*4/5;
+          let d = r*1.2;
+          cc.fillStyle = "rgba(255, 255, 255, 0.7)";
+          for(i=0; i<(userAlphaHistory.length-1); i++){
+            let angle = anglei + dangle*(i+1);
+            let x = cx + d*Math.sin(angle);
+            let y = cy + d*Math.cos(angle);
+            drawCircle(cc, x, y, r*0.10, false, true);
+          }
+        }
+
+        function draw_quote(){
+          for(let box of quoteBoxes){
+            draw_letterbox(box);
+          }
+        }
+
+        function draw_letterbox(box){
+          let x = box.x;
+          let y = box.y;
+          let letter = box.letter;
+          let plainBG;
+          let plainColor;
+          if(box.num == activeBox && correction != 1){
+            plainBG = colors["active"];
+            plainColor = "#ffffff";
+          }else if(box.letter == quoteBoxes[activeBox].letter && correction != 1){
+            plainBG = colors["collateral"];
+            plainColor = "#ffffff";
+          }else{
+            plainBG = "white";
+            plainColor = "black";
+          }
+          if(alpha.includes(letter)){
+            // main
+            cc.fillStyle = plainBG;
+            cc.fillRect(x, y, MONO, plainH);
+            cc.font = monofont("Courier", 20);
+            cc.fillStyle = plainColor;
+            let plainletter = ralph(letter, alpha, userAlpha);
+            if(plainletter != "?"){
+              cc.fillText(plainletter, x+MONO/2, y+plainH/2);
+            }
+            // cipher
+            cc.fillStyle = "lightgrey";
+            cc.fillRect(x, y+plainH+heatH, MONO, cypherH);
+            cc.font = monofont("Courier", 16);
+            cc.fillStyle = "black"
+            let offset = letter == "Ç" ? cypherH*0.44 :
+                         letter == "Q" ? cypherH*0.45 : cypherH*0.5;
+            cc.fillText(letter, x+MONO/2, y+plainH+heatH+offset)
+            // heatmap
+            cc.fillStyle = freqColor(letter);
+            cc.fillRect(x, y+plainH, MONO, heatH);
+            cc.strokeRect(x, y+plainH, MONO, heatH);
+            cc.font = monofont("Courier", 10);
+            cc.fillStyle = "black";
+            cc.fillText(freqs[letter], x+MONO/2, y+plainH+heatH/2);
+            // global border
+            cc.strokeStyle = "black";
+            cc.strokeRect(x, y, MONO, plainH+heatH+cypherH);
+          }else{
+            cc.fillStyle = "black";
+            cc.font = monofont("Courier", 20);
+            cc.fillText(letter, x+box.w/2, y+plainH/2);
+          }
+        }
+
+        function draw_querty(){
+          let backdrawn = false;
+          let x;
+          let y;
+          let w;
+          let h;
+          let m;
+          for(let k of quertyKeys){
+            m = k.w*0.1;
+            h = k.h;
+            y = k.y;
+            if(k.letter == "<"){
+              if(backdrawn){
+                continue;
+              }else{
+                w = 2*k.w;
+                x = k.x+k.w/2;
+                backdrawn = true;
+              }
+            }else{
+              w = k.w;
+              x = k.x;
+            }
+            h -= m;
+            w -= m;
+            cc.fillStyle = userAlpha.includes(k.letter) ? colors.quertyshade : "white";
+            roundRect(cc, x-w/2, y-h/2, w, h, h/10);
+            if(k.letter == "<"){
+              drawImage(cc, img_backspace, x-h*0.05, y, h*0.73, h*0.73, center=true);
+              /*
+              cc.fillStyle = "#bbbbbb";
+              cc.font = font("Helvetica", 15);
+              cc.fillText("elimina", x, y+h*0.02);*/
+            }else if(k.letter == "^"){
+              drawImage(cc, img_clear, x, y, h*0.73, h*0.73, center=true);
+            }else{
+              cc.fillStyle = "black";
+              cc.font = font("Helvetica", 22);
+              cc.fillText(k.letter, x, y+h*0.04);
+            }
+          }
+        }
+
+        function draw_info_panel(){
+          let w = shareW;
+          let h = shareH*1.16;
+          let x = gX + (gW-w)/2;
+          let y = (gW-w)/2+w*0.13;
+          let sq_u = w/340;
+          let m = sq_u*15;
+          let hm = sq_u*10;
+          let fsize = 11.8;
+          let il = sq_u*fsize*1.1;
+
+          cc.fillStyle = colors["bg"];
+          cc.fillRect(x, y, w, h);
+          cc.strokeRect(x, y, w, h);
+          //
+          cc.textAlign = "left";
+          cc.fillStyle = "white";
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Què és aquesta bruixeria?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("És un criptograma. És a dir, una frase amagada a base d'aplicar-li", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("un xifratge per substitució monoalfabètica aleatòria.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("No ho he entès!", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("He canviat les lletres de la frase de veritat per unes altres.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("Per exemple, potser totes les F grises són en realitat la lletra A.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("La teva feina és descobrir quina lletra de veritat és cada lletra grisa.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Bua bro, ca difisil, no? :(", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Depèn del dia. N'hi ha de molt fàcils i n'hi ha que et bulliran el cap.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("Les frases curtes solen ser més complicades, sobre tot si fan servir", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("paraules rares o si fan servir molt una lletra que és poc típica.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Espera, i aquests números de coloraines?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Són només un recompte de quantes lletres iguals hi ha.", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+          cc.font = font("Helvetica", fsize, bold=true);
+          cc.fillText("Hm, d'acord. Com ho intento?", x+hm, y + 20*sq_u);
+          y += il * 1.2;
+          cc.font = font("Helvetica", fsize);
+          cc.fillText("Fixa't en els apòstrofs, punts volats, guionets i en les lletres dobles.", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("En llocs així no són gaires, les lletres que hi podrien encaixar.", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("Fixa't en les paraules curtes. En què podrien ser, i en si hi ha", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("paraules curtes diferents que tinguin lletres en comú.", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("I també en els números. En català escrit les lletres més habituals", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("són EA/ITS, en aquest ordre (tot i que a les frases mai se sap).", x+m, y + 20*sq_u);
+          y += il * 1.5;
+          cc.fillText("Finalment, l'autor de la frase et pot donar pistes sobre el tema", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("de les paraules que busques, i també pots fixar-te en la gramàtica", x+m, y + 20*sq_u);
+          y += il;
+          cc.fillText("i el sentit de la frase en conjunt. Les paraules no viuen aïllades. ;)", x+m, y + 20*sq_u);
+          y += il * 1.7;
+          //
+
+        }
+
+        function draw_share_square(){
+          let w = shareW;
+          let h = shareH;
+          let x = gX+(gW-w)/2;
+          let y = (gW-w)/2;
+          let sq_u = h/340;
+
+          let band_y = y+h*0.2;
+          let band_h = h*0.22;
+
+          let time_y = band_y + band_h + 115*sq_u;
+
+          // main square
+          cc.fillStyle = colors["main"];
+          cc.fillRect(x, y, w, h);
+          cc.strokeStyle = "black";
+          cc.strokeRect(x, y, w, h);
+          // TOP
+          cc.font = font("Helvetica", 30, bold=true);
+          cc.fillStyle = "white";
+          cc.fillText("CATAGRAMA", x+w/2, y+30*sq_u);
+          cc.font = font("Helvetica", 13);
+          let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
+          cc.fillText(de_quan, x+w/2, y+50*sq_u);
+          // MID
+          cc.fillStyle = colors["bg"];
+          cc.fillRect(x, band_y, w, band_h);
+          cc.strokeRect(x, band_y, w, band_h);
+          //
+          cc.fillStyle = "rgba(255, 255, 255, 0.6)";
+          cc.font = font("Helvetica", 40, bold=true)
+          cc.fillText(quote_num, x+w/2, band_y+band_h*0.35);
+          //
+          cc.fillStyle = "white";
+          cc.font = font("Helvetica", 18, bold=true)
+          cc.fillText(author, x+w/2, band_y+band_h*0.77);
+          // BOTTOM
+          cc.font = font("Helvetica", 30);
+          cc.fillText("RESOLT EN", x+w/2, time_y - 60*sq_u);
+          cc.font = font("Courier", 80, bold=true);
+          cc.fillText(get_time(t_end, t_start), x+w/2, time_y);
+        }
+
+        function draw_end_buttons(){
+          for(let b of endButtons){
+            let m = 2*u;
+            let text = "";
+            let bg_color = "white";
+            let txt_color = "black";
+            switch (b.letter) {
+              case "Share":
+                if(share_available){
+                  text = "Comparteix";
+                }else{
+                  text = "Comparteix";
+                  bg_color = colors["quertyshade"];
+                  txt_color = colors["collateral"];
+                }
+                break;
+              case "ToggleShow":
+                text = show_share_square && show_end ? "Veure frase" : "Veure resultat";
+                break;
+              case "Antics":
+              case "Kofi":
+                text = "";
+                break;
+              case "aceptadas":
+                text = "✅";
+                if(submitChoice && submitChoice.result == b.letter){
+                  bg_color = colors["quertyshade"];
+                };
+                break;
+              case "baneadas":
+                text = "❌";
+                if(submitChoice && submitChoice.result == b.letter){
+                  bg_color = colors["quertyshade"];
+                };
+                break;
+              case "reguleras":
+                text = "⏸"
+                if(submitChoice && submitChoice.result == b.letter){
+                  bg_color = colors["quertyshade"];
+                };
+                break;
+              default:
+                text = b.letter
+            }
+
+            cc.fillStyle = bg_color;
+            roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 2*m);
+
+            if(b.letter == "Antics"){
+              drawImage(cc, img_arxiu_b, b.x+b.w/2, b.y+b.h/2, b.h*0.7, b.h*0.7, center=true);
+            }else if(b.letter == "Kofi"){
+              drawImage(cc, img_kofi, b.x+b.w*0.54, b.y+b.h/2, b.h*0.7, b.h*0.7, center=true);
+            }else{
+              cc.font = font("Helvetica", 20);
+              cc.fillStyle = txt_color;
+              cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
+            }
+          }
+        }
+
+        function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.roundRect(x, y, w, h, r);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function getMaxFreq(){
+          let max = 1;
+          for(let [letter, quantity] of Object.entries(freqs)){
+            max = Math.max(max, quantity);
+          }
+          return max;
+        }
+
+        function freqColor(letter){
+          let lowest = [250, 230, 55];  // amarillo
+          let highest = [250, 81, 55];  // rojo
+          let k = freqs[letter] / maxFreq;
+
+          let color = [lowest[0]*(1-k) + highest[0]*k,
+                       lowest[1]*(1-k) + highest[1]*k,
+                       lowest[2]*(1-k) + highest[2]*k,
+                       ];
+          return "rgb("+ color[0] + "," + color[1] + "," + color[2] + ")";
+        }
+
+        function ralph(letter, older, newer){
+          // replace alphabet
+          return newer[older.indexOf(letter)];
+        }
+
+        function replace_at_index(string, index, char){
+          let newString = string.substring(0, index) + char + string.substring(index+1);
+          return newString;
+        }
+
+        function place_letter(letter){
+          let cypherLetter = quoteBoxes[activeBox].letter;
+          if(userAlpha[alpha.indexOf(cypherLetter)] != letter){
+            add_to_history();
+          }
+          if(userAlpha.includes(letter)){
+            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "?");
+          }
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(cypherLetter), letter);
+
+          // reset correction & search for next
+          correction = 0;
+          to_next_empty();
+        }
+
+        function delete_letter(){
+          let cypherLetter = quoteBoxes[activeBox].letter;
+          if(userAlpha[alpha.indexOf(cypherLetter)] != "?"){
+            add_to_history();
+          }
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "?");
+          correction = 0;
+        }
+
+        function clear_all(){
+          if(userAlpha != "?".repeat(userAlpha.length)){
+            add_to_history();
+          }
+          userAlpha = "?".repeat(userAlpha.length);
+        }
+
+        function add_to_history(){
+          if(userAlphaHistory.length && userAlphaHistory.slice(-1) == userAlpha){
+            return;
+          }
+          userAlphaHistory.push(userAlpha);
+          userAlphaSelectHistory.push(activeBox);
+          // trim
+          if(userAlphaHistory.length > maxHistory){
+            userAlphaHistory = userAlphaHistory.slice(userAlphaHistory.length-maxHistory);
+            userAlphaSelectHistory = userAlphaSelectHistory.slice(userAlphaHistory.length-maxHistory);
+          }
+        }
+
+        function restore_last_history(){
+          if(userAlphaHistory.length){
+            userAlpha = userAlphaHistory.pop();
+            activeBox = userAlphaSelectHistory.pop();
+          }
+        }
+
+        function to_next_empty(){
+          for(j=1; j<quoteBoxes.length; j++){
+            let k = (activeBox+j) % quoteBoxes.length;
+            if(alpha.includes(quoteBoxes[k].letter)){  // és lletra
+              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "?"){
+                activeBox = k;
+                return;
+              }
+            }
+          }
+          // else
+          check_quote();
+        }
+
+        function to_next(right=true){
+          let k;
+          for(j=1; j<quoteBoxes.length;j++){
+            if(right){
+              k = (activeBox+j) % quoteBoxes.length;
+            }else{
+              k = (activeBox-j) % quoteBoxes.length;
+              if(k<0){
+                k += quoteBoxes.length;
+              }
+            }
+            if(alpha.includes(quoteBoxes[k].letter)){
+              activeBox = k;
+              return;
+            }
+          }
+        }
+
+        function check_quote(){
+          // strip unused
+          let guessed = userAlpha;
+          guessed = guessed.replaceAll("?", "");
+          // strip non appearing
+          let correct = plainphabet;
+          for(let lletra of plainphabet){
+            if(!plain.includes(lletra)){
+              correct = correct.replace(lletra, "");
+            }
+          }
+          correction = guessed == correct ? 1 : -1;
+          if(correction == 1 && t_end < t_start){
+            t_end = Date.now();
+            ajax("submit_time_" + quote_id + "_" + (t_end-t_start).toString(), submitTime);
+            show_share_square = true;
+          }
+        }
+
+        function get_time(end, start){
+          let msec = end - start;
+          //
+          let sec = Math.floor(msec / 1000);
+          msec -= sec * 1000;
+          //
+          let min = Math.floor(sec / 60);
+          sec -= min * 60;
+
+          return time_text = min + ":" + sec.toString().padStart(2, "0");
+        }
+
+        // unfocus
+        window.addEventListener("blur", function(){
+          t_pause_start = Date.now();
+        }, true);
+        // refocus
+        window.addEventListener("focus", function(){
+          if(t_pause_start != -42 && correction != 1){
+            t_start += Date.now() - t_pause_start;  // compensate for pause time
+          }
+          t_pause_start = -42;
+        }, true);
+
+        ///////////////// KeyUp ////////////////
+        function canvas_hotkeys(e){
+            let upperKey = e.key.toUpperCase();
+            if(correction != 1){
+              if(alpha.includes(upperKey)){
+                place_letter(upperKey);
+              }else if(e.key == "Backspace"){
+                delete_letter();
+              }else if(e.key == "ArrowLeft"){
+                to_next(right=false);
+              }else if(e.key == "ArrowRight"){
+                to_next();
+              }else if(e.key == "1"){
+                restore_last_history();
+              }else if(e.key == "0"){
+                clear_all();
+              }
+            }
+            update();
+        }
+
+        /////////// Clicks ////////////
+        // Init quoteBoxes
+        function init_quote_boxes(){
+          quoteBoxes = [];
+          let words = cypher.split(" ");
+          let x = gX+MONO;
+          let y = quoteY;
+          let i=0;
+          for(let word of words){
+            if(x + (word.length+3) * MONO> gX + gW){
+              x = gX+MONO;
+              y += qLineH;
+              // check for keyboard overlap = make smaller
+              if(y + qLineH > quertyY-keyH){
+                MONO *= 0.8;
+                console.log(MONO);
+                set_quote_measures();
+                init_quote_boxes();  // recursive retry
+                break;
+              }
+            }
+            for(let letter of word){
+              let w = alpha.includes(letter) ? MONO : MONO*2/3;
+              quoteBoxes.push(new letterBox(x, y, w, plainH + heatH + cypherH, letter, i));
+              x += w;
+              i++;
+            }
+            x += MONO*2/3;
+          }
+          update();
+        }
+
+        function init_querty(){
+           quertyKeys = [];
+           let y = quertyY;
+           for(let row of quertyRows){
+             i = 0;
+             let x0 = gX+gW/2-keyW*(row.length-1)/2;
+             for(let letter of row){
+               quertyKeys.push(new quertyKey(x0+keyW*i, y, keyW, keyH, letter));
+               i++;
+             }
+             y += keyH;
+           }
+        }
+
+        function init_end_buttons(){
+          endButtons = [];
+          let y = endbY;
+          let w = shareW;
+          let x = gX + (gW-w)/2;
+          let h = (gH*0.95 - endbY)/2;
+          endButtons.push(new quertyKey(x, y, w/3, h, "aceptadas"));
+          endButtons.push(new quertyKey(x+w/3, y, w/3, h, "reguleras"));
+          endButtons.push(new quertyKey(x+2*w/3, y, w/3, h, "baneadas"));
+          endButtons.push(new quertyKey(x+h, y+h, w-h, h, "ToggleShow"));
+          endButtons.push(new quertyKey(x, y+h, h, h, "Kofi"));
+        }
+
+        // Collisions (partially StackOverflow)
+        function init_collisions(c){
+            c.addEventListener('click', function(event){
+                const rect = c.getBoundingClientRect();
+                const relX = event.clientX - rect.left;
+                const relY = event.clientY - rect.top;
+                x = relX * c.width / rect.width;
+                y = relY * c.height / rect.height;
+
+                xcur = x;
+                ycur = y;
+                pressed = [xcur, ycur];
+
+                if(show_info_panel){
+                  show_info_panel = false;
+                  update();
+                  return;
+                }
+
+                if(!show_share_square){
+                  if(y < 36*u){  // top menu
+                    if(x < gX+50*u){  // archive
+                        window.open("/catagrama/arxiu", "_blank");
+                        return;
+                    }else if(x > gX+gW-50*u){  // info
+                      show_info_panel = true;
+                      update();
+                      return;
+                    }
+                  }else if(y < 70*u){  // subtop menu
+                    if(x > gX+gW-50*u && userAlphaHistory.length){
+                      if(correction != 1){
+                        restore_last_history();
+                      }
+                      update();
+                      return;
+                    }
+                  }
+                }
+                if(correction != 1){  // playing
+                  // quote
+                  let i = 0;
+                  for(let b of quoteBoxes){
+                      if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){  // rollin LTR: bulk discard (last 2 conditions checked only if found)
+                          activeBox = i;
+                          update();
+                          return;
+                      }
+                      i++;
+                  }
+                  // keyboard
+                  for(let k of quertyKeys){
+                    if(y < k.y+k.h/2 && x < k.x+k.w/2 && x > k.x-k.w/2 && y > k.y-k.h/2){
+                      if(alpha.includes(k.letter)){
+                        place_letter(k.letter);
+                      }else if(k.letter == "^"){
+                        clear_all();
+                      }else{
+                        delete_letter();
+                      }
+                      update();
+                      return;
+                    }
+                  }
+                }else{  // solved
+                  for(let b of endButtons){
+                    if(y < b.y+b.h && y > b.y && x < b.x+b.w && x > b.x){
+                      if(["aceptadas", "baneadas", "reguleras"].includes(b.letter)){
+                        ajax("submit_choice_" + quote_id + "_" + b.letter, submitChoice);
+                      }else if(b.letter == "Share"){
+                        if(share_available){
+                          show_share_square = true;
+                          share();
+                        }
+                      }else if(b.letter == "Antics"){
+                        window.open("/catagrama/arxiu", "_blank");
+                      }else if(b.letter == "Kofi"){
+                        window.open("https://ko-fi.com/rusca", "_blank");
+                      }else{
+                        if(!show_end){
+                          show_end = true;
+                          show_share_square = true;
+                          update();
+                          break;
+                        }else{
+                          show_share_square = !show_share_square;
+                        }
+                      }
+                    }
+                  }
+                }
+
+                update();
+            }, false);
+        }
+
+        /////////////// SHARE HANDLER ///////////////
+        async function share(){
+          if(navigator.share){
+            var crop = document.createElement('canvas');
+            crop.width = shareW;
+            crop.height = shareH;
+            let x = gX + (gW-shareW)/2;
+            let y = (gW - shareW)/2;
+            crop.getContext('2d').drawImage(c, x, y, shareW, shareH, 0, 0, shareW, shareH);
+            const DATA_URL = crop.toDataURL();
+            const BLOB = await (await fetch(DATA_URL)).blob();
+            const FILES_ARRAY = [
+              new File(
+                [BLOB],
+                "shared.png",
+                {
+                  type: BLOB.type,
+                  lastModified: new Date().getTime()
+                }
+              )
+            ];
+            const SHARE_DATA = {
+              files: FILES_ARRAY,
+            };
+            try {
+              navigator.share(SHARE_DATA);
+            }catch{
+              share_available = false;
+            }
+          }else{
+            console.log("no share");
+            share_available = false;
+          }
+        }
+
+        ///////////////// AJAX HANDLER //////////////
+
+        function ajax(url='', ajax_result=new AjaxRequest()){
+          let req = new XMLHttpRequest();
+
+          req.onreadystatechange = function(){
+              if(this.readyState == 4 && this.status == 200) {
+                  ajax_result.result = this.responseText;
+                  ajax_result.done = true;
+                  update();
+              }else{
+                  ajax_result.done = false;
+              }
+          }
+
+          console.log('/catagrama/ajax/' + url);
+          req.open('GET', '/catagrama/ajax/' + url, true);
+          req.send();
+        }
+    </script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);" style="width: 100%; height: 100%; display: block;"></canvas>
+</body>
+</html>

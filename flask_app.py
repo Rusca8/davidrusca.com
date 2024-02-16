@@ -223,7 +223,9 @@ def catagrama_ajax(datos="hello_world"):
         case ["submit", "time", quote_id, solve_time]:
             cg.stats_submit_time(quote_id, solve_time)
             return cg.get_stats(quote_id)
-
+        case ["submit", "choice", quote_id, choice]:
+            cg.vq_submit_choice(quote_id, choice)
+            return choice
         case ["queue"]:
             queue = cg.get_quotes_on_queue(num_after_archive=True)
             return render_template("/catagrama/queue_table.html", queue=queue)
@@ -302,6 +304,27 @@ def catagrama(archive_id="Today"):
 
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
                            plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=archive_id)
+
+
+@app.route('/catagrama/quote-filtering')
+@app.route('/catagrama/quote-filtering/')
+def catagrama_viqui():
+    import catagrames as cg
+
+    cita = cg.get_random_vq()
+    quote_id = cita["id"]
+    quote = cita["cita"]
+    author = cita["autor"]
+    num = cita["num"]
+
+    plain = crypto.unidecode_but(quote.upper(), preserve="Ç·", post_replace={"...": "…"})
+    plainphabet, alpha = crypto.new_transposition_alphabet("ABCÇDEFGHIJKLMNOPQRSTUVWXYZ",
+                                                           return_plain=True, quote=plain, avoid="Ç")
+    cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
+    freqs = crypto.get_frequencies(cypher)
+
+    return render_template("catagrames_vq.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
+                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=quote_id)
 
 
 @app.route('/ktn')

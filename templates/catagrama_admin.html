@@ -67,20 +67,26 @@ Admin key: <input type="password" class="ml-2" id="admin_key">
         let scroll_element = document.getElementById(place_id + "-scroll");
         let feedback = document.getElementById(feedback_id);
         let admin_key = document.getElementById("admin_key").value;
+        let scroll_value;
 
         try{
-            let scroll = scroll_element.scrollTop;
-            //console.log('pre-scroll (' + place_id + ')' + scroll);
-        }catch{let scroll = 0}
+            scroll_value = scroll_element.scrollTop;
+            //console.log('pre-scroll (' + place_id + ')' + scroll_value);
+        }catch{
+          console.log("error get scroll_value");
+          scroll_value = 0;
+        };
 
         req.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200) {
                 result.innerHTML = this.responseText;
                 try{
-                    //console.log('post-scroll (' + place_id + ')' + scroll);
+                    //console.log('post-scroll (' + place_id + ')' + scroll_value);
                     scroll_element = document.getElementById(place_id + "-scroll"); //requery, cause replaced
-                    scroll_element.scrollTop = scroll;
-                }catch{};
+                    scroll_element.scrollTop = scroll_value;
+                }catch(error){
+                  console.log("error set scroll_value");
+                };
                 feedback.innerHTML = "";
 
                 // recursive bulk refresh of (asked for) affected tables
