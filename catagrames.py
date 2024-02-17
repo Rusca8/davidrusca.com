@@ -293,7 +293,6 @@ def stats_submit_time(quote_id, solve_time):
 
 
 def add_new_quote_to_archive():
-    """ de moment estem de proves :) """
     with archive_lock:
         with queue_lock:
             with quotes_lock:
@@ -318,3 +317,24 @@ def add_new_quote_to_archive():
 
                         utilities.dump_json(queue, queue_file)
                         utilities.dump_json(archive, archive_file)
+
+
+def check_queue_length():
+    from tele import send_message
+
+    mins = {"first": 40, "second": 20, "worry": 10, "panic": 5}
+    with queue_lock:
+        queue = utilities.load_json(queue_file)
+
+    lenq = len(queue)
+    print(f"Checking queue length...\nCurrently {lenq} on queue.")
+    if lenq == mins["first"]:
+        send_message("archi", "yo", f"Hauria de posar Catagrames nous a la llista, senyoria.\nEn queden {lenq}.")
+    elif lenq == mins["second"]:
+        send_message("archi", "yo", f"⚠️ Senyoria, no va posar Catagrames. S'estan gastant.\nEn queden *{lenq}*.")
+    elif lenq == mins["worry"]:
+        send_message("archi", "yo",
+                     f"🚨 Queden molt pocs catagrames, excel·lència. *Només {lenq}.*\nPotser que s'espavil·li.")
+    elif lenq <= mins["panic"]:
+        send_message("archi", "yo",
+                     f"🚨⚠⚠️ ELS CATAGRAMES S'ESTAN ESGOTANT. FACI ALGUNA COSA, SISPLAU LI HO DEMANO.\nEN QUEDEN {lenq}.")
