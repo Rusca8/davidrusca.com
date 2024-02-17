@@ -338,3 +338,5 @@ def check_queue_length():
     elif lenq <= mins["panic"]:
         send_message("archi", "yo",
                      f"🚨⚠⚠️ ELS CATAGRAMES S'ESTAN ESGOTANT. FACI ALGUNA COSA, SISPLAU LI HO DEMANO.\nEN QUEDEN {lenq}.")
+    else:
+        print("No need to wake up Archibald.")
