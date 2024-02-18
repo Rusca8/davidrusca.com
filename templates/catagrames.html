@@ -116,7 +116,11 @@
         var plainphabet = {{plainphabet | tojson}};
         var cypher = {{cypher | tojson}};
         var freqs = {{freqs | tojson}};
-        var userAlpha = "?".repeat(alpha.length);
+        {% if user_alpha is defined and user_alpha %}
+          var userAlpha = {{user_alpha | tojson}};
+        {% else %}
+          var userAlpha = "-".repeat(alpha.length);
+        {% endif %}
         var userAlphaHistory = [];
         var userAlphaSelectHistory = [];
         var maxHistory = 6;
@@ -142,11 +146,15 @@
         var show_share_square = false;
         var show_qr_panel = false;
         var show_end = false
-        var show_end_delay = 1000;  // ms
+        var show_end_delay = 2000;  // ms
+        //
         var shareW;
         var shareH;
         var endbY;
         var endButtons = [];
+        //
+        var qr_type = "empty";
+        var qrButtons = [];
         //
         var share_available = navigator.share;
         //
@@ -187,6 +195,7 @@
             init_quote_boxes();
             init_querty();
             init_end_buttons();
+            init_qr_buttons();
             init_collisions(c);
 
             // prevent space going down
@@ -202,13 +211,19 @@
               init_quote_boxes();
               init_querty();
               init_end_buttons();
+              init_qr_buttons();
               update();
             }, true);
 
             update();
 
             // start clock
-            t_start = Date.now();
+            {% if t_start is defined and t_start %}
+              t_start = {{t_start | tojson}};
+            {% else %}
+              console.log({{t_start | tojson}});
+              t_start = Date.now();
+            {% endif %}
             t_end = Date.now() - 42;
 
             // focus
@@ -278,7 +293,9 @@
               cc.fillStyle = "white";
               cc.fillText("CATAGRAMA", gX+gW/2, 25*u);
               // info
-              drawImage(cc, img_qr, gX+gW-23*u*2.3, 23*u, 22*u, 22*u, true);
+              if(correction != 1){
+                drawImage(cc, img_qr, gX+gW-23*u*2.3, 23*u, 22*u, 22*u, true);
+              }
               drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
               drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
               if(userAlphaHistory.length && correction != 1 && !show_qr_panel && !show_info_panel){
@@ -289,7 +306,7 @@
               cc.fillStyle = "white";
               let de_quan = archive_id == "Today" ? "DEL DIA" : "Arxiu: " + archive_id;
               if(correction == 1){
-                de_quan += " · Resolt en: " + get_time(t_end, t_start)
+                de_quan += " · Resolt en: " + get_time(t_end, t_start);
               }
               if(!show_info_panel){
                 cc.font = font("Helvetica", 13);
@@ -427,7 +444,7 @@
             cc.font = monofont("Courier", 20);
             cc.fillStyle = plainColor;
             let plainletter = ralph(letter, alpha, userAlpha);
-            if(plainletter != "?"){
+            if(plainletter != "-"){
               cc.fillText(plainletter, x+MONO/2, y+plainH/2);
             }
             // cipher
@@ -505,11 +522,13 @@
           let y = gH-h-(gW-w)/2;
 
           let sq_u = w/340;
-          let qr_size_round = w*0.8;
+          let qr_size_round = w*0.8;  // (global)
           let qr_size = qr_size_round*0.95;
 
           let qr_text_x = gX+(gW-qr_size)/2;
           let qr_text_y = y+h-sq_u*20;
+
+          let m = 2*sq_u;
 
           cc.fillStyle = colors["bg"];
           roundRect(cc, x, y, w, h, sq_u*5, true, true);
@@ -526,7 +545,21 @@
           cc.fillText(author, qr_text_x + quote_num_len + 4*u, qr_text_y);
           cc.font = font("Helvetica", 13);
 
-          qr_empty.draw(cc, x+w/2-qr_size/2, gH-qr_size-(gW-qr_size)/2, qr_size, qr_size);
+          if(qr_type == "empty"){
+            qr_empty.draw(cc, x+w/2-qr_size/2, gH-qr_size-(gW-qr_size)/2, qr_size, qr_size);
+          }else{
+            qr_state.draw(cc, x+w/2-qr_size/2, gH-qr_size-(gW-qr_size)/2, qr_size, qr_size);
+          }
+
+
+          cc.textAlign = "center";
+          for(let b of qrButtons){
+            cc.fillStyle = qr_type == b.letter ? colors["quertyshade"] : "white";
+            roundRect(cc, b.x+m, b.y, b.w-2*m, b.h, sq_u*5, true, true);
+            cc.font = font("Helvetica", 20);
+            cc.fillStyle = "black";
+            cc.fillText(b.letter == "empty" ? "Buida" : "Com ara", b.x+b.w/2, b.y+b.h/2, b.w, b.h);
+          }
         }
 
         function draw_info_panel(){
@@ -653,8 +686,8 @@
         }
 
         function draw_end_buttons(){
+          let m = 2*u;
           for(let b of endButtons){
-            let m = 2*u;
             let text = "";
             let bg_color = "white";
             let txt_color = "black";
@@ -741,7 +774,7 @@
             add_to_history();
           }
           if(userAlpha.includes(letter)){
-            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "?");
+            userAlpha = replace_at_index(userAlpha, userAlpha.indexOf(letter), "-");
           }
           userAlpha = replace_at_index(userAlpha, alpha.indexOf(cypherLetter), letter);
 
@@ -752,18 +785,18 @@
 
         function delete_letter(){
           let cypherLetter = quoteBoxes[activeBox].letter;
-          if(userAlpha[alpha.indexOf(cypherLetter)] != "?"){
+          if(userAlpha[alpha.indexOf(cypherLetter)] != "-"){
             add_to_history();
           }
-          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "?");
+          userAlpha = replace_at_index(userAlpha, alpha.indexOf(quoteBoxes[activeBox].letter), "-");
           correction = 0;
         }
 
         function clear_all(){
-          if(userAlpha != "?".repeat(userAlpha.length)){
+          if(userAlpha != "-".repeat(userAlpha.length)){
             add_to_history();
           }
-          userAlpha = "?".repeat(userAlpha.length);
+          userAlpha = "-".repeat(userAlpha.length);
         }
 
         function add_to_history(){
@@ -790,7 +823,7 @@
           for(j=1; j<quoteBoxes.length; j++){
             let k = (activeBox+j) % quoteBoxes.length;
             if(alpha.includes(quoteBoxes[k].letter)){  // és lletra
-              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "?"){
+              if(userAlpha[alpha.indexOf(quoteBoxes[k].letter)] == "-"){
                 activeBox = k;
                 return;
               }
@@ -821,7 +854,7 @@
         function check_quote(){
           // strip unused
           let guessed = userAlpha;
-          guessed = guessed.replaceAll("?", "");
+          guessed = guessed.replaceAll("-", "");
           // strip non appearing
           let correct = plainphabet;
           for(let lletra of plainphabet){
@@ -940,6 +973,16 @@
           endButtons.push(new quertyKey(x, y+h, h, h, "Kofi"));
         }
 
+        function init_qr_buttons(){
+          qrButtons = [];
+          let w = shareW*0.8*0.5*1.01;
+          let h = w*0.28;
+          let x = gX + gW/2-w;
+          let y = gH-shareH-(gW-shareW)/2-30*u;
+          qrButtons.push(new quertyKey(x, y, w, h, "empty"));
+          qrButtons.push(new quertyKey(x+w, y, w, h, "state"));
+        }
+
         // Collisions (partially StackOverflow)
         function init_collisions(c){
             c.addEventListener('click', function(event){
@@ -953,8 +996,24 @@
                 ycur = y;
                 pressed = [xcur, ycur];
 
-                if(show_info_panel || show_qr_panel){
+                if(show_info_panel){
                   show_info_panel = false;
+                  update();
+                  return;
+                }
+                if(show_qr_panel){
+                  for(let b of qrButtons){
+                    if(y < b.y + b.h && y > b.y && x > b.x && x < b.x + b.w){
+                      qr_type = b.letter;
+                      if(qr_type == "state"){
+                        let qrurl = window.location.href.split(/[?#]/)[0];
+                        qrurl += "?ua=" + userAlpha + "&st=" + t_start;
+                        qr_state.generate(qrurl);
+                      }
+                      update();
+                      return;
+                    }
+                  }
                   show_qr_panel = false;
                   update();
                   return;
@@ -970,8 +1029,14 @@
                       show_info_panel = true;
                       update();
                       return;
-                    }else if(x > gX + gW - 70*u){  // qr
-                      qr_empty.generate(window.location.href.split(/[?#]/)[0]);
+                    }else if(x > gX + gW - 70*u && correction != 1){  // qr
+                      qrurl = window.location.href.split(/[?#]/)[0];
+                      if(qr_type == "empty"){
+                        qr_empty.generate(qrurl);
+                      }else{
+                        qrurl += "?ua=" + userAlpha + "&st=" + t_start;
+                        qr_state.generate(qrurl);
+                      }
                       show_qr_panel = true;
                       update();
                       return;

@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import render_template, redirect, request, make_response
 from flask import send_from_directory
@@ -302,8 +301,14 @@ def catagrama(archive_id="Today"):
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
     freqs = crypto.get_frequencies(cypher)
 
+    user_alpha = request.args.get("ua", "")
+    if len(user_alpha) != len(plainphabet):
+        user_alpha = ""
+    t_start = int(request.args.get("st", "0"))
+
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
-                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=archive_id)
+                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=archive_id,
+                           user_alpha=user_alpha, t_start=t_start)
 
 
 @app.route('/catagrama/quote-filtering')
