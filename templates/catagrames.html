@@ -79,6 +79,7 @@
         var cWidth;
         var cHeight;
         var u;
+        var resolution = 5;
         var colors = {
           "bg": "#1990bd",
           "bg_correct": "#55bd19",
@@ -209,12 +210,7 @@
 
             // on resize
             window.addEventListener("resize", function(){
-              set_measures();
-              init_quote_boxes();
-              init_querty();
-              init_end_buttons();
-              init_qr_buttons();
-              update();
+              set_all_measures();
             }, true);
 
             update();
@@ -232,8 +228,20 @@
             c.focus();
         }
 
+
+        function set_all_measures(){
+            set_measures();
+
+            init_quote_boxes();
+            init_querty();
+            init_end_buttons();
+            init_qr_buttons();
+
+            update();
+        };
+
+
         function set_measures(){
-          let resolution = 5;
           c.width = window.innerWidth * resolution;
           c.height = window.innerHeight * resolution;
           cWidth = c.width;
@@ -353,6 +361,12 @@
             }
             if(show_qr_panel){
               draw_qr_panel();
+            }
+
+            // /////// MEASURES CHECK (WebView mess-up test) //////////
+            if(window.innerHeight * resolution != cHeight){
+                console.log("Some shady resize detected. Adjusting sizes...");
+                set_all_measures();
             }
 
             // ////// DEBUGGING //////
