@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
     <title>CATAGRAMA del dia</title>
 
+    <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
+
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_favicon.png">
     <!--icon for home screen -->
@@ -1019,6 +1021,11 @@
                   return;
                 }
 
+                // out of bounds exception
+                if(x < gX || x > gX+gW){
+                  return;
+                }
+
                 // TOP MENUS
                 if(!show_share_square){
                   if(y < 39*u){  // top menu
@@ -1163,6 +1170,6 @@
     </script>
 </head>
 <body style="margin: 0; padding: 0;">
-    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);" style="width: 100%; height: 100%; display: block;"></canvas>
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
 </body>
 </html>
