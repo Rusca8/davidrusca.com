@@ -10,6 +10,22 @@ body {
     height: 100%;
 }
 
+.archive-text-size {
+    font-size: min(3vw, 2.4vh);
+}
+
+.archive-header-size {
+    font-size: min(7.2vw, 5.76vh);
+}
+
+.archive-subheader-size {
+    font-size: min(3.6vw, 2.88vh);
+}
+
+.archive-kofi-footer {
+    font-size: min(2.7vw, 2.16vh);
+}
+
 .archive-quote:hover {
     background-color: rgba(255, 255, 255, 0.1);
     height: 100%;
