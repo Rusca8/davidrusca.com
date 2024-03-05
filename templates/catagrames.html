@@ -38,6 +38,27 @@
             this.letter = letter;
           }
         }
+        class Button {
+          constructor(x, y, w, h, code, show_if, image, img_scale=1){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.code = code;
+            this.show_if = show_if | {};
+            this.image = image;
+            this.img_scale = img_scale;
+          }
+
+          shown(){
+            for(const [key, value] of Object.entries(this.show_if)){
+              if(window[key] != value){
+                return false;
+              }
+            }
+            return true;
+          }
+        }
         class AjaxRequest {
           constructor(result, done=false){
             this.result = result;
@@ -158,6 +179,8 @@
         //
         var qr_type = "empty";
         var qrButtons = [];
+        //
+        var mainButtons = [];
         //
         var share_available = navigator.share;
         //

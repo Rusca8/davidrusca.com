@@ -9,7 +9,12 @@
         <td class="num px-1 text-center">quote_id</td>
     </tr>
 
+    {% set ns = namespace(autor="") %}
     {% for quote_id, quote in pool.items()|sort(attribute="1.autor") if quote_id != "DEFAULT" %}
+        {% if ns.autor and ns.autor != quote["autor"] %}
+            <tr><td class="table-section-divider" colspan="5">{{ autor }}</td></tr>
+        {% endif %}
+        {% set ns.autor = quote['autor'] %}
     <tr class="pooled{{ '-other' if loop.index % 2 else '' }}">
         <td class=" text-center px-1 table-controls" style="white-space:nowrap;">
             <span class="hand" onclick="ajax('pool_{{quote_id}}_top', 'pool-table', 'pool-feedback', ['queue']);">⏫</span>

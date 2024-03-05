@@ -168,6 +168,29 @@ def get_quotes_pool():
     return pool_quotes
 
 
+def print_vq_choice_quotes(choices=None):
+    import json
+    if choices is None:
+        choices = ["aceptadas"]
+    with quotes_lock:
+        quotes = utilities.load_json(quotes_file)
+    with viqui_lock:
+        viquidites = utilities.load_json(viqui_file)
+    with vqchoices_lock:
+        vqchoices = utilities.load_json(vqchoices_file)
+
+    for choice, vq_ids in vqchoices.items():
+        print(f"=== {choice} ===")
+        if choice not in choices:
+            print("hidden")
+            continue
+        for vq_id in vq_ids:
+            if vq_id in quotes:
+                print("-", vq_id, "in pool -")
+            else:
+                print(f'"{vq_id}":', "{", ', '.join(f'"{k}": "{v}"' for k, v in viquidites[vq_id].items()), "},")
+
+
 def move_in_queue(quote_id, move):
     with queue_lock:
         queue = utilities.load_json(queue_file)
@@ -340,3 +363,7 @@ def check_queue_length():
                      f"🚨⚠⚠️ ELS CATAGRAMES S'ESTAN ESGOTANT. FACI ALGUNA COSA, SISPLAU LI HO DEMANO.\nEN QUEDEN {lenq}.")
     else:
         print("No need to wake up Archibald.")
+
+
+if __name__ == "__main__":
+    print_vq_choice_quotes()

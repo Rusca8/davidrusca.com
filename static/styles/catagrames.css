@@ -214,3 +214,8 @@ td {
     height: 1px;
     background: white;
 }
+
+.table-section-divider {
+    height: 1px;
+    background: rgba(33, 33, 33, 1);
+}
