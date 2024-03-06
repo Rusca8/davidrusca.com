@@ -169,7 +169,6 @@ def get_quotes_pool():
 
 
 def print_vq_choice_quotes(choices=None):
-    import json
     if choices is None:
         choices = ["aceptadas"]
     with quotes_lock:
@@ -189,6 +188,15 @@ def print_vq_choice_quotes(choices=None):
                 print("-", vq_id, "in pool -")
             else:
                 print(f'"{vq_id}":', "{", ', '.join(f'"{k}": "{v}"' for k, v in viquidites[vq_id].items()), "},")
+
+
+def get_vq_choices_stats():
+    with viqui_lock:
+        viqui = utilities.load_json(viqui_file)
+    with vqchoices_lock:
+        vqchoices = utilities.load_json(vqchoices_file)
+    pendientes = len(viqui) - sum(len(v) for k, v in vqchoices.items())
+    return {k: len(v) for k, v in vqchoices.items()} | {"pendientes": pendientes}
 
 
 def move_in_queue(quote_id, move):

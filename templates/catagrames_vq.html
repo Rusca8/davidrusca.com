@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- to avoid 300ms touchscreen delay... -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
-    <title>CATAGRAMA del dia</title>
+    <title>pre-CATAGRAMA</title>
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_favicon.png">
@@ -56,15 +56,15 @@
         var cHeight;
         var u;
         var colors = {
-          "bg": "#1990bd",
+          "bg": "#8a6db5",
           "bg_correct": "#55bd19",
           "bg_wrong": "#bd1924",
-          "main": "#4bb4db",
+          "main": "#af8de0",
           "main_correct": "#80db4b",
           "main_wrong": "#db4b55",
-          "active": "#24404d",
-          "collateral": "#70909e",
-          "quertyshade": "#99b9c7",
+          "active": "#483c59",
+          "collateral": "#9b8ead",
+          "quertyshade": "#bfb8cc",
         }
         var cc;
 
@@ -99,6 +99,8 @@
         var userAlphaSelectHistory = [];
         var maxHistory = 6;
         var maxFreq;
+        //
+        var choice_stats = {{choice_stats | tojson}};
 
         // UI
         var quertyRows = ["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<<^"];
@@ -302,6 +304,15 @@
             }
             if(show_info_panel){
               draw_info_panel();
+            }else{
+              // choice stats
+              cc.fillStyle=colors["bg"];
+              cc.font = font("Courier", 13);
+              let text = "";
+              for(let [k, v] of Object.entries(choice_stats)){
+                text += k.slice(0, 3) + ": " + v + "  "
+              }
+              cc.fillText(text.trim(), gX+gW/2, gH-15*u);
             }
 
             // ////// DEBUGGING //////

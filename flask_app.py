@@ -328,8 +328,11 @@ def catagrama_viqui():
     cypher = "".join([alpha[plainphabet.index(c)] if c in plainphabet else c for c in plain])
     freqs = crypto.get_frequencies(cypher)
 
+    choice_stats = cg.get_vq_choices_stats()
+
     return render_template("catagrames_vq.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
-                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=quote_id)
+                           plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=quote_id,
+                           choice_stats=choice_stats)
 
 
 @app.route('/ktn')
