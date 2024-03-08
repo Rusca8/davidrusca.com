@@ -8,7 +8,7 @@
             <td class="px-2 text-center queued-header">#</td>
             <td class="num px-2 text-center queued-header">programada</td>
             <td colspan="3" class="text-center queued-header table-controls"><span>{{permission or 'Controls'}}</span></td>
-            <td class="px-2 queued-header"><b>Autor</b></td>
+            <td class="px-2 queued-header" colspan="2"><b>Autor</b></td>
             <td class="mono px-2 queued-header">Cita|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|....|</td>
             <td class="num px-2 text-center queued-header">quote_id</td>
         </tr>
@@ -22,6 +22,7 @@
         {% set watched_info = quote['watched_info']['nom'] if quote['watched_info'] else '' %}
         {% set watched_class = ('watched-info-right' if fixed_class == 'fixed-right' else 'watched-info-wrong') if watched_info else fixed_class %}
         {% set watch_emoji = quote['watched_info'].get('emoji', '📅') if quote['watched_info'] else '' %}
+        {% set ago_class = 'ago-warning' if quote['freq_stats']['ago']|int < 14 else 'ago-alert' if quote['freq_stats']['ago']|int < 25 else '' %}
         <tr class="queued{{ '-other' if loop.index % 2 else '' }}">
             <td class="px-0 text-center {{ watched_class }}" title="{{watched_info}}">{{ watch_emoji }}</td>
             <td class="px-2 text-center {{ fixed_class }}">{{ queue_id }}</td>
@@ -47,7 +48,8 @@
             <td class=" text-center px-1 table-controls">
                 <span class="hand" onclick="ajax('queue_{{quote_id}}_remove', 'queue-table', 'queue-feedback', ['pool']);">✕</span>
             </td>
-            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }}</b></td>
+            <td class="num text-center {{ ago_class }}"><small>{{ quote['freq_stats']['ago'] }}</small></td>
+            <td class="px-2" style="white-space:nowrap;"><b>{{ quote['autor'] }} <small>· {{ quote['freq_stats']['count'] }}</small></b></td>
             <td class="mono px-2">{{ quote['cita'] }}</td>
             <td class="num px-2 text-center">{{ quote['id'] }}</td>
         </tr>

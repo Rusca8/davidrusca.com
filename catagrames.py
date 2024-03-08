@@ -111,8 +111,19 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
                 queue = utilities.load_json(queue_file)
                 quotes = utilities.load_json(quotes_file)
 
+    # archive frequencies info
+    freq_stats = {}
+    for i, archived_quote in enumerate(archive.values(), start=1):
+        quote_id = archived_quote["id"]
+        autor = quotes.get(quote_id, cita_def)["autor"]
+        freq_stats[autor] = freq_stats.get(autor, {})
+        freq_stats[autor]["last"] = i
+        freq_stats[autor]["count"] = freq_stats[autor].get("count", 0) + 1
+
+    # retrieve quotes (+ bundle extra info)
     queued_quotes = {}
     for i, quote_id in enumerate(queue, start=start):
+        # add standard info
         queued_quotes[i] = quotes.get(quote_id, cita_def)
         queued_quotes[i]["id"] = quote_id
         expected_date = datetime.fromtimestamp(time.time()) + timedelta(days=i-start+1) - timedelta(hours=4)
@@ -120,6 +131,16 @@ def get_quotes_on_queue(start=1, num_after_archive=False):
         queued_quotes[i]["fixed"] = fixed.get(quote_id, "")
         if f"{expected_date:%m-%d}" in watched:
             queued_quotes[i]["watched_info"] = watched[f"{expected_date:%m-%d}"]
+        # add frequency info
+        autor = queued_quotes[i]["autor"]
+        quote_freq_stats = freq_stats.get(autor, {})
+        queued_quotes[i]["freq_stats"] = {}
+        queued_quotes[i]["freq_stats"]["count"] = quote_freq_stats.get("count", 1)
+        queued_quotes[i]["freq_stats"]["ago"] = ago if (ago := i-quote_freq_stats.get("last", i)) > 0 else ""
+        # frequency info dict update
+        freq_stats[autor] = freq_stats.get(autor, {})
+        freq_stats[autor]["last"] = i
+        freq_stats[autor]["count"] = freq_stats[autor].get("count", 0) + 1
 
     return queued_quotes
 

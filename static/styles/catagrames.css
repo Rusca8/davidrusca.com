@@ -219,3 +219,7 @@ td {
     height: 1px;
     background: rgba(33, 33, 33, 1);
 }
+
+.ago-warning {color: #ff7363;}
+.ago-alert {color: #ffd321;}
+.ago-correct {color: white;}
