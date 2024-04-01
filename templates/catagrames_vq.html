@@ -101,6 +101,7 @@
         var userAlphaSelectHistory = [];
         var maxHistory = 6;
         var maxFreq;
+        var origin = {{origin|tojson}};
         //
         var choice_stats = {{choice_stats | tojson}};
 
@@ -194,10 +195,13 @@
             c.focus();
         }
 
+        function true_width(){return origin == "app" ? window.screen.availWidth : window.innerWidth;};
+        function true_height(){return origin == "app" ? window.screen.availHeight : window.innerHeight;};
+
         function set_measures(){
           let resolution = 5;
-          c.width = window.innerWidth * resolution;
-          c.height = window.innerHeight * resolution;
+          c.width = true_width() * resolution;
+          c.height = true_height() * resolution;
           cWidth = c.width;
           cHeight = c.height;
           u = cHeight/500;
@@ -317,7 +321,7 @@
               for(let [k, v] of Object.entries(choice_stats)){
                 text += k.slice(0, 3) + ": " + v + "  "
               }
-              text += " " + {{origin|tojson}}
+              text += " " + origin;
               cc.fillText(text.trim(), gX+gW/2, gH-15*u);
             }
 
