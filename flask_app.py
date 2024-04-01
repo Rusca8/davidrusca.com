@@ -289,6 +289,8 @@ def catagrama_arxiu():
 def catagrama(archive_id="Today"):
     import catagrames as cg
 
+    origin = request.args.get("from", "default")
+
     cita = cg.get_from_archive(archive_id)
     quote_id = cita["id"]
     quote = cita["cita"]
@@ -308,13 +310,15 @@ def catagrama(archive_id="Today"):
 
     return render_template("catagrames.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
                            plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=archive_id,
-                           user_alpha=user_alpha, t_start=t_start)
+                           user_alpha=user_alpha, t_start=t_start, origin=origin)
 
 
 @app.route('/catagrama/quote-filtering')
 @app.route('/catagrama/quote-filtering/')
 def catagrama_viqui():
     import catagrames as cg
+
+    origin = request.args.get("from", "default")
 
     cita = cg.get_random_vq()
     quote_id = cita["id"]
@@ -332,7 +336,7 @@ def catagrama_viqui():
 
     return render_template("catagrames_vq.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
                            plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=quote_id,
-                           choice_stats=choice_stats)
+                           choice_stats=choice_stats, origin=origin)
 
 
 @app.route('/ktn')

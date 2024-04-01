@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
     <title>pre-CATAGRAMA</title>
 
+    <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
+
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_qf_favicon.png">
     <!--icon for home screen -->
@@ -131,6 +133,7 @@
         //
         const img_info = new Imagen("/static/img/catagrama/how_to.png", "?")
         const img_arxiu = new Imagen("/static/img/catagrama/archive.png", "arxiu")
+        const img_rand = new Imagen("/static/img/catagrama/rand.png", "rand")
         const img_arxiu_b = new Imagen("/static/img/catagrama/archive_black.png", "arxiu")
         const img_backspace = new Imagen("/static/img/catagrama/backspace.png", "<-")
         const img_restore = new Imagen("/static/img/catagrama/restore.png", "desfer")
@@ -256,6 +259,7 @@
               // info
               drawImage(cc, img_info, gX+gW-23*u, 23*u, 22*u, 22*u, true);
               drawImage(cc, img_arxiu, gX+23*u, 23*u, 22*u, 22*u, true);
+              drawImage(cc, img_rand, gX+53*u, 23*u, 22*u, 22*u, true);
               if(userAlphaHistory.length && correction != 1){
                 drawImage(cc, img_restore, gX+gW-23*u, 23*u+30*u, 22*u, 22*u, true);
                 draw_restore_dots(gX+gW-23*u, 23*u+30*u, 11*u);
@@ -305,13 +309,15 @@
             if(show_info_panel){
               draw_info_panel();
             }else{
-              // choice stats
+              // origin debug info
               cc.fillStyle=colors["bg"];
               cc.font = font("Courier", 13);
+              // choice stats
               let text = "";
               for(let [k, v] of Object.entries(choice_stats)){
                 text += k.slice(0, 3) + ": " + v + "  "
               }
+              text += " " + {{origin|tojson}}
               cc.fillText(text.trim(), gX+gW/2, gH-15*u);
             }
 
@@ -929,8 +935,12 @@
 
                 if(!show_share_square){
                   if(y < 36*u){  // top menu
-                    if(x < gX+50*u){  // archive
+                    if(x < gX+70*u){  // archive
+                      if(x < gX+36*u){
                         window.open("/catagrama/arxiu", "_blank");
+                      }else{
+                        location.reload();
+                      }
                         return;
                     }else if(x > gX+gW-50*u){  // info
                       show_info_panel = true;
