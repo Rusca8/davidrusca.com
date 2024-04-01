@@ -196,8 +196,8 @@
             c.focus();
         }
 
-        function true_width(){return origin == "app" ? window.screen.availWidth : window.innerWidth;};
-        function true_height(){return origin == "app" ? window.screen.availHeight : window.innerHeight;};
+        function true_width(){return (origin == "app" ? from_app_sizes[0] : window.innerWidth) || window.innerWidth;};
+        function true_height(){return (origin == "app" ? from_app_sizes[1] : window.innerHeight) || window.innerHeight;};
 
         function set_measures(){
           let resolution = 5;
