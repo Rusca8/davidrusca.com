@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- to avoid 300ms touchscreen delay... -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=3">
     <title>pre-CATAGRAMA</title>
 
     <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
@@ -196,8 +196,8 @@
             c.focus();
         }
 
-        function true_width(){return (origin == "app" ? from_app_sizes[0] : window.innerWidth) || window.innerWidth;};
-        function true_height(){return (origin == "app" ? from_app_sizes[1] : window.innerHeight) || window.innerHeight;};
+        function true_width(){return (origin == "res" ? from_app_sizes[0] : window.innerWidth) || window.innerWidth;};
+        function true_height(){return (origin == "res" ? from_app_sizes[1] : window.innerHeight) || window.innerHeight;};
 
         function set_measures(){
           let resolution = 5;
