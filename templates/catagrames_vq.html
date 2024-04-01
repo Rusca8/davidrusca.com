@@ -102,6 +102,7 @@
         var maxHistory = 6;
         var maxFreq;
         var origin = {{origin|tojson}};
+        var from_app_sizes = {{from_app_sizes|tojson}};
         //
         var choice_stats = {{choice_stats | tojson}};
 
@@ -316,6 +317,7 @@
               // origin debug info
               cc.fillStyle=colors["bg"];
               cc.font = font("Courier", 13);
+              cc.fillText(from_app_sizes.join("x"), gX+gW/2, quertyY-25*u);
               // choice stats
               let text = "";
               for(let [k, v] of Object.entries(choice_stats)){

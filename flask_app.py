@@ -319,6 +319,10 @@ def catagrama_viqui():
     import catagrames as cg
 
     origin = request.args.get("from", "default")
+    try:
+        from_app_sizes = [int(x) for x in request.args.get("sizes", "x").split("x")]
+    except Exception:
+        from_app_sizes = [0, 0]
 
     cita = cg.get_random_vq()
     quote_id = cita["id"]
@@ -336,7 +340,7 @@ def catagrama_viqui():
 
     return render_template("catagrames_vq.html", quote=quote, plain=plain, alpha=alpha, cypher=cypher, freqs=freqs,
                            plainphabet=plainphabet, author=author, num=num, quote_id=quote_id, archive_id=quote_id,
-                           choice_stats=choice_stats, origin=origin)
+                           choice_stats=choice_stats, origin=origin, from_app_sizes=from_app_sizes)
 
 
 @app.route('/ktn')
