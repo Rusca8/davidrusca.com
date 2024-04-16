@@ -20,6 +20,11 @@
                         <li><a href="#ede">💵 {{ _('Economía de la empresa') }}</a></li>
                     </ul>
                 </li>
+                <li><a href="#PAP">{{ _('Pruebas de Aptitud Personal') }}</a>
+                    <ul>
+                        <li><a href="#clomPAP">🔢 {{ _('Competencia Logicomatemática') }}</a></li>
+                    </ul>
+                </li>
                 <li><a href="#CFGS">{{ _('Prueba de acceso') }} CFGS</a>
                     <ul>
                         <li><a href="#dtCFGS">📐 {{ _('Dibujo Técnico') }}</a></li>
@@ -185,6 +190,21 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="card border-c bg-light mb-2"><b id="PAP"></b>
+        <h5 class="card-header">{{ _('Pruebas de Aptitud Personal') }}</h5>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="clomPAP"></b>
+            <div class="card-body">
+                <h5 class="card-title">{{ _('Competencia Logicomatemática') }}</h5>
+                <hr>
+                <b>{{ _('Resumen:') }}</b>
+                <ul>
+                    <li><a href="/static/pdf/PAP_Resum.pdf" target="_blank">PAP - {{ _('Resumen') }} EsPAPtacular [CA]</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="card border-c bg-light mb-2"><b id="CFGS"></b>
