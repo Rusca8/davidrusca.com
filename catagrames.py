@@ -3,6 +3,7 @@ import random
 from datetime import datetime, timedelta
 from threading import RLock
 
+import tele
 import utilities
 
 # locks (careful: A-Z acquire Z-A release)
@@ -88,9 +89,16 @@ def get_archive():
             quotes = utilities.load_json(quotes_file)
 
     for k, v in archive.items():
-        stats = get_stats(v["id"])
+        bug = False
+        try:
+            stats = get_stats(v["id"])
+        except Exception as e:
+            tele.send_message("archi", "yo",
+                              "💥*CATAGRAMA FAIL*💥 (" + f"{e}) quan carregava stats de la cita del {k} per l'arxiu.")
+            stats = {}
+            bug = True
         archive[k]["autor"] = quotes.get(v["id"], cita_def)["autor"]
-        archive[k]["solves"] = len([t for t in stats.get("times", {}).values() if t > 10000])
+        archive[k]["solves"] = "🐞" if bug else len([t for t in stats.get("times", {}).values() if t > 10000])
 
     return archive
 
