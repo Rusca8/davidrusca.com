@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- to avoid 300ms touchscreen delay... -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <title>BLD training</title>
+
+    <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
+
+    <!-- favicon
+    <link rel="icon" type="image/x-icon" href="/static/icons/catagrama_favicon.png">
+    -->
+    <!--icon for home screen
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/static/icons/catagrama128.png">
+    <link rel="shortcut icon" sizes="128x128" href="/static/icons/catagrama128.png">
+    -->
+
+    <!-- main -->
+    <script>
+        //////// Classes ///////
+        class Button{
+          constructor(x, y, w, h, letter){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.letter = letter;
+            this.guess = "";
+          }
+        }
+        class AjaxRequest {
+          constructor(result, done=false){
+            this.result = result;
+            this.done = done;
+          }
+        }
+        class Clock {
+          constructor(){
+            this.t_start = "nope";
+          }
+
+          start(){
+            this.t_start = Date.now();
+            this.t_end = this.start - 42;
+          }
+
+          stop(){
+            this.t_end = Date.now();
+          }
+
+          read(){
+            if(this.t_start == "nope"){
+              return "-"
+            }
+            let msec = this.t_end - this.t_start;
+            if(msec < 0){
+              msec = Date.now() - this.t_start;
+            }
+            //
+            let sec = Math.floor(msec / 1000);
+            msec -= sec * 1000;
+            //
+            let min = Math.floor(sec / 60);
+            sec -= min * 60;
+
+            return min + ":" + sec.toString().padStart(2, "0") + '.' + Math.floor(msec/10).toString().padStart(2, "0");
+          }
+
+          clone(){
+            let new_clock = new Clock();
+            new_clock.t_start = this.t_start;
+            new_clock.t_end = this.t_end;
+            return new_clock;
+          }
+        }
+
+        class Solve{
+          constructor(memo, recall, correct){
+            this.memo = memo;
+            this.recall = recall;
+            this.correct = correct;
+          }
+
+          read(){
+            return this.memo.read() + "     " + this.recall.read() + "      " + this.correct.toString().padStart(3, " ") + "%";
+          }
+        }
+
+        //////// GLOBAL VARS //////
+        var cWidth;
+        var cHeight;
+        var u;
+        var resolution = 5;
+        var colors = {
+          "bg": "lightgrey",
+          "main": "white"
+        }
+        var cc;
+
+        // main space
+        var gX;
+        var gY;
+        var gW;
+        var gH;
+
+        // board
+        var pairsY = 0;
+        var pairsCols = 6;
+        var pairsM;
+        var stickers = [];
+        var letters = {{ letters | tojson }} || "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var ajax_letters = new AjaxRequest();
+        var scheme = {{ scheme | tojson }} || letters;
+        var n = {{ n | tojson }} || 16;
+        var activeBox = 0;
+
+        // other ui
+        var doneY;
+        var ui_buttons = [];
+        var querty = [];
+
+        // state
+        var state = "memo";
+
+        // timers
+        var clock_memo = new Clock();
+        var clock_recall = new Clock();
+        var clock_log = [];
+
+        // debugging
+        var cursorx = 0;
+        var cursory = 0;
+
+        ///////// onload //////
+        window.onload = function(){
+            c=document.getElementById("app");
+            console.log("window loaded");
+
+            // measures
+            set_measures()
+
+            // drawing init
+            cc = c.getContext("2d");
+            update();
+            setInterval(update, 500);  // fallback update 0.5s (normalmente será onclick)
+
+            // UI inits
+            init_collisions(c);
+            init_pairs();
+            init_querty();
+            init_ui_buttons();
+
+            // prevent space going down
+            window.addEventListener("keydown", function(e){
+                if((e.key==" ") && document.activeElement==c){
+                    e.preventDefault();
+                }
+            }, false);
+
+            // on resize
+            window.addEventListener("resize", function(){
+              resize_measures();
+            }, true);
+
+            update();
+
+            // start clock
+            clock_memo.start();
+
+            // focus
+            c.focus();
+        }
+
+
+        function set_measures(){
+          c.width = window.innerWidth * resolution;
+          c.height = window.innerHeight * resolution;
+          cWidth = c.width;
+          cHeight = c.height;
+          u = cHeight/500;
+
+          // main space w/h
+          gH = cHeight;
+          gW = cWidth < cHeight/1.3 ? cWidth : cHeight/1.3;
+          gY = 0;
+          gX = cWidth/2 - gW/2;
+
+          // UI elements
+          pairsY = gY - gH*0.1;
+          pairsM = u*7;
+          doneY = gY + gH*0.5;
+
+
+        }
+
+        function resize_measures(){
+          set_measures();
+          init_pairs();
+          init_ui_buttons();
+          init_querty();
+          update();
+        }
+
+        function done(){
+          switch(state){
+            case "memo":
+              clock_memo.stop();
+              clock_recall.start();
+              state = "solve";
+              break;
+            case "solve":
+              state = "check";
+              clock_recall.stop();
+              clock_log.push(new Solve(clock_memo.clone(), clock_recall.clone(), get_precision()));
+              break;
+            case "check":
+              state = "memo";
+              letters = "";
+              init_pairs();
+              console.log("Scrambling...");
+              ajax("bld_letters?scheme=" + scheme + "&n=" + n, ajax_letters, new_letters);
+            default:
+              state = "memo";
+          }
+        }
+
+        function get_precision(){
+          let right = 0;
+          for(let l of stickers){
+            if(l.letter == l.guess){
+              right += 1;
+              console.log(l.letter, l.guess);
+            }
+          }
+          return Math.floor(100*right/letters.length);
+        }
+
+
+        function new_letters(){
+          console.log("loading new letters...");
+          letters = ajax_letters.result;
+          console.log(letters);
+          init_pairs();
+          clock_memo.start();
+        }
+
+
+        ///////// Update ////////
+        function update(){
+            // style setup
+            cc.textBaseline = "middle";
+            cc.textAlign = "center";
+            cc.lineJoin = 'miter';
+            cc.miterLimit = 2;
+
+            // bg
+            cc.fillStyle = colors.bg;
+            cc.fillRect(0, 0, c.width, c.height);
+
+            // main portrait
+            cc.fillStyle=colors.main;
+            cc.fillRect(cWidth/2-gW/2, 0, gW, gH);
+
+            // title and info
+
+            // board
+            cc.lineWidth = 1*u;
+            draw_pairs();
+
+            //////////////// OTHER UI
+            // clocks
+            cc.font = font("Helvetica", 10);
+            cc.fillStyle = "grey";
+            if(state == "solve" || state == "check"){
+              cc.fillText("Memo " + clock_memo.read(), gX+gW*0.3, gY+gH*0.05);
+            }
+            if(state == "check"){
+              cc.fillText("Recall " + clock_recall.read(), gX+gW*0.7, gY+gH*0.05);
+              draw_log();
+            }
+            // button
+            cc.font = font("Helvetica", 14);
+            let text;
+            for(let b of ui_buttons){
+              if(b.letter == "done"){
+                text = state == "memo" ? "Resolver" :
+                       state == "solve" ? "Comprobar":
+                       "Nuevo";
+              }else{
+                text = b.letter;
+              }
+              console.log(b.x, b.y);
+              cc.fillStyle = "lightgrey";
+              cc.fillRect(b.x, b.y, b.w, b.h);
+              cc.strokeRect(b.x, b.y, b.w, b.h);
+              cc.fillStyle = "black";
+              cc.fillText(text, b.x+b.w/2, b.y+b.h/2);
+            }
+            if(state == "solve"){
+              draw_querty();
+            }
+
+            // ////// DEBUGGING //////
+            //cc.fillStyle = "red";
+            //cc.fillRect(cursorx-2*u, cursory-2*u, 4*u, 4*u);
+        }
+
+        function font(family, pt, bold=false, italic=false){
+          let type = "";
+          if(italic){
+            type += "italic ";
+          }
+          if(bold){
+            type += "bold ";
+          }
+          return type + (pt*gW/400).toString() + "px " + family;
+        }
+
+        function drawCircle(cc, x, y, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.arc(x, y, r, 0, 2 * Math.PI, false);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function print_thing(){
+          console.log("thing");
+        }
+
+        function draw_pairs(){
+          if(letters.length == 0){
+            cc.fillStyle = "grey";
+            cc.fillText("Loading...", gX+gW/2, gY+gH*0.2)
+            return
+          }
+          cc.font = font("Helvetica", 20);
+          let i = 0;
+          for(let p of stickers){
+            if(state == "memo"){
+              cc.fillStyle = i == activeBox || i-1 == activeBox ? "white" : "lightgrey";
+            }else if(state == "solve"){
+              cc.fillStyle = i == activeBox ? "white" : "lightgrey";
+            }else if(state == "check"){
+              cc.fillStyle = p.letter == p.guess ? "lime" : "red";
+            }
+
+            cc.fillRect(p.x, p.y, p.w, p.h);
+            cc.strokeRect(p.x, p.y, p.w, p.h);
+
+            cc.fillStyle = "black";
+            if(state == "check"){
+              cc.font = font("Helvetica", 20);
+              cc.fillText(p.guess, p.x + p.w/2, p.y+p.h*0.63);
+                cc.font = font("Helvetica", 10);
+              cc.fillText(p.letter, p.x + p.w*0.2, p.y+p.h*0.2);
+            }else{
+              cc.font = font("Helvetica", 20);
+              cc.fillText(state == "memo" ? p.letter : p.guess, p.x+p.w/2, p.y+p.h/2);
+            }
+            i++;
+          }
+        }
+
+        function draw_querty(){
+          for(let k of querty){
+            cc.fillStyle = "lightgrey";
+            cc.fillRect(k.x, k.y, k.w, k.h);
+            cc.strokeRect(k.x, k.y, k.w, k.h);
+            cc.fillStyle = "black";
+            cc.fillText(k.letter, k.x+k.w/2, k.y+k.h/2);
+          }
+        }
+
+        function draw_log(){
+          cc.font = font("Helvetica", 14);
+          cc.fillText("MEMO     RECALL     PR%", gX + gW/2, gY + gH*0.7);
+          let i = 0;
+          let log;
+          for(let i=clock_log.length-1; i>=0; i--){
+            log = clock_log[i];
+            cc.fillText(log.read(), gX + gW/2, gY + gH*0.7 + 14*u*(clock_log.length-i+0.4));
+          }
+        }
+
+
+        function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.roundRect(x, y, w, h, r);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+
+        function next(){
+          if(state == "memo"){
+            activeBox = (activeBox + 2) % letters.length;
+            activeBox -= activeBox % 2 ? 1 : 0;
+          }else{
+            activeBox = (activeBox + 1) % letters.length;
+          }
+          update();
+        }
+
+        function next_empty(){
+          let target = activeBox;
+          for(let i=1; i<letters.length; i++){
+            target = (activeBox+i) % letters.length;
+            if(!stickers[target].guess){
+              activeBox = target;
+              update();
+              return
+            }
+          }
+          return
+        }
+
+        function prev(){
+          if(state == "memo"){
+            activeBox = (activeBox - 2) % letters.length;
+            if(activeBox<0){
+              activeBox = letters.length - 1;
+            }
+            activeBox -= activeBox % 2 ? 1 : 0;
+          }else{
+            activeBox = (activeBox - 1 + letters.length) % letters.length;
+          }
+          update();
+        }
+
+
+        ///////////////// KeyUp ////////////////
+        function canvas_hotkeys(e){
+            let upperKey = e.key.toUpperCase();
+            if(state == "solve" && scheme.includes(upperKey)){
+              stickers[activeBox].guess = upperKey;
+              next_empty();
+            }else if(e.key == "Backspace"){
+
+            }else if(e.key == "Enter"){
+              done();
+            }else if(e.key == "ArrowLeft"){
+              prev();
+            }else if(e.key == "ArrowRight"){
+              next();
+            }else if(e.key == "1"){
+            }
+            update();
+        }
+
+        /////////// Clicks ////////////
+        // Init letter Pairs
+        function init_pairs(){
+          console.log("init_pairs...");
+          let w = (gW-(pairsCols+1)*pairsM)/pairsCols/2;
+          let h = w*1.3;
+          stickers = [];
+          let i = 0;
+          for(let char of letters){
+            let x = gX + pairsM*Math.ceil((1+i%(2*pairsCols))/2) + w*(i%(2*pairsCols));
+            let y = gY + gH*0.1 + (4*pairsM+h)*Math.floor(i/pairsCols/2);
+            stickers.push(new Button(x, y, w, h, char));
+            i++;
+          }
+        }
+
+        function init_ui_buttons(){
+          console.log("init_ui_buttons...");
+          ui_buttons = [];
+          let w = gW * 0.6;
+          let h = gW * 0.1;
+          ui_buttons.push(new Button(gX+gW/2-w/2, doneY, w, h, "done"));
+        }
+
+        function init_querty(){
+          console.log("init_querty");
+          let rows = ["QWERTYUIOP", "ASDFGHJKLÑ", "ZXCVBNM<"];
+          querty = [];
+          let dx = 0;
+          let y = gY + gH*0.7;
+          let m = 5*u;
+          let w = (gW - 11*m)/10;
+          let h = w*1.2;
+          let i = 0;
+          for(let row of rows){
+            dx = m + (gW-m-(m+w)*row.length)/2
+            for(let l of row){
+              querty.push(new Button(gX + dx + i*(m+w), y, w, h, l));
+              i++;
+            }
+            i = 0;
+            y += h+m;
+          }
+        }
+
+        // Collisions (partially StackOverflow)
+        function init_collisions(c){
+            c.addEventListener('click', function(event){
+                const rect = c.getBoundingClientRect();
+                const relX = event.clientX - rect.left;
+                const relY = event.clientY - rect.top;
+                x = relX * c.width / rect.width;
+                y = relY * c.height / rect.height;
+
+                cursorx = x;
+                cursory = y;
+
+                // out of bounds exception
+                if(x < gX || x > gX+gW){
+                  return;
+                }
+
+                for(let b of ui_buttons){
+                  if(y < b.y+b.h && x < b.x+b.w && x > b.x && y > b.y){
+                    if(b.letter == "done"){
+                      done();
+                    }
+                  }
+                }
+
+                let i = 0;
+                for(let s of stickers){
+                  if(y < s.y+s.h && x < s.x+s.w && x > s.x && y > s.y){
+                    activeBox = i;
+                    if(i % 2 && state == "memo"){
+                      activeBox = i-1
+                    }
+                    update();
+                    return;
+                  }
+                  i++;
+                }
+
+                i=0;
+                for(let k of querty){
+                  if(y < k.y+k.h && x < k.x+k.w && x > k.x && y > k.y){
+                    stickers[activeBox].guess = k.letter;
+                    next_empty();
+                  }
+                }
+
+                update();
+            }, false);
+        }
+
+        ///////////////// AJAX HANDLER //////////////
+
+        function ajax(url='', ajax_result=new AjaxRequest(), trigger=update){
+          let req = new XMLHttpRequest();
+
+          req.onreadystatechange = function(){
+              if(this.readyState == 4 && this.status == 200) {
+                  ajax_result.result = this.responseText;
+                  ajax_result.done = true;
+                  trigger();
+              }else{
+                  ajax_result.done = false;
+              }
+          }
+
+          req.open('GET', '/memory/ajax/' + url, true);
+          req.send();
+        }
+    </script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+</body>
+</html>

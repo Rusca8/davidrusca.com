@@ -7,6 +7,7 @@ import re
 import random
 
 import crypto
+import memory_games
 import utilities as utils
 import crypto as c
 
@@ -197,6 +198,26 @@ def flashmemory_debunker(key=26, files_de=10, segons=2):
     except:
         return render_template("nelson26.html", quantes=26, files_de=10, segons=2)
     return render_template("nelson26.html", quantes=key, files_de=files_de, segons=segons)
+
+
+@app.route('/memory/ajax/<datos>')
+def memory_ajax(datos=None):
+    print("getting ajax for memory_games", datos)
+    import memory_games as mg
+    if datos == "bld_letters":
+        scheme = request.args.get("s", "ABCDEFGHIJKLMNOPQRSTUVXZ")
+        n = request.args.get("n", "16")
+        return mg.new_bld_letters(scheme, n)
+
+
+@app.route('/memory')
+@app.route('/memory/g/<which>')
+def memory_games(which=None):
+    import memory_games as mg
+    scheme = request.args.get("s", "ABCDEFGHIJKLMNOPQRSTUVXZ")
+    n = request.args.get("n", "16")
+    letters = mg.new_bld_letters(scheme, n)
+    return render_template("/js_games/memory_bld.html", n=n, letters=letters, scheme=scheme)
 
 
 @app.route('/catagrama/admin')
