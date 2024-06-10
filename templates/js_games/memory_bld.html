@@ -543,7 +543,7 @@
                 i=0;
                 for(let k of querty){
                   if(y < k.y+k.h && x < k.x+k.w && x > k.x && y > k.y){
-                    stickers[activeBox].guess = k.letter;
+                    stickers[activeBox].guess = k.letter == "<" ? "" : k.letter;
                     next_empty();
                   }
                 }
