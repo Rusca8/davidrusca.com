@@ -460,6 +460,7 @@
         // Init letter Pairs
         function init_pairs(){
           console.log("init_pairs...");
+          activeBox = 0;
           let w = (gW-(pairsCols+1)*pairsM)/pairsCols/2;
           let h = w*1.3;
           stickers = [];
@@ -486,7 +487,7 @@
           querty = [];
           let dx = 0;
           let y = gY + gH*0.7;
-          let m = 5*u;
+          let m = 0*u;
           let w = (gW - 11*m)/10;
           let h = w*1.2;
           let i = 0;
