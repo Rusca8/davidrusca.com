@@ -49,22 +49,15 @@
             this.t_end = Date.now();
           }
 
-          read(){
-            if(this.t_start == "nope"){
-              return "-"
-            }
-            let msec = this.t_end - this.t_start;
-            if(msec < 0){
-              msec = Date.now() - this.t_start;
-            }
-            //
-            let sec = Math.floor(msec / 1000);
-            msec -= sec * 1000;
-            //
-            let min = Math.floor(sec / 60);
-            sec -= min * 60;
+          delta(){
+            return this.t_end - this.t_start;
+          }
 
-            return min + ":" + sec.toString().padStart(2, "0") + '.' + Math.floor(msec/10).toString().padStart(2, "0");
+          read(){
+            if(this.t_end - this.t_start < 0){
+              return "-";
+            }
+            return read_time(this.t_end - this.t_start);
           }
 
           clone(){
@@ -80,6 +73,10 @@
             this.memo = memo;
             this.recall = recall;
             this.correct = correct;
+          }
+
+          get total(){
+            return this.memo.t_end - this.memo.t_start + this.recall.t_end - this.recall.t_start;
           }
 
           read(){
@@ -127,6 +124,12 @@
         var clock_memo = new Clock();
         var clock_recall = new Clock();
         var clock_log = [];
+
+        // status
+        var best_memo;
+        var best_recall;
+        var best_total;
+        var best_precision;
 
         // debugging
         var cursorx = 0;
@@ -210,9 +213,21 @@
               state = "solve";
               break;
             case "solve":
-              state = "check";
               clock_recall.stop();
               clock_log.push(new Solve(clock_memo.clone(), clock_recall.clone(), get_precision()));
+              if(best_memo == undefined || best_memo > clock_memo.delta()){
+                best_memo = clock_memo.delta();
+              }
+              if(best_recall == undefined || best_recall > clock_recall.delta()){
+                best_recall = clock_recall.delta();
+              }
+              if(best_total == undefined || best_total > clock_recall.delta() + clock_memo.delta()){
+                best_total = clock_recall.delta() + clock_memo.delta();
+              }
+              if(best_precision == undefined || best_precision < get_precision()){
+                best_precision = get_precision();
+              }
+              state = "check";
               break;
             case "check":
               state = "memo";
@@ -230,10 +245,25 @@
           for(let l of stickers){
             if(l.letter == l.guess){
               right += 1;
-              console.log(l.letter, l.guess);
             }
           }
           return Math.floor(100*right/letters.length);
+        }
+
+        function read_time(time){
+          let msec = time;
+          if(msec < 0){
+            msec = Date.now() - this.t_start;
+          }
+          //
+          let sec = Math.floor(msec / 1000);
+          msec -= sec * 1000;
+          //
+          let min = Math.floor(sec / 60);
+          sec -= min * 60;
+
+          return min + ":" + sec.toString().padStart(2, "0") + '.' + Math.floor(msec/10).toString().padStart(2, "0");
+
         }
 
 
@@ -290,7 +320,6 @@
               }else{
                 text = b.letter;
               }
-              console.log(b.x, b.y);
               cc.fillStyle = "lightgrey";
               cc.fillRect(b.x, b.y, b.w, b.h);
               cc.strokeRect(b.x, b.y, b.w, b.h);
@@ -378,12 +407,32 @@
 
         function draw_log(){
           cc.font = font("Helvetica", 14);
-          cc.fillText("MEMO     RECALL     PR%", gX + gW/2, gY + gH*0.7);
-          let i = 0;
+          let x = [gX + gW*0.2, gX + gW*0.4, gX + gW*0.6, gX + gW*0.8];
+          let y = gY + gH*0.65;
+          // titles
+          cc.fillText("MEMO", x[0], y);
+          cc.fillText("RECALL", x[1], y);
+          cc.fillText("TOTAL", x[2], y);
+          cc.fillText("PR%", x[3], y);
+          // stats
+          y = gY + gH * 0.7
+          cc.fillStyle = "green";
+          cc.fillText(read_time(best_memo), x[0], y);
+          cc.fillText(read_time(best_recall), x[1], y);
+          cc.fillText(read_time(best_total), x[2], y);
+          cc.fillText(best_precision + "%", x[3], y);
+
           let log;
           for(let i=clock_log.length-1; i>=0; i--){
             log = clock_log[i];
-            cc.fillText(log.read(), gX + gW/2, gY + gH*0.7 + 14*u*(clock_log.length-i+0.4));
+            y = gY + gH*0.7 + 14*u*(clock_log.length-i+0.4);
+            cc.fillStyle = log.memo.read() == read_time(best_memo) ? "goldenrod" : "grey";
+            cc.fillText(log.memo.read(), x[0], y);
+            cc.fillStyle = log.recall.read() == read_time(best_recall) ? "goldenrod" : "grey";
+            cc.fillText(log.recall.read(), x[1], y);
+            cc.fillStyle = read_time(log.total) == read_time(best_total) ? "goldenrod" : "grey";
+            cc.fillText(read_time(log.total), x[2], y);
+            cc.fillText(log.correct + "%", x[3], y);
           }
         }
 
