@@ -212,12 +212,13 @@ def print_vq_choice_quotes(choices=None):
         if choice not in choices:
             print("hidden")
             continue
+        count_hidden = 0
         for vq_id in vq_ids:
             if vq_id in quotes:
-                print("-", vq_id, "in pool -")
+                count_hidden +=1
             else:
                 print(f'"{vq_id}":', "{", ', '.join(f'"{k}": "{v}"' for k, v in viquidites[vq_id].items()), "},")
-
+        print(f"···{count_hidden} more in pool···") if count_hidden else None
 
 def get_vq_choices_stats():
     with viqui_lock:

@@ -1,6 +1,6 @@
-'''
+"""
 Texto críptico para el cumple de Raquel. Traductor py.
-'''
+"""
 import random
 from unidecode import unidecode
 
