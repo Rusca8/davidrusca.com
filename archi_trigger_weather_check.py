@@ -4,4 +4,5 @@ import requests
 req = requests.post(f"http://tele2notion.eu.pythonanywhere.com/{trigger_weather_check}")
 
 print(req)
+print(req.content)
 
