@@ -17,14 +17,16 @@
 
     <h5 class="text-center mb-2">· Taula de substitucions ·</h5>
 
-    <div class="row justify-content-center">
-        <table class="table-sm text-center mb-4">
-            <tr id="t_alphabet"></tr>
-            <tr id="t_althadet"></tr>
-        </table>
+    <div class="row justify-content-center mx-3">
+            {% for i in range(6) %}
+                <table class="table-sm text-center mb-2 mx-1">
+                    <tr id="t{{i}}_alphabet"></tr>
+                    <tr id="t{{i}}_althadet"></tr>
+                </table>
+            {% endfor %}
     </div>
 
-    <h5 class="text-center mb-2">· Frases per practicar les lletres difícils ·</h5>
+    <h5 class="text-center mb-2 mt-2">· Frases per practicar les lletres difícils ·</h5>
 
     <div class="row justify-content-center">
         <div class="text-center mb-1 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
@@ -109,6 +111,8 @@
         CA: {"B": "D", "F": "θ", "M": "N", "P": "T", "V": "D", "W": "OU"}
     }
 
+    var alphablocks = ["ABC", "DEF", "GHIJ", "KLMNOP", "QRSTU", "VWXYZ"]
+
     window.onload = function(){
         /* Pre result */
         result = document.getElementById("resultat");
@@ -116,9 +120,13 @@
         make_trad();
 
         /* Language Table */
-        t_alphabet =  document.getElementById("t_alphabet");
-        t_althadet =  document.getElementById("t_althadet");
-        make_table();
+        let t_alphadone = 0;
+        for(let i=0; i < alphablocks.length; i++){
+            t_alphabet =  document.getElementById("t" + i + "_alphabet");
+            t_althadet =  document.getElementById("t" + i + "_althadet");
+            make_table(t_alphadone, t_alphadone + alphablocks[i].length, t_alphabet, t_althadet);
+            t_alphadone += alphablocks[i].length;
+        }
     }
 
     function preclass(sub){
@@ -142,16 +150,16 @@
         result.innerHTML = build_style_classes(text_build);
     }
 
-    function make_table(){
+    function make_table(start=0, end=26, t_alpha, t_altha){
         // Upper row
         let t_built = "";
-        for(let lletra of alphs[lang]){
+        for(let lletra of alphs[lang].slice(start, end)){
             t_built += "<td>" + lletra + "</td>";
         }
-        t_alphabet.innerHTML = t_built;
+        t_alpha.innerHTML = t_built;
         // Subs row
         t_built = "";
-        for(let lletra of alphs[lang]){
+        for(let lletra of alphs[lang].slice(start, end)){
             if(lletra in subs[lang]){
                 let sub = subs[lang][lletra]
                 t_built += "<th class='sub-" + sub + "'>" + sub + "</th>";
@@ -159,7 +167,7 @@
                 t_built += "<th>" + lletra + "</th>";
             }
         }
-        t_althadet.innerHTML = t_built;
+        t_altha.innerHTML = t_built;
     }
 </script>
 
