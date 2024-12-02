@@ -1,0 +1,35 @@
+/* Substitutions styling */
+
+.sub-D, .sub-N, .sub-T, .sub-θ, .sub-OU {
+    font-weight: bold;
+}
+.sub-D {
+    color: #33aa88;
+}
+.sub-N {
+    color: #dd5532;
+}
+.sub-T {
+    color: #dd8832;
+}
+.sub-θ {
+    color: #bb77bb;
+}
+.sub-OU {
+    color: #3377bb;
+}
+
+/* Other stuff */
+
+table, tr {
+    border: 1px solid #5c4723;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+td {
+    background-color: rgba(255,255,255,1);
+}
+
+.lighter {
+    background-color: rgba(255, 255, 255, 0.5);
+}

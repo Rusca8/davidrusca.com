@@ -73,6 +73,12 @@ def logos():
     return render_template("logos.html")
 
 
+@app.route('/ventriloquia')
+@app.route('/ventriloquia/')
+def ventrad():
+    return render_template("ventriloquia.html")
+
+
 @app.route('/bg')
 @app.route('/bg/')
 def bg():

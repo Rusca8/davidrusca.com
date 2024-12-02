@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Ventriloquía') }} - David Ruscalleda{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/ventrad.css">
+{% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center">{{ _('Traductor de Ventriloquía') }}</h3>
+<p class="text-center">Escriu una frase per saber com dir-la sense moure els llavis.</p>
+
+<div id="container_for_margins" class="px-3 mb-3">
+    <div class="card bg-rusca text-center border-c mb-1 lighter">
+      <div id="resultat" class="card-body" style="min-height: 4rem;">
+        Coses!
+      </div>
+    </div>
+    <textarea id="frase" class="form-control text-center border-c mb-3" rows="1" oninput="make_trad();">Quan ho faig bé puc parlar sense moure els llavis.</textarea>
+
+    <h5 class="text-center mb-2">· Taula de substitucions ·</h5>
+
+    <div class="row justify-content-center">
+        <table class="table-sm text-center mb-4">
+            <tr id="t_alphabet"></tr>
+            <tr id="t_althadet"></tr>
+        </table>
+    </div>
+
+    <h5 class="text-center mb-2">· Frases per practicar les lletres difícils ·</h5>
+
+    <div class="row justify-content-center">
+        <div class="text-center mb-1 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
+            <h5 class="mb-0">B / V → <span class="sub-D">D</span></h5>
+            <small>Pensar una B / V, però dir una D</small>
+            "Voldria venir a veure el basquetbol."
+            <hr class="mt-2 mb-2">
+            <div><span class="sub-D">D</span>ol<span class="sub-D">D</span>ria <span class="sub-D">D</span>enir a <span class="sub-D">D</span>eure el <span class="sub-D">D</span>asquet<span class="sub-D">D</span>ol.</div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="text-center mb-1 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
+            <h5 class="mb-0">F → <span class="sub-θ">θ</span></h5>
+            <small>Pensar una F, però dir una θ (la Z castellana)</small>
+            "Si fas farinetes els francesos faran festa."
+            <hr class="mt-2 mb-2">
+            <div>Si <span class="sub-θ">θ</span>as <span class="sub-θ">θ</span>arinetes els <span class="sub-θ">θ</span>rancesos <span class="sub-θ">θ</span>aran <span class="sub-θ">θ</span>esta.</div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="text-center mb-1 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
+            <h5 class="mb-0">M → <span class="sub-N">N</span></h5>
+            <small>Pensar una M, però dir una N</small>
+            "Massa mosques mengen mandarines."
+            <hr class="mt-2 mb-2">
+            <div><span class="sub-N">N</span>assa <span class="sub-N">N</span>osques <span class="sub-N">N</span>engen <span class="sub-N">N</span>andarines.</div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="text-center mb-1 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
+            <h5 class="mb-0">P → <span class="sub-T">T</span></h5>
+            <small>Pensar una P, però dir una T</small>
+            "Podria portar patates a la platja."
+            <hr class="mt-2 mb-2">
+            <div><span class="sub-T">T</span>odria <span class="sub-T">T</span>ortar <span class="sub-T">T</span>atates a la <span class="sub-T">T</span>latja.</div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="text-center mb-3 card bg-rusca border-c p-2 lighter" style="width: 25rem;">
+            <h5 class="mb-0">W → <span class="sub-OU">OU</span></h5>
+            <small>Pensar una W, però dir OU (també als diftongs creixents).</small>
+            "Quatre kiwis quasi aquosos."
+            <hr class="mt-2 mb-2">
+            <div>Q<span class="sub-OU">OU</span>atre ki<span class="sub-OU">OU</span>is q<span class="sub-OU">OU</span>asi aq<span class="sub-OU">OU</span>osos.</div>
+        </div>
+    </div>
+    <p class="text-center">
+        <small>Rusca 2024 · Adaptat al català a partir dels tutorials de Jeff Duncan.</small>
+    </p>
+</div>
+
+
+
+<script>
+    var result;
+    var input;
+    var lang = "CA";
+
+    /* LANGUAGE SPECIFIC ITEMS */
+    var alphs = {
+        CA: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    }
+
+    function preprocess(text){
+        new_text = "";
+        if(lang == "CA"){
+            let vocals_ao = ["a", "à", "o", "ò", "ó"]
+            let vocals_ei = ["e", "è", "é", "i", "í"]
+            for(let i=0; i<text.length-1; i++){
+                if((text[i].toLowerCase() == "u" && vocals_ao.includes(text[i+1].toLowerCase()))
+                   || (text[i].toLowerCase() == "ü" && vocals_ei.includes(text[i+1].toLowerCase()))){
+                    new_text += "w";
+                }else{
+                    new_text += text[i];
+                }
+            }
+        }
+        return new_text + text[text.length-1] || "lang?";
+    }
+
+    var subs = {
+        CA: {"B": "D", "F": "θ", "M": "N", "P": "T", "V": "D", "W": "OU"}
+    }
+
+    window.onload = function(){
+        /* Pre result */
+        result = document.getElementById("resultat");
+        input = document.getElementById("frase");
+        make_trad();
+
+        /* Language Table */
+        t_alphabet =  document.getElementById("t_alphabet");
+        t_althadet =  document.getElementById("t_althadet");
+        make_table();
+    }
+
+    function preclass(sub){
+        return "始" + sub + "'>" + sub + "終"
+    }
+
+    function build_style_classes(text){
+        return text.replaceAll("始", "<span class='sub-").replaceAll("終", "</span>")
+    }
+
+    function make_trad(){
+        let text_build = input.value;
+        if(!input.value){
+            result.innerHTML = " ";
+            return;
+        }
+        text_build = preprocess(text_build);
+        for(const [older, newer] of Object.entries(subs[lang])){
+            text_build = text_build.replaceAll(older, preclass(newer)).replaceAll(older.toLowerCase(), preclass(newer));
+        }
+        result.innerHTML = build_style_classes(text_build);
+    }
+
+    function make_table(){
+        // Upper row
+        let t_built = "";
+        for(let lletra of alphs[lang]){
+            t_built += "<td>" + lletra + "</td>";
+        }
+        t_alphabet.innerHTML = t_built;
+        // Subs row
+        t_built = "";
+        for(let lletra of alphs[lang]){
+            if(lletra in subs[lang]){
+                let sub = subs[lang][lletra]
+                t_built += "<th class='sub-" + sub + "'>" + sub + "</th>";
+            }else{
+                t_built += "<th>" + lletra + "</th>";
+            }
+        }
+        t_althadet.innerHTML = t_built;
+    }
+</script>
+
+{% endblock %}
