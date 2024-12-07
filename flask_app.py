@@ -79,6 +79,14 @@ def ventrad():
     return render_template("ventriloquia.html")
 
 
+@app.route('/wrapped')
+@app.route('/wrapped/')
+def wrapped_history():
+    from wrapped import extract_data as wrap
+    return render_template("wrapped.html", wrap=wrap())
+
+
+
 @app.route('/bg')
 @app.route('/bg/')
 def bg():

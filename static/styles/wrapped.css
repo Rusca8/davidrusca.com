@@ -1,0 +1,46 @@
+table, td, th {
+    border: 1px solid #5c4723 !important;
+}
+
+table {
+    min-width: 20rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5c4723 !important;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.year {
+    font-size: smaller;
+}
+
+.pos {
+    width: 1rem;
+    background: rgba(90, 70, 30, 0.2);
+}
+
+.change {
+    width: 3rem;
+}
+
+.change-new {
+    background: rgba(250, 230, 50, 0.4);
+    color: rgba(150, 130, 20, 1);
+}
+.change-0 {
+    background: rgba(150, 150, 150, 0.15);
+    color: grey;
+}
+.change-p {
+    background: rgba(130, 230, 30, 0.4);
+    color: rgba(30, 130, 20, 1);
+}
+.change-n {
+    background: rgba(230, 110, 20, 0.4);
+    color: rgba(130, 30, 20, 1);
+}
+.change-null {
+    background: rgba(50, 30, 0, 0.40);
+}
