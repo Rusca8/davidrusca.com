@@ -3,12 +3,12 @@ import utilities
 sample = {
     "words": {
         "v": [
-            [0, 1, "truita", "-"],
-            [4, 5, "de", "-"]
+            [0, 1, "truita", "Ous barrejats del temps amb fruita escapçada."],
+            [4, 5, "de", "Cor d'un adéu consonant."]
         ],
         "h":[
-            [2, 0, "gustosa", ""],
-            [5, 0, "patates", "-"]
+            [2, 0, "gustosa", "Saborosa formiga anglesa abandona un guant per atacar Tossa."],
+            [5, 0, "patates", "Als inicis practicava ambicions teatrals amb tots els seus tubercles."]
         ],
     },
 }
