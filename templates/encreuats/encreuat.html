@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-auto pl-0 pr-2">
-                <div class="card border-c mb-2 encreuat-title-card margin-x-auto" style="width: {{ cols * 2 + 0.1 }}rem;">
+                <div class="card border-c mb-2 encreuat-title-card max-w-lim margin-x-auto">
                     <div class="card-body py-1 text-center">
                         <h5 class="mb-0">{{enc["title"]}}</h5>
                     </div>
@@ -26,9 +26,9 @@
                         {% set dis=encreuat[r][c] == "-" %}
                         {% set style = paint[r][c] %}
                         {% set style_class = '' if not dis else ('encreuat-cell-style-' + style) if style else 'encreuat-cell-disabled' %}
-                        <td id="cell-{{r}}-{{c}}" class="encreuat-cell text-center {{style_class}} px-0">
+                        <td id="cell-{{r}}-{{c}}" class="encreuat-cell text-center {{style_class}} px-0 py-0">
                             {% if not dis %}
-                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="this.value = this.value[this.value.length - 1].toUpperCase(); next({{r}}, {{c}});">
+                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="get_last_input(this); save_state(); next({{r}}, {{c}});">
                             {% endif %}
                             <div class="overlay">{{encreuat[r][c] if encreuat[r][c] not in ["-", "x"]}}</div>
                         </td>
@@ -36,17 +36,17 @@
                     </tr>
                 {% endfor %}
                 </table>
-                <div id="current-clues" class="mt-2 p-0 margin-x-auto" style="width: {{ cols * 2 + 0.1 }}rem;">
+                <div id="current-clues" class="mt-2 p-0 max-w-lim margin-x-auto">
                     <div id="current-clue-v-div" class="p-1"><b>V:</b> <span id="current-clue-v">-</span></div>
                     <div id="current-clue-h-div" class="p-1"><b>H:</b> <span id="current-clue-h">-</span></div>
                 </div>
-                <div class="card border-c mt-2 encreuat-title-card margin-x-auto mb-3" style="width: {{ cols * 2 + 0.1 }}rem;">
+                <div class="card border-c mt-2 encreuat-title-card mb-3 max-w-lim margin-x-auto">
                     <div class="card-body py-1 px-2 text-center" style="line-height: 80%;">
                         <div class="py-1">
                             <b>{{enc["autor"]}}</b> · {{enc["date"]}}<br>
                         </div>
-                        <div id="encreuat-comments" style="width: {{ (cols-1) * 2 }}rem;" class="margin-x-auto mb-1">
-                            {{enc["comments"]}}
+                        <div id="encreuat-comments" class="margin-x-auto mb-1">
+                            {{enc["comments"] | safe}}
                         </div>
                     </div>
                 </div>
@@ -76,9 +76,15 @@
             </div>
         </div>
     </div>
+
+    <div class="text-center mt-3">
+        <button class="btn btn-block btn-danger" onclick="ask_for_deletion();">Esborrar-ho tot</button>
+    </div>
 </div>
 
 <script>
+    var localstorage_id = "encreuat-" + {{enc["enc_id"] | tojson}};
+
     var rows = {{rows}};
     var cols = {{cols}};
 
@@ -92,6 +98,10 @@
 
     var clues_v = {{clues["v"] | tojson}};
     var clues_h = {{clues["h"] | tojson}};
+
+    window.onload = function(){
+        load_state();
+    }
 
     function new_focus(r, c){
         // select cell in coordinates [r, c]
@@ -274,6 +284,49 @@
         if(next_cell){
             next_cell.focus();
             last_focus = horizontal ? [r, c+1] : [r+1, c];
+        }
+    }
+
+    function save_state(){
+        let puzzle = [];
+        // quite unefficient, I guess, but will do
+        for(let r=0; r<{{rows}}; r++){
+            let this_row = []
+            for(let c=0; c<{{cols}}; c++){
+                let this_cell = document.getElementById("input-" + r + "-" + c);
+                this_row.push(this_cell ? this_cell.value : null);
+            }
+            puzzle.push(this_row);
+        }
+        console.log(puzzle);
+        localStorage.setItem(localstorage_id, JSON.stringify(puzzle));
+    }
+
+    function load_state(){
+        console.log("Loading previous state...");
+        let puzzle = JSON.parse(localStorage.getItem(localstorage_id));
+        console.log(puzzle);
+        if(puzzle){
+            for(let r=0; r<{{rows}}; r++){
+                for(let c=0; c<{{cols}}; c++){
+                    let this_cell = document.getElementById("input-" + r + "-" + c);
+                    if(this_cell){
+                        this_cell.value = puzzle[r][c] || '';
+                    }
+                }
+            }
+        }
+    }
+
+    function get_last_input(item){
+        item.value = item.value ? item.value[item.selectionStart - 1].toUpperCase() : '';
+    }
+
+    function ask_for_deletion(){
+        let wanna_delete = confirm("Segur que vols esborrar-ho tot? (no ho podré desfer)");
+        if(wanna_delete === true){
+            localStorage.removeItem(localstorage_id);
+            location.reload();
         }
     }
 </script>

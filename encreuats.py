@@ -3,12 +3,12 @@ import utilities
 sample = {
     "words": {
         "v": [
-            [0, 4, "tornara", "mai no hi va"]
+            [0, 1, "truita", "-"],
+            [4, 5, "de", "-"]
         ],
         "h":[
-            [1, 0, "carxofes", "arrebossades"],
-            [3, 1, "joanuna", "oliva"],
-            [5, 2, "cara", "quina _ que tens"]
+            [2, 0, "gustosa", ""],
+            [5, 0, "patates", "-"]
         ],
     },
 }
@@ -69,9 +69,9 @@ def parse_encreuat(enc_id=None):
 
 
     return {"rows": rows, "cols": cols, "solved": parsed, "empty": empty, "paint": paint,
-            "clues": {"h": clues_h, "v": clues_v},
-            "title": encreuat.get("title", "Títol? No ho sé"), "autor": encreuat.get("autor", "Autor?"),
-            "date": encreuat.get("date", "????-??-??"), "comments": encreuat.get("comments", "Bon dia tinguin.")}
+            "clues": {"h": clues_h, "v": clues_v}, "enc_id": enc_id,
+            "title": encreuat.get("title", "Vaia patillada"), "autor": encreuat.get("autor", "Rusca"),
+            "date": encreuat.get("date", "2024-12-15"), "comments": encreuat.get("comments", f"Has posat un enllaç que no existeix.<br>No hi ha cap críptic <b>#{enc_id}</b>.<br>Però et perdono. Pots resoldre això, va.")}
 
 if __name__ == "__main__":
     enc = parse_encreuat("0")

@@ -1,9 +1,13 @@
 .encreuat-cell {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border: 1px solid rgba(30, 20, 0, 0.5);
     background-color: rgba(255, 255, 255, 1);
     position:relative;
+}
+
+.max-w-lim {
+    max-width: 25rem;
 }
 
 .encreuat-cell-disabled {
