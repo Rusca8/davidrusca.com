@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% block title %}Encreuats Críptics - David Ruscalleda{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/encreuats.css">
+{% endblock %}
+
+{% block content %}
+    {% set rows = enc["rows"] %}
+    {% set cols = enc["cols"] %}
+    {% set encreuat = enc["empty"] %}
+    {% set paint = enc["paint"] %}
+    {% set clues = enc["clues"] %}
+<div class="mx-3 mt-3">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-auto pl-0 pr-2">
+                <div class="card border-c mb-2 encreuat-title-card margin-x-auto" style="width: {{ cols * 2 + 0.1 }}rem;">
+                    <div class="card-body py-1 text-center">
+                        <h5 class="mb-0">{{enc["title"]}}</h5>
+                    </div>
+                </div>
+                <table class="encreuat-full margin-x-auto">
+                {% for r in range(rows) %}
+                    <tr>
+                    {% for c in range(cols) %}
+                        {% set dis=encreuat[r][c] == "-" %}
+                        {% set style = paint[r][c] %}
+                        {% set style_class = '' if not dis else ('encreuat-cell-style-' + style) if style else 'encreuat-cell-disabled' %}
+                        <td id="cell-{{r}}-{{c}}" class="encreuat-cell text-center {{style_class}} px-0">
+                            {% if not dis %}
+                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="this.value = this.value[this.value.length - 1].toUpperCase(); next({{r}}, {{c}});">
+                            {% endif %}
+                            <div class="overlay">{{encreuat[r][c] if encreuat[r][c] not in ["-", "x"]}}</div>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+                </table>
+                <div id="current-clues" class="mt-2 p-0 margin-x-auto" style="width: {{ cols * 2 + 0.1 }}rem;">
+                    <div id="current-clue-v-div" class="p-1"><b>V:</b> <span id="current-clue-v">-</span></div>
+                    <div id="current-clue-h-div" class="p-1"><b>H:</b> <span id="current-clue-h">-</span></div>
+                </div>
+                <div class="card border-c mt-2 encreuat-title-card margin-x-auto mb-3" style="width: {{ cols * 2 + 0.1 }}rem;">
+                    <div class="card-body py-1 px-2 text-center" style="line-height: 80%;">
+                        <div class="py-1">
+                            <b>{{enc["autor"]}}</b> · {{enc["date"]}}<br>
+                        </div>
+                        <div id="encreuat-comments" style="width: {{ (cols-1) * 2 }}rem;" class="margin-x-auto mb-1">
+                            {{enc["comments"]}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Clues -->
+            <div class="col px-0">
+                <div class="card border-c px-0 mb-1">
+                    <h5 class="card-header py-1 px-3">
+                        Verticals
+                    </h5>
+                    <div class="card-body px-3 py-2">
+                        {% for i, clue in clues["v"].items() %}
+                        <div id="clue-list-v-{{i}}" class="clue-list-item" onclick="select_clue_from_list({{clue['pos'][0]}}, {{clue['pos'][1]}}, false)"><b>{{i}}.</b> {{clue["def"]}}<br></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card border-c px-0">
+                    <h5 class="card-header py-1 px-3">
+                        Horitzontals
+                    </h5>
+                    <div class="card-body px-3 py-2">
+                        {% for i, clue in clues["h"].items() %}
+                        <div id="clue-list-h-{{i}}" class="clue-list-item"  onclick="select_clue_from_list({{r}}, {{c}}, true)"><b>{{i}}.</b> {{clue["def"]}}<br></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var rows = {{rows}};
+    var cols = {{cols}};
+
+    var horizontal = false;
+    var last_focus = [null, null];
+
+    var next_cell_h = null;
+    var next_cell_v = null;
+    var prev_cell_h = null;
+    var prev_cell_v = null;
+
+    var clues_v = {{clues["v"] | tojson}};
+    var clues_h = {{clues["h"] | tojson}};
+
+    function new_focus(r, c){
+        // select cell in coordinates [r, c]
+        update_surround_cells(r, c);
+
+        if(next_cell_h && next_cell_v){
+            if(last_focus[0] == r && last_focus[1] == c){
+                horizontal = !horizontal;
+            }else{  // no user preference: prioritize clue starts
+                [start_v, start_h] = get_clue_start_directions_in_cell(r, c);
+                if(start_v){
+                    if(!start_h){
+                        horizontal = false;
+                    }
+                }else if(start_h){
+                    horizontal = true;
+                }
+            }
+        }else if(next_cell_h){
+            horizontal = true;
+        }else if(next_cell_v){
+            horizontal = false;
+        }
+        last_focus = [r, c];
+        // update
+        update_current_clues(r, c);
+        // styling
+        clean_highlighted_cells();
+        highlight_current_clue_cells(r, c);
+        highlight_current_clue_def(r, c);
+    }
+
+    function update_surround_cells(r, c){
+        next_cell_h = get_next_cell_h(r, c);
+        next_cell_v = get_next_cell_v(r, c);
+        prev_cell_h = get_prev_cell_h(r, c);
+        prev_cell_v = get_prev_cell_v(r, c);
+    }
+
+    function update_current_clues(r, c){
+        current_clue_h = document.getElementById("current-clue-h");
+        current_clue_v = document.getElementById("current-clue-v");
+
+        [clue_v, clue_h] = get_clues_in_cell(r, c);
+        current_clue_h.innerHTML = clue_h ? clues_h[clue_h]["def"] : "-";
+        current_clue_v.innerHTML = clue_v ? clues_v[clue_v]["def"] : "-";
+    }
+
+    function get_clues_in_cell(r, c){
+        let clue_v = null;
+        let clue_h = null;
+        for(const [key, clue] of Object.entries(clues_h)){
+            if(r == clue["pos"][0] && c >= clue["pos"][1] && c < clue["pos"][1] + clue["len"]){
+                clue_h = key;
+                break;
+            }
+        }
+        for(const [key, clue] of Object.entries(clues_v)){
+            if(c == clue["pos"][1] && r >= clue["pos"][0] && r < clue["pos"][0] + clue["len"]){
+                clue_v = key;
+                break;
+            }
+        }
+        return [clue_v, clue_h]
+    }
+
+    function select_clue_from_list(r, c, h){
+        [clue_v, clue_h] = get_clues_in_cell(r, c);
+
+        horizontal = h;
+        let pos = h ? clues_h[clue_h]["pos"] : clues_v[clue_v]["pos"]
+        let the_cell = document.getElementById("input-" + pos[0] + "-" + pos[1]);
+
+        if(the_cell){
+            console.log(the_cell);
+            the_cell.focus();
+            new_focus(pos[0], pos[1]);
+        }
+    }
+
+    function get_clue_start_directions_in_cell(r, c){
+        let start_v = false;
+        let start_h = false;
+        for(const [key, clue] of Object.entries(clues_h)){
+            if(r == clue["pos"][0] && c == clue["pos"][1]){
+                start_h = true;
+                break;
+            }
+        }
+        for(const [key, clue] of Object.entries(clues_v)){
+            if(r == clue["pos"][0] && c == clue["pos"][1]){
+                start_v = true;
+                break;
+            }
+        }
+        return [start_v, start_h]
+    }
+
+    function clean_highlighted_cells(){
+        for(let r=0; r < rows; r++){
+            for(let c=0; c < cols; c++){
+                let cell_rc = document.getElementById("cell-" + r + "-" + c);
+                if(cell_rc){
+                    cell_rc.classList.remove("encreuat-cell-current-clue");
+                }
+            }
+        }
+    }
+
+    function highlight_current_clue_cells(r, c){
+        [clue_v, clue_h] = get_clues_in_cell(r, c);
+        if(clue_h && horizontal || !clue_v){
+            let c0 = clues_h[clue_h]["pos"][1];
+            let cf = c0 + clues_h[clue_h]["len"];
+            for(let ci = c0; ci < cf; ci++){
+                cell_rc = document.getElementById("cell-" + r + "-" + ci);
+                cell_rc.classList.add("encreuat-cell-current-clue");
+            }
+        }else if(clue_v){
+            let r0 = clues_v[clue_v]["pos"][0];
+            let rf = r0 + clues_v[clue_v]["len"];
+            for(let ri = r0; ri < rf; ri++){
+                cell_rc = document.getElementById("cell-" + ri + "-" + c);
+                cell_rc.classList.add("encreuat-cell-current-clue");
+            }
+        }
+    }
+
+    function highlight_current_clue_def(r, c){
+        [clue_v, clue_h] = get_clues_in_cell(r, c);
+        ccvdiv = document.getElementById("current-clue-v-div");  // current clue, vertical
+        cchdiv = document.getElementById("current-clue-h-div");  // current clue, horizontal
+        // cleaning
+        ccvdiv.classList.remove("encreuat-current-clue");
+        cchdiv.classList.remove("encreuat-current-clue");
+        clean_clue_lists();
+        // highlight
+        if(clue_h && (horizontal || !clue_v)){
+            cchdiv.classList.add("encreuat-current-clue");
+            document.getElementById("clue-list-h-" + clue_h).classList.add('clue-list-current');
+            clue_v ? document.getElementById("clue-list-v-" + clue_v).classList.add('clue-list-secondary') : null;
+        }else if(clue_v){
+            ccvdiv.classList.add("encreuat-current-clue");
+            document.getElementById("clue-list-v-" + clue_v).classList.add('clue-list-current');
+            clue_h ? document.getElementById("clue-list-h-" + clue_h).classList.add('clue-list-secondary') : null;
+        }
+    }
+
+    function clean_clue_lists(){
+        for(let i of Object.keys(clues_v)){
+            document.getElementById("clue-list-v-" + i).classList.remove('clue-list-current', 'clue-list-secondary');
+        }
+        for(let i of Object.keys(clues_h)){
+            document.getElementById("clue-list-h-" + i).classList.remove('clue-list-current', 'clue-list-secondary');
+        }
+    }
+
+    function get_next_cell(r, c){
+        return horizontal ? get_next_cell_h(r, c) : get_next_cell_v(r, c);
+    }
+
+    function get_next_cell_h(r, c){
+        return document.getElementById("input-" + r + "-" + (c+1));
+    }
+
+    function get_next_cell_v(r, c){
+        return document.getElementById("input-" + (r+1) + "-" + c);
+    }
+
+    function get_prev_cell_h(r, c){
+        return document.getElementById("input-" + r + "-" + (c-1));
+    }
+
+    function get_prev_cell_v(r, c){
+        return document.getElementById("input-" + (r-1) + "-" + c);
+    }
+
+    function next(r, c){
+        next_cell = get_next_cell(r, c);
+        if(next_cell){
+            next_cell.focus();
+            last_focus = horizontal ? [r, c+1] : [r+1, c];
+        }
+    }
+</script>
+{% endblock %}
