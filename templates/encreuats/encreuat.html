@@ -69,7 +69,7 @@
                     </h5>
                     <div class="card-body px-3 py-2">
                         {% for i, clue in clues["h"].items() %}
-                        <div id="clue-list-h-{{i}}" class="clue-list-item"  onclick="select_clue_from_list({{r}}, {{c}}, true)"><b>{{i}}.</b> {{clue["def"]}}<br></div>
+                        <div id="clue-list-h-{{i}}" class="clue-list-item"  onclick="select_clue_from_list({{clue['pos'][0]}}, {{clue['pos'][1]}}, true)"><b>{{i}}.</b> {{clue["def"]}}<br></div>
                         {% endfor %}
                     </div>
                 </div>
