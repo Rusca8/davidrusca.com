@@ -8,7 +8,7 @@
 
 .fixed-w-25 {
     max-width: 25rem;
-    min-width: 25rem;
+    min-width: 30vw;
 }
 
 .encreuat-cell-disabled {

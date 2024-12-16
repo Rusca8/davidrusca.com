@@ -10,13 +10,17 @@
     {% set encreuat = enc["empty"] %}
     {% set paint = enc["paint"] %}
     {% set clues = enc["clues"] %}
+
+<h3 class="mt-3 text-center mb-1">Mots encreuats críptics</h3>
+<p class="text-center">Les pistes no són definicions directes, sinó trencaclosques verbals.</p>
+
 <div class="mx-3 mt-3">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-auto pl-0 pr-2">
                 <div class="card border-c mb-2 encreuat-title-card fixed-w-25 margin-x-auto">
                     <div class="card-body py-1 text-center">
-                        <h5 class="mb-0">{{enc["title"]}}</h5>
+                        <h5 class="mb-0">#{{enc["enc_id"]}}: {{enc["title"]}}</h5>
                     </div>
                 </div>
                 <table id="encreuat-full" class="encreuat-full margin-x-auto">
