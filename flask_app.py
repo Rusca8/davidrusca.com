@@ -28,6 +28,17 @@ def get_locale():
     return request.accept_languages.best_match(['es', 'ca'])
 
 
+@app.before_request
+def before_request():
+    """Force https (2024/12, will need it for js-hashing crossword answers)"""
+    if app.debug:  # prevents site blockage when local testing
+        return
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
+
 @app.route('/')
 @app.route('/index')
 @app.route('/index/')
