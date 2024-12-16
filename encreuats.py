@@ -1,4 +1,6 @@
 import utilities
+from hashlib import sha256
+
 
 sample = {
     "words": {
@@ -31,11 +33,11 @@ def parse_encreuat(enc_id=None):
     for word in encreuat["words"]["v"]:
         r, c, w, d = word
         for i, letter in enumerate(w):
-            parsed[r+i][c] = letter
+            parsed[r+i][c] = letter.upper()
     for word in encreuat["words"]["h"]:
         r, c, w, d = word
         for i, letter in enumerate(w):
-            parsed[r][c+i] = letter
+            parsed[r][c+i] = letter.upper()
     # ---- building empty crossword ----
     empty = [["-" if letter == "-" else "x" for letter in row] for row in parsed]
     paint = [["" for _ in row] for row in parsed]
@@ -67,14 +69,17 @@ def parse_encreuat(enc_id=None):
             if clued:
                 current_clue += 1
 
+    # solution hash (sha256)
+    solution_string = "".join("".join(cell for cell in row if cell != "-") for row in parsed)
+    hashed = sha256(solution_string.encode('utf-8')).hexdigest()
 
     return {"rows": rows, "cols": cols, "solved": parsed, "empty": empty, "paint": paint,
-            "clues": {"h": clues_h, "v": clues_v}, "enc_id": enc_id,
+            "clues": {"h": clues_h, "v": clues_v}, "enc_id": enc_id, "hashed": hashed,
             "title": encreuat.get("title", "Vaia patillada"), "autor": encreuat.get("autor", "Rusca"),
             "date": encreuat.get("date", "2024-12-15"), "comments": encreuat.get("comments", f"Has posat un enllaç que no existeix.<br>No hi ha cap críptic <b>#{enc_id}</b>.<br>Però et perdono. Pots resoldre això, va.")}
 
 if __name__ == "__main__":
-    enc = parse_encreuat("0")
+    enc = parse_encreuat("3")
     print(enc["rows"], enc["cols"])
     for row in enc["solved"]:
         print("".join([cell for cell in row]))

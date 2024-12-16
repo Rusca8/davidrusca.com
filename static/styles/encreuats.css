@@ -6,8 +6,9 @@
     position:relative;
 }
 
-.max-w-lim {
+.fixed-w-25 {
     max-width: 25rem;
+    min-width: 25rem;
 }
 
 .encreuat-cell-disabled {
@@ -69,4 +70,12 @@
 
 .clue-list-secondary {
     background-color: #e6e6e6;
+}
+
+.table-solved {
+    border: 4px solid green;
+}
+
+.table-error {
+    border: 4px solid darkred;
 }

@@ -14,12 +14,12 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-auto pl-0 pr-2">
-                <div class="card border-c mb-2 encreuat-title-card max-w-lim margin-x-auto">
+                <div class="card border-c mb-2 encreuat-title-card fixed-w-25 margin-x-auto">
                     <div class="card-body py-1 text-center">
                         <h5 class="mb-0">{{enc["title"]}}</h5>
                     </div>
                 </div>
-                <table class="encreuat-full margin-x-auto">
+                <table id="encreuat-full" class="encreuat-full margin-x-auto">
                 {% for r in range(rows) %}
                     <tr>
                     {% for c in range(cols) %}
@@ -28,7 +28,7 @@
                         {% set style_class = '' if not dis else ('encreuat-cell-style-' + style) if style else 'encreuat-cell-disabled' %}
                         <td id="cell-{{r}}-{{c}}" class="encreuat-cell text-center {{style_class}} px-0 py-0">
                             {% if not dis %}
-                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="get_last_input(this); save_state(); next({{r}}, {{c}});">
+                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="get_last_input(this); save_state(); check_solution(); next({{r}}, {{c}});">
                             {% endif %}
                             <div class="overlay">{{encreuat[r][c] if encreuat[r][c] not in ["-", "x"]}}</div>
                         </td>
@@ -36,11 +36,11 @@
                     </tr>
                 {% endfor %}
                 </table>
-                <div id="current-clues" class="mt-2 p-0 max-w-lim margin-x-auto">
+                <div id="current-clues" class="mt-2 p-0 fixed-w-25 margin-x-auto">
                     <div id="current-clue-v-div" class="p-1"><b>V:</b> <span id="current-clue-v">-</span></div>
                     <div id="current-clue-h-div" class="p-1"><b>H:</b> <span id="current-clue-h">-</span></div>
                 </div>
-                <div class="card border-c mt-2 encreuat-title-card mb-3 max-w-lim margin-x-auto">
+                <div class="card border-c mt-2 encreuat-title-card mb-3 fixed-w-25 margin-x-auto">
                     <div class="card-body py-1 px-2 text-center" style="line-height: 80%;">
                         <div class="py-1">
                             <b>{{enc["autor"]}}</b> · {{enc["date"]}}<br>
@@ -98,6 +98,8 @@
 
     var clues_v = {{clues["v"] | tojson}};
     var clues_h = {{clues["h"] | tojson}};
+
+    var true_hash = {{(enc["hashed"] if "hashed" in enc else "- not provided -") | tojson}};
 
     window.onload = function(){
         load_state();
@@ -288,6 +290,7 @@
     }
 
     function save_state(){
+        console.log("Saving puzzle...");
         let puzzle = [];
         // quite unefficient, I guess, but will do
         for(let r=0; r<{{rows}}; r++){
@@ -298,14 +301,12 @@
             }
             puzzle.push(this_row);
         }
-        console.log(puzzle);
         localStorage.setItem(localstorage_id, JSON.stringify(puzzle));
     }
 
     function load_state(){
         console.log("Loading previous state...");
         let puzzle = JSON.parse(localStorage.getItem(localstorage_id));
-        console.log(puzzle);
         if(puzzle){
             for(let r=0; r<{{rows}}; r++){
                 for(let c=0; c<{{cols}}; c++){
@@ -316,6 +317,23 @@
                 }
             }
         }
+        check_solution();
+    }
+
+    function stringify_solution(){
+        stringified = ""
+        for(let r=0; r<{{rows}}; r++){
+            for(let c=0; c<{{cols}}; c++){
+                this_cell = document.getElementById("input-" + r + "-" + c);
+                if(this_cell){
+                    if(this_cell.value == ""){
+                        return "";
+                    }
+                    stringified += this_cell.value;
+                }
+            }
+        }
+        return stringified;
     }
 
     function get_last_input(item){
@@ -327,6 +345,67 @@
         if(wanna_delete === true){
             localStorage.removeItem(localstorage_id);
             location.reload();
+        }
+    }
+
+    async function digest_message(message){
+        const encoder = new TextEncoder();
+        const data = encoder.encode(message);
+        const hash_buffer = await window.crypto.subtle.digest("SHA-256", data);
+        const hash_array = Array.from(new Uint8Array(hash_buffer));
+        const hash_hex = hash_array.map((b) => b.toString(16).padStart(2, "0")).join("")
+        return [hash_hex, message];
+    }
+
+    function check_solution(){
+        let stringified = stringify_solution();
+        if(!stringified){
+            console.log("User is still solving...");
+            clean_solved_styling();
+            return;
+        }
+        // if crossword is completely filled
+        console.log("Solution string:", "'" + stringified + "'");
+        try{
+            console.log("Hashing solution string...");
+            digest_message(stringified).then(([hashed, sol_string]) => compare_hashes_and_resolve_check(hashed, sol_string));
+        }catch{
+            console.log("Couldn't check for correctness :(");
+        }
+    }
+
+    function clean_solved_styling(){
+        document.getElementById("encreuat-full").classList.remove("table-solved", "table-error");
+    }
+
+    function compare_hashes_and_resolve_check(hashed, sol_string){
+        console.log("Solution hash:", hashed);
+        console.log("True enc hash:", true_hash);
+
+        const encreuat_full = document.getElementById("encreuat-full");
+        clean_solved_styling();
+
+        if(hashed == true_hash){
+            console.log("Solved!");
+
+            // styling: correctly solved
+            encreuat_full.classList.add("table-solved");
+
+            // get solution back in case user messed up after async check
+            let i=0;  // getting chars from the accepted sol_string
+            for(let r=0; r<{{rows}}; r++){
+                for(let c=0; c<{{cols}}; c++){
+                    this_cell = document.getElementById("input-" + r + "-" + c);
+                    if(this_cell){
+                        this_cell.value = sol_string[i];
+                        i++;
+                    }
+                }
+            }
+            save_state();
+        }else{
+            // styling: not solved
+            encreuat_full.classList.add("table-error");
         }
     }
 </script>
