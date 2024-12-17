@@ -15,9 +15,20 @@ sample = {
     },
 }
 
+encreuats_file = "./hidden/encreuats/encreuats.json"
+
+def list_for_index():
+    encreuats = utilities.load_json(encreuats_file)
+    listed = []
+    for enc_id, enc in reversed(encreuats.items()):
+        nclues = len(enc["words"]["h"]) + len(enc["words"]["v"])
+        listed.append({"title": enc["title"], "autor": enc['autor'], "data": enc['date'], "enc_id": enc_id, "size": nclues})
+    return listed
+
+
 def parse_encreuat(enc_id=None):
     print(f"searching for {enc_id=}")
-    encreuats = utilities.load_json("./hidden/encreuats/encreuats.json")
+    encreuats = utilities.load_json(encreuats_file)
     encreuat = encreuats.get(enc_id, sample)
     rows = 0
     cols = 0

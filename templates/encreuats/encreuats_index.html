@@ -1,0 +1,661 @@
+{% extends "base.html" %}
+{% block title %}Encreuats Críptics - David Ruscalleda{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/encreuats.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+<h3 class="mt-3 text-center mb-1">Mots encreuats críptics</h3>
+<p class="text-center">Llista dels críptics que he anat creant, i una mica de tutorial i exemples pels més novells :)</p>
+
+<div class="container">
+    <div class="row">
+        {% for enc in encs %}
+        <div class="col-md-3 px-1">
+            <div class="card border-c mb-2">
+                <h6 class="card-header py-1 px-2"><span class="index-enc-id">#{{enc["enc_id"]}}</span> {{enc["title"]}}</h6>
+                <div class="card-body py-1 px-2 small">
+                    {{enc["autor"]}} · <b>{{enc["size"]}} paraules</b> · <span class="index-enc-date">{{enc["data"]}}</span>
+                    <a href="/encreuats/{{enc['enc_id']}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+<div class="card border-c bg-light mb-2 mx-3">
+    <h4 class="card-header text-center py-2">Tutorial i exemples</h4>
+
+    <h5 class="h5 text-center mt-3">Conceptes generals</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Estructura de les pistes</h5>
+            <hr>
+            <p class="mb-1">
+                En uns mots encreuats críptics, les pistes tenen sempre dues parts:
+            </p>
+                <ul>
+                    <li>Una <span class="eh-def">definició</span> (un sinònim, hiperònim, exemple...) de <span class="eh-res">la paraula que busques</span>.</li>
+                    <li>Alguna mena de <span class="eh-wordplay">joc de paraules</span> que va a parar a <span class="eh-res">la mateixa resposta</span>.</li>
+                </ul>
+            <p class="mb-1">
+                Dins el joc de paraules trobarem dos tipus de paraula diferents:
+            </p>
+            <ul>
+                <li>Els <span class="eh-ind">indicadors</span> que ens insinuen la manera com hem de jugar amb les paraules.</li>
+                <li>El <span class="eh-mat">material</span> (les paraules amb què hem de jugar).</li>
+            </ul>
+            <p class="mb-3">
+                Algunes paraules (sobretot paraules petites com 'i', 'de' o 'en') poden estar fent d'unió i prou, <br>
+                però idealment totes les paraules de la pista formaran part de la <span class="eh-def">definició</span> o del <span class="eh-wordplay">joc de paraules</span>.<br>
+                És a dir, per norma general no es renuncia a la coherència del <span class="eh-wordplay">joc de paraules</span> per motius gramaticals.
+            </p>
+            <div class="alert alert-danger small mb-0 px-2 py-1">
+                <b>Compte! </b> El primer críptic que vaig fer (<b>Aliment-icí</b>) no respecta per defecte cap de les convencions d'aquesta guia, així que resoldre'l potser requerirà més pensament lateral.<br>
+                La recomanació és que comenceu per <b>CRUIptic</b> o qualsevol de posterior (quan n'afegeixi de nous), que sí que estaran creats amb l'estructura i els tipus de pista en ment.
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">La definició sempre als extrems</h5>
+            <hr>
+            <p class="mb-3">
+                A les pistes, la <span class="eh-def">definició</span> <u>sempre</u> serà al principi o al final de la pista.<br>
+                Pot ser la primera paraula, les tres primeres, les dues últimes...<br>
+                qualsevol quantitat de paraules, sempre i quan comenci al principi o acabi al final.
+            </p>
+            <p class="mb-3">
+                Una part important de la feina, doncs, serà decidir quin extrem de la frase té més pinta de ser <span class="eh-def">un sinònim</span>,<br>
+                i decidir si hem d'agafar només una paraula o si n'hem d'agafar unes quantes que sembla que van juntes.
+            </p>
+            <p class="mb-1">
+                Compte, però, perquè molt sovint hi haurà paraules que superficialment semblen un grup obvi,<br>
+                però que en realitat s'hauran de retallar perquè la <span class="eh-def">definició</span> només serà una d'elles.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Maneres de jugar amb les paraules</h5>
+            <hr>
+            <p class="mb-3">
+                Dins el <span class="eh-wordplay">joc de paraules</span> podem trobar un bon grapat de maneres diferents de remenar el <span class="eh-mat">material</span>,<br>
+                i és important estar tenir el radar sempre posat, intentant detectar quines paraules podrien estar fent d'<span class="eh-ind">indicador</span>.
+            </p>
+            <p class="mb-3">
+                Malauradament, no et puc donar cap llista tancada dels <span class="eh-ind">indicadors</span> que marquen cada tipus de <span class="eh-wordplay">joc de paraules</span>,<br>
+                perquè part de la gràcia dels críptics és que els autors es posen (ens posem) creatius amb aquestes coses,<br>
+                i que per tant hauràs d'aprendre a detectar <span class="eh-ind">paraules sospitoses</span> i a entendre què deuen estar insinuant.
+            </p>
+            <p class="mb-3">
+                Tot i això, sí que hi ha maneres molt concretes i molt típiques de <span class="eh-wordplay">jugar amb les paraules</span>,<br>
+                com per exemple <span class="eh-wordplay">agafar-ne o eliminar-ne algunes lletres</span>, <span class="eh-wordplay">fer-ne un anagrama</span> o <span class="eh-wordplay">llegir-les marxa enrere</span>.<br>
+
+            </p>
+            <p class="mb-1">
+                És a dir, no et puc dir exactament quines <span class="eh-ind">paraules clau</span> hauràs de buscar,<br>
+                però sí que et puc dir quines <span class="eh-wordplay">maneres de jugar</span> són típiques i et trobaràs sovint.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Utilitzant el material</h5>
+            <hr>
+            <p class="mb-3">
+                Quan trobem <span class="eh-mat">material</span> dins les pistes, pot ser que ja estigui escrit tal com el necessitem,<br>
+                però també pot ser que primer haguem de buscar <span class="eh-wordplay">un sinònim</span> de la paraula que ens donen.
+            </p>
+            <p class="mb-1">
+                D'altra banda, si la <span class="eh-mat">paraula</span> que ens donen té una <span class="eh-wordplay">abreviatura</span> típica (en llengua o també en ciència),<br>
+                pot ser que haguem de fer servir l'abreviatura en lloc de la paraula.
+            </p>
+        </div>
+    </div>
+
+    <h5 class="h5 text-center mt-3">Tipus d'indicador</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'eliminació</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que cal <span class="eh-wordplay">eliminar lletres</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">escapçada</span> o <span class="eh-ind">decapitat</span> poden ser senyals que hem d'<span class="eh-wordplay">ignorar la primera lletra</span>.</li>
+                <li>Paraules com <span class="eh-ind">escuada</span> o <span class="eh-ind">sense fi</span> poden ser senyals que hem d'<span class="eh-wordplay">ignorar l'última lletra</span>.</li>
+                <li>Paraules com <span class="eh-ind">sense ànima</span> o <span class="eh-ind">buit</span> poden ser senyals que hem d'<span class="eh-wordplay">agafar només les puntes</span>.</li>
+                <li>Paraules com <span class="eh-ind">desabrigada</span> o <span class="eh-ind">desprotegit</span> poden ser senyals que hem d'<span class="eh-wordplay">eliminar les puntes</span>.</li>
+                <li>Paraules com <span class="eh-ind">allibera</span> o <span class="eh-ind">ignora</span> poden ser senyals que hem d'<span class="eh-wordplay">eliminar alguna cosa de pel mig</span>.</li>
+            </ul>
+            <p class="mb-1">
+                Evidentment, pot ser que en alguna pista apareguin paraules d'aquestes i no siguin res d'això.<br>
+                Fins i tot de vegades pot ser que siguin part de la <span class="eh-def">definició</span>! Però va bé estar sempre a l'aguait.
+            </p>
+
+            <!-- Example -->
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Classe sense la primera taula. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-elimina">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-elimina" class="collapse">
+                            <span class="eh-def">Classe</span> <span class="eh-ind">sense la primera</span> <span class="eh-mat">taula</span>. (4)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-elimina">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-elimina" class="collapse">
+                            Si <span class="eh-ind">eliminem la primera lletra</span> de la paraula "<span class="eh-mat">taula</span>", ens queda "<span class="eh-res">aula</span>", que és una <span class="eh-def">classe</span> i té 4 lletres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'inversió</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que cal <span class="eh-wordplay">invertir la paraula</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">retorna</span> o <span class="eh-ind">reculant</span> poden ser senyals que hem d'<span class="eh-wordplay">escriure-la al revés</span></li>
+                <li>Paraules com <span class="eh-ind">cap per vall</span> o <span class="eh-ind">ascendint</span> també, si és una paraula que va en vertical.</li>
+            </ul>
+            <!-- Example -->
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple (V):</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Estimació de Roma a l'alça. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-inversio">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-inversio" class="collapse">
+                            <span class="eh-def">Estimació</span> de <span class="eh-mat">Roma</span> <span class="eh-ind">a l'alça</span>. (4)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-inversio">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-inversio" class="collapse">
+                            Si llegim la paraula <span class="eh-def">Roma</span> "<span class="eh-ind">a l'alça</span>" (i.e. <span class="eh-ind">de baix a dalt</span>), ens surt "<span class="eh-res">amor</span>", una forma d'<span class="eh-def">estimació</span> de 4 lletres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'amagatall</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que trobarem la <span class="eh-res">resposta</span> <span class="eh-wordplay">buscant pel mig d'una frase</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">inclou</span> o <span class="eh-ind">bocí de</span> poden ser senyals que hem de <span class="eh-wordplay">buscar dins la frase ignorant els espais</span>.</li>
+            </ul>
+            <!-- Example -->
+            <div class="card index-enc-example mb-2">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Bèstia alada s'amaga entre la pedra calcària. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-amagada">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-amagada" class="collapse">
+                            <span class="eh-def">Bèstia alada</span> <span class="eh-ind">s'amaga entre</span> <span class="eh-mat">la pedra calcària</span>. (4)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-amagada">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-amagada" class="collapse">
+                            Si <span class="eh-ind">busquem</span> entre les paraules "<span class="eh-mat">la pe<u>dra c</u>alcària</span>", trobem la paraula "<span class="eh-res">drac</span>", que és <span class="eh-def">una bèstia alada</span> de 4 lletres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'anagrama</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que hem de <span class="eh-wordplay">reordenar les lletres</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">en moviment</span> o <span class="eh-ind">esverada</span>, que facin referència a <span class="eh-wordplay">lletres que es mouen</span>.</li>
+                <li>Paraules com <span class="eh-ind">embolic</span> o <span class="eh-ind">confosa</span>, que facin referència a <span class="eh-wordplay">lletres que no saben on són</span>.</li>
+                <li>Paraules com <span class="eh-ind">destrucció</span> o <span class="eh-ind">ferida</span>, que facin referència a <span class="eh-wordplay">malmetre les paraules</span>.</li>
+            </ul>
+            <p>
+                Qualsevol cosa que ens faci pensar en <span class="eh-wordplay">trencament</span>, <span class="eh-wordplay">moviment</span> o <span class="eh-wordplay">caos</span>, té possibilitats de ser un <span class="eh-ind">indicador d'anagrama</span>.<br>
+                Una bona manera de confirmar la sospita és mirar si just al costat hi ha <span class="eh-mat">material</span> amb la quantitat de lletres que necessitem.
+            </p>
+            <!-- Example -->
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Mira amb miopia un rodolí. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-anagrama">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-anagrama" class="collapse">
+                            <span class="eh-mat">Mira</span> <span class="eh-ind">amb miopia</span> <span class="eh-def">un rodolí</span>. (4)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-anagrama">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-anagrama" class="collapse">
+                            L'expressió "<span class="eh-ind">amb miopia</span>" sona a <span class="eh-wordplay">confusió</span>, i és al costat de "<span class="eh-mat">mira</span>", que té 4 lletres. <span class="eh-wordplay">Reordenant-la</span> trobem "<span class="eh-res">rima</span>", <span class="eh-def">un rodolí</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors de recipient</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que hem de <span class="eh-wordplay">posar una paraula dins d'una altra</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">conté</span> o <span class="eh-ind">abraça</span> poden ser senyals que hem d'<span class="eh-wordplay">escriure una paraula dins l'altra</span>.</li>
+            </ul>
+            <!-- Example -->
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Joia de pera conté un litre. (5)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-conte">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-conte" class="collapse">
+                            <span class="eh-def">Joia</span> de <span class="eh-mat">pera</span> <span class="eh-ind">conté</span> <span class="eh-mat">un litre</span>. (5)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-conte">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-conte" class="collapse">
+                            Si agafem "<span class="eh-mat">un litre</span>" (L) i <span class="eh-wordplay">el posem a dins</span> de la paraula "<span class="eh-mat">pera</span>", ens queda "<span class="eh-res">perla</span>", que és <span class="eh-def">una joia</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'acròstic</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que hem d'<span class="eh-wordplay">agafar una lletra de cada paraula</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">als inicis</span> o <span class="eh-ind">principalment</span> poden ser senyals que hem d'agafar <span class="eh-wordplay">la primera lletra de cada paraula</span>.</li>
+                <li>Paraules com <span class="eh-ind">finalitzant</span> o <span class="eh-ind">acaben</span> poden ser senyals que hem d'agafar <span class="eh-wordplay">l'última lletra de cada paraula</span>.</li>
+                <li>Paraules com <span class="eh-ind">intermitent</span> o <span class="eh-ind">alterna</span> poden ser senyals que hem d'agafar <span class="eh-wordplay">una lletra de cada dues</span>.</li>
+            </ul>
+            <!-- Example -->
+            {% set tipus = 'acrostic' %}
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Córrer molt, aconseguint regularment acabar tenint obsequis per les primeres posicions. (6)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-{{tipus}}">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-{{tipus}}" class="collapse">
+                            <span class="eh-def">Córrer</span> <span class="eh-mat">molt, aconseguint regularment acabar tenint obsequis</span> <span class="eh-ind">per les primeres posicions</span>. (6)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-{{tipus}}">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-{{tipus}}" class="collapse">
+                            Agafant <span class="eh-ind">les primeres lletres</span> de "<span class="eh-mat"><u>m</u>olt, <u>a</u>conseguint <u>r</u>egularment <u>a</u>cabar <u>t</u>enint <u>o</u>bsequis</span>" ens surt "<span class="eh-res">marató</span>", que és una manera de <span class="eh-def">córrer</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Indicadors d'homòfons</h5>
+            <hr>
+            <p class="mb-1">
+                Paraules que insinuen que <span class="eh-wordplay">sona igual però s'escriu diferent</span>.
+            </p>
+            <ul>
+                <li>Paraules com <span class="eh-ind">escolta</span> o <span class="eh-ind">diuen</span> poden ser senyals que hem de <span class="eh-wordplay">buscar una paraula que soni igual</span>.</li>
+            </ul>
+            <!-- Example -->
+            {% set tipus = 'homofon' %}
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Dona gust sentir un grup d'animals que es reprodueixen entre ells. (7)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-{{tipus}}">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-{{tipus}}" class="collapse">
+                            <span class="eh-def">Dona gust</span> <span class="eh-ind">sentir</span> <span class="eh-mat">un grup d'animals que es reprodueixen entre ells</span>. (7)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-{{tipus}}">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-{{tipus}}" class="collapse">
+                            <span class="eh-mat">Un grup d'animals que es reprodueixen entre ells</span> és una <span class="eh-mat">espècie</span>, que <span class="eh-wordplay">sona com</span> "<span class="eh-res">espècia</span>", una cosa que <span class="eh-def">dona gust</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Altres indicadors?</h5>
+            <hr>
+            <p class="mb-3">
+                Com dèiem a la introducció, la creació de mots encreuats críptics porta extremadament arrelada la celebració de la creativitat,<br>
+                així que sempre hi ha la possibilitat que la pista que t'estàs mirant no segueixi cap dels <span class="eh-wordplay">patrons clàssics</span>,<br>
+                i que en canvi el seu autor estigui provant <span class="eh-wordplay">alguna cosa estrafalària</span> que per algun motiu li ha encaixat amb la pista.
+            </p>
+            <p class="mb-1">
+                Tot i això, sí que hi ha un grapat de <span class="eh-wordplay">tipus de pista alternatius</span> que, tot i tenir una estructura diferent de la normal,<br>
+                són igualment maneres clàssiques de fer les coses. Posem-los al radar per si mai apareixen...
+            </p>
+        </div>
+    </div>
+
+    <h5 class="h5 text-center mt-3">Tipus de pista alternatius</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Doble definició</h5>
+            <hr>
+            <p class="mb-1">
+                Pistes que només tenen <span class="eh-def">definició</span>, però que en tenen dues de diferents que comparteixen la mateixa <span class="eh-res">resposta</span>.
+            </p>
+            <!-- Example -->
+            {% set tipus = 'doble' %}
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Grup de peixos per seure. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-{{tipus}}">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-{{tipus}}" class="collapse">
+                            <span class="eh-def">Grup de peixos</span> <span class="eh-def">per seure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-{{tipus}}">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-{{tipus}}" class="collapse">
+                            Un <span class="eh-def">grup de peixos</span> que també és un <span class="eh-def">lloc per seure</span> és un <span class="eh-res">banc</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title mb-0">Literal (pista com a definició)</h5>
+            <i>En anglès, "&lit" i "semi-&lit".</i>
+            <hr>
+            <p class="mb-3">
+                Pistes on el <span class="eh-wordplay">joc de paraules</span> és alhora la <span class="eh-def">definició</span> (o en forma part).
+            </p>
+            <p class="mb-3">
+                Els anglesos en diuen pistes "<b>&lit</b>" quan <u>tota la pista sencera</u> es pot llegir alhora com una <span class="eh-def">definició</span> o com un <span class="eh-wordplay">joc de paraules</span>,<br>
+                i en diuen pistes "<b>semi-&lit</b>" quan <u>la pista sencera</u> és la <span class="eh-def">definició</span>, i alhora <u>una part de la pista</u> és el <span class="eh-wordplay">joc de paraules</span>.
+            </p>
+            <p class="mb-3">
+                Aquestes pistes apareixen poc, perquè (sobre tot les <b>&lit</b> pures) són molt difícils d'aconseguir inventar.<br>
+                És per això que molts autors les consideren el sant grial dels mots encreuats críptics.
+            </p>
+            <p class="mb-1">
+                Alguns mitjans (sobretot dels Estats Units) identifiquen les pistes <b>&lit</b> posant una exclamació al final de la pista.
+            </p>
+            <!-- Example -->
+            {% set tipus = 'andlit' %}
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Cosa mutilada que solia ser un arbre. (4)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-{{tipus}}">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-{{tipus}}" class="collapse">
+                            <span class="eh-mat pb-1 px-0"><span class="eh-def">Cosa</span></span><span class="eh-def px-0"> </span><span class="eh-ind pb-1 px-0"><span class="eh-def">mutilada</span></span><span class="eh-def">que solia ser un arbre</span>. (4)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-{{tipus}}">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-{{tipus}}" class="collapse">
+                            Si "<span class="eh-ind">mutilem</span>" la paraula "<span class="eh-mat">cosa</span>" (en fem un <span class="eh-wordplay">anagrama</span>), trobem "<span class="eh-res">soca</span>", una "<span class="eh-def">cosa mutilada que solia ser un arbre</span>".
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title mb-0">Jeroglífic (pista inversa)</h5>
+            <i>En anglès, "rebus".</i>
+            <hr>
+            <p class="mb-3">
+                Pistes que en lloc de tenir <span class="eh-wordplay">joc de paraules</span>, et diuen quin seria el resultat de prendre't la <span class="eh-res">resposta</span> com si fos un <span class="eh-wordplay">joc de paraules</span>.
+            </p>
+            <p class="mb-1">
+                Hi ha paraules o expressions que són una <span class="eh-res">resposta</span>, però que per sí soles tindrien sentit com a <span class="eh-wordplay">joc de paraules</span>.<br>
+                En aquests casos, l'autor pot decidir que la pista estarà composta de la <span class="eh-def">definició</span> de sempre,<br>
+                juntament amb la "<span class="eh-mat pb-1 px-0"><span class="eh-res">resposta</span></span>" que obtindríem si féssim servir <span class="eh-res pb-1 px-0"><span class="eh-wordplay">la resposta de veritat</span></span> com a única pista.
+            </p>
+            <!-- Example -->
+            {% set tipus = 'rebus' %}
+            <div class="card index-enc-example mb-2 mt-3">
+                <div class="card-body py-1 px-2">
+                    <b>Exemple:</b>
+                    <div class="row mb-0 px-2">
+                        <div class="col-md-auto px-2">
+                            Element i nom. (8)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#analitza-{{tipus}}">Analitza</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="analitza-{{tipus}}" class="collapse">
+                            <span class="eh-def">Element</span> <span class="eh-mat pb-1 px-0"><span class="eh-res">i nom</span></span>. (8)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto pr-0 pl-2">
+                        <button type="button" class="btn btn-mini border-c py-0 btn-enc-sample" data-toggle="collapse" data-target="#resol-{{tipus}}">Resol</button>
+                    </div>
+                    <div class="col-md-auto px-2">
+                        <div id="resol-{{tipus}}" class="collapse">
+                            Un <span class="eh-def">element</span> de 8 lletres és l'<span class="eh-res pb-1 px-0"><span class="eh-ind pr-0">anti</span><span class="eh-mat pl-0">moni</span></span>, que ens insinua que hem d'<span class="eh-wordplay">invertir</span> les lletres de "<span class="eh-mat">moni</span>", obtenint <span class="eh-mat pb-1 px-0"><span class="eh-res">i nom</span></span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/exemple-->
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+        <div class="card-body">
+            <h5 class="card-title">Altres tipus de pista?</h5>
+            <hr>
+            <p class="mb-1">
+                Sí, ja veus com va la cosa... no pots estar mai segur que ho saps tot!<br>
+                Però saber que sempre et poden sorprendre amb una pirula tot boja també és divertit.<br>
+                Per tant, tingues la ment oberta i no tinguis por de provar coses rares si et sembla que tenen sentit!
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

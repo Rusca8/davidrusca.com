@@ -79,3 +79,43 @@
 .table-error {
     border: 4px solid darkred;
 }
+
+/* INDEX & TUTORIAL */
+.index-enc-id {
+    color: #aaaaaa;
+    margin-right: 0.2rem;
+}
+
+.index-enc-date {
+    color: #336699;
+}
+/* enc. highlighting */
+.eh-def {
+    background-color: #cfefff;
+}
+.eh-mat {
+    background-color: #f5c4c4;
+}
+.eh-ind {
+    background-color: #f7e1b2;
+}
+.eh-wordplay {
+    background-color: #e9e9e9;
+}
+.eh-res {
+    background-color: #d0f0b9;
+}
+.eh-def, .eh-mat, .eh-ind, .eh-wordplay, .eh-res {
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+}
+
+.index-enc-example {
+    border: 1px dashed rgba(120, 100, 80);
+    max-width: 45rem;
+}
+
+.btn-enc-sample {
+    height: 1.5rem;
+    width: 4.5rem;
+}

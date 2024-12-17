@@ -388,11 +388,19 @@ def catagrama_viqui():
                            choice_stats=choice_stats, origin=origin, from_app_sizes=from_app_sizes)
 
 
+@app.route('/encreuats')
+@app.route('/encreuats/')
+def encreuats_index():
+    import encreuats as ec
+    encs = ec.list_for_index()
+    return render_template("/encreuats/encreuats_index.html", encs=encs)
+
+
 @app.route('/encreuats/<enc_id>')
 def encreuat(enc_id="sample"):
-    import encreuats as enc
-    enc = enc.parse_encreuat(enc_id)
-    return render_template("/encreuats/encreuat.html", enc=enc, show=False)
+    import encreuats as ec
+    ec = ec.parse_encreuat(enc_id)
+    return render_template("/encreuats/encreuat.html", enc=ec, show=False)
 
 
 @app.route('/ktn')
