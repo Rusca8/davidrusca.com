@@ -26,6 +26,31 @@ def list_for_index():
     return listed
 
 
+def clues_in_cell(enc, row, col):
+    cic = 0
+    for clue in enc["clues"]["h"].values():
+        if row == clue["pos"][0] and clue["pos"][1] <= col < clue["pos"][1] + clue["len"]:
+            cic += 1
+    for clue in enc["clues"]["v"].values():
+        if col == clue["pos"][1] and clue["pos"][0] <= row < clue["pos"][0] + clue["len"]:
+            cic += 1
+    return cic
+
+
+def get_keying_factor(enc_id=None):
+    enc = parse_encreuat(enc_id)
+    n_clued = 0
+    n_keyed = 0
+    for row in range(enc["rows"]):
+        for col in range(enc["cols"]):
+            cic = clues_in_cell(enc, row, col)
+            if cic:
+                n_clued += 1
+                if cic > 1:
+                    n_keyed += 1
+    return round(100 * n_keyed / n_clued)
+
+
 def parse_encreuat(enc_id=None):
     print(f"searching for {enc_id=}")
     encreuats = utilities.load_json(encreuats_file)
@@ -90,8 +115,10 @@ def parse_encreuat(enc_id=None):
             "date": encreuat.get("date", "2024-12-15"), "comments": encreuat.get("comments", f"Has posat un enllaç que no existeix.<br>No hi ha cap críptic <b>#{enc_id}</b>.<br>Però et perdono. Pots resoldre això, va.")}
 
 if __name__ == "__main__":
-    enc = parse_encreuat("3")
+    test_id = "1"
+    enc = parse_encreuat(test_id)
     print(enc["rows"], enc["cols"])
     for row in enc["solved"]:
         print("".join([cell for cell in row]))
 
+    print(get_keying_factor(test_id))
