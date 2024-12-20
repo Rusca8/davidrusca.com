@@ -44,13 +44,22 @@
                     <div id="current-clue-v-div" class="p-1"><b>V:</b> <span id="current-clue-v">-</span></div>
                     <div id="current-clue-h-div" class="p-1"><b>H:</b> <span id="current-clue-h">-</span></div>
                 </div>
-                <div class="card border-c mt-2 encreuat-title-card mb-3 fixed-w-25 margin-x-auto">
+                <div class="card border-c mt-2 encreuat-title-card mb-2 fixed-w-25 margin-x-auto">
                     <div class="card-body py-1 px-2 text-center" style="line-height: 80%;">
                         <div class="py-1">
                             <b>{{enc["autor"]}}</b> · {{enc["date"]}}<br>
                         </div>
                         <div id="encreuat-comments" class="margin-x-auto mb-1">
                             {{enc["comments"] | safe}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-c bg-index-tut mb-3 fixed-w-25 margin-x-auto">
+                    <div class="card-body py-1 px-2 text-center" style="line-height: 80%;">
+                        <div class="py-1">
+                            Índex i tutorial
+                            <a href="/encreuats/" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>

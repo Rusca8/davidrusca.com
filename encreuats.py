@@ -16,13 +16,26 @@ sample = {
 }
 
 encreuats_file = "./hidden/encreuats/encreuats.json"
+keying_factors_file = "./hidden/encreuats/keying_factors.json"
+dimensions_file = "./hidden/encreuats/dimensions.json"
 
 def list_for_index():
     encreuats = utilities.load_json(encreuats_file)
+    keying_factors = utilities.load_json(keying_factors_file)
+    dimensions = utilities.load_json(dimensions_file)
     listed = []
     for enc_id, enc in reversed(encreuats.items()):
         nclues = len(enc["words"]["h"]) + len(enc["words"]["v"])
-        listed.append({"title": enc["title"], "autor": enc['autor'], "data": enc['date'], "enc_id": enc_id, "size": nclues})
+        if enc_id not in keying_factors:
+            print(enc_id, "not in keying factors database. Updating...")
+            build_keying_factors()
+        k = keying_factors.get(enc_id, "??")
+        if enc_id not in dimensions:
+            print(enc_id, "not in dimensions database. Updating...")
+            build_dimensions_db()
+        rows, cols = dimensions.get(enc_id)
+        listed.append({"title": enc["title"], "autor": enc['autor'], "data": enc['date'], "enc_id": enc_id,
+                       "size": nclues, "k": k, "rows": rows, "cols": cols})
     return listed
 
 
@@ -37,18 +50,30 @@ def clues_in_cell(enc, row, col):
     return cic
 
 
-def get_keying_factor(enc_id=None):
-    enc = parse_encreuat(enc_id)
-    n_clued = 0
-    n_keyed = 0
+def get_keying_factor(enc=None):
+    if enc is None:
+        return "Not provided"
+    word_letters = 0
+    unchecked = 0
     for row in range(enc["rows"]):
         for col in range(enc["cols"]):
             cic = clues_in_cell(enc, row, col)
             if cic:
-                n_clued += 1
-                if cic > 1:
-                    n_keyed += 1
-    return round(100 * n_keyed / n_clued)
+                word_letters += cic
+                if cic == 1:
+                    unchecked += 1
+    return round(100 * (1 - unchecked / word_letters))
+
+
+def build_keying_factors(rebuild=False):
+    """Calculates keying factors for all crosswords and saves them to a file."""
+    utilities.touch_file(keying_factors_file)
+    keying_factors = utilities.load_json(keying_factors_file)
+    encreuats = utilities.load_json(encreuats_file)
+    for enc_id in encreuats:
+        if enc_id not in keying_factors or rebuild:
+            keying_factors[enc_id] = get_keying_factor(parse_encreuat(enc_id))
+    utilities.dump_json(keying_factors, keying_factors_file)
 
 
 def parse_encreuat(enc_id=None):
@@ -114,6 +139,19 @@ def parse_encreuat(enc_id=None):
             "title": encreuat.get("title", "Vaia patillada"), "autor": encreuat.get("autor", "Rusca"),
             "date": encreuat.get("date", "2024-12-15"), "comments": encreuat.get("comments", f"Has posat un enllaç que no existeix.<br>No hi ha cap críptic <b>#{enc_id}</b>.<br>Però et perdono. Pots resoldre això, va.")}
 
+
+def build_dimensions_db(rebuild=False):
+    """Calculates keying factors for all crosswords and saves them to a file."""
+    utilities.touch_file(dimensions_file)
+    dimensions = utilities.load_json(dimensions_file)
+    encreuats = utilities.load_json(encreuats_file)
+    for enc_id in encreuats:
+        if enc_id not in dimensions or rebuild:
+            enc = parse_encreuat(enc_id)
+            dimensions[enc_id] = [enc["rows"], enc["cols"]]
+    utilities.dump_json(dimensions, dimensions_file)
+
+
 if __name__ == "__main__":
     test_id = "1"
     enc = parse_encreuat(test_id)
@@ -121,4 +159,5 @@ if __name__ == "__main__":
     for row in enc["solved"]:
         print("".join([cell for cell in row]))
 
-    print(get_keying_factor(test_id))
+    build_dimensions_db(True)
+    build_keying_factors(True)

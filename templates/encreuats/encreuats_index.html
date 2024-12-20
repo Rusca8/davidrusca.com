@@ -16,7 +16,8 @@
             <div class="card border-c mb-2">
                 <h6 class="card-header py-1 px-2"><span class="index-enc-id">#{{enc["enc_id"]}}</span> {{enc["title"]}}</h6>
                 <div class="card-body py-1 px-2 small">
-                    {{enc["autor"]}} · <b>{{enc["size"]}} paraules</b> · <span class="index-enc-date">{{enc["data"]}}</span>
+                    {{enc["autor"]}} · <span class="index-enc-date">{{enc["data"]}}</span><br>
+                    <span class="index-enc-dim">{{enc["rows"]}}x{{enc["cols"]}}</span> · <b>{{enc["size"]}} paraules</b> · <span class="index-enc-k">k{{enc["k"]}}</span>
                     <a href="/encreuats/{{enc['enc_id']}}" class="stretched-link"></a>
                 </div>
             </div>

@@ -33,6 +33,7 @@
     top: -0.05rem;
     left: 0.1rem;
     font-size: 0.5rem;
+    pointer-events: none;
 }
 
 .cell-input {
@@ -85,9 +86,14 @@
     color: #aaaaaa;
     margin-right: 0.2rem;
 }
-
 .index-enc-date {
     color: #336699;
+}
+.index-enc-dim{
+    color: #886622;
+}
+.index-enc-k {
+    color: #882288;
 }
 /* enc. highlighting */
 .eh-def {
@@ -118,4 +124,9 @@
 .btn-enc-sample {
     height: 1.5rem;
     width: 4.5rem;
+}
+
+.bg-index-tut {
+    background-color: #807a6e;
+    color: white;
 }
