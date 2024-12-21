@@ -87,3 +87,7 @@ canvas {
 .min-w-index {
     min-width: 17rem;
 }
+
+.social-icon {
+    height: 1.5rem;
+}
