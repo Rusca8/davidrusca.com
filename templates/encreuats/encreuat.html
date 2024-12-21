@@ -32,7 +32,7 @@
                         {% set style_class = '' if not dis else ('encreuat-cell-style-' + style) if style else 'encreuat-cell-disabled' %}
                         <td id="cell-{{r}}-{{c}}" class="encreuat-cell text-center {{style_class}} px-0 py-0">
                             {% if not dis %}
-                            <input id="input-{{r}}-{{c}}" type="text" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="get_last_input(this); save_state(); check_solution(); next({{r}}, {{c}});">
+                            <input id="input-{{r}}-{{c}}" type="text" autocomplete="off" value="{{enc['solved'][r][c] if show else ''}}" class="cell-input" onclick="new_focus({{r}},{{c}});" oninput="get_last_input(this); save_state(); check_solution(); next({{r}}, {{c}});" />
                             {% endif %}
                             <div class="overlay">{{encreuat[r][c] if encreuat[r][c] not in ["-", "x"]}}</div>
                         </td>
