@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2024 ORGANIZATION
+# Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-21 18:12+0100\n"
+"POT-Creation-Date: 2025-01-02 15:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1979,11 +1979,11 @@ msgstr ""
 msgid "Programación"
 msgstr ""
 
-#: templates/docentes.html:101 templates/docentes.html:481
-msgid "Crucigramas crípticos"
+#: templates/docentes.html:101 templates/docentes.html:470
+msgid "Juegos de Lengua"
 msgstr ""
 
-#: templates/docentes.html:102 templates/docentes.html:470
+#: templates/docentes.html:102 templates/docentes.html:482
 #: templates/ventriloquia.html:2
 msgid "Ventriloquía"
 msgstr ""
@@ -2224,7 +2224,7 @@ msgid "Máquinas simples"
 msgstr ""
 
 #: templates/docentes.html:424 templates/docentes.html:472
-#: templates/docentes.html:483
+#: templates/docentes.html:484
 msgid "Online:"
 msgstr ""
 
@@ -2252,12 +2252,16 @@ msgstr ""
 msgid "Apuntes y Trucos"
 msgstr ""
 
-#: templates/docentes.html:474 templates/ventriloquia.html:7
-msgid "Traductor de Ventriloquía"
+#: templates/docentes.html:474
+msgid "Catagrama del día"
 msgstr ""
 
-#: templates/docentes.html:485
-msgid "Tutorial, ejemplos y crucigramas"
+#: templates/docentes.html:475
+msgid "Crucigramas crípticos"
+msgstr ""
+
+#: templates/docentes.html:486 templates/ventriloquia.html:7
+msgid "Traductor de Ventriloquía"
 msgstr ""
 
 #: templates/index.html:25

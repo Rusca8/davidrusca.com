@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Builder: Diacriptic</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+    <link rel="stylesheet" href="/static/styles/diacriptic_builder.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+
+    <!-- Main -->
+    {% set word = "" %}
+    {% set clue = "" %}
+    {% set solu = "" %}
+    <script>
+        var clue_id = "????????";
+        var clue = {{clue|tojson}};
+        var word = {{word|tojson}};
+        var siblings_word = "";
+        var solu = {{solu|tojson}};
+        var blocks = {};
+        var last_block = null;
+        var sol_blocks = {};
+        var sol_last_block = null;
+
+        var t_last_input = Date.now();
+        var t_check_siblings = Date.now();
+
+        var base_url = "/diacriptic/b/ajax/"
+
+        window.onload = function(){
+            update();
+            reset_blocks();
+            reset_blocks("solu");
+            document.getElementById("clue").addEventListener("keypress", hotkey_clue);
+            document.getElementById("solu").addEventListener("keypress", hotkey_solu);
+
+            setInterval(check_word_siblings, 500);
+        }
+
+        function build_block_list(which_list="clue"){
+            let blocklist = document.getElementById(which_list == "clue" ? "blocklist" : "blocklist-solu");
+            blocklist.innerHTML = "";
+            let the_blocks = which_list == "clue" ? blocks : sol_blocks;
+            let the_text = which_list == "clue" ? clue : solu;
+            // parsing
+            for(let [key, value] of Object.entries(the_blocks)){
+                let i = 0;
+                for(let [s, e] of value){
+                    let result = the_text.slice(Math.max(0, s), Math.min(e, the_text.length));
+                    let the_block = '<span class="eh-' + key + '"><span class="del-btn" onclick="del_block(' + "'" + key + "'" + ', ' + i + ', ' + "'" + which_list + "'" + ')">' + result + " ⨉" + '</span></span>'
+                    blocklist.innerHTML += the_block + " ";
+                    i++;
+                }
+            }
+        }
+
+
+        function paint_analysis(which="clue"){
+            let text_to_paint = which == "clue" ? clue : solu;
+            let blocks_to_paint = which == "clue" ? blocks : sol_blocks;
+            let text = apply_analysis_to_text(text_to_paint, blocks_to_paint);
+            let id_to_paint = which == "clue" ? "analysis" : "solu-analysis";
+            let wlength = which == "clue" ? " " + write_word_length() : "";
+            document.getElementById(id_to_paint).innerHTML = text + wlength;
+        }
+
+        function write_word_length(){
+            if(!word){
+                return "";
+            }
+            let word_fragments = word.split(" ");
+            let len_list = [];
+            for(let fragment of word_fragments){
+                len_list.push(fragment.length);
+            }
+            return "(" + len_list.join(",") + ")";
+        }
+
+
+        function del_block(key, i, which_list="clue"){
+            let the_blocks = which_list == "clue" ? blocks : sol_blocks;
+            the_blocks[key].splice(i, 1);
+
+            update();
+            if(which_list == "clue"){
+                last_block = null;
+            }else{
+                sol_last_block = null;
+            }
+
+        }
+
+
+        function blocks_with_defaults(from_dict=null){
+            let keys = ["def", "ind", "mat", "wop", "res", "hid"];  // TODO get from sqlite
+            let new_blocks = {};
+            for(let key of keys){
+                new_blocks[key] = [];
+                if(from_dict !== null && key in from_dict){
+                    new_blocks[key] = from_dict[key];
+                }
+            }
+            return new_blocks;
+        }
+
+
+        function reset_blocks(which="clue"){
+            console.log("resetting blocks... " + which);
+            if(which == "clue"){
+                blocks = blocks_with_defaults();
+                last_block = null;
+            }else{
+                sol_blocks = blocks_with_defaults();
+                sol_last_block = null;
+            }
+            update();
+        }
+
+
+        function delete_last(which="clue"){
+            let key = which == "clue" ? last_block : sol_last_block;
+            if(key === null){
+                return;
+            }
+            let the_blocks = which == "clue" ? blocks : sol_blocks;
+            if(the_blocks[key].length > 0){
+                the_blocks[key] = the_blocks[key].slice(0, -1);
+            }
+            update();
+        }
+
+
+        function hotkey_clue(e){
+            hotkey(e, "clue");
+        }
+        function hotkey_solu(e){
+            hotkey(e, "solu");
+        }
+
+
+        function hotkey(e, which="clue"){
+            let text_to_hl = document.getElementById(which);
+            let start = text_to_hl.selectionStart;
+            let end = text_to_hl.selectionEnd;
+            if(e.key == "c"){
+                reset_blocks(which);
+            }else if(e.key == "r"){
+                delete_last(which);
+            }
+            if(start == end){
+                return;
+            }
+            let key = "";
+            switch(e.key){
+                case "1":
+                    key = "def";
+                    break;
+                case "2":
+                    key = "ind";
+                    break;
+                case "3":
+                    key = "mat";
+                    break;
+                case "4":
+                    key = "wop";
+                    break;
+                case "5":
+                    key = "res";
+                    break;
+                case "6":
+                    key = "hid";
+                    break;
+                default:
+                    return;
+            }
+            text_to_hl.selectionEnd = text_to_hl.selectionStart;
+            let the_blocks = which == "clue" ? blocks : sol_blocks;
+            the_blocks[key].push([start, end]);
+            if(which == "clue"){
+                last_block = key;
+            }else{
+                sol_last_block = key;
+            }
+            update();
+        }
+
+
+        function blocks_dict(which="clue"){
+            let the_blocks = which == "clue" ? blocks : sol_blocks;
+            let block_code = []
+            for(let [key, vals] of Object.entries(the_blocks)){
+                if(vals.length == 0){
+                    continue;
+                }
+                let vals_code = []
+                for(let [s, e] of vals){
+                    vals_code.push("[" + s + ", " + e + "]");
+                }
+                block_code.push('"' + key + '": [' + vals_code.join(", ") + "]");
+            }
+            return block_code.join(", ")
+        }
+
+
+        function write_analysis_code(){
+            let analysis_code = document.getElementById("analysis-code");
+            let tab = "&nbsp;&nbsp;&nbsp;&nbsp;"
+            // build
+            let the_code = '"' + clue_id + '": ' + "{\n";
+            the_code += '"word": "' + word.toLowerCase() + '"';
+            the_code += ',\n"clue": "' + clue + '"';
+            the_code += ',\n"analysis": {';
+            the_code += blocks_dict("clue");
+            the_code += "}";
+            the_code += ',\n"solution": ' + '"' + solu.replaceAll('"', '\\"') + '"';
+            the_code += ',\n"sol_analysis": {';
+            the_code += blocks_dict("solu");
+            the_code += "}";
+            the_code += "\n}";
+            analysis_code.innerHTML = the_code
+        }
+
+        function change_clue_id(input_element){
+            clue_id = input_element.value;
+            update();
+        }
+        function change_word(input_element){
+            word = input_element.value;
+            update();
+            t_last_input = Date.now();
+        }
+        function change_clue(input_element){
+            clue = input_element.value;
+            apply_changes();
+            update();
+        }
+        function sanitize_word(input_element){
+            input_element.value = input_element.value.toLowerCase();
+            let unidecode_subs = {
+                "a": ["à", "á"],
+                "e": ["è", "é"],
+                "i": ["í", "ï"],
+                "o": ["ò", "ó"],
+                "u": ["ú", "ü"]
+            }
+            for(let [unidecoded, latins] of Object.entries(unidecode_subs)){
+                for(let latin of latins){
+                    input_element.value = input_element.value.replace(latin, unidecoded);
+                }
+            }
+            word = input_element.value;
+            apply_changes();
+            update();
+        }
+        function sanitize_clue(input_element){
+            while(input_element.value.endsWith(".")){
+                input_element.value = input_element.value.slice(0,-1);
+            }
+            clue = input_element.value;
+            apply_changes();
+            update();
+        }
+        function change_solu(input_element){
+            solu = input_element.value;
+            apply_changes();
+            update();
+        }
+        function apply_changes(){
+            document.getElementById("clue").value = clue;
+            document.getElementById("solu").value = solu;
+        }
+
+        function update(){
+            build_block_list();
+            build_block_list("solu");
+            paint_analysis();
+            paint_analysis("solu");
+            write_analysis_code();
+        }
+
+
+        function load_from_id(){
+            let load_clue_id = $("#in-id").val();
+            if(load_clue_id){
+                console.log("Loading clue_id=" + load_clue_id);
+                $.ajax({
+                    url: base_url + "load",
+                    type: "post",
+                    data: {"clue_id": load_clue_id,
+                           "with_analyses": true
+                    },
+                    success: load_execute,
+                })
+            }else{
+                console.log("No clue_id to load.")
+            }
+        }
+        function load_execute(loaded_clue){
+            if(loaded_clue == "N"){
+                console.log("Clue id not found.");
+            }else{
+                clue_id = loaded_clue["clue_id"];
+                word = loaded_clue["word"];
+                clue = loaded_clue["clue"];
+                solu = loaded_clue["solution"];
+                document.getElementById("in-word").value = word;
+                document.getElementById("in-clue").value = clue;
+                document.getElementById("in-sol").value = solu;
+                blocks = blocks_with_defaults(loaded_clue["clue_analysis"]);
+                sol_blocks = blocks_with_defaults(loaded_clue["solution_analysis"]);
+                // swap modes
+                choose_mode("update");
+                $("#clue-id").val(clue_id);
+                // update dependencies
+                apply_changes();
+                update();
+                t_last_input = Date.now();
+            }
+        }
+
+        /*
+        function json_load_from_id(){
+            let load_clue_id = document.getElementById("load-clue-id").value;
+
+            ajax('builder_load_' + load_clue_id, new AjaxRequest(json_load_execute));
+        }
+        function json_load_execute(ajax_result){
+            ajax_result = JSON.parse(ajax_result);
+            clue_id = ajax_result["clue_id"];
+            word = ajax_result["word"];
+            clue = ajax_result["clue"];
+            solu = ajax_result["solution"];
+            document.getElementById("in-word").value = word;
+            document.getElementById("in-clue").value = clue;
+            document.getElementById("in-sol").value = solu;
+            blocks = blocks_with_defaults(ajax_result["analysis"]);
+            sol_blocks = blocks_with_defaults(ajax_result["sol_analysis"]);
+            // lock id
+            document.getElementById("load-clue-id").disabled = true;
+            // update dependencies
+            apply_changes();
+            update();
+        }
+        */
+
+        function choose_mode(mode){
+            console.log("choose mode:", mode);
+            $("#mode").val(mode);
+        }
+
+        function new_clue(){
+            console.log("Starting new clue");
+            empty_things();
+            choose_mode("create");
+        }
+
+        function empty_things(){
+            word = "";
+            clue = "";
+            solu = "";
+            reset_blocks();
+            reset_blocks("solu");
+            document.getElementById("in-word").value = word;
+            document.getElementById("in-clue").value = clue;
+            document.getElementById("in-sol").value = solu;
+            apply_changes();
+            update();
+            $("#clue-id").val("(new clue)");
+            t_last_input = Date.now();
+        }
+
+
+        function submit_to_db(){
+            let mode = $("#mode").val();
+            // UPDATE to DB
+            if(mode == "update"){
+                let clue_id = $("#clue-id").val();
+                let autor_id = $("#autor-id").html();
+                console.log("Will update clue #" + clue_id);
+                $.ajax({
+                    url: base_url + "update",
+                    type: "post",
+                    data: {
+                        "clue_id": clue_id,
+                        "word": word,
+                        "clue": clue,
+                        "solu": solu,
+                        "autor_id": autor_id,
+                        "clue_analysis": JSON.stringify(blocks),
+                        "solu_analysis": JSON.stringify(sol_blocks),
+                    },
+                    success: submit_update_execute,
+                });
+            // CREATE to DB
+            }else if(mode == "create"){
+                console.log("Creating new clue");
+                $.ajax({
+                    url: base_url + "create",
+                    type: "post",
+                    data: {
+                        "word": word,
+                        "clue": clue,
+                        "solu": solu,
+                        "clue_analysis": JSON.stringify(blocks),
+                        "solu_analysis": JSON.stringify(sol_blocks),
+                    },
+                    success: submit_create_execute,
+                });
+            }else{
+                console.log("submit_to_db??", mode);
+            }
+        }
+        function submit_create_execute(success){
+            if(success == "Y"){
+                console.log("Successfuly created")
+                new_clue();
+            }else{
+                console.log("Clue creation failed. Try again?")
+            }
+        }
+        function submit_update_execute(success){
+            console.log(success);
+        }
+        function submit_execute(success){
+            console.log(success);
+        }
+
+        function check_word_siblings(){
+            if(t_check_siblings < t_last_input && Date.now() > t_last_input + 500){
+                if(siblings_word != word){
+                    load_clue_siblings();
+                }
+            }
+        }
+
+        function load_clue_siblings(){
+            $.ajax({
+                url: base_url + "siblings",
+                type: "post",
+                data: {
+                    "word": word,
+                },
+                success: load_clue_siblings_execute,
+            })
+        }
+        function load_clue_siblings_execute(clue_siblings){
+            $("#siblings-table").html(clue_siblings);
+            siblings_word = word;  // TODO GET IT FROM THE RESPONSE
+            t_check_siblings = Date.now();
+        }
+
+
+        ///////////////// AJAX HANDLER //////////////
+        class AjaxRequest {
+          constructor(when_done){
+            this.result = undefined;
+            this.when_done = when_done;
+          }
+          do_the_thing(){
+              this.when_done(this.result);
+          }
+        }
+        function ajax(url='', ajax_result=new AjaxRequest()){
+          let req = new XMLHttpRequest();
+
+          req.onreadystatechange = function(){
+              if(this.readyState == 4 && this.status == 200) {
+                  ajax_result.result = this.responseText;
+                  ajax_result.do_the_thing();
+              }else{
+                  //console.log("AJAX not done...")
+              }
+          }
+
+          console.log('/diacriptic/ajax/' + url);
+          req.open('GET', '/diacriptic/ajax/' + url, true);
+          req.send();
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div class="text-center mx-3">
+
+    <h1 class="h1 mt-4 mb-3">Diacriptic builder</h1>
+    <div id="diac-load" class="card my-2 py-2 border-c">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 px-1">
+                    <div class="input-group input-group-sm mb-0 ml-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text border-c" style="background-color:rgba(255, 255, 255, 0.7);">id to load</span>
+                      </div>
+                      <input id="in-id" type="text" class="form-control border-c" placeholder="clue_id" oninput="change_clue_id(this);" onclick="this.selectionStart=0;this.selectionEnd=this.value.length;" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-2 ml-1 pr-0">
+                    <button id="load-from-id" class="btn btn-block py-0 btn-secondary" onclick="load_from_id();">Load</button>
+                </div>
+                <div class="col-md-2 pl-2">
+                    <button id="new-id" class="btn btn-block py-0 btn-danger" onclick="new_clue();">New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="diac-form" class="card border-c pt-2 pb-1 mb-3">
+        <div class="container-fluid mt-2">
+            <div class="row px-3">
+                <div class="col px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text border-c"><b>word</b></span>
+                      </div>
+                      <input id="in-word" type="text" class="form-control border-c" placeholder="word" onchange="sanitize_word(this);" oninput="change_word(this);" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3 px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><b>autor</b></span>
+                        <span class="input-group-text" id="autor-id">0</span>
+                      </div>
+                      <input id="autor" type="text" class="form-control" value="David Ruscalleda" disabled>
+                    </div>
+                </div>
+                <div class="col-md-2 px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><b>clue_id</b></span>
+                      </div>
+                      <input id="clue-id" type="text" class="form-control" value="(new clue)" disabled>
+                    </div>
+                </div>
+                <div class="col-md-2 px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><b>mode</b></span>
+                      </div>
+                      <input id="mode" type="text" class="form-control" value="create" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row px-3">
+                <div class="col px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text border-c"><b>clue</b></span>
+                      </div>
+                      <input id="in-clue" type="text" class="form-control border-c" placeholder="clue" onchange="sanitize_clue(this);" oninput="change_clue(this);" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="row px-3">
+                <div class="col px-1">
+                    <div class="input-group input-group-sm mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text border-c"><b>solution</b></span>
+                      </div>
+                      <input id="in-sol" type="text" class="form-control border-c" placeholder="solution" oninput="change_solu(this);" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="siblings-table"></div>
+    </div>
+    <!-- analysis editor columns -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card border-c mb-3">
+                <div class="card-body py-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-auto"><b>1</b> <span class="eh-def">def</span></div>
+                            <div class="col-sm-auto"><b>2</b> <span class="eh-ind">ind</span></div>
+                            <div class="col-sm-auto"><b>3</b> <span class="eh-mat">mat</span></div>
+                            <div class="col-sm-auto"><b>4</b> <span class="eh-wop">wop</span></div>
+                            <div class="col-sm-auto"><b>5</b> <span class="eh-res">res</span></div>
+                            <div class="col-sm-auto"><b>6</b> <span class="eh-hid">hid</span></div>
+                            <div class="col-sm-auto px-4"></div>
+                            <div class="col-sm-auto"><b>r</b> retry</div>
+                            <div class="col-sm-auto"><b>c</b> clear</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card border-c">
+                    <h5 class="card-header py-1">
+                        Analysis blocks
+                    </h5>
+                    <div class="card-body py-2 anblocks">
+                        <div id="blocklist">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-c mt-2">
+                    <h5 class="card-header py-1">
+                        Solution blocks
+                    </h5>
+                    <div class="card-body py-2 anblocks">
+                        <div id="blocklist-solu">
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-block btn-primary mt-2 py-0" onclick="submit_to_db();">Save to DB</button>
+                </div>
+            </div>
+            <div class="col">
+                <!-- clue painting -->
+                <div id="analysis" class="analysis-sentence pt-2">{{clue}}</div>
+                <textarea id="clue" readonly="readonly" class="text-center mt-2 mb-2 control-sentence">{{clue}}</textarea>
+                <!-- solu painting -->
+                <div id="solu-analysis" class="analysis-sentence pt-2">{{solu}}</div>
+                <textarea id="solu" readonly="readonly" class="text-center mt-2 mb-4 control-sentence">{{solu}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <textarea id="analysis-code" class="p-2 mt-3" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

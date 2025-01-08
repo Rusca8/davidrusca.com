@@ -1,0 +1,11 @@
+{# table of every clue for the chosen word #}
+
+<table class="siblings-table ml-3 mb-1">
+    {% for clue in siblings %}
+        <tr>
+            <td class="px-2">{{clue.clue_id}}</td>
+            <td class="px-2"><b>{{clue.word}}</b></td>
+            <td class="px-2">{{clue.clue}}</td>
+        </tr>
+    {% endfor %}
+</table>

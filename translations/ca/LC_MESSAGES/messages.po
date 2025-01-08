@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-21 18:12+0100\n"
+"POT-Creation-Date: 2025-01-02 15:27+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -1958,9 +1958,8 @@ msgid "Climate Tracker Infographic - Web de David Ruscalleda"
 msgstr ""
 
 #: templates/climate_tracker.html:4
-#, fuzzy
 msgid "Infográfico para Climate Tracker"
-msgstr "Article per Climate Tracker"
+msgstr "Infogràfic per Climate Tracker"
 
 #: templates/climate_tracker.html:5
 msgid "Sobre los puntos de no retorno y el informe del IPCC."
@@ -2092,11 +2091,11 @@ msgstr "Miscel·lani"
 msgid "Programación"
 msgstr "Programació"
 
-#: templates/docentes.html:101 templates/docentes.html:481
-msgid "Crucigramas crípticos"
-msgstr "Mots encreuats críptics"
+#: templates/docentes.html:101 templates/docentes.html:470
+msgid "Juegos de Lengua"
+msgstr "Jocs de Llengua"
 
-#: templates/docentes.html:102 templates/docentes.html:470
+#: templates/docentes.html:102 templates/docentes.html:482
 #: templates/ventriloquia.html:2
 msgid "Ventriloquía"
 msgstr "Ventriloquia"
@@ -2337,7 +2336,7 @@ msgid "Máquinas simples"
 msgstr "Màquines simples"
 
 #: templates/docentes.html:424 templates/docentes.html:472
-#: templates/docentes.html:483
+#: templates/docentes.html:484
 msgid "Online:"
 msgstr "Online:"
 
@@ -2365,13 +2364,17 @@ msgstr "Apunts"
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
-#: templates/docentes.html:474 templates/ventriloquia.html:7
+#: templates/docentes.html:474
+msgid "Catagrama del día"
+msgstr "Catagrama del dia"
+
+#: templates/docentes.html:475
+msgid "Crucigramas crípticos"
+msgstr "Mots encreuats críptics"
+
+#: templates/docentes.html:486 templates/ventriloquia.html:7
 msgid "Traductor de Ventriloquía"
 msgstr "Traductor de Ventriloquia"
-
-#: templates/docentes.html:485
-msgid "Tutorial, ejemplos y crucigramas"
-msgstr "Tutorial, exemples i mots encreuats"
 
 #: templates/index.html:25
 msgid "Bienvenidas a mi página!"
@@ -2566,9 +2569,8 @@ msgid "Juegos de Mesa"
 msgstr "Jocs de Taula"
 
 #: templates/index.html:218
-#, fuzzy
 msgid "Recursos:"
-msgstr "Recursos Anki"
+msgstr "Recursos:"
 
 #: templates/index.html:220
 msgid "Listas de Conjuros de DnD 5e"
@@ -2587,9 +2589,8 @@ msgid "Diseños propios"
 msgstr "Dissenys propis"
 
 #: templates/index.html:227
-#, fuzzy
 msgid "Diseño de Juegos"
-msgstr "Disseny de Monstres"
+msgstr "Disseny de Jocs"
 
 #: templates/index.html:237
 msgid "Cosas que he construído, en"
@@ -2708,13 +2709,12 @@ msgid "Cartas de Conjuros"
 msgstr "Cartes d'Encanteris"
 
 #: templates/juegos.html:91
-#, fuzzy
 msgid "Otros recursos"
-msgstr "Recursos Anki"
+msgstr "Altres recursos"
 
 #: templates/juegos.html:93
 msgid "Diagrama de Todas las Subclases"
-msgstr ""
+msgstr "Diagrama de Totes les Subclasses"
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 msgid "Laboratorio"
@@ -3279,4 +3279,7 @@ msgstr "Les dades dels vidrets"
 
 #~ msgid "Límites"
 #~ msgstr "Límits"
+
+#~ msgid "Tutorial, ejemplos y crucigramas"
+#~ msgstr "Tutorial, exemples i mots encreuats"
 

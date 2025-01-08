@@ -1,16 +1,37 @@
 from flask import Flask
-from flask import render_template, redirect, request, make_response
+from flask import render_template, redirect, request, make_response, url_for
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
 
+# standard
 import re
 import random
 
+# internal
 import crypto
 import utilities as utils
 import crypto as c
 
+# LOGINS [base stuff coming from realpython's tutorial: https://realpython.com/flask-google-login/]
+import json
+import os
+import requests
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+from oauthlib.oauth2 import WebApplicationClient
+
+from database.db import init_app
+from database.user import User
+
+from secretos import flask_secret_key, oauth_client as oauth_client_secrets, oauth_yo
+GOOGLE_CLIENT_ID = oauth_client_secrets["id"]
+GOOGLE_CLIENT_SECRET = oauth_client_secrets["secret"]
+GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
+
+
+# MAIN CONFIG
 app = Flask(__name__)
+
+# TRANSLATIONS config
 app.config['BABEL_DEFAULT_LOCALE'] = 'es'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = './translations'  # sense això pythonAnywhere es fa un embolic
 babel = Babel(app)
@@ -23,6 +44,27 @@ babel = Babel(app)
 # OJO: si te marca [#, fuzzy] es que ha medio-traducido por tí y tienes que quitar eso cuando lo revises.
 
 
+# LOGINS Config
+app.secret_key = flask_secret_key or os.urandom(24)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+# DB INITIALIZATION // SCHEMA UPDATE
+init_app(app)  # this adds the command to the CLI so that I can use it via Terminal
+# normally run the app, then... $ flask init-db
+
+
+# Oauth 2 client setup
+oauth_client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
+
+# Flask-Login helper to retrieve a user from our db
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+
 @babel.localeselector
 def get_locale():
     return request.accept_languages.best_match(['es', 'ca'])
@@ -31,7 +73,7 @@ def get_locale():
 @app.before_request
 def before_request():
     """Force https (2024/12, will need it for js-hashing crossword answers)"""
-    if app.debug:  # prevents site blockage when local testing
+    if app.debug:  # prevents site blockage when local testing (not needed if PyOpenSSL on local)
         return
     if not request.is_secure:
         url = request.url.replace('http://', 'https://', 1)
@@ -39,11 +81,128 @@ def before_request():
         return redirect(url, code=code)
 
 
+@app.context_processor
+def add_global_variables():
+    global_vars = {"admin": False}
+    if current_user.is_authenticated:
+        global_vars["current_user"] = current_user
+        if current_user.id == oauth_yo:
+            global_vars["admin"] = True
+    return global_vars
+
+
 @app.route('/')
 @app.route('/index')
 @app.route('/index/')
 def hello_world():
     return render_template("index.html")
+
+
+@app.route('/u/')
+def user_page():
+    if current_user.is_authenticated:
+        from database.user import User
+        return render_template("user_profile.html", username_regex=User.username_pattern)
+    else:
+        return render_template("user_none.html")
+
+
+@app.route('/u/ajax/<query>', methods=["GET", "POST"])
+@login_required
+def user_ajax(query=None):
+    match query:
+        case "username_exists":
+            username = request.form.get("username")
+            return "Y" if User.is_username_taken(username) else "N"
+        case "submit_username":
+            username = request.form.get("username")
+            success = User.change_username(id_=current_user.id, username=username)
+            return "Y" if success else "N"
+    return "Què vol? User Ajax FAILED i és culpa teva. bahaha"
+
+
+def get_google_provider_cfg():
+    # TODO handle errors if google sends back nonsense
+    return requests.get(GOOGLE_DISCOVERY_URL).json()
+
+
+@app.route("/login")
+def login():
+    # Find out what URL to hit for Google login
+    google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    # Use library to construct the request for Google login and provide
+    # scopes that let you retrieve user's profile from Google
+    request_uri = oauth_client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url + "/callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
+
+
+@app.route("/login/callback")
+def login_callback():
+    # Get authorization code Google sent back to you
+    code = request.args.get("code")
+    # Find out what URL to hit to get tokens that allow you to ask for
+    # things on behalf of a user
+    google_provider_cfg = get_google_provider_cfg()
+    token_endpoint = google_provider_cfg["token_endpoint"]
+    # Prepare and send a request to get tokens! Yay tokens!
+    token_url, headers, body = oauth_client.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url,
+        redirect_url=request.base_url,
+        code=code
+    )
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+    )
+    # Parse the tokens!
+    oauth_client.parse_request_body_response(json.dumps(token_response.json()))
+    # Now that you have tokens (yay) let's find and hit the URL
+    # from Google that gives you the user's profile information,
+    # including their Google profile image and email
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    uri, headers, body = oauth_client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=headers, data=body)
+    # You want to make sure their email is verified.
+    # The user authenticated with Google, authorized your
+    # app, and now you've verified their email through Google!
+    if userinfo_response.json().get("email_verified"):
+        unique_id = userinfo_response.json()["sub"]  # "subject" (el seu ID únic de google)
+        users_email = userinfo_response.json()["email"]
+        picture = userinfo_response.json()["picture"]
+        users_name = userinfo_response.json()["given_name"]
+    else:
+        return "User email not available or not verified by Google.", 400
+
+    # ········· HANDLING THE USER INFO ··········
+    # Create a user in your db with the information provided
+    # by Google
+    user = User(id_=unique_id, name=users_name, email=users_email, profile_pic=picture)
+
+    # Doesn't exist? Add it to the database.
+    if not User.get(unique_id):
+        User.create(unique_id, users_name, users_email, picture)
+
+    # Begin user session by logging the user in
+    login_user(user)
+
+    # Send user back to homepage
+    return redirect(url_for("user_page"))
+
+
+@app.route("/logout")
+@login_required  # nice auto firewall for other things
+def logout():
+    logout_user()
+    return redirect("/")
 
 
 @app.route('/music')
@@ -403,6 +562,133 @@ def encreuat(enc_id="sample"):
     return render_template("/encreuats/encreuat.html", enc=ec, show=False)
 
 
+@app.route('/diacriptic/')
+@app.route('/diacriptic')
+@app.route('/diacriptic/a/<archive_id>')
+@app.route('/diacriptic/a/<archive_id>/')
+def diacriptic(archive_id="2"):
+    import diacriptics as dc
+    clue = dc.get_archived_clue(archive_id)
+    return render_template("/encreuats/diacriptic.html", clue=clue)
+
+
+@app.route('/diacriptic/ajax/<query>', methods=["GET", "POST"])
+def diacriptic_ajax(query=None):
+    if query is None:
+        return "Quin bon dia fa aquí"
+
+    import diacriptics as dc
+
+    match query:
+        case "definition":
+            clue_id = request.form.get("clue_id")
+            clue = request.form.get("clue")
+            if clue_id and clue:
+                cclue = dc.get_clue(clue_id, with_analyses=True)
+                if cclue.clue != clue:  # validating for public clues
+                    print("Asking for a definition but clue doesn't match.")
+                    return "N"
+                cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
+                return render_template("/encreuats/diacriptic/analysed_text.html",
+                                       text=cclue.clue, analysis=cclue.clue_analysis)
+        case "letter":
+            clue_id = request.form.get("clue_id")
+            clue = request.form.get("clue")
+            i = request.form.get("i")
+            if i.isnumeric():
+                i = int(i)
+            else:
+                return "N"
+            if clue_id and clue:
+                cclue = dc.get_clue(clue_id)
+                if cclue.clue != clue:  # validating for public clues
+                    print("Asking for letter but clue doesn't match.")
+                    return "N"
+                wordletters = cclue.word.replace(" ", "")  # ignorem els espais en multiparaula
+                return f"{i}.{wordletters[i]}" if 0 <= i < len(wordletters) else "N"  # js fa .split(".")
+        case "submit":
+            clue_id = request.form.get("clue_id")
+            clue = request.form.get("clue")
+            wordletters = request.form.get("wordletters")
+            help_used = request.form.get("help_used")
+            help_mask = request.form.get("help_mask")
+            if clue_id and clue:
+                cclue = dc.get_clue(clue_id, with_analyses=True)
+                if cclue.clue != clue:
+                    print("Solved a nonexisting clue or something.")
+                    return "N"
+                if wordletters == cclue.word.replace(" ", ""):  # ignore whitespace
+                    # TODO add solves table to SQL, make it INSERT the solve here
+                    cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
+                    return render_template("/encreuats/diacriptic_solved.html", cclue=cclue,
+                                           help_used=help_used, help_mask=help_mask)
+                else:
+                    return "Incorrect"
+    print("WTF ya doin' here")
+    return "N"
+
+
+@app.route('/diacriptic/explained', methods=["GET", "POST"])
+def diacriptic_explained():
+    if request.method == "POST":
+        import diacriptics as dc
+        clue_id = request.form.get("clue_id")
+        word = request.form.get("word")
+        clue = request.form.get("clue")
+        if clue_id and word and clue:
+            cclue = dc.get_clue(clue_id, with_analyses=True)
+            if cclue.word == word and cclue.clue == clue:  # solved public clue validation
+                return render_template("/encreuats/diacriptic_explained.html", cclue=cclue)
+        print("Explain what?")
+    return redirect("/diacriptic")
+
+
+@app.route('/diacriptic/b/ajax/<query>', methods=["GET", "POST"])
+@login_required
+def diacriptic_builder_ajax(query=None):
+    if current_user.id == oauth_yo:
+        import diacriptics as dc
+        match query:
+            case "siblings":  # clues with the same word
+                word = request.form.get("word", "")
+                siblings = dc.get_siblings(word)
+                return render_template("/encreuats/diacriptic/siblings_table.html",
+                                       siblings=siblings)
+            case "load":
+                clue_id = request.form.get("clue_id", "")
+                with_analyses = request.form.get("with_analyses", False)
+                print(f"Loading {clue_id} (analyses: {with_analyses})")
+                if not clue_id:
+                    return "clue_id not provided"
+                return dc.get_clue(clue_id, with_analyses=with_analyses, to_dict=True) or "N"
+            case "create":
+                success = dc.create(params=request.form)
+                return "Y" if success else "N"
+            case "update":
+                success = dc.update(params=request.form)
+                return "Y" if success else "N"
+        return "AJAX diac builder - No vol res? Doncs no li dono res."
+    return "Not the one I expected, tbh", 401
+
+
+@app.route("/diacriptic/builder")
+@login_required
+def diacriptic_builder():
+    if current_user.id == oauth_yo:
+        return render_template("/encreuats/diacriptic_builder.html")
+    return redirect("/")
+
+
+@app.route("/diacriptic/admin")
+@login_required
+def diacriptic_admin():
+    if current_user.id == oauth_yo:
+        import diacriptics as dc
+        queue = dc.get_clues_in_pool()  # TODO fix this crepancy
+        return render_template("/encreuats/diacriptic_admin.html", queue=queue) if app.debug else "Eps com va."
+    return redirect("/")
+
+
 @app.route('/ktn')
 @app.route('/ktn/')
 def ktn():
@@ -543,6 +829,11 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
+@app.errorhandler(401)
+def unauthorized(e):
+    return render_template("401.html"), 401
+
+
 if __name__ == "__main__":  # això la fa córrer en local
     print("running local...")
-    app.run(debug=True)
+    app.run(port=8000, debug=True, ssl_context="adhoc")  # s'ha posat exquisit amb el port, no sé

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+
+    <!-- main -->
+    <script>
+        var current = null;
+        var n = {{clue.n|sum}};
+        var clue_id = '{{clue.clue_id}}';
+        var clue = {{clue.clue|tojson}};
+        var known_letters = [];
+        var pistes = [];
+        var base_url = "/diacriptic/ajax/";
+        var solved = false;
+
+        window.addEventListener("keydown", function(e){
+            if(solved){
+                return
+            }
+            if("qwertyuiopasdfghjklçzxcvbnm".includes(e.key)){
+                key_click(e.key);
+            }else if(e.key == "Backspace"){
+                key_del();
+            }else if(e.key == "ArrowRight"){
+                next();
+            }else if(e.key == "ArrowLeft"){
+                prev();
+            }else{
+                console.log(e.key);
+            }
+        }, false);
+
+
+        function check_completeness(){
+            // checks if every cell has some letter
+            // checking
+            let full_cells = 0;
+            for(let i=0; i<n; i++){
+                let cell = document.getElementById("cell-" + i);
+                if(cell && cell.innerHTML.trim()){
+                    full_cells++;
+                }
+            }
+            // executing
+            let comprobutton = document.getElementById("comprobutton");
+            if(full_cells == n){
+                comprobutton.disabled = false;
+                console.log("Solution is complete");
+                comprobutton.classList.remove("btn-diac-disabled");
+                comprobutton.innerHTML = "Comprova";
+            }else{
+                comprobutton.disabled = true;
+                console.log("Solution is in progress");
+                comprobutton.classList.add("btn-diac-disabled");
+                comprobutton.innerHTML = "Resolent...";
+            }
+        }
+
+
+        function comprova(){
+            // botó de comprovar si està bé
+            let text = "";
+            for(let i=0; i<n; i++){
+                let cell = document.getElementById("cell-" + i);
+                if(cell){
+                    text += cell.innerHTML.trim();
+                }else{
+                    console.log("Cell " + i + " not found!")
+                }
+            }
+            if(text.length != n){
+                confirm("Encara no has omplert la paraula!")
+            }else{
+                request_correction(text);
+            }
+        }
+
+        function cell_click(num){
+            console.log("Pressed " + num);
+            let the_cell = document.getElementById("cell-" + num);
+            if(the_cell && the_cell.classList.contains("diac-known")){  // disable click on known
+                return;
+            }
+            clean_cells();
+            the_cell.classList.add("diac-selected");
+            current = num;
+        }
+        function clean_cells(){
+            for(let i=0; i<n; i++){
+                document.getElementById("cell-" + i).classList.remove("diac-selected");
+            }
+        }
+
+        function key_click(key){
+            if(key == "<"){
+                key_del();
+                return;
+            }
+            console.log("Key " + key);
+            let current_cell = document.getElementById("cell-" + current);
+            if(current_cell && !current_cell.classList.contains("diac-known")){
+                current_cell.innerHTML = key.toLowerCase();
+                next(false);
+            }
+            check_completeness();
+        }
+
+        function key_del(){
+            console.log("Backspace");
+            let current_cell = document.getElementById("cell-" + current);
+            if(current_cell){
+                if(current_cell.innerHTML.trim() == ""){
+                    prev(false);
+                    let current_cell = document.getElementById("cell-" + current);
+                    if(current_cell){
+                        current_cell.innerHTML = "";
+                    }
+                }else{
+                    current_cell.innerHTML = "";
+                }
+            }
+            check_completeness();
+        }
+
+        function next(wrap=true){
+            for(let i=0; i<n; i++){
+                let curr_i = wrap ? (current+1+i)%n : current+1+i;
+                let next_cell = document.getElementById("cell-" + curr_i);
+                if(next_cell && !next_cell.classList.contains("diac-known")){
+                    next_cell.click();
+                    return;
+                }
+            }
+        }
+
+        function prev(wrap=true){
+            for(let i=0; i<n; i++){
+                let curr_i = wrap ? (current+n-1-i)%n : current-1-i;
+                let prev_cell = document.getElementById("cell-" + curr_i);
+                if(prev_cell && !prev_cell.classList.contains("diac-known")){
+                    prev_cell.click();
+                    break;
+                }
+            }
+        }
+
+
+        function request_pista(){
+            console.log("requesting pista");
+            $.ajax({
+                url: base_url + "definition",
+                type: "post",
+                data: {
+                    "clue_id": clue_id,
+                    "clue": clue,
+                },
+                success: request_pista_execute,
+            })
+        }
+        function request_pista_execute(ajax_result){
+            if(ajax_result == "N"){
+                console.log("No match or no clue_id at backend.");
+            }else{
+                console.log("Definition analysis received.");
+                let the_clue = $("#clue");
+                the_clue.html(ajax_result);
+                render_analyses();
+                if(!pistes.includes("d")){
+                    pistes.push("d");
+                    console.log(pistes);
+                    paint_the_dots();
+                    let pistabutton = document.getElementById("pistabutton");
+                    pistabutton.disabled = true;
+                    pistabutton.classList.add("btn-diac-disabled");
+                }
+            }
+        }
+
+
+        function lletra_to_request(){
+            if(known_letters.length > 0){
+                // prepare lists
+                let even_i_list = [];
+                for(let i=0; i<n; i+=2){
+                    if(!known_letters.includes(i)){
+                        even_i_list.push(i);
+                    }
+                }
+                let odd_i_list = [];
+                for(let i=1; i<n; i+=2){
+                    if(!known_letters.includes(i)){
+                        odd_i_list.push(i);
+                    }
+                }
+                // odds or evens?
+                let last_i = known_letters.slice(-1)[0];
+                if(odd_i_list.length && (last_i % 2 || !even_i_list.length)){
+                    return odd_i_list[Math.floor(odd_i_list.length * Math.random())];
+                }else if(even_i_list.length){
+                    return even_i_list[Math.floor(even_i_list.length * Math.random())];
+                }else{
+                    console.log("Shouldn't be here. No lets remaining");
+                    return "nomyst";
+                }
+            }else{
+                return Math.floor(n * Math.random());
+            }
+        }
+        function request_lletra(){
+            if(known_letters.length == n){
+                console.log("no mysteries remaining");
+                return
+            }
+            console.log("requesting lletra");
+            let i = lletra_to_request();
+            if(i == "nomyst"){
+                return;
+            }
+            $.ajax({
+                url: base_url + "letter",
+                type: "post",
+                data: {
+                    "clue_id": clue_id,
+                    "clue": clue,
+                    "i": i,
+                },
+                success: lletra_execute,
+            });
+        }
+        function lletra_execute(ajax_result){
+            if(ajax_result == "N"){
+                console.log("Something failed behind the scenes");
+                return
+            }
+            let [i, lletra] = ajax_result.split(".");
+            known_lletra_to_cell(i, lletra);
+            known_letters.push(parseInt(i));
+            pistes.push("l");
+            console.log(pistes);
+            paint_the_dots();
+            // disable button if full
+            if(known_letters.length == n){
+                let lletrabutton = document.getElementById("lletrabutton");
+                lletrabutton.disabled = true;
+                lletrabutton.classList.add("btn-diac-disabled");
+            }
+        }
+        function known_lletra_to_cell(i, lletra){
+            let the_cell = document.getElementById("cell-" + i);
+            if(the_cell){
+                the_cell.innerHTML = lletra;
+                the_cell.classList.add("diac-known");
+            }
+            check_completeness();
+            if(current == i){
+                next();
+            }
+        }
+
+        function request_correction(result){
+            let help_mask = known_letters_mask();
+            $.ajax({
+                url: base_url + "submit",
+                type: "post",
+                data: {
+                    "clue_id": clue_id,
+                    "clue": clue,
+                    "wordletters": result,
+                    "help_used": pistes.join(""),
+                    "help_mask": help_mask,
+                },
+                success: correction_execute,
+            });
+        }
+        function correction_execute(ajax_result){
+            if(ajax_result == "Incorrect"){
+                console.log("Incorrect");
+            }else if(ajax_result.length < 30){
+                console.log("Not sure what's going on... ??")
+            }else{
+                $("#replaceable-wrapper").html(ajax_result);
+                render_analyses();
+                solved = true;
+            }
+        }
+
+        function known_letters_mask(){
+            let help_mask = "";
+            for(let i=0; i<n; i++){
+                let cell = document.getElementById("cell-" + i);
+                if(cell){
+                    help_mask += cell.classList.contains("diac-known") ? "1" : "0";
+                }else{
+                    console.log("Cell " + i + " not found!")
+                }
+            }
+            return help_mask
+        }
+
+
+        function paint_the_dots(){
+            for(let i=0; i<pistes.length; i++){
+                let the_dot = document.getElementById("dot-" + i);
+                the_dot.classList.remove("dot-p", "dot-l");
+                the_dot.classList.add("dot-" + pistes[i]);
+            }
+        }
+
+        ////////// diacriptic_solved /////////
+        var showing = true;
+        function toggle_showing(){
+            if(showing){
+                // hide
+                for(let i=0; i<n; i++){
+                    document.getElementById("cell-" + i).classList.add("text-invisible");
+                }
+                $("#toggle-showing").html("Mostra les lletres");
+                showing = false;
+            }else{
+                // show
+                for(let i=0; i<n; i++){
+                    document.getElementById("cell-" + i).classList.remove("text-invisible");
+                    $("#toggle-showing").html("Amaga les lletres");
+                }
+                showing = true;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+<div id="replaceable-wrapper">
+    <div class="inner-game margin-x-auto">
+    <div class="diac-main pb-4">
+        <div class="diac-head">
+            <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
+        </div>
+
+        <h1 class="h1 text-center pt-1">dia<span class="eh-ind pl-0">críptic</span></h1>
+        <br>
+        <p class="clue lora-clue text-center mb-3 mx-3">
+            <span id="clue">{{clue.clue}}</span> ({{clue.n|join(",")}})
+        </p>
+        <table class="margin-x-auto diac-table mb-2">
+            <tr>
+                {% set globals = namespace(i=0) %}
+                {% for w in clue.n %}
+                    {% if loop.index0 %}
+                        <td class="interworder"></td>
+                    {% endif %}
+                    {% for lletra in range(w) %}
+                        <td id="cell-{{globals.i}}" class="diac-letter lora-answer text-center p-0 m-0 diac-{{'l' if not loop.index0 else 'r' if loop.index == w else 'm'}}" onclick="cell_click({{globals.i}});"></td>
+                        {% set globals.i = globals.i + 1 %}
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+        </table>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                {% set par = clue.n|sum // 2 %}
+                {% for i in range(clue.n|sum + 1)%}
+                <div id="dot-{{i}}" class="dot"></div>
+                    {% if par == loop.index or par == loop.index + 1 %}
+                    <span class="dots-bar">·</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="diac-under-ui mt-3 text-center">
+        <button id="pistabutton" class="btn btn-diac mb-1 alt-outline" onclick="request_pista();">Pista</button>
+        <button id="lletrabutton" class="btn btn-diac mb-1 alt-outline" onclick="request_lletra();">Lletra</button>
+        <button id="comprobutton" class="btn btn-diac btn-diac-disabled mb-1 alt-outline" onclick="comprova();" disabled>Resolent...</button>
+    </div>
+
+    <div class="kb-div pt-3 pb-2">
+    {% set keyboard=["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<"] %}
+    {% for row in keyboard %}
+        <table class="keyboard margin-x-auto" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                {% for key in row %}
+                    <td onclick="key_click('{{key}}');"><div class="kb-key text-center bg-white {{'kb-del' if key == '<' else ''}} unselectable">{{key}}</div></td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endfor %}
+    <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+    </div>
+
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

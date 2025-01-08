@@ -1,0 +1,27 @@
+
+body {
+    background-color: lightgrey;
+}
+
+table, td, th {
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 0.7rem;
+}
+
+table {
+    border: 2px solid black;
+}
+
+th {
+    border-bottom: 1px solid black;
+}
+
+td {
+    border-top: 1px solid lightgrey;
+}
+
+.mono {
+    font-family: courier;
+    color: silver;
+}

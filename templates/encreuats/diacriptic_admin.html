@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin: Diacríptic</title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Admin: Diacriptic</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+    <link rel="stylesheet" href="/static/styles/diacriptic_admin.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+    <script>
+        window.onload = function (){
+            render_analyses();
+        };
+    </script>
+</head>
+
+<body class="p-3">
+
+<h3 class="text-center">Diacriptic: Admin</h3>
+<div id="queue-table">
+    {% include '/encreuats/diacriptic/queue_table.html' %}
+</div>
+
+</body>
+
+</html>

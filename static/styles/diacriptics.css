@@ -1,0 +1,200 @@
+
+:root {
+    --color-ind: #f7e1b2;
+    --color-mat: #f5c4c4;
+    --color-def: #cfefff;
+    --color-res: #d0f0b9;
+    --color-wop: #e9e9e9;
+
+    --color-d-ind: #ccaa22;
+    --color-d-def: #65a3c2;
+    --color-d-mat: #cc7788;
+
+    --dot-rad: 0.8rem;
+}
+
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    background: #888585;
+}
+
+.inner-game {
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-ind);
+}
+
+.diac-main {
+    background: white;
+    border-bottom: 1px solid #ccaa22;
+}
+
+.diac-table {
+    /*border: 2px solid black;*/
+}
+
+.diac-letter {
+    border: 1px solid black;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
+    line-height: 1.2rem;
+}
+
+.diac-m, .diac-l, .diac-r {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.diac-l {
+    border-left: 2px solid black;
+}
+
+.diac-r {
+    border-right: 2px solid black;
+}
+
+.diac-selected {
+    background: var(--color-ind);
+}
+
+.diac-known {
+    background: var(--color-wop);
+}
+.diac-res {
+    background: var(--color-res);
+}
+
+.lora-answer {
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 630;  /* 400 to 700 */
+    font-style: italic;
+}
+
+.kb-div {
+    position:absolute;
+    bottom:0;
+    width: 100vw;
+    background-color: var(--color-mat);
+    border-top: 1px solid var(--color-d-mat);
+}
+
+.kb-key {
+    width: 9vw;
+    max-width: 3.5rem;
+    height: 2.6rem;
+    border: 1px solid var(--color-d-mat);
+    border-radius: 0.2rem;
+    line-height: 2.4rem;
+    pointer-events: pass-through;
+    margin: 0.1vw;
+}
+
+.max-w-inner {
+    max-width: 30rem;
+}
+.max-w-inner-btn {
+    max-width: 20rem;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.kb-key:hover, .diac-letter:hover {
+    cursor: pointer;
+}
+.diac-known:hover, .diac-res:hover {
+    cursor: default;
+}
+
+.kb-del {
+    width: 18vw;
+    max-width: 7rem;
+}
+
+.credits {
+    color: var(--color-d-mat);
+}
+
+.btn-diac {
+    background: white;
+    border: 1px solid var(--color-d-ind);
+    outline: none;
+    width: 8rem;
+}
+.btn-diac-disabled, .btn-diac-disabled:hover {
+    color: var(--color-d-ind);
+    cursor: default;
+}
+
+.btn-diac-tutorial {
+    border: 2.5px solid black;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    font-size: 1.2rem;
+    border-radius: 5rem;
+    font-weight: bold;
+}
+
+.dot {
+    width: var(--dot-rad);
+    height: var(--dot-rad);
+    border-radius: 1rem;
+    border: 1.5px solid black;
+    margin: 0.1rem;
+}
+.dot-d {
+    background-color: var(--color-def);
+}
+.dot-l {
+    background-color: var(--color-wop);
+}
+.dot-r {
+    background-color: white;
+}
+
+.dots-bar {
+    padding-bottom: 0.12rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+
+.interworder {
+    background-color: white;
+    width: 0.5rem;
+}
+
+.border-ind {
+    border: 1px solid var(--color-d-ind);
+}
+
+.btn-def {
+    border: 1px solid var(--color-d-def);
+    background-color: var(--color-def);
+}
+
+.btn-hid {
+    border: 1px solid #999999;
+}
+
+.alt-outline {
+    outline: none;
+}
+.alt-outline:focus {
+    border-width: 1.5px;
+    box-shadow: none;
+}
+
+.text-invisible {
+    color: rgba(0, 0, 0, 0);
+}

@@ -20,6 +20,7 @@
 
 #fitxers en concret
 secretos.py
+sqlite_db
 
 #venv
 /.venvs

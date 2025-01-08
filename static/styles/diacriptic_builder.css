@@ -1,0 +1,62 @@
+body {
+    background: var(--color-ind);
+}
+
+.analysis-sentence {
+    border: 1px solid black;
+    height: 2.3rem;
+    line-height: 2rem;
+    background: white;
+    border-radius: 0.2rem;
+}
+
+#solu-analysis, #analysis {
+    line-height: 1.3rem;
+    height: 5rem;
+}
+
+#analysis-code {
+    width: 100%;
+    min-height: 10rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    color: white;
+    font-family: Courier;
+    font-size: 0.7rem;
+}
+
+#load-from-id, #new-id {
+    margin-top: 0.12rem;
+}
+
+.control-sentence {
+    width: 100%;
+    background-color: #e4e4e4;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    color: #555555;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.del-btn {
+    cursor: pointer;
+}
+
+.anblocks {
+    min-height: 6rem;
+}
+
+#diac-form {
+    background-color: rgba(100, 150, 200, 0.5);
+}
+#diac-load {
+    background-color: rgba(200, 150, 100, 0.5);
+}
+
+.siblings-table {
+    font-size: 0.8rem;
+}

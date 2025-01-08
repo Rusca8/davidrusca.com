@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ _('401 No Autorizado') }} - Web de David Ruscalleda{% endblock %}
+{% block content%}
+
+<div class="ml-4 mr-4">
+    <h4 class="mt-4">401 - {{ _('No autorizado') }}</h4>
+    <p>
+        {{ _('Tendrías que') }} <a href="/u">{{ _('iniciar sesión') }}</a>
+        (...{{ _('o ser alguien distinto') }}!)
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+
+{# diacriptic SOLVED: inner game replacement #}
+    <div class="inner-game margin-x-auto">
+        <div class="diac-main pb-4">
+            <div class="diac-head">
+                <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
+            </div>
+
+            <h1 class="h1 text-center pt-1">dia<span class="eh-res pl-0">críptic</span></h1>
+            <br>
+            <p class="clue lora-clue text-center mb-3 mx-3">
+                {% if 'd' in help_used %}
+                    {% with text=cclue.clue, analysis=cclue.clue_analysis %}
+                        {% include '/encreuats/diacriptic/analysed_text.html' %} ({{cclue.n|join(",")}})
+                    {% endwith %}
+                {% else %}
+                <span id="clue">{{cclue.clue}}</span> ({{cclue.n|join(",")}})
+                {% endif %}
+            </p>
+            <table class="margin-x-auto diac-table mb-2">
+                <tr>
+                    {% set globals = namespace(i=0) %}
+                    {% for w in cclue.word.split(" ") %}
+                        {% if loop.index0 %}
+                            <td class="interworder"></td>
+                        {% endif %}
+                        {% for lletra in w %}
+                            {% set border_class = 'l' if not loop.index0 else 'r' if loop.index == w|length else 'm' %}
+                            {% set letter_class = 'diac-known' if help_mask[globals.i] == "1" else 'diac-res' %}
+                            <td id="cell-{{globals.i}}" class="diac-letter {{letter_class}} lora-answer text-center p-0 m-0 diac-{{border_class}}">{{lletra}}</td>
+                            {% set globals.i = globals.i + 1 %}
+                        {% endfor %}
+                    {% endfor %}
+                </tr>
+            </table>
+            <!-- par DOTS -->
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    {% set par = cclue.n|sum // 2 %}
+                    {% for i in range(cclue.n|sum + 1)%}
+                        {% set dot_type = "dot-r" if loop.index > help_used|length else "dot-" + help_used[loop.index0] %}
+                        <div id="dot-{{i}}" class="dot {{dot_type}}"></div>
+                        {% if par == loop.index or par == loop.index + 1 %}
+                        <span class="dots-bar">·</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-2">
+            <div class="card mt-3 mb-1 mx-3 max-w-inner mx-auto border-ind">
+                <div class="card-body p-2">
+                    <h3 class="h4 text-center mt-1 mb-0">Desxifrat!</h3>
+                    <div class="text-center">
+                        {% set par_score = help_used|length - par %}
+                        El par era {{par}}, l'has resolt en {{help_used|length}}.<br>
+                        <h5 class="mt-3">Resultat: <span class="eh-{{'def' if par_score == 0 else 'mat' if par_score > 0 else 'res' }}">{{par_score if par_score < 1 else '+' + par_score|string}}</span></h5>
+                        <button id="toggle-showing" class="btn btn-block btn-hid py-1 mt-3 alt-outline" onclick="toggle_showing();">Amaga les lletres</button>
+                        <form method="post" action="/diacriptic/explained">
+                            <input type="hidden" name="clue_id" value="{{cclue.clue_id}}">
+                            <input type="hidden" name="word" value="{{cclue.word}}">
+                            <input type="hidden" name="clue" value="{{cclue.clue}}">
+                            <button class="btn btn-block btn-def py-1 mt-1 alt-outline">Veure l'explicació</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="kb-div pt-1 pb-2">
+            <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+        </div>
+    </div>

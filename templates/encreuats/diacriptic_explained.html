@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+
+    <!-- main -->
+    <script>
+        window.onload = function(){
+            render_analyses();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="inner-game margin-x-auto">
+    <div class="diac-main pb-4">
+        <div class="diac-head">
+            <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
+        </div>
+
+        <h1 class="h1 text-center pt-1">dia<span class="eh-def pl-0">críptic</span></h1>
+        <br>
+        <p class="clue text-center mb-3 mx-3">
+            {% with text=cclue.clue, analysis=cclue.clue_analysis %}
+                {% include '/encreuats/diacriptic/analysed_text.html' %} ({{cclue.n|join(",")}})
+            {% endwith %}
+        </p>
+        <table class="margin-x-auto diac-table mb-2">
+            <tr>
+                {% set globals = namespace(i=0) %}
+                {% for w in cclue.word.split(" ") %}
+                    {% if loop.index0 %}
+                        <td class="interworder"></td>
+                    {% endif %}
+                    {% for lletra in w %}
+                        {% set border_class = 'l' if not loop.index0 else 'r' if loop.index == w|length else 'm' %}
+                        <td id="cell-{{globals.i}}" class="diac-letter lora-answer text-center p-0 m-0 diac-{{border_class}}">{{lletra}}</td>
+                        {% set globals.i = globals.i + 1 %}
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+        </table>
+
+        <div class="text-center max-w-inner margin-x-auto">
+
+        </div>
+    </div>
+
+    <div class="mx-2">
+        <div class="card mt-3 mb-1 mx-3 max-w-inner mx-auto border-ind">
+            <div class="card-body p-3">
+                <div class="text-center">
+                    <h5>Com es resolia?</h5>
+                    {% with text=cclue.solution, analysis=cclue.solution_analysis %}
+                        {% include '/encreuats/diacriptic/analysed_text.html' %}
+                    {% endwith %}
+
+                    <a href="/encreuats/" class="btn btn-block btn-hid py-1 mt-4 alt-outline" onclick="">Tutorial d'encreuats críptics</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="kb-div pt-1 pb-2">
+            <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+    </div>
+
+</div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
