@@ -5,11 +5,13 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
+from utilities import true_path
+
 
 def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(
-            "./database/sqlite_db",
+            true_path("./database/sqlite_db"),
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         g.db.execute('PRAGMA foreign_keys = ON')  # without THIS it wouldn't check foreign key constraints (!)

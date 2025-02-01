@@ -17,6 +17,11 @@ def add_to_json(new_data, filename='data.json'):
         json.dump(file_data, file, indent=4)
 
 
+def true_path(filename='data.json'):
+    root = os.path.dirname(__file__)
+    return os.path.join(root, filename)
+
+
 def load_json(filename='data.json'):
     root = os.path.dirname(__file__)
     with open(os.path.join(root, filename), mode='r') as file:
