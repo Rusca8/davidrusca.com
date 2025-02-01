@@ -14,6 +14,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <!-- Material Symbols (google) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@22,300,0,0&icon_names=backspace" />
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/encreuats.css">
@@ -424,7 +426,14 @@
         <table class="keyboard margin-x-auto" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 {% for key in row %}
-                    <td onclick="key_click('{{key}}');"><div class="kb-key text-center bg-white {{'kb-del' if key == '<' else ''}} unselectable">{{key}}</div></td>
+                    <td onclick="key_click('{{key}}');"><div class="kb-key text-center bg-white {{'kb-del' if key == '<' else ''}} unselectable">
+                        {% if key == "<" %}
+                            <span class="material-symbols-outlined inline-icon">backspace</span>
+                        {% else %}
+                            {{key}}
+                        {% endif %}
+                        {{key_text}}
+                    </div></td>
                 {% endfor %}
             </tr>
         </table>

@@ -263,3 +263,8 @@ button.border-c {
     margin-left: auto;
     margin-right: auto;
 }
+
+.inline-icon {
+    vertical-align: middle;
+    transform: translate(-0.06rem,-0.06rem);
+}
