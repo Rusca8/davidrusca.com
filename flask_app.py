@@ -214,12 +214,15 @@ def login_callback():
 @app.route("/logout/<origin>")
 @login_required  # nice auto firewall for other things
 def logout(origin="home"):
-    session.clear()
     logout_user()
+
     match origin:
         case "diacriptic":
-            return redirect("/diacriptic/")
-    return redirect("/")
+            response = make_response(redirect("/diacriptic/"))
+        case _:
+            response = make_response(redirect("/"))
+    response.delete_cookie("remember_token", domain="davidrusca.com")
+    return response
 
 
 @app.route('/music')
