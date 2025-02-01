@@ -225,7 +225,6 @@ def logout(origin="home"):
     # trying to overwrite the cookie with a bad date instead of just deleting it cause google hallucinates deleted stuff
     response.set_cookie("remember_token", "", expires=datetime.utcnow() - timedelta(days=1),
                         domain=".davidrusca.com")  # got this domain from inspecting the remember_token cookie... (?)
-    response.delete_cookie("remember_token", domain="davidrusca.com")
     return response
 
 
