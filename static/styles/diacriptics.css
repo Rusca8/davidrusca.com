@@ -14,7 +14,7 @@
 }
 
 html {
-    background-color: #444444;
+    background-color: #333333;
 }
 
 *.unselectable {
@@ -80,7 +80,7 @@ html {
 }
 
 .kb-div {
-    position:absolute;
+    position:fixed;
     bottom:0;
     width: 100vw;
     background-color: var(--color-mat);
