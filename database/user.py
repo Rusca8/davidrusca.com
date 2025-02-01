@@ -85,11 +85,15 @@ class User(UserMixin):
         print(f"Inserting new user into db: {name}")
         db = get_db()
         # main user data
-        user_id = db.execute(
+        db.execute(
             "INSERT INTO user (name, fallback_email, profile_pic) "
-            "VALUES (?, ?, ?) "  # Els ? són per evitar SQL injection, diu (prohibit f"" %s etc)
-            "RETURNING id",  # (select inserted row's id, needed for FK in the details insert)
+            "VALUES (?, ?, ?) ",  # Els ? són per evitar SQL injection, diu (prohibit f"" %s etc)
             (name, email, profile_pic),
+        )
+        # Pick id from the email, since PythonAnywhere doesn't let me use RETURNING clauses
+        user_id = db.execute(
+            "SELECT id FROM user WHERE fallback_email = ?",
+            (email,)
         ).fetchone()
         # adding login_details [this should happen in the same transaction, since it's not commited yet]
         user_id = user_id["id"]
