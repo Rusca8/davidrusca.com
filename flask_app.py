@@ -217,6 +217,8 @@ def login_callback():
 @app.route("/logout/<origin>")
 @login_required  # nice auto firewall for other things
 def logout(origin="home"):
+    session.clear()
+    session["_remember"] = "clear"  # maybe this?
     logout_user()
 
     match origin:
