@@ -50,6 +50,8 @@ app.config["REMEMBER_COOKIE_DOMAIN"] = "davidrusca.com"  # remember_cookie setti
 app.config["REMEMBER_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
+app.config["REMEMBER_COOKIE_PATH"] = "/"
+app.config["SESSION_COOKIE_PATH"] = "/"
 app.secret_key = flask_secret_key or os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
