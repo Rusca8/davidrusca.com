@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>diacríptic</title>
+    <title>Diacríptic</title>
 
     <!-- Lora font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,10 +28,19 @@
         var n = {{clue.n|sum}};
         var clue_id = '{{clue.clue_id}}';
         var clue = {{clue.clue|tojson}};
-        var known_letters = [];
-        var pistes = [];
+        var known_letters = {{known_letters|tojson}};
+        var pistes = {{pistes|tojson}};
         var base_url = "/diacriptic/ajax/";
-        var solved = false;
+        var solved = {{solved|tojson}};
+
+        window.onload = function(){
+            if(solved){
+                comprova();
+            }
+            if(pistes.includes("d")){
+                render_analyses();
+            }
+        }
 
         window.addEventListener("keydown", function(e){
             if(solved){
@@ -295,6 +304,11 @@
         function correction_execute(ajax_result){
             if(ajax_result == "Incorrect"){
                 console.log("Incorrect");
+                // shake the table bahah
+                document.getElementById("word-table").classList.add("shake");
+                setTimeout(function(){ // remove the animation class once it's done
+                    document.getElementById("word-table").classList.remove("shake");
+                }, 300);
             }else if(ajax_result.length < 30){
                 console.log("Not sure what's going on... ??")
             }else{
@@ -353,24 +367,32 @@
 <div id="replaceable-wrapper">
     <div class="inner-game margin-x-auto">
     <div class="diac-main pb-4">
-        <div class="diac-head">
-            <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
-        </div>
+        {% include '/encreuats/diacriptic/header.html' %}
 
-        <h1 class="h1 text-center pt-1">dia<span class="eh-ind pl-0">críptic</span></h1>
+        <h1 class="h1 text-center pt-1"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-ind pl-0">críptic</span></span></h1>
+
         <br>
         <p class="clue lora-clue text-center mb-3 mx-3">
+            {% if 'd' in help_used %}
+                {% with text=clue.clue, analysis=clue.clue_analysis %}
+                    {% include '/encreuats/diacriptic/analysed_text.html' %} ({{clue.n|join(",")}})
+                {% endwith %}
+            {% else %}
             <span id="clue">{{clue.clue}}</span> ({{clue.n|join(",")}})
+            {% endif %}
         </p>
-        <table class="margin-x-auto diac-table mb-2">
+        <table id="word-table" class="margin-x-auto diac-table mb-2">
             <tr>
                 {% set globals = namespace(i=0) %}
-                {% for w in clue.n %}
+                {% for w in clue.word.split(" ") %}
                     {% if loop.index0 %}
                         <td class="interworder"></td>
                     {% endif %}
-                    {% for lletra in range(w) %}
-                        <td id="cell-{{globals.i}}" class="diac-letter lora-answer text-center p-0 m-0 diac-{{'l' if not loop.index0 else 'r' if loop.index == w else 'm'}}" onclick="cell_click({{globals.i}});"></td>
+                    {% for lletra in w %}
+                        {% set border_class = 'l' if not loop.index0 else 'r' if loop.index == w|length else 'm' %}
+                        {% set known = help_mask[globals.i] == "1" %}
+                        {% set letter_class = 'diac-known' if known else '' %}
+                        <td id="cell-{{globals.i}}" class="diac-letter {{letter_class}} lora-answer text-center p-0 m-0 diac-{{border_class}}" onclick="cell_click({{globals.i}});">{{lletra if known or solved else '' }}</td>
                         {% set globals.i = globals.i + 1 %}
                     {% endfor %}
                 {% endfor %}
@@ -380,7 +402,8 @@
             <div class="row align-items-center justify-content-center">
                 {% set par = clue.n|sum // 2 %}
                 {% for i in range(clue.n|sum + 1)%}
-                <div id="dot-{{i}}" class="dot"></div>
+                    {% set dot_type = "" if loop.index > help_used|length else "dot-" + help_used[loop.index0] %}
+                    <div id="dot-{{i}}" class="dot {{dot_type}}"></div>
                     {% if par == loop.index or par == loop.index + 1 %}
                     <span class="dots-bar">·</span>
                     {% endif %}
@@ -406,7 +429,7 @@
             </tr>
         </table>
     {% endfor %}
-    <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+    <div class="small text-center mt-1 credits">Rusca 2025 · Based on MinuteCryptics</div>
     </div>
 
     </div>

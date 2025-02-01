@@ -64,7 +64,7 @@
         <b id="secretillos" class=""></b>
       </div>
     </nav>
-    {% if admin %}
+    {% if current_user.is_admin %}
     <div class="admin-top-bar"></div>
     {% endif %}
 

@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, redirect, request, make_response, url_for
+from flask import render_template, redirect, request, make_response, url_for, session
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
 
@@ -22,7 +22,7 @@ from oauthlib.oauth2 import WebApplicationClient
 from database.db import init_app
 from database.user import User
 
-from secretos import flask_secret_key, oauth_client as oauth_client_secrets, oauth_yo
+from secretos import flask_secret_key, oauth_client as oauth_client_secrets
 GOOGLE_CLIENT_ID = oauth_client_secrets["id"]
 GOOGLE_CLIENT_SECRET = oauth_client_secrets["secret"]
 GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
@@ -83,11 +83,9 @@ def before_request():
 
 @app.context_processor
 def add_global_variables():
-    global_vars = {"admin": False}
+    global_vars = {}
     if current_user.is_authenticated:
         global_vars["current_user"] = current_user
-        if current_user.id == oauth_yo:
-            global_vars["admin"] = True
     return global_vars
 
 
@@ -101,7 +99,6 @@ def hello_world():
 @app.route('/u/')
 def user_page():
     if current_user.is_authenticated:
-        from database.user import User
         return render_template("user_profile.html", username_regex=User.username_pattern)
     else:
         return render_template("user_none.html")
@@ -126,8 +123,15 @@ def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
 
+@app.route("/login/<origin>")
+def save_login_origin(origin="home"):
+    # store login trigger origin for redirect after login callback
+    session["login_origin"] = origin
+    return redirect("/login")
+
+
 @app.route("/login")
-def login():
+def login(origin="main"):
     # Find out what URL to hit for Google login
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
@@ -175,33 +179,40 @@ def login_callback():
     # The user authenticated with Google, authorized your
     # app, and now you've verified their email through Google!
     if userinfo_response.json().get("email_verified"):
-        unique_id = userinfo_response.json()["sub"]  # "subject" (el seu ID únic de google)
-        users_email = userinfo_response.json()["email"]
+        sub = userinfo_response.json()["sub"]  # "subject" (el seu ID únic de google)
+        email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
-        users_name = userinfo_response.json()["given_name"]
+        name = userinfo_response.json()["given_name"]
     else:
         return "User email not available or not verified by Google.", 400
 
     # ········· HANDLING THE USER INFO ··········
-    # Create a user in your db with the information provided
-    # by Google
-    user = User(id_=unique_id, name=users_name, email=users_email, profile_pic=picture)
+    # ------ Refactoring the tutorial example in my way... (so that I can handle db's id generation) ------
+    # Try to fetch it from db via oauth details.
+    user = User.get_from_oauth("google", sub)
+    # Create (and load) if it didn't exist
+    if not user:
+        user = User.create(name=name, email=email, profile_pic=picture, provider="google", sub=sub)
 
-    # Doesn't exist? Add it to the database.
-    if not User.get(unique_id):
-        User.create(unique_id, users_name, users_email, picture)
-
-    # Begin user session by logging the user in
+    # Begin user session in Flask
     login_user(user)
 
-    # Send user back to homepage
+    # Send user back to logged in
+    login_origin = session.pop("login_origin", "")
+    match login_origin:
+        case "diacriptic":
+            return redirect("/diacriptic/")
     return redirect(url_for("user_page"))
 
 
 @app.route("/logout")
+@app.route("/logout/<origin>")
 @login_required  # nice auto firewall for other things
-def logout():
+def logout(origin="home"):
     logout_user()
+    match origin:
+        case "diacriptic":
+            return redirect("/diacriptic/")
     return redirect("/")
 
 
@@ -564,12 +575,35 @@ def encreuat(enc_id="sample"):
 
 @app.route('/diacriptic/')
 @app.route('/diacriptic')
-@app.route('/diacriptic/a/<archive_id>')
-@app.route('/diacriptic/a/<archive_id>/')
-def diacriptic(archive_id="2"):
+@app.route('/diacriptic/arxiu/<date>')
+@app.route('/diacriptic/arxiu/<date>/')
+def diacriptic(date=None):
     import diacriptics as dc
-    clue = dc.get_archived_clue(archive_id)
-    return render_template("/encreuats/diacriptic.html", clue=clue)
+    clues_on_date = dc.get_clues_on_date(date)
+    if not clues_on_date:
+        return "Dispensi però encara no hi ha res en aquesta data (un dia pintarem aquest desert blanc)."
+    else:  # TODO disambiguation screen if more than one clues_on_date
+        clue = dc.get_clue(clues_on_date[0])
+        help_dots = ""
+        help_mask = "0" * sum(clue.n)
+        solved = False
+        if current_user.is_authenticated:  # get progress
+            solve = dc.get_solve(clue.clue_id, current_user.id)
+            # append def if they knew it
+            if solve:
+                if solve.date_solved:
+                    solved = True
+                if "d" in solve.help_dots:
+                    _, analysis_definition = dc.get_definition(params={"clue_id": clue.clue_id, "clue": clue.clue})
+                    clue.clue_analysis = analysis_definition
+                # build help mask for known letters
+                help_mask = dc.help_mask(clue, solve)
+                help_dots = solve.help_dots
+        pistes = [p for p in help_dots]
+        known_letters = [i for i, h in enumerate(help_mask) if h == "1"]
+        return render_template("/encreuats/diacriptic.html", clue=clue,
+                               help_used=help_dots, help_mask=help_mask, pistes=pistes, known_letters=known_letters,
+                               solved=solved)
 
 
 @app.route('/diacriptic/ajax/<query>', methods=["GET", "POST"])
@@ -581,31 +615,15 @@ def diacriptic_ajax(query=None):
 
     match query:
         case "definition":
-            clue_id = request.form.get("clue_id")
-            clue = request.form.get("clue")
-            if clue_id and clue:
-                cclue = dc.get_clue(clue_id, with_analyses=True)
-                if cclue.clue != clue:  # validating for public clues
-                    print("Asking for a definition but clue doesn't match.")
-                    return "N"
-                cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
-                return render_template("/encreuats/diacriptic/analysed_text.html",
-                                       text=cclue.clue, analysis=cclue.clue_analysis)
-        case "letter":
-            clue_id = request.form.get("clue_id")
-            clue = request.form.get("clue")
-            i = request.form.get("i")
-            if i.isnumeric():
-                i = int(i)
-            else:
+            user_id = current_user.id if current_user.is_authenticated else None
+            clue, analysis_definition = dc.get_definition(params=request.form, user_id=user_id)
+            if not analysis_definition:
                 return "N"
-            if clue_id and clue:
-                cclue = dc.get_clue(clue_id)
-                if cclue.clue != clue:  # validating for public clues
-                    print("Asking for letter but clue doesn't match.")
-                    return "N"
-                wordletters = cclue.word.replace(" ", "")  # ignorem els espais en multiparaula
-                return f"{i}.{wordletters[i]}" if 0 <= i < len(wordletters) else "N"  # js fa .split(".")
+            return render_template("/encreuats/diacriptic/analysed_text.html",
+                                   text=clue, analysis=analysis_definition)
+        case "letter":
+            user_id = current_user.id if current_user.is_authenticated else None
+            return dc.get_letter(params=request.form, user_id=user_id)  # (public clue status validated inside)
         case "submit":
             clue_id = request.form.get("clue_id")
             clue = request.form.get("clue")
@@ -618,7 +636,9 @@ def diacriptic_ajax(query=None):
                     print("Solved a nonexisting clue or something.")
                     return "N"
                 if wordletters == cclue.word.replace(" ", ""):  # ignore whitespace
-                    # TODO add solves table to SQL, make it INSERT the solve here
+                    user_id = current_user.id if current_user.is_authenticated else None
+                    if user_id:
+                        dc.submit_solve(clue_id, user_id)
                     cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
                     return render_template("/encreuats/diacriptic_solved.html", cclue=cclue,
                                            help_used=help_used, help_mask=help_mask)
@@ -626,6 +646,11 @@ def diacriptic_ajax(query=None):
                     return "Incorrect"
     print("WTF ya doin' here")
     return "N"
+
+
+@app.route('/diacriptic/tutorial')
+def diacriptic_tutorial():
+    return render_template("/encreuats/diacriptic_tutorial.html")
 
 
 @app.route('/diacriptic/explained', methods=["GET", "POST"])
@@ -646,7 +671,7 @@ def diacriptic_explained():
 @app.route('/diacriptic/b/ajax/<query>', methods=["GET", "POST"])
 @login_required
 def diacriptic_builder_ajax(query=None):
-    if current_user.id == oauth_yo:
+    if current_user.is_admin:
         import diacriptics as dc
         match query:
             case "siblings":  # clues with the same word
@@ -674,19 +699,90 @@ def diacriptic_builder_ajax(query=None):
 @app.route("/diacriptic/builder")
 @login_required
 def diacriptic_builder():
-    if current_user.id == oauth_yo:
+    if current_user.is_admin:
         return render_template("/encreuats/diacriptic_builder.html")
     return redirect("/")
+
+
+@app.route('/diacriptic/a/ajax/<query>', methods=["POST"])
+@login_required
+def diacriptic_admin_ajax(query=None):
+    if current_user.is_admin:
+        import diacriptics as dc
+        match query:
+            case "add_tag":
+                tag = request.form.get("tag")
+                clue_id = request.form.get("clue_id")
+                success = dc.add_tag(clue_id, tag)
+                if success:
+                    return {"clue_id": clue_id, "tag": tag}
+                else:
+                    return "N"
+            case "remove_tag":
+                tag = request.form.get("tag")
+                clue_id = request.form.get("clue_id")
+                success = dc.remove_tag(clue_id, tag)
+                if success:
+                    return {"clue_id": clue_id, "tag": tag}
+                else:
+                    return "N"
+            case "assign_date":
+                clue_id = request.form.get("clue_id")
+                date = request.form.get("date")
+                pwd = request.form.get("pwd")
+                success = dc.assign_date(clue_id, date, pwd)
+                if success:
+                    return "Y"  # TODO return html of pool row to update
+                else:
+                    return "N"
+            case "assign_num":
+                clue_id = request.form.get("clue_id")
+                num = request.form.get("num")
+                success = dc.assign_num(clue_id, num)
+                if success:
+                    return "Y"  # TODO return html of pool row to update
+                else:
+                    return "N"
+            case "remove_date":
+                clue_id = request.form.get("clue_id")
+                date = request.form.get("date")
+                pwd = request.form.get("pwd")
+                success = dc.remove_date(clue_id, date, pwd)
+                if success:
+                    return "Y"  # TODO return html of pool row to update
+                else:
+                    return "N"
+        return "AJAX admin - No vol res?"
+    return "No parlar amb desconeguts. Recorda no parlar amb desconeguts..."
 
 
 @app.route("/diacriptic/admin")
 @login_required
 def diacriptic_admin():
-    if current_user.id == oauth_yo:
+    if current_user.is_admin:
+        from database.cryptic_clue import CrypticClue
         import diacriptics as dc
-        queue = dc.get_clues_in_pool()  # TODO fix this crepancy
-        return render_template("/encreuats/diacriptic_admin.html", queue=queue) if app.debug else "Eps com va."
+        pool = dc.get_clues_in_pool()
+        tags = dc.get_tags()
+        available_tags = CrypticClue.available_tags
+        calendar = dc.admin_calendar()
+        arxiu = dc.get_arxiu()
+        for day, entries in arxiu.items():
+            for da in entries:
+                if da.clue_id in pool:
+                    pool[da.clue_id].arxiu[day] = da.num
+
+        return render_template("/encreuats/diacriptic_admin.html", pool=pool, tags=tags,
+                               available_tags=available_tags, calendar=calendar, arxiu=arxiu)
     return redirect("/")
+
+
+@app.route("/diacriptic/u/")
+def user():
+    if current_user.is_authenticated:
+        return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic")
+    else:
+        return "Login something something page wip"
 
 
 @app.route('/ktn')
@@ -821,6 +917,11 @@ def d_anki(file):
     else:
         return f"El fitxer {file} no l'he pas trobat."
     return send_from_directory("./static/anki/", deck, as_attachment=True, attachment_filename=nom, cache_timeout=0)
+
+
+@app.route("/privacy")
+def privacy_policy():
+    return render_template("privacy_policy.html")
 
 
 @app.errorhandler(404)

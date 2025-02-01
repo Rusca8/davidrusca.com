@@ -232,6 +232,34 @@
             analysis_code.innerHTML = the_code
         }
 
+        function compare_edition(old_text, new_text){
+            let b = -42;
+            let e = -42;
+            let minlen = Math.min(old_text.length, new_text.length);
+            // beginning
+            for(let i=0; i<minlen; i++){
+                if(old_text[i] != new_text[i]){
+                    b = i;
+                    break;
+                }
+            }
+            if(b==-42){
+                b = minlen;
+            }
+            // ending
+            for(let i=0; i<minlen; i++){
+                if(old_text.substring(old_text.length-i-1) != new_text.substring(new_text.length-i-1)){
+                    e = old_text.length - i;
+                    break;
+                }
+            }
+            e = Math.max(e, b);
+            console.log("old_text", old_text);
+            console.log("new_text", new_text);
+            console.log([b, e]);
+            return [b, e];
+        }
+
         function change_clue_id(input_element){
             clue_id = input_element.value;
             update();
@@ -242,7 +270,23 @@
             t_last_input = Date.now();
         }
         function change_clue(input_element){
+            let old_clue = clue;
             clue = input_element.value;
+            let [b, e] = compare_edition(old_clue, clue);
+            let diff = clue.length - old_clue.length;
+            for(let [key, intervals] of Object.entries(blocks)){
+                let new_intervals = []
+                for(let interval of intervals){
+                    if(interval[1] < b){  // before the edition
+                        new_intervals.push(interval);
+                    }else if(interval[0] > e){
+                        new_intervals.push([interval[0] + diff, interval[1] + diff])
+                    }else if(b > interval[0] && e <= interval[1]){  // edition within interval
+                        new_intervals.push([interval[0], interval[1] + diff]);
+                    }
+                }
+                blocks[key] = new_intervals;
+            }
             apply_changes();
             update();
         }

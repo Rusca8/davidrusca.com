@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Perfil d'usuari - Diacríptic</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+</head>
+<body class="p-3">
+    <h1 class="h1 text-center mt-3 pb-2"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-wop pl-0">críptic</span></span></h1>
+    <div class="card bg-wop mt-4">
+        <div class="card-body p-0 py-2">
+            {% include '/accounts/user_profile_block.html' %}
+        </div>
+    </div>
+</body>
+</html>

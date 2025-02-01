@@ -17,11 +17,11 @@ function apply_analysis_to_text(text_to_paint, blocks_to_paint){
                 if(s==i){
                     // check padding
                     let pl = "";
-                    if(i > 0 && !" ,.:;\"".includes(text_to_paint[i-1])){
+                    if(i > 0 && !" ,.:;\"'".includes(text_to_paint[i-1])){
                         pl = " pl-0";
                     }
                     let pr = "";
-                    if(!" ,.:;\"".includes(text_to_paint[e]) && text_to_paint[e] != undefined){
+                    if(!" ,.:;\"'".includes(text_to_paint[e]) && text_to_paint[e] != undefined){
                         pr = " pr-0";
                     }
                     text.push('<span class="eh-' + key + pl + pr + '">');
@@ -36,6 +36,16 @@ function apply_analysis_to_text(text_to_paint, blocks_to_paint){
 
 function swap_quotes(text, temp="❆"){
     return text.replaceAll('"', temp).replaceAll("'", '"').replaceAll(temp, "'");
+}
+
+function fix_bad_quotes_dict(dict){
+    // gets a (jinja) dict with bad JSON quotes (i.e. ['things', 'things']) and reparses it to proper quotes.
+    if(!dict.includes("[")){
+        return "";
+    }
+    let text = JSON.stringify(dict).slice(1, -1);
+    text = swap_quotes(text);
+    return JSON.parse(text);
 }
 
 function render_analyses(){

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Tutorial - diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+</head>
+<body>
+
+    <h1 class="h1 text-center mt-4 mb-2"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-mat pl-0">críptic</span></span></h1>
+
+    <h5 class="text-center py-2">Tutorial de mots encreuats críptics</h5>
+
+    <div id="diac-tutorial-container" class="py-3 px-3">
+    {% with origin="diacriptic" %}
+        {% include '/encreuats/diacriptic/tutorial.html' %}
+    {% endwith %}
+
+        <div class="text-center">
+            <button id="btn-diac-tutorial-juga" class="btn mx-2 alt-outline" onclick="location.href='/diacriptic';">
+                Ja ho he entès! Ara vull jugar!!
+            </button>
+        </div>
+
+    <div class="stretched-link-boundary">
+        <div class="small text-center mt-1 credits">Rusca 2024 · davidrusca.com/diacriptic<a class="stretched-link" href="/diacriptic/"></a></div>
+    </div>
+    </div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

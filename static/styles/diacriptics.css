@@ -21,10 +21,6 @@
     user-select: none;
 }
 
-body {
-    background: #888585;
-}
-
 .inner-game {
     width: 100vw;
     height: 100vh;
@@ -183,6 +179,11 @@ body {
     background-color: var(--color-def);
 }
 
+.btn-mat {
+    border: 1px solid var(--color-d-mat);
+    background-color: var(--color-mat);
+}
+
 .btn-hid {
     border: 1px solid #999999;
 }
@@ -197,4 +198,64 @@ body {
 
 .text-invisible {
     color: rgba(0, 0, 0, 0);
+}
+
+.diac-head {
+    width: 100%;
+}
+
+#account-area {
+    cursor: pointer;
+}
+
+#user-thumbnail {
+    width: 2rem;
+}
+
+.bg-wop {
+    background-color: var(--color-wop);
+}
+
+.stretched-link-boundary {
+    transform: rotate(0);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+@keyframes shake {
+    0% {transform: translateX(0);}
+    25% {transform: translateX(-0.3rem);}
+    50% {transform: translateX(+0.3rem);}
+    75% {transform: translateX(-0.3rem);}
+    100% {transform: translateX(0);}
+}
+
+#diac-tutorial-container {
+    background-color: var(--color-mat);
+    border-top: 1px solid var(--color-d-mat);
+}
+
+.card.border-c {
+    border-color: var(--color-d-mat);
+}
+
+.tutorial-section {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+button.border-c {
+    border-color: black;
+}
+
+#btn-diac-tutorial-juga {
+    background: white;
+    border: 1px solid var(--color-d-mat);
+    width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
 }

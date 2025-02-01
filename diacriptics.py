@@ -1,6 +1,10 @@
 import json
+import pytz
+from datetime import datetime, timedelta
 
 from database.cryptic_clue import CrypticClue
+from database.diacriptic_arxiu import DiacripticArxiu
+from database.diacriptic_solve import DiacripticSolve
 
 
 default_clue = {
@@ -16,8 +20,58 @@ clues_file = "./hidden/diacriptics/clues.json"
 
 
 def get_clues_in_pool():
-    clues = CrypticClue.get_all(with_analyses=True)
+    clues = {cclue.clue_id: cclue for cclue in CrypticClue.get_all(with_analyses=True)}
     return clues
+
+
+def get_tags():
+    return CrypticClue.get_all_tags()
+
+
+def add_tag(clue_id, tag):
+    return CrypticClue.add_tag(clue_id, tag)
+
+
+def remove_tag(clue_id, tag):
+    return CrypticClue.remove_tag(clue_id, tag)
+
+
+def today(offset4=False):
+    if offset4:
+        return (datetime.now(pytz.timezone("Europe/Madrid")) - timedelta(hours=4)).strftime("%Y-%m-%d")
+    return datetime.now(pytz.timezone("Europe/Madrid")).strftime("%Y-%m-%d")
+
+
+def now():
+    """Unix epoch in seconds (no decimal places). Mimics output of sqlite's unixepoch()"""
+    return round(datetime.now().timestamp())
+
+
+def assign_date(clue_id, date, pwd=""):
+    if clue_id and date:
+        if date <= today():
+            print(date, today())
+            from secretos import diacriptic_ajax
+            if pwd != diacriptic_ajax:
+                print(f"failed password for adding older than today date (#{clue_id}, {date})")
+                return False
+        return DiacripticArxiu.create(date, clue_id)
+    return False
+
+
+def assign_num(clue_id, num):
+    return DiacripticArxiu.assign_num(clue_id=clue_id, num=num)
+
+
+def remove_date(clue_id, date, pwd=""):
+    if clue_id and date:
+        if date <= today():
+            from secretos import diacriptic_ajax
+            if pwd != diacriptic_ajax:
+                print(f"failed password for removing older than today date (#{clue_id}, {date})")
+                return False
+        return DiacripticArxiu.remove(date, clue_id)
+    return False
 
 
 def get_clue(clue_id, with_analyses=False, to_dict=False):
@@ -31,9 +85,64 @@ def get_clue(clue_id, with_analyses=False, to_dict=False):
     return False
 
 
+def get_definition(params=None, user_id=None):
+    """Returns a tuple (clue, analysis) where the analysis only highlights the definition(s)
+       If user is provided, also adds a definition mark to the help_used DB string
+    """
+    clue_id = params.get("clue_id")
+    clue = params.get("clue")
+    if clue_id and clue:
+        cclue = get_clue(clue_id, with_analyses=True)
+        if cclue.clue != clue:  # validating for public clues
+            print("Asking for a definition but clue doesn't match.")
+            return False
+        # providing the clue with definition analysis
+        if user_id:  # store help used by user
+            DiacripticSolve.add_help(clue_id, user_id, "?")
+        return cclue.clue, {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
+    return False
+
+
+def get_letter(params=None, user_id=None):
+    """returns letter in asked position (and logs the call for help into the user progress)"""
+    if params is None:
+        return False
+    clue_id = params.get("clue_id")
+    clue = params.get("clue")
+    i = params.get("i")
+    if i.isnumeric():
+        i = int(i)
+    else:
+        return False
+    if clue_id and clue:
+        cclue = get_clue(clue_id)
+        if cclue.clue != clue:  # validating for public clues
+            print("Asking for a letter, but the clue doesn't match.")
+            return False
+        wordletters = cclue.word.replace(" ", "")  # ignorem els espais en multiparaula
+        if user_id:  # store help used by user
+            encoded_i = chr(i + 97)
+            DiacripticSolve.add_help(clue_id, user_id, help_char=encoded_i)
+        return f"{i}.{wordletters[i]}" if 0 <= i < len(wordletters) else "N"  # js fa .split(".")
+
+
+def submit_solve(clue_id, user_id=None):
+    date_solved = now()
+    DiacripticSolve.solved(clue_id=clue_id, user_id=user_id, date_solved=date_solved)
+
+
 def get_archived_clue(archive_id):
+    """ deprecated """
     clue_id = "2"  # TODO CrypticClue.get_id_from_archive_or_something()
     return get_clue(clue_id)
+
+
+def get_clues_on_date(date=None, future=False):
+    if date is None:
+        return DiacripticArxiu.get_clues_on_date(today(offset4=True))
+    if date > today(offset4=True) and not future:
+        return []
+    return DiacripticArxiu.get_clues_on_date(date)
 
 
 def get_siblings(word):
@@ -95,3 +204,32 @@ def update(params=None):
     else:
         print("Missing id, word or clue. Can't update cryptic_clue into its own disappearance")
         return False
+
+
+def admin_calendar(start=2025):
+    import calendar as cal
+    months = []
+    year = start
+    for month in range(1, 13):
+        months.append({"year": year, "month": month, "range": cal.monthrange(year, month)})
+    return months
+
+
+def get_arxiu():
+    from database.diacriptic_arxiu import DiacripticArxiu
+    return DiacripticArxiu.get_all()
+
+
+def get_solve(clue_id, user_id):
+    return DiacripticSolve.get(clue_id, user_id)
+
+
+def help_mask(clue, solve):
+    mask = ["0" for _ in range(sum(clue.n))]
+    if solve:
+        for h in solve.help_used:
+            if h != "?":
+                i = ord(h) - 97
+                if 0 <= i < len(mask):
+                    mask[i] = "1"
+    return "".join(mask)

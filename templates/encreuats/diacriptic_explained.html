@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>diacríptic</title>
+    <title>Diacríptic - Explained</title>
 
     <!-- Lora font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,15 +33,13 @@
 <body>
     <div class="inner-game margin-x-auto">
     <div class="diac-main pb-4">
-        <div class="diac-head">
-            <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
-        </div>
+        {% include '/encreuats/diacriptic/header.html' %}
 
-        <h1 class="h1 text-center pt-1">dia<span class="eh-def pl-0">críptic</span></h1>
+        <h1 class="h1 text-center pt-1"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-def pl-0">críptic</span></span></h1>
         <br>
         <p class="clue text-center mb-3 mx-3">
             {% with text=cclue.clue, analysis=cclue.clue_analysis %}
-                {% include '/encreuats/diacriptic/analysed_text.html' %} ({{cclue.n|join(",")}})
+                {% include '/encreuats/diacriptic/analysed_text.html' %}({{cclue.n|join(",")}})
             {% endwith %}
         </p>
         <table class="margin-x-auto diac-table mb-2">
@@ -74,14 +72,14 @@
                         {% include '/encreuats/diacriptic/analysed_text.html' %}
                     {% endwith %}
 
-                    <a href="/encreuats/" class="btn btn-block btn-hid py-1 mt-4 alt-outline" onclick="">Tutorial d'encreuats críptics</a>
+                    <a href="/diacriptic/tutorial" class="btn btn-block btn-mat py-1 mt-4 alt-outline" onclick="">Tutorial d'encreuats críptics</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="kb-div pt-1 pb-2">
-            <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+            <div class="small text-center mt-1 credits">Rusca 2025 · Based on MinuteCryptics</div>
     </div>
 
 </div>

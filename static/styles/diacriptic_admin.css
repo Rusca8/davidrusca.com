@@ -5,8 +5,11 @@ body {
 
 table, td, th {
     border-collapse: collapse;
+    font-size: 0.6rem;
+}
+
+tr {
     background-color: rgba(255, 255, 255, 0.8);
-    font-size: 0.7rem;
 }
 
 table {
@@ -18,10 +21,140 @@ th {
 }
 
 td {
-    border-top: 1px solid lightgrey;
+    border-top: 1px solid grey;
 }
 
 .mono {
     font-family: courier;
-    color: silver;
+    color: grey;
+}
+
+.icon-trans {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.diac-admin-tags {
+    width: 3rem;
+}
+
+/* importa l'ordre (prioritat) */
+.diac-admin-a {
+    background-color: #aaccaa;
+}
+.diac-admin-e {
+    background-color: #ccbbaa;
+}
+.diac-admin-p {
+    background-color: #cccccc;
+}
+
+.cal-day {
+    background-color: var(--color-wop);
+    width: 1rem;
+    height: 1rem;
+    align-content:center;
+    border-radius: 50%;
+    position: relative;
+}
+.cal-day:hover {
+    cursor: pointer;
+}
+
+.cal-month-title {
+    font-size: 0.5rem;
+}
+
+.month, .month th, .month td {
+    border: 0px;
+}
+.month tr {
+    background-color: rgba(0,0,0,0);
+}
+
+.num-1 {
+    background-color: var(--color-ind);
+    box-shadow: inset 0 0 0 0.07rem var(--color-d-ind);
+}
+.num-many {
+    background-color: fuchsia;
+}
+
+.diac-admin-date {
+    width: 4.2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+#cal-day-hover-data {
+    position: absolute;
+    background-color: white;
+    border: 1px solid grey;
+    font-size: 0.5rem;
+    z-index: 1000;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.dayclock {
+    font-size: 0.8rem;
+}
+
+#date-selection-popup {
+    width: 30rem;
+    background-color: white;
+    border: 1px solid grey;
+    position: absolute;
+    font-size: 0.8rem;
+    box-shadow: 0 0 0 2px darkred;
+}
+#ds-popup-header {
+    background-color: #eeeeee;
+    border-bottom: 1px solid grey;
+}
+#ds-popup-quit {
+    background-color: var(--color-wop);
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+}
+#ds-popup-assigned-dates {
+    width: 4.5rem;
+    height: 100%;
+    border-right: 1px solid var(--color-d-ind);
+    font-size: 0.6rem;
+}
+.lilcross {
+    color: darkred;
+    cursor: pointer;
+}
+
+#admin-pwd-popup {
+    width: 30rem;
+    background-color: white;
+    border: 1px solid grey;
+    font-size: 0.8rem;
+    box-shadow: 0 0 0 2px gold;
+    position: fixed;
+    top: calc(50% - 3rem);
+    left: calc(50% - 15rem);
+}
+
+.today {
+    color: darkred;
+    font-weight: bold;
+    border: 1px solid darkred;
+    position: relative;
+    z-index: 100;
+}
+
+.tomonth {
+    color: darkred;
+}
+
+.arxiu-cell {
+    font-family: "Courier";
 }

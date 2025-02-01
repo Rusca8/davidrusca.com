@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Política de privacitat</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+</head>
+<body class="bg-rusca m-3">
+
+            <h1 class="text-center">Política de privacitat</h1>
+            <h5 class="text-center mb-3">de DavidRusca.com</h5>
+    <div class="card border-c">
+        <div class="card-body">
+            <h5 class="">Galetes</h5>
+            <p>
+                La web no fa servir <b>galetes de tercers</b>.
+            </p>
+            <p>
+                En algunes seccions, fa servir <b>galetes de sessió</b> (<code>Flask session</code>) per coses com recordar de quina part de la web venies quan has iniciat sessió (i així poder-te tornar al mateix lloc).<br>
+                Aquestes galetes de sessió s'obliden tan bon punt tanques el navegador.
+            </p>
+            <p>
+                En altres seccions, com per exemple els encreuats críptics, fa servir <b>galetes permanents</b> (<code>javascript localStorage</code>) per recordar com estava la teva partida i poder-te-la posar tal com la tenies el dia anterior.<br>
+                Aquestes s'obliden quan tu li demanes al teu navegador.<br>
+            </p>
+            <p>
+                Tant amb les galetes de sessió com amb les galetes permanents, la informació es desa al teu ordinador.
+            </p>
+
+
+            <h5 class="mt-3">Comptes d'usuari</h5>
+            <p>
+                La web permet iniciar sessió a través del teu compte de Google.<br>
+                Si inicies sessió d'aquesta manera, la web enregistra a la seva base de dades el teu <b>nom de pila</b> (sense cognom), el teu <b>email</b>, un enllaç a la teva <b>foto de perfil</b>, i el teu <b>número de Google</b> (<code>OAuth sub</code>), que és un número que Google fa servir per saber qui ets i poder-m'ho dir a mi.
+            </p>
+            <p>
+                Les teves contrassenyes <b>no passen mai</b> per les meves mans (Google em promet que ets tu, i amb això faig prou).
+            </p>
+            <p>
+                A part d'aquesta informació que em dona Google, si posteriorment has escollit un <b>nom d'usuari</b>, la web també l'haurà enregistrat.<br>
+                (Pots veure tota aquesta informació que la web ha recopilat sobre tu a <a href="/u/">la teva plana de perfil</a>).
+            </p>
+            <p>
+                D'altra banda, si has jugat (havent iniciat sessió) als jocs de la web que permeten jugar amb compte d'usuari (p. ex. al diacríptic), la web també haurà recollit les dades que necessita per poder recordar el teu progrés, i les haurà vinculat al teu compte.
+            </p>
+
+            <h5 class="mt-3">Ús de les dades</h5>
+            <p>
+                Aquestes dades recollides són únicament per ús intern, i no les comparteixo (ni les compartiré) amb tercers.
+            </p>
+
+            <h5 class="mt-3">Esborrar o alterar les teves dades</h5>
+            <p>
+                De seguida que pugui, afegiré la opció d'eliminar el compte directament des del teu perfil (sense necessitat de contactar-me a mi ni res),
+                però voldria que la web enviés un correu de confirmació abans d'esborrar-te-la, per què puguis confirmar que ets tu qui ho demana (i no te'l pugui esborrar qualsevol persona que es trobi el teu compte obert).
+            </p><p>
+                Com que primer he d'aprendre a gestionar això d'enviar correus des del propi Flask d'alguna manera, de moment no es pot esborrar el compte sense la meva intervenció (i.e. si estàs veient això, és que encara estem de proves i en certa manera t'has colat al beta-testing).
+            </p><p>
+                En tot cas, si vols esborrar el compte abans que jo tingui temps d'implementar el correu de confirmació (o si per algun motiu vols alterar les teves dades sense esborrar-les), no dubtis a contactar amb mi a través de qualsevol dels enllaços de contacte de la pàgina, i t'ho esborro o canvio jo manualment.
+            </p>
+
+            <h5 class="mt-3">Codi obert</h5>
+            <p>
+                El codi d'aquesta web és totalment públic (excepte les claus privades d'encriptació i altra informació sensible similar).<br>
+                Si tens més curiositat de la que pot satisfer aquesta política de privacitat (o vols entendre millor com gestiono la base de dades), pots xafardejar-ho tot a GitHub.
+            </p>
+            <p class="small">
+                Aquest text s'ha actualitzat per última vegada el dia 01/02/2025.
+            </p>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

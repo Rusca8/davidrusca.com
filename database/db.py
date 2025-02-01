@@ -12,6 +12,7 @@ def get_db():
             "./database/sqlite_db",
             detect_types=sqlite3.PARSE_DECLTYPES
         )
+        g.db.execute('PRAGMA foreign_keys = ON')  # without THIS it wouldn't check foreign key constraints (!)
         g.db.row_factory = sqlite3.Row
 
     return g.db
@@ -50,7 +51,7 @@ def prepopulate():
                    "wop": "Joc de paraules", "res": "Resposta", "hid": "Text amagat"}
     for btype, name in block_types.items():
         db.execute(
-            "INSERT OR IGNORE INTO analysis_block_type (type, name)"
+            "INSERT OR IGNORE INTO analysis_block_type (type, name) "
             "VALUES (?, ?)",
             (btype, name)
         )
@@ -59,7 +60,7 @@ def prepopulate():
     print("· Making sure all analysis_types exist")
     for type_ in ["clue", "solution"]:
         db.execute(
-            "INSERT OR IGNORE INTO cryptic_clue_analysis_type (type)"
+            "INSERT OR IGNORE INTO cryptic_clue_analysis_type (type) "
             "VALUES (?)",
             (type_,)  # important comma over here (makes it a tuple)
         )
@@ -68,9 +69,28 @@ def prepopulate():
     ...
     # user_autor (0 = oauth_yo)
     ...
+    # login_provider
+    print("· Making sure all login_providers exist")
+    for provider in ["google"]:
+        db.execute(
+            "INSERT OR IGNORE INTO login_provider (provider) "
+            "VALUES (?)",
+            (provider,)  # important comma over here (makes it a tuple)
+        )
+        db.commit()
+    # cryptic_clue_tag_type
+    print("· Making sure all cryptic_clue_tag_types exist")
+    from database.cryptic_clue import CrypticClue
+    for tag_type, tag_data in CrypticClue.available_tags.items():
+        db.execute(
+            "INSERT OR IGNORE INTO cryptic_clue_tag_type (type, description)"
+            "VALUES (?, ?)",
+            (tag_type, tag_data["description"],)
+        )
+        db.commit()
 
 
-@click.command("init-db")
+@click.command("init-db")  # para ejecutarlo en la terminal: $ flask --app flask_app init-db
 @with_appcontext
 def init_db_command():
     init_db()

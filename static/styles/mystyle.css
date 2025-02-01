@@ -111,3 +111,7 @@ canvas {
     background-color: #4488dd;
     color: white;
 }
+
+.stretched-link-boundary {
+    transform: rotate(0);
+}

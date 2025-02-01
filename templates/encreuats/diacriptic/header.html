@@ -1,0 +1,27 @@
+{# diacriptic header #}
+
+<div class="diac-head">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col px-0">
+                <a href="/diacriptic/tutorial" class="btn btn-diac-tutorial m-2">?</a>
+            </div>
+            <div class="col px-0">
+                <div id="account-area" class="float-right">
+                    {% if current_user.is_authenticated %}
+                    <div>
+                        <b>{{current_user.username or "(" + current_user.name + ")"}}</b>
+                        <img id="user-thumbnail" class="rounded-circle profile-thumbnail ml-1 mr-2 mt-2 mb-2" src="{{current_user.profile_pic or '/static/img/ningu.png'}}" alt="profile_pic">
+                        <a href="/diacriptic/u/" class="stretched-link"></a>
+                    </div>
+                    {% else %}
+                    <div class="stretched-link-boundary">
+                        <div class="my-2 mx-3">inicia sessió</div>
+                        <a href="/login/diacriptic" class="stretched-link"></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

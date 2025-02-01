@@ -2,16 +2,13 @@
 {# diacriptic SOLVED: inner game replacement #}
     <div class="inner-game margin-x-auto">
         <div class="diac-main pb-4">
-            <div class="diac-head">
-                <a href="/encreuats/" class="btn btn-diac-tutorial m-2">?</a>
-            </div>
-
-            <h1 class="h1 text-center pt-1">dia<span class="eh-res pl-0">críptic</span></h1>
+            {% include '/encreuats/diacriptic/header.html' %}
+            <h1 class="h1 text-center pt-1"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-res pl-0">críptic</span></span></h1>
             <br>
             <p class="clue lora-clue text-center mb-3 mx-3">
                 {% if 'd' in help_used %}
                     {% with text=cclue.clue, analysis=cclue.clue_analysis %}
-                        {% include '/encreuats/diacriptic/analysed_text.html' %} ({{cclue.n|join(",")}})
+                        {% include '/encreuats/diacriptic/analysed_text.html' %}({{cclue.n|join(",")}})
                     {% endwith %}
                 {% else %}
                 <span id="clue">{{cclue.clue}}</span> ({{cclue.n|join(",")}})
@@ -70,6 +67,6 @@
 
 
         <div class="kb-div pt-1 pb-2">
-            <div class="small text-center mt-1 credits">Rusca 2024 · Based on MinuteCryptics</div>
+            <div class="small text-center mt-1 credits">Rusca 2025 · Based on MinuteCryptics</div>
         </div>
     </div>

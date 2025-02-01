@@ -3,6 +3,11 @@ from crypto import unidecode_but
 
 
 class CrypticClue:
+    available_tags = {
+        "p": {"description": "Pausada", "icon": "⏸️"},
+        "a": {"description": "Aprovada", "icon": "✅"},
+        "e": {"description": "Esperant que arribi el moment", "icon": "⏳"},
+    }
     sql_select_clue = """
         SELECT cryptic_clue.clue_id, word, clue, solution, date_created, 
             autor.id AS autor_id, autor.name AS autor 
@@ -24,6 +29,10 @@ class CrypticClue:
                 ON analysis_block.clue_id = cryptic_clue_analysis.clue_id 
                 AND analysis_block.analysis_type = cryptic_clue_analysis.analysis_type 
         """
+    sql_select_tags = """
+        SELECT clue_id, tag_id
+        FROM cryptic_clue_tag
+        """
 
     def __init__(self, clue_id, word, clue, solution="", date_created=None, autor_id=None, autor=None,
                  clue_analysis=None, solution_analysis=None):
@@ -36,6 +45,8 @@ class CrypticClue:
         self.autor = autor
         self.clue_analysis = clue_analysis
         self.solution_analysis = solution_analysis
+        # extra usable parameters
+        self.arxiu = {}  # admin page will place here the days of the appearances
 
     @property
     def n(self):
@@ -124,8 +135,8 @@ class CrypticClue:
                 cclues[clue_id]["analysis"][analysis_type][block_type].append([block_start, block_end])
 
             return [CrypticClue.from_row(cclue["row"],
-                                         clue_analysis=cclue["analysis"]["clue"],
-                                         solution_analysis=cclue["analysis"]["solution"])
+                                         clue_analysis=cclue["analysis"].get("clue", {}),
+                                         solution_analysis=cclue["analysis"].get("solution", {}))
                     for cclue in cclues.values()]
         else:
             db = get_db()
@@ -283,10 +294,10 @@ class CrypticClue:
     def get_new_id():
         db = get_db()
         ids = db.execute(
-            "SELECT * FROM cryptic_clue"
+            "SELECT clue_id FROM cryptic_clue"
         ).fetchall()
         if ids:
-            return max(int(clue_id[0]) for clue_id in ids if clue_id) + 1
+            return max(int(clue_id[0]) for clue_id in ids if clue_id and clue_id[0].isdigit()) + 1
         return 1
 
     @staticmethod
@@ -317,3 +328,66 @@ class CrypticClue:
             "solution_analysis": self.solution_analysis
         }
         return clue
+
+    @staticmethod
+    def get_tags(clue_id):
+        db = get_db()
+        tags = db.execute(
+            CrypticClue.sql_select_tags +
+            "WHERE clue_id = ?",
+            (clue_id,)
+        ).fetchall()
+        return [tag["type"] for tag in tags]
+
+    @staticmethod
+    def get_all_tags():
+        """get a dictionary containing every existing tag for any given clue"""
+        db = get_db()
+        tags_data = db.execute(
+            CrypticClue.sql_select_tags
+        ).fetchall()
+        tags = {}
+        for tag in tags_data:
+            clue_id, tag_id = tag["clue_id"], tag["tag_id"]
+            if clue_id not in tags:
+                tags[clue_id] = []
+            tags[clue_id].append(tag_id)
+
+        return tags
+
+    @staticmethod
+    def add_tag(clue_id, tag):
+        """adds a cryptic_clue_tag to the cryptic_clue"""
+        db = get_db()
+        if tag not in CrypticClue.available_tags:
+            print("tag not available")
+            return False
+        try:
+            db.execute(
+                "INSERT INTO cryptic_clue_tag (clue_id, tag_id) "
+                "VALUES (?, ?)",
+                (clue_id, tag,)
+            )
+            db.commit()
+        except Exception as e:
+            print(e)
+            return False
+        return True
+
+    @staticmethod
+    def remove_tag(clue_id, tag):
+        db = get_db()
+        if tag not in CrypticClue.available_tags:
+            print("tag not available")
+            return False
+        try:
+            db.execute(
+                "DELETE FROM cryptic_clue_tag "
+                "WHERE clue_id = ? AND tag_id = ?",
+                (clue_id, tag)
+            )
+            db.commit()
+        except Exception as e:
+            print(e)
+            return False
+        return True
