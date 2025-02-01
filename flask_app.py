@@ -48,6 +48,7 @@ babel = Babel(app)
 app.config["REMEMBER_COOKIE_DOMAIN"] = ".davidrusca.com"  # remember_cookie settings to please android chrome?
 app.config["REMEMBER_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SECURE"] = True
+app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
 app.secret_key = flask_secret_key or os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
