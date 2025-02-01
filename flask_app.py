@@ -48,6 +48,7 @@ babel = Babel(app)
 app.secret_key = flask_secret_key or os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.session_protection = "basic"
 
 
 # DB INITIALIZATION // SCHEMA UPDATE
