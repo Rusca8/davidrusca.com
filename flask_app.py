@@ -195,7 +195,7 @@ def login_callback():
         user = User.create(name=name, email=email, profile_pic=picture, provider="google", sub=sub)
 
     # Begin user session in Flask
-    login_user(user)
+    login_user(user, remember=True)
 
     # Send user back to logged in
     login_origin = session.pop("login_origin", "")

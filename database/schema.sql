@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS user (
   name TEXT NOT NULL,
   fallback_email TEXT UNIQUE NOT NULL,  -- per si l'usuari queda orfe de logins, que tingui alguna referència
   profile_pic TEXT,
-  date_joined INTEGER DEFAULT (strftime('%F', 'now')),
+  date_joined INTEGER DEFAULT (strftime('%s', 'now')),
   username TEXT UNIQUE
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS cryptic_clue (
   word TEXT NOT NULL,
   clue TEXT,
   solution TEXT,
-  date_created INTEGER DEFAULT (strftime('%F', 'now')),
+  date_created INTEGER DEFAULT (strftime('%s', 'now')),
   autor_id INTEGER DEFAULT 0,
   FOREIGN KEY (autor_id)
     REFERENCES autor (id)
