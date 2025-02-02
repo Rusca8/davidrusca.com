@@ -799,7 +799,7 @@ def user():
         return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic",
                                username_regex=User.username_pattern)
     else:
-        return "Login something something page wip"
+        return redirect("/diacriptic")
 
 
 @app.route('/ktn')

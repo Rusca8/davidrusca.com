@@ -102,6 +102,10 @@
                 {{current_user.fallback_email}}<br>
                 {% set logout_link = '/logout/' + logout_origin if logout_origin else '/logout' %}
                 <a href="{{logout_link}}" type="button" class="btn btn-danger py-0 mt-2 text-white">Tancar Sessió</a>
+                <div class="small mt-1" style="color: rgba(0, 0, 0, 0.4);">
+                    *Sembla que Chrome a Android de vegades et recorda igualment després de tancar sessió. 
+                    Els altres navegadors (inclòs chrome d'ordinador) m'ho fan bé. Si algú en sap coses feu-m'ho saber!
+                </div>
             </div>
         </div>
         <small class="mb-2" style="color: rgba(0,0,0,0.5)">
