@@ -796,7 +796,8 @@ def diacriptic_admin():
 @app.route("/diacriptic/u/")
 def user():
     if current_user.is_authenticated:
-        return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic")
+        return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic",
+                               username_regex=User.username_pattern)
     else:
         return "Login something something page wip"
 
