@@ -95,6 +95,10 @@ def prepopulate():
 @click.command("init-db")  # para ejecutarlo en la terminal: $ flask --app flask_app init-db
 @with_appcontext
 def init_db_command():
+    """Inicialitza la base de dades a partir de l'esquema i hi afegeix els ítems que hi han de ser des del principi.
+    A la terminal de PyCharm em funciona amb: $ flask --app flask_app init-db
+    A pythonanywhere la versió és més vella: $ export FLASK_APP=flask_app.py      $ flask init-db
+    """
     init_db()
     prepopulate()
     click.echo("Initialized the database.")

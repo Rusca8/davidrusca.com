@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin: Diacríptic</title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Admin: Diacriptic</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+    <link rel="stylesheet" href="/static/styles/diacriptic_admin.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+    <script>
+        var base_url = "/diacriptic/a/ajax/";
+
+        window.onload = function (){
+            render_analyses();
+            choose_row_classes();
+            load_hovers();
+            update_clock();
+            setInterval(update_clock, 1000);
+            highlight_today();
+            setInterval(highlight_today, 60000);
+        };
+
+        function get_local_datetime(){
+            let datetime = new Date();
+            let off = datetime.getTimezoneOffset();
+            datetime.setTime(datetime.getTime() - off*60*1000);
+            let [date, time] = datetime.toISOString().split("T");
+            time = time.split(".")[0];
+            return [date, time];
+        }
+
+        function update_clock(){
+            let [date, time] = get_local_datetime();
+            $("#clock").html(time);
+            $("#today").html(date);
+        }
+
+        function load_hovers(){
+            $(".cal-day").map(function () {
+                if(this.dataset.numofdiacs == 0){
+                    return;
+                }
+                $(this).hover(
+                    function(){
+                        load_cal_day_data(this);
+                    },
+                    function(){
+                        document.getElementById("cal-day-hover-data").classList.add("hidden");
+                    }
+                )
+            });
+        }
+
+        function load_cal_day_data(cal_day){
+            let hover_div = document.getElementById("cal-day-hover-data");
+            hover_div.innerHTML = cal_day.dataset.hover;
+            hover_div.classList.remove("hidden");
+            $('#cal-day-hover-data').css({
+                'top': $("#" + cal_day.id).offset().top - 16,
+                'left': $("#" + cal_day.id).offset().left,
+            });
+        }
+
+        function load_date_selection_popup(clue_id){
+            let ds_popup = document.getElementById("date-selection-popup");
+            // placement
+            let arxiu_cell = $("#arxiu-cell-" + clue_id);
+            $("#date-selection-popup").css({
+               "top": arxiu_cell.offset().top,
+                "left": arxiu_cell.offset().left + arxiu_cell.width() + 8,
+            });
+
+            // load clue data
+            $("#ds-popup-clue-id").html(clue_id);
+            let assigned_dates_html = [];
+            let dates = fix_bad_quotes_dict(arxiu_cell.data("dates"));
+            for(let date of dates){
+                assigned_dates_html.push("<span>" + date + '</span> <span class="lilcross" onclick="initiate_date_removal(\'' + clue_id + '\',\'' + date + '\');">×</span>');
+            }
+            $("#ds-popup-assigned-dates").html(assigned_dates_html.join("<br>"));
+            $("#ds-popup-word").html($("#word-cell-" + clue_id).html());
+            $("#ds-popup-clue").html($("#clue-cell-" + clue_id).html());
+
+            // date
+            document.getElementById("selected-date").value = "";
+            reset_btn_assign_date();
+            // num
+            document.getElementById("selected-num").value = "";
+            reset_btn_assign_num();
+
+            // show
+            ds_popup.classList.remove("hidden");
+        }
+        function quit_date_selection_popup(){
+            document.getElementById("date-selection-popup").classList.add("hidden");
+        }
+
+        function reset_btn_assign_date(){
+            let btn = $("#btn-assign-date");
+            btn.prop("disabled", true);
+            btn.html("Select a date");
+        }
+        function reset_btn_assign_num(){
+            let btn = $("#btn-assign-num");
+            btn.prop("disabled", true);
+            btn.html("Select an opus number");
+        }
+
+        function highlight_today(){
+            let now = get_local_datetime()[0];
+            // marca el dia
+            $(".cal-day").map(function () {
+                this.classList.remove("today");
+            });
+            document.getElementById("calday-" + now).classList.add("today");
+            // marca el mes
+            $(".cal-month-title").map(function () {
+                this.classList.remove("tomonth");
+            });
+            document.getElementById("calmonth-" + now.slice(0, 7)).classList.add("tomonth");
+        }
+
+        function tag_is_active(clue_id, tag){
+            let ctrl = document.getElementById("ctrl-" + clue_id + "-" + tag);
+            return !ctrl.classList.contains("icon-trans");
+        }
+
+        function toggle_tag(clue_id, tag){
+            if(tag_is_active(clue_id, tag)){
+                remove_tag(clue_id, tag);
+            }else{
+                add_tag(clue_id, tag);
+            }
+        }
+
+        function add_tag(clue_id, tag){
+            $.ajax({
+                url: base_url + "add_tag",
+                type: "post",
+                data: {"clue_id": clue_id,
+                       "tag": tag
+                },
+                success: tag_added
+            });
+        }
+        function tag_added(ajax_result){
+            if(ajax_result == "N"){
+                console.log("Failed");
+                return;
+            }
+            let clue_id = ajax_result["clue_id"];
+            let tag = ajax_result["tag"];
+            document.getElementById("ctrl-" + clue_id + "-" + tag).classList.remove("icon-trans");
+            choose_row_class(clue_id);
+        }
+
+        function remove_tag(clue_id, tag){
+            $.ajax({
+                url: base_url + "remove_tag",
+                    type: "post",
+                    data: {"clue_id": clue_id,
+                           "tag": tag
+                    },
+                    success: tag_removed
+            });
+        }
+        function tag_removed(ajax_result){
+            if(ajax_result == "N"){
+                console.log("Failed");
+                return;
+            }
+            let clue_id = ajax_result["clue_id"];
+            let tag = ajax_result["tag"];
+            document.getElementById("ctrl-" + clue_id + "-" + tag).classList.add("icon-trans");
+            choose_row_class(clue_id);
+        }
+
+        function apply_tag_class(row, clue_id, tag){
+            if(tag_is_active(clue_id, tag)){
+                row.classList.add("diac-admin-" + tag);
+            }else{
+                row.classList.remove("diac-admin-" + tag);
+            }
+        }
+
+        function choose_row_class(clue_id){
+            let row = document.getElementById("row-" + clue_id);
+            apply_tag_class(row, clue_id, "a");
+            apply_tag_class(row, clue_id, "p");
+            apply_tag_class(row, clue_id, "e");
+        }
+
+        function choose_row_classes(){
+            let pool = document.getElementById("pool");
+            for(let row of pool.rows){
+                if(row.id){
+                    let clue_id = row.id.split("-")[1];
+                    choose_row_class(clue_id);
+                }
+            }
+        }
+
+        function num_selected(){
+            let selected_num = document.getElementById("selected-num").value;
+            if(selected_num==""){
+                reset_btn_assign_num();
+                return;
+            }
+            $("#btn-assign-num").html("Assign opus #" + selected_num);
+            $("#btn-assign-num").prop("disabled", false);
+        }
+
+        function date_selected(){
+            let selected_date = document.getElementById("selected-date").value;
+            if(selected_date==""){
+                reset_btn_assign_date();
+                return;
+            }
+            $("#btn-assign-date").html("Assign for " + selected_date);
+            $("#btn-assign-date").prop("disabled", false);
+        }
+
+        function initiate_date_assignation(){
+            let date = $("#selected-date").val();
+            let clue_id = $("#ds-popup-clue-id").html();
+            console.log("Asking to add", date, "to clue #", clue_id);
+            if(date <= get_local_datetime()[0]){
+                console.log("Publication is retroactive. Asking for validation.")
+                load_pwd_popup("date_addition", {"clue_id": clue_id, "date": date});
+            }else{
+                assign_date(clue_id, date);
+            }
+        }
+        function assign_date(clue_id, date, pwd="") {
+            if(!clue_id || !date){
+                console.log("assign: no clue or date");
+                return;
+            }
+            console.log("Assigning date " + date + " to clue #" + clue_id);
+            $.ajax({
+                url: base_url + "assign_date",
+                type: "post",
+                data: {"clue_id": clue_id,
+                       "date": date,
+                       "pwd": pwd,
+                },
+                success: date_added
+            });
+        }
+        function date_added(ajax_result){
+            if(ajax_result == "N"){
+                console.log("date addition failed");
+                return;
+            }
+            // TODO ajax it to only [calendar + affected row]
+            location.reload();
+        }
+
+        function initiate_date_removal(clue_id, date){
+            console.log("Asking to remove", date, "from", clue_id);
+            if(date <= get_local_datetime()[0]){
+                console.log("Clue already published. Asking for validation.")
+                load_pwd_popup("date_removal", {"clue_id": clue_id, "date": date});
+            }else{
+                remove_date_from_clue(clue_id, date);
+            }
+        }
+        function remove_date_from_clue(clue_id, date, pwd=""){
+            if(!clue_id || !date){
+                console.log("no clue or no date");
+                return;
+            }
+            $.ajax({
+                url: base_url + "remove_date",
+                type: "post",
+                data: {"clue_id": clue_id,
+                       "date": date,
+                       "pwd": pwd,
+                },
+                success: date_removed
+            });
+        }
+        function date_removed(ajax_result){
+            if(ajax_result == "N"){
+                console.log("date removal failed");
+                return;
+            }
+            // TODO ajax it to only [calendar + affected row]
+            location.reload();
+        }
+
+        function initiate_num_assignation(){
+            let num = $("#selected-num").val();
+            let clue_id = $("#ds-popup-clue-id").html();
+            console.log("Asking to assign ", num, "to clue #", clue_id);
+            // TODO check if clue already has number in older dates or something
+            assign_num(clue_id, num);
+        }
+        function assign_num(clue_id, num) {
+            if(!clue_id){
+                console.log("assign num: no clue");
+                return;
+            }
+            console.log("Assigning num #" + num + " to clue #" + clue_id);
+            $.ajax({
+                url: base_url + "assign_num",
+                type: "post",
+                data: {"clue_id": clue_id,
+                       "num": num,
+                },
+                success: num_added
+            });
+        }
+        function num_added(ajax_result){
+            if(ajax_result == "N"){
+                console.log("num addition failed");
+                return;
+            }
+            // TODO ajax it to only [calendar + affected row]
+            location.reload();
+        }
+
+        function load_pwd_popup(query_origin, data){
+            $("#apwd-query-origin").html(query_origin);
+            $("#admin-pwd-popup").data("querydata", data);
+            document.getElementById("admin-pwd-popup").classList.remove("hidden");
+            $("#admin-pwd").focus();
+        }
+        function quit_pwd_popup(){
+            $("#admin-pwd").val("");
+            $("#apwd-query-origin").html("");
+            $("#admin-pwd-popup").data("querydata", "");
+            document.getElementById("admin-pwd-popup").classList.add("hidden");
+        }
+        function submit_pwd(){
+            let pwd = $("#admin-pwd").val();
+            let query_origin = $("#apwd-query-origin").html();
+            let data = $("#admin-pwd-popup").data("querydata");
+            console.log(data);
+            quit_pwd_popup();
+            // apply requested action
+            switch(query_origin){
+                case "date_removal":
+                    remove_date_from_clue(data["clue_id"], data["date"], pwd);
+                    break;
+                case "date_addition":
+                    assign_date(data["clue_id"], data["date"], pwd);
+                    break;
+                case "":
+                    console.log("No origin defined for this password request.");
+                    break;
+            }
+        }
+
+    </script>
+</head>
+
+<body class="p-3" style="height: 100vh;">
+
+<h3 class="text-center mb-1">Diacriptic: Admin</h3>
+<div class="dayclock text-center mt-0 mb-2">
+    Users
+</div>
+
+<div>
+    <b>Most Solves</b>
+    <table>
+        <tr>
+            <td class="px-1 text-right">user_id</td>
+            <td class="px-1 text-right">name</td>
+            <td class="px-1"><b>username</b></td>
+            <td class="px-1 text-center">solved</td>
+            <td class="px-1 text-center">wip</td>
+        </tr>
+    {% for user_id, user in solves.items() %}
+        <tr>
+            <td class="px-1 text-right">{{ user_id }}</td>
+            <td class="px-1 text-right">{{ user["name"] }}</td>
+            <td class="px-1"><b>{{ user["username"] if user["username"] else ''}}</b></td>
+            <td class="px-1 text-center">{{ user["solved"] }}</td>
+            <td class="px-1 text-center">{{ user["pending"] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

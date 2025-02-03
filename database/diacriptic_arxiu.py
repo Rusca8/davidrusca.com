@@ -93,3 +93,33 @@ class DiacripticArxiu:
             (date,)
         )
         return [row["clue_id"] for row in entries]
+
+    @staticmethod
+    def count_solves_per_person():
+        """returns list of how many solves by each solver"""
+        db = get_db()
+        solves = db.execute(
+            """
+            SELECT user_id, name, username, count(user_id) as solves, 
+                CASE WHEN date_solved IS NULL THEN 'PENDING'
+                ELSE 'SOLVED'
+                END AS 'solve_status'
+            FROM diacriptic_solve 
+            LEFT JOIN user
+                ON user.id = diacriptic_solve.user_id
+            GROUP BY user_id, solve_status
+            ORDER BY solves DESC
+            """
+        ).fetchall()
+
+        solves_count = {}
+        for row in solves:
+            user_id = row["user_id"]
+            if user_id not in solves_count:
+                solves_count[user_id] = {"name": row["name"], "username": row["username"]}
+            if row["solve_status"] == "PENDING":
+                solves_count[user_id]["pending"] = row["solves"]
+            else:
+                solves_count[user_id]["solved"] = row["solves"]
+        return solves_count
+

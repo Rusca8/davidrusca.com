@@ -793,6 +793,16 @@ def diacriptic_admin():
     return redirect("/")
 
 
+@app.route("/diacriptic/admin/users")
+@login_required
+def diacriptic_admin_users():
+    if current_user.is_admin:
+        from database.diacriptic_arxiu import DiacripticArxiu
+        solves = DiacripticArxiu.count_solves_per_person()
+        return render_template("/encreuats/diacriptic_admin_users.html", solves=solves)
+    return redirect("/")
+
+
 @app.route("/diacriptic/u/")
 def user():
     if current_user.is_authenticated:
