@@ -33,9 +33,14 @@
     {% with origin="diacriptic" %}
         {% include '/encreuats/diacriptic/tutorial.html' %}
     {% endwith %}
+        <div class="text-center">
+            <button class="btn mx-2 alt-outline btn-diac-tutorial-tutorial" onclick="location.href='/diacriptic/par';">
+                Perfecte, però no entenc la puntuació :(
+            </button>
+        </div>
 
         <div class="text-center">
-            <button id="btn-diac-tutorial-juga" class="btn mx-2 alt-outline" onclick="location.href='/diacriptic';">
+            <button class="btn mx-2 alt-outline btn-diac-tutorial-tutorial mt-1" onclick="location.href='/diacriptic';">
                 Ja ho he entès! Ara vull jugar!!
             </button>
         </div>

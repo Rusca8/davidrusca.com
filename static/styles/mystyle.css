@@ -115,3 +115,8 @@ canvas {
 .stretched-link-boundary {
     transform: rotate(0);
 }
+
+.non-decor, .non-decor:hover {
+    color: black;
+    text-decoration: none;
+}

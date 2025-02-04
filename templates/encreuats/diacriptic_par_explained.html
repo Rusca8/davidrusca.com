@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Tutorial - diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/mystyle.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+</head>
+<body>
+
+    <h1 class="h1 text-center pt-4 mb-2"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-mat pl-0">críptic</span></span></h1>
+
+    <h5 class="text-center py-2">Com funciona la puntuació?</h5>
+
+    <div id="diac-tutorial-container" class="py-3 px-3">
+
+        <div class="card border-c ml-2 mr-2 mt-0 mb-2">
+            <div class="card-body">
+                <h5 class="card-title">En resum</h5>
+                <hr>
+                <p class="mb-1">
+                    Ho pots pensar com un número que et diu <b>quanta ajuda has necessitat</b>.<br>
+                    Funciona com el <b>par</b> del golf. Com més <span class="eh-res">negatiu</span> més bé, com més <span class="eh-mat">positiu</span> més malament. Si treus <span class="eh-wop">un zero</span>, és que ho has fet "normal".<br>
+                </p>
+            </div>
+        </div>
+
+        <div class="card border-c ml-2 mr-2 mt-2 mb-2">
+            <div class="card-body">
+                <h5 class="card-title">D'on ve la meva puntuació?</h5>
+                <hr>
+                <p class="mb-2">
+                    Veuràs que hi ha <b>uns cercles</b> a sota la paraula. Cada vegada que demanis ajuda (la pista o una lletra), s'omplirà un dels punts.<br>
+                    El punt que està separat dels altres t'indica <b>quina és la quantitat normal d'ajuda</b> que hauries de necessitar.
+                </p>
+                <div class="container mx-0">
+                    <div class="row align-items-center">
+                        {% set par = 8 // 2 %}
+                        {% for i in range(8 + 1)%}
+                            {% set dot_type = "dot-d" if loop.index0 == 2 else "dot-l" if loop.index0 < 4 else "" %}
+                            <div id="dot-{{i}}" class="dot {{dot_type}}"></div>
+                            {% if par == loop.index or par == loop.index + 1 %}
+                            <span class="dots-bar">·</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <p class="mb-1 mt-1">
+                    Si arribes exacte al punt central, tindràs <span class="eh-wop">un zero</span> i ho hauràs fet <span class="eh-wop">normal</span>.<br>
+                    Si no et cal omplir tant, tindràs una puntuació <span class="eh-res">negativa</span> i ho hauràs fet <span class="eh-res">especialment bé</span>.<br>
+                    Si et cal omplir més, tindràs una puntuació <span class="eh-mat">positiva</span> i ho hauràs fet <span class="eh-mat">necessitant molta ajuda</span>.
+                </p>
+            </div>
+        </div>
+
+        <div class="card border-c ml-2 mr-2 mt-0 mb-2">
+            <div class="card-body">
+                <h5 class="card-title">Què és "normal"?</h5>
+                <hr>
+                <p class="mb-3">
+                    En els mots encreuats clàssics, hi ha moltes lletres que formen part de dues paraules diferents.<br>
+                    Quan són mots encreuats <u>críptics</u>, gairebé sempre són compartides <b>la meitat de les lletres</b> de cada paraula.
+                </p>
+                <p class="mb-3">
+                    Per tant, si estiguessis fent uns críptics a la vida real, la majoria de les paraules ja les començaries amb ajuda.<br>
+                    Concretament, abans de posar-te a llegir l'enunciat, en general ja sabries (de mitjana) la meitat de les lletres compartides,<br>
+                    perquè la meitat de les compartides vindrien de les paraules que ja has fet, i l'altra meitat servirien de pista per les que faràs després.
+                </p>
+                <p class="mb-2">
+                    El <b>par</b> d'un diacríptic és <b>la meitat de la meitat de la quantitat de lletres, +1</b>.
+                </p>
+                <ul>
+                    <li>La primera meitat ens serveix per calcular quantes lletres serien compartides.<br>
+                        <small>(aquí arrodoneixo les meitats amunt perquè a la vida real les paraules senars acostumen a compartir la meitat grossa)</small>
+                    </li>
+                    <li>
+                        La segona meitat ens serveix per calcular quantes lletres compartides tindríem.<br>
+                        <small>(aquí arrodoneixo les meitats amunt, aquest cop perquè la tria és arbitrària i tant per tant millor trio a favor de la vostra autoestima)</small>
+                    </li>
+                    <li>
+                        El +1 del final serveix per què demanar la definició sigui gratis.<br>
+                        <small>(perquè en general no canvia si l'hauries tret a llarg termini o no, només et filtra la pluja d'idees de quines coses intentar abans de treure'l).</small>
+                    </li>
+                </ul>
+                <p class="mb-1">
+                    Per tant, si veus que acostumes a resoldre els diacríptics sempre en <span class="eh-wop">0</span> o <span class="eh-res">subpar</span>,<br>
+                    vol dir que ja hauríes de ser capaç de resoldre uns mots encreuats críptics sencers!<br>
+                    <i>...o, si més no, uns críptics sencers que tinguin pistes de l'estil i nivell de les meves.</i>
+                </p>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn mx-2 alt-outline btn-diac-tutorial-tutorial" onclick="location.href='/diacriptic/tutorial';">
+                Potser que em miri el tutorial, doncs...
+            </button>
+        </div>
+        <div class="text-center">
+            <button class="btn mx-2 alt-outline btn-diac-tutorial-tutorial mt-1" onclick="location.href='/diacriptic';">
+                Ja ho he entès! Ara vull jugar!!
+            </button>
+        </div>
+
+    <div class="stretched-link-boundary">
+        <div class="small text-center mt-1 credits">Rusca 2024 · davidrusca.com/diacriptic<a class="stretched-link" href="/diacriptic/"></a></div>
+    </div>
+    </div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

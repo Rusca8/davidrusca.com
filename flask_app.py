@@ -669,6 +669,11 @@ def diacriptic_tutorial():
     return render_template("/encreuats/diacriptic_tutorial.html")
 
 
+@app.route('/diacriptic/par')
+def diacriptic_par():
+    return render_template("/encreuats/diacriptic_par_explained.html")
+
+
 @app.route('/diacriptic/explained', methods=["GET", "POST"])
 def diacriptic_explained():
     if request.method == "POST":

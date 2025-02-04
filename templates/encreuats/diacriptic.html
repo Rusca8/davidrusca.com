@@ -402,7 +402,7 @@
         </table>
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                {% set par = clue.n|sum // 2 %}
+                {% set par = clue.par %}
                 {% for i in range(clue.n|sum + 1)%}
                     {% set dot_type = "" if loop.index > help_used|length else "dot-" + help_used[loop.index0] %}
                     <div id="dot-{{i}}" class="dot {{dot_type}}"></div>

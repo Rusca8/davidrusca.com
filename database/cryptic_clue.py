@@ -52,6 +52,12 @@ class CrypticClue:
     def n(self):
         return [len(w) for w in self.word.split()]  # llista de quantitats de lletres
 
+    @property
+    def par(self):
+        """Returns par score as [bigger half of the checked squares (i.e. bigger half of the bigger half)] + 1"""
+        upper_half = sum(self.n) // 2 + sum(self.n) % 2  # upper half
+        return upper_half // 2 + upper_half % 2 + 1
+
     @staticmethod
     def get(clue_id, with_analyses=False):
         if with_analyses:

@@ -242,6 +242,7 @@ html {
 #diac-tutorial-container {
     background-color: var(--color-mat);
     border-top: 1px solid var(--color-d-mat);
+    min-height: 100vh;
 }
 
 .card.border-c {
@@ -256,7 +257,7 @@ button.border-c {
     border-color: black;
 }
 
-#btn-diac-tutorial-juga {
+.btn-diac-tutorial-tutorial {
     background: white;
     border: 1px solid var(--color-d-mat);
     max-width: 30rem;
