@@ -10,7 +10,7 @@
             <th class="px-1">Solution</th>
             <th class="px-1">ID</th>
         </tr>
-        {% for clue_id, cclue in pool.items() %}
+        {% for clue_id, cclue in pool.items()|reverse %}
         <tr id="row-{{cclue.clue_id}}">
             <td id="arxiu-cell-{{clue_id}}" class="px-1 pointer arxiu-cell" onclick="load_date_selection_popup({{clue_id}});" data-dates="{{cclue.arxiu.keys()|list}}">
                 {{ cclue.arxiu.keys()|join(" ") }}

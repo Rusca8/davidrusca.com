@@ -561,7 +561,7 @@
             </div>
         </div>
     </div>
-    <div id="diac-form" class="card border-c pt-2 pb-1 mb-3">
+    <div id="diac-form" class="card border-c pt-2 pb-1 mb-2">
         <div class="container-fluid mt-2">
             <div class="row px-3">
                 <div class="col px-1">
@@ -621,8 +621,16 @@
         </div>
         <div id="siblings-table"></div>
     </div>
+    <!-- NATO cheatsheet -->
+    {% set nato = ["Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu"] %}
+    <div class="small" style="color: rgba(0, 0, 0, 0.2);">
+        {% for w in nato %}
+            {{ '·' if loop.index0 else '' }}
+        <b>{{ w[0] }}</b>{{ w[1:] }}
+        {% endfor %}
+    </div>
     <!-- analysis editor columns -->
-    <div class="container">
+    <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="card border-c mb-3">
                 <div class="card-body py-1">
