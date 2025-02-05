@@ -83,7 +83,8 @@ class CrypticClue:
                     analysis[analysis_type][block_type] = []
                 analysis[analysis_type][block_type].append([block_start, block_end])
 
-            cclue = CrypticClue.from_row(cclue, clue_analysis=analysis["clue"], solution_analysis=analysis["solution"])
+            cclue = CrypticClue.from_row(cclue, clue_analysis=analysis.get("clue", {}),
+                                         solution_analysis=analysis.get("solution", {}))
             return cclue
         else:
             db = get_db()
