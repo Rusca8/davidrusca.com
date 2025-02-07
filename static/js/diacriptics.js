@@ -17,11 +17,11 @@ function apply_analysis_to_text(text_to_paint, blocks_to_paint){
                 if(s==i){
                     // check padding
                     let pl = "";
-                    if(i > 0 && !" ,.:;\"'".includes(text_to_paint[i-1])){
+                    if(i > 0 && !" ,.:;\"'?!".includes(text_to_paint[i-1])){
                         pl = " pl-0";
                     }
                     let pr = "";
-                    if(!" ,.:;\"'".includes(text_to_paint[e]) && text_to_paint[e] != undefined){
+                    if(!" ,.:;\"'?!".includes(text_to_paint[e]) && text_to_paint[e] != undefined){
                         pr = " pr-0";
                     }
                     text.push('<span class="eh-' + key + pl + pr + '">');
