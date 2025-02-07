@@ -236,7 +236,7 @@ class CrypticClue:
 
         for k in updates:
             print(k)
-            print(f"  {updates[k]} → {in_db[k]}")
+            print(f"  {in_db[k]} → {updates[k]}")
 
         # execute
         db = get_db()
