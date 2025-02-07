@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <!-- Material Symbols (google) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@22,300,0,0&icon_names=backspace" />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+    <link rel="stylesheet" href="/static/styles/diacriptic_arxiu.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+
+    <!-- main -->
+    <script>
+
+    </script>
+</head>
+
+<body>
+    {% set month_names = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"] %}
+    <div class="inner-game margin-x-auto">
+        <div class="diac-main pb-2">
+            {% with login_origin = 'diacriptic-arxiu' %}
+                {% include '/encreuats/diacriptic/header.html' %}
+            {% endwith %}
+
+            <h1 class="h1 text-center pt-1 pb-1"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-ind pl-0">críptic</span></span></h1>
+            <h5 class="text-center py-0 pb-1">Arxiu dels diacríptics dels dies anteriors</h5>
+
+        </div>
+        <div class="p-3">
+            <div class="container">
+                {% if not current_user.is_authenticated %}
+                <div class="row justify-content-center">
+                    <div class="col-md-auto px-0">
+                        <a href="/login/diacriptic-arxiu" class="btn bg-white border-ind mb-2 alt-outline">
+                            <span class="small"><i>Recorda que pots <u>iniciar sessió</u> (amb google) per què et marqui quins has fet i quins no.</i></span>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row justify-content-center">
+                    <div class="col-md-auto px-0">
+                        <div class="card border-ind mb-2">
+                            <div class="card-body p-2">
+
+                                {% include '/encreuats/diacriptic/arxiu_month.html' %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if ivedoneit %}
+            <div class="card border-ind">
+                <div class="card-body p-2">
+
+                    {# TODO Manage when two quotes on one place #}
+                    {% for date, da in arxiu.items() %}
+                    <div>{{date}} - {{da[0].clue_id}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="kb-div pt-1 pb-2">
+            <div class="small text-center mt-1 credits">Rusca 2025 · Based on MinuteCryptics</div>
+        </div>
+    </div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

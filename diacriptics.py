@@ -42,6 +42,10 @@ def today(offset4=False):
     return datetime.now(pytz.timezone("Europe/Madrid")).strftime("%Y-%m-%d")
 
 
+def today_add_weeks(weeks):
+    return (datetime.now(pytz.timezone("Europe/Madrid")) + timedelta(weeks=weeks)).strftime("%Y-%m-%d")
+
+
 def now():
     """Unix epoch in seconds (no decimal places). Mimics output of sqlite's unixepoch()"""
     return round(datetime.now().timestamp())
@@ -145,6 +149,12 @@ def get_clues_on_date(date=None, future=False):
     return DiacripticArxiu.get_clues_on_date(date)
 
 
+def get_clues_on_interval(start="2025-02-00", end=today(offset4=True), future=False):
+    if end > today(offset4=True) and not future:
+        end = today(offset4=True)
+    return DiacripticArxiu.get_clues_on_interval(start, end)
+
+
 def get_siblings(word):
     siblings = CrypticClue.get_siblings(word)
     return siblings
@@ -206,13 +216,30 @@ def update(params=None):
         return False
 
 
-def admin_calendar(start=2025):
+def calendar(start="2025-01-01", end=today_add_weeks(52)):
     import calendar as cal
+    sy, sm, sd = [int(x) for x in start.split("-")]
+    ey, em, ed = [int(x) for x in end.split("-")]
     months = []
-    year = start
-    for month in range(1, 13):
-        months.append({"year": year, "month": month, "range": cal.monthrange(year, month)})
+    year = sy
+    for year in range(sy, ey+1):
+        for month in range(1, 13):
+            if year == sy and month < sm:
+                continue
+            if year == ey and month > em:
+                continue
+            months.append({"year": year, "month": month, "range": cal.monthrange(year, month)})
     return months
+
+
+def month_calendar(year=None, month=None):
+    """Returns single month's structure."""
+    import calendar as cal
+    if year is None:
+        year = datetime.now().year
+    if month is None:
+        month = datetime.now().month
+    return {"year": year, "month": month, "range": cal.monthrange(year, month)}
 
 
 def get_arxiu():
@@ -222,6 +249,15 @@ def get_arxiu():
 
 def get_solve(clue_id, user_id):
     return DiacripticSolve.get(clue_id, user_id)
+
+
+def get_solves_by_user(user_id, focus_month=None):
+    """focus_month is [year, month]"""
+    year, month = focus_month or [datetime.now().year, datetime.now().month]
+    start = f"{year}-{month:0>2}-00"
+    end = f"{year}-{month:0>2}-32"
+    user_solves = DiacripticArxiu.get_solves_by_user(user_id, start, end)
+    return user_solves
 
 
 def help_mask(clue, solve):

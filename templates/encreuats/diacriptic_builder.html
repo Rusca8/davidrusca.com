@@ -46,6 +46,10 @@
             document.getElementById("clue").addEventListener("keypress", hotkey_clue);
             document.getElementById("solu").addEventListener("keypress", hotkey_solu);
 
+            {% if preload_clue %}
+                preload_clue({{preload_clue}});
+            {% endif %}
+
             setInterval(check_word_siblings, 500);
         }
 

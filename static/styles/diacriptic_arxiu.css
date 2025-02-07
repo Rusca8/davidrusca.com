@@ -1,0 +1,24 @@
+.arxiu-dot {
+    width: var(--arch-day-rad);
+    line-height: var(--arch-day-lh);
+    height: var(--arch-day-rad);
+    border-radius: 50%;
+}
+
+.arxiu-dot-pending {
+    background-color: var(--color-ind);
+    border: 1px solid var(--color-d-ind);
+}
+.arxiu-dot-solved {
+    background-color: var(--color-res);
+    border: 1px solid var(--color-d-res);
+}
+.arxiu-dot-disabled {
+    background-color: var(--color-wop);
+    color: var(--color-d-wop);
+    border: 1px solid var(--color-d-wop);
+}
+
+.cal-month-hr {
+    border-color: var(--color-d-wop);
+}

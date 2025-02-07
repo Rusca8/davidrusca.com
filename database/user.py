@@ -16,6 +16,10 @@ class User(UserMixin):
         self.username = username
         self.login_details = login_details
 
+    @property
+    def user_id(self):
+        return self.id
+
     @staticmethod  # adapted from realpython's
     def get(user_id):
         db = get_db()

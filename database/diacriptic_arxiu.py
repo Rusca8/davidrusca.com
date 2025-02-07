@@ -95,6 +95,29 @@ class DiacripticArxiu:
         return [row["clue_id"] for row in entries]
 
     @staticmethod
+    def get_clues_on_interval(start, end):
+        """Returns list of dates and quotes in date, between two given dates"""
+        db = get_db()
+        entries = db.execute(
+            """
+            SELECT * FROM diacriptic_arxiu
+            WHERE date_published >= ? AND date_published <= ?
+            """,
+            (start, end,)
+        )
+        archive_clues = {}
+        for row in entries:
+            date_published = row["date_published"]
+            if date_published not in archive_clues:
+                archive_clues[date_published] = []
+            archive_clues[date_published].append(
+                [DiacripticArxiu(
+                    id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
+                    )
+                ])
+        return archive_clues
+
+    @staticmethod
     def count_solves_per_person():
         """returns list of how many solves by each solver"""
         db = get_db()
@@ -123,3 +146,28 @@ class DiacripticArxiu:
                 solves_count[user_id]["solved"] = row["solves"]
         return solves_count
 
+    @staticmethod
+    def get_solves_by_user(user_id, start, end):
+        """Returns solves by user in a given period"""
+        print(start, end)
+        db = get_db()
+        entries = db.execute(
+            """
+            SELECT * FROM diacriptic_arxiu 
+              LEFT JOIN diacriptic_solve
+                ON diacriptic_arxiu.clue_id = diacriptic_solve.clue_id
+            WHERE user_id = ? AND date_published > ? AND date_published < ? 
+            """,
+            (user_id, start, end,)
+        )
+        solves = {}
+        for row in entries:
+            date_published = row["date_published"]
+            if date_published not in solves:
+                solves[date_published] = []
+            solves[date_published].append(
+                DiacripticArxiu(
+                    id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
+                    )
+            )
+        return solves

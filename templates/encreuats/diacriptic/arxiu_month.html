@@ -1,0 +1,36 @@
+
+        {% set monthdate = month['year']|string + "-" + '%02d' % month['month'] %}
+        <div id="calmonth-{{monthdate}}" class="cal-month-title text-center"><b>{{ month_names[month["month"]-1] }}</b> {{ month["year"] }}</div>
+        <hr class="cal-month-hr my-2">
+        <table class="month mb-1 margin-x-auto">
+            {% for week in range(5) %}
+            <tr>
+                {% for day in range(7) %}
+                    {% set day = week*7 + day - month["range"][0] + 1 %}
+                    <td class="p-0">
+                        {% if 0 < day <= month["range"][1] %}
+                            {# /////////////// real days on the calendar ////////////// #}
+                            {% set date = month['year']|string + "-" + '%02d' % month['month'] + "-" + '%02d' % day %}
+
+                            {% set num_of_diacs = arxiu.get(date, [])|length %}
+                            {% set num_class = 'num-1' if num_of_diacs == 1 else 'num-many' if num_of_diacs > 1 else '' %}
+
+                            {% if num_of_diacs and current_user.is_authenticated %}
+                                {% set day_solved = solves.get(date, [])|length %}
+                            {% endif %}
+
+                            {% set dot_class = 'arxiu-dot-solved' if day_solved else 'arxiu-dot-pending' if num_of_diacs else 'arxiu-dot-disabled' %}
+                            <div class="arxiu-dot {{dot_class}} m-1 text-center align-middle stretched-link-boundary">
+                                {{day}}
+                                {% if num_of_diacs %}
+                                <a href="/diacriptic/arxiu/{{date}}" class="stretched-link"></a>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                        <div class="text-center">•</div>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>

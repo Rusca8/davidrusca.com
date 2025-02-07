@@ -210,6 +210,8 @@ def login_callback():
     match login_origin:
         case "diacriptic":
             return redirect("/diacriptic/")
+        case "diacriptic-arxiu":
+            return redirect("/diacriptic/arxiu")
     return redirect(url_for("user_page"))
 
 
@@ -666,6 +668,18 @@ def diacriptic_ajax(query=None):
     return "N"
 
 
+@app.route('/diacriptic/arxiu')
+def diacriptic_arxiu():
+    import diacriptics as dc
+    month_calendar = dc.month_calendar()
+    arxiu = dc.get_clues_on_interval()
+    solves = {}
+    if current_user.is_authenticated:
+        solves = dc.get_solves_by_user(user_id=current_user.id)
+    return render_template("/encreuats/diacriptic_arxiu.html", arxiu=arxiu,
+                           month=month_calendar, solves=solves)
+
+
 @app.route('/diacriptic/tutorial')
 def diacriptic_tutorial():
     return render_template("/encreuats/diacriptic_tutorial.html")
@@ -788,7 +802,7 @@ def diacriptic_admin():
         pool = dc.get_clues_in_pool()
         tags = dc.get_tags()
         available_tags = CrypticClue.available_tags
-        calendar = dc.admin_calendar()
+        calendar = dc.calendar()
         arxiu = dc.get_arxiu()
         for day, entries in arxiu.items():
             for da in entries:
