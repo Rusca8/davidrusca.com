@@ -108,7 +108,6 @@ class DiacripticArxiu:
         archive_clues = {}
         for row in entries:
             date_published = row["date_published"]
-            print(date_published)
             if date_published not in archive_clues:
                 archive_clues[date_published] = []
             archive_clues[date_published].append(
@@ -116,6 +115,7 @@ class DiacripticArxiu:
                     id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
                 )
                 ])
+        print(f"Clues on interval ({start}, {end}): " + " ".join(archive_clues.keys()))
         return archive_clues
 
     @staticmethod
