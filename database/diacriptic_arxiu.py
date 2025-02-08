@@ -108,12 +108,13 @@ class DiacripticArxiu:
         archive_clues = {}
         for row in entries:
             date_published = row["date_published"]
+            print(date_published)
             if date_published not in archive_clues:
                 archive_clues[date_published] = []
             archive_clues[date_published].append(
                 [DiacripticArxiu(
                     id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
-                    )
+                )
                 ])
         return archive_clues
 
@@ -149,7 +150,6 @@ class DiacripticArxiu:
     @staticmethod
     def get_solves_by_user(user_id, start, end):
         """Returns solves by user in a given period"""
-        print(start, end)
         db = get_db()
         entries = db.execute(
             """
@@ -168,6 +168,6 @@ class DiacripticArxiu:
             solves[date_published].append(
                 DiacripticArxiu(
                     id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
-                    )
+                )
             )
         return solves

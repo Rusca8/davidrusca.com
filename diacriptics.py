@@ -152,6 +152,7 @@ def get_clues_on_date(date=None, future=False):
 def get_clues_on_interval(start="2025-02-00", end=today(offset4=True), future=False):
     if end > today(offset4=True) and not future:
         end = today(offset4=True)
+    print("get clues on interval:", start, end)
     return DiacripticArxiu.get_clues_on_interval(start, end)
 
 

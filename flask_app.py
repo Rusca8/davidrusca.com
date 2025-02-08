@@ -669,6 +669,7 @@ def diacriptic_ajax(query=None):
 
 
 @app.route('/diacriptic/arxiu')
+@app.route('/diacriptic/arxiu/')
 def diacriptic_arxiu():
     import diacriptics as dc
     month_calendar = dc.month_calendar()
