@@ -150,6 +150,7 @@ def get_clues_on_date(date=None, future=False):
 
 
 def get_clues_on_interval(start="2025-02-00", end=today(offset4=True), future=False):
+    print(datetime.now(pytz.timezone("Europe/Madrid")) - timedelta(hours=4))  # TODO remove (server time debugging)
     if end > today(offset4=True) and not future:
         print("correcting end date for get_clues_on_interval")
         end = today(offset4=True)
