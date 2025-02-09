@@ -12,6 +12,7 @@ function apply_analysis_to_text(text_to_paint, blocks_to_paint){
             }
         }
         // pass for beginnings
+        let afterblocks = [];
         for(let [key, val] of Object.entries(blocks_to_paint)){
             for(let [s, e] of val){
                 if(s==i){
@@ -24,9 +25,17 @@ function apply_analysis_to_text(text_to_paint, blocks_to_paint){
                     if(!" ,.:;\"'?!".includes(text_to_paint[e]) && text_to_paint[e] != undefined){
                         pr = " pr-0";
                     }
-                    text.push('<span class="eh-' + key + pl + pr + '">');
+                    if(key == "hid"){
+                        afterblocks.push('<span class="eh-' + key + pl + pr + '">');
+                    }else{
+                        text.push('<span class="eh-' + key + pl + pr + '">');
+                    }
                 }
             }
+        }
+        // held beginnings execute
+        for(let ab_text of afterblocks){
+            text.push(ab_text);
         }
         // the char
         text.push(text_to_paint[i]);
