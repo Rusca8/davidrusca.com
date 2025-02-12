@@ -656,7 +656,7 @@ def diacriptic_ajax(query=None):
                 # IF CORRECT
                 if wordletters == cclue.word.replace(" ", ""):  # ignore whitespace
                     user_id = current_user.id if current_user.is_authenticated else None
-                    print(f"{user_id} solved clue #{clue_id}")
+                    print(f"{user_id or 'Someone'} solved clue #{clue_id}")
                     if user_id:
                         dc.submit_solve(clue_id, user_id)
                     cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}

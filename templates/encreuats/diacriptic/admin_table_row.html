@@ -1,0 +1,40 @@
+{# clue row for admin tables #}
+
+<tr id="row-{{cclue.clue_id}}">
+    {% for col in table_columns %}
+        {% if col == "arxiu" %}
+            <td id="arxiu-cell-{{clue_id}}" class="px-1 pointer arxiu-cell" onclick="load_date_selection_popup({{clue_id}});" data-dates="{{cclue.arxiu.keys()|list}}">
+                {{ cclue.arxiu.keys()|join(" ") }}
+            </td>
+        {% elif col == "tags" %}
+            <td class="px-1">
+                {% for tag, tag_data in available_tags.items() %}
+                    {% set icon = tag_data["icon"] %}
+                    <span id="ctrl-{{clue_id}}-{{tag}}" onclick="toggle_tag('{{clue_id}}', '{{tag}}');" class="pointer {{'icon-trans' if tag not in tags[clue_id] else ''}}">{{icon}}</span>
+                {% endfor %}
+            </td>
+        {% elif col == "opus" %}
+            <td id="num-cell-{{clue_id}}" class="px-1 pointer" data-nums="{{cclue.arxiu}}"  onclick="load_date_selection_popup({{clue_id}});">
+                {% for num in cclue.arxiu.values() %}
+                    {{ num }}
+                {% endfor %}
+            </td>
+        {% elif col == "word" %}
+            <td id="word-cell-{{clue_id}}" class="px-1">{{cclue.word}}</td>
+        {% elif col == "clue" %}
+            <td id="clue-cell-{{clue_id}}" class="px-1" data-text="{{cclue.clue}} ({{cclue.n|join(',')}})" data-blocks='{{cclue.clue_analysis}}'>{{cclue.clue}}</td>
+        {% elif col == "solu" %}
+            <td class="px-1" data-text="{{cclue.solution}}" data-blocks='{{cclue.solution_analysis}}'>{{cclue.solution}}</td>
+        {% elif col == "clue_id" %}
+            <td class="px-1 mono text-right">{{clue_id}}</td>
+        {% else %}
+            <td>({{col}})</td>
+        {% endif %}
+    {% endfor %}
+
+
+
+
+
+
+</tr>
