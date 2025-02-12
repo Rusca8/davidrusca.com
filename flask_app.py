@@ -890,6 +890,12 @@ def bg_dots(bg=None):
         return render_template('404.html')
 
 
+@app.route('/repartir')
+def repartiment():
+    """TODO muntar una pàgina sencera amb el pdf i una mica d'explicació i futur enllaç a sardanòmetre digital."""
+    return redirect('/static/pdf/manual_definitiu_de_repartiment.pdf')
+
+
 @app.route('/notion/data')
 @app.route('/notion/data/')
 def notion_data():
