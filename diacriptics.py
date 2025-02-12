@@ -150,14 +150,8 @@ def get_clues_on_date(date=None, future=False):
 
 
 def get_clues_on_interval(start="2025-02-00", end=None, future=False):
-    print("Get Clues on Interval. Wats hapenin bro.")
-    print(datetime.now(pytz.timezone("Europe/Madrid")) - timedelta(hours=4))  # TODO remove (server time debugging)
-    print((datetime.now(pytz.timezone("Europe/Madrid")) - timedelta(hours=4)).strftime("%Y-%m-%d %H:%M"))
-    print("· today:", today(offset4=True))
     if end is None or (end > today(offset4=True) and not future):
-        print("correcting end date for get_clues_on_interval")
         end = today(offset4=True)
-    print("· end:", end)
     return DiacripticArxiu.get_clues_on_interval(start, end)
 
 
