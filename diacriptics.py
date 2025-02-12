@@ -256,7 +256,7 @@ def get_solves_by_user(user_id, focus_month=None):
     year, month = focus_month or [datetime.now().year, datetime.now().month]
     start = f"{year}-{month:0>2}-00"
     end = f"{year}-{month:0>2}-32"
-    user_solves = DiacripticArxiu.get_solves_by_user(user_id, start, end)
+    user_solves = DiacripticSolve.get_solves_by_user(user_id, start, end)
     return user_solves
 
 

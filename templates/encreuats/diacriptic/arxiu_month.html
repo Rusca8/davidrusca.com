@@ -16,10 +16,16 @@
                             {% set num_class = 'num-1' if num_of_diacs == 1 else 'num-many' if num_of_diacs > 1 else '' %}
 
                             {% if num_of_diacs and current_user.is_authenticated %}
+                                {% set day_data = namespace(wip=0) %}
+                                {% for solve in solves.get(date, []) %}
+                                    {% if not solve.date_solved %}
+                                        {% set day_data.wip = day_data.wip + 1 %}
+                                    {% endif %}
+                                {% endfor %}
                                 {% set day_solved = solves.get(date, [])|length %}
                             {% endif %}
 
-                            {% set dot_class = 'arxiu-dot-solved' if day_solved else 'arxiu-dot-pending' if num_of_diacs else 'arxiu-dot-disabled' %}
+                            {% set dot_class = ('arxiu-dot-wip' if day_data.wip else 'arxiu-dot-solved') if day_solved else 'arxiu-dot-pending' if num_of_diacs else 'arxiu-dot-disabled' %}
                             <div class="arxiu-dot {{dot_class}} m-1 text-center align-middle stretched-link-boundary">
                                 {{day}}
                                 {% if num_of_diacs %}

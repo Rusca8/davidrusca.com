@@ -9,6 +9,10 @@
     background-color: var(--color-ind);
     border: 1px solid var(--color-d-ind);
 }
+.arxiu-dot-wip {
+    background-color: var(--color-def);
+    border: 1px solid var(--color-d-def);
+}
 .arxiu-dot-solved {
     background-color: var(--color-res);
     border: 1px solid var(--color-d-res);
