@@ -115,7 +115,6 @@ class DiacripticArxiu:
                     id_=row["id"], date_published=date_published, clue_id=row["clue_id"], num=row["num"]
                 )
                 ])
-        print(f"Clues on interval ({start}, {end}): " + " ".join(archive_clues.keys()))
         return archive_clues
 
     @staticmethod
