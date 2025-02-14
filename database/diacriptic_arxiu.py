@@ -116,3 +116,18 @@ class DiacripticArxiu:
                 )
                 ])
         return archive_clues
+
+    @staticmethod
+    def get_queue():
+        """Returns list of future dates with a clue assigned to them.
+           Will check against calendar to detect holes near today.
+        """
+        db = get_db()
+        queue = db.execute(
+            """
+            SELECT date_published FROM diacriptic_arxiu
+            WHERE date_published > strftime('%Y-%m-%d','now')
+            ORDER BY date_published ASC
+            """
+        ).fetchall()
+        return (row["date_published"] for row in queue)

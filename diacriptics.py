@@ -269,3 +269,19 @@ def help_mask(clue, solve):
                 if 0 <= i < len(mask):
                     mask[i] = "1"
     return "".join(mask)
+
+
+def first_hole_in_queue():
+    queue = DiacripticArxiu.get_queue()
+    check_date = datetime.now()
+    for date in queue:
+        check_date += timedelta(days=1)
+        check_date_strf = check_date.strftime("%Y-%m-%d")
+        print(f"{date=}, {check_date_strf=}")
+        if date != check_date_strf:
+            return check_date
+
+
+def queue_length():
+    hole = first_hole_in_queue()
+    return (hole - datetime.now()).days

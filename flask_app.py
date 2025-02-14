@@ -97,6 +97,12 @@ def add_global_variables():
     return global_vars
 
 
+@app.route('/hooks/diacriptic/queue_check')
+def diacriptic_queue_check():
+    import diacriptics as dc
+    return f"{dc.queue_length()}"
+
+
 @app.route('/')
 @app.route('/index')
 @app.route('/index/')
@@ -805,13 +811,14 @@ def diacriptic_admin():
         available_tags = CrypticClue.available_tags
         calendar = dc.calendar()
         arxiu = dc.get_arxiu()
+        queue_len = dc.queue_length()
         for day, entries in arxiu.items():
             for da in entries:
                 if da.clue_id in pool:
                     pool[da.clue_id].arxiu[day] = da.num
 
         return render_template("/encreuats/diacriptic_admin.html", pool=pool, tags=tags,
-                               available_tags=available_tags, calendar=calendar, arxiu=arxiu)
+                               available_tags=available_tags, calendar=calendar, arxiu=arxiu, queue_len=queue_len)
     return redirect("/")
 
 
