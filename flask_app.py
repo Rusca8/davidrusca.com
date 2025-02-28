@@ -678,13 +678,14 @@ def diacriptic_ajax(query=None):
 @app.route('/diacriptic/arxiu/')
 def diacriptic_arxiu():
     import diacriptics as dc
-    month_calendar = dc.month_calendar()
+    last_month = dc.month_calendar(2025, 2)
+    this_month = dc.month_calendar(2025, 3)
     arxiu = dc.get_clues_on_interval()
     solves = {}
     if current_user.is_authenticated:
         solves = dc.get_solves_by_user(user_id=current_user.id)
     return render_template("/encreuats/diacriptic_arxiu.html", arxiu=arxiu,
-                           month=month_calendar, solves=solves)
+                           months=[this_month, last_month], solves=solves)
 
 
 @app.route('/diacriptic/tutorial')

@@ -26,3 +26,7 @@
 .cal-month-hr {
     border-color: var(--color-d-wop);
 }
+
+.inner-game { /* overwrite */
+    height: 110vh;
+}
