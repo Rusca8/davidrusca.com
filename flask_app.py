@@ -683,7 +683,9 @@ def diacriptic_arxiu():
     arxiu = dc.get_clues_on_interval()
     solves = {}
     if current_user.is_authenticated:
+        # TODO soft-code this
         solves = dc.get_solves_by_user(user_id=current_user.id)
+        solves |= dc.get_solves_by_user(user_id=current_user.id, focus_month=[2025, 2])
     return render_template("/encreuats/diacriptic_arxiu.html", arxiu=arxiu,
                            months=[this_month, last_month], solves=solves)
 
