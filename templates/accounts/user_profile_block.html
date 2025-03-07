@@ -118,7 +118,7 @@
             <div class="col-md-auto">
                 <div class="mb-1">
                     <h5 class="mb-0">{{'Canvia el' if current_user.username else 'Tria un'}} nom d'usuari</h5>
-                    <small style="color: rgba(0, 0, 0, 0.5);">Entre 3 i 30 caràcters. Admet lletres, números, punts i barres baixes, però ha de començar per una lletra.</small>
+                    <small style="color: rgba(0, 0, 0, 0.5);">Entre 3 i 30 caràcters. Admet lletres <b>minúscules</b>, números, punts i barres baixes. Ha de començar per una lletra.</small>
                 </div>
                 <input id="chosen_username" type="text" oninput="reset_checking(this.value);" style="width: 25rem;"/> <span id="check_icon"></span>
                 <div>
