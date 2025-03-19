@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 
 # internal
 import crypto
+import utilities
 import utilities as utils
 import crypto as c
 
@@ -904,6 +905,12 @@ def bg_dots(bg=None):
 def repartiment():
     """TODO muntar una pàgina sencera amb el pdf i una mica d'explicació i futur enllaç a sardanòmetre digital."""
     return redirect('/static/pdf/manual_definitiu_de_repartiment.pdf')
+
+
+@app.route('/carreres')
+def carreres():
+    cs = utilities.load_json('./static/json/carreres/carreres.json')
+    return render_template('carreres.html', carreres=cs)
 
 
 @app.route('/notion/data')

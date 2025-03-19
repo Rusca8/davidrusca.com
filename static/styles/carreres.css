@@ -1,0 +1,100 @@
+:root {
+    --color-border: black;
+}
+
+.card {
+    border: 1px solid var(--color-border);
+}
+
+.card-header {
+    background: #9e825a;
+    color: #fffefc;
+    font-weight: normal;
+    border-bottom: 0px;
+}
+.cell-nom {
+    background: #9e825a;
+    color: #fffefc;
+    width: 15rem;
+}
+
+.ponderacions {
+    border-top: 1px solid var(--color-border);
+    background: #cccccc;
+}
+
+.resum {
+    line-height: 1.2rem;
+    border-top: 1px solid #a18052;
+    background: #d6bb94;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+.cell-resum {
+    background: #d6bb94;
+    width: 30rem;
+}
+
+.pond-B {
+    background: #ddeed6;
+}
+.pond-T {
+    background: #ddedee;
+}
+.pond-None {
+    background: #dddddd;
+}
+
+.pond1 {
+    font-size: 0.7rem;
+}
+
+.desc {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.links {
+    color: darkred;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    line-height: 0.8rem;
+}
+
+.sh, .sh:hover {
+    background: #f5e4e1;
+    border: 0px;
+    border-radius: 2px;
+    font-size: 0.6rem;
+    color: darkred;
+}
+
+.selected {
+    box-shadow: 0 0 0 4px steelblue;
+}
+
+table {
+    /*border: 2px solid black;*/
+    margin-right: auto;
+    margin-left: auto;
+}
+
+table, td, th {
+    font-size: 0.8rem;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.cell-ponds {
+    width: 12rem;
+}
+
+.cell-remove {
+    width: 1.3rem;
+    cursor: pointer;
+    color: darkred;
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}

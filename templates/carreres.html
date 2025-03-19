@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %} Carreres i Professions {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/carreres.css">
+{% endblock %}
+
+{% set picons={"B": "🌼", "F": "🧲", "Q": "🧪", "GCA": "🌍", "M": "🔢", "CG": "🔬", "MCS": "📈", "DT": "📐", "T": "⚙️", "D": "🪑", "DA": "🎨", "DTA": "📏", "TEG": "✏️", "EdE": "💵"} %}
+{% set pnames={"B": "Biologia", "F": "Física", "Q": "Química", "GCA": "Geologia i Ciències Ambientals", "MCS": "Matemàtiques CCSS", "DT": "Dibuix Tècnic", "T": "Tecnologia", "EdE": "Funcionament de l'Empresa", "M": "Matemàtiques", "CG": "Ciències Generals", "D": "Disseny", "DA": "Dibuix Artístic", "DTA": "Dibuix Tècnic Aplicat", "TEG": "Tècniques d'Expressió Gràfica"} %}
+
+{% block content %}
+<h3 class="h3 mt-3 text-center">Carreres que existeixen</h3>
+<p class="text-center">Última actualització al 2025. Comproveu les ponderacions contra la llista oficial!</p>
+
+<div class="card mx-5 p-2 mb-4 text-center" id="summary_card">
+  <h5>Carreres que t'han interessat</h5>
+  <div id="empty_summary" class="small">Selecciona les carreres que t'agradin (clica'n el títol) per agrupar-les aquí.</div>
+  <div id="summary" class="hide">
+    <table class="summary_table">
+      {% for c_id, dades in carreres.items()|sort(attribute="1.nom") %}
+      <tr id="row-c-{{c_id}}" class="py-0 hide">
+        <td class="cell-remove" onclick="toggle_select({{c_id}})">⨉</td>
+        <td class="cell-nom px-1">{{dades.nom}}</td>
+        <td class="cell-resum px-2">{{dades.resum or '?'}}</td>
+        {% if "ponderacions" in dades %}
+          {% set any, ponds = (dades.ponderacions.items()|sort)[-1] %}
+          {% set p2, p1 = ponds %}
+          {% set p2 = p2.split() %}
+          {% set p1 = p1.split() %}
+          {% set bat = 'T' if 'T' in p2 else 'B' if "B" in p2 else 'T' if 'DT' in p2 else '?' %}
+          {% if p1 or p2 %}
+          <td class="cell-ponds pond-{{bat}}">
+            {% for p in p2|sort %}
+              <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
+            {% endfor %}
+            {{'·' if p1 else ''}}
+            {% for p in p1|sort %}
+              <span class="picon-{{p}} pond1" title="{{pnames.get(p, p)}} pondera 0.1">{{picons.get(p, p)}}</span>
+            {% endfor %}
+          </td>
+          {% else %}
+          <td class="cell-ponds">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</td>
+          {% endif %}
+        {% else %}
+        <td class="cell-ponds">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row mx-2">
+    {% for c_id, dades in carreres.items()|sort(attribute="1.nom") %}
+    <div class="col-xl-2 col-lg-3 col-md-4 col-6 p-1">
+      <div class="card text-center border-c" id="c-{{c_id}}">
+        {% if "resum" in dades and dades.resum %}
+        <!-- FULL FLEDGED -->
+        <h6 class="card-header card-header-c px-2 pt-2 pb-1" onclick="toggle_select({{c_id}});">{{dades.nom}}</h6>
+        <div class="card-body p-0">
+          <div class="resum px-2 py-1">{{dades.resum}}</div>
+          {% if "ponderacions" in dades %}
+            {% set any, ponds = (dades.ponderacions.items()|sort)[-1] %}
+            {% set p2, p1 = ponds %}
+            {% set p2 = p2.split() %}
+            {% set p1 = p1.split() %}
+            {% set bat = 'T' if 'T' in p2 else 'B' if "B" in p2 else 'T' if 'DT' in p2 else '?' %}
+          {% if p1 or p2 %}
+          <div class="ponderacions pond-{{bat}}">
+            {% for p in p2|sort %}
+              <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
+            {% endfor %}
+            {{'·' if p1 else ''}}
+            {% for p in p1|sort %}
+              <span class="picon-{{p}} pond1" title="{{pnames.get(p, p)}} pondera 0.1">{{picons.get(p, p)}}</span>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="ponderacions-alt pond-None">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</div>
+          {% endif %}
+          {% endif %}
+          <div class="desc py-1 px-2 small">
+            {{dades.desc}}
+          </div>
+          {% if "study_hall" in dades %}
+            <div class="links small py-1 text-left">
+              <a href="{{dades.study_hall}}" target="_blank" class="btn btn-sm sh small py-0 ml-2">▶ SH</a>
+            </div>
+          {% endif %}
+        </div>
+        {% else %}
+        <!-- NO INFO -->
+        <h6 class="card-header px-2 pt-2 pb-1" onclick="toggle_select({{c_id}});">{{dades.nom}}</h6>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  function toggle_select(id){
+    let card = document.getElementById("c-" + id);
+    let row = document.getElementById("row-c-" + id);
+    if(card.classList.contains("selected")){
+      console.log("remove", id);
+      card.classList.remove("selected");
+      row.classList.add("hide");
+    }else{
+      console.log("select", id);
+      card.classList.add("selected");
+      row.classList.remove("hide");
+    }
+    build_summary();
+  }
+
+  function build_summary(){
+    let count = 0;
+    $(".selected").each(function(i, obj){
+      let id = $(this).attr('id');
+      count++;
+    });
+    let empty_summary = document.getElementById('empty_summary');
+    let summary = document.getElementById('summary');
+    if(!count){
+      empty_summary.classList.remove("hide");
+      summary.classList.add("hide");
+    }else{
+      empty_summary.classList.add("hide");
+      summary.classList.remove("hide");
+    }
+  }
+</script>
+{% endblock %}
