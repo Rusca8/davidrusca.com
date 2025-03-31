@@ -1,7 +1,5 @@
 {# calendari per l'arxiu de diacríptics #}
 
-{% set month_names = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"] %}
-
 <div class="container-fluid">
     <div class="row">
         {% for month in calendar %}
@@ -9,7 +7,7 @@
         <div class="col-md-auto px-0">
             <div id="calmonth-{{monthdate}}" class="cal-month-title text-center">{{ month["year"] }} - <b>{{ month_names[month["month"]-1] }}</b></div>
             <table class="month mr-1 mb-1">
-                {% for week in range(5) %}
+                {% for week in range(6) %}
                 <tr>
                     {% for day in range(7) %}
                         {% set day = week*7 + day - month["range"][0] + 1 %}

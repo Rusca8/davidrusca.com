@@ -27,7 +27,31 @@
 
     <!-- main -->
     <script>
+        var base_url = "/diacriptic/arx/ajax/";
 
+        function get_month(year, month, disabled){
+            console.log("getting month", year, month);
+
+            if(disabled){
+                return;
+            }
+
+            $.ajax({
+                url: base_url + "get_month",
+                type: "post",
+                data: {"year": year,
+                       "month": month
+                },
+                success: load_month
+            });
+        }
+        function load_month(result){
+            if(result == "N"){
+                console.log("no calendar loaded")
+                return
+            }
+            $("#the-month-container").html(result);
+        }
     </script>
 </head>
 
@@ -58,7 +82,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-auto px-0">
                         <div class="card border-ind mb-2 w-fit margin-x-auto">
-                            <div class="card-body p-2">
+                            <div id="the-month-container" class="card-body p-2">
                                 {% include '/encreuats/diacriptic/arxiu_month.html' %}
                             </div>
                         </div>

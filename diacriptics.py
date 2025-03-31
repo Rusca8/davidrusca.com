@@ -239,7 +239,8 @@ def month_calendar(year=None, month=None):
         year = datetime.now().year
     if month is None:
         month = datetime.now().month
-    return {"year": year, "month": month, "range": cal.monthrange(year, month)}
+    return {"year": year, "month": month, "range": cal.monthrange(year, month),
+            "current": year == datetime.now().year and month == datetime.now().month}
 
 
 def get_arxiu():

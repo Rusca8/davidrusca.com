@@ -1,9 +1,31 @@
 
+{% set month_names = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"] %}
+
         {% set monthdate = month['year']|string + "-" + '%02d' % month['month'] %}
-        <div id="calmonth-{{monthdate}}" class="cal-month-title text-center"><b>{{ month_names[month["month"]-1] }}</b> {{ month["year"] }}</div>
-        <hr class="cal-month-hr my-2">
+        <div class="container">
+            <div class="row">
+                {% set prev_m = month['month'] - 1 or 12 %}
+                {% set prev_y = month['year'] - 1 if prev_m == 12 else month['year'] %}
+                {% set arrow_disabled = prev_m == 1 and prev_y == 2025 %}
+                <div class="col-md-2 align-self-center px-1 arrow-container" title="{{prev_y}}-{{prev_m}}"
+                    onclick="get_month({{prev_y}}, {{prev_m}}, {{arrow_disabled|tojson}});">
+                    <div class="arrow-left m-2 {{'arrow-left-disabled' if arrow_disabled else ''}}"></div>
+                </div>
+                <div class="col text-center">
+                    <div id="calmonth-{{monthdate}}" class="cal-month-title text-center"><b>{{ month_names[month["month"]-1] }}</b> {{ month["year"] }}</div>
+                </div>
+                {% set next_m = month['month'] + 1 if month['month'] < 12 else 1 %}
+                {% set next_y = month['year'] + 1 if next_m == 1 else month['year'] %}
+                {% set arrow_disabled = month['current'] %}
+                <div class="col-md-2 align-self-center px-1 arrow-container" title="{{next_y}}-{{next_m}}"
+                    onclick="get_month({{next_y}}, {{next_m}}, {{arrow_disabled|tojson}});">
+                    <div class="arrow-right m-2 float-right {{'arrow-right-disabled' if arrow_disabled else ''}}"></div>
+                </div>
+            </div>
+        </div>
+        <hr class="cal-month-hr mb-2 mt-1">
         <table class="month mb-1 margin-x-auto">
-            {% for week in range(5) %}
+            {% for week in range(6) %}
             <tr>
                 {% for day in range(7) %}
                     {% set day = week*7 + day - month["range"][0] + 1 %}

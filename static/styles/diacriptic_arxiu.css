@@ -30,3 +30,29 @@
 .inner-game { /* overwrite */
     height: 110vh;
 }
+
+.arrow-left {
+    width: 0px;
+    height: 0px;
+    border-right: 0.6rem solid black;
+    border-left: 0rem solid transparent;
+    border-top: 0.4rem solid transparent;
+    border-bottom: 0.4rem solid transparent;
+}
+.arrow-left-disabled {
+    border-right: 0.6rem solid lightgrey;
+}
+.arrow-right {
+    width: 0px;
+    height: 0px;
+    border-right: 0rem solid transparent;
+    border-left: 0.6rem solid black;
+    border-top: 0.4rem solid transparent;
+    border-bottom: 0.4rem solid transparent;
+}
+.arrow-right-disabled {
+    border-left: 0.6rem solid lightgrey;
+}
+.arrow-container {
+    cursor: pointer;
+}

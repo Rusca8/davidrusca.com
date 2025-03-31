@@ -679,8 +679,7 @@ def diacriptic_ajax(query=None):
 @app.route('/diacriptic/arxiu/')
 def diacriptic_arxiu():
     import diacriptics as dc
-    last_month = dc.month_calendar(2025, 2)
-    this_month = dc.month_calendar(2025, 3)
+    this_month = dc.month_calendar()
     arxiu = dc.get_clues_on_interval()
     solves = {}
     if current_user.is_authenticated:
@@ -688,7 +687,36 @@ def diacriptic_arxiu():
         solves = dc.get_solves_by_user(user_id=current_user.id)
         solves |= dc.get_solves_by_user(user_id=current_user.id, focus_month=[2025, 2])
     return render_template("/encreuats/diacriptic_arxiu.html", arxiu=arxiu,
-                           months=[this_month, last_month], solves=solves)
+                           months=[this_month], solves=solves)
+
+
+@app.route('/diacriptic/arx/ajax/<query>', methods=["GET", "POST"])
+def diacriptic_arxiu_ajax(query=None):
+    if query is None:
+        return "Arxiu Ajax Fail I guess. Aviseu al rusca si de cas."
+
+    import diacriptics as dc
+
+    match query:
+        case "get_month":
+            month = request.form.get("month", None)
+            year = request.form.get("year", None)
+            try:
+                the_month = dc.month_calendar(int(year), int(month))
+                arxiu = dc.get_clues_on_interval(f"{year}-{month:0>2}-00", f"{year}-{month:0>2}-32")
+                print(arxiu)
+                solves = {}
+                if current_user.is_authenticated:
+                    solves = dc.get_solves_by_user(current_user.id, focus_month=[year, month])
+                return render_template("/encreuats/diacriptic/arxiu_month.html", arxiu=arxiu,
+                                       month=the_month, solves=solves)
+            except Exception as e:
+                print(e, "on get_month")
+                return "N"
+
+    print("Nonono")
+    return "N"
+
 
 
 @app.route('/diacriptic/tutorial')
