@@ -7,7 +7,7 @@
                 {% set prev_m = month['month'] - 1 or 12 %}
                 {% set prev_y = month['year'] - 1 if prev_m == 12 else month['year'] %}
                 {% set arrow_disabled = prev_m == 1 and prev_y == 2025 %}
-                <div class="col-md-2 align-self-center px-1 arrow-container" title="{{prev_y}}-{{prev_m}}"
+                <div class="col-2 align-self-center px-1 arrow-container" title="{{prev_y}}-{{prev_m}}"
                     onclick="get_month({{prev_y}}, {{prev_m}}, {{arrow_disabled|tojson}});">
                     <div class="arrow-left m-2 {{'arrow-left-disabled' if arrow_disabled else ''}}"></div>
                 </div>
@@ -17,7 +17,7 @@
                 {% set next_m = month['month'] + 1 if month['month'] < 12 else 1 %}
                 {% set next_y = month['year'] + 1 if next_m == 1 else month['year'] %}
                 {% set arrow_disabled = month['current'] %}
-                <div class="col-md-2 align-self-center px-1 arrow-container" title="{{next_y}}-{{next_m}}"
+                <div class="col-2 align-self-center px-1 arrow-container" title="{{next_y}}-{{next_m}}"
                     onclick="get_month({{next_y}}, {{next_m}}, {{arrow_disabled|tojson}});">
                     <div class="arrow-right m-2 float-right {{'arrow-right-disabled' if arrow_disabled else ''}}"></div>
                 </div>
