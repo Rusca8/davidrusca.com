@@ -24,11 +24,11 @@
 </div>
 
 <div class="container">
-    <div class="row mb-3">
+    <div class="row mb-3 justify-content-center">
     {% for i in range(10) %}
         {% set q = i+1 %}
-        <div class="col px-1">
-            <div class="card bg-light border-c p-1">
+        <div class="col-auto px-1">
+            <div class="card bg-light border-c p-1 mb-1">
                 <b class="mb-1 text-center">Q{{q}}</b>
                 <button id="Q{{q}}-4" class="btn btn-success mb-1 py-1 btn-disabled" onclick="select({{q}}, 4); calcula();">0.4</button>
                 <button id="Q{{q}}-0" class="btn btn-danger py-1" onclick="select({{q}}, 0); calcula();">0</button>
@@ -36,15 +36,15 @@
         </div>
     {% endfor %}
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         {% for i in range(5) %}
-        <div class="col px-1">
-            <div class="card bg-light border-c">
-                <h6 class="card-header text-center py-1">Problema {{i}}</h6>
+        <div class="col-auto px-1">
+            <div class="card bg-light border-c mb-1">
+                <h6 class="card-header text-center py-1">Problema {{i+1}}</h6>
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         {% for j in range(2) %}
-                        <div class="col px-1 text-center py-1">
+                        <div class="col-auto px-1 text-center py-1">
                             {% set q = 10+2*i+j+1 %}
                             <b class="text-center">Q{{q}}</b><br>
                             <button id="Q{{q}}-6" class="btn btn-block btn-success mt-1 mb-1 py-1 btn-disabled" onclick="select({{q}}, 6); calcula();">0.6</button>

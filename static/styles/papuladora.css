@@ -12,3 +12,7 @@
 #curtes, #llargues, #total {
     font-size: 2rem;
 }
+
+.btn {
+    width: 5rem;
+}
