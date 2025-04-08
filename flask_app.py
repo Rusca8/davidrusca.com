@@ -935,6 +935,11 @@ def repartiment():
     return redirect('/static/pdf/manual_definitiu_de_repartiment.pdf')
 
 
+@app.route('/nota_pap')
+def nota_pap():
+    return render_template("lab_pap.html")
+
+
 @app.route('/carreres')
 def carreres():
     cs = utilities.load_json('./static/json/carreres/carreres.json')

@@ -1,0 +1,14 @@
+
+.btn-disabled {
+    background: transparent;
+    color: black;
+}
+
+#nota {
+    font-size: 4rem;
+    line-height: 3rem;
+}
+
+#curtes, #llargues, #total {
+    font-size: 2rem;
+}
