@@ -935,7 +935,7 @@ def repartiment():
     return redirect('/static/pdf/manual_definitiu_de_repartiment.pdf')
 
 
-@app.route('/nota_pap')
+@app.route('/notapap')
 def nota_pap():
     return render_template("lab_pap.html")
 
