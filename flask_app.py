@@ -936,8 +936,18 @@ def repartiment():
 
 
 @app.route('/notapap')
+@app.route('/papuladora')
 def nota_pap():
     return render_template("lab_pap.html")
+
+
+@app.route('/embed/<page>')
+def embed(page=None):
+    match page:
+        case 'papuladora':
+            return render_template("labs/papuladora_embed.html")
+        case _:
+            return f"Embed '{page}'?"
 
 
 @app.route('/carreres')
