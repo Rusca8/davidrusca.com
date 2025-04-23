@@ -294,3 +294,7 @@ button.border-c {
 .w-fit {
     width: fit-content;
 }
+
+.no-dtz {
+    touch-action: manipulation;
+}

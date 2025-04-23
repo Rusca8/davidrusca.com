@@ -423,7 +423,7 @@
     <div class="kb-div pt-3 pb-2">
     {% set keyboard=["QWERTYUIOP", "ASDFGHJKLÇ", "ZXCVBNM<"] %}
     {% for row in keyboard %}
-        <table class="keyboard margin-x-auto" cellpadding="0" cellspacing="0" border="0">
+        <table class="keyboard margin-x-auto no-dtz" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 {% for key in row %}
                     <td onclick="key_click('{{key}}');"><div class="kb-key text-center bg-white {{'kb-del' if key == '<' else ''}} unselectable">
