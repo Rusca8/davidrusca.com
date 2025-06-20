@@ -967,7 +967,8 @@ def notion_data():
 @app.route('/pulseras')
 @app.route('/pulseras/')
 def pulseras():
-    return render_template("pulseras.html")
+    import pulseras as ps
+    return render_template("pulseras.html", beads=ps.beads, designs=ps.designs)
 
 
 @app.route('/anki/d/<file>')
