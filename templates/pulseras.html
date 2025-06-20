@@ -120,7 +120,7 @@
     <h5 class="card-header">{{ _('Diseños') }}</h5>
     <div class="card-body">
 
-        {% for group, combis in designs.items() %}
+        {% for group, combis in designs.items() if group != "hidden" %}
         <h5>{{group}}</h5>
         <div class="container-fluid ml-2">
             {% for nombre, combi in combis.items() %}
@@ -155,6 +155,57 @@
         {% if not loop.last %}
         <hr>
         {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="card mx-2 mt-2 border-c">
+    <h5 class="card-header">{{ _('Cronología de diseños dedicados') }}</h5>
+    <div class="card-body">
+
+        {{ _("A lo largo de los años he ido creando diseños nuevos para poder regalar pulseras únicas a personas concretas.") }}<br>
+        {{ _("Algunas de las más antiguas ya aparecen arriba, pero así recopilo en algun sitio las más nuevas también.") }}
+
+        {% set ns = namespace(predate="") %}
+        {% for combi in chrono %}
+            {% set date = combi.get("date", "YYYY-MM") %}
+            {% if date != ns.predate %}
+            <hr>
+            <h5 class="mt-2">
+                {{date}}
+            </h5>
+                {% set ns.predate = date %}
+            {% endif %}
+        <div class="mb-2">
+            {% set notes = combi.get("notes", "") %}
+            <b class="ml-2">{{combi.get("sub", "?")}}</b> {{'·' if notes else ''}} {{notes}}
+        </div>
+        <div class="container-fluid ml-2">
+                <div class="row">
+                    <div class="col px-0 scroll-thin">
+                        <table class="glued-cells">
+                            <tr>
+                                {% if "x" in combi.code %}
+                                    {% set code, repeats = combi.code.split("x") %}
+                                {% else %}
+                                    {% set code, repeats = combi.code, 1 %}
+                                {% endif %}
+                                {% for _ in range(repeats|int) %}
+                                    {% for num in code.split(",") %}
+                                        <td class="th_bolita_container">
+                                            <div class="thumbnail_bolita" style="background: {{beads.get(num|int).hex}};"></div>
+                                        </td>
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-auto">
+                        <button onclick="import_this_code('{{combi.code}}');" class="btn btn-outline-secondary btn-sm px-4 py-1">{{ _('Llevar al editor') }}</button>
+                    </div>
+                </div>
+        </div>
         {% endfor %}
 
     </div>

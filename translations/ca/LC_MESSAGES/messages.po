@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-19 19:35+0100\n"
+"POT-Creation-Date: 2025-06-20 14:19+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -18,25 +18,133 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
+#: pulseras.py:100
+msgid "Arcoíris"
+msgstr "Arc de sant martí"
+
+#: pulseras.py:105
+msgid "Negro"
+msgstr "Negre"
+
+#: pulseras.py:109
+msgid "Suave"
+msgstr "Suau"
+
+#: pulseras.py:114
+msgid "Como despedida y recuerdo el último día de conservatorio."
+msgstr "Com a comiat i record l'últim dia de conservatori."
+
+#: pulseras.py:117
+msgid "Pulso de color"
+msgstr "Batec de color"
+
+#: pulseras.py:118
+msgid "Azul"
+msgstr "Blau"
+
+#: pulseras.py:123
+msgid "Como regalo en un reencuentro después de la orquestada."
+msgstr "Com a regal en una retrobada després de l'orquestrada."
+
+#: pulseras.py:125
+msgid "Verde"
+msgstr "Verd"
+
+#: pulseras.py:129
+msgid "Rojo"
+msgstr "Vermell"
+
+#: pulseras.py:134
+msgid "Luz y sombra"
+msgstr "Llum i ombra"
+
+#: pulseras.py:135
+msgid "Iceberg"
+msgstr "Iceberg"
+
+#: pulseras.py:138 pulseras.py:144
+msgid "Como despedida y recuerdo el último día de casal de tenis."
+msgstr "Com a comiat i record l'últim dia de casal de tennis."
+
+#: pulseras.py:141
+msgid "Incendio"
+msgstr "Incendi"
+
+#: pulseras.py:147
+msgid "Erupción"
+msgstr "Erupció"
+
+#: pulseras.py:151
+msgid "Jungla"
+msgstr "Jungla"
+
+#: pulseras.py:156
+msgid "Cuatro elementos"
+msgstr "Quatre elements"
+
+#: pulseras.py:157
+msgid "Tierra"
+msgstr "Terra"
+
+#: pulseras.py:161
+msgid "Bosque"
+msgstr "Bosc"
+
+#: pulseras.py:166
+msgid "Dibujando cosas"
+msgstr "Dibuixant coses"
+
+#: pulseras.py:167
+msgid "Día soleado"
+msgstr "Dia assolellat"
+
+#: pulseras.py:171
+msgid "Ying-Yang en color"
+msgstr "Ying-Yang de color"
+
+#: pulseras.py:176
+msgid "Escondiendo mensajes"
+msgstr "Amagant missatges"
+
+#: pulseras.py:177
+msgid "Agua y cuarzo (Morse: David)"
+msgstr "Aigua i quars (Morse: David)"
+
+#: pulseras.py:200 pulseras.py:207 pulseras.py:214
+msgid "Como despedida y recuerdo el último día de orquesta del curso."
+msgstr "Com a comiat i record l'últim dia d'orquestra del curs."
+
+#: pulseras.py:219
+msgid "para mí"
+msgstr "per mi"
+
+#: pulseras.py:221
+msgid "Entrelazando los colores de las otras tres."
+msgstr "Entrellaçant els colors de les altres tres."
+
+#: pulseras.py:228 pulseras.py:235
+msgid "Como recuerdo de despedida y amuleto para selectividad."
+msgstr "Com a record de comiat i amulet per a la selectivitat."
+
 #: templates/401.html:2
 msgid "401 No Autorizado"
-msgstr ""
+msgstr "401 No Autoritzat"
 
 #: templates/401.html:6
 msgid "No autorizado"
-msgstr ""
+msgstr "No autoritzat"
 
 #: templates/401.html:8
 msgid "Tendrías que"
-msgstr ""
+msgstr "Hauries d'"
 
 #: templates/401.html:8
 msgid "iniciar sesión"
-msgstr ""
+msgstr "iniciar sessió"
 
 #: templates/401.html:9
 msgid "o ser alguien distinto"
-msgstr ""
+msgstr "o ser una altra persona"
 
 #: templates/404.html:2
 msgid "404 No Encontrada"
@@ -143,7 +251,7 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:420
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:424
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
@@ -415,7 +523,7 @@ msgstr "Identificar què és un error i què no ho és."
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:227 templates/docentes.html:370
+#: templates/anki.html:227 templates/docentes.html:374
 msgid "Fracciones"
 msgstr "Fraccions"
 
@@ -427,7 +535,7 @@ msgstr "Potències"
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:230 templates/docentes.html:372
+#: templates/anki.html:230 templates/docentes.html:376
 msgid "Ecuaciones"
 msgstr "Equacions"
 
@@ -2044,13 +2152,13 @@ msgstr "Mates socials"
 
 #: templates/docentes.html:24 templates/docentes.html:47
 #: templates/docentes.html:56 templates/docentes.html:78
-#: templates/docentes.html:239 templates/docentes.html:303
-#: templates/docentes.html:319
+#: templates/docentes.html:239 templates/docentes.html:307
+#: templates/docentes.html:323
 msgid "Tecnología"
 msgstr "Tecnologia"
 
 #: templates/docentes.html:25 templates/docentes.html:250
-#: templates/docentes.html:293
+#: templates/docentes.html:297
 msgid "Dibujo técnico"
 msgstr "Dibuix tècnic"
 
@@ -2074,11 +2182,11 @@ msgstr "Prova d'accés"
 msgid "Dibujo Técnico"
 msgstr "Dibuix Tècnic"
 
-#: templates/docentes.html:63 templates/docentes.html:336
+#: templates/docentes.html:63 templates/docentes.html:340
 msgid "Grado Profesional de Música"
 msgstr "Grau Professional de Música"
 
-#: templates/docentes.html:65 templates/docentes.html:340
+#: templates/docentes.html:65 templates/docentes.html:344
 msgid "Armonía"
 msgstr "Harmonia"
 
@@ -2086,15 +2194,15 @@ msgstr "Harmonia"
 msgid "Educación Secundaria (ESO)"
 msgstr "Educació Secundària (ESO)"
 
-#: templates/docentes.html:77 templates/docentes.html:384
+#: templates/docentes.html:77 templates/docentes.html:388
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: templates/docentes.html:79 templates/docentes.html:416
+#: templates/docentes.html:79 templates/docentes.html:420
 msgid "Sociales"
 msgstr "Socials"
 
-#: templates/docentes.html:80 templates/docentes.html:427
+#: templates/docentes.html:80 templates/docentes.html:431
 msgid "Inglés"
 msgstr "Anglès"
 
@@ -2102,20 +2210,20 @@ msgstr "Anglès"
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: templates/docentes.html:98 templates/docentes.html:459
+#: templates/docentes.html:98 templates/docentes.html:463
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: templates/docentes.html:100 templates/docentes.html:463
+#: templates/docentes.html:100 templates/docentes.html:467
 #: templates/index.html:139
 msgid "Programación"
 msgstr "Programació"
 
-#: templates/docentes.html:102 templates/docentes.html:486
+#: templates/docentes.html:102 templates/docentes.html:490
 msgid "Juegos de Lengua"
 msgstr "Jocs de Llengua"
 
-#: templates/docentes.html:103 templates/docentes.html:498
+#: templates/docentes.html:103 templates/docentes.html:503
 #: templates/ventriloquia.html:2
 msgid "Ventriloquía"
 msgstr "Ventriloquia"
@@ -2129,12 +2237,12 @@ msgid "Esquemas y Formularios:"
 msgstr "Esquemes i Formularis:"
 
 #: templates/docentes.html:124 templates/docentes.html:161
-#: templates/docentes.html:365
+#: templates/docentes.html:369
 msgid "Ecuaciones exponenciales y logarítmicas"
 msgstr "Equacions exponencials i logarítmiques"
 
 #: templates/docentes.html:125 templates/docentes.html:162
-#: templates/docentes.html:364
+#: templates/docentes.html:368
 msgid "Combinatoria"
 msgstr "Combinatòria"
 
@@ -2171,8 +2279,8 @@ msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
 #: templates/docentes.html:137 templates/docentes.html:173
-#: templates/docentes.html:321 templates/docentes.html:367
-#: templates/docentes.html:405 templates/docentes.html:447
+#: templates/docentes.html:325 templates/docentes.html:371
+#: templates/docentes.html:409 templates/docentes.html:451
 msgid "Fichas:"
 msgstr "Fitxes:"
 
@@ -2181,7 +2289,7 @@ msgid "Ficha de Derivadas Definitiva"
 msgstr "Fitxa de Derivades Definitiva"
 
 #: templates/docentes.html:140 templates/docentes.html:176
-#: templates/docentes.html:371
+#: templates/docentes.html:375
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
@@ -2194,19 +2302,19 @@ msgid "Derivadas"
 msgstr "Derivades"
 
 #: templates/docentes.html:144 templates/docentes.html:180
-#: templates/docentes.html:221 templates/docentes.html:295
-#: templates/docentes.html:305
+#: templates/docentes.html:221 templates/docentes.html:299
+#: templates/docentes.html:309
 msgid "Temario:"
 msgstr "Temari:"
 
 #: templates/docentes.html:146 templates/docentes.html:182
-#: templates/docentes.html:223 templates/docentes.html:297
-#: templates/docentes.html:307
+#: templates/docentes.html:223 templates/docentes.html:301
+#: templates/docentes.html:311
 msgid "Temario optimizado"
 msgstr "Temari optimitzat"
 
 #: templates/docentes.html:150 templates/docentes.html:186
-#: templates/docentes.html:377
+#: templates/docentes.html:381
 msgid "Funciones trigonométricas"
 msgstr "Funcions trigonomètriques"
 
@@ -2216,7 +2324,7 @@ msgstr "Mates Socials"
 
 #: templates/docentes.html:159 templates/docentes.html:195
 #: templates/docentes.html:217 templates/docentes.html:241
-#: templates/docentes.html:362 templates/docentes.html:401
+#: templates/docentes.html:366 templates/docentes.html:405
 msgid "Formularios:"
 msgstr "Formularis"
 
@@ -2236,7 +2344,7 @@ msgstr "Moviments"
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de MRUA"
 
-#: templates/docentes.html:201 templates/docentes.html:407
+#: templates/docentes.html:201 templates/docentes.html:411
 msgid "Fuerzas"
 msgstr "Forces"
 
@@ -2249,8 +2357,8 @@ msgid "Ondas"
 msgstr "Ones"
 
 #: templates/docentes.html:213 templates/docentes.html:263
-#: templates/docentes.html:342 templates/docentes.html:465
-#: templates/docentes.html:477 templates/index.html:99 templates/index.html:174
+#: templates/docentes.html:346 templates/docentes.html:469
+#: templates/docentes.html:481 templates/index.html:99 templates/index.html:174
 msgid "Apuntes:"
 msgstr "Apunts:"
 
@@ -2262,12 +2370,12 @@ msgstr "Nombres quàntics"
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: templates/docentes.html:225 templates/docentes.html:390
-#: templates/docentes.html:418
+#: templates/docentes.html:225 templates/docentes.html:394
+#: templates/docentes.html:422
 msgid "Mnemotecnia:"
 msgstr "Mnemotècnia:"
 
-#: templates/docentes.html:227 templates/docentes.html:392
+#: templates/docentes.html:227 templates/docentes.html:396
 msgid "Valencias de los Elementos"
 msgstr "Valències dels Elements"
 
@@ -2304,100 +2412,100 @@ msgstr "Fonts de Finançament"
 msgid "Resumen:"
 msgstr "Resum:"
 
-#: templates/docentes.html:289 templates/docentes.html:315
+#: templates/docentes.html:293 templates/docentes.html:319
 msgid "Prueba de Acceso"
 msgstr "Prova d'Accés"
 
-#: templates/docentes.html:323
+#: templates/docentes.html:327
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: templates/docentes.html:324
+#: templates/docentes.html:328
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: templates/docentes.html:325
+#: templates/docentes.html:329
 msgid "Energías"
 msgstr "Energies"
 
-#: templates/docentes.html:326
+#: templates/docentes.html:330
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: templates/docentes.html:327
+#: templates/docentes.html:331
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: templates/docentes.html:328
+#: templates/docentes.html:332
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: templates/docentes.html:344
+#: templates/docentes.html:348
 msgid "Canciones para los intervalos"
 msgstr "Cançons pels intervals"
 
-#: templates/docentes.html:348
+#: templates/docentes.html:352
 msgid "Editor de Esquemas Armónicos"
 msgstr "Editor d'Esquemes Harmònics"
 
-#: templates/docentes.html:369
+#: templates/docentes.html:373
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: templates/docentes.html:373
+#: templates/docentes.html:377
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: templates/docentes.html:388
+#: templates/docentes.html:392
 msgid "Masa y peso"
 msgstr "Massa i pes"
 
-#: templates/docentes.html:403
+#: templates/docentes.html:407
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: templates/docentes.html:408 templates/docentes.html:409
+#: templates/docentes.html:412 templates/docentes.html:413
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: templates/docentes.html:429 templates/docentes.html:488
-#: templates/docentes.html:500
+#: templates/docentes.html:433 templates/docentes.html:492
+#: templates/docentes.html:505
 msgid "Online:"
 msgstr "Online:"
 
-#: templates/docentes.html:441
+#: templates/docentes.html:445
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:449
+#: templates/docentes.html:453
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:450
+#: templates/docentes.html:454
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:451
+#: templates/docentes.html:455
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: templates/docentes.html:467
+#: templates/docentes.html:471
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: templates/docentes.html:468
+#: templates/docentes.html:472
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
-#: templates/docentes.html:490
+#: templates/docentes.html:495
 msgid "Catagrama del día"
 msgstr "Catagrama del dia"
 
-#: templates/docentes.html:491
+#: templates/docentes.html:496
 msgid "Crucigramas crípticos"
 msgstr "Mots encreuats críptics"
 
-#: templates/docentes.html:502 templates/ventriloquia.html:7
+#: templates/docentes.html:507 templates/ventriloquia.html:7
 msgid "Traductor de Ventriloquía"
 msgstr "Traductor de Ventriloquia"
 
@@ -3144,135 +3252,65 @@ msgid ""
 "prima y a ella le iba mejor leer de arriba. ajajaj"
 msgstr ""
 
-#: templates/pulseras.html:5
+#: templates/pulseras.html:8
 msgid "Pulseras de abalorios"
 msgstr "Braçalets de granadura"
 
-#: templates/pulseras.html:6
+#: templates/pulseras.html:9
 msgid "Crea tus propios diseños o carga diseños hechos por otros."
 msgstr "Crea els teus propis dissenys o carrega dissenys fets per altra gent."
 
-#: templates/pulseras.html:12
+#: templates/pulseras.html:15
 msgid "Editor de pulseras"
 msgstr "Editor de braçalets"
 
-#: templates/pulseras.html:15
+#: templates/pulseras.html:18
 msgid "Introduce el código de la pulsera que quieras ver"
 msgstr "Introdueix el codi del braçalet que vulguis veure"
 
-#: templates/pulseras.html:28
+#: templates/pulseras.html:31
 msgid "cuentas"
 msgstr "vidrets"
 
-#: templates/pulseras.html:76
+#: templates/pulseras.html:79
 msgid "Pulsa 'exportar' para obtener el código de esta pulsera"
 msgstr "Prem 'exportar' per obtenir el codi d'aquest braçalet"
 
-#: templates/pulseras.html:86
+#: templates/pulseras.html:89
 msgid "Colores"
 msgstr "Colors"
 
-#: templates/pulseras.html:89
+#: templates/pulseras.html:92
 msgid ""
 "Los colores de la aplicación intentan parecerse a los de las cuentas "
 "siguientes:"
 msgstr "Els colors de l'aplicació intenten assemblar-se als dels vidrets següents:"
 
-#: templates/pulseras.html:115
+#: templates/pulseras.html:120
 msgid "Diseños"
 msgstr "Dissenys"
 
-#: templates/pulseras.html:118
-msgid "Arcoíris"
-msgstr "Arc de sant martí"
-
-#: templates/pulseras.html:122
-msgid "Arcoíris simple"
-msgstr "Arc de sant martí simple"
-
-#: templates/pulseras.html:126 templates/pulseras.html:136
-#: templates/pulseras.html:146 templates/pulseras.html:159
-#: templates/pulseras.html:169 templates/pulseras.html:179
-#: templates/pulseras.html:192 templates/pulseras.html:202
-#: templates/pulseras.html:212 templates/pulseras.html:222
-#: templates/pulseras.html:234 templates/pulseras.html:244
-#: templates/pulseras.html:257 templates/pulseras.html:270
+#: templates/pulseras.html:150 templates/pulseras.html:205
 msgid "Llevar al editor"
 msgstr "Portar a l'editor"
 
-#: templates/pulseras.html:132
-msgid "Arcoíris negro"
-msgstr "Arc de sant martí negre"
+#: templates/pulseras.html:164
+msgid "Cronología de diseños dedicados"
+msgstr "Cronologia de dissenys dedicats"
 
-#: templates/pulseras.html:142
-msgid "Arcoíris suave"
-msgstr "Arc de sant martí suau"
+#: templates/pulseras.html:167
+msgid ""
+"A lo largo de los años he ido creando diseños nuevos para poder regalar "
+"pulseras únicas a personas concretas."
+msgstr ""
 
-#: templates/pulseras.html:151
-msgid "Pulso de color"
-msgstr "Batec de color"
+#: templates/pulseras.html:168
+msgid ""
+"Algunas de las más antiguas ya aparecen arriba, pero así recopilo en "
+"algun sitio las más nuevas también."
+msgstr ""
 
-#: templates/pulseras.html:155
-msgid "Pulso azul"
-msgstr "Batec blau"
-
-#: templates/pulseras.html:165
-msgid "Pulso verde"
-msgstr "Batec verd"
-
-#: templates/pulseras.html:175
-msgid "Pulso rojo"
-msgstr "Batec vermell"
-
-#: templates/pulseras.html:184
-msgid "Luz y sombra"
-msgstr "Llum i ombra"
-
-#: templates/pulseras.html:188
-msgid "Iceberg"
-msgstr "Iceberg"
-
-#: templates/pulseras.html:198
-msgid "Incendio"
-msgstr "Incendi"
-
-#: templates/pulseras.html:208
-msgid "Erupción"
-msgstr "Erupció"
-
-#: templates/pulseras.html:218
-msgid "Jungla"
-msgstr "Jungla"
-
-#: templates/pulseras.html:227
-msgid "Cuatro elementos"
-msgstr "Quatre elements"
-
-#: templates/pulseras.html:230
-msgid "Cuatro Elementos (tierra)"
-msgstr "Quatre elements (terra)"
-
-#: templates/pulseras.html:240
-msgid "Cuatro Elementos (bosque)"
-msgstr "Quatre elements (bosc)"
-
-#: templates/pulseras.html:249
-msgid "Dibujando cosas"
-msgstr "Dibuixant coses"
-
-#: templates/pulseras.html:253
-msgid "Día soleado"
-msgstr "Dia assolellat"
-
-#: templates/pulseras.html:262
-msgid "Escondiendo mensajes"
-msgstr "Amagant missatges"
-
-#: templates/pulseras.html:266
-msgid "Agua y cuarzo (Morse: David)"
-msgstr "Aigua i quars (Morse: David)"
-
-#: templates/pulseras.html:279
+#: templates/pulseras.html:216
 msgid ""
 "Llevaba demasiado tiempo echando de menos aquél \"Pulsermaker\" que hice "
 "en 2010 con flash..."
@@ -3280,19 +3318,19 @@ msgstr ""
 "Portava massa temps trobant a faltar aquell 'Pulsermaker' que vaig fer el"
 " 2010 amb flash..."
 
-#: templates/pulseras.html:280
+#: templates/pulseras.html:217
 msgid "por fin ha podido renacer."
 msgstr "per fi l'he pugut fer renéixer."
 
-#: templates/pulseras.html:1061
+#: templates/pulseras.html:998
 msgid "Los datos de la bolita"
 msgstr "Les dades del vidret"
 
-#: templates/pulseras.html:1061 templates/pulseras.html:1063
+#: templates/pulseras.html:998 templates/pulseras.html:1000
 msgid "se perderán. Continuar?"
 msgstr "es perdran. Continuar?"
 
-#: templates/pulseras.html:1063
+#: templates/pulseras.html:1000
 msgid "Los datos de las bolitas"
 msgstr "Les dades dels vidrets"
 
@@ -3307,4 +3345,25 @@ msgstr "Les dades dels vidrets"
 
 #~ msgid "Tutorial, ejemplos y crucigramas"
 #~ msgstr "Tutorial, exemples i mots encreuats"
+
+#~ msgid "Arcoíris simple"
+#~ msgstr "Arc de sant martí simple"
+
+#~ msgid "Arcoíris negro"
+#~ msgstr "Arc de sant martí negre"
+
+#~ msgid "Arcoíris suave"
+#~ msgstr "Arc de sant martí suau"
+
+#~ msgid "Pulso azul"
+#~ msgstr "Batec blau"
+
+#~ msgid "Pulso rojo"
+#~ msgstr "Batec vermell"
+
+#~ msgid "Cuatro Elementos (tierra)"
+#~ msgstr "Quatre elements (terra)"
+
+#~ msgid "Cuatro Elementos (bosque)"
+#~ msgstr "Quatre elements (bosc)"
 
