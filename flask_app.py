@@ -61,7 +61,7 @@ login_manager.session_protection = "basic"
 
 # DB INITIALIZATION // SCHEMA UPDATE
 init_app(app)  # this adds the command to the CLI so that I can use it via Terminal
-# normally run the app, then... $ flask init-db
+# check 'db.py' file for instructions on how to run this
 
 
 # Oauth 2 client setup

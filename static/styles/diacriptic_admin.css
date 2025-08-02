@@ -34,7 +34,7 @@ td {
 }
 
 .diac-admin-tags {
-    width: 3rem;
+    width: 5rem;
 }
 
 /* importa l'ordre (prioritat) */
@@ -46,6 +46,12 @@ td {
 }
 .diac-admin-p {
     background-color: #cccccc;
+}
+.diac-admin-w {
+    background-color: #f0e0bb;
+}
+.diac-admin-d {
+    background-color: #ccaaaa;
 }
 
 .cal-day {

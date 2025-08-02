@@ -7,6 +7,8 @@ class CrypticClue:
         "p": {"description": "Pausada", "icon": "⏸️"},
         "a": {"description": "Aprovada", "icon": "✅"},
         "e": {"description": "Esperant que arribi el moment", "icon": "⏳"},
+        "w": {"description": "Work In Progress", "icon": "🚧"},
+        "d": {"description": "Descartada", "icon": "❌"}
     }
     sql_select_clue = """
         SELECT cryptic_clue.clue_id, word, clue, solution, date_created, 
