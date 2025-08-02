@@ -606,7 +606,9 @@ def diacriptic(date=None):
     import diacriptics as dc
     clues_on_date = dc.get_clues_on_date(date)
     if not clues_on_date:
-        return "Dispensi però encara no hi ha res en aquesta data (un dia pintarem aquest desert blanc)."
+        if date is None:
+            return render_template("/encreuats/diacriptic_today_is_empty.html")
+        return "Dispensi però encara no hi ha res en aquesta data (un dia pintarem aquest desert blanc).", 404
     else:  # TODO disambiguation screen if more than one clues_on_date
         clue = dc.get_clue(clues_on_date[0])
         help_dots = ""

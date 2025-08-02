@@ -298,3 +298,7 @@ button.border-c {
 .no-dtz {
     touch-action: manipulation;
 }
+
+#plorembutton {
+    width: 20rem;
+}

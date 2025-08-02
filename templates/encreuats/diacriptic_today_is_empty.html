@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Diacríptic</title>
+
+    <!-- Lora font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <!-- Material Symbols (google) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@22,300,0,0&icon_names=backspace" />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/encreuats.css">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+
+    <!-- My JS modules -->
+    <script src="/static/js/diacriptics.js"></script>
+</head>
+
+<body>
+<div id="replaceable-wrapper">
+    <div class="inner-game margin-x-auto">
+    <div class="diac-main pb-4">
+        {% include '/encreuats/diacriptic/header.html' %}
+
+        <h1 class="h1 text-center pt-1"><span class="pointer" onclick="location.href='/diacriptic/'">dia<span class="eh-ind pl-0">críptic</span></span></h1>
+        <h3 class="h3 text-danger text-center pt-4">OH NO, AUXILI, NO HI HA CAP DIACRÍPTIC PREPARAT</h3>
+
+        <br>
+        <p class="clue lora-clue text-center mb-3 mx-3">
+            <span id="clue">Em temo que al Rusca se li ha oblidat programar el Diacríptic d'avui (perquè és un gamarús i ha procrastinat massa). 🤨</span><br>
+            <i>Si veus que a mig matí no ho ha arreglat, <b>prova d'escriure'l</b> per algun lloc per avisar-lo.</i>
+        </p>
+
+    </div>
+
+    <div class="diac-under-ui mt-3 text-center">
+        <a id="plorembutton" class="btn btn-diac mb-1 alt-outline" href="/diacriptic/arxiu">Plorem i juguem als antics</a>
+    </div>
+
+    <div class="kb-div pt-2 pb-2">
+        <div class="small text-center mt-0 credits">Rusca 2025 · Based on MinuteCryptics</div>
+    </div>
+
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
