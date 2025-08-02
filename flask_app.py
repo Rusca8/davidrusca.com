@@ -608,7 +608,12 @@ def diacriptic(date=None):
     if not clues_on_date:
         if date is None:
             return render_template("/encreuats/diacriptic_today_is_empty.html")
-        return "Dispensi però encara no hi ha res en aquesta data (un dia pintarem aquest desert blanc).", 404
+        if re.match("^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$", date):
+            date_vibes = True
+        else:
+            date_vibes = False
+        return render_template("/encreuats/diacriptic_404.html",
+                               date=date, date_vibes=date_vibes), 404
     else:  # TODO disambiguation screen if more than one clues_on_date
         clue = dc.get_clue(clues_on_date[0])
         help_dots = ""
