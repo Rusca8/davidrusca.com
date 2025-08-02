@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- to avoid 300ms touchscreen delay... -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <title>Sardanòmetre</title>
+
+    <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
+
+    <!-- main -->
+    <script>
+        //////// Classes ///////
+        class Button {
+          constructor(x, y, w, h, code, show_if, image, img_scale=1){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.code = code;
+            this.show_if = show_if || {}; // dict of "toggle_name": expected_bool
+            this.image = image;
+            this.img_scale = img_scale;
+          }
+
+          get show(){
+            for(const [key, value] of Object.entries(this.show_if)){
+              if(window[key] != value){
+                return false;
+              }
+            }
+            return true;
+          }
+        }
+        class Imagen {
+          constructor(src, title="img"){
+            this.img = new Image();
+            this.img.src = src;
+            this.ready = false;
+
+            this.img.onload = () => {
+              this.ready = true;
+            }
+          }
+        }
+        class Board {
+            constructor(x=-10, y=-10, w=0, h=0, llargs=5){
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.llargs = llargs;
+                this.passos = [];
+            }
+            get n(){
+                return this.llargs*4;
+            }
+            get wIns(){
+                return this.w*0.9;
+            }
+            get wPeu(){
+                return this.wIns/this.n;
+            }
+            get r(){
+                return this.h*0.05;
+            }
+            x_of(index){
+                return this.x + this.w - this.wIns + index*this.wPeu;
+            }
+            get mIns(){
+                return this.h*0.08;
+            }
+            get hPeus(){
+                return this.h*0.4;
+            }
+        }
+        class Pas{
+            constructor(pas, ltr, index, b){
+                this.pas = pas;
+                this.ltr = ltr;
+                this.index = index;
+                this.board = b;
+            }
+            static pas_colors = {
+                "llarg": ["rgb(240,229,211)", "rgb(216,184,158)", "rgb(119,90,61)"],
+                "dos": ["rgb(226,235,253)", "rgb(180,194,229)", "rgb(75,106,180)"],
+                "curt": ["rgb(230,244,250)", "rgb(174,218,235)", "rgb(87,138,159)"],
+                "dosi": ["rgb(230,244,250)", "rgb(174,218,235)", "rgb(87,138,159)"],
+                "tres": ["rgb(250,229,222)", "rgb(233,186,171)", "rgb(153,87,66)"],
+                "dosos": ["rgb(253,242,208)", "rgb(251,230,163)", "rgb(184,146,48)"],
+                "quatre": ["rgb(220,233,213)", "rgb(188,214,172)", "rgb(72,117,44)"],
+            }
+            get x(){
+                return this.board.x_of(this.index);
+            }
+            get y(){
+                return this.board.y + this.board.h - this.board.mIns - this.board.hPeus + this.m;
+            }
+            get m(){
+                return this.board.mIns * 0.3;
+            }
+            get h(){
+                return this.board.hPeus-2*this.m;
+            }
+            get w(){
+                return this.n * this.board.wPeu;
+            }
+            get r(){
+                return this.board.r * 0.8;
+            }
+            get hFooter(){
+                return this.h * 0.35;
+            }
+            get colors(){
+                return Pas.pas_colors[this.pas] || ["white", "lightgrey", "grey"];
+            }
+            get parat(){
+                return ["dos", "tres", "quatre"].includes(this.pas);
+            }
+            static pas_n(pas){
+                switch(pas){
+                    case "llarg":
+                    case "quatre":
+                        return 4;
+                    case "tres":
+                        return 3;
+                    default:
+                        return 2;
+                }
+            }
+            get n(){
+                return Pas.pas_n(this.pas);
+            }
+        }
+
+        //////// GLOBAL VARS //////
+        var cWidth;
+        var cHeight;
+        var u;
+        var resolution = 5;
+        var colors = {
+          "board": "rgb(243, 243, 243)",
+          "insert": "rgb(204, 204, 204)",
+          "select": "#9356bf",
+          "select_light": "#e8d7f5",
+          "bg": "white",
+        }
+        var stroke_ws = {};  // defined at set_measures
+        var cc;
+
+        // UI
+        var board = new Board();
+        board.passos = [
+            new Pas("llarg", 1, 0, board),
+        ];
+        var pas_selected = null;
+        //
+        var pas_buttons = [];  // chosen at init_buttons
+        var pas_button_selected = null;
+        //
+        var placing_buttons = [];  // generated at init_buttons, shown on demand
+        var placing_options = [];
+        var placing = false;
+        //
+        var input_mode = "fall_left";  // fall_left = place leftmost space from rightmost opening
+        var link_feet = true;  // link feet to left if connected
+        //
+        var settings_buttons = [];  // at init_buttons
+        var on_select_buttons = [];  // at init_buttons
+        //
+        const img_passos = {
+            "llarg": new Imagen("/static/img/sardanometre/llarg.png", "llarg"),
+            "curt": new Imagen("/static/img/sardanometre/curt.png", "curt"),
+            "dos": new Imagen("/static/img/sardanometre/dos.png", "dos"),
+            "tres": new Imagen("/static/img/sardanometre/tres.png", "tres"),
+            "quatre": new Imagen("/static/img/sardanometre/quatre.png", "quatre"),
+        }
+        img_passos.dosi = img_passos.dos;
+        img_passos.dosos = img_passos.dos;
+        var img_peus = [
+            new Imagen("/static/img/sardanometre/peu_e.png", "E"),
+            new Imagen("/static/img/sardanometre/peu_d.png", "D"),
+        ]
+        var img_link = new Imagen("/static/img/sardanometre/link_feet.png", "link");
+        var img_input_modes = {
+            "fall_left": new Imagen("/static/img/sardanometre/fall_left.png", "fall"),
+            "choose": new Imagen("/static/img/sardanometre/choose.png", "choose"),
+        };
+        var img_on_select = {
+            "swap_feet": new Imagen("/static/img/sardanometre/swap_feet.png", "swap_feet"),
+            "remove": new Imagen("/static/img/sardanometre/remove.png", "remove"),
+        }
+
+        // UI debug
+        var pressed = [0, 0];
+
+        ///////// onload //////
+        window.onload = function(){
+            c=document.getElementById("app");
+
+            // medidas
+            set_measures();
+
+            // drawing init
+            cc = c.getContext("2d");
+            update();
+            setInterval(update, 500);  // fallback update 1s (normalmente será onclick)
+
+            // ui init
+            init_collisions(c);
+
+
+            // prevent space going down
+            window.addEventListener("keydown", function(e){
+                if((e.key==" ") && document.activeElement==c){
+                    e.preventDefault();
+                }
+            }, false);
+
+            // on resize
+            window.addEventListener("resize", function(){
+              set_measures();
+            }, true);
+
+            update();
+
+            // focus
+            c.focus();
+        }
+
+
+        function set_measures(){
+          c.width = window.innerWidth * resolution;
+          c.height = window.innerHeight * resolution;
+          cWidth = c.width;
+          cHeight = c.height;
+          u = cWidth/800;
+
+          //widths
+          stroke_ws.def = 1*u;
+          stroke_ws.border = 2*u;
+          stroke_ws.select = 3*u;
+
+          // Main Board
+            board.w = u*600;
+            board.h = u*200;
+            board.x = c.width/2-board.w/2;
+            board.y = board.h*0.1;
+
+          init_buttons();
+        }
+        function init_buttons(){
+            pas_buttons = [];
+            let opcions = ["curt", "llarg"];
+            for(let i=0; i<opcions.length; i++){
+                pas_buttons.push(new Button(board.x + i*board.w/opcions.length, board.y+board.h*1.3+board.mIns*2, board.w/opcions.length, board.h*0.3, opcions[i], {"pas_selected": null}, img_passos[opcions[i]]));
+            }
+            opcions = ["dosi", "dos", "tres", "quatre"];
+            for(let i=0; i<opcions.length; i++){
+                pas_buttons.push(new Button(board.x + i*board.w/opcions.length, board.y+board.h+board.mIns*2, board.w/opcions.length, board.h*0.3, opcions[i], {"pas_selected": null}, img_passos[opcions[i]]));
+            }
+            //
+            placing_buttons = [];
+            for(let i=0; i<board.n; i++){
+                placing_buttons.push(new Button(board.x + board.w - board.wIns + board.wPeu*i, board.y + board.h - board.hPeus - board.mIns, board.wPeu, board.hPeus, "place-" + i, {"placing": true}));
+            }
+            console.log(placing_buttons[0].show_if);
+            //
+            let wi = (c.width - board.w)/2;
+            settings_buttons = [
+                new Button(wi*0.2, board.y+wi*0.2, wi*0.6, wi*0.6, "input_mode"),
+                new Button(wi*0.2, board.y + wi, wi*0.6, wi*0.6, "link_feet", {}, img_link, 0.8),
+            ];
+            //
+            wi = board.hPeus;
+            let xi = board.x + board.w/2;
+            let yi = board.y + board.h + board.mIns * 3;
+            opcions = ["remove", "swap_feet"]
+            on_select_buttons = [];
+            for(let i=0; i<opcions.length; i++){
+                let imgsize = opcions[i] == "remove" ? 0.6 : 0.8;
+                on_select_buttons.push(
+                    new Button(xi-(wi*1.2)*i, yi, wi, wi, opcions[i], {}, img_on_select[opcions[i]], imgsize)
+                );
+            }
+        }
+
+        function get_placing_options(){
+            let pas = pas_button_selected.code;
+            placing_options = [];
+            let consec = 0;
+            let mask = passos_mask(board);
+            console.log("mask", mask);
+            let n = Pas.pas_n(pas);
+            for(let i=board.n-1; i>=0; i--){
+                if(mask[i] == 0){
+                    consec++;
+                    if(consec >= n){
+                        placing_options.push(i);
+                    }
+                }else{
+                    consec = 0;
+                }
+            }
+            console.log("placing options:", placing_options);
+        }
+
+        ///////// Update ////////
+        function update(){
+            // style setup
+            cc.textBaseline = "middle";
+            cc.textAlign = "center";
+            cc.lineJoin = 'miter';
+            cc.miterLimit = 2;
+
+            //bg
+            cc.fillStyle = colors.bg;
+            cc.fillRect(0, 0, c.width, c.height);
+
+            //board
+            draw_board(board);
+            //
+            for(let p of board.passos){
+                draw_pas(p);
+            }
+            //
+            if(pas_selected){
+                draw_selected_pas_ui(pas_selected);
+            }
+
+            draw_pas_buttons();
+            draw_placing_buttons();
+            draw_settings_buttons();
+
+            // ////// DEBUGGING //////
+
+        }
+
+        function font(family, pt, bold=false, italic=false){
+          let type = "";
+          if(italic){
+            type += "italic ";
+          }
+          if(bold){
+            type += "bold ";
+          }
+          return type + (pt*gW/400).toString() + "px " + family;
+        }
+
+
+        // DRAWING UTILITIES
+        function drawImage(cc, imagen, x, y, w, h, center=false, debug=false){
+          if(center){
+            x -= w/2;
+            y -= h/2;
+          }
+          if(debug){
+              cc.strokeStyle = colors.select;
+              cc.strokeRect(x, y, w, h);
+          }
+          if(imagen.ready){
+            if(w && h){
+              cc.drawImage(imagen.img, x, y, w, h);
+            }else{
+              cc.drawImage(imagen.img, x, y);
+            }
+          }else{
+            cc.fillText("(" + imagen.title + ")", x, y);
+          }
+        }
+
+        function drawCircle(cc, x, y, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.arc(x, y, r, 0, 2 * Math.PI, false);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.roundRect(x, y, w, h, r);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        // DRAWING THE THINGS
+        function draw_board(b){
+            let yNums = b.y + b.mIns;
+            let mNums = b.h*0.05;
+            let hNums = (((b.h - 2*b.mIns) - b.hPeus) - mNums)/3;
+            let bec = (stroke_ws.border-stroke_ws.def)/2;  //border error correction
+            let m = b.mIns*0.3;
+            // base
+            cc.lineWidth = stroke_ws.border;
+            cc.strokeStyle = "black";
+            cc.fillStyle = colors.board;
+            roundRect(cc, b.x, b.y, b.w, b.h, b.r);
+            // inserts
+            cc.lineWidth = stroke_ws.def;
+            cc.fillStyle = colors.insert;
+            let xi = b.x+b.w-b.wIns;
+            let yi = yNums;
+            roundRect(cc, xi-m, yi, b.wIns-bec+m, hNums, [b.r*0.5, 0, 0, b.r*0.5]);
+            //
+            yi += hNums + mNums;
+            roundRect(cc, xi-m, yi, b.wIns-bec+m, hNums, [b.r*0.5, 0, 0, b.r*0.5]);
+            //
+            yi += hNums + hNums/2;
+            for(let i=0; i<20; i++){
+                let hi = i%4==3 ? hNums*0.6 : hNums*0.4;
+                roundRect(cc, xi + (i+0.5)*b.wIns/20, yi-hi/2, u*0.3, hi, u*0.5);
+            }
+            //
+            yi += hNums/2;
+            roundRect(cc, xi-m, yi, b.wIns-bec+m, b.hPeus, [b.r*0.5, 0, 0, b.r*0.5]);
+        }
+
+        function draw_pas(p){
+            let b = p.board;
+            let m = b.mIns*0.3;
+            let pb = 0.35;
+            let xi = p.x;
+            let yi = p.y;
+            // default style
+            cc.strokeStyle = "black";
+            cc.lineWidth = stroke_ws.def;
+            // main
+            cc.fillStyle = p.colors[0];
+            roundRect(cc, xi, yi, p.w, p.h, b.r*0.8);
+            let hi = b.hPeus*(1-pb);
+            cc.globalAlpha = 0.7;
+            drawImage(cc, img_passos[p.pas], xi+p.w/2, yi+hi/2, b.wPeu*2.5, b.wPeu*2.3, center=true);
+            cc.globalAlpha = 1;
+            // footer
+            cc.fillStyle = p.colors[1];
+            yi = p.y + p.h - p.hFooter;
+            hi = p.hFooter;
+            roundRect(cc, xi, yi, p.w, hi, [0, 0, b.r*0.8, b.r*0.8]);
+            cc.fillStyle = p.colors[2];
+            roundRect(cc, xi+b.wPeu*(p.n-1), yi, b.wPeu, hi, [0, 0, b.r*0.8, 0]);
+            // icons
+            cc.globalAlpha = 0.7;
+            for(let i=0; i<p.n-1; i++){
+                let img = p.ltr ? img_peus[i%2] : img_peus[(i+1)%2];
+                drawImage(cc, img, xi + b.wPeu*(i+0.5), yi+hi/2, b.wPeu*0.7, b.wPeu*0.7, center=true)
+            }
+            cc.globalAlpha = 1;
+            cc.fillStyle = "rgba(255, 255, 255, 0.9)";
+            xi = xi+b.wPeu*(p.n-0.5)
+            if(p.parat){
+                cc.fillRect(xi-b.wPeu*0.25, yi+hi/2-b.wPeu*0.25, b.wPeu*0.2, b.wPeu*0.5);
+                cc.fillRect(xi+b.wPeu*0.25, yi+hi/2-b.wPeu*0.25, -b.wPeu*0.2, b.wPeu*0.5);
+            }else{
+                drawArrow(cc, xi, yi+hi/2, b.wPeu*0.5, p.ltr);
+            }
+        }
+        function drawArrow(cc, x, y, size, ltr=true){
+            let sig = ltr ? 1 : -1;
+            let hbody = size*0.5;
+            let xhead = x + sig*size*0;
+            // rectangle
+            cc.fillRect(x-sig*size*0.5, y-hbody/2, x-xhead+sig*size*0.51, hbody);
+            // triangle
+            cc.beginPath();
+            cc.moveTo(xhead, y+size*0.5);
+            cc.lineTo(xhead, y-size*0.5);
+            cc.lineTo(x+sig*size*0.5, y);
+            cc.fill();
+        }
+
+        function draw_pas_buttons(){
+            let m = board.mIns * 0.3;
+            for(let b of pas_buttons){
+                if(b.show){
+                    cc.strokeStyle = "black";
+                    cc.lineWidth = stroke_ws.def;
+                    cc.fillStyle = Pas.pas_colors[b.code][0];
+                    roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, board.r*0.8);
+                    drawImage(cc, b.image, b.x+b.w/2, b.y+b.h/2, b.h, b.h, center=true);
+                    if(pas_button_selected==b){
+                        cc.strokeStyle = colors.select;
+                        cc.lineWidth = stroke_ws.select;
+                        roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, board.r*0.8, true, false);
+                    }
+                }
+            }
+        }
+
+        function draw_placing_buttons(){
+            let m = board.mIns * 0.3;
+            cc.strokeStyle = colors.select;
+            cc.lineWidth = stroke_ws.select;
+            for(let b of placing_buttons){
+                if(b.show){
+                    if(placing_options.includes(parseInt(b.code.split("-")[1]))){
+                        roundRect(cc, b.x, b.y+m, b.w, b.h-2*m, board.r*0.8, true, false);
+                    }
+                }
+            }
+        }
+
+        function draw_settings_buttons(){
+            for(let b of settings_buttons){
+                if(b.show){
+                    cc.strokeStyle = "black";
+                    cc.lineWidth = stroke_ws.def;
+                    if(b.code == "link_feet" && link_feet){
+                        cc.fillStyle = colors.select_light;
+                    }else{
+                        cc.fillStyle = "white";
+                    }
+                    let r = b.code == "input_mode" ? board.r*3 : board.r*0.8;
+                    roundRect(cc, b.x, b.y, b.w, b.h, r);
+                    if(b.image){
+                        if(b.code == "link_feet" && !link_feet){
+                            cc.globalAlpha = 0.2;
+                        }
+                        drawImage(cc, b.image, b.x+b.w/2, b.y+b.h/2, b.w*b.img_scale, b.h*b.img_scale, center=true);
+                        cc.globalAlpha = 1;
+                    }else if(b.code == "input_mode"){
+                        drawImage(cc, img_input_modes[input_mode], b.x+b.w/2, b.y+b.h/2, b.w*0.5, b.h*0.5, center=true);
+                    }
+                }
+            }
+        }
+
+        function draw_selected_pas_ui(p){
+            cc.strokeStyle = colors.select;
+            cc.lineWidth = stroke_ws.select;
+            roundRect(cc, p.x, p.y, p.w, p.h, p.r, stroke=true, fill=false);
+            // botons
+            cc.strokeStyle = "black";
+            cc.lineWidth = stroke_ws.def;
+            cc.fillStyle = "white";
+            for(let b of on_select_buttons){
+                roundRect(cc, b.x, b.y, b.w, b.h, p.r, stroke=true, fill=true);
+                drawImage(cc, img_on_select[b.code], b.x+b.w/2, b.y+b.w/2, b.w*b.img_scale, b.h*b.img_scale, center=true);
+            }
+        }
+
+        /////////// UI calcs //////////
+        function passos_mask(board){
+            let mask = [];
+            for(let i=0; i<board.n;i++){
+                mask.push(0);
+            }
+            for(p of board.passos){
+                for(let i=0; i<p.n; i++){
+                    mask[p.index+i] += 1;
+                }
+            }
+            return mask;
+        }
+
+        function swap_feet(){
+            pas_selected.ltr = (pas_selected.ltr + 1) % 2;
+            if(!are_feet_linked()){
+                link_feet = false;
+            }
+            update();
+        }
+
+        function delete_selected(){
+            board.passos.splice(board.passos.indexOf(pas_selected), 1);
+            pas_selected = null;
+            color_dosos();
+            update();
+        }
+
+        function get_fall_left_index(){
+            let last = placing_options[0];  // placing_options va de gros a petit
+            for(let n of placing_options){
+                if(n == last || n == last-1){
+                    last = n;
+                }else{
+                    break;
+                }
+            }
+            console.log("fall_left_index", last);
+            return last;
+        }
+
+        function color_dosos(){
+            let dosos = [];
+            let half_pair = false;
+            let i=0;
+            while(i<board.n){
+                let trobat = false;
+                for(let p of board.passos){
+                    if(p.index == i){
+                        trobat = true;
+                        console.log("pcode", p.pas);
+                        if(p.pas == "dosi" || p.pas == "dosos"){
+                            console.log("dos at", i);
+                            if(half_pair){
+                                dosos.push(i);
+                                dosos.push(i-2);
+                                half_pair = false;
+                            }else{
+                                half_pair = true;
+                            }
+                        }
+                        i += p.n - 1;
+                        break;
+                    }
+                }
+                if(!trobat){
+                    half_pair = false;
+                }
+                i++;
+            }
+            console.log("dosos at ", dosos);
+            for(let p of board.passos){
+                if(p.pas == "dosi" || p.pas == "dosos"){
+                    if(dosos.includes(p.index)){
+                        p.pas = "dosos";
+                    }else{
+                        p.pas = "dosi";
+                    }
+                }
+            }
+        }
+
+        function link_the_feet(){
+            console.log("linking feet");
+            let ref = null;
+            let i=0;
+            while(i<board.n){
+                let trobat = false;
+                for(let p of board.passos){
+                    if(p.index == i){
+                        trobat = true;
+                        if(ref === null){
+                            ref = p;
+                        }else{
+                            p.ltr = (ref.ltr+1) % 2;
+                            ref = p;
+                        }
+                        i += p.n - 1;
+                        break;
+                    }
+                }
+                if(!trobat){
+                    ref = null;
+                }
+                i++;
+            }
+        }
+
+        function are_feet_linked(){
+            console.log("checking feet linkage");
+            let ref = null;
+            let i=0;
+            while(i<board.n){
+                let trobat = false;
+                for(let p of board.passos){
+                    if(p.index == i){
+                        trobat = true;
+                        if(ref === null){
+                            ref = p;
+                        }else{
+                            if(p.ltr != (ref.ltr+1) % 2){
+                                return false;
+                            }
+                            ref = p;
+                        }
+                        i += p.n - 1;
+                        break;
+                    }
+                }
+                if(!trobat){
+                    ref = null;
+                }
+                i++;
+            }
+            return true;
+        }
+
+        function place_selected_pas(num){
+            board.passos.push(new Pas(pas_button_selected.code, 1, num, board));
+            if(link_feet){
+                link_the_feet();
+            }
+            color_dosos();
+            // vaig posar update a part per calcular més coses abans
+        }
+
+        ///////////////// KeyUp ////////////////
+        function canvas_hotkeys(e){
+            let upperKey = e.key.toUpperCase();
+            if(pas_selected){
+                if(upperKey == "BACKSPACE"){
+                    delete_selected();
+                    return;
+                }else if(upperKey == "S"){
+                    swap_feet();
+                    return;
+                }
+            }else if(upperKey == "L"){
+                link_the_feet();
+            }
+            console.log(upperKey);
+            update();
+        }
+
+
+        // Collisions (partially StackOverflow)
+        function init_collisions(c){
+            c.addEventListener('click', function(event){
+                const rect = c.getBoundingClientRect();
+                const relX = event.clientX - rect.left;
+                const relY = event.clientY - rect.top;
+                x = relX * c.width / rect.width;
+                y = relY * c.height / rect.height;
+
+                xcur = x;
+                ycur = y;
+                let pressed = [xcur, ycur];
+                console.log(pressed);
+
+                // zona dels passos
+                if(ycur < board.y + board.h - board.mIns
+                    && ycur > board.y + board.h - board.mIns - board.hPeus){
+                    // primer comprovo placing options
+                    if(placing){
+                        for(let b of placing_buttons){
+                            let num = parseInt(b.code.split("-")[1]);
+                            if(placing_options.includes(num) && xcur < b.x + b.w && xcur > b.x){
+                                place_selected_pas(num);
+                                get_placing_options();
+                                update();
+                                return;
+                            }
+                        }
+                    }
+                    placing = false;
+                    // cada pas
+                    for(let p of board.passos){
+                        if(xcur > p.x
+                            && xcur < p.x + p.w){
+                            console.log("Selected " + p.pas);
+                            pas_selected = p;
+                            update();
+                            return;
+                        }
+                    }
+                }
+                // botons settings
+                for(let b of settings_buttons){
+                    if(b.show){
+                        if(ycur < b.y+b.h && ycur > b.y && xcur < b.x + b.w && xcur > b.x){
+                            if(b.code == "link_feet"){
+                                link_feet = !link_feet;
+                                if(link_feet){
+                                    link_the_feet();
+                                }
+                                update();
+                                return;
+                            }else if(b.code == "input_mode"){
+                                switch(input_mode){
+                                    case "fall_left":
+                                        input_mode = "choose";
+                                        break;
+                                    default:
+                                        input_mode = "fall_left";
+                                        break;
+                                }
+                                placing = false;
+                                pas_button_selected = null;
+                                update();
+                                return;
+                            }
+                        }
+                    }
+                }
+                // on select
+                if(pas_selected){
+                    for(let b of on_select_buttons){
+                        if(ycur > b.y && ycur < b.y + b.h && xcur > b.x && xcur < b.x + b.w){
+                            console.log(b.code);
+                            switch(b.code){
+                                case "remove":
+                                    delete_selected();
+                                    return;
+                                case "swap_feet":
+                                    swap_feet();
+                                    return;
+                            }
+                        }
+                    }
+                }
+                // botons de pas
+                for(let b of pas_buttons){
+                    if(b.show){
+                        if(ycur > b.y && ycur < b.y + b.h && xcur > b.x && xcur < b.x + b.w){
+                            pas_button_selected = b;
+                            get_placing_options();
+                            if(input_mode=="fall_left"){
+                                place_selected_pas(get_fall_left_index());
+                                pas_button_selected = null;
+                            }else{
+                                placing = true;
+                            }
+                            update();
+                            return;
+                        }
+                    }
+                }
+                pas_selected = null;
+                pas_button_selected = null;
+                placing = false;
+                update();
+            }, false);
+        }
+    </script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+</body>
+</html>

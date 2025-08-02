@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- to avoid 300ms touchscreen delay... -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <title>TITLE</title>
+
+    <link rel="stylesheet" href="/static/styles/fullscreen_canvas.css">
+
+    <!-- main -->
+    <script>
+        //////// Classes ///////
+        class Button {
+          constructor(x, y, w, h, code, show_if, image, img_scale=1){
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.code = code;
+            this.show_if = show_if || {};
+            this.image = image;
+            this.img_scale = img_scale;
+          }
+
+          shown(){
+            for(const [key, value] of Object.entries(this.show_if)){
+              if(window[key] != value){
+                return false;
+              }
+            }
+            return true;
+          }
+        }
+        class Imagen {
+          constructor(src, title="img"){
+            this.img = new Image();
+            this.img.src = src;
+            this.ready = false;
+
+            this.img.onload = () => {
+              this.ready = true;
+            }
+          }
+        }
+
+        //////// GLOBAL VARS //////
+        var cWidth;
+        var cHeight;
+        var u;
+        var resolution = 5;
+        var colors = {
+          "bg": "#1990bd",
+        }
+        var cc;
+
+        //
+        const img_info = new Imagen("/static/img/catagrama/how_to.png", "?");
+
+        // UI debug
+        var pressed = [0, 0];
+
+        ///////// onload //////
+        window.onload = function(){
+            c=document.getElementById("app");
+
+            // medidas
+            set_measures();
+
+            // drawing init
+            cc = c.getContext("2d");
+            update();
+            setInterval(update, 500);  // fallback update 1s (normalmente será onclick)
+
+            // ui init
+            init_collisions(c);
+
+
+            // prevent space going down
+            window.addEventListener("keydown", function(e){
+                if((e.key==" ") && document.activeElement==c){
+                    e.preventDefault();
+                }
+            }, false);
+
+            // on resize
+            window.addEventListener("resize", function(){
+              set_measures();
+            }, true);
+
+            update();
+
+            // focus
+            c.focus();
+        }
+
+
+        function set_measures(){
+          c.width = window.innerWidth * resolution;
+          c.height = window.innerHeight * resolution;
+          cWidth = c.width;
+          cHeight = c.height;
+          u = cHeight/500;
+        }
+
+        ///////// Update ////////
+        function update(){
+            // style setup
+            cc.textBaseline = "middle";
+            cc.textAlign = "center";
+            cc.lineJoin = 'miter';
+            cc.miterLimit = 2;
+
+            //bg
+            cc.fillStyle = "lightblue";
+            cc.fillRect(0, 0, c.width, c.height);
+
+            // ////// DEBUGGING //////
+
+        }
+
+        function font(family, pt, bold=false, italic=false){
+          let type = "";
+          if(italic){
+            type += "italic ";
+          }
+          if(bold){
+            type += "bold ";
+          }
+          return type + (pt*gW/400).toString() + "px " + family;
+        }
+
+        function drawImage(cc, imagen, x, y, w, h, center=false){
+          if(center){
+            x -= w/2;
+            y -= h/2;
+          }
+          if(imagen.ready){
+            if(w && h){
+              cc.drawImage(imagen.img, x, y, w, h);
+            }else{
+              cc.drawImage(imagen.img, x, y);
+            }
+          }else{
+            cc.fillText("(" + imagen.title + ")", x, y);
+          }
+        }
+
+        function drawCircle(cc, x, y, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.arc(x, y, r, 0, 2 * Math.PI, false);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+          cc.beginPath();
+          cc.roundRect(x, y, w, h, r);
+          if(fill){
+            cc.fill();
+          }
+          if(stroke){
+            cc.stroke();
+          }
+        }
+
+        ///////////////// KeyUp ////////////////
+        function canvas_hotkeys(e){
+            let upperKey = e.key.toUpperCase();
+            console.log(upperKey);
+            update();
+        }
+
+
+        // Collisions (partially StackOverflow)
+        function init_collisions(c){
+            c.addEventListener('click', function(event){
+                const rect = c.getBoundingClientRect();
+                const relX = event.clientX - rect.left;
+                const relY = event.clientY - rect.top;
+                x = relX * c.width / rect.width;
+                y = relY * c.height / rect.height;
+
+                xcur = x;
+                ycur = y;
+                let pressed = [xcur, ycur];
+
+                console.log(pressed);
+
+                update();
+            }, false);
+        }
+    </script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);"></canvas>
+</body>
+</html>

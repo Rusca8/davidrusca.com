@@ -972,6 +972,12 @@ def pulseras():
                            beads=ps.beads, designs=ps.designs, chrono=ps.get_chrono())
 
 
+@app.route('/sardanometre')
+@app.route('/sardanometre/')
+def sardanometre():
+    return render_template("sardanometre.html")
+
+
 @app.route('/anki/d/<file>')
 def d_anki(file):
     if file == "verbscat":
