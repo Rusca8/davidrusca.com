@@ -302,3 +302,14 @@ button.border-c {
 #plorembutton {
     width: 20rem;
 }
+
+.cluetype-card {
+    background: white;
+    border: 1px solid var(--color-d-ind);
+    width: 24.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    height: 2rem;
+    line-height: 1.9rem;
+    display: none;
+}

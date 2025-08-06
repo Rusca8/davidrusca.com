@@ -8,7 +8,10 @@ class CrypticClue:
         "a": {"description": "Aprovada", "icon": "✅"},
         "e": {"description": "Esperant que arribi el moment", "icon": "⏳"},
         "w": {"description": "Work In Progress", "icon": "🚧"},
-        "d": {"description": "Descartada", "icon": "❌"}
+        "d": {"description": "Descartada", "icon": "❌"},
+        "rebus": {"description": "Pista rebus", "icon": "🙃"},
+        "semi&lit": {"description": "Pista semi&lit", "icon": "❗️"},
+        "&lit": {"description": "Pista &lit", "icon": "⁉️"},
     }
     sql_select_clue = """
         SELECT cryptic_clue.clue_id, word, clue, solution, date_created, 
@@ -346,11 +349,11 @@ class CrypticClue:
             "WHERE clue_id = ?",
             (clue_id,)
         ).fetchall()
-        return [tag["type"] for tag in tags]
+        return [tag["tag_id"] for tag in tags]
 
     @staticmethod
     def get_all_tags():
-        """get a dictionary containing every existing tag for any given clue"""
+        """get a dictionary containing every existing tag for each of the clues"""
         db = get_db()
         tags_data = db.execute(
             CrypticClue.sql_select_tags

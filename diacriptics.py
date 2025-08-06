@@ -28,6 +28,11 @@ def get_tags():
     return CrypticClue.get_all_tags()
 
 
+def get_cluetype(clue_id):
+    tags = CrypticClue.get_tags(clue_id)
+    return [t for t in tags if t in ["rebus", "&lit", "semi&lit"]]
+
+
 def add_tag(clue_id, tag):
     return CrypticClue.add_tag(clue_id, tag)
 

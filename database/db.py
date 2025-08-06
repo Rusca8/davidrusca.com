@@ -50,7 +50,9 @@ def prepopulate():
     # analysis_block_type
     print("· Making sure all block_types exist")
     block_types = {"def": "Definició", "ind": "Indicador", "mat": "Material",
-                   "wop": "Joc de paraules", "res": "Resposta", "hid": "Text amagat"}
+                   "wop": "Joc de paraules", "res": "Resposta", "hid": "Text amagat",
+                   "uind": "Indicador (underline)", "umat": "Material (underline)",
+                   "ures": "Resposta (underline)"}
     for btype, name in block_types.items():
         db.execute(
             "INSERT OR IGNORE INTO analysis_block_type (type, name) "

@@ -108,7 +108,7 @@
 
 
         function blocks_with_defaults(from_dict=null){
-            let keys = ["def", "ind", "mat", "wop", "res", "hid"];  // TODO get from sqlite
+            let keys = ["def", "ind", "mat", "wop", "res", "hid", "uind", "umat", "ures"];  // TODO get from sqlite
             let new_blocks = {};
             for(let key of keys){
                 new_blocks[key] = [];
@@ -186,7 +186,17 @@
                 case "6":
                     key = "hid";
                     break;
+                case "%":
+                    key = "ures";
+                    break;
+                case "\"":
+                    key = "uind";
+                    break;
+                case "·":
+                    key = "umat";
+                    break;
                 default:
+                    console.log("key pressed:", e.key);
                     return;
             }
             text_to_hl.selectionEnd = text_to_hl.selectionStart;
@@ -648,6 +658,8 @@
                             <div class="col-sm-auto"><b>4</b> <span class="eh-wop">wop</span></div>
                             <div class="col-sm-auto"><b>5</b> <span class="eh-res">res</span></div>
                             <div class="col-sm-auto"><b>6</b> <span class="eh-hid">hid</span></div>
+                            <div class="col-sm-auto px-4"></div>
+                            <div class="col-sm-auto"><b>+shift</b> <span>underline</span></div>
                             <div class="col-sm-auto px-4"></div>
                             <div class="col-sm-auto"><b>r</b> retry</div>
                             <div class="col-sm-auto"><b>c</b> clear</div>

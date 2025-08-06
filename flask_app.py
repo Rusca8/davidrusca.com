@@ -619,6 +619,7 @@ def diacriptic(date=None):
         help_dots = ""
         help_mask = "0" * sum(clue.n)
         solved = False
+        cluetype = ""
         if current_user.is_authenticated:  # get progress
             solve = dc.get_solve(clue.clue_id, current_user.id)
             # append def if they knew it
@@ -628,6 +629,7 @@ def diacriptic(date=None):
                 if "d" in solve.help_dots:
                     _, analysis_definition = dc.get_definition(params={"clue_id": clue.clue_id, "clue": clue.clue})
                     clue.clue_analysis = analysis_definition
+                    cluetype = " ".join(dc.get_cluetype(clue.clue_id))  # TODO multitipus, com l'altre cluetype
                 # build help mask for known letters
                 help_mask = dc.help_mask(clue, solve)
                 help_dots = solve.help_dots
@@ -635,7 +637,7 @@ def diacriptic(date=None):
         known_letters = [i for i, h in enumerate(help_mask) if h == "1"]
         return render_template("/encreuats/diacriptic.html", clue=clue,
                                help_used=help_dots, help_mask=help_mask, pistes=pistes, known_letters=known_letters,
-                               solved=solved)
+                               solved=solved, cluetype=cluetype)
 
 
 @app.route('/diacriptic/ajax/<query>', methods=["GET", "POST"])
@@ -649,10 +651,11 @@ def diacriptic_ajax(query=None):
         case "definition":
             user_id = current_user.id if current_user.is_authenticated else None
             clue, analysis_definition = dc.get_definition(params=request.form, user_id=user_id)
+            cluetype = " ".join(dc.get_cluetype(request.form.get("clue_id")))  # TODO fer més elegant el multitipus... però n'hi haurà?
             if not analysis_definition:
                 return "N"
             return render_template("/encreuats/diacriptic/analysed_text.html",
-                                   text=clue, analysis=analysis_definition)
+                                   text=clue, analysis=analysis_definition, cluetype=cluetype)
         case "letter":
             user_id = current_user.id if current_user.is_authenticated else None
             return dc.get_letter(params=request.form, user_id=user_id)  # (public clue status validated inside)

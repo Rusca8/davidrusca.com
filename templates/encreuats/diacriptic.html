@@ -41,6 +41,8 @@
             }
             if(pistes.includes("d")){
                 render_analyses();
+                show_cluetype();
+                disable_pistabutton();  // redundant però just in case
             }
         }
 
@@ -200,10 +202,28 @@
                     pistes.push("d");
                     console.log(pistes);
                     paint_the_dots();
-                    let pistabutton = document.getElementById("pistabutton");
-                    pistabutton.disabled = true;
-                    pistabutton.classList.add("btn-diac-disabled");
                 }
+                disable_pistabutton();
+                show_cluetype();
+            }
+        }
+
+        function disable_pistabutton(){
+            let pistabutton = document.getElementById("pistabutton");
+            pistabutton.disabled = true;
+            pistabutton.classList.add("btn-diac-disabled");
+        }
+
+        function show_cluetype(){
+            let cluetype_div = $("[data-cluetype]")
+            if(!cluetype_div){
+                return;
+            }
+            let cluetype = cluetype_div.data('cluetype');
+            console.log("Clue type is:", cluetype);
+            if(cluetype){
+                $("#cluetype").html(cluetype);
+                $("#cluetype-card").show();
             }
         }
 
@@ -415,9 +435,11 @@
     </div>
 
     <div class="diac-under-ui mt-3 text-center">
-        <button id="pistabutton" class="btn btn-diac mb-1 alt-outline" onclick="request_pista();">Pista</button>
+        <button id="pistabutton" class="btn btn-diac mb-1 alt-outline {{'btn-diac-disabled' if 'd' in pistes else ''}}" onclick="request_pista();" {{'disabled' if 'd' in pistes else ''}}>Ajuda</button>
         <button id="lletrabutton" class="btn btn-diac mb-1 alt-outline" onclick="request_lletra();">Lletra</button>
         <button id="comprobutton" class="btn btn-diac btn-diac-disabled mb-1 alt-outline" onclick="comprova();" disabled>Resolent...</button>
+
+        <div id="cluetype-card" class="cluetype-card mx-auto mt-4">Estàs fent una pista de tipus <b><span id="cluetype"></span></b>.</div>
     </div>
 
     <div class="kb-div pt-3 pb-2">

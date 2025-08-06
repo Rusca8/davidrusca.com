@@ -118,6 +118,20 @@
 .eh-hid {
     text-decoration: underline;
 }
+.eh-uind, .eh-ures, .eh-umat {
+    text-decoration: underline;
+    text-decoration-thickness: 0.25rem;
+    text-underline-offset: 0.22rem;
+}
+.eh-uind {
+    text-decoration-color: #f7e1b2; /* TODO: pick from globals */
+}
+.eh-ures {
+    text-decoration-color: #d0f0b9;
+}
+.eh-umat {
+    text-decoration-color: #f5c4c4;
+}
 
 .index-enc-example {
     border: 1px dashed rgba(120, 100, 80);
