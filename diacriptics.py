@@ -16,6 +16,13 @@ default_clue = {
     }
 
 
+clue_types = {
+    "&lit": "literal",
+    "rebus": "jeroglífic",
+    "semi&lit": "semi-literal",
+}
+
+
 clues_file = "./hidden/diacriptics/clues.json"
 
 
@@ -30,7 +37,7 @@ def get_tags():
 
 def get_cluetype(clue_id):
     tags = CrypticClue.get_tags(clue_id)
-    return [t for t in tags if t in ["rebus", "&lit", "semi&lit"]]
+    return [clue_types[t] for t in tags if t in clue_types]
 
 
 def add_tag(clue_id, tag):

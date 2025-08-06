@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@22,300,0,0&icon_names=backspace" />
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/encreuats.css">
-    <link rel="stylesheet" href="/static/styles/diacriptics.css">
+    <link rel="stylesheet" href="/static/styles/encreuats.css?date=2025-08-06">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css?date=2025-08-06">
 
     <!-- My JS modules -->
     <script src="/static/js/diacriptics.js"></script>
@@ -432,14 +432,15 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div id="cluetype-card" class="cluetype-card text-center mx-auto mt-2 px-4">Aquesta pista és de tipus <b><span id="cluetype"></span></b></div>
     </div>
+
 
     <div class="diac-under-ui mt-3 text-center">
         <button id="pistabutton" class="btn btn-diac mb-1 alt-outline {{'btn-diac-disabled' if 'd' in pistes else ''}}" onclick="request_pista();" {{'disabled' if 'd' in pistes else ''}}>Ajuda</button>
         <button id="lletrabutton" class="btn btn-diac mb-1 alt-outline" onclick="request_lletra();">Lletra</button>
         <button id="comprobutton" class="btn btn-diac btn-diac-disabled mb-1 alt-outline" onclick="comprova();" disabled>Resolent...</button>
-
-        <div id="cluetype-card" class="cluetype-card mx-auto mt-4">Estàs fent una pista de tipus <b><span id="cluetype"></span></b>.</div>
     </div>
 
     <div class="kb-div pt-3 pb-2">

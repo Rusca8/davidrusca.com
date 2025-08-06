@@ -305,11 +305,11 @@ button.border-c {
 
 .cluetype-card {
     background: white;
-    border: 1px solid var(--color-d-ind);
-    width: 24.5rem;
+    border: 1px solid var(--color-d-wop);
+    width: fit-content;
     border-radius: 0.25rem;
     font-size: 0.8rem;
-    height: 2rem;
-    line-height: 1.9rem;
+    height: 1.5rem;
+    line-height: 1.35rem;
     display: none;
 }
