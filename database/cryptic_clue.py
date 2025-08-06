@@ -9,6 +9,7 @@ class CrypticClue:
         "e": {"description": "Esperant que arribi el moment", "icon": "⏳"},
         "w": {"description": "Work In Progress", "icon": "🚧"},
         "d": {"description": "Descartada", "icon": "❌"},
+        "dobledef": {"description": "Pista dobledef", "icon": "👥"},
         "rebus": {"description": "Pista rebus", "icon": "🙃"},
         "semi&lit": {"description": "Pista semi&lit", "icon": "❗️"},
         "&lit": {"description": "Pista &lit", "icon": "⁉️"},

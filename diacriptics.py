@@ -20,6 +20,7 @@ clue_types = {
     "&lit": "literal",
     "rebus": "jeroglífic",
     "semi&lit": "semi-literal",
+    "dobledef": "doble definició",
 }
 
 
