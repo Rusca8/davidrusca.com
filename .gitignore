@@ -17,6 +17,7 @@
 
 #altres
 *.apkg
+*.ai
 
 #fitxers en concret
 secretos.py
