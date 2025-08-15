@@ -34,6 +34,7 @@ GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configura
 app = Flask(__name__)
 
 # TRANSLATIONS config
+app.config['LANGUAGES'] = {'es': 'Español', 'ca': 'Català'}
 app.config['BABEL_DEFAULT_LOCALE'] = 'es'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = './translations'  # sense això pythonAnywhere es fa un embolic
 babel = Babel(app)
@@ -76,7 +77,22 @@ def load_user(user_id):
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(['es', 'ca'])
+    """get default or manually chosen language (from https://stackoverflow.com/a/42396494)"""
+    # if the user has set up the language manually it will be stored in the session,
+    # so we use the locale from the user settings
+    try:
+        language = session['lang']
+    except KeyError:
+        language = None
+    if language is not None:
+        return language
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
+
+@app.route('/lang/<lang>')
+def set_language(lang=None):
+    session['lang'] = lang
+    return lang
 
 
 @app.before_request
@@ -95,6 +111,8 @@ def add_global_variables():
     global_vars = {}
     if current_user.is_authenticated:
         global_vars["current_user"] = current_user
+    global_vars["current_lang"] = session.get('lang',
+                                              request.accept_languages.best_match(app.config['LANGUAGES'].keys()))
     return global_vars
 
 

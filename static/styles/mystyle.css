@@ -120,3 +120,41 @@ canvas {
     color: black;
     text-decoration: none;
 }
+
+.drop {
+    background-color: #574a36;
+    border-color: black;
+    position:absolute;
+    top: 2.6rem;
+    right: -0.2rem;
+    min-width: 0;
+}
+
+.drop.show {
+    /* worked first try */
+    position:absolute;
+}
+
+.drop-i {
+    color: #e3ddd3;
+}
+
+.drop-i:hover {
+    background-color: #e3ddd3;
+    color: #574a36;
+}
+
+.lang-icon {
+    position: relative;
+    top: 0.3rem;
+}
+
+.lang-text {
+    position: relative;
+    top: -0.1rem;
+}
+
+.lang-arrow {
+    position: relative;
+    top: -0.1rem;
+}
