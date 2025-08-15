@@ -1,19 +1,143 @@
 {% extends "base.html" %}
-{% block title %}{{ _('Juegos de Mesa') }} - David Ruscalleda{% endblock %}
+{% block title %}{{ _('Juegos') }} - David Ruscalleda{% endblock %}
 {% block navjuegos %}active{% endblock %}
 {% block content %}
-<h3 class="mt-3 text-center">{{ _('Juegos de Mesa') }} </h3>
-<p class="text-center">{{ _('Diseños propios y Recursos para juegos existentes.') }} </p>
+<h3 class="mt-3 text-center">{{ _('Juegos digitales y de mesa') }} </h3>
+<p class="text-center">{{ _('Diseños propios y recursos para juegos existentes.') }} </p>
+
+    <div class="card bg-light border-c mt-2 mb-2 mx-2">
+        <h5 class="card-header py-1 text-center">{{ _('Índice') }}</h5>
+        <div class="card-body py-2 pr-2">
+            <div class="container-fluid pl-0">
+                <div class="row">
+                    <div class="col pr-0 pl-1">
+                        <div class="card border-c pr-2 pl-3 pt-2 mb-1 min-w-index">
+                        <ul class="list-unstyled">
+                            <li><a href="#digi">{{ _('Juegos digitales') }}</a>
+                                <ul>
+                                    <li><a href="#lengua">✏️ {{ _('Juegos de Lengua') }}</a></li>
+                                    <li><a href="#mates">🔢 {{ _('Juegos de Mates') }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="col pr-0 pl-1">
+                        <div class="card border-c pr-3 pl-3 pt-2 mb-1 min-w-index">
+                        <ul class="list-unstyled">
+                            <li><a href="#bgdesign">{{ _('Diseños de juegos de mesa') }}</a>
+                                <ul>
+                                    <li><a href="#protos">🚧 {{ _('Prototipos') }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="col pr-0 pl-1">
+                        <div class="card border-c pr-3 pl-3 pt-2 mb-1 min-w-index">
+                        <ul class="list-unstyled">
+                            <li><a href="#bgrec">{{ _('Recursos para juegos de mesa') }}</a>
+                                <ul>
+                                    <li><a href="#DnD5e">⚔️ {{ _('Dragones y Mazmorras (5ª Edición)') }}</a></li>
+                                    <li><a href="#terraforming">🌏 Terraforming Mars</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+<div class="card border-c bg-light mb-2 mx-2"><b id="digi"></b>
+    <h5 class="card-header">{{ _('Juegos digitales') }}</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="lengua"></b>
+        <div class="card-body">
+            <h5 class="card-title"><span class="mr-2">✏️</span> {{ _('Juegos de Lengua') }}</h5>
+            <hr>
+
+    <div class="card-columns">
+
+            <div class="card border-c mx-2 my-2"><b id="Diacríptic"></b>
+                <img class="card-img-top" src="/static/img/juegos/diacriptic.png" alt="Thumbnail Diacriptic">
+                <div class="card-body">
+                    <h5 class="card-title">Diacríptic [CA]</h5>
+                        Desxifra cada dia una pista de mots encreuats críptics. <br><br>
+                        <i>Inclou un tutorial detallat i ple d'exemples, un arxiu amb tots els reptes dels dies anteriors, i totes les resolucions dels diaris es poden veure explicades.</i>
+                    <br><br>
+                    <a href="/diacriptic" class="btn btn-outline-primary btn-sm btn-block" role="button">Juga a la web</a>
+                </div>
+            </div>
+
+            <div class="card border-c mx-2 my-2"><b id="Catagrama"></b>
+                <img class="card-img-top" src="/static/img/juegos/catagrama.png" alt="Thumbnail Catagrama">
+                <div class="card-body">
+                    <h5 class="card-title">Catagrama [CA]</h5>
+                        Desxifra cada dia un criptograma en català.
+                        <br><br>
+                        <i>Inclou un tutorial i un arxiu amb totes les frases dels dies anteriors.</i>
+                    <br><br>
+                    <a href="/catagrama" class="btn btn-outline-primary btn-sm btn-block" role="button">Juga a la web</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.rusca8.catagrama&hl=ca" class="btn btn-outline-success btn-sm btn-block" role="button">Descarrega l'app d'Android</a>
+                </div>
+            </div>
+
+        <div class="card border-c mx-2 my-2"><b id="Encreuats"></b>
+                <img class="card-img-top" src="/static/img/juegos/encreuats.png" alt="Thumbnail Encreuats">
+                <div class="card-body">
+                    <h5 class="card-title">Encreuats críptics [CA]</h5>
+                        Desxifra mots encreuats críptics sencers.
+                        <br><br>
+                        <i>Si t'agrada el Diacríptic i vols posar a prova el que hi has après, aquí hi ha alguns mots encreuats críptics que he anat creant.</i>
+                    <br><br>
+                    <a href="/encreuats" class="btn btn-outline-primary btn-sm btn-block" role="button">Juga a la web</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="mates"></b>
+        <div class="card-body">
+            <h5 class="card-title"><span class="mr-2">🔢</span> {{ _('Juegos de Mates') }}</h5>
+            <hr>
+
+    <div class="card-columns">
+
+            <div class="card border-c mx-2 my-2"><b id="primes"></b>
+                <img class="card-img-top" src="/static/img/juegos/primes.png" alt="Thumbnail Primes">
+                <div class="card-body">
+                    <h5 class="card-title">Primes!</h5>
+                        {{ _("Calcula rápido los factores primeros de los números que aparecen para intentar vaciar la pantalla tan rápido como puedas.") }} <br><br>
+                    <a href="https://play.google.com/store/apps/details?id=com.rusca8.primes.android" class="btn btn-outline-success btn-sm btn-block" role="button">Descarrega l'app d'Android</a>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+</div>
+
 
 <div class="card border-c bg-light mb-2 mx-2"><b id="Diseños"></b>
-    <h5 class="card-header">{{ _('Diseños propios') }}</h5>
+    <h5 class="card-header">{{ _('Diseños de juegos de mesa') }}</h5>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="protos"></b>
+        <div class="card-body">
+            <h5 class="card-title"><span class="mr-2">🚧</span> {{ _('Prototipos') }}</h5>
+            <hr>
+
     <div class="card-columns">
 
             <div class="card border-c mx-2 my-2"><b id="Impedimentos"></b>
                 <img class="card-img-top" src="/static/img/bg/impedimentos.png" alt="Thumbnail Impedimentos">
                 <div class="card-body">
                     <h5 class="card-title">Impedimentos</h5>
-                        Los jugadores tendrán que moverse a través de un laberinto cambiante para intentar conseguir sus cuatro cubitos antes que los demás.
+                        {{ _("Los jugadores tendrán que moverse a través de un laberinto cambiante para intentar conseguir sus cuatro cubitos antes que los demás.") }}
                     <br><br>
                     <a href="/static/pdf/bg/ss_impedimentos.pdf" class="btn btn-outline-primary btn-sm btn-block" role="button">Hoja de Ventas</a>
                 </div>
@@ -23,24 +147,24 @@
                 <img class="card-img-top" src="/static/img/bg/matriculados.png" alt="Thumbnail Matriculados">
                 <div class="card-body">
                     <h5 class="card-title">Matriculados</h5>
-                        Juego de agilidad mental y memoria donde los jugadores tendrán que ser los más rápidos sumando matrículas y recordando dónde están las parecidas.<br>
+                        {{ _("Juego de agilidad mental y memoria donde los jugadores tendrán que ser los más rápidos sumando matrículas y recordando dónde están las parecidas.") }}<br>
                         <br>
-                        <i>Pensado para trabajar la regla de divisibilidad del 3 y un poco de mnemotecnia en las escuelas.</i>
+                        <i>{{ _("Pensado para trabajar la regla de divisibilidad del 3 y un poco de mnemotecnia en las escuelas.") }}</i>
                     <br><br>
                     <a href="/static/pdf/bg/ss_matriculados.pdf" class="btn btn-outline-primary btn-sm btn-block" role="button">Hoja de Ventas</a>
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
 </div>
 
 <div class="card border-c bg-light mb-2 mx-2"><b id="Recursos"></b>
-    <h5 class="card-header">{{ _('Recursos para juegos existentes') }}</h5>
+    <h5 class="card-header">{{ _('Recursos para juegos de mesa') }}</h5>
 
     <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="DnD5e"></b>
         <div class="card-body">
-            <h5 class="card-title">{{ _('Dragones y Mazmorras (5ª Edición)') }}</h5>
+            <h5 class="card-title"><span class="mr-2">⚔️</span> {{ _('Dragones y Mazmorras (5ª Edición)') }}</h5>
             <hr>
 
             <div class="card-columns">
@@ -84,15 +208,43 @@
                 </div>
             </div>
 
+            <div class="card border-c mx-2 my-2"><b id="OtrosDnD5e"></b>
+                <img class="card-img-top" src="/static/img/bg/dnd_otros.png" alt="Thumbnail Otros Recursos">
+                <div class="card-body">
+                    <h5 class="card-title">{{ _('Otros Recursos') }}</h5>
+                    <ul>
+                        <li><a href="/static/pdf/subclases.pdf" target="_blank">DnD 5e - {{ _('Diagrama de Todas las Subclases') }} [ES]</a></li>
+                        <li><a href="/static/pdf/tablamagiasalvaje.pdf" target="_blank">DnD 5e - {{ _('Tabla d100 de magia salvaje') }} [ES]</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
-
-                <hr>
-                <b>{{ _('Otros recursos') }}:</b>
-                <ul>
-                    <li><a href="/static/pdf/subclases.pdf" target="_blank">DnD 5e - {{ _('Diagrama de Todas las Subclases') }} [ES]</a></li>
-                </ul>
             </div>
         </div>
+
+    <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="terraforming"></b>
+        <div class="card-body">
+            <h5 class="card-title"><span class="mr-2">🌏</span> Terraforming Mars</h5>
+            <hr>
+
+    <div class="card-columns">
+
+            <div class="card border-c mx-2 my-2"><b id="laser_terraforming"></b>
+                <img class="card-img-top" src="/static/img/juegos/laser_terraforming.png" alt="Thumbnail Làser Terraforming">
+                <div class="card-body">
+                    <h5 class="card-title">{{ _("Bandeja de jugador de madera") }}</h5>
+                        {{ _("Archivo digital para crear una bandeja de jugador de doble capa con la cortadora láser.") }}
+                    <br><br>
+                    <i>{{ _("El archivo incluye la parte de los grabados y el trazo del corte en capas separadas. Las dos capas de madera están colocadas de lado para grabarlas y cortarlas simultáneamente.") }}</i>
+                    <br><br>
+                    <a href="/static/pdf/bg/terraforming_laser.ai" class="btn btn-outline-primary btn-sm btn-block" role="button">{{ _("Archivo de Illustrator") }}</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}

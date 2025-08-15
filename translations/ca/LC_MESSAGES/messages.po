@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-20 14:19+0200\n"
+"POT-Creation-Date: 2025-08-15 18:01+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -243,7 +243,7 @@ msgid "Barajas"
 msgstr "Baralles"
 
 #: templates/anki.html:70 templates/ankicode.html:12 templates/docentes.html:11
-#: templates/music.html:11
+#: templates/juegos.html:9 templates/music.html:11
 msgid "Índice"
 msgstr "Índex"
 
@@ -2054,6 +2054,10 @@ msgid "Docentes"
 msgstr "Docents"
 
 #: templates/base.html:58
+msgid "juegos"
+msgstr "jocs"
+
+#: templates/base.html:58 templates/juegos.html:2
 msgid "Juegos"
 msgstr "Jocs"
 
@@ -2220,6 +2224,7 @@ msgid "Programación"
 msgstr "Programació"
 
 #: templates/docentes.html:102 templates/docentes.html:490
+#: templates/juegos.html:18 templates/juegos.html:59
 msgid "Juegos de Lengua"
 msgstr "Jocs de Llengua"
 
@@ -2697,7 +2702,7 @@ msgstr "Cartell per l'extraescolar d'Antaviana"
 msgid "Logotipos"
 msgstr "Logotips"
 
-#: templates/index.html:212 templates/juegos.html:2 templates/juegos.html:5
+#: templates/index.html:212
 msgid "Juegos de Mesa"
 msgstr "Jocs de Taula"
 
@@ -2717,7 +2722,7 @@ msgstr "Cartes d'encanteris de DnD 5e"
 msgid "Diseño:"
 msgstr "Disseny:"
 
-#: templates/index.html:221 templates/juegos.html:9
+#: templates/index.html:221
 msgid "Diseños propios"
 msgstr "Dissenys propis"
 
@@ -2781,73 +2786,148 @@ msgstr "Recopilatori de trucs:"
 msgid "Edit con los trucos de"
 msgstr "Edit amb els trucs de"
 
+#: templates/juegos.html:5
+msgid "Juegos digitales y de mesa"
+msgstr "Jocs digitals i de taula"
+
 #: templates/juegos.html:6
-msgid "Diseños propios y Recursos para juegos existentes."
-msgstr "Dissenys propis i Recursos per a jocs existents."
+msgid "Diseños propios y recursos para juegos existentes."
+msgstr "Dissenys propis i recursos per a jocs existents."
 
-#: templates/juegos.html:39
-msgid "Recursos para juegos existentes"
-msgstr "Recursos per a jocs existents"
+#: templates/juegos.html:16 templates/juegos.html:55
+msgid "Juegos digitales"
+msgstr "Jocs digitals"
 
-#: templates/juegos.html:43
+#: templates/juegos.html:19 templates/juegos.html:105
+msgid "Juegos de Mates"
+msgstr "Jocs de Mates"
+
+#: templates/juegos.html:28 templates/juegos.html:127
+msgid "Diseños de juegos de mesa"
+msgstr "Dissenys de jocs de taula"
+
+#: templates/juegos.html:30 templates/juegos.html:131
+msgid "Prototipos"
+msgstr "Prototips"
+
+#: templates/juegos.html:39 templates/juegos.html:163
+msgid "Recursos para juegos de mesa"
+msgstr "Recursos per a jocs de taula"
+
+#: templates/juegos.html:41 templates/juegos.html:167
 msgid "Dragones y Mazmorras (5ª Edición)"
 msgstr ""
 
-#: templates/juegos.html:52
+#: templates/juegos.html:114
+msgid ""
+"Calcula rápido los factores primeros de los números que aparecen para "
+"intentar vaciar la pantalla tan rápido como puedas."
+msgstr ""
+"Calcula ràpid els factors primers dels números que apareixen per intentar buidar la pantalla tan ràpid com puguis."
+
+#: templates/juegos.html:140
+msgid ""
+"Los jugadores tendrán que moverse a través de un laberinto cambiante para"
+" intentar conseguir sus cuatro cubitos antes que los demás."
+msgstr ""
+"Els jugadors hauran de moure's a través d'un laberint canviant per intentar aconseguir els seus quatre cubs abans que els altres."
+
+#: templates/juegos.html:150
+msgid ""
+"Juego de agilidad mental y memoria donde los jugadores tendrán que ser "
+"los más rápidos sumando matrículas y recordando dónde están las "
+"parecidas."
+msgstr ""
+"Joc d'agilitat mental i memòria on els jugadors hauran de ser el més ràpids sumant matrícules i recordant on són les semblants."
+
+#: templates/juegos.html:152
+msgid ""
+"Pensado para trabajar la regla de divisibilidad del 3 y un poco de "
+"mnemotecnia en las escuelas."
+msgstr ""
+"Pensat per a treballar la regla de divisibiliatat del 3 i una mica de mnemotècnia a les escoles."
+
+#: templates/juegos.html:176
 msgid "Listas Resumen de Conjuros"
 msgstr "Llistes Resum d'Encanteris"
 
-#: templates/juegos.html:54 templates/juegos.html:73
+#: templates/juegos.html:178 templates/juegos.html:197
 msgid "Todos los Conjuros"
 msgstr "Tots els Encanteris"
 
-#: templates/juegos.html:55 templates/juegos.html:74
+#: templates/juegos.html:179 templates/juegos.html:198
 msgid "Conjuros de Artificiero"
 msgstr "Encanteris de l'Artificier"
 
-#: templates/juegos.html:56 templates/juegos.html:75
+#: templates/juegos.html:180 templates/juegos.html:199
 msgid "Conjuros de Bardo"
 msgstr "Encanteris del Bard"
 
-#: templates/juegos.html:57 templates/juegos.html:76
+#: templates/juegos.html:181 templates/juegos.html:200
 msgid "Conjuros de Brujo"
 msgstr "Encanteris del Bruixot"
 
-#: templates/juegos.html:58 templates/juegos.html:77
+#: templates/juegos.html:182 templates/juegos.html:201
 msgid "Conjuros de Clérigo"
 msgstr "Encanteris del Clergue"
 
-#: templates/juegos.html:59 templates/juegos.html:78
+#: templates/juegos.html:183 templates/juegos.html:202
 msgid "Conjuros de Druida"
 msgstr "Encanteris del Druida"
 
-#: templates/juegos.html:60 templates/juegos.html:79
+#: templates/juegos.html:184 templates/juegos.html:203
 msgid "Conjuros de Explorador"
 msgstr "Encanteris de l'Explorador"
 
-#: templates/juegos.html:61 templates/juegos.html:80
+#: templates/juegos.html:185 templates/juegos.html:204
 msgid "Conjuros de Hechicero"
 msgstr "Encanteris del Fetiller"
 
-#: templates/juegos.html:62 templates/juegos.html:81
+#: templates/juegos.html:186 templates/juegos.html:205
 msgid "Conjuros de Mago"
 msgstr "Encanteris del Mag"
 
-#: templates/juegos.html:63 templates/juegos.html:82
+#: templates/juegos.html:187 templates/juegos.html:206
 msgid "Conjuros de Paladin"
 msgstr "Encanteris del Paladí"
 
-#: templates/juegos.html:71
+#: templates/juegos.html:195
 msgid "Cartas de Conjuros"
 msgstr "Cartes d'Encanteris"
 
-#: templates/juegos.html:91
-msgid "Otros recursos"
-msgstr "Altres recursos"
+#: templates/juegos.html:214
+msgid "Otros Recursos"
+msgstr "Altres Recursos"
 
-#: templates/juegos.html:93
+#: templates/juegos.html:216
 msgid "Diagrama de Todas las Subclases"
 msgstr "Diagrama de Totes les Subclasses"
+
+#: templates/juegos.html:217
+msgid "Tabla d100 de magia salvaje"
+msgstr "Taula d100 de magia salvatge"
+
+#: templates/juegos.html:237
+msgid "Bandeja de jugador de madera"
+msgstr "Safata de jugador de fusta"
+
+#: templates/juegos.html:238
+msgid ""
+"Archivo digital para crear una bandeja de jugador de doble capa con la "
+"cortadora láser."
+msgstr "Fitxer digital per a crear una safata de jugador de doble capa amb la talladora làser."
+
+#: templates/juegos.html:240
+msgid ""
+"El archivo incluye la parte de los grabados y el trazo del corte en capas"
+" separadas. Las dos capas de madera están colocadas de lado para "
+"grabarlas y cortarlas simultáneamente."
+msgstr ""
+"El fitxer inclou la part del gravat i la part del tall a capes separades. Les dues capes de fusta estan col·locades de costat per a gravar-les i tallar-les simultàniament."
+
+#: templates/juegos.html:242
+msgid "Archivo de Illustrator"
+msgstr "Fitxer d'Illustrator"
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 msgid "Laboratorio"
@@ -3016,17 +3096,16 @@ msgid "Cuarteto a Cinco en Sib M"
 msgstr "Quartet a Cinc en Sib M"
 
 #: templates/music.html:86 templates/music.html:290
-#, fuzzy
-msgid "Desembre"
-msgstr "Setembre"
+msgid "Diciembre"
+msgstr "Desembre"
 
 #: templates/music.html:86 templates/music.html:290
-msgid "Març"
-msgstr "Marzo"
+msgid "Marzo"
+msgstr "Març"
 
 #: templates/music.html:94 templates/music.html:306
-msgid "Juliol"
-msgstr "Julio"
+msgid "Julio"
+msgstr "Juliol"
 
 #: templates/music.html:112
 msgid "Dúos cortos para dos flautas"

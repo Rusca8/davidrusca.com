@@ -292,10 +292,16 @@ def wrapped_history():
     return render_template("wrapped.html", wrap=wrap())
 
 
-
 @app.route('/bg')
 @app.route('/bg/')
 def bg():
+    # DEPRECATED URL -> redirect to ./juegos/ (browser will handle old anchors properly)
+    return redirect(url_for("juegos")), 301
+
+
+@app.route('/jocs/')
+@app.route('/juegos/')
+def juegos():
     return render_template("juegos.html")
 
 
@@ -637,7 +643,7 @@ def diacriptic(date=None):
         known_letters = [i for i, h in enumerate(help_mask) if h == "1"]
         return render_template("/encreuats/diacriptic.html", clue=clue,
                                help_used=help_dots, help_mask=help_mask, pistes=pistes, known_letters=known_letters,
-                               solved=solved, cluetype=cluetype)
+                               solved=solved, cluetype=cluetype, date=date)
 
 
 @app.route('/diacriptic/ajax/<query>', methods=["GET", "POST"])
