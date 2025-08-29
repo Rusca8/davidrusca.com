@@ -986,8 +986,17 @@ def embed(page=None):
 
 @app.route('/carreres')
 def carreres():
-    cs = utilities.load_json('./static/json/carreres/carreres.json')
-    return render_template('carreres.html', carreres=cs)
+    import carreres as cs
+    carreres_info = cs.load()
+    stats = {"total": 0, "short": 0, "long": 0}
+    for carrera in carreres_info.values():
+        stats["total"] += 1
+        if carrera.get("resum", ""):
+            stats["short"] += 1
+            if carrera.get("desc", ""):
+                stats["long"] += 1
+    print(stats)
+    return render_template('carreres.html', carreres=carreres_info, stats=stats)
 
 
 @app.route('/notion/data')

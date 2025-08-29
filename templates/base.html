@@ -84,7 +84,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle align-middle p-0 lang-arrow" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
               <span class="lang-text">
-                {{current_lang|upper}}
+                {{current_lang|upper if current_lang else 'ES'}} {# avoiding a NONE here? #}
               </span>
               <span class="material-symbols-outlined lang-icon">
               language

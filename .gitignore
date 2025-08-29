@@ -18,6 +18,7 @@
 #altres
 *.apkg
 *.ai
+*.csv
 
 #fitxers en concret
 secretos.py

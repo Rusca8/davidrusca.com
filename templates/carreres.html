@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="/static/styles/carreres.css">
 {% endblock %}
 
-{% set picons={"B": "🌼", "F": "🧲", "Q": "🧪", "GCA": "🌍", "M": "🔢", "CG": "🔬", "MCS": "📈", "DT": "📐", "T": "⚙️", "D": "🪑", "DA": "🎨", "DTA": "📏", "TEG": "✏️", "EdE": "💵"} %}
-{% set pnames={"B": "Biologia", "F": "Física", "Q": "Química", "GCA": "Geologia i Ciències Ambientals", "MCS": "Matemàtiques CCSS", "DT": "Dibuix Tècnic", "T": "Tecnologia", "EdE": "Funcionament de l'Empresa", "M": "Matemàtiques", "CG": "Ciències Generals", "D": "Disseny", "DA": "Dibuix Artístic", "DTA": "Dibuix Tècnic Aplicat", "TEG": "Tècniques d'Expressió Gràfica"} %}
+{% set picons={"AM": "🎼", "AE": "🎭", "B": "🌼", "CG": "🔬", "CTV": "🎤", "DA": "🎨", "DT": "📐", "DTA": "📏", "D": "🪑", "F": "🧲", "FA": "🏛️", "EdE": "💵", "G": "🗺️", "GCA": "🌍", "HMD": "🪇", "HA": "🖼️", "LCAS": "📙", "LCAT": "📕", "LD": "📖", "LCG": "🏺", "LCL": "📜", "M": "🔢", "MCS": "📈", "MCA": "🌀", "Q": "🧪", "TEG": "✏️", "T": "⚙️"} %}
+{% set pnames={"AM":"Anàlisi Musical", "AE": "Arts Escèniques", "B": "Biologia", "CG": "Ciències Generals", "CTV": "Cor i Tècnica vocal", "DA": "Dibuix Artístic", "DT": "Dibuix Tècnic", "DTA": "Dibuix Tècnic Aplicat", "D": "Disseny", "F": "Física", "FA": "Fonaments Artístics", "EdE": "Funcionament de l'Empresa", "G": "Geografia", "GCA": "Geologia i Ciències Ambientals", "HMD": "Història de la Música i la Dansa", "HA": "Història de l'Art", "LCAS": "Literatura Castellana", "LCAT": "Literatura Catalana", "LD": "Literatura Dramàtica", "LCG": "Grec", "LCL": "Llatí", "M": "Matemàtiques", "MCS": "Matemàtiques CCSS", "MCA": "Moviments Culturals i Artístics", "Q": "Química", "TEG": "Tècniques d'Expressió Gràfica", "T": "Tecnologia"} %}
 
 {% block content %}
 <h3 class="h3 mt-3 text-center">Carreres que existeixen</h3>
@@ -25,15 +25,14 @@
         {% if "ponderacions" in dades %}
           {% set any, ponds = (dades.ponderacions.items()|sort)[-1] %}
           {% set p2, p1 = ponds %}
-          {% set p2 = p2.split() %}
-          {% set p1 = p1.split() %}
-          {% set bat = 'T' if 'T' in p2 else 'B' if "B" in p2 else 'T' if 'DT' in p2 else '?' %}
+          {% set bat = dades.bat %}
+          {% set branca = dades.branca %}
           {% if p1 or p2 %}
-          <td class="cell-ponds pond-{{bat}}">
+          <td class="cell-ponds pond-{{bat}} branca-{{branca}}">
             {% for p in p2|sort %}
               <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
             {% endfor %}
-            {{'·' if p1 else ''}}
+            {{' · ' if p1 else ''}}
             {% for p in p1|sort %}
               <span class="picon-{{p}} pond1" title="{{pnames.get(p, p)}} pondera 0.1">{{picons.get(p, p)}}</span>
             {% endfor %}
@@ -50,12 +49,16 @@
   </div>
 </div>
 
+  <div class="small text-center mb-2 text-danger">
+  WIP... ({{stats.long}}/{{stats.short}}/{{stats.total}})
+  </div>
+
 <div class="container-fluid">
   <div class="row mx-2">
     {% for c_id, dades in carreres.items()|sort(attribute="1.nom") %}
     <div class="col-xl-2 col-lg-3 col-md-4 col-6 p-1">
       <div class="card text-center border-c" id="c-{{c_id}}">
-        {% if "resum" in dades and dades.resum %}
+        {% if ("resum" in dades and dades.resum) or "ponderacions" in dades %}
         <!-- FULL FLEDGED -->
         <h6 class="card-header card-header-c px-2 pt-2 pb-1" onclick="toggle_select({{c_id}});">{{dades.nom}}</h6>
         <div class="card-body p-0">
@@ -63,15 +66,14 @@
           {% if "ponderacions" in dades %}
             {% set any, ponds = (dades.ponderacions.items()|sort)[-1] %}
             {% set p2, p1 = ponds %}
-            {% set p2 = p2.split() %}
-            {% set p1 = p1.split() %}
-            {% set bat = 'T' if 'T' in p2 else 'B' if "B" in p2 else 'T' if 'DT' in p2 else '?' %}
+            {% set bat = dades.bat %}
+            {% set branca = dades.branca %}
           {% if p1 or p2 %}
-          <div class="ponderacions pond-{{bat}}">
+          <div class="ponderacions pond-{{bat}} branca-{{branca}} px-2">
             {% for p in p2|sort %}
               <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
             {% endfor %}
-            {{'·' if p1 else ''}}
+            {{' · ' if p1 else ''}}
             {% for p in p1|sort %}
               <span class="picon-{{p}} pond1" title="{{pnames.get(p, p)}} pondera 0.1">{{picons.get(p, p)}}</span>
             {% endfor %}

@@ -20,7 +20,7 @@
 
 .ponderacions {
     border-top: 1px solid var(--color-border);
-    background: #cccccc;
+    background: #dddddd;
 }
 
 .resum {
@@ -34,15 +34,48 @@
     width: 30rem;
 }
 
+
 .pond-B {
     background: #ddeed6;
 }
 .pond-T {
     background: #ddedee;
 }
+.pond-E {
+    background: #fce3f9;
+}
+.pond-S {
+    background: #e5e3fc;
+}
+.pond-H {
+    background: #ffdad6;
+}
+.pond-A {
+    background: #f5efc9;
+}
+.pond-AE {
+    background: #f5e6c9;
+}
 .pond-None {
     background: #dddddd;
 }
+
+/* // no em convenç
+.branca-AH {
+    background: #f5efc9;
+}
+.branca-C {
+    background: #ddeed6;
+}
+.branca-CS{
+    background: #fce3f9;
+}
+.branca-CSJ{
+    background: #fce3e3;
+}
+.branca-EA{
+    background: #ddedee;
+}*/
 
 .pond1 {
     font-size: 0.7rem;
