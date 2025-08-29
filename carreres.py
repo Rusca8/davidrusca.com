@@ -30,12 +30,12 @@ def get_bat(carrera):
         return "H"
     if "CG" in p2:
         return "B"
-    if "MCS" in p2:
-        return "S"
     if any(x in p2 for x in ["LCG", "LCL"]):
         return "H"
     if any(x in p2 for x in ["F", "B"]):
         return "B"
+    if "MCS" in p2:
+        return "S"
     return "?"
 
 
