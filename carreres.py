@@ -7,8 +7,8 @@ def load():
     ponds = utilities.load_json('./static/json/carreres/ponderacions.json')
     for id_, carrera in cs.items():
         print(carrera.get("nom", "GUAT"), get_bat(carrera))
-        cs[id_]["ponderacions"]["2025"] = ponds[id_]["pond"]
-        cs[id_]["branca"] = ponds[id_]["branca"]
+        cs[id_]["ponderacions"]["2025"] = ponds.get(id_, {}).get("pond", [[], []])
+        cs[id_]["branca"] = ponds.get(id_, {}).get("branca", "")
         cs[id_]["bat"] = get_bat(carrera)
     return cs
 
