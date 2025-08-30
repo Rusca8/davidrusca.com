@@ -38,10 +38,10 @@
             {% endfor %}
           </td>
           {% else %}
-          <td class="cell-ponds">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</td>
+          <td class="cell-ponds">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
           {% endif %}
         {% else %}
-        <td class="cell-ponds">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</td>
+        <td class="cell-ponds">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
         {% endif %}
       </tr>
       {% endfor %}
@@ -79,7 +79,7 @@
             {% endfor %}
           </div>
           {% else %}
-          <div class="ponderacions-alt pond-None">{{dades.pond_alt if 'pond_alt' in dades else '?'}}</div>
+          <div class="ponderacions-alt pond-None">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</div>
           {% endif %}
           {% endif %}
           <div class="desc py-1 px-2 small">
