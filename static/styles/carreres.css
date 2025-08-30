@@ -37,24 +37,31 @@
 
 .pond-B {
     background: #ddeed6;
+    border-bottom: 1px solid #9ebf91;
 }
 .pond-T {
     background: #ddedee;
+    border-bottom: 1px solid #84bdc2;
 }
 .pond-E {
     background: #fce3f9;
+    border-bottom: 1px solid #d19bcb;
 }
 .pond-S {
     background: #e5e3fc;
+    border-bottom: 1px solid #9893cc;
 }
 .pond-H {
     background: #ffdad6;
+    border-bottom: 1px solid #cf8c84;
 }
 .pond-A {
     background: #f5efc9;
+    border-bottom: 1px solid #bfb56f;
 }
 .pond-AE {
-    background: #f5e6c9;
+    background: #ffeacc;
+    border-bottom: 1px solid #c4a476;
 }
 .pond-None {
     background: #dddddd;
@@ -82,7 +89,7 @@
 }
 
 .desc {
-    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    /*border-top: 1px solid rgba(0, 0, 0, 0.3);*/
 }
 
 .links {
