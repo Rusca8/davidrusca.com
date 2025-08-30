@@ -24,6 +24,8 @@ def get_bat(carrera):
         return "AE"
     if "DA" in p2:
         return "A"
+    if "B" in p2 and "CG" in p2:
+        return "B"
     if "EdE" in p2:
         return "E"
     if any(x in p2 for x in ["LCAS", "LCAT"]):
