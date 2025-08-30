@@ -92,6 +92,11 @@
     /*border-top: 1px solid rgba(0, 0, 0, 0.3);*/
 }
 
+.tiny-postdesc {
+    font-size: 0.6rem;
+    color: grey;
+}
+
 .links {
     color: darkred;
     border-top: 1px solid rgba(0, 0, 0, 0.2);

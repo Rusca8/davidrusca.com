@@ -2,7 +2,7 @@
 {% block title %} Carreres i Professions {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="/static/styles/carreres.css?date=2025-08-30">
+<link rel="stylesheet" href="/static/styles/carreres.css?date=2025-08-30.2">
 {% endblock %}
 
 {% set picons={"AM": "🎼", "AE": "🎭", "B": "🌼", "CG": "🔬", "CTV": "🎤", "DA": "🎨", "DT": "📐", "DTA": "📏", "D": "🪑", "F": "🧲", "FA": "🏛️", "EdE": "💵", "G": "🗺️", "GCA": "🌍", "HMD": "🪇", "HA": "🖼️", "LCAS": "📙", "LCAT": "📕", "LD": "📖", "LCG": "🏺", "LCL": "📜", "M": "🔢", "MCS": "📈", "MCA": "🌀", "Q": "🧪", "TEG": "✏️", "T": "⚙️"} %}
@@ -85,6 +85,11 @@
           <div class="desc py-1 px-2 small">
             {{dades.desc}}
           </div>
+          {% if 'tiny_postdesc' in dades %}
+          <div class="tiny-postdesc pb-1">
+           {{dades.tiny_postdesc}}
+          </div>
+          {% endif %}
           {% if "study_hall" in dades %}
             <div class="links small py-1 text-left">
               <a href="{{dades.study_hall}}" target="_blank" class="btn btn-sm sh small py-0 ml-2">▶ SH</a>
