@@ -2,17 +2,19 @@
 {% block title %} Carreres i Professions {% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="/static/styles/carreres.css?date=2025-08-30.2">
+<link rel="stylesheet" href="/static/styles/carreres.css?date=2025-09-02">
 {% endblock %}
 
 {% set picons={"AM": "🎼", "AE": "🎭", "B": "🌼", "CG": "🔬", "CTV": "🎤", "DA": "🎨", "DT": "📐", "DTA": "📏", "D": "🪑", "F": "🧲", "FA": "🏛️", "EdE": "💵", "G": "🗺️", "GCA": "🌍", "HMD": "🪇", "HA": "🖼️", "LCAS": "📙", "LCAT": "📕", "LD": "📖", "LCG": "🏺", "LCL": "📜", "M": "🔢", "MCS": "📈", "MCA": "🌀", "Q": "🧪", "TEG": "✏️", "T": "⚙️"} %}
 {% set pnames={"AM": "Anàlisi Musical", "AE": "Arts Escèniques", "B": "Biologia", "CG": "Ciències Generals", "CTV": "Cor i Tècnica vocal", "DA": "Dibuix Artístic", "DT": "Dibuix Tècnic", "DTA": "Dibuix Tècnic Aplicat", "D": "Disseny", "F": "Física", "FA": "Fonaments Artístics", "EdE": "Funcionament de l'Empresa", "G": "Geografia", "GCA": "Geologia i Ciències Ambientals", "HMD": "Història de la Música i la Dansa", "HA": "Història de l'Art", "LCAS": "Literatura Castellana", "LCAT": "Literatura Catalana", "LD": "Literatura Dramàtica", "LCG": "Grec", "LCL": "Llatí", "M": "Matemàtiques", "MCS": "Matemàtiques CCSS", "MCA": "Moviments Culturals i Artístics", "Q": "Química", "TEG": "Tècniques d'Expressió Gràfica", "T": "Tecnologia"} %}
+{% set pbats={"AM": "AE", "AE": "AE", "B": "B", "CG": "B", "CTV": "AE", "DA": "A", "DT": "T", "DTA": "A", "D": "A", "F": "T", "FA": "A", "EdE": "E", "G": "H", "GCA": "B", "HMD": "AE", "HA": "A", "LCAS": "H", "LCAT": "H", "LD": "H", "LCG": "H", "LCL": "H", "M": "B", "MCS": "E", "MCA": "A", "Q": "B", "TEG": "A", "T": "T"} %}
 
 {% block content %}
 <h3 class="h3 mt-3 text-center">Carreres que existeixen</h3>
-<p class="text-center">Última actualització al 2025. Comproveu les ponderacions contra la llista oficial!</p>
+<p class="text-center px-2">Explicades curt amb paraules normals.
+</p>
 
-<div class="card mx-5 p-2 mb-4 text-center" id="summary_card">
+<div class="card mx-4 p-2 mb-4 text-center" id="summary_card">
   <h5>Carreres que t'han interessat</h5>
   <div id="empty_summary" class="small">Selecciona les carreres que t'agradin (clica'n el títol) per agrupar-les aquí.</div>
   <div id="summary" class="hide">
@@ -28,7 +30,7 @@
           {% set bat = dades.bat %}
           {% set branca = dades.branca %}
           {% if p1 or p2 %}
-          <td class="cell-ponds pond-{{bat}} branca-{{branca}}">
+          <td class="cell-ponds pond-{{bat}} branca-{{branca}} px-2">
             {% for p in p2|sort %}
               <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
             {% endfor %}
@@ -38,10 +40,10 @@
             {% endfor %}
           </td>
           {% else %}
-          <td class="cell-ponds">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
+          <td class="cell-ponds px-2">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
           {% endif %}
         {% else %}
-        <td class="cell-ponds">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
+        <td class="cell-ponds px-2">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</td>
         {% endif %}
       </tr>
       {% endfor %}
@@ -49,11 +51,29 @@
   </div>
 </div>
 
+<div class="p-2 mb-0 text-center">
+  <h5 class="h5">Filtra les assignatures</h5>
+  <div class="small mb-3">Escull una o més assignatures per veure quants punts extra pots aconseguir si les fas a la sele.</div>
+    {% for id_, nom in pnames.items() %}
+      <button id="filter-{{id_}}" class="btn btn-small btn-pond btn-pond-{{pbats[id_]}} mb-1 py-0 px-2" onclick="choose('{{id_}}'); filter_chosen();"><span class="mr-1">{{ picons[id_] }}</span> {{nom}}</button>
+    {% endfor %}
+</div>
+
+<div class="small text-center mt-2 mb-3">Última actualització al setembre de 2025. Comprova les ponderacions contra la llista oficial!</div>
+
+{% for i in [4, 3, 2, 1] %}
+<div id="divider-p{{i}}" class="pond-divider alert py-0 mx-4 mb-1 px-2"><b>+{{i}}</b><span class="divider-text-{{i}}"> · Nota sobre 1{{i}}</span></div>
 <div class="container-fluid">
-  <div class="row mx-2">
+  <div class="row mx-1" id="filtrades-p{{i}}"></div>
+</div>
+{% endfor %}
+<div id="divider-p0" class="pond-divider alert py-0 px-2 mx-4 mb-1"><b>+0</b><span class="divider-text-0"> · Nota sobre 10</span></div>
+
+<div class="container-fluid">
+  <div class="row mx-1" id="originals">
     {% for c_id, dades in carreres.items()|sort(attribute="1.nom") %}
-    <div class="col-xl-2 col-lg-3 col-md-4 col-6 p-1">
-      <div class="card text-center border-c" id="c-{{c_id}}">
+    <div class="col-xl-2 col-lg-3 col-md-4 col-6 p-1 col-carrera" id="col-c-{{c_id}}" data-cid="{{c_id}}">
+      <div class="card text-center border-c" id="c-{{c_id}}" data-selection-id="{{c_id}}">
         {% if ("resum" in dades and dades.resum) or "ponderacions" in dades %}
         <!-- FULL FLEDGED -->
         <h6 class="card-header card-header-c px-2 pt-2 pb-1" onclick="toggle_select({{c_id}});">{{dades.nom}}</h6>
@@ -65,7 +85,7 @@
             {% set bat = dades.bat %}
             {% set branca = dades.branca %}
           {% if p1 or p2 %}
-          <div class="ponderacions pond-{{bat}} branca-{{branca}} px-2">
+          <div id="ponds-{{c_id}}" class="ponderacions pond-{{bat}} branca-{{branca}} px-2" data-p2="{{p2|join('.')}}" data-p1="{{p1|join('.')}}">
             {% for p in p2|sort %}
               <span class="picon-{{p}}" title="{{pnames.get(p, p)}} pondera 0.2">{{picons.get(p, p)}}</span>
             {% endfor %}
@@ -75,7 +95,7 @@
             {% endfor %}
           </div>
           {% else %}
-          <div class="ponderacions-alt pond-None">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</div>
+          <div id="ponds-{{c_id}}" class="ponderacions-alt pond-None" data-p2="" data-p1="">{% if 'pond_alt' in dades %} <i>{{dades.pond_alt}}</i> {% else %} ? {% endif %}</div>
           {% endif %}
           {% endif %}
           <div class="desc py-1 px-2 small">
@@ -106,20 +126,99 @@
     let card = document.getElementById("c-" + id);
     let row = document.getElementById("row-c-" + id);
     if(card.classList.contains("selected")){
+      // deselect
       console.log("remove", id);
-      card.classList.remove("selected");
+      $('*[data-selection-id="' + id + '"]').removeClass('selected');
       row.classList.add("hide");
     }else{
+      // select
       console.log("select", id);
-      card.classList.add("selected");
+      $('*[data-selection-id="' + id + '"]').addClass('selected');
       row.classList.remove("hide");
     }
     build_summary();
   }
 
+  function clone_card(id_){
+    let $original = $('#col-c-' + id_);
+    let clone = $original.clone();
+    clone.removeAttr('id');
+    clone.find('[id]').each(function(){
+      $(this).removeAttr('id');
+    });
+    clone.removeClass('hide');
+    return clone;
+  }
+
+  function choose(id_){
+    let chosen = document.getElementById('filter-' + id_);
+    if(chosen.classList.contains('chosen')){
+      chosen.classList.remove('chosen');
+    }else{
+      chosen.classList.add('chosen');
+    }
+  }
+
+  function filter_chosen(){
+    // gather filters
+    let chosen_ponds = [];
+    for(let id_ of {{pnames.keys()|list|tojson}}){
+      let b = document.getElementById('filter-' + id_);
+      if(b.classList.contains('chosen')){
+        chosen_ponds.push(id_);
+      }
+    }
+    console.log('Found filters: ', chosen_ponds);
+
+    // clean
+    for(let i=0; i<5; i++){
+      $('#filtrades-p' + i).html('');
+    }
+
+    // apply filters (need it clean, otherwise will pick the copies)
+    $('.col-carrera').each(function() {
+      let cid = $(this).data('cid');
+      let ponds_list = $('#ponds-' + cid);
+      let p2 = ponds_list.data('p2');
+      let p1 = ponds_list.data('p1');
+
+      let punts = 0;
+
+      if(ponds_list){
+        let n_p2 = 0;
+        let n_p1 = 0;
+        for(let p of chosen_ponds){
+          if(p2.split('.').includes(p)){
+            n_p2 += 1;
+          }
+          if(p1.split('.').includes(p)){
+            n_p1 += 1;
+          }
+        }
+        punts = n_p2 > 1 ? 4
+          : n_p2 == 1 && n_p1 > 0 ? 3
+          : n_p1 > 1 || n_p2 == 1 ? 2
+          : n_p1 > 0 ? 1
+          : 0;
+        console.log("#" + cid, punts);
+      }
+
+      if(punts == 0){
+        $(this).removeClass('hide');
+      }else{
+        // append non_id clone
+        let clone = clone_card(cid);
+        console.log(punts);
+        $('#filtrades-p' + punts).append(clone);
+        $(this).addClass('hide');
+      }
+    });
+  }
+
   function build_summary(){
+    // apparently it just shows/hides the empty_summary message
     let count = 0;
-    $(".selected").each(function(i, obj){
+    $("#originals .selected").each(function(i, obj){
       let id = $(this).attr('id');
       count++;
     });
