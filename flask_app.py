@@ -1101,6 +1101,11 @@ def unauthorized(e):
     return render_template("401.html"), 401
 
 
+@app.route('/robots.txt')  # may add more docs here as additional routes (https://stackoverflow.com/a/14054039/5093220)
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+
 if __name__ == "__main__":  # això la fa córrer en local
     print("running local...")
     app.run(port=8000, debug=True, ssl_context="adhoc")  # s'ha posat exquisit amb el port, no sé
