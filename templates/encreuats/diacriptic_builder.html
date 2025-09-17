@@ -490,6 +490,12 @@
         }
         function submit_update_execute(success){
             console.log(success);
+            if(success == "Y"){
+                console.log("Successfuly updated")
+                new_clue();
+            }else{
+                console.log("Clue updating failed. Try again?")
+            }
         }
         function submit_execute(success){
             console.log(success);
