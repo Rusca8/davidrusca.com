@@ -47,7 +47,7 @@
             document.getElementById("solu").addEventListener("keypress", hotkey_solu);
 
             {% if preload_clue %}
-                preload_clue({{preload_clue}});
+                preload_clue({{preload_clue|tojson}});
             {% endif %}
 
             setInterval(check_word_siblings, 500);
@@ -545,6 +545,13 @@
           console.log('/diacriptic/ajax/' + url);
           req.open('GET', '/diacriptic/ajax/' + url, true);
           req.send();
+        }
+
+        function preload_clue(clue_id){
+            $("#in-id").val(clue_id);
+            load_from_id();
+            // remove clue_id from the url once it's been applied
+            history.replaceState({}, "", "/diacriptic/builder");
         }
 
 

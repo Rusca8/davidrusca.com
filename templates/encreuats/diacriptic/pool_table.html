@@ -5,12 +5,13 @@
             <th class="px-1 diac-admin-date">Arxiu</th>
             <th class="px-1 diac-admin-tags">Tags</th>
             <th class="px-1">Op.</th>
+            <th class="px-1"></th>
             <th class="px-1">Word</th>
             <th class="px-1">Clue</th>
             <th class="px-1">Solution</th>
             <th class="px-1">ID</th>
         </tr>
-        {% with table_columns = ["arxiu", "tags", "opus", "word", "clue", "solu", "clue_id"] %}
+        {% with table_columns = ["arxiu", "tags", "opus", "edit_button", "word", "clue", "solu", "clue_id"] %}
             {% for clue_id, cclue in pool.items()|reverse %}
                 {% include '/encreuats/diacriptic/admin_table_row.html' %}
             {% endfor %}

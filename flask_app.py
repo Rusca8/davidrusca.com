@@ -807,10 +807,11 @@ def diacriptic_builder_ajax(query=None):
 
 
 @app.route("/diacriptic/builder")
+@app.route("/diacriptic/builder/<clue_id>")
 @login_required
-def diacriptic_builder():
+def diacriptic_builder(clue_id=None):
     if current_user.is_admin:
-        return render_template("/encreuats/diacriptic_builder.html")
+        return render_template("/encreuats/diacriptic_builder.html", preload_clue=clue_id)
     return redirect("/")
 
 

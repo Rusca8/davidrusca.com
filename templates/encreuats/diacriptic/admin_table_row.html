@@ -27,6 +27,8 @@
             <td class="px-1" data-text="{{cclue.solution}}" data-blocks='{{cclue.solution_analysis}}'>{{cclue.solution}}</td>
         {% elif col == "clue_id" %}
             <td class="px-1 mono text-right">{{clue_id}}</td>
+        {% elif col == "edit_button" %}
+            <td class="px-1 mono text-center"><a href="/diacriptic/builder/{{clue_id}}" target="_blank" class="non-decor">📝</a></td>
         {% else %}
             <td>({{col}})</td>
         {% endif %}
