@@ -897,7 +897,8 @@ def diacriptic_admin_users():
     if current_user.is_admin:
         from database.diacriptic_solve import DiacripticSolve
         solves = DiacripticSolve.count_solves_per_person()
-        return render_template("/encreuats/diacriptic_admin_users.html", solves=solves)
+        recent_solves = DiacripticSolve.count_solves_per_person(only_recent=True)
+        return render_template("/encreuats/diacriptic_admin_users.html", solves=solves, recent=recent_solves)
     return redirect("/")
 
 

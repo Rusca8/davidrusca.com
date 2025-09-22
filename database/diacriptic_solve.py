@@ -2,6 +2,10 @@ from database.db import get_db
 
 
 class DiacripticSolve:
+    sql_filter_recent = """
+        WHERE date_solved IS NOT NULL AND date_solved > strftime('%s', 'now', '-7 day')
+        """
+
     def __init__(self, clue_id, user_id, date_solved=None, help_used=""):
         self.clue_id = clue_id
         self.user_id = user_id
@@ -90,18 +94,20 @@ class DiacripticSolve:
         return True
 
     @staticmethod
-    def count_solves_per_person():
+    def count_solves_per_person(only_recent=False):
         """returns list of how many solves by each solver"""
         db = get_db()
         solves = db.execute(
             """
             SELECT user_id, name, username, count(user_id) as solves, 
                 CASE WHEN date_solved IS NULL THEN 'PENDING'
-                ELSE 'SOLVED'
-                END AS 'solve_status'
+                    ELSE 'SOLVED'
+                    END AS 'solve_status'
             FROM diacriptic_solve 
             LEFT JOIN user
-                ON user.id = diacriptic_solve.user_id
+                ON user.id = diacriptic_solve.user_id"""
+            + (DiacripticSolve.sql_filter_recent if only_recent else '') +
+            """
             GROUP BY user_id, solve_status
             ORDER BY solves DESC
             """
