@@ -19,7 +19,7 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/encreuats.css?date=2025-08-06">
-    <link rel="stylesheet" href="/static/styles/diacriptics.css?date=2025-08-06.1">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css?date=2025-09-22">
 
     <!-- My JS modules -->
     <script src="/static/js/diacriptics.js"></script>
@@ -34,6 +34,7 @@
         var pistes = {{pistes|tojson}};
         var base_url = "/diacriptic/ajax/";
         var solved = {{solved|tojson}};
+        var date = {{ (date or '')|tojson}};
 
         window.onload = function(){
             if(solved){
@@ -316,6 +317,7 @@
                 data: {
                     "clue_id": clue_id,
                     "clue": clue,
+                    "date": date,
                     "wordletters": result,
                     "help_used": pistes.join(""),
                     "help_mask": help_mask,

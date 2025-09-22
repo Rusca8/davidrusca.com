@@ -211,6 +211,8 @@ html {
 
 .diac-head {
     width: 100%;
+    background-color: var(--color-wop);
+    border-bottom: 1px solid var(--color-d-wop);
 }
 
 #account-area {
@@ -312,4 +314,10 @@ button.border-c {
     height: 1.5rem;
     line-height: 1.4rem;
     display: none;
+}
+
+.badge-date {
+    background: #f5f5f5;
+    color: var(--color-d-wop);
+    border-radius: 0.1rem;
 }

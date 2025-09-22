@@ -686,6 +686,7 @@ def diacriptic_ajax(query=None):
         case "submit":
             clue_id = request.form.get("clue_id")
             clue = request.form.get("clue")
+            date = request.form.get("date")
             wordletters = request.form.get("wordletters")
             help_used = request.form.get("help_used")
             help_mask = request.form.get("help_mask")
@@ -702,7 +703,7 @@ def diacriptic_ajax(query=None):
                         dc.submit_solve(clue_id, user_id)
                     cclue.clue_analysis = {k: v for k, v in cclue.clue_analysis.items() if k == "def"}
                     return render_template("/encreuats/diacriptic_solved.html", cclue=cclue,
-                                           help_used=help_used, help_mask=help_mask)
+                                           help_used=help_used, help_mask=help_mask, date=date)
                 else:
                     return "Incorrect"
     print("WTF ya doin' here")
@@ -770,10 +771,11 @@ def diacriptic_explained():
         clue_id = request.form.get("clue_id")
         word = request.form.get("word")
         clue = request.form.get("clue")
+        date = request.form.get("date")
         if clue_id and word and clue:
             cclue = dc.get_clue(clue_id, with_analyses=True)
             if cclue.word == word and cclue.clue == clue:  # solved public clue validation
-                return render_template("/encreuats/diacriptic_explained.html", cclue=cclue)
+                return render_template("/encreuats/diacriptic_explained.html", cclue=cclue, date=date)
         print("Explain what?")
     return redirect("/diacriptic")
 
