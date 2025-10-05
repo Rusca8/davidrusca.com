@@ -917,6 +917,12 @@ def ktn():
     return redirect('/static/pdf/KendamaTrickNotation1.2.pdf')
 
 
+@app.route('/kubb')
+@app.route('/kubb/')
+def kubb():
+    return redirect('/static/pdf/kubb_CA.pdf?date=20251005')
+
+
 @app.route('/ivtest')
 @app.route('/ivtest/')
 @app.route('/ivtest<temps>')
