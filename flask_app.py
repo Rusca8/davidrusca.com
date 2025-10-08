@@ -975,6 +975,11 @@ def kubb_live_edit_match(rnum=None, match_id=None):
                            rnum=rnum, rounds=rounds, teams=teams, match_id=match_id)
 
 
+@app.route('/tombaelrei/add_round/')
+def add_round():
+    return render_template("/kubb_live/klive_add_round_dialogue.html")
+
+
 @login_required
 @app.route('/klive/ajax/<query>', methods=["POST"])
 def klive_ajax(query=None):
@@ -990,6 +995,15 @@ def klive_ajax(query=None):
                 return {"success": success}
             case "add_match":
                 success = klive.append_match(data=request.form)
+                return {"success": success}
+            case "remove_match":
+                success = klive.remove_match(data=request.form)
+                return {"success": success}
+            case "add_round":
+                success = klive.add_round(rtype=request.form.get("rtype", "normal"))
+                return {"success": success}
+            case "remove_round":
+                success = klive.remove_round(data=request.form)
                 return {"success": success}
     return {"success": False}
 

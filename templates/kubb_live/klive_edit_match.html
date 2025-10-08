@@ -56,6 +56,25 @@
                 location.reload();
             }
         }
+
+
+        function remove_match(rnum, match_id){
+            console.log("removing match " + rnum + "/" + match_id);
+            $.ajax({
+                url: base_url + "remove_match",
+                type: "post",
+                data: {
+                    "rnum": rnum,
+                    "match_id": match_id,
+                },
+                success: remove_match_execute,
+            });
+        }
+        function remove_match_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei/rounds/{{rnum}}";
+            }
+        }
     </script>
 </head>
 <body>
@@ -97,11 +116,11 @@
             <hr class="khr my-3" data-content="{{'★' if i else 'vs'}}">
         {% endfor %}
 
-        <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn kbtn-admin btn-block py-2">Tanca l'editor</a>
+        <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn kbtn-admin btn-block py-2">Fet</a>
 
         <hr class="khr my-3" data-content="★">
 
-        <button class="kbtn kbtn-elimina btn-block py-2">Elimina el partit</button>
+        <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_match({{rnum}}, {{match_id}});">Elimina el partit</button>
 
     </div>
 

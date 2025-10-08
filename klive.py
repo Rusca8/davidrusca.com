@@ -137,5 +137,58 @@ def append_match(data=None):
     return False
 
 
+def remove_match(data=None):
+    if data is None:
+        return False
+    if all(x in data for x in ["rnum", "match_id"]):
+        rnum = data["rnum"]
+        match_id = data["match_id"]
+
+        with klive_lock:
+            rounds = utilities.load_json(rounds_file)
+            if rnum in rounds["rounds"] and "matches" in rounds["rounds"][rnum]:
+                matches = rounds["rounds"][rnum]["matches"]
+                rounds["rounds"][rnum]["matches"] = {id_: match for id_, match in matches.items() if id_ != match_id}
+
+                utilities.dump_json(rounds, filename=rounds_file)
+                return True
+    return False
+
+
+def add_round(rtype):
+    if rtype in ["normal", "final"]:
+        with klive_lock:
+            rounds = utilities.load_json(rounds_file)
+            new_id = max(int(id_) for id_ in rounds["rounds"]) + 1
+            if rtype == "final":
+                pre_matches = {"1": {"final": "F", "teams": ["", ""], "result": ["K", "K"]},
+                               "2": {"final": "Q", "teams": ["", ""], "result": ["K", "K"]}
+                               }
+            else:
+                pre_matches = {"1": {"teams": ["", ""], "result": ["K", "K"]}}
+
+            rounds["rounds"][new_id] = {"type": rtype, "matches": pre_matches}
+
+            utilities.dump_json(rounds, filename=rounds_file)
+            return True
+    return False
+
+
+def remove_round(data=None):
+    if data is None:
+        return False
+    if all(x in data for x in ["rnum"]):
+        rnum = data["rnum"]
+
+        with klive_lock:
+            rounds = utilities.load_json(rounds_file)
+            if rnum in rounds["rounds"]:
+                rounds["rounds"] = {id_: round_ for id_, round_ in rounds["rounds"].items() if id_ != rnum}
+
+                utilities.dump_json(rounds, filename=rounds_file)
+                return True
+    return False
+
+
 def def_pairs(rnum):
     return "HOLA"

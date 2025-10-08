@@ -39,6 +39,23 @@
                 location.reload(true);
             }
         }
+
+        function remove_round(rnum){
+            console.log("removing round " + rnum);
+            $.ajax({
+                url: base_url + "remove_round",
+                type: "post",
+                data: {
+                    "rnum": rnum,
+                },
+                success: remove_round_execute,
+            });
+        };
+        function remove_round_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei";
+            }
+        }
     </script>
 </head>
 <body>
@@ -71,7 +88,7 @@
 
         <hr class="khr my-3" data-content="★">
 
-        <button class="kbtn kbtn-elimina btn-block py-2">Elimina la ronda</button>
+        <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>
 
     </div>
 

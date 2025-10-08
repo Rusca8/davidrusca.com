@@ -8,23 +8,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Tomba el rei</title>
+    <title>Afegir ronda - Tomba el rei</title>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/klive.css">
+
+    <script>
+        var base_url = "/klive/ajax/";
+
+        function add_round(rtype){
+            console.log("adding round: " + rtype);
+            $.ajax({
+                url: base_url + "add_round",
+                type: "post",
+                data: {
+                    "rtype": rtype,
+                },
+                success: add_round_execute,
+            });
+        }
+        function add_round_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei/";
+            }
+        }
+    </script>
 </head>
 <body>
-    <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
     <div class="m-3">
-        <a href="/tombaelrei/teams" class="btn kbtn btn-block py-2">Equips</a>
-
+        <button class="kbtn kbtn-admin kbtn-huge btn-block py-2" onclick="add_round('normal');">Ronda suïssa</button>
         <hr class="khr my-3" data-content="★">
-
-        {% for rnum, round_ in rounds.items() %}
-        <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn btn-block py-2 mb-3">{{"Final" if round_.get("type") == "final" else "Ronda " + rnum}}</a>
-        {% endfor %}
-        <a href="/tombaelrei/add_round" class="btn kbtn kbtn-admin btn-block py-2 my-4">+</a>
-
+        <button class="kbtn kbtn-admin kbtn-huge btn-block py-2" onclick="add_round('final');">Final</button>
     </div>
 
     <!-- Optional JavaScript -->
