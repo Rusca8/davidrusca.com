@@ -41,7 +41,7 @@ def get_ranking(round_num=None):
             match_teams = match.get("teams", [])
             match_result = match.get("result", [])
             if len(match_teams) == 2 and len(match_result) == 2:
-                if all(x.isnumeric() for x in match_result):
+                if all(x.isnumeric() for x in match_result) and all(x in teams for x in match_teams):
                     # KCSS
                     scores[match_teams[0]]["K"] += int(match_result[0])
                     scores[match_teams[1]]["K"] += int(match_result[1])
@@ -82,18 +82,17 @@ def get_ranking(round_num=None):
 def edit_match_points(data=None):
     if data is None:
         return False
-    if all(x in data for x in ["rnum", "match_id", "team_id", "points"]):
+    if all(x in data for x in ["rnum", "match_id", "team_index", "points"]):
         rnum = data["rnum"]
         match_id = data["match_id"]
-        team_id = data["team_id"]
+        team_index = data["team_index"]
         points = data["points"]
 
         with (klive_lock):
             rounds = utilities.load_json(rounds_file)
-            match = rounds["rounds"].get(rnum, {}).get("matches", {}).get(match_id, {})
-            if match and team_id in match.get("teams", []):
-                team_index = (0 if team_id == match["teams"][0] else 1)
-                rounds["rounds"][rnum]["matches"][match_id]["result"][team_index] = points
+            match_ = rounds["rounds"].get(rnum, {}).get("matches", {}).get(match_id, {})
+            if match_ and "result" in match_:
+                rounds["rounds"][rnum]["matches"][match_id]["result"][int(team_index)] = points
 
                 utilities.dump_json(rounds, filename=rounds_file)
                 return True
@@ -188,6 +187,25 @@ def remove_round(data=None):
                 utilities.dump_json(rounds, filename=rounds_file)
                 return True
     return False
+
+
+def get_match_edit_data(rnum, match_id):
+    rounds = load_rounds()
+
+    round_ = rounds.get(rnum, {})
+    matches = round_.get("matches", {})
+    match_ = matches.get(match_id, {})
+
+    match_edit_data = {}
+
+    if not match_:
+        return {}
+
+    match_edit_data["type"] = round_.get("type", "normal")
+    match_edit_data["match_teams"] = match_.get("teams", ["", ""])
+    match_edit_data["result"] = match_.get("result", ["K", "K"])
+
+    return match_edit_data
 
 
 def def_pairs(rnum):

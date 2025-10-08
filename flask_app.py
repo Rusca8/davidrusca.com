@@ -969,10 +969,10 @@ def kubb_live():
 @app.route('/tombaelrei/edit_match/<rnum>/<match_id>/')
 def kubb_live_edit_match(rnum=None, match_id=None):
     import klive
-    rounds = klive.load_rounds()
+    match_edit_data = klive.get_match_edit_data(rnum, match_id)
     teams = klive.load_teams()
     return render_template("/kubb_live/klive_edit_match.html",
-                           rnum=rnum, rounds=rounds, teams=teams, match_id=match_id)
+                           rnum=rnum, match_edit_data=match_edit_data, teams=teams, match_id=match_id)
 
 
 @app.route('/tombaelrei/add_round/')
