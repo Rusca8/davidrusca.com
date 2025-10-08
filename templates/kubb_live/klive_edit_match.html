@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Editar partit - Tomba el rei</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/klive.css">
+
+    <script>
+        var base_url = "/klive/ajax/";
+
+        function edit_match_score(rnum, match_id, team_id, points){
+            console.log("editing match " + rnum + "/" + match_id + ": team #" + team_id + " - " + points + " points");
+            $.ajax({
+                url: base_url + "edit_match_points",
+                type: "post",
+                data: {
+                    "rnum": rnum,
+                    "match_id": match_id,
+                    "team_id": team_id,
+                    "points": points,
+                },
+                success: edit_match_score_execute,
+            });
+        };
+        function edit_match_score_execute(ajax_result){
+            if(ajax_result.success){
+                location.reload();
+            }
+        }
+
+        function edit_match_team(rnum, match_id, team_index, select_item){
+            let team_id = select_item.value;
+            console.log("editing match " + rnum + "/" + match_id + ": team at [" + team_index + "] = #" + team_id);
+            $.ajax({
+                url: base_url + "edit_match_team",
+                type: "post",
+                data: {
+                    "rnum": rnum,
+                    "match_id": match_id,
+                    "team_index": team_index,
+                    "team_id": team_id,
+                },
+                success: edit_match_team_execute,
+            });
+        }
+        function edit_match_team_execute(ajax_result){
+            if(ajax_result.success){
+                location.reload();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="m-3">
+        {% set type = rounds.get(rnum, {}).get("type", "normal") %}
+
+        {% set match = rounds.get(rnum, {}).get("matches", {}).get(match_id, {}) %}
+
+        {% set match_teams = match.get("teams", ["", ""]) %}
+        {% set result = match.get("result", ["K", "K"]) %}
+        {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
+        {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
+
+        <div class="text-center lil-title">{{"Final" if rounds.get(rnum, {}).get("type") == "final" else "Ronda " + rnum}}</div>
+
+        <hr class="khr mt-1 mb-3" data-content="★">
+
+        {% set p_keys = [["K", "0", "1", "2"], ["3", "4", "5", "6"]] %}
+        {% for i in range(2) %}
+        <div class="mx-1 kselect-out mb-3">
+            <select class="form-select kform-select form-select-lg w-100 px-2 py-3" onchange="edit_match_team({{rnum}}, {{match_id}}, {{i}}, this);">
+                <option {{'' if match_teams[i] else 'selected'}}>"(Equip)"</option>
+                {% for team_id, team in teams.items() %}
+                    <option value="{{team_id}}" {{'selected' if match_teams[i] == team_id else ''}}>{{team.get('name', '(name missing)')}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <table class="w-100">
+                {% for row in p_keys %}
+                <tr>
+                    {% for key in row %}
+                        {% set selected = key == result[i] %}
+                    <td class="p-1"><button class="btn kbtn btn-block {{'selected' if selected else ''}}" onclick="edit_match_score({{rnum}}, {{match_id}}, {{match_teams[i]}}, '{{key}}')">{{key}}</button></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+
+            <hr class="khr my-3" data-content="{{'★' if i else 'vs'}}">
+        {% endfor %}
+
+        <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn kbtn-admin btn-block py-2">Tanca l'editor</a>
+
+        <hr class="khr my-3" data-content="★">
+
+        <button class="kbtn kbtn-elimina btn-block py-2">Elimina el partit</button>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -923,6 +923,77 @@ def kubb():
     return redirect('/static/pdf/kubb_CA.pdf?date=20251005')
 
 
+@app.route('/tombaelrei/rounds/<rnum>/')
+@app.route('/tombaelrei/rounds/<rnum>/<page>/')
+def kubb_live_round(rnum=None, page=None):
+    """round info for klive"""
+    import klive
+    if page == "ranking":
+        ranking_info = klive.get_ranking(rnum)
+        return render_template("/kubb_live/klive_round_ranking.html", rnum=rnum, ranking_info=ranking_info)
+    elif page == "def_pairs":
+        # TODO authenticate
+        def_pairs = klive.def_pairs(rnum)
+        return render_template("/kubb_live/klive_def_pairs.html", rnum=rnum, pairs=def_pairs)
+    else:
+        rounds = klive.load_rounds()
+        teams = klive.load_teams()
+        return render_template("/kubb_live/klive_round.html",
+                               rnum=rnum, teams=teams, round_=rounds.get(rnum, {}))
+
+
+@app.route("/tombaelrei/teams/")
+@app.route("/tombaelrei/teams/<tnum>/")
+@app.route("/tombaelrei/teams/<tnum>/<page>/")
+def kubb_live_teams(tnum=None, page=None):
+    import klive
+    teams = klive.load_teams()
+    if tnum:
+        if tnum in teams:
+            return render_template("/kubb_live/klive_team_members.html",
+                                   tnum=tnum, team=teams.get(tnum, {}))
+        else:
+            return redirect("/tombaelrei/teams/")
+    return render_template("/kubb_live/klive_teams.html", teams=teams)
+
+
+@app.route('/tombaelrei/')
+@app.route('/tombaelrei/rounds/')
+def kubb_live():
+    """proof of concept (provisional implementation): pending sqlite3 integration and competition parametrization"""
+    import klive
+    rounds = klive.load_rounds()
+    return render_template("/kubb_live/klive_main.html", rounds=rounds)
+
+
+@app.route('/tombaelrei/edit_match/<rnum>/<match_id>/')
+def kubb_live_edit_match(rnum=None, match_id=None):
+    import klive
+    rounds = klive.load_rounds()
+    teams = klive.load_teams()
+    return render_template("/kubb_live/klive_edit_match.html",
+                           rnum=rnum, rounds=rounds, teams=teams, match_id=match_id)
+
+
+@login_required
+@app.route('/klive/ajax/<query>', methods=["POST"])
+def klive_ajax(query=None):
+    if current_user.is_kubb_admin:
+        import klive
+
+        match query:
+            case "edit_match_points":
+                success = klive.edit_match_points(data=request.form)
+                return {"success": success}
+            case "edit_match_team":
+                success = klive.edit_match_team(data=request.form)
+                return {"success": success}
+            case "add_match":
+                success = klive.append_match(data=request.form)
+                return {"success": success}
+    return {"success": False}
+
+
 @app.route('/ivtest')
 @app.route('/ivtest/')
 @app.route('/ivtest<temps>')

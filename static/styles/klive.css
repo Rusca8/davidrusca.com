@@ -1,0 +1,168 @@
+:root {
+    --color-bg: #d3dfe2;
+    --color-sub: #a9c3c8;
+    --color-head: #80a4ae;
+
+    --color-success: #cce0c8;
+    --color-danger: #e8b5b5;
+}
+
+.btn {
+    padding: 0px;
+}
+
+body {
+    background-color: var(--color-bg);
+}
+
+.khead {
+    background-color: var(--color-head);
+    color: white;
+    font-size: 2rem;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+.khead:focus, .khead:hover {
+    color: white;
+}
+
+.ksub {
+    background-color: var(--color-sub);
+    font-size: 2rem;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+.ksub:focus, .ksub:hover {
+    color: black;
+}
+
+.kbtn {
+    background: white;
+    color: black;
+    font-size: 2rem;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    width: 100%;
+}
+
+.kbtn.selected {
+    background: var(--color-head);
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.ranking {
+    background-color: white;
+    border-radius: 0.2rem;
+}
+.ranking tr, .ranking tr td, .ranking tr th {
+    border: 1px solid black;
+}
+
+.ranking tr th {
+    border-bottom: 2px solid black;
+}
+
+td {
+    padding: 0px;
+}
+
+.winner {
+    background-color: var(--color-success);
+}
+.loser {
+    background-color: var(--color-danger);
+}
+
+.w100 {
+    width: 100%;
+}
+
+.kbtn-admin {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.kbtn-confirma {
+    background: var(--color-success);
+}
+.kbtn-elimina {
+    background: var(--color-danger);
+    font-size: 1.3rem;
+}
+
+.kbtn-secondary {
+    background-color: transparent;
+    font-size: 1.5rem;
+}
+
+.w20 {
+    width: 15%;
+}
+
+.table-punts {
+    width: 20%;
+}
+
+.table-team, .table-punts {
+    font-size: 1.2rem;
+}
+
+.teams-text {
+    font-size: 1.3rem;
+}
+
+.team-member {
+    font-size: 1.5rem;
+}
+
+.khr {
+  border: 0;
+  font-size: 14px;
+  height: 1.5em;
+  line-height: 1em;
+  position: relative;
+  text-align: center;
+}
+.khr::before {
+    content: "";
+    background: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+}
+.khr::after {
+    background-color: var(--color-bg);
+    color: black;
+    content: attr(data-content);
+    line-height: 1.5em;
+    padding: 0 7px;
+    position: relative;
+}
+
+.b-right {
+    border-right: 1px solid black;
+}
+.b-left {
+    border-left: 1px solid black;
+}
+.b-top {
+    border-top: 1px solid black;
+}
+
+.lil-title {
+    font-size: 1.3rem;
+}
+
+.kform-select {
+    font-size: 1.3rem;
+}
+
+.kselect-out {
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}

@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 
 from database.db import get_db
-from secretos import oauth_yo
+from secretos import oauth_yo, kubb_admins
 
 
 class User(UserMixin):
@@ -142,5 +142,12 @@ class User(UserMixin):
         if self.login_details is not None:
             for ld in self.login_details:
                 if ld.get("provider") == "google" and ld.get("sub") == oauth_yo:
+                    return True
+        return False
+
+    def is_kubb_admin(self):
+        if self.login_details is not None:
+            for ld in self.login_details:
+                if ld.get("provider") == "google" and ld.get("sub") in kubb_admins:
                     return True
         return False

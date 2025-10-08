@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Ronda - Tomba el rei</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/klive.css">
+
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if(event.persisted){
+                console.log("Cache? Things may be out of date. Reloading...");
+                location.reload(true);
+            }
+        });
+
+        var base_url = "/klive/ajax/";
+
+        function add_match_to_round(rnum){
+            console.log("adding match to round " + rnum);
+            $.ajax({
+                url: base_url + "add_match",
+                type: "post",
+                data: {
+                    "rnum": rnum,
+                },
+                success: add_match_execute,
+            });
+        };
+        function add_match_execute(ajax_result){
+            if(ajax_result.success){
+                location.reload(true);
+            }
+        }
+    </script>
+</head>
+<body>
+    <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+    <a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_.get("type") == "final" else "Ronda " + rnum}}</a>
+    <div class="m-3">
+        <a href="/tombaelrei/rounds/{{rnum}}/ranking" class="btn kbtn btn-block py-2">Classificació</a>
+
+        <hr class="khr my-3" data-content="★">
+
+        {% for match_id, match in round_.get("matches", {}).items() %}
+            {% set match_teams = match.get("teams", ["", ""]) %}
+            {% set result = match.get("result", ["K", "K"]) %}
+            {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
+            {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
+            <a href="/tombaelrei/edit_match/{{rnum}}/{{match_id}}/" class="btn kbtn btn-block mb-3">
+                <table class="w100 mb-0">
+                    <tr>
+                        <td class="text-left px-2 table-team">{{t0}}</td>
+                        <td class="b-left table-punts {{'winner' if result[0] == '6' else '' if result[0] == 'K' else 'loser'}}">{{result[0]}}</td>
+                    </tr>
+                    <tr>
+                        <td class="b-top text-left px-2 table-team">{{t1}}</td>
+                        <td class="b-top b-left table-punts {{'winner' if result[1] == '6' else '' if result[1] == 'K' else 'loser'}}">{{result[1]}}</td>
+                    </tr>
+                </table>
+            </a>
+        {% endfor %}
+        <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
+
+        <hr class="khr my-3" data-content="★">
+
+        <button class="kbtn kbtn-elimina btn-block py-2">Elimina la ronda</button>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
