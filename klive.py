@@ -129,7 +129,7 @@ def append_match(data=None):
             rounds = utilities.load_json(rounds_file)
             if rnum in rounds["rounds"] and "matches" in rounds["rounds"][rnum]:
                 matches = rounds["rounds"][rnum]["matches"]
-                new_id = max(int(id_) for id_ in matches) + 1
+                new_id = max(int(id_) for id_ in matches) + 1 if matches else 1
                 matches[new_id] = {"teams": ["", ""], "result": ["K", "K"]}
 
                 utilities.dump_json(rounds, filename=rounds_file)
@@ -159,7 +159,7 @@ def add_round(rtype):
     if rtype in ["normal", "final"]:
         with klive_lock:
             rounds = utilities.load_json(rounds_file)
-            new_id = max(int(id_) for id_ in rounds["rounds"]) + 1
+            new_id = max(int(id_) for id_ in rounds["rounds"]) + 1 if rounds["rounds"] else 1
             if rtype == "final":
                 pre_matches = {"1": {"final": "F", "teams": ["", ""], "result": ["K", "K"]},
                                "2": {"final": "Q", "teams": ["", ""], "result": ["K", "K"]}
