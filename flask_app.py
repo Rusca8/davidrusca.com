@@ -994,8 +994,9 @@ def klive_ajax(query=None):
                 success = klive.edit_match_team(data=request.form)
                 return {"success": success}
             case "add_match":
-                success = klive.append_match(data=request.form)
-                return {"success": success}
+                result = klive.append_match(data=request.form)
+                success = bool(result)
+                return {"success": success, "new_id": result["new_id"] if result else None}
             case "remove_match":
                 success = klive.remove_match(data=request.form)
                 return {"success": success}

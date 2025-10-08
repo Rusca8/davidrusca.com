@@ -100,6 +100,7 @@ def edit_match_points(data=None):
 
 
 def edit_match_team(data=None):
+    print(data)
     if data is None:
         return False
     if all(x in data for x in ["rnum", "match_id", "team_index", "team_id"]):
@@ -113,7 +114,7 @@ def edit_match_team(data=None):
             match = rounds["rounds"].get(rnum, {}).get("matches", {}).get(match_id, {})
             if match and "teams" in match:
                 rounds["rounds"][rnum]["matches"][match_id]["teams"][int(team_index)] = team_id
-
+                print(rounds["rounds"][rnum])
                 utilities.dump_json(rounds, filename=rounds_file)
                 return True
     return False
@@ -132,7 +133,7 @@ def append_match(data=None):
                 matches[new_id] = {"teams": ["", ""], "result": ["K", "K"]}
 
                 utilities.dump_json(rounds, filename=rounds_file)
-                return True
+                return {"new_id": new_id}
     return False
 
 
@@ -204,6 +205,10 @@ def get_match_edit_data(rnum, match_id):
     match_edit_data["type"] = round_.get("type", "normal")
     match_edit_data["match_teams"] = match_.get("teams", ["", ""])
     match_edit_data["result"] = match_.get("result", ["K", "K"])
+
+    match_edit_data["busy_teams"] = set()
+    for m in matches.values():
+        match_edit_data["busy_teams"].update(m.get("teams", []))
 
     return match_edit_data
 

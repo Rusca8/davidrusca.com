@@ -82,6 +82,7 @@
         {% set type = match_edit_data["type"] %}
 
         {% set match_teams = match_edit_data["match_teams"] %}
+        {% set busy_teams = match_edit_data["busy_teams"] %}
         {% set result = match_edit_data["result"] %}
         {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
         {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
@@ -94,9 +95,11 @@
         {% for i in range(2) %}
         <div class="mx-1 kselect-out mb-3">
             <select class="form-select kform-select form-select-lg w-100 px-2 py-3" onchange="edit_match_team({{rnum}}, {{match_id}}, {{i}}, this);">
-                <option {{'' if match_teams[i] else 'selected'}}>(Tria un equip)</option>
+                <option value="" class="default-select-option" {{'' if match_teams[i] else 'selected'}}>-tria un equip-</option>
                 {% for team_id, team in teams.items() %}
+                    {% if team_id == match_teams[i] or team_id not in busy_teams %}
                     <option value="{{team_id}}" {{'selected' if match_teams[i] == team_id else ''}}>{{team.get('name', '(name missing)')}}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>

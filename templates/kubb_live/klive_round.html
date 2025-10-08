@@ -36,7 +36,9 @@
         };
         function add_match_execute(ajax_result){
             if(ajax_result.success){
-                location.reload(true);
+                let new_id = ajax_result.new_id;
+                console.log("New match at id #", new_id, "opening new match to edit...");
+                window.location.href = "/tombaelrei/edit_match/{{rnum}}/" + new_id + "/";
             }
         }
 
