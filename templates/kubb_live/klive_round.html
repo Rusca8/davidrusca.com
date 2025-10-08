@@ -73,15 +73,19 @@
             {% set result = match.get("result", ["K", "K"]) %}
             {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
             {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
+
+            {% set match_done = "6" in result %}
             <a href="/tombaelrei/edit_match/{{rnum}}/{{match_id}}/" class="btn kbtn btn-block mb-3">
                 <table class="w100 mb-0">
                     <tr>
                         <td class="text-left px-2 table-team">{{t0}}</td>
-                        <td class="b-left table-punts {{'winner' if result[0] == '6' else '' if result[0] == 'K' else 'loser'}}">{{result[0]}}</td>
+                        {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}
+                        <td class="b-left table-punts {{result_class}}">{{result[0]}}</td>
                     </tr>
                     <tr>
                         <td class="b-top text-left px-2 table-team">{{t1}}</td>
-                        <td class="b-top b-left table-punts {{'winner' if result[1] == '6' else '' if result[1] == 'K' else 'loser'}}">{{result[1]}}</td>
+                        {% set result_class = '' if not match_done else "winner" if result[1] == "6" else "loser" %}
+                        <td class="b-top b-left table-punts {{result_class}}">{{result[1]}}</td>
                     </tr>
                 </table>
             </a>
