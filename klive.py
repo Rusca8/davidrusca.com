@@ -20,21 +20,19 @@ def load_rounds():
     return rounds.get("rounds", {})
 
 
-def get_ranking(round_num=None):
-    teams = load_teams()
-    rounds = load_rounds()
-
-    round_type = rounds.get(round_num, {}).get("type", "normal")
+def get_scores(rnum=None, rounds=None, teams=None):
+    rounds = rounds or load_rounds()
+    teams = teams or load_teams()
 
     scores = {}
 
     # prepopulate teams
     for team in teams:
-        scores[team] = {"id": team, "P": 0, "K": 0, "oponents": [],  "-K": 0, "SOS": 0}
+        scores[team] = {"id": team, "P": 0, "K": 0, "oponents": [], "-K": 0, "SOS": 0}
 
     # get main scores
     for id_, round_ in rounds.items():
-        if int(id_) > int(round_num):  # ignore "future" rounds
+        if rnum and int(id_) > int(rnum):  # ignore "future" rounds
             continue
         for match in round_.get("matches", {}).values():
             match_teams = match.get("teams", [])
@@ -64,20 +62,96 @@ def get_ranking(round_num=None):
         # subtract KC scored against the team
         scores[team]["SOS"] -= scores[team]["-K"]
 
+    return scores
+
+
+def get_ranking(rnum=None):
+    teams = load_teams()
+    rounds = load_rounds()
+
+    round_type = rounds.get(rnum, {}).get("type", "normal")
+
+    # get scores
+    scores = get_scores(rnum=rnum, rounds=rounds, teams=teams)
+
     # generate ranking
+    finals_ranking = get_finals_ranking(rnum, rounds=rounds)
+    ranking = generate_ranking(scores, teams=teams, finals=finals_ranking)
+
+    # count finished matches
+    finished_matches = count_finished_matches(rnum=rnum, rounds=rounds)
+
+    return {"round_type": round_type, "ranking": ranking, "finished_matches": finished_matches}
+
+
+def winner_of_a_score(score=None):
+    if score is None:
+        return 0
+    if score[1] == "K":
+        return 0
+    if score[0] == "K":
+        return 1
+    if score[1] > score[0]:
+        return 1
+    else:
+        return 0
+
+
+def get_finals_ranking(rnum, rounds=None):
+    rounds = rounds or load_rounds()
+    round_ = rounds.get(rnum, {})
+    finals_ranking = ["", "", "", ""]
+    if round_.get("type") == "final":
+        for match_ in round_.get("matches", {}).values():
+            final_status = match_.get("final")
+            if final_status in ["F", "Q"]:
+                result = match_.get("result", ["K", "K"])
+                teams = match_.get("teams", ["", ""])
+                if final_status == "F":
+                    if winner_of_a_score(result) == 1:  # comparing strings but it's fine here
+                        finals_ranking[0], finals_ranking[1] = teams[1], teams[0]
+                    else:
+                        finals_ranking[0], finals_ranking[1] = teams
+                elif match_.get("final") == "Q":
+                    if winner_of_a_score(result) == 1:  # comparing strings but it's fine here
+                        finals_ranking[2], finals_ranking[3] = teams[1], teams[0]
+                    else:
+                        finals_ranking[2], finals_ranking[3] = teams
+    print(finals_ranking)
+    return [f for f in finals_ranking if f]
+
+
+def generate_ranking(scores, teams=None, finals=None):
+    if finals is None:
+        finals = []
+    teams = teams or load_teams()
     ranking = []
     rank = 0
     last = {"P": 0, "K": 0, "SOS": 0}
-    for team in reversed(sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], stats["id"]])):
+    # force extract finalists (if round is final)
+    for finalist in finals:
+        team = scores.get(finalist)
+        team_name = teams.get(team["id"]).get("name", "(Equip)")
+        rank += 1
+        ranking.append({"rank": rank, "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
+    # generate swiss ranking
+    for team in reversed(
+            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], stats["id"]])):
+        if team["id"] in finals:
+            continue
         team_name = teams.get(team["id"]).get("name", "(Equip)")
         if last["P"] != team["P"] or last["K"] != team["K"] or last["SOS"] != team["SOS"]:
             rank += 1
         ranking.append({"rank": rank, "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
+    return ranking
 
-    # count finished matches
+
+def count_finished_matches(rnum=None, rounds=None):
+    rounds = rounds or load_rounds()
+
     finished_matches = {}
     for id_, round_ in rounds.items():
-        if int(id_) > int(round_num):  # ignore "future" rounds
+        if rnum and int(id_) > int(rnum):  # ignore "future" rounds
             continue
         finished_matches[id_] = {"total": 0, "finished": 0}
         for match in round_.get("matches", {}).values():
@@ -85,7 +159,7 @@ def get_ranking(round_num=None):
             if "6" in match.get("result", []):
                 finished_matches[id_]["finished"] += 1
 
-    return {"round_type": round_type, "ranking": ranking, "finished_matches": finished_matches}
+    return finished_matches
 
 
 def edit_match_points(data=None):
@@ -174,7 +248,7 @@ def add_round(rtype):
                                "2": {"final": "Q", "teams": ["", ""], "result": ["K", "K"]}
                                }
             else:
-                pre_matches = {"1": {"teams": ["", ""], "result": ["K", "K"]}}
+                pre_matches = {}
 
             rounds["rounds"][new_id] = {"type": rtype, "matches": pre_matches}
 

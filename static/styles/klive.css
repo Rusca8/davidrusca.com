@@ -5,6 +5,10 @@
 
     --color-success: #cce0c8;
     --color-danger: #e8b5b5;
+
+    --color-gold: #f5e2ae;
+    --color-silver: #eeeeee;
+    --color-bronze: #d9c6b8;
 }
 
 .btn {
@@ -24,6 +28,10 @@ body {
 }
 .khead:focus, .khead:hover {
     color: white;
+}
+
+.table-div {
+    background-color: black;
 }
 
 .ksub {
@@ -50,6 +58,20 @@ body {
     color: white;
 }
 
+.bg-gold {
+    background-color: var(--color-gold);
+}
+
+.finalista-1 {
+    background-color: var(--color-gold);
+}
+.finalista-2 {
+    background-color: var(--color-silver);
+}
+.finalista-3 {
+    background-color: var(--color-bronze);
+}
+
 table {
     border-collapse: collapse;
 }
@@ -64,6 +86,10 @@ table {
 
 .ranking tr th {
     border-bottom: 2px solid black;
+}
+
+.ranking th {
+    background-color: var(--color-sub);
 }
 
 td {
@@ -107,11 +133,23 @@ td {
 }
 
 .table-punts {
-    width: 20%;
+    width: 3rem;
 }
 
-.table-team, .table-punts {
+.table-team, .table-punts, .table-final {
     font-size: 1.2rem;
+}
+
+.table-final {
+    width: 2rem;
+    border-right: 1px solid black;
+}
+
+.table-final-F {
+    background-color: var(--color-gold);
+}
+.table-final-Q {
+    background-color: var(--color-bronze);
 }
 
 .teams-text {

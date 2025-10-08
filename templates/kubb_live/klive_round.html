@@ -11,7 +11,7 @@
     <title>Ronda - Tomba el rei</title>
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css">
+    <link rel="stylesheet" href="/static/styles/klive.css?date=20251008">
 
     <script>
         window.addEventListener("pageshow", function (event) {
@@ -78,6 +78,9 @@
             <a href="/tombaelrei/edit_match/{{rnum}}/{{match_id}}/" class="btn kbtn btn-block mb-3">
                 <table class="w100 mb-0">
                     <tr>
+                        {% if "final" in match %}
+                        <td rowspan="2" class="table-final table-final-{{match['final']}}">{{match["final"]}}</td>
+                        {% endif %}
                         <td class="text-left px-2 table-team">{{t0}}</td>
                         {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}
                         <td class="b-left table-punts {{result_class}}">{{result[0]}}</td>
@@ -94,10 +97,11 @@
         {% if not all_busy %}
         <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
         {% endif %}
+
+        {% if not round_.get("matches", {}) %}
         <hr class="khr my-3" data-content="★">
-
         <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>
-
+        {% endif %}
     </div>
 
     <!-- Optional JavaScript -->

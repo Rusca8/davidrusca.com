@@ -21,7 +21,8 @@
         <hr class="khr my-3" data-content="★">
 
         {% for rnum, round_ in rounds.items() %}
-        <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn btn-block py-2 mb-3">{{"Final" if round_.get("type") == "final" else "Ronda " + rnum}}</a>
+            {% set final = round_.get("type") == "final" %}
+            <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn btn-block py-2 mb-3 {{'bg-gold' if final else ''}}">{{"Final" if final else "Ronda " + rnum}}</a>
         {% endfor %}
         <a href="/tombaelrei/add_round" class="btn kbtn kbtn-admin btn-block py-2 my-4">+</a>
 
