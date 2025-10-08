@@ -920,7 +920,7 @@ def ktn():
 @app.route('/kubb')
 @app.route('/kubb/')
 def kubb():
-    return redirect('/static/pdf/kubb_CA.pdf?date=20251005')
+    return redirect('/static/pdf/kubb_CA.pdf?date=20251008')
 
 
 @app.route('/tombaelrei/rounds/<rnum>/')
