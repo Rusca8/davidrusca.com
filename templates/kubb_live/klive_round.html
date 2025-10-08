@@ -90,8 +90,10 @@
                 </table>
             </a>
         {% endfor %}
-        <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
 
+        {% if not all_busy %}
+        <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
+        {% endif %}
         <hr class="khr my-3" data-content="★">
 
         <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>

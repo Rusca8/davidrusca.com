@@ -938,8 +938,9 @@ def kubb_live_round(rnum=None, page=None):
     else:
         rounds = klive.load_rounds()
         teams = klive.load_teams()
+        all_busy = klive.all_busy(rnum, rounds=rounds, teams=teams)
         return render_template("/kubb_live/klive_round.html",
-                               rnum=rnum, teams=teams, round_=rounds.get(rnum, {}))
+                               rnum=rnum, teams=teams, round_=rounds.get(rnum, {}), all_busy=all_busy)
 
 
 @app.route("/tombaelrei/teams/")

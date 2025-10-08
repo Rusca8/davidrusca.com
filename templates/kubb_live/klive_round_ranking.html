@@ -39,6 +39,11 @@
             </tr>
         {% endfor %}
         </table>
+        {% set finished_matches = ranking_info["finished_matches"] %}
+        <div class="text-center lil-title mb-1 mt-3"><b>Estat dels partits</b></div>
+        {% for fm_round, info in finished_matches.items() %}
+        <div class="text-center"><b>Ronda {{fm_round}}</b> · {{info["total"]}} partit{{'' if info["total"] == 1 else 's' }} · {{info["finished"]}} acabat{{'' if info["finished"] == 1 else 's' }}</div>
+        {% endfor %}
         <button class="kbtn kbtn-admin btn-block py-2 my-4">Partits suggerits</button>
     </div>
 

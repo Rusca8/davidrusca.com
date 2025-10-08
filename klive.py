@@ -37,7 +37,6 @@ def get_ranking(round_num=None):
         if int(id_) > int(round_num):  # ignore "future" rounds
             continue
         for match in round_.get("matches", {}).values():
-            print(match)
             match_teams = match.get("teams", [])
             match_result = match.get("result", [])
             if len(match_teams) == 2 and len(match_result) == 2:
@@ -56,7 +55,6 @@ def get_ranking(round_num=None):
                     # KC scored by oponents against the team
                     scores[match_teams[0]]["-K"] += int(match_result[1])
                     scores[match_teams[1]]["-K"] += int(match_result[0])
-            print(scores)
 
     # calculate Strength of Schedule
     for team, stats in scores.items():
@@ -76,7 +74,18 @@ def get_ranking(round_num=None):
             rank += 1
         ranking.append({"rank": rank, "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
 
-    return {"round_type": round_type, "ranking": ranking}
+    # count finished matches
+    finished_matches = {}
+    for id_, round_ in rounds.items():
+        if int(id_) > int(round_num):  # ignore "future" rounds
+            continue
+        finished_matches[id_] = {"total": 0, "finished": 0}
+        for match in round_.get("matches", {}).values():
+            finished_matches[id_]["total"] += 1
+            if "6" in match.get("result", []):
+                finished_matches[id_]["finished"] += 1
+
+    return {"round_type": round_type, "ranking": ranking, "finished_matches": finished_matches}
 
 
 def edit_match_points(data=None):
@@ -211,6 +220,17 @@ def get_match_edit_data(rnum, match_id):
         match_edit_data["busy_teams"].update(m.get("teams", []))
 
     return match_edit_data
+
+
+def all_busy(rnum, rounds=None, teams=None):
+    rounds = rounds or load_rounds()
+    teams = teams or load_teams()
+
+    busy_teams = set()
+    for match in rounds.get(rnum, {}).get("matches", {}).values():
+        busy_teams.update(match.get("teams", []))
+
+    return all(t in busy_teams for t in teams)
 
 
 def def_pairs(rnum):
