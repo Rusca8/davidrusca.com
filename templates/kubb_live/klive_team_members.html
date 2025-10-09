@@ -11,8 +11,9 @@
     <title>Membres de l'equip - Tomba el rei</title>
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css">
+    <link rel="stylesheet" href="/static/styles/klive.css?date=20251009">
 
+    {% if current_user.is_kubb_admin %}
     <script>
         var base_url = "/klive/ajax/";
 
@@ -79,19 +80,34 @@
             )
         }
     </script>
+    {% endif %}
 </head>
 <body>
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
     <a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
     <div class="m-3">
+        {% if current_user.is_kubb_admin %}
         <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}" autocomplete="off">
+        {% else %}
+        <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip')}}</div>
+        {% endif %}
+        {% if current_user.is_kubb_admin %}
         <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
+        {% endif %}
         <hr class="khr my-3" data-content="★">
         <div id="member_list">
         {% for member in team.get("members", []) %}
+            {% if current_user.is_kubb_admin %}
             <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}" autocomplete="off">
+            {% else %}
+            <div class="team-member text-center">{{member}}</div>
+            {% endif %}
         {% endfor %}
         </div>
+
+        {% if not current_user.is_kubb_admin %}
+        <a class="kbtn btn btn-block mt-4 py-1" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
+        {% endif %}
 
         {% if current_user.is_kubb_admin %}
             <button class="kbtn team-member kbtn-admin btn-block py-1" onclick="add_team_member();">+</button>
@@ -100,8 +116,6 @@
             <hr class="khr my-3" data-content="★">
             <button class="kbtn kbtn-elimina btn-block py-2" onclick='remove_team({{tnum|tojson}});'>Elimina</button>
             {% endif %}
-        {% else %}
-            TODO: show team
         {% endif %}
 
     <!-- Optional JavaScript -->

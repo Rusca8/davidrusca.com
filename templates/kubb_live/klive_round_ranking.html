@@ -50,7 +50,9 @@
             {% endif %}
         {% endfor %}
         </table>
+        {% if current_user.is_kubb_admin %}
         <button class="kbtn kbtn-admin btn-block py-2 my-3">Partits suggerits</button>
+        {% endif %}
     </div>
 
     <!-- Optional JavaScript -->

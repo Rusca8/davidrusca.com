@@ -52,10 +52,13 @@ body {
     border-radius: 0.2rem;
     width: 100%;
 }
-
 .kbtn.selected {
     background: var(--color-head);
     color: white;
+}
+
+.team-name {
+    font-size: 2rem;
 }
 
 .bg-gold {

@@ -25,7 +25,9 @@
             {% set final = round_.get("type") == "final" %}
             <a href="/tombaelrei/rounds/{{rnum}}" class="btn kbtn btn-block py-2 mb-3 {{'bg-gold' if final else ''}}">{{"Final" if final else "Ronda " + rnum}}</a>
         {% endfor %}
+        {% if current_user.is_kubb_admin %}
         <a href="/tombaelrei/add_round" class="btn kbtn kbtn-admin btn-block py-2 my-4">+</a>
+        {% endif %}
 
     </div>
 

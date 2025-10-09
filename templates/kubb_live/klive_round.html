@@ -13,6 +13,7 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/klive.css?date=20251008">
 
+    {% if current_user.is_kubb_admin %}
     <script>
         window.addEventListener("pageshow", function (event) {
             if(event.persisted){
@@ -59,6 +60,7 @@
             }
         }
     </script>
+    {% endif %}
 </head>
 <body>
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
@@ -75,7 +77,12 @@
             {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
 
             {% set match_done = "6" in result %}
-            <a href="/tombaelrei/edit_match/{{rnum}}/{{match_id}}/" class="btn kbtn btn-block mb-3">
+            {% if current_user.is_kubb_admin %}
+                {% set match_press_url = '/tombaelrei/edit_match/' + rnum + '/' + match_id + '/' %}
+            {% else %}
+                {% set match_press_url = '/tombaelrei/teams/' %}
+            {% endif %}
+            <a href="{{match_press_url}}" class="btn kbtn btn-block mb-3">
                 <table class="w100 mb-0">
                     <tr>
                         {% if "final" in match %}
@@ -94,13 +101,15 @@
             </a>
         {% endfor %}
 
-        {% if not all_busy %}
-        <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
-        {% endif %}
+        {% if current_user.is_kubb_admin %}
+            {% if not all_busy %}
+            <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="add_match_to_round({{rnum}});">+</button>
+            {% endif %}
 
-        {% if not round_.get("matches", {}) %}
-        <hr class="khr my-3" data-content="★">
-        <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>
+            {% if not round_.get("matches", {}) %}
+            <hr class="khr my-3" data-content="★">
+            <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>
+            {% endif %}
         {% endif %}
     </div>
 
