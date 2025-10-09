@@ -19,6 +19,14 @@
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
     <a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_type == "final" else "Ronda " + rnum}}</a>
     <div class="m-3">
+        {% set finished_matches = ranking_info["finished_matches"] %}
+        <div class="text-center lil-title mb-1 mt-3"><b>Estat dels partits</b></div>
+        {% for fm_round, info in finished_matches.items() %}
+        <div class="text-center"><b>Ronda {{fm_round}}</b> · {{info["total"]}} partit{{'' if info["total"] == 1 else 's' }} · {{info["finished"]}} acabat{{'' if info["finished"] == 1 else 's' }}</div>
+        {% endfor %}
+
+        <hr class="khr my-3" data-content="★">
+
         <div class="text-center lil-title mb-2"><b>Classificació</b></div>
 
         <table class="w100 ranking">
@@ -42,14 +50,7 @@
             {% endif %}
         {% endfor %}
         </table>
-        <hr class="khr my-3" data-content="★">
-        {% set finished_matches = ranking_info["finished_matches"] %}
-        <div class="text-center lil-title mb-1 mt-3"><b>Estat dels partits</b></div>
-        {% for fm_round, info in finished_matches.items() %}
-        <div class="text-center"><b>Ronda {{fm_round}}</b> · {{info["total"]}} partit{{'' if info["total"] == 1 else 's' }} · {{info["finished"]}} acabat{{'' if info["finished"] == 1 else 's' }}</div>
-        {% endfor %}
-        <hr class="khr my-3" data-content="★">
-        <button class="kbtn kbtn-admin btn-block py-2 my-2">Partits suggerits</button>
+        <button class="kbtn kbtn-admin btn-block py-2 my-3">Partits suggerits</button>
     </div>
 
     <!-- Optional JavaScript -->

@@ -143,7 +143,12 @@ td {
 .table-final {
     width: 2rem;
     border-right: 1px solid black;
+    border-top-left-radius: 0.12rem;
 }
+.br-bl {border-bottom-left-radius: 0.12rem;}
+.br-br {border-bottom-right-radius: 0.12rem;}
+.br-tl {border-top-left-radius: 0.12rem;}
+.br-tr {border-top-right-radius: 0.12rem;}
 
 .table-final-F {
     background-color: var(--color-gold);
