@@ -12,6 +12,29 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/klive.css">
+
+    <script>
+        var base_url = "/klive/ajax/";
+
+        function add_team(){
+            console.log("adding team to the tournament");
+            $.ajax({
+                url: base_url + "add_team",
+                type: "post",
+                data: {
+                    "hola": "és que no hi havia res a enviar, ja em sap greu",
+                },
+                success: add_team_execute,
+            });
+        };
+        function add_team_execute(ajax_result){
+            if(ajax_result.success){
+                let new_id = ajax_result.new_id;
+                console.log("New team at id #", new_id, "opening new team to edit...");
+                window.location.href = "/tombaelrei/teams/" + new_id + "/";
+            }
+        }
+    </script>
 </head>
 <body>
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
@@ -27,7 +50,7 @@
             </table>
         </a>
         {% endfor %}
-        <button class="kbtn kbtn-admin btn-block py-2 my-3">+</button>
+        <button class="kbtn kbtn-admin btn-block py-2 my-3" onclick="add_team();">+</button>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

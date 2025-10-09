@@ -998,10 +998,17 @@ def klive_ajax(query=None):
             case "edit_match_team":
                 success = klive.edit_match_team(data=request.form)
                 return {"success": success}
+            case "add_team":
+                result = klive.append_team()
+                success = bool(result)
+                return {"success": success, "new_id": result["new_id"] if result else None}
             case "add_match":
                 result = klive.append_match(data=request.form)
                 success = bool(result)
                 return {"success": success, "new_id": result["new_id"] if result else None}
+            case "remove_team":
+                success = klive.remove_team(data=request.form)
+                return {"success": success}
             case "remove_match":
                 success = klive.remove_match(data=request.form)
                 return {"success": success}

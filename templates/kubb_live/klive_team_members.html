@@ -54,9 +54,27 @@
             }
         }
 
+        function remove_team(tnum){
+            console.log("remove team");
+            $.ajax({
+                url: base_url + "remove_team",
+                type: "post",
+                data: {
+                    "team_id": tnum,
+                },
+                success: remove_team_execute,
+            });
+        }
+        function remove_team_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei/teams";
+            }
+        }
+
         function add_team_member(){
             let new_id = $('input.team-member').length + 1;
-            $('input.team-member').last().after(
+            console.log("new team member with new_id", new_id);
+            $('#member_list').append(
                 '<input id="team_member_' + new_id + '" class="kbtn team-member text-center py-1 mb-2" type="text" value="">'
             )
         }
@@ -66,19 +84,21 @@
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
     <a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
     <div class="m-3">
-        <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}">
+        <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}" autocomplete="off">
         <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
         <hr class="khr my-3" data-content="★">
+        <div id="member_list">
         {% for member in team.get("members", []) %}
-            <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}">
+            <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}" autocomplete="off">
         {% endfor %}
+        </div>
 
         {% if current_user.is_kubb_admin %}
             <button class="kbtn team-member kbtn-admin btn-block py-1" onclick="add_team_member();">+</button>
             <button class="kbtn kbtn-confirma btn-block py-2" onclick="submit_team_changes()">Confirma</button>
             {% if not has_matches %}
             <hr class="khr my-3" data-content="★">
-            <button class="kbtn kbtn-elimina btn-block py-2">Elimina</button>
+            <button class="kbtn kbtn-elimina btn-block py-2" onclick='remove_team({{tnum|tojson}});'>Elimina</button>
             {% endif %}
         {% else %}
             TODO: show team

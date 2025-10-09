@@ -231,6 +231,20 @@ def edit_match_team(data=None):
     return False
 
 
+def append_team():
+    with klive_lock:
+        teams = utilities.load_json(teams_file)
+        if "teams" in teams:
+            new_id = max(int(id_) for id_ in teams["teams"]) + 1 if teams["teams"] else 1
+            teams["teams"][new_id] = {
+                "name": "",
+                "members": [],
+            }
+            utilities.dump_json(teams, filename=teams_file)
+            return {"new_id": new_id}
+    return False
+
+
 def append_match(data=None):
     if data is None:
         return False
@@ -245,6 +259,23 @@ def append_match(data=None):
 
                 utilities.dump_json(rounds, filename=rounds_file)
                 return {"new_id": new_id}
+    return False
+
+
+def remove_team(data=None):
+    if data is None:
+        return False
+    if all(x in data for x in ["team_id"]):
+        team_id = data["team_id"]
+
+        with klive_lock:
+            teams = utilities.load_json(teams_file)
+
+            if team_id in teams["teams"]:
+                teams["teams"] = {id_: team for id_, team in teams["teams"].items() if id_ != team_id}
+
+                utilities.dump_json(teams, filename=teams_file)
+                return True
     return False
 
 
