@@ -20,6 +20,15 @@ def load_rounds():
     return rounds.get("rounds", {})
 
 
+def team_has_matches(tnum, rounds=None):
+    rounds = rounds or load_rounds()
+    for round_ in rounds.values():
+        for match_ in round_.get("matches", {}).values():
+            if tnum in match_.get("teams", []):
+                return True
+    return False
+
+
 def get_scores(rnum=None, rounds=None, teams=None):
     rounds = rounds or load_rounds()
     teams = teams or load_teams()
@@ -162,6 +171,25 @@ def count_finished_matches(rnum=None, rounds=None):
     return finished_matches
 
 
+def edit_team(data=None):
+    if data is None:
+        return False
+    if all(x in data for x in ["tnum", "name", "members"]):
+        import json
+        tnum = data["tnum"]
+        name = data["name"]
+        members = json.loads(data["members"])
+
+        with klive_lock:
+            teams = utilities.load_json(teams_file)
+            if tnum in teams["teams"]:
+                teams["teams"][tnum]["name"] = name
+                teams["teams"][tnum]["members"] = members
+                utilities.dump_json(teams, filename=teams_file)
+            return True
+    return False
+
+
 def edit_match_points(data=None):
     if data is None:
         return False
@@ -171,7 +199,7 @@ def edit_match_points(data=None):
         team_index = data["team_index"]
         points = data["points"]
 
-        with (klive_lock):
+        with klive_lock:
             rounds = utilities.load_json(rounds_file)
             match_ = rounds["rounds"].get(rnum, {}).get("matches", {}).get(match_id, {})
             if match_ and "result" in match_:

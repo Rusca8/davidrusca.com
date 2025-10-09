@@ -12,23 +12,74 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/klive.css">
+
+    <script>
+        var base_url = "/klive/ajax/";
+
+        function submit_team_changes(){
+            let name = $('#team_name').val();
+            let members = [];
+            let i=1;
+            while(i<20){
+                let member = $("#team_member_" + i);
+                if(member.val()){
+                    members.push(member.val());
+                }else{
+                    break;
+                }
+                i++;
+            }
+            console.log(name, members)
+            edit_team(name, members);
+        }
+
+        function edit_team(name, members){
+            console.log("edit team");
+            members = JSON.stringify(members);
+            let tnum = {{tnum|tojson}};
+            $.ajax({
+                url: base_url + "edit_team",
+                type: "post",
+                data: {
+                    "tnum": tnum,
+                    "name": name,
+                    "members": members,
+                },
+                success: edit_team_execute,
+            });
+        };
+        function edit_team_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei/teams";
+            }
+        }
+
+        function add_team_member(){
+            let new_id = $('input.team-member').length + 1;
+            $('input.team-member').last().after(
+                '<input id="team_member_' + new_id + '" class="kbtn team-member text-center py-1 mb-2" type="text" value="">'
+            )
+        }
+    </script>
 </head>
 <body>
     <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
     <a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
     <div class="m-3">
-        <input class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}">
+        <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}">
         <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
         <hr class="khr my-3" data-content="★">
         {% for member in team.get("members", []) %}
-            <input class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}">
+            <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}">
         {% endfor %}
 
         {% if current_user.is_kubb_admin %}
-            <button class="kbtn team-member kbtn-admin btn-block py-1">+</button>
-            <button class="kbtn kbtn-confirma btn-block py-2">Confirma</button>
+            <button class="kbtn team-member kbtn-admin btn-block py-1" onclick="add_team_member();">+</button>
+            <button class="kbtn kbtn-confirma btn-block py-2" onclick="submit_team_changes()">Confirma</button>
+            {% if not has_matches %}
             <hr class="khr my-3" data-content="★">
             <button class="kbtn kbtn-elimina btn-block py-2">Elimina</button>
+            {% endif %}
         {% else %}
             TODO: show team
         {% endif %}

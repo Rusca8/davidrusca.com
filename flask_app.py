@@ -951,8 +951,9 @@ def kubb_live_teams(tnum=None, page=None):
     teams = klive.load_teams()
     if tnum:
         if tnum in teams:
+            has_matches = klive.team_has_matches(tnum)
             return render_template("/kubb_live/klive_team_members.html",
-                                   tnum=tnum, team=teams.get(tnum, {}))
+                                   tnum=tnum, team=teams.get(tnum, {}), has_matches=has_matches)
         else:
             return redirect("/tombaelrei/teams/")
     return render_template("/kubb_live/klive_teams.html", teams=teams)
@@ -988,6 +989,9 @@ def klive_ajax(query=None):
         import klive
 
         match query:
+            case "edit_team":
+                success = klive.edit_team(data=request.form)
+                return {"success": success}
             case "edit_match_points":
                 success = klive.edit_match_points(data=request.form)
                 return {"success": success}
