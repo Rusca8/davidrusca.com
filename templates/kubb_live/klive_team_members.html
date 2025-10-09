@@ -89,7 +89,7 @@
         {% if current_user.is_kubb_admin %}
         <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}" autocomplete="off">
         {% else %}
-        <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip')}}</div>
+        <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip') or "Nom de l'equip"}}</div>
         {% endif %}
         {% if current_user.is_kubb_admin %}
         <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
