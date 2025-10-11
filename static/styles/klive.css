@@ -91,7 +91,7 @@ table {
     border-bottom: 2px solid black;
 }
 
-.ranking th {
+.ranking th, .false-th {
     background-color: var(--color-sub);
 }
 
@@ -109,6 +109,8 @@ td {
 .w100 {
     width: 100%;
 }
+.stats-P {width: 25%}
+.stats-K {width: 35%}
 
 .kbtn-admin {
     background: rgba(255, 255, 255, 0.5);
@@ -215,4 +217,21 @@ td {
 .kselect-out {
     border: 1px solid black;
     border-radius: 0.2rem;
+}
+
+.big-text-th {
+    font-size: 1.5rem;
+}
+.big-text-td {
+    font-size: 2rem;
+}
+
+.positive {
+    color: green;
+    background-color: var(--color-success);
+}
+
+.negative {
+    color: darkred;
+    background-color: var(--color-danger);
 }

@@ -1,6 +1,7 @@
 from threading import RLock
 
 import utilities
+from utilities import Reversor as Rev
 
 klive_lock = RLock()
 klive_root = "./static/json/kubb_live/tombaelrei/"
@@ -142,17 +143,43 @@ def generate_ranking(scores, teams=None, finals=None):
         team = scores.get(finalist)
         team_name = teams.get(team["id"]).get("name", "(Equip)")
         rank += 1
-        ranking.append({"rank": rank, "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
+        ranking.append({"rank": rank, "id": team["id"], "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
     # generate swiss ranking
     for team in reversed(
-            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], stats["id"]])):
+            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], Rev(stats["id"])])):
         if team["id"] in finals:
             continue
         team_name = teams.get(team["id"]).get("name", "(Equip)")
         if last["P"] != team["P"] or last["K"] != team["K"] or last["SOS"] != team["SOS"]:
             rank += 1
-        ranking.append({"rank": rank, "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
+        ranking.append({"rank": rank, "id": team["id"], "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
     return ranking
+
+
+def get_team_stats(tnum, rounds=None, teams=None):
+    rounds = rounds or load_rounds()
+    teams = teams or load_teams()
+
+    # calculate scores
+    scores = get_scores(rounds=rounds, teams=teams)
+
+    # get matches
+    matches = []
+    for rnum, round in rounds.items():
+        for match_id, match in round.get("matches", {}).items():
+            if tnum in match.get("teams", {}):
+                matches.append(match)
+                matches[-1]["rnum"] = rnum
+                matches[-1]["id"] = match_id
+
+    # get sos_table
+    sos_table = {}
+    for oponent in scores.get(tnum, {}).get("oponents", []):
+        sos_table[oponent] = scores.get(oponent, {}).get("K", 0)
+
+    print(scores)
+
+    return {"scores": scores.get(tnum, {}), "matches": matches, "sos_table": sos_table}
 
 
 def count_finished_matches(rnum=None, rounds=None):
@@ -366,5 +393,84 @@ def all_busy(rnum, rounds=None, teams=None):
     return all(t in busy_teams for t in teams)
 
 
-def def_pairs(rnum):
-    return "HOLA"
+def default_pairs(ranking, past_games, byes):
+    pairs = []
+    playing = []
+    bye = None
+    # choose bye
+    if len(ranking) % 2:
+        for team in reversed(ranking):
+            if team not in byes:
+                bye = team
+                byes.append(team)
+                break
+    # choose pairs
+    for team in ranking:
+        if team in playing or team == bye:
+            continue
+        options = [t for t in ranking if t not in playing and t not in past_games[team] and t != team and t != bye]
+        print("options for ", team, "::", options, " - already played", past_games[team])
+        if options:
+            pairs.append([team, options[0]])
+            playing += [team, options[0]]
+            print("new pair", [team, options[0]])
+        else:
+            print(f"!! TEAM {team} CAN'T PLAY NEW OPONENT !!")
+            print("YOU'LL NEED TO MANAGE THIS")
+    return pairs
+
+
+def simulate_swiss_matches(teams, n_rounds=3, deviation=40):
+    import random
+
+    # init
+    print("······· Simulating swiss tournament matches ·······")
+    print("Teams: ", teams)
+
+    # team strengths
+    print("\n······ Choosing team strengths ·····")
+    team_strengths = {t: random.randint(1, 100) for t in teams}
+    print("".join(f"{t:>5}" for t in team_strengths))
+    print("".join(f"{s:>5}" for s in team_strengths.values()))
+
+    # ranking
+    ranking = [t for t in teams]
+    past_games = {t: [] for t in teams}
+    byes = []
+
+    proxy_scores = {t: 0 for t in teams}
+    for r in range(n_rounds):
+        # current ranking
+        ranking = [t for t, _ in sorted(proxy_scores.items(), key=lambda x: [Rev(x[1]), x[0]])]
+
+        print(f"\n\n{' ROUND':/>35} {r:/<35}")
+        print(f"\n{' Current ranking ':·^70}")
+        t_strings = ["Team   "]
+        s_strings = ["Points "]
+        for t in ranking:
+            t_strings += f"{t:>5} "
+            s_strings += f"{proxy_scores[t]:>5} "
+        print("".join(t_strings[:-1]))
+        print("".join(s_strings[:-1]), "\n")
+
+        # get matches
+        new_games = default_pairs(ranking, past_games, byes)
+
+        # execute matches
+        for game in new_games:
+            t0, t1 = game
+            past_games[t0].append(t1)
+            past_games[t1].append(t0)
+            increments = [random.randint(0, deviation) for _ in game]
+            delta = (team_strengths[t0] + increments[0]) - (team_strengths[t1] + increments[1])
+            if delta >= 0:  # team 0 wins
+                proxy_scores[t0] += 6
+                proxy_scores[t1] += random.randint(0, 5)
+            else:
+                proxy_scores[t1] += 6
+                proxy_scores[t0] += random.randint(0, 5)
+
+
+if __name__ == "__main__":
+    teams = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    simulate_swiss_matches(teams, n_rounds=6, deviation=40)

@@ -951,9 +951,14 @@ def kubb_live_teams(tnum=None, page=None):
     teams = klive.load_teams()
     if tnum:
         if tnum in teams:
-            has_matches = klive.team_has_matches(tnum)
-            return render_template("/kubb_live/klive_team_members.html",
-                                   tnum=tnum, team=teams.get(tnum, {}), has_matches=has_matches)
+            if page == "stats":
+                stats = klive.get_team_stats(tnum, teams=teams)
+                return render_template("/kubb_live/klive_team_stats.html",
+                                       tnum=tnum, team=teams.get(tnum, {}), teams=teams, stats=stats)
+            else:
+                has_matches = klive.team_has_matches(tnum)  # only let remove teams with no matches
+                return render_template("/kubb_live/klive_team_members.html",
+                                       tnum=tnum, team=teams.get(tnum, {}), has_matches=has_matches)
         else:
             return redirect("/tombaelrei/teams/")
     return render_template("/kubb_live/klive_teams.html", teams=teams)

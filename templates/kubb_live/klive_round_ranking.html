@@ -38,7 +38,8 @@
                 <th class="text-center px-1">SoS</th>
             </tr>
         {% for team in ranking %}
-            <tr>
+            {% set team_id = team.get("id") %}
+            <tr onclick="window.location.href = '/tombaelrei/teams/{{team_id}}/stats/'">
                 <td class="text-center px-1 {{'finalista-' + loop.index|string if round_type == 'final' else ''}}">{{team["rank"]}}</td>
                 <td class="px-1">{{team["name"]}}</td>
                 <td class="text-center px-1">{{team["P"]}}</td>

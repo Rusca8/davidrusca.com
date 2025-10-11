@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Classificació - Tomba el rei</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles/klive.css?date=20251009">
+</head>
+<body>
+    <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+    <a href="/tombaelrei/teams/{{tnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{team.get('name', "Nom de l'equip")}}</a>
+    <div class="m-3">
+        <div class="text-center lil-title mb-1 mt-3"><b>Resum</b></div>
+            <table class="w-100 ranking">
+                <tr>
+                    <th class="text-center stats-P">Punts</th>
+                    <th class="text-center stats-K">Kubbs</th>
+                    <th class="text-center stats-SoS">SoS</th>
+                </tr>
+                <tr>
+                    <td class="text-center big-text-td">{{stats["scores"].get("P", "-")}}</td>
+                    <td class="text-center big-text-td">{{stats["scores"].get("K", "-")}}</td>
+                    <td class="text-center big-text-td">{{stats["scores"].get("SOS", "-")}}</td>
+                </tr>
+            </table>
+
+        <hr class="khr my-3" data-content="★">
+
+        <div class="text-center lil-title mb-1 mt-3"><b>Partits</b></div>
+
+        {% set matches = stats.get("matches", []) %}
+
+        {% for match in matches %}
+            {% set match_id = match["id"] %}
+            {% set rnum = match["rnum"] %}
+            {% set match_teams = match.get("teams", ["", ""]) %}
+            {% set result = match.get("result", ["K", "K"]) %}
+            {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
+            {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
+
+            {% set match_done = "6" in result %}
+            {% if current_user.is_kubb_admin %}
+                {% set match_press_url = '/tombaelrei/edit_match/' + rnum + '/' + match_id + '/' %}
+            {% else %}
+                {% set match_press_url = '/tombaelrei/teams/' %}
+            {% endif %}
+            <a href="{{match_press_url}}" class="btn kbtn btn-block mb-3">
+                <table class="w100 mb-0">
+                    <tr>
+                        {% if "final" in match %}
+                        <td rowspan="2" class="table-final br-tl br-bl table-final-{{match['final']}}">{{match["final"]}}</td>
+                        {% endif %}
+                        <td class="text-left px-2 table-team">{{t0}}</td>
+                        {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}
+                        <td class="b-left br-tr table-punts {{result_class}}">{{result[0]}}</td>
+                    </tr>
+                    <tr>
+                        <td class="b-top text-left px-2 table-team">{{t1}}</td>
+                        {% set result_class = '' if not match_done else "winner" if result[1] == "6" else "loser" %}
+                        <td class="b-top b-left br-br table-punts {{result_class}}">{{result[1]}}</td>
+                    </tr>
+                </table>
+            </a>
+        {% endfor %}
+
+        <hr class="khr my-3" data-content="★">
+
+        <div class="text-center lil-title mb-1 mt-3"><b>Strength of Schedule</b></div>
+
+        <table class="w-100 ranking mb-4">
+            {% for t, s in stats["sos_table"].items() %}
+            <tr onclick="window.location.href = '/tombaelrei/teams/{{t}}/stats/'">
+                <td class="pl-2">{{teams.get(t, {}).get("name", "Equip")}}</td>
+                <td class="text-center px-2 positive"><b>+{{s}}</b></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="pl-2"><i class="ml-2">Kubbs en contra</i></td>
+                <td class="text-center px-2 negative"><b>-{{stats["scores"]["-K"]}}</b></td>
+            </tr>
+            <tr><td class="table-div"></td></tr>
+            <tr>
+                <td class="pl-2"><b>Total</b></td>
+                <td class="text-center px-2"><b>{{stats["scores"]["SOS"]}}</b></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

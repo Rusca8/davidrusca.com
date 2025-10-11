@@ -62,3 +62,14 @@ def format_solve_time(solve_time):
     h = "" if h == ["0"] else ":".join(h) + "h"
     m = "" if m == "00" else f"{int(m)}" + "m"
     return f"{h} {m} {s}s"
+
+
+class Reversor:
+    def __init__(self, obj):
+        self.obj = obj
+
+    def __eq__(self, other):
+        return other.obj == self.obj
+
+    def __lt__(self, other):
+        return other.obj < self.obj

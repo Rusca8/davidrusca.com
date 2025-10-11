@@ -92,7 +92,7 @@
         <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip') or "Nom de l'equip"}}</div>
         {% endif %}
         {% if current_user.is_kubb_admin %}
-        <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
+        <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
         {% endif %}
         <hr class="khr my-3" data-content="★">
         <div id="member_list">
@@ -106,7 +106,7 @@
         </div>
 
         {% if not current_user.is_kubb_admin %}
-        <a class="kbtn btn btn-block mt-4 py-1" href="/tombaelrei/teams/{{tnum}}/">Estadístiques</a>
+        <a class="kbtn btn btn-block mt-4 py-1" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
         {% endif %}
 
         {% if current_user.is_kubb_admin %}
