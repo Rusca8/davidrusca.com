@@ -75,8 +75,8 @@ def get_scores(rnum=None, rounds=None, teams=None):
     return scores
 
 
-def get_ranking(rnum=None):
-    teams = load_teams()
+def get_ranking(rnum=None, teams=None):
+    teams = teams or load_teams()
     rounds = load_rounds()
 
     round_type = rounds.get(rnum, {}).get("type", "normal")
@@ -91,7 +91,7 @@ def get_ranking(rnum=None):
     # count finished matches
     finished_matches = count_finished_matches(rnum=rnum, rounds=rounds)
 
-    return {"round_type": round_type, "ranking": ranking, "finished_matches": finished_matches}
+    return {"round_type": round_type, "ranking": ranking, "finished_matches": finished_matches, "scores": scores}
 
 
 def winner_of_a_score(score=None):

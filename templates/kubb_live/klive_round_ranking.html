@@ -11,7 +11,7 @@
     <title>Classificació - Tomba el rei</title>
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css?date=20251009">
+    <link rel="stylesheet" href="/static/styles/klive.css?date=20251012">
 </head>
 <body>
     {% set round_type = ranking_info["round_type"] %}
@@ -52,7 +52,46 @@
         {% endfor %}
         </table>
         {% if current_user.is_kubb_admin %}
-        <button class="kbtn kbtn-admin btn-block py-2 my-3">Partits suggerits</button>
+        <hr class="khr my-3" data-content="★">
+        <div class="text-center lil-title mb-2"><b>Dejà vu</b></div>
+            {% for team in ranking %}
+                {% if loop.index % 2 %}
+                    {% set oponents = ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
+                    {% if ranking|length > loop.index %}
+                        {% set new_op = ranking[loop.index0+1].get("id", "") %}
+                        {% if new_op in oponents %}
+                        <div class="kbtn mb-2">
+                            <table class="w100 mb-0">
+                                <tr>
+                                    <td rowspan="2" class="redpair br-tl br-bl"></td>
+                                    <td class="text-left px-2 table-team">{{team.get("name", "Equip")}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="b-top text-left px-2 table-team">{{teams.get(new_op, {}).get("name", "Equip")}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+        <hr class="khr my-3" data-content="★">
+        <div class="text-center lil-title mb-2"><b>Oponents passats</b></div>
+
+            {% for team in ranking %}
+                <table class="w-100 ranking mb-2">
+                    <tr>
+                        <th class="pl-2">{{team.get("name", "Equip")}}</th>
+                    </tr>
+                    {% for op in ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
+                    <tr>
+                        <td class="pl-2">{{teams.get(op, {}).get("name", "Equip")}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+
         {% endif %}
     </div>
 

@@ -929,8 +929,10 @@ def kubb_live_round(rnum=None, page=None):
     """round info for klive"""
     import klive
     if page == "ranking":
-        ranking_info = klive.get_ranking(rnum)
-        return render_template("/kubb_live/klive_round_ranking.html", rnum=rnum, ranking_info=ranking_info)
+        teams = klive.load_teams()
+        ranking_info = klive.get_ranking(rnum, teams=teams)
+        return render_template("/kubb_live/klive_round_ranking.html",
+                               rnum=rnum, ranking_info=ranking_info, teams=teams)
     elif page == "def_pairs":
         # TODO authenticate
         def_pairs = klive.def_pairs(rnum)

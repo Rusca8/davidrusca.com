@@ -99,6 +99,12 @@ td {
     padding: 0px;
 }
 
+.redpair {
+    background-color: var(--color-danger);
+    width: 0.5rem;
+    border-right: 1px solid black;
+}
+
 .winner {
     background-color: var(--color-success);
 }
