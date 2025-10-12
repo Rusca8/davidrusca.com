@@ -146,7 +146,7 @@ def generate_ranking(scores, teams=None, finals=None):
         ranking.append({"rank": rank, "id": team["id"], "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
     # generate swiss ranking
     for team in reversed(
-            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], Rev(stats["id"])])):
+            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], Rev(f'{stats["id"]:0>3}')])):
         if team["id"] in finals:
             continue
         team_name = teams.get(team["id"]).get("name", "(Equip)")
