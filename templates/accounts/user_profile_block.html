@@ -74,6 +74,10 @@
         }
     }
 
+    function lower(input_form){
+        input_form.value = input_form.value.toLowerCase();
+    }
+
     function set_check_icon(which){
         let chosen_username = document.getElementById("chosen_username");
         check_icon.innerHTML = chosen_username == "" ? "" : which;
@@ -120,7 +124,7 @@
                     <h5 class="mb-0">{{'Canvia el' if current_user.username else 'Tria un'}} nom d'usuari</h5>
                     <small style="color: rgba(0, 0, 0, 0.5);">Entre 3 i 30 caràcters. Admet lletres <b>minúscules</b>, números, punts i barres baixes. Ha de començar per una lletra.</small>
                 </div>
-                <input id="chosen_username" type="text" oninput="reset_checking(this.value);" style="width: 25rem;"/> <span id="check_icon"></span>
+                <input id="chosen_username" type="text" oninput="lower(this); reset_checking(this.value);" style="width: 25rem;"/> <span id="check_icon"></span>
                 <div>
                     <button class="btn btn-secondary py-0 mt-2" onclick="submit_new_username();">Aplica els canvis</button>
                 </div>
