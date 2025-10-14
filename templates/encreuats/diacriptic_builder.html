@@ -51,7 +51,13 @@
             {% endif %}
 
             setInterval(check_word_siblings, 500);
+
+            // avoid focus loose for edit buttons
+            $('#edit-buttons').on("pointerdown", function(e){
+                e.preventDefault();
+            });
         }
+
 
         function build_block_list(which_list="clue"){
             let blocklist = document.getElementById(which_list == "clue" ? "blocklist" : "blocklist-solu");
@@ -121,6 +127,10 @@
 
 
         function reset_blocks(which="clue"){
+            if(which != "clue" && which != "solu"){
+                console.log("no blocklist chosen");
+                return;
+            }
             console.log("resetting blocks... " + which);
             if(which == "clue"){
                 blocks = blocks_with_defaults();
@@ -134,6 +144,10 @@
 
 
         function delete_last(which="clue"){
+            if(which != "clue" && which != "solu"){
+                console.log("no blocklist chosen");
+                return;
+            }
             let key = which == "clue" ? last_block : sol_last_block;
             if(key === null){
                 return;
@@ -143,6 +157,16 @@
                 the_blocks[key] = the_blocks[key].slice(0, -1);
             }
             update();
+        }
+
+        function eh_button_pressed(key){
+            $('textarea').each(function () {
+                if(this.selectionStart !== this.selectionEnd){
+                    if(this.id == "clue" || this.id == "solu"){
+                        add_to_blocklist(this.id, key);
+                    }
+                }
+            })
         }
 
 
@@ -155,16 +179,10 @@
 
 
         function hotkey(e, which="clue"){
-            let text_to_hl = document.getElementById(which);
-            let start = text_to_hl.selectionStart;
-            let end = text_to_hl.selectionEnd;
             if(e.key == "c"){
                 reset_blocks(which);
             }else if(e.key == "r"){
                 delete_last(which);
-            }
-            if(start == end){
-                return;
             }
             let key = "";
             switch(e.key){
@@ -199,7 +217,19 @@
                     console.log("key pressed:", e.key);
                     return;
             }
-            text_to_hl.selectionEnd = text_to_hl.selectionStart;
+            add_to_blocklist(which, key);
+            update();
+        }
+
+        function add_to_blocklist(which, key){
+            // get selection range
+            let text_to_hl = document.getElementById(which);
+            let start = text_to_hl.selectionStart;
+            let end = text_to_hl.selectionEnd;
+            if(start == end){
+                return;
+            }
+            // append block to block list
             let the_blocks = which == "clue" ? blocks : sol_blocks;
             the_blocks[key].push([start, end]);
             if(which == "clue"){
@@ -207,6 +237,9 @@
             }else{
                 sol_last_block = key;
             }
+            // reset selection range
+            text_to_hl.selectionEnd = text_to_hl.selectionStart;
+            // update
             update();
         }
 
@@ -661,21 +694,34 @@
     <!-- analysis editor columns -->
     <div class="container mt-3">
         <div class="row justify-content-center">
-            <div class="card border-c mb-3">
-                <div class="card-body py-1">
-                    <div class="container">
+            <div class="border-c mb-3">
+                <div class="py-1">
+                    <div class="container" id="edit-buttons">
                         <div class="row">
-                            <div class="col-sm-auto"><b>1</b> <span class="eh-def">def</span></div>
-                            <div class="col-sm-auto"><b>2</b> <span class="eh-ind">ind</span></div>
-                            <div class="col-sm-auto"><b>3</b> <span class="eh-mat">mat</span></div>
-                            <div class="col-sm-auto"><b>4</b> <span class="eh-wop">wop</span></div>
-                            <div class="col-sm-auto"><b>5</b> <span class="eh-res">res</span></div>
-                            <div class="col-sm-auto"><b>6</b> <span class="eh-hid">hid</span></div>
-                            <div class="col-sm-auto px-4"></div>
-                            <div class="col-sm-auto"><b>+shift</b> <span>underline</span></div>
-                            <div class="col-sm-auto px-4"></div>
-                            <div class="col-sm-auto"><b>r</b> retry</div>
-                            <div class="col-sm-auto"><b>c</b> clear</div>
+                            {% for i, eh in {1: "def", 2: "ind", 3: "mat", 4: "wop", 5: "res", 6: "hid"}.items() %}
+                            <div class="col-sm-auto px-1">
+                                <div class="btn eh-btn px-3 py-1 unselectable" onclick="eh_button_pressed('{{eh}}')">
+                                    <b>{{i}}</b> <span class="eh-{{eh}}">{{eh}}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="col-sm-auto px-2"></div>
+                            <div class="col-sm-auto px-1">
+                                <button class="btn eh-btn px-3 py-1 unselectable">
+                                    <b>+shift</b> <span>underline</span>
+                                </button>
+                            </div>
+                            <div class="col-sm-auto px-2"></div>
+                            <div class="col-sm-auto px-1">
+                                <div class="btn eh-btn px-3 py-1 unselectable"  onclick="delete_last(document.activeElement.id);">
+                                    <b>r</b> <span>retry</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-auto px-1">
+                                <div class="btn eh-btn px-3 py-1 unselectable" onclick="reset_blocks(document.activeElement.id);">
+                                    <b>c</b> <span>clear</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
