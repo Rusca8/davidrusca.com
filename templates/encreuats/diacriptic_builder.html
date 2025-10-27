@@ -169,6 +169,24 @@
             })
         }
 
+        function toggle_underline(){
+            if($('.eh-btn-underline').last().hasClass('hide')){
+                $('.eh-btn-regular').each(function(){
+                    $(this).addClass('hide')
+                });
+                $('.eh-btn-underline').each(function() {
+                    $(this).removeClass('hide');
+                });
+            }else{
+                $('.eh-btn-underline').each(function(){
+                    $(this).addClass('hide')
+                })
+                $('.eh-btn-regular').each(function() {
+                    $(this).removeClass('hide');
+                })
+            }
+        }
+
 
         function hotkey_clue(e){
             hotkey(e, "clue");
@@ -699,15 +717,21 @@
                     <div class="container" id="edit-buttons">
                         <div class="row">
                             {% for i, eh in {1: "def", 2: "ind", 3: "mat", 4: "wop", 5: "res", 6: "hid"}.items() %}
+                                {% set has_underline = i in [2, 3, 5] %}
                             <div class="col-sm-auto px-1">
-                                <div class="btn eh-btn px-3 py-1 unselectable" onclick="eh_button_pressed('{{eh}}')">
+                                <div class="btn eh-btn px-3 py-1 unselectable {{'eh-btn-regular' if has_underline else ''}}" onclick="eh_button_pressed('{{eh}}')">
                                     <b>{{i}}</b> <span class="eh-{{eh}}">{{eh}}</span>
                                 </div>
+                                {% if has_underline %}
+                                <div class="btn eh-btn px-3 py-1 unselectable eh-btn-underline hide" onclick="eh_button_pressed('u{{eh}}')">
+                                    <b>^{{i}}</b> <span class="eh-u{{eh}}">u{{eh}}</span>
+                                </div>
+                                {% endif %}
                             </div>
                             {% endfor %}
                             <div class="col-sm-auto px-2"></div>
                             <div class="col-sm-auto px-1">
-                                <button class="btn eh-btn px-3 py-1 unselectable">
+                                <button class="btn eh-btn px-3 py-1 unselectable" onclick="toggle_underline();">
                                     <b>+shift</b> <span>underline</span>
                                 </button>
                             </div>
