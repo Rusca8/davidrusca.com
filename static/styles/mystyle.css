@@ -158,3 +158,37 @@ canvas {
     position: relative;
     top: -0.1rem;
 }
+
+/* DONATIONS WIDGET */
+.donations-heart-button {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    background-color: wheat;
+    border-radius: 20%;
+    font-size: 2rem;
+    line-height: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border: 1.5px solid black;
+    filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0,0,0,0.3));
+}
+.donations-heart-img {
+    width: 90%;
+    height: 90%;
+    position:relative;
+    top: -0.3rem;
+}
+
+.donations-card {
+    height: 4rem;
+    background-color: #947f5f;
+    border: 1px solid black;
+}
+
+.donations-kofi {
+    height: 100%;
+    background-color: #635032;
+    border: 1px solid black;
+    margin-right: 3.5rem;
+}

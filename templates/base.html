@@ -10,7 +10,7 @@
 
 
     <!-- Google Material icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=language" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=favorite,language" />
 
     <!-- mathjax stuff -->
         <script>
@@ -29,7 +29,7 @@
     <!-- mj -->
 
     <!-- Mi CSS -->
-    <link rel="stylesheet" href="/static/styles/mystyle.css?date=2025-08-15">
+    <link rel="stylesheet" href="/static/styles/mystyle.css?date=2025-10-28">
 
     <title>{% block title %}{% endblock %}</title>
     <script>
@@ -109,7 +109,7 @@
 
     {% block content %}{% endblock %}
 
-    <p></p> <!-- esto mete un espacio abajo al final -->
+    {% include "/widgets/donations.html" %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
