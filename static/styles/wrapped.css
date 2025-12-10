@@ -41,6 +41,10 @@ td {
     background: rgba(230, 110, 20, 0.4);
     color: rgba(130, 30, 20, 1);
 }
+.change-back {
+    background: rgba(76, 179, 207, 0.3);
+    color: rgba(23, 127, 156, 1);
+}
 .change-null {
     background: rgba(50, 30, 0, 0.40);
 }

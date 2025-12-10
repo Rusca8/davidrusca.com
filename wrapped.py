@@ -1,4 +1,22 @@
 tops = {
+        2025: {
+            "artists": {
+                1: "Lizzy McAlpine",
+                2: "dodie",
+                3: "OMAC",
+                4: "Alba Careta",
+                5: "La Oreja de Van Gogh",
+                6: "Jacob Collier",
+            },
+            "songs": {
+                1: "A Little Bit of Everything",
+                2: "Quan te'n vas",
+                3: "Got Weird",
+                4: "ceilings",
+                5: "No és veritat",
+                6: "Same Boat",
+            }
+        },
         2024: {
             "artists": {
                 1: "dodie",
@@ -47,6 +65,7 @@ tops = {
         }
     }
 
+
 def extract_data():
     result = {}
     artists = {}
@@ -73,6 +92,7 @@ def extract_data():
                     last_index = last_top_artists[artist]
                     change = last_index - n
                 result[year]["artists"].append([change_text(change), n, artist, change_class(change)])
+        for n in range(1, 6):
             # songs
             song = tops[year].get("songs", {}).get(n, "-")
             if song == "-":

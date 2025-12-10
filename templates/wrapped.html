@@ -5,8 +5,10 @@
 {% endblock %}
 {% block content %}
 <h3 class="mt-3 text-center">La banda sonora :)</h3>
-<p class="text-center">Tenia ganes d'anar recopilant en algun lloc com han evolucionat els meus Spotify Wrapped al llarg dels anys.<br>
+<p class="text-center">Tenia ganes d'anar recopilant en algun lloc com ha evolucionat la meva música més escoltada al llarg dels anys.<br>
 M'ho faig una mica per mi, però evidentment són també recomanacions musicals.</p>
+<div class="small text-center">Els primers anys era el Wrapped de Spotify (que de fet només comptabilitza de Gener a Octubre). A partir de 2025 són estadístiques directes (de tot l'any, tallant a Novembre).<br>A partir de 2026 seran extretes del
+    <a href="https://www.qobuz.com/es-es/discover">Qobuz</a> perquè he abandonat Spotify per raons ètiques (i el Qobuz és la millor alternativa en clau de valors).</div>
 <div class="mx-2 mt-4">
     {% for year, tops in wrap.items() | reverse %}
     <h5 class="text-center mt-3">{{year}}</h5>
@@ -47,4 +49,5 @@ M'ho faig una mica per mi, però evidentment són també recomanacions musicals.
     </div>
     {% endfor %}
 </div>
+<p class="mb-5"></p>
 {% endblock %}
