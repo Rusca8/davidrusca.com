@@ -192,3 +192,7 @@ canvas {
     border: 1px solid black;
     margin-right: 3.5rem;
 }
+
+.pointer {
+    cursor: pointer;
+}
