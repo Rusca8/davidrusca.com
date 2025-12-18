@@ -1,0 +1,1128 @@
+{% extends "base.html" %}
+{% block title %} {{ _('Laboratorio') }} {{ _('Le Châtelier') }} - Web de David Ruscalleda {% endblock %}
+{% block content %}
+<h3 class="mt-3 text-center" style="user-select:none;">Radi Atòmic</h3>
+<p class="mt-2 text-center" style="user-select:none;">Observa els canvis en la mida dels orbitals a mesura que canvies els protons i electrons.</p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mx-2 border-c" style="user-select:none;">
+                    <div class="card-header py-2">
+                        <h5 class="text-center my-0">Radi Atòmic</h5>
+                    </div>
+                    <canvas id="app" tabindex="0" onkeyup="canvas_hotkeys(event);" style="border-bottom-right-radius: 0.2rem; border-bottom-left-radius: 0.2rem;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card border-c mt-2 px-2 mx-2">
+                    <p class="mb-0">
+                    <b>Configuració Electrònica:</b> <span id="econfig"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="card mx-2 border-c mt-2 pb-0">
+    <div class="card-body" style="user-select:none;">
+        {{ _('Si clicas sobre la animación podrás pararla con la tecla') }} <code>{{ _('Espacio') }}</code>.<br>
+        També pots navegar per la taula periòdica amb les <code>Fletxes</code> del teclat (compte no et perdis pel forat del bloc f!).<br>
+        Amb la tecla <code>n</code> pots canviar l'escala del nucli, i amb la <code>o</code> l'estil de repartiment dels electrons dins les òrbites.
+    </div>
+</div>
+
+<div class="card mx-2 border-c mt-2 pb-0">
+    <div class="card-body">
+        Els radis i velocitats angulars de l'animació es calculen en directe en base a les <b>regles d'apantallament de Slater</b> per a la correcció de les òrbites del <b>model de Bohr</b>,
+        i posteriorment s'escalen proporcionalment fins a valors observables. El model fa servir també els nivells d'energia corregits de Slater ($n^*$).
+        Com que Slater no va proposar correcció per a $n=7$, he extrapolat a partir de la tendència decreixent
+        dels nivells anteriors. Al dibuix els orbitals estan agrupats tal com els agrupen les pròpies normes de Slater (sp, i df).
+        <br><br>
+        La mida del nucli està també calculada de manera realista (a partir d'un nombre màssic que s'interpola entre $2z$ i $2.5z$). Al dibuix principal el nucli minúscul que es veu està en una escala diferent a la dels radis (en un intent desesperat que es vegi almenys una mica), però igualment respecta les proporcions al llarg dels elements (com es pot apreciar a la casella externa que el mostra més ampliat).
+        D'altra banda, els electrons estan dibuixats a una mida apreciable tot i que a la vida real la sospita més actual és que ni tan sols tenen mida.<br>
+    </div>
+</div>
+
+<script>
+ ///////////// GLOBAL VARS //////////////
+ // periodic table
+const elements = {
+  1: { symbol: "H", name: "Hidrogen" },
+  2: { symbol: "He", name: "Heli" },
+  3: { symbol: "Li", name: "Liti" },
+  4: { symbol: "Be", name: "Beril·li" },
+  5: { symbol: "B", name: "Bor" },
+  6: { symbol: "C", name: "Carboni" },
+  7: { symbol: "N", name: "Nitrogen" },
+  8: { symbol: "O", name: "Oxigen" },
+  9: { symbol: "F", name: "Fluor" },
+  10: { symbol: "Ne", name: "Neó" },
+  11: { symbol: "Na", name: "Sodi" },
+  12: { symbol: "Mg", name: "Magnesi" },
+  13: { symbol: "Al", name: "Alumini" },
+  14: { symbol: "Si", name: "Silici" },
+  15: { symbol: "P", name: "Fòsfor" },
+  16: { symbol: "S", name: "Sofre" },
+  17: { symbol: "Cl", name: "Clor" },
+  18: { symbol: "Ar", name: "Argó" },
+  19: { symbol: "K", name: "Potassi" },
+  20: { symbol: "Ca", name: "Calci" },
+  21: { symbol: "Sc", name: "Escandi" },
+  22: { symbol: "Ti", name: "Titani" },
+  23: { symbol: "V", name: "Vanadi" },
+  24: { symbol: "Cr", name: "Crom" },
+  25: { symbol: "Mn", name: "Manganès" },
+  26: { symbol: "Fe", name: "Ferro" },
+  27: { symbol: "Co", name: "Cobalt" },
+  28: { symbol: "Ni", name: "Níquel" },
+  29: { symbol: "Cu", name: "Coure" },
+  30: { symbol: "Zn", name: "Zinc" },
+  31: { symbol: "Ga", name: "Gal·li" },
+  32: { symbol: "Ge", name: "Germani" },
+  33: { symbol: "As", name: "Arsènic" },
+  34: { symbol: "Se", name: "Seleni" },
+  35: { symbol: "Br", name: "Brom" },
+  36: { symbol: "Kr", name: "Criptó" },
+  37: { symbol: "Rb", name: "Rubidi" },
+  38: { symbol: "Sr", name: "Estronci" },
+  39: { symbol: "Y", name: "Itri" },
+  40: { symbol: "Zr", name: "Zirconi" },
+  41: { symbol: "Nb", name: "Niobi" },
+  42: { symbol: "Mo", name: "Molibdè" },
+  43: { symbol: "Tc", name: "Tecneci" },
+  44: { symbol: "Ru", name: "Ruteni" },
+  45: { symbol: "Rh", name: "Rodi" },
+  46: { symbol: "Pd", name: "Pal·ladi" },
+  47: { symbol: "Ag", name: "Argent" },
+  48: { symbol: "Cd", name: "Cadmi" },
+  49: { symbol: "In", name: "Indi" },
+  50: { symbol: "Sn", name: "Estany" },
+  51: { symbol: "Sb", name: "Antimoni" },
+  52: { symbol: "Te", name: "Tel·luri" },
+  53: { symbol: "I", name: "Iode" },
+  54: { symbol: "Xe", name: "Xenó" },
+  55: { symbol: "Cs", name: "Cesi" },
+  56: { symbol: "Ba", name: "Bari" },
+  57: { symbol: "La", name: "Lantani" },
+  58: { symbol: "Ce", name: "Ceri" },
+  59: { symbol: "Pr", name: "Praseodimi" },
+  60: { symbol: "Nd", name: "Neodimi" },
+  61: { symbol: "Pm", name: "Prometi" },
+  62: { symbol: "Sm", name: "Samari" },
+  63: { symbol: "Eu", name: "Europi" },
+  64: { symbol: "Gd", name: "Gadolini" },
+  65: { symbol: "Tb", name: "Terbi" },
+  66: { symbol: "Dy", name: "Disprosi" },
+  67: { symbol: "Ho", name: "Holmi" },
+  68: { symbol: "Er", name: "Erbi" },
+  69: { symbol: "Tm", name: "Tuli" },
+  70: { symbol: "Yb", name: "Iterbi" },
+  71: { symbol: "Lu", name: "Luteci" },
+  72: { symbol: "Hf", name: "Hafni" },
+  73: { symbol: "Ta", name: "Tàntal" },
+  74: { symbol: "W", name: "Wolframi" },
+  75: { symbol: "Re", name: "Reni" },
+  76: { symbol: "Os", name: "Osmi" },
+  77: { symbol: "Ir", name: "Iridi" },
+  78: { symbol: "Pt", name: "Platí" },
+  79: { symbol: "Au", name: "Or" },
+  80: { symbol: "Hg", name: "Mercuri" },
+  81: { symbol: "Tl", name: "Tal·li" },
+  82: { symbol: "Pb", name: "Plom" },
+  83: { symbol: "Bi", name: "Bismut" },
+  84: { symbol: "Po", name: "Poloni" },
+  85: { symbol: "At", name: "Àstat" },
+  86: { symbol: "Rn", name: "Radó" },
+  87: { symbol: "Fr", name: "Franci" },
+  88: { symbol: "Ra", name: "Radi" },
+  89: { symbol: "Ac", name: "Actini" },
+  90: { symbol: "Th", name: "Tori" },
+  91: { symbol: "Pa", name: "Protactini" },
+  92: { symbol: "U", name: "Urani" },
+  93: { symbol: "Np", name: "Neptuni" },
+  94: { symbol: "Pu", name: "Plutoni" },
+  95: { symbol: "Am", name: "Americi" },
+  96: { symbol: "Cm", name: "Curi" },
+  97: { symbol: "Bk", name: "Berkeli" },
+  98: { symbol: "Cf", name: "Californi" },
+  99: { symbol: "Es", name: "Einsteini" },
+  100: { symbol: "Fm", name: "Fermi" },
+  101: { symbol: "Md", name: "Mendelevi" },
+  102: { symbol: "No", name: "Nobeli" },
+  103: { symbol: "Lr", name: "Laurenci" },
+  104: { symbol: "Rf", name: "Rutherfordi" },
+  105: { symbol: "Db", name: "Dubni" },
+  106: { symbol: "Sg", name: "Seaborgi" },
+  107: { symbol: "Bh", name: "Bohri" },
+  108: { symbol: "Hs", name: "Hassi" },
+  109: { symbol: "Mt", name: "Meitneri" },
+  110: { symbol: "Ds", name: "Darmstadti" },
+  111: { symbol: "Rg", name: "Roentgeni" },
+  112: { symbol: "Cn", name: "Copernici" },
+  113: { symbol: "Nh", name: "Nihoni" },
+  114: { symbol: "Fl", name: "Flerovi" },
+  115: { symbol: "Mc", name: "Moscovi" },
+  116: { symbol: "Lv", name: "Livermori" },
+  117: { symbol: "Ts", name: "Tennessí" },
+  118: { symbol: "Og", name: "Oganessó" }
+};
+
+ const ptable = [
+     [  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  2],
+     [  3,  4,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  5,  6,  7,  8,  9, 10],
+     [ 11, 12,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 13, 14, 15, 16, 17, 18],
+     [ 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
+     [ 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54],
+     [ 55, 56, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86],
+     [ 87, 88,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118],
+ ];
+
+ // timing
+ let fps = 60;
+ let t = Date.now();
+ let dt = 0;  // tiempo real que ha pasado
+ let kdt = 0;  // corrección para movimiento según dt
+ let pause = false;
+ //
+ let world_time = 0;
+
+ // medidas
+ let cWidth;
+ let cHeight;
+ //
+ let mainw, uiw;
+ let atomx, atomy;
+ let atomsymboly, atomsymbolw;
+ let nuclix, nucliy, nucliw, nuclih, nucliyo;
+
+ // constants
+ let me = 9.11e-31;
+ let q = 1.6e-19;
+ let k = 9e9;
+ let h = 6.636e-34;
+ let c = 3e8;
+
+ console.log("World constants: ", me, q, k, h, c);
+
+ let r_zoom = 2e12;
+ let big_nucli_scale = 2e3;
+ let small_nucli_scale = 2e2;
+ let electron_scale = 1.5e10;
+ let w_scale = 5e-18;
+
+ let a0; // bohr radius
+ update_bohr_radius();
+ let rnucli = 5e-15;
+ let relectron = 1e-22;
+
+ // UI
+ let nucli_size = "dot";
+ let e_placements = ["equi", "side"]
+ let electron_placement = "equi";  // equi(distant), side(by side), scatter(by coprime modulo), slots(by quantum nums)
+ let hotkey_add = "ze";  // hotkey_add_mode
+
+ let buttons = [];
+ let pt_buttons = [];
+ let ptabley, ptableh, ptablew;
+
+ ///////////////// CLASSES //////////////
+ class Button {
+     constructor(x, y, w=20, h=20, text="btn", code=null, img=null){
+         this.x = x;
+         this.y = y;
+         this.w = w;
+         this.h = h;
+         this.text = text;
+         this.code = code;
+         this.img = img;
+     }
+
+     hit(clickX, clickY){
+         return clickX > this.x && clickY > this.y
+             && clickX < this.x + this.w && clickY < this.y + this.h;
+     }
+ }
+
+ class ElectronCloud {
+     constructor(z=10){
+         this.z = z;
+         this.electrons = [];
+         this.screenings = {};
+         this.orbital_radii = {};
+         this.orbital_speeds = {};
+         this.orbital_electron_count = {};
+         this.econfig = {};
+         this.ec_text = "-";
+         this.init(this.z, this.z);
+     }
+
+     get q(){
+         return this.z - this.e;
+     }
+
+     get e(){
+         return this.electrons.length;
+     }
+
+     get symbol(){
+         let q = this.q;
+         let qtnum = q < 2 && q > -2 ? "" :
+                     tiny_number(Math.abs(q));
+         let qsign = q < 0 ? "⁻" : (q > 0 ? "⁺" : "");
+         let thsp = q == 0 ? "" : " ";
+         return elements[this.z]["symbol"] + thsp + qtnum + qsign;
+     }
+
+     get gp(){
+         let p=1;
+         for(let row of ptable){
+             let g=1;
+             for(let z of row){
+                 if(z == this.z){
+                     return [g, p];
+                 }
+                 g++;
+             }
+             p++;
+         }
+         return [null, this.z < 89 ? 6 : 7];
+     }
+
+     addPeriode(){
+         console.log("Increasing the period...");
+         let [g, p] = this.gp;
+         console.log(g, p);
+         if(p < 7){
+             let d = ptable[p][g-1]-this.z;
+             this.addZE(d, d);
+         }else{
+             console.log("ABORTED: Already on 7th period.")
+         }
+     }
+
+     removePeriode(){
+         console.log("Decreasing the period...");
+         let [g, p] = this.gp;
+         if(p > 1 && ptable[p-2][g-1]){
+             let d = ptable[p-2][g-1]-this.z;
+             this.addZE(d, d);
+         }else{
+             console.log("ABORTED: Can't go lower.");
+         }
+     }
+
+     init(z, e){
+         console.log("Initializing electron cloud (z=" + z + " e=" + e + ")");
+         this.z = z;
+         this.electrons = [];
+         for(let i=0; i<e; i++){
+            this.pushE(null, false);
+         }
+         console.log(this);
+         this.update_calcs();
+     }
+
+     update_calcs(){
+         this.calculate_radii();
+         this.update_rnucli();
+         this.calculate_econfig();
+     }
+
+     addZE(dz=1, de=1){
+         console.log("Changing ZE values...");
+         let new_z = this.z + dz;
+         if(new_z < 1 || new_z > 118){
+             console.log("ABORTED: New Z would be illegal");
+             return;
+         }
+         if(this.electrons.length + de < 0){
+             console.log("ABORTED: Can't have negative electrons");
+         }
+         if(dz){
+             this.addZ(dz, false);
+         }
+         if(de > 0){
+             for(let i=0; i<de; i++){
+                 this.pushE(null, false);
+             }
+         }else if(de < 0){
+             for(let i=0; i<-de; i++){
+                 this.popE(false);
+             }
+         }
+         this.update_calcs();
+     }
+
+     addZ(dz=1, update=true){
+         console.log("Changing Z of the atom, Z=" + this.z + "+(" + dz + ")");
+         let newz = this.z + dz;
+         this.z = Math.max(1, Math.min(newz, 118));
+         if(update){
+            this.update_calcs();
+         }
+     }
+
+     pushE(orbital=null, update=true){
+         console.log("Adding e- to orbital", orbital);
+         if(orbital === null){
+             for(let orb of sopa){
+                 let available_spaces = orb.ne;
+                 for(let e of this.electrons){
+                     if(e.n == orb.n && e.l == orb.l){
+                         available_spaces -= 1;
+                         if(available_spaces < 1){
+                             break;
+                         }
+                     }
+                 }
+                 if(available_spaces){
+                     this.electrons.push(new Electron(orb.n, orb.l));
+                     console.log(this.electrons.slice(-1));
+                     if(update){
+                         this.update_calcs();
+                     }
+                     return;
+                 }
+             }
+         }
+         if(update){
+             this.update_calcs();
+         }
+     }
+
+     popE(update=true){
+         if(this.electrons){
+            console.log("Removing last added electron");
+            this.electrons.pop();
+         }else{
+             console.log("No more electrons to remove");
+         }
+         if(update){
+            this.update_calcs();
+         }
+     }
+
+     calculate_radii(){
+         console.log("Calculating screening for each electron orbital...");
+         let screenings = {"1sp": 0};
+         // check each electron. If orbital not calculated, calculate
+         let count_1sp = 0;
+         for(let e of this.electrons){
+             let orb_type = e.l < 2 ? "sp" : "df";
+             let orb_pack = e.n + orb_type;
+             if(orb_pack == "1sp"){
+                count_1sp += 1;
+             };
+             if(!Object.keys(screenings).includes(orb_pack)){
+                 // Slater's screening
+                    //     >   =    <      <<
+                    // 1s: 0  0.3                (0.3 only if 2e- on 1s)
+                    // sp: 0  0.35  0.85   1
+                    // df: 0  0.35  1
+                 let s = 0;
+                 for(let e_shield of this.electrons){
+                     if(e_shield != e && e_shield.n <= e.n){  // filter itself out & ignore outers
+                         if(e_shield.n == e.n){
+                             s += 0.35;
+                         }else if(e_shield.n == e.n-1 && orb_type == "sp"){
+                             s += 0.85;
+                         }else{
+                             s += 1;
+                         }
+                     }
+                 }
+                 screenings[orb_pack] = s;
+            }
+        }
+        if(count_1sp > 1){
+            screenings["1sp"] = 0.3;  // same level shielding for 1sp orbital
+        }
+
+        this.screenings = screenings;
+        console.log(screenings);
+
+        console.log("Calculating bohr-slater radii for each electron orbital...");
+        let new_radii = {};  // non-intrusive calc
+        for(let [orb, s] of Object.entries(screenings)){
+            let zeff = this.z - s;
+            new_radii[orb] = (a0 * Orbital.get_ns(parseInt(orb[0]))**2/zeff); // r(orb)= a0·(n*)^2/zeff
+        }
+        this.orbital_radii = new_radii;
+        console.log(new_radii);
+
+        console.log("Calculating orbital speeds...");
+        let orbital_speeds = {};
+        for(let [orb, r] of Object.entries(this.orbital_radii)){
+            orbital_speeds[orb] = parseInt(orb[0]) * h / (2 * Math.PI * r**2 * me);
+        }
+        this.orbital_speeds = orbital_speeds;
+     }
+
+     update_rnucli(){
+         console.log("Updating rnucli...")
+         let r0 = 1.3e-15;
+         let a = this.z*(2.5*(this.z)/118 + 2*(118-this.z)/118);
+         console.log(a);
+         rnucli = r0 * a ** (1/3);  // known experimental formula
+         console.log(rnucli);
+     }
+
+     calculate_econfig(){
+         console.log("Getting eConfig...");
+         let econfig = [];
+         let i = 0;
+         for(let orb of sopa){
+             econfig.push(0);
+             for(let e of this.electrons){
+                 if(e.n == orb.n && e.l == orb.l){
+                     econfig[i] += 1;
+                 }
+             }
+             i++;
+         }
+         this.econfig = econfig;
+         console.log(this.econfig);
+         this.format_econfig();
+         this.count_orbital_electrons();
+     }
+
+     format_econfig(){
+         let i = 0;
+         let ec_text = "";
+         for(let orb of sopa){
+             if(this.econfig[i]){
+                 ec_text += orb.n + {0: "s", 1: "p", 2: "d", 3: "f"}[orb.l] + tiny_number(this.econfig[i]) + " ";
+             }
+             i++;
+         }
+         this.ec_text = ec_text;
+         console.log(this.ec_text);
+         $('#econfig').html(this.ec_text);
+     }
+
+     count_orbital_electrons(){
+         console.log("counting e- per orbital pack");
+         let electron_count = {};
+         for(let e of this.electrons){
+             if(!Object.keys(electron_count).includes(e.orb_pack)){
+                 electron_count[e.orb_pack] = 0;
+             }
+             electron_count[e.orb_pack] += 1;
+         }
+         this.orbital_electron_count = electron_count;
+         console.log(this.orbital_electron_count);
+     }
+ }
+
+ class Electron {
+   constructor(n, l, m, s){
+     this.n = n;
+     this.l = l;
+     this.m = m;  // won't use for now
+     this.s = s;  // won't use for now
+   }
+
+   get orb_name(){
+       return this.n + ["s", "p", "d", "f", "g"][this.l];
+   }
+
+   get orb_pack(){
+       return this.n + (this.l < 2 ? "sp" : "df");
+   }
+ }
+
+ class Orbital {
+     // a la sopa
+     constructor(n, l){
+         this.n = n;
+         this.l = l;
+     };
+
+     get ne(){
+         return 2 + this.l*4;
+     }
+
+     static get_ns(n){
+         // slater's n* (with an extra 7th energy level extrapolated)
+         return {1: 1, 2: 2, 3: 3, 4: 3.7, 5: 4.0, 6: 4.2, 7: 4.3}[n];
+     }
+ }
+
+ class Smoothimation{
+   constructor(speed=0.1, n=0){
+     this.speed = speed;
+     this.n = n;
+     this.chasing = n;
+   }
+
+   update(){
+     this.n = this.chasing*this.speed + this.n*(1-this.speed);
+   }
+
+   chase(chase){
+     this.chasing = chase;
+   }
+
+   set(n){
+     this.n = n;
+   }
+ }
+
+ class Imagen {
+   constructor(src, title="img"){
+     this.img = new Image();
+     this.img.src = src;
+     this.ready = false;
+
+     this.img.onload = () => {
+       this.ready = true;
+     }
+   }
+ }
+
+ let colors = {
+     "orbitals": {
+         "1": [100, 100, 100],
+         "2": [30, 81, 117],
+         "3": [117, 30, 30],
+         "4": [30, 117, 49],
+         "5": [117, 110, 30],
+         "6": [117, 87, 30],
+         "7": [81, 117, 30],
+     }
+ }
+
+ /////////////// DATA /////////////
+ // la sopa de formatge
+ let sopa = []
+ fes_la_sopa();
+
+
+ //////////////// OBJECTS ///////////////
+ let electron_cloud;
+
+ // img
+ const img_gel = new Imagen("/static/img/labs/chatelier/gel.png", "gel");
+
+ /////////////////// inicio ////////////////////
+    window.onload = function(){
+        c=document.getElementById("app");
+        // medidas
+        cWidth = 2000;
+        cHeight = 1000;
+        c.width = cWidth;
+        c.height = cHeight;
+        u = cHeight/1200;     // unidad de medida
+        //
+        mainw = cWidth*2/3;
+        uiw = cWidth*1/3;
+        atomsymbolw = uiw * 0.6;
+        atomsymboly = u*60 + atomsymbolw/2;
+        atomx = mainw*0.5;
+        atomy = c.height*0.5;
+        nucliw = u*200;
+        nuclih = u*250;
+        nuclix = mainw-u*20 - nucliw/2;
+        nucliy = u*20 + nuclih/2;
+        nucliyo = nuclih*0.05;
+        ptabley = c.height * 0.55;
+        ptablew = uiw*0.8;
+        ptableh = ptablew*0.35;
+
+        // inicialitza l'àtom
+        electron_cloud = new ElectronCloud(6);
+
+        // inicialitza botons
+        init_ze_buttons();
+        init_ptable();
+
+        // inicializa dibuix
+        cc=c.getContext("2d");
+
+        // dibuix recurrent
+        update();
+        setInterval(update, Math.round(1000/fps));
+
+        // clicks
+        c.addEventListener("click", onClick, false);
+    }
+
+
+    function update_bohr_radius(){
+        a0 = (h ** 2)/(4 * Math.PI**2 * q**2 * k * me);
+        console.log("Bohr Radius: a0 = " + a0);
+    }
+
+
+    function fes_la_sopa(){
+        console.log("Calculating orbital order for electronic configuration...");
+        sopa = [];
+        let orbitals = [0, 1, 2, 3];
+        for(let orb of orbitals){
+            for(let fletxa=0; fletxa<2; fletxa++){
+                let i=0;
+                while(orb-i >= 0){
+                    sopa.push(new Orbital(orb+1+i+fletxa, orb-i));
+                    i++;
+                }
+            }
+        }
+        console.log(sopa);
+    }
+
+    function init_atom(z=12, e=12){
+        console.log("Initializing atom with z=" + z + ", e=" + e);
+        electron_cloud.init(z=z, e=e);
+        console.log(electron_cloud);
+    }
+
+     function init_ze_buttons(){
+         console.log("Initializing UI buttons...");
+         let x = mainw + 10*u;
+         let h = (c.height*0.1);
+         let y = c.height - 2*h - 10*u;
+         let w = (c.width - mainw - 20*u)/3;
+         let i=0;
+         buttons = [];
+         for(let [codi, text] of Object.entries({"+e": "+e", "+ze": "+", "+z": "+p", "-e": "-e", "-ze": "-", "-z": "-p"})){
+            buttons.push(new Button(x + w*(i%3), y + h*Math.floor(i/3), w, h, text, codi));
+            i++;
+         }
+         console.log(buttons);
+     }
+
+    function init_ptable(){
+        pt_buttons = [];
+        let i = 0;
+        let x0 = c.width - uiw/2 - ptablew/2;
+        let w = ptablew/ptable[0].length;
+        let h = ptableh/ptable.length;
+        for(let row of ptable){
+            let yi = ptabley + i*h;
+            let j = 0;
+            for(let z of row){
+                if(z){
+                    let xi = x0 + j*w;
+                    pt_buttons.push(new Button(xi, yi, w, h, "", "z" + z));
+                }
+                j++;
+            }
+            i++;
+        }
+    }
+
+ ////////////////// dibujo ////////////////////
+    function update(){
+        // timing
+        dt = pause ? 0 : Date.now()-t;
+        t = Date.now();
+
+        // previos
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.lineWidth = 2*u;
+        cc.textBaseline = "middle";
+        cc.textAlign = "center";
+
+        // fondo
+        cc.fillStyle="#eeeeee";
+        cc.fillRect(0, 0, c.width, c.height);
+
+        // scale marks
+        cc.textAlign = "right";
+        cc.textBaseline = "bottom";
+        cc.font = (30*u).toString() + "px Courier New";
+        for(let i=15; i>0; i--){
+            let w = i * 1e-10 * r_zoom;
+            cc.fillStyle = i % 2 ? "#f6f6f6" : "#f1f1f1";
+            cc.fillRect(atomx-w/2, atomy-w/2, w, w);
+            cc.strokeStyle = "rgba(0,0,0,0.1)";
+            cc.strokeRect(atomx-w/2, atomy-w/2, w, w);
+            cc.fillStyle = "#bbbbbb";
+            cc.fillText(i + "Å", atomx+w/2-4*u, atomy+w/2);
+        }
+        // frame metadata
+        cc.font = (20*u).toString() + "px Courier New";
+        cc.textAlign = "left";
+        cc.textBaseline = "top";
+        cc.fillStyle = "black";
+        cc.fillText("Les velocitats estan a escala (però x" + (1/w_scale).toFixed() + " vegades més lentes).", 10*u, 8*u);
+        cc.fillText("Els radis estan a escala (els quadrats marquen diàmetres en ångströms).", 10*u, 8*u + 25*u);
+        if(nucli_size == "big"){
+            cc.fillText("El nucli dins l'àtom l'estàs veient x" + big_nucli_scale + " vegades més gran del que toca.", 10*u, 8*u + 2*25*u);
+        }else if(nucli_size == "dot"){
+            cc.fillText("El nucli dins l'àtom l'estàs veient x" + small_nucli_scale + " vegades més gran del que toca.", 10*u, 8*u + 2*25*u);
+        }else if(nucli_size == "real"){
+            cc.fillText("El nucli dins l'àtom no el veus perquè l'he dibuixat a la mida bona.", 10*u, 8*u + 2*25*u);
+        }
+        cc.fillText("Els electrons els estàs veient almenys x" + electron_scale + " vegades més grans del que són.", 10*u, 8*u + 3*25*u);
+
+
+
+        // ------------ ÀTOM ----------- //
+        // -- nucli highlight
+        cc.textAlign = "center";
+        cc.textBaseline = "top";
+        // box
+        cc.fillStyle="rgba(250, 250, 250, 0.7)";
+        cc.strokeStyle="black";
+        roundRect(cc, nuclix-nucliw/2, nucliy-nuclih/2, nucliw, nuclih, 10*u);
+        // coverable labels
+        cc.fillStyle = "#444444";
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.fillText("Nucli", nuclix, nucliy-nuclih/2 + 17*u);
+
+        cc.font = (20*u).toString() + "px Courier New";
+        cc.textBaseline = "bottom";
+        cc.fillText("Zoom x" + 5e3, nuclix, nucliy+nuclih/2 - 8*u);
+        // ball
+        cc.fillStyle="rgba(250, 0, 0, 0.5)";
+        cc.strokeStyle="#dd0000";
+        drawCircle(cc, nuclix, nucliy+nucliyo, rnucli*r_zoom*u*5e3, true, true);
+        // Z label
+        cc.font = (30*u).toString() + "px Courier New";
+        cc.fillStyle = "white";
+        cc.textBaseline = "middle";
+        cc.fillText(electron_cloud.z, nuclix, nucliy+nucliyo);
+
+        // orbitals: shade
+        for(let [orb, r] of Object.entries(electron_cloud.orbital_radii)){
+            if(r<0){
+                continue;
+            }
+            let n = orb[0];
+            cc.fillStyle = orbital_color(n, 0.05);
+            drawCircle(cc, atomx, atomy, r*r_zoom*u, false, true);
+        }
+        // orbitals: second pass for rings & electrons
+        for(let [orb, r] of Object.entries(electron_cloud.orbital_radii)){
+            if(r<0){
+                cc.fillStyle = "darkred";
+                cc.textBaseline = "middle";
+                cc.fillText("No pot aguantar tants electrons.", atomx, atomy);
+                continue;
+            }
+            // ring
+            let n = orb[0];
+            let ring_r = r*r_zoom*u;
+            cc.strokeStyle = orbital_color(n, 0.8);
+            drawCircle(cc, atomx, atomy, ring_r, true, false);
+            // ring label
+            cc.fillStyle = orbital_color(n, 0.8);
+            cc.font = (20*u).toString() + "px Courier New";
+            cc.textAlign = "center";
+            cc.textBaseline = "top";
+            let orb_label = orb == "1sp" ? "1s" : (orb == "3df" ? "3d" : orb);
+            cc.fillText(orb_label, atomx, atomy + ring_r + 10*u);
+            // electrons
+            let ne = electron_cloud.orbital_electron_count[orb];
+            for(let i=0; i<ne; i++){
+                cc.fillStyle = "black";
+                let w = electron_cloud.orbital_speeds[orb] * w_scale;
+                let dang = 2*Math.PI/ne;
+                let available_ne;
+                if(["side", "scatter"].includes(electron_placement)){
+                    available_ne = orb[0] == 1 ? 2 :(
+                                   orb.includes("s") ? 8 :(
+                                   orb[0] == 3 ? 10: 24
+                                   ));
+                    if(electron_placement == "side"){
+                        dang = 2*Math.PI/available_ne;
+                    }else{
+                        dang = available_ne == 2 ? Math.PI :(
+                               available_ne == 8 ? 2*Math.PI * 3/8 :(
+                               available_ne == 10 ? 2*Math.PI * 11/10 :
+                               2*Math.PI * 11/12
+                               ));
+                    }
+                }
+                let xi = atomx + ring_r*Math.cos(dang*i + w*world_time/1000);
+                let yi = atomy + ring_r*Math.sin(dang*i + w*world_time/1000);
+                drawCircle(cc, xi, yi, relectron*r_zoom*electron_scale*u, false, true);
+            }
+        }
+
+        // nucli in situ
+        if(nucli_size == "big"){
+            cc.fillStyle="rgba(250, 0, 0, 0.5)";
+            cc.strokeStyle="#dd0000";
+            drawCircle(cc, atomx, atomy, rnucli*r_zoom*u*big_nucli_scale, false, true);
+        }else if(nucli_size == "dot"){
+            cc.fillStyle="#dd0000";
+            drawCircle(cc, atomx, atomy, rnucli*r_zoom*u*small_nucli_scale, false, true);
+        }else{
+            cc.fillStyle="#dd0000";
+            drawCircle(cc, atomx, atomy, rnucli*r_zoom*u, false, true);
+        }
+
+        // -------- UI --------
+        // bg
+        cc.fillStyle = "rgba(0,10,20,0.2)";
+        cc.fillRect(mainw, 0, c.width, c.height);
+        cc.strokeStyle = "rgba(0, 10, 20, 0.6)";
+        cc.strokeRect(mainw, -10, c.width, c.height+20);
+        // Taula Periòdica
+        for(let b of pt_buttons){
+            let is_current = parseInt(b.code.slice(1)) == electron_cloud.z;
+            let m = 2*u;
+            cc.strokeStyle = "rgba(0, 10, 20, 0.6)";
+            cc.fillStyle = is_current ? "rgba(0,10,20,0.4)" : "rgba(0,10,20,0.2)";
+            cc.fillRect(b.x+m, b.y+m, b.w-2*m, b.h-2*m);
+        }
+        // Àtom (símbol)
+        cc.fillStyle = "rgba(100, 100, 100, 0.6)";
+        cc.strokeStyle = "rgba(0, 0, 0, 0.7)";
+        roundRect(cc, c.width-uiw/2-atomsymbolw/2, atomsymboly-atomsymbolw/2, atomsymbolw, atomsymbolw, 10*u, true, true);
+        cc.fillStyle = "#f5f5f5";
+        cc.font = (180*u).toString() + "px Helvetica";
+        cc.textBaseline = "middle";
+        cc.fillText(electron_cloud.symbol, c.width - uiw/2, atomsymboly-atomsymbolw*0.15);
+        cc.font = (50*u).toString() + "px Helvetica";
+        cc.fillText("Z = " + electron_cloud.z, c.width - uiw/2, atomsymboly+atomsymbolw*0.2);
+        cc.fillText("E = " + electron_cloud.e, c.width - uiw/2, atomsymboly+atomsymbolw*0.35);
+        // econfig
+        cc.fillStyle = "rgba(0, 10, 20, 0.7)";
+        cc.font = (30*u).toString() + "px Helvetica";
+        let ec_text_split = electron_cloud.ec_text.split(" ");
+        for(let i=0; i<ec_text_split.length/8; i++){
+            let ec_line = ec_text_split.slice(i*8, (1+i)*8).join(" ");
+            cc.fillText(ec_line, c.width - uiw/2, atomsymboly + atomsymbolw * 0.6 + 35*u*i);
+        }
+        // ZE Buttons
+        cc.textBaseline = "middle";
+        cc.textAlign = "center";
+        for(let b of buttons){
+            let m = 5*u;
+            cc.fillStyle = b.code.length > 2 ? "rgba(255, 255, 255, 0.9)" : "rgba(240,240,240,0.9)";
+            cc.strokeStyle = "black";
+            roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 7*u);
+            cc.fillStyle = "black";
+            cc.font = ((b.code.length > 2 ? 120 : 40)*u).toString() + "px Courier New";
+            cc.fillText(b.text, b.x+b.w/2, b.y+b.h/2+3*u);
+        }
+
+        //
+        move_world(dt);
+    }
+
+ //////////////// cálculos mundo ///////////////
+    function move_world(dt){
+        dt = Math.min(dt, 1000); // avoid huge corrections in a single frame
+        // updates
+        world_time += dt;
+    }
+
+    function move_molec(mol, pbspeed=1){
+        kdt *= pbspeed;
+        // gravity
+        mol.vy += g * kdt;
+        //console.log(mol.vy);
+        // movement
+        mol.setX(mol.x + mol.vx * kdt);
+        mol.setY(mol.y + mol.vy * kdt);
+        keep_outside(mol, wall);
+        keep_outside(mol, prods);
+        keep_inside(mol);
+    }
+
+ ////////////// drawing tools //////////////
+ //
+ function orbital_color(n, alpha=1){
+     let color = colors.orbitals[n];
+     if(color){
+         return "rgba(" + color[0] + ", " + color[1] + "," + color[2] + ", " + alpha + ")";
+     }else{
+         return "rgba(100, 100, 100, " + alpha + ")";
+     }
+ }
+
+ // roundrect
+    function roundRect(cc, x, y, w, h, r, stroke=true, fill=true){
+        cc.beginPath();
+        cc.roundRect(x, y, w, h, r);
+        if(stroke){
+            cc.stroke();
+        }
+        if(fill){
+            cc.fill();
+        }
+        cc.closePath();
+    }
+
+ // circles
+    function drawCircle(cc, x, y, r, stroke, fill){
+        cc.beginPath();
+        cc.arc(x, y, r, 0, 2 * Math.PI, false);
+        if(fill){
+            cc.fill();
+        }
+        if(stroke){
+            cc.stroke();
+        }
+    }
+
+  // lines
+    function drawLine(cc, points){
+      if(points.length < 2){
+        return
+      }
+      cc.beginPath();
+      cc.moveTo(points[0][0], points[0][1]);
+      for(let p of points.slice(1)){
+        cc.lineTo(p[0], p[1]);
+      }
+      cc.stroke();
+    }
+
+  function drawTriangle(cc, x1, y1, x2, y2, x3, y3, stroke=true, fill=true){
+      cc.beginPath();
+      cc.moveTo(x1, y1);
+      cc.lineTo(x2, y2);
+      cc.lineTo(x3, y3);
+      cc.closePath();
+      if(fill){
+        cc.fill();
+      }
+      if(stroke){
+        cc.stroke();
+      }
+  }
+
+  function drawImage(cc, imagen, x, y, w, h){
+    if(imagen.ready){
+      if(w && h){
+        cc.drawImage(imagen.img, x, y, w, h);
+      }else{
+        cc.drawImage(imagen.img, x, y);
+      }
+    }else{
+      cc.fillText("(" + imagen.title + ")", x, y);
+    }
+  }
+
+
+  function lerpColor(rgb1, rgb2, t){
+    let colR = Math.round(rgb1[0]*t + rgb2[0]*(1-t));
+    let colG = Math.round(rgb1[1]*t + rgb2[1]*(1-t));
+    let colB = Math.round(rgb1[2]*t + rgb2[2]*(1-t));
+    return "rgb(" + colR + ", " + colG + ", " + colB + ")";
+  }
+
+    function tiny_number(n, sign=false){
+        let result = "";
+        for(let x of n.toString()){
+            if(parseInt(x)<10){
+                result += "⁰¹²³⁴⁵⁶⁷⁸⁹"[x];
+            }
+        }
+        return result;
+    }
+
+    ///////////////// Click ////////////////
+    function onClick(e) {
+          const rect = c.getBoundingClientRect();
+          const relX = event.clientX - rect.left;
+          const relY = event.clientY - rect.top;
+          xCur = relX * c.width / rect.width;
+          yCur = relY * c.height / rect.height;
+
+        // main ui
+        for(let b of buttons){
+            if(b.hit(xCur, yCur)){
+                switch(b.code){
+                    case "+e":
+                        electron_cloud.addZE(0, 1);
+                        break;
+                    case "-e":
+                        electron_cloud.addZE(0, -1);
+                        break;
+                    case "+z":
+                        electron_cloud.addZE(1, 0);
+                        break;
+                    case "-z":
+                        electron_cloud.addZE(-1, 0);
+                        break;
+                    case "+ze":
+                        electron_cloud.addZE(1, 1);
+                        break;
+                    case "-ze":
+                        electron_cloud.addZE(-1, -1);
+                        break;
+                    case "+P":
+                        electron_cloud.addPeriode();
+                        break;
+                    case "-P":
+                        electron_cloud.removePeriode();
+                        break;
+                }
+            }
+        }
+
+        for(let b of pt_buttons){
+            if(b.hit(xCur, yCur)){
+                let z = parseInt(b.code.slice(1));
+                if(z){
+                    electron_cloud.init(z, z);
+                }
+            }
+        }
+    }
+
+    ///////////////// KeyUp ////////////////
+    function canvas_hotkeys(e){
+        switch(e.key){
+            case " ":
+            case "p":
+                pause = !pause;
+                break;
+            case "z":
+                hotkey_add = "z";
+                break;
+            case "e":
+                hotkey_add = "e";
+                break;
+            case "a":
+                hotkey_add = "a";
+                break;
+            case "n":
+                console.log("current nucli size", nucli_size);
+                if(nucli_size == "dot"){
+                    nucli_size = "big";
+                }else if(nucli_size == "big"){
+                    nucli_size = "real";
+                }else{
+                    nucli_size = "dot";
+                }
+                break;
+            case "+":
+              electron_cloud.addZE(hotkey_add.includes("z") ? 1 : 0, hotkey_add.includes("e") ? 1 : 0);
+              break;
+            case "-":
+              electron_cloud.addZE(hotkey_add.includes("z") ? -1 : 0, hotkey_add.includes("e") ? -1 : 0);
+              break;
+            case "ArrowDown":
+                electron_cloud.addPeriode();
+                break;
+            case "ArrowUp":
+                electron_cloud.removePeriode();
+                break;
+            case "ArrowLeft":
+                electron_cloud.addZE(-1, -1);
+                break;
+            case "ArrowRight":
+                electron_cloud.addZE(1, 1);
+                break;
+            case "o":
+                electron_placement = e_placements[(e_placements.indexOf(electron_placement)+1)%e_placements.length];
+                break;
+        }
+    }
+    window.addEventListener("keydown", function(e){
+        if([" ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key) && document.activeElement==c){
+            e.preventDefault();
+        }
+    }, false);
+</script>
+{% endblock %}

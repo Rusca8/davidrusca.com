@@ -1055,6 +1055,11 @@ def q_eq():
     return render_template("lab_q_eq.html")
 
 
+@app.route('/labs/q/radi/')
+def q_radi():
+    return render_template("/labs/lab_radiatomic.html")
+
+
 @app.route('/jsg/ede')
 @app.route('/jsg/ede/')
 def jsg_ede():
