@@ -180,6 +180,11 @@ const elements = {
      [ 87, 88,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118],
  ];
 
+ const ptable_dlc = [
+     [ 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70],
+     [ 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,100,101,102],
+ ];
+
  // timing
  let fps = 60;
  let t = Date.now();
@@ -296,8 +301,14 @@ const elements = {
          let [g, p] = this.gp;
          console.log(g, p);
          if(p < 7){
+             if(!g){
+                 this.addZE(32, 32);
+                 return;
+
+             }
              let d = ptable[p][g-1]-this.z;
              this.addZE(d, d);
+             return;
          }else{
              console.log("ABORTED: Already on 7th period.")
          }
@@ -306,6 +317,10 @@ const elements = {
      removePeriode(){
          console.log("Decreasing the period...");
          let [g, p] = this.gp;
+         if(!g && p==7){
+             this.addZE(-32, -32);
+             return;
+         }
          if(p > 1 && ptable[p-2][g-1]){
              let d = ptable[p-2][g-1]-this.z;
              this.addZE(d, d);
@@ -619,7 +634,7 @@ const elements = {
         //
         mainw = cWidth*2/3;
         uiw = cWidth*1/3;
-        atomsymbolw = uiw * 0.6;
+        atomsymbolw = uiw * 0.5;
         atomsymboly = u*60 + atomsymbolw/2;
         atomx = mainw*0.5;
         atomy = c.height*0.5;
@@ -628,7 +643,7 @@ const elements = {
         nuclix = mainw-u*20 - nucliw/2;
         nucliy = u*20 + nuclih/2;
         nucliyo = nuclih*0.05;
-        ptabley = c.height * 0.55;
+        ptabley = c.height * 0.50;
         ptablew = uiw*0.8;
         ptableh = ptablew*0.35;
 
@@ -687,19 +702,32 @@ const elements = {
          let w = (c.width - mainw - 20*u)/3;
          let i=0;
          buttons = [];
-         for(let [codi, text] of Object.entries({"+e": "+e", "+ze": "+", "+z": "+p", "-e": "-e", "-ze": "-", "-z": "-p"})){
-            buttons.push(new Button(x + w*(i%3), y + h*Math.floor(i/3), w, h, text, codi));
-            i++;
+         for(let i=0; i<6; i++){
+             if(i == 0){
+                 // protons
+                 buttons.push(new Button(x + w*(i%3), y + h*Math.floor(i/3), w/2, h, "+p", "+p"));
+                 buttons.push(new Button(x + w*(i%3) + w/2, y + h*Math.floor(i/3), w/2, h, "-p", "-p"));
+             }else if(i == 2){
+                 buttons.push(new Button(x + w*(i%3), y + h*Math.floor(i/3), w/2, h, "+e", "+e"));
+                 buttons.push(new Button(x + w*(i%3) + w/2, y + h*Math.floor(i/3), w/2, h, "-e", "-e"));
+             }else{
+                 let [codi, text] = {1: ["-P", "-P"], 3: ["-ze", "-G"], 4: ["+P", "+P"], 5: ["+ze", "+G"]}[i];
+                 buttons.push(new Button(x + w*(i%3), y + h*Math.floor(i/3), w, h, text, codi));
+             }
          }
          console.log(buttons);
      }
 
     function init_ptable(){
         pt_buttons = [];
+        // main table
         let i = 0;
         let x0 = c.width - uiw/2 - ptablew/2;
         let w = ptablew/ptable[0].length;
         let h = ptableh/ptable.length;
+
+        let dlc_m = h*0.6;
+
         for(let row of ptable){
             let yi = ptabley + i*h;
             let j = 0;
@@ -708,6 +736,18 @@ const elements = {
                     let xi = x0 + j*w;
                     pt_buttons.push(new Button(xi, yi, w, h, "", "z" + z));
                 }
+                j++;
+            }
+            i++;
+        }
+        // dlc
+        i=0;
+        for(let row of ptable_dlc){
+            yi = ptabley + (i+7)*h + dlc_m;
+            j=0;
+            for(let z of row){
+                let xi = x0 + (j+2)*w;
+                pt_buttons.push(new Button(xi, yi, w, h, "", "z" + z));
                 j++;
             }
             i++;
@@ -762,31 +802,6 @@ const elements = {
 
 
         // ------------ ÀTOM ----------- //
-        // -- nucli highlight
-        cc.textAlign = "center";
-        cc.textBaseline = "top";
-        // box
-        cc.fillStyle="rgba(250, 250, 250, 0.7)";
-        cc.strokeStyle="black";
-        roundRect(cc, nuclix-nucliw/2, nucliy-nuclih/2, nucliw, nuclih, 10*u);
-        // coverable labels
-        cc.fillStyle = "#444444";
-        cc.font = (40*u).toString() + "px Courier New";
-        cc.fillText("Nucli", nuclix, nucliy-nuclih/2 + 17*u);
-
-        cc.font = (20*u).toString() + "px Courier New";
-        cc.textBaseline = "bottom";
-        cc.fillText("Zoom x" + 5e3, nuclix, nucliy+nuclih/2 - 8*u);
-        // ball
-        cc.fillStyle="rgba(250, 0, 0, 0.5)";
-        cc.strokeStyle="#dd0000";
-        drawCircle(cc, nuclix, nucliy+nucliyo, rnucli*r_zoom*u*5e3, true, true);
-        // Z label
-        cc.font = (30*u).toString() + "px Courier New";
-        cc.fillStyle = "white";
-        cc.textBaseline = "middle";
-        cc.fillText(electron_cloud.z, nuclix, nucliy+nucliyo);
-
         // orbitals: shade
         for(let [orb, r] of Object.entries(electron_cloud.orbital_radii)){
             if(r<0){
@@ -857,7 +872,33 @@ const elements = {
             drawCircle(cc, atomx, atomy, rnucli*r_zoom*u, false, true);
         }
 
+        // -- nucli highlight
+        cc.textAlign = "center";
+        cc.textBaseline = "top";
+        // box
+        cc.fillStyle="rgba(250, 250, 250, 0.7)";
+        cc.strokeStyle="black";
+        roundRect(cc, nuclix-nucliw/2, nucliy-nuclih/2, nucliw, nuclih, 10*u);
+        // coverable labels
+        cc.fillStyle = "#444444";
+        cc.font = (40*u).toString() + "px Courier New";
+        cc.fillText("Nucli", nuclix, nucliy-nuclih/2 + 17*u);
+        //
+        cc.font = (20*u).toString() + "px Courier New";
+        cc.textBaseline = "bottom";
+        cc.fillText("Zoom x" + 5e3, nuclix, nucliy+nuclih/2 - 8*u);
+        // ball
+        cc.fillStyle="rgba(250, 0, 0, 0.5)";
+        cc.strokeStyle="#dd0000";
+        drawCircle(cc, nuclix, nucliy+nucliyo, rnucli*r_zoom*u*5e3, true, true);
+        // Z label
+        cc.font = (30*u).toString() + "px Courier New";
+        cc.fillStyle = "white";
+        cc.textBaseline = "middle";
+        cc.fillText(electron_cloud.z, nuclix, nucliy+nucliyo);
+
         // -------- UI --------
+        let [grup, periode] = electron_cloud.gp;
         // bg
         cc.fillStyle = "rgba(0,10,20,0.2)";
         cc.fillRect(mainw, 0, c.width, c.height);
@@ -865,23 +906,28 @@ const elements = {
         cc.strokeRect(mainw, -10, c.width, c.height+20);
         // Taula Periòdica
         for(let b of pt_buttons){
-            let is_current = parseInt(b.code.slice(1)) == electron_cloud.z;
+            let bz = parseInt(b.code.slice(1))
+            let is_current = bz == electron_cloud.z;
             let m = 2*u;
             cc.strokeStyle = "rgba(0, 10, 20, 0.6)";
             cc.fillStyle = is_current ? "rgba(0,10,20,0.4)" : "rgba(0,10,20,0.2)";
             cc.fillRect(b.x+m, b.y+m, b.w-2*m, b.h-2*m);
+            if(((bz == 56 && periode == 6) || (bz == 88 && periode == 7)) && !grup){
+                cc.fillStyle = "rgba(0,10,20,0.4)";
+                cc.fillRect(b.x+b.w-m, b.y+m, 2*m, b.h-2*m);
+            }
         }
         // Àtom (símbol)
         cc.fillStyle = "rgba(100, 100, 100, 0.6)";
         cc.strokeStyle = "rgba(0, 0, 0, 0.7)";
         roundRect(cc, c.width-uiw/2-atomsymbolw/2, atomsymboly-atomsymbolw/2, atomsymbolw, atomsymbolw, 10*u, true, true);
         cc.fillStyle = "#f5f5f5";
-        cc.font = (180*u).toString() + "px Helvetica";
+        cc.font = (atomsymbolw*0.5).toString() + "px Helvetica";
         cc.textBaseline = "middle";
         cc.fillText(electron_cloud.symbol, c.width - uiw/2, atomsymboly-atomsymbolw*0.15);
-        cc.font = (50*u).toString() + "px Helvetica";
-        cc.fillText("Z = " + electron_cloud.z, c.width - uiw/2, atomsymboly+atomsymbolw*0.2);
-        cc.fillText("E = " + electron_cloud.e, c.width - uiw/2, atomsymboly+atomsymbolw*0.35);
+        cc.font = (atomsymbolw*0.1).toString() + "px Helvetica";
+        cc.fillText("Z = " + electron_cloud.z + "   e = " + electron_cloud.e, c.width - uiw/2, atomsymboly+atomsymbolw*0.2);
+        cc.fillText("P = " + periode + "   G = " + grup, c.width - uiw/2, atomsymboly+atomsymbolw*0.36);
         // econfig
         cc.fillStyle = "rgba(0, 10, 20, 0.7)";
         cc.font = (30*u).toString() + "px Helvetica";
@@ -895,12 +941,30 @@ const elements = {
         cc.textAlign = "center";
         for(let b of buttons){
             let m = 5*u;
-            cc.fillStyle = b.code.length > 2 ? "rgba(255, 255, 255, 0.9)" : "rgba(240,240,240,0.9)";
+            let is_main_b = ["+P", "-P", "+ze", "-ze"].includes(b.code);
+            cc.fillStyle = is_main_b ? "rgba(255, 255, 255, 0.9)" : "rgba(240,240,240,0.9)";
             cc.strokeStyle = "black";
             roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 7*u);
-            cc.fillStyle = "black";
-            cc.font = ((b.code.length > 2 ? 120 : 40)*u).toString() + "px Courier New";
-            cc.fillText(b.text, b.x+b.w/2, b.y+b.h/2+3*u);
+            cc.fillStyle = "rgba(0,10,20,0.4)";
+            switch(b.code){
+                case "-P":
+                    drawTriangle(cc, b.x+b.w/2, b.y+b.h*0.3, b.x+b.w*0.3, b.y+b.h*0.7, b.x+b.w*0.7, b.y+b.h*0.7, false, true);
+                    break;
+                case "+P":
+                    drawTriangle(cc, b.x+b.w/2, b.y+b.h*0.7, b.x+b.w*0.3, b.y+b.h*0.3, b.x+b.w*0.7, b.y+b.h*0.3, false, true);
+                    break;
+                case "-ze":
+                    drawTriangle(cc, b.x+b.w*0.4, b.y+b.h*0.5, b.x+b.w*0.6, b.y+b.h*0.2, b.x+b.w*0.6, b.y+b.h*0.8, false, true);
+                    break;
+                case "+ze":
+                    drawTriangle(cc, b.x+b.w*0.6, b.y+b.h*0.5, b.x+b.w*0.4, b.y+b.h*0.2, b.x+b.w*0.4, b.y+b.h*0.8, false, true);
+                    break;
+                default:
+                    cc.fillStyle = "black";
+                    cc.font = ((is_main_b ? 120 : 40)*u).toString() + "px Courier New";
+                    cc.fillText(b.text, b.x+b.w/2, b.y+b.h/2+3*u);
+                    break;
+            }
         }
 
         //
