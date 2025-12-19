@@ -198,7 +198,7 @@ const elements = {
  let cWidth;
  let cHeight;
  //
- let mainw, uiw;
+ let mainw, uiw, maina;
  let atomx, atomy;
  let atomsymboly, atomsymbolw;
  let nuclix, nucliy, nucliw, nuclih, nucliyo;
@@ -633,6 +633,7 @@ const elements = {
         u = cHeight/1200;     // unidad de medida
         //
         mainw = cWidth*2/3;
+        maina = Math.atan2(c.height, mainw);
         uiw = cWidth*1/3;
         atomsymbolw = uiw * 0.5;
         atomsymboly = u*60 + atomsymbolw/2;
@@ -856,6 +857,24 @@ const elements = {
                 let e_space = orbital_filling_order(orb)[i];
                 let xi = atomx + ring_r*Math.cos(dang*e_space + w*world_time/1000);
                 let yi = atomy + ring_r*Math.sin(dang*e_space + w*world_time/1000);
+                if(xi < 0 || yi < 0 || xi > mainw || yi > c.height){
+                    let ai = Math.atan2(yi-atomy, xi-atomx);
+                    let dxi, dyi;
+                    let ts = 7*u;
+                    if(ai < maina && ai > -maina){
+                        // right
+                        drawTriangle(cc, mainw, yi, mainw-ts, yi+ts, mainw-ts, yi-ts, false, true);
+                    }else if(ai < Math.PI-maina && ai >= maina){
+                        // bottom
+                        drawTriangle(cc, xi, c.height, xi-ts, c.height-ts, xi+ts, c.height-ts, false, true);
+                    }else if(ai > -Math.PI+maina && ai <= -maina){
+                        // top
+                        drawTriangle(cc, xi, 0, xi-ts, ts, xi+ts, ts, false, true);
+                    }else{
+                        // left
+                        drawTriangle(cc, 0, yi, ts, yi+ts, ts, yi-ts, false, true);
+                    }
+                }
                 drawCircle(cc, xi, yi, relectron*r_zoom*electron_scale*u, false, true);
             }
         }
