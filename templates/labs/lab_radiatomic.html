@@ -30,7 +30,7 @@
     <div class="card-body" style="user-select:none;">
         {{ _('Si clicas sobre la animación podrás pararla con la tecla') }} <code>{{ _('Espacio') }}</code>.<br>
         També pots navegar per la taula periòdica amb les <code>Fletxes</code> del teclat (compte no et perdis pel forat del bloc f!).<br>
-        Amb la tecla <code>n</code> pots canviar l'escala del nucli, i amb la <code>o</code> l'estil de repartiment dels electrons dins les òrbites.
+        I amb la tecla <code>o</code> pots canviar l'estil de repartiment dels electrons dins les òrbites.
     </div>
 </div>
 
@@ -646,7 +646,7 @@ const elements = {
         uiw = cWidth*1/3;
         atomsymbolw = uiw * 0.5;
         atomsymboly = u*60 + atomsymbolw/2;
-        atomx = mainw*0.5;
+        atomx = mainw*0.50;
         atomy = c.height*0.5;
         nucliw = u*200;
         nuclih = u*250;
@@ -1306,8 +1306,6 @@ const elements = {
             case "n":
                 console.log("current nucli size", nucli_size);
                 if(nucli_size == "dot"){
-                    nucli_size = "big";
-                }else if(nucli_size == "big"){
                     nucli_size = "real";
                 }else{
                     nucli_size = "dot";
