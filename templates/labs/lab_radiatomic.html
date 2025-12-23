@@ -941,6 +941,16 @@ const elements = {
         cc.fillStyle = "white";
         cc.textBaseline = "middle";
         cc.fillText(electron_cloud.z, nuclix, nucliy+nucliyo);
+        // -- càrrega
+        let ec_q = electron_cloud.q;
+        if(ec_q) {
+            cc.fillStyle="rgba(250, 250, 250, 0.7)";
+            cc.strokeStyle="rgba(0, 0, 0, 0.9)";
+            roundRect(cc, nuclix-nucliw/2, nucliy+nuclih/2+20*u, nucliw, 50*u, 10*u);
+            cc.fillStyle = "black";
+            cc.fillText("q = " + (ec_q>0 ? "+" : "") + electron_cloud.q, nuclix, nucliy+nuclih/2 + 45*u)
+        }
+
 
         // ------ overlays ---------
         // -- screening
@@ -1060,7 +1070,11 @@ const elements = {
             cc.fillStyle = is_main_b ? "rgba(255, 255, 255, 0.9)" : "rgba(240,240,240,0.9)";
             cc.strokeStyle = "black";
             roundRect(cc, b.x+m, b.y+m, b.w-2*m, b.h-2*m, 7*u);
-            cc.fillStyle = "rgba(0,10,20,0.4)";
+            cc.fillStyle = "rgba(0,10,20,0.5)";
+            let dx = 0;
+            let dy = 0;
+            let circx;
+            let circy;
             switch(b.code){
                 case "-P":
                     drawTriangle(cc, b.x+b.w/2, b.y+b.h*0.3, b.x+b.w*0.3, b.y+b.h*0.7, b.x+b.w*0.7, b.y+b.h*0.7, false, true);
@@ -1080,6 +1094,42 @@ const elements = {
                     }else{
                         drawTriangle(cc, b.x+b.w/2, b.y+b.h*0.35, b.x+b.w*0.3, b.y+b.h*0.65, b.x+b.w*0.7, b.y+b.h*0.65, false, true);
                     }
+                case "+p":
+                case "+e":
+                    cc.fillStyle = "rgba(0,10,20,0.3)";
+                    dx = 0.0*b.w;
+                    dy = -0.11*b.h;
+                    drawTriangle(cc, b.x+b.w/2+dx, b.y+b.h*0.3+dy, b.x+b.w*0.35+dx, b.y+b.h*0.45+dy, b.x+b.w*0.65+dx, b.y+b.h*0.45+dy, false, true);
+                    circx = b.x+b.w*0.5;
+                    circy = b.y+b.h*0.61;
+                    drawCircle(cc, circx, circy, b.w*0.18, false, true);
+                    cc.fillStyle = "rgba(255, 255, 255, 0.85)";
+                    if(b.code == "+p"){
+                        cc.font = "bold " + (50*u).toString() + "px Courier New";
+                        cc.fillText("+", circx, circy+2*u);
+                    }else{
+                        cc.font = "bold " + (60*u).toString() + "px Courier New";
+                        cc.fillText("-", circx, circy+2.65*u);
+                    }
+                    break;
+                case "-p":
+                case "-e":
+                    cc.fillStyle = "rgba(0,10,20,0.3)";
+                    dx = 0.0*b.w;
+                    dy = +0.11*b.h;
+                    drawTriangle(cc, b.x+b.w/2+dx, b.y+b.h*0.7+dy, b.x+b.w*0.35+dx, b.y+b.h*0.55+dy, b.x+b.w*0.65+dx, b.y+b.h*0.55+dy, false, true);
+                    circx = b.x+b.w*0.5;
+                    circy = b.y+b.h*0.39;
+                    drawCircle(cc, circx, circy, b.w*0.18, false, true);
+                    cc.fillStyle = "rgba(255, 255, 255, 0.85)";
+                    if(b.code == "-p"){
+                        cc.font = "bold " + (50*u).toString() + "px Courier New";
+                        cc.fillText("+", circx, circy+2*u);
+                    }else{
+                        cc.font = "bold " + (60*u).toString() + "px Courier New";
+                        cc.fillText("-", circx, circy+2.65*u);
+                    }
+                    break;
                 default:
                     cc.fillStyle = "black";
                     cc.font = ((is_main_b ? 120 : 40)*u).toString() + "px Courier New";
