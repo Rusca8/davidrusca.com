@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-27 00:43+0100\n"
+"POT-Creation-Date: 2026-02-02 14:43+0100\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -2226,7 +2226,7 @@ msgid "Programación"
 msgstr "Programació"
 
 #: templates/docentes.html:104 templates/docentes.html:518
-#: templates/juegos.html:18 templates/juegos.html:59
+#: templates/juegos.html:18 templates/juegos.html:60
 msgid "Juegos de Lengua"
 msgstr "Jocs de Llengua"
 
@@ -2817,31 +2817,31 @@ msgstr "Jocs digitals i de taula"
 msgid "Diseños propios y recursos para juegos existentes."
 msgstr "Dissenys propis i recursos per a jocs existents."
 
-#: templates/juegos.html:16 templates/juegos.html:55
+#: templates/juegos.html:16 templates/juegos.html:56
 msgid "Juegos digitales"
 msgstr "Jocs digitals"
 
-#: templates/juegos.html:19 templates/juegos.html:105
+#: templates/juegos.html:19 templates/juegos.html:106
 msgid "Juegos de Mates"
 msgstr "Jocs de Mates"
 
-#: templates/juegos.html:28 templates/juegos.html:127
+#: templates/juegos.html:28 templates/juegos.html:128
 msgid "Diseños de juegos de mesa"
 msgstr "Dissenys de jocs de taula"
 
-#: templates/juegos.html:30 templates/juegos.html:131
+#: templates/juegos.html:30 templates/juegos.html:132
 msgid "Prototipos"
 msgstr "Prototips"
 
-#: templates/juegos.html:39 templates/juegos.html:163
+#: templates/juegos.html:39 templates/juegos.html:164
 msgid "Recursos para juegos de mesa"
 msgstr "Recursos per a jocs de taula"
 
-#: templates/juegos.html:41 templates/juegos.html:167
+#: templates/juegos.html:41 templates/juegos.html:168
 msgid "Dragones y Mazmorras (5ª Edición)"
 msgstr ""
 
-#: templates/juegos.html:114
+#: templates/juegos.html:115
 msgid ""
 "Calcula rápido los factores primeros de los números que aparecen para "
 "intentar vaciar la pantalla tan rápido como puedas."
@@ -2849,7 +2849,7 @@ msgstr ""
 "Calcula ràpid els factors primers dels números que apareixen per intentar"
 " buidar la pantalla tan ràpid com puguis."
 
-#: templates/juegos.html:140
+#: templates/juegos.html:141
 msgid ""
 "Los jugadores tendrán que moverse a través de un laberinto cambiante para"
 " intentar conseguir sus cuatro cubitos antes que los demás."
@@ -2857,7 +2857,7 @@ msgstr ""
 "Els jugadors hauran de moure's a través d'un laberint canviant per "
 "intentar aconseguir els seus quatre cubs abans que els altres."
 
-#: templates/juegos.html:150
+#: templates/juegos.html:151
 msgid ""
 "Juego de agilidad mental y memoria donde los jugadores tendrán que ser "
 "los más rápidos sumando matrículas y recordando dónde están las "
@@ -2866,7 +2866,7 @@ msgstr ""
 "Joc d'agilitat mental i memòria on els jugadors hauran de ser el més "
 "ràpids sumant matrícules i recordant on són les semblants."
 
-#: templates/juegos.html:152
+#: templates/juegos.html:153
 msgid ""
 "Pensado para trabajar la regla de divisibilidad del 3 y un poco de "
 "mnemotecnia en las escuelas."
@@ -2874,71 +2874,71 @@ msgstr ""
 "Pensat per a treballar la regla de divisibiliatat del 3 i una mica de "
 "mnemotècnia a les escoles."
 
-#: templates/juegos.html:176
+#: templates/juegos.html:177
 msgid "Listas Resumen de Conjuros"
 msgstr "Llistes Resum d'Encanteris"
 
-#: templates/juegos.html:178 templates/juegos.html:197
+#: templates/juegos.html:179 templates/juegos.html:198
 msgid "Todos los Conjuros"
 msgstr "Tots els Encanteris"
 
-#: templates/juegos.html:179 templates/juegos.html:198
+#: templates/juegos.html:180 templates/juegos.html:199
 msgid "Conjuros de Artificiero"
 msgstr "Encanteris de l'Artificier"
 
-#: templates/juegos.html:180 templates/juegos.html:199
+#: templates/juegos.html:181 templates/juegos.html:200
 msgid "Conjuros de Bardo"
 msgstr "Encanteris del Bard"
 
-#: templates/juegos.html:181 templates/juegos.html:200
+#: templates/juegos.html:182 templates/juegos.html:201
 msgid "Conjuros de Brujo"
 msgstr "Encanteris del Bruixot"
 
-#: templates/juegos.html:182 templates/juegos.html:201
+#: templates/juegos.html:183 templates/juegos.html:202
 msgid "Conjuros de Clérigo"
 msgstr "Encanteris del Clergue"
 
-#: templates/juegos.html:183 templates/juegos.html:202
+#: templates/juegos.html:184 templates/juegos.html:203
 msgid "Conjuros de Druida"
 msgstr "Encanteris del Druida"
 
-#: templates/juegos.html:184 templates/juegos.html:203
+#: templates/juegos.html:185 templates/juegos.html:204
 msgid "Conjuros de Explorador"
 msgstr "Encanteris de l'Explorador"
 
-#: templates/juegos.html:185 templates/juegos.html:204
+#: templates/juegos.html:186 templates/juegos.html:205
 msgid "Conjuros de Hechicero"
 msgstr "Encanteris del Fetiller"
 
-#: templates/juegos.html:186 templates/juegos.html:205
+#: templates/juegos.html:187 templates/juegos.html:206
 msgid "Conjuros de Mago"
 msgstr "Encanteris del Mag"
 
-#: templates/juegos.html:187 templates/juegos.html:206
+#: templates/juegos.html:188 templates/juegos.html:207
 msgid "Conjuros de Paladin"
 msgstr "Encanteris del Paladí"
 
-#: templates/juegos.html:195
+#: templates/juegos.html:196
 msgid "Cartas de Conjuros"
 msgstr "Cartes d'Encanteris"
 
-#: templates/juegos.html:214
+#: templates/juegos.html:215
 msgid "Otros Recursos"
 msgstr "Altres Recursos"
 
-#: templates/juegos.html:216
+#: templates/juegos.html:217
 msgid "Diagrama de Todas las Subclases"
 msgstr "Diagrama de Totes les Subclasses"
 
-#: templates/juegos.html:217
+#: templates/juegos.html:218
 msgid "Tabla d100 de magia salvaje"
 msgstr "Taula d100 de magia salvatge"
 
-#: templates/juegos.html:237
+#: templates/juegos.html:238
 msgid "Bandeja de jugador de madera"
 msgstr "Safata de jugador de fusta"
 
-#: templates/juegos.html:238
+#: templates/juegos.html:239
 msgid ""
 "Archivo digital para crear una bandeja de jugador de doble capa con la "
 "cortadora láser."
@@ -2946,7 +2946,7 @@ msgstr ""
 "Fitxer digital per a crear una safata de jugador de doble capa amb la "
 "talladora làser."
 
-#: templates/juegos.html:240
+#: templates/juegos.html:241
 msgid ""
 "El archivo incluye la parte de los grabados y el trazo del corte en capas"
 " separadas. Las dos capas de madera están colocadas de lado para "
@@ -2956,9 +2956,41 @@ msgstr ""
 " Les dues capes de fusta estan col·locades de costat per a gravar-les i "
 "tallar-les simultàniament."
 
-#: templates/juegos.html:242
+#: templates/juegos.html:243
 msgid "Archivo de Illustrator"
 msgstr "Fitxer d'Illustrator"
+
+#: templates/juegos.html:260
+msgid "Hojas de Referencia"
+msgstr "Fulls de Referència"
+
+#: templates/juegos.html:261
+msgid ""
+"Creadas por Samuel Marchal (Zessx), las hemos traducido en equipo yo y "
+"Aina SG (en github)."
+msgstr "Creats per Samuel Marchal (Zessx), les hem traduït en equip jo i l'Aina SG (al github)."
+
+#: templates/juegos.html:263
+msgid ""
+"La de Iniciación es una versión distinta de la que hay en zessx porque no"
+" me convenció el consenso y la retoqué por mi cuenta."
+msgstr "La d'Iniciació és una versió diferent de la que hi ha a zessx perquè no em va convèncer el consens i la vaig retocar pel meu compte."
+
+#: templates/juegos.html:265
+msgid "Iniciación"
+msgstr "iniciació"
+
+#: templates/juegos.html:266
+msgid "Yakus"
+msgstr "Yakus"
+
+#: templates/juegos.html:267
+msgid "Puntuación"
+msgstr "Puntuació"
+
+#: templates/juegos.html:268
+msgid "Otros idiomas"
+msgstr "Altres idiomes"
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 #: templates/labs/lab_radiatomic.html:2

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-01-27 00:43+0100\n"
+"POT-Creation-Date: 2026-02-02 14:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2114,7 +2114,7 @@ msgid "Programación"
 msgstr ""
 
 #: templates/docentes.html:104 templates/docentes.html:518
-#: templates/juegos.html:18 templates/juegos.html:59
+#: templates/juegos.html:18 templates/juegos.html:60
 msgid "Juegos de Lengua"
 msgstr ""
 
@@ -2703,134 +2703,166 @@ msgstr ""
 msgid "Diseños propios y recursos para juegos existentes."
 msgstr ""
 
-#: templates/juegos.html:16 templates/juegos.html:55
+#: templates/juegos.html:16 templates/juegos.html:56
 msgid "Juegos digitales"
 msgstr ""
 
-#: templates/juegos.html:19 templates/juegos.html:105
+#: templates/juegos.html:19 templates/juegos.html:106
 msgid "Juegos de Mates"
 msgstr ""
 
-#: templates/juegos.html:28 templates/juegos.html:127
+#: templates/juegos.html:28 templates/juegos.html:128
 msgid "Diseños de juegos de mesa"
 msgstr ""
 
-#: templates/juegos.html:30 templates/juegos.html:131
+#: templates/juegos.html:30 templates/juegos.html:132
 msgid "Prototipos"
 msgstr ""
 
-#: templates/juegos.html:39 templates/juegos.html:163
+#: templates/juegos.html:39 templates/juegos.html:164
 msgid "Recursos para juegos de mesa"
 msgstr ""
 
-#: templates/juegos.html:41 templates/juegos.html:167
+#: templates/juegos.html:41 templates/juegos.html:168
 msgid "Dragones y Mazmorras (5ª Edición)"
 msgstr ""
 
-#: templates/juegos.html:114
+#: templates/juegos.html:115
 msgid ""
 "Calcula rápido los factores primeros de los números que aparecen para "
 "intentar vaciar la pantalla tan rápido como puedas."
 msgstr ""
 
-#: templates/juegos.html:140
+#: templates/juegos.html:141
 msgid ""
 "Los jugadores tendrán que moverse a través de un laberinto cambiante para"
 " intentar conseguir sus cuatro cubitos antes que los demás."
 msgstr ""
 
-#: templates/juegos.html:150
+#: templates/juegos.html:151
 msgid ""
 "Juego de agilidad mental y memoria donde los jugadores tendrán que ser "
 "los más rápidos sumando matrículas y recordando dónde están las "
 "parecidas."
 msgstr ""
 
-#: templates/juegos.html:152
+#: templates/juegos.html:153
 msgid ""
 "Pensado para trabajar la regla de divisibilidad del 3 y un poco de "
 "mnemotecnia en las escuelas."
 msgstr ""
 
-#: templates/juegos.html:176
+#: templates/juegos.html:177
 msgid "Listas Resumen de Conjuros"
 msgstr ""
 
-#: templates/juegos.html:178 templates/juegos.html:197
+#: templates/juegos.html:179 templates/juegos.html:198
 msgid "Todos los Conjuros"
 msgstr ""
 
-#: templates/juegos.html:179 templates/juegos.html:198
+#: templates/juegos.html:180 templates/juegos.html:199
 msgid "Conjuros de Artificiero"
 msgstr ""
 
-#: templates/juegos.html:180 templates/juegos.html:199
+#: templates/juegos.html:181 templates/juegos.html:200
 msgid "Conjuros de Bardo"
 msgstr ""
 
-#: templates/juegos.html:181 templates/juegos.html:200
+#: templates/juegos.html:182 templates/juegos.html:201
 msgid "Conjuros de Brujo"
 msgstr ""
 
-#: templates/juegos.html:182 templates/juegos.html:201
+#: templates/juegos.html:183 templates/juegos.html:202
 msgid "Conjuros de Clérigo"
 msgstr ""
 
-#: templates/juegos.html:183 templates/juegos.html:202
+#: templates/juegos.html:184 templates/juegos.html:203
 msgid "Conjuros de Druida"
 msgstr ""
 
-#: templates/juegos.html:184 templates/juegos.html:203
+#: templates/juegos.html:185 templates/juegos.html:204
 msgid "Conjuros de Explorador"
 msgstr ""
 
-#: templates/juegos.html:185 templates/juegos.html:204
+#: templates/juegos.html:186 templates/juegos.html:205
 msgid "Conjuros de Hechicero"
 msgstr ""
 
-#: templates/juegos.html:186 templates/juegos.html:205
+#: templates/juegos.html:187 templates/juegos.html:206
 msgid "Conjuros de Mago"
 msgstr ""
 
-#: templates/juegos.html:187 templates/juegos.html:206
+#: templates/juegos.html:188 templates/juegos.html:207
 msgid "Conjuros de Paladin"
 msgstr ""
 
-#: templates/juegos.html:195
+#: templates/juegos.html:196
 msgid "Cartas de Conjuros"
 msgstr ""
 
-#: templates/juegos.html:214
+#: templates/juegos.html:215
 msgid "Otros Recursos"
 msgstr ""
 
-#: templates/juegos.html:216
+#: templates/juegos.html:217
 msgid "Diagrama de Todas las Subclases"
 msgstr ""
 
-#: templates/juegos.html:217
+#: templates/juegos.html:218
 msgid "Tabla d100 de magia salvaje"
 msgstr ""
 
-#: templates/juegos.html:237
+#: templates/juegos.html:238
 msgid "Bandeja de jugador de madera"
 msgstr ""
 
-#: templates/juegos.html:238
+#: templates/juegos.html:239
 msgid ""
 "Archivo digital para crear una bandeja de jugador de doble capa con la "
 "cortadora láser."
 msgstr ""
 
-#: templates/juegos.html:240
+#: templates/juegos.html:241
 msgid ""
 "El archivo incluye la parte de los grabados y el trazo del corte en capas"
 " separadas. Las dos capas de madera están colocadas de lado para "
 "grabarlas y cortarlas simultáneamente."
 msgstr ""
 
-#: templates/juegos.html:242
+#: templates/juegos.html:243
 msgid "Archivo de Illustrator"
+msgstr ""
+
+#: templates/juegos.html:260
+msgid "Hojas de Referencia"
+msgstr ""
+
+#: templates/juegos.html:261
+msgid ""
+"Creadas por Samuel Marchal (Zessx), las hemos traducido en equipo yo y "
+"Aina SG (en github)."
+msgstr ""
+
+#: templates/juegos.html:263
+msgid ""
+"La de Iniciación es una versión distinta de la que hay en zessx porque no"
+" me convenció el consenso y la retoqué por mi cuenta."
+msgstr ""
+
+#: templates/juegos.html:265
+msgid "Iniciación"
+msgstr ""
+
+#: templates/juegos.html:266
+msgid "Yakus"
+msgstr ""
+
+#: templates/juegos.html:267
+msgid "Puntuación"
+msgstr ""
+
+#: templates/juegos.html:268
+msgid "Otros idiomas"
 msgstr ""
 
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
