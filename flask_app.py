@@ -317,6 +317,11 @@ def bg():
     return redirect(url_for("juegos")), 301
 
 
+@app.route('/riichi/')
+def riichi():
+    return redirect("/juegos/#riichi")
+
+
 @app.route('/jocs/')
 @app.route('/juegos/')
 def juegos():
