@@ -1,0 +1,102 @@
+:root {
+    --color-border: black;
+    --color-bg: #f2e8c9;
+}
+
+.card {
+    border: 1px solid var(--color-border);
+}
+
+.card-header {
+    background: #9e825a;
+    color: #fffefc;
+    font-weight: normal;
+    border-bottom: 0px;
+}
+
+.subheader {
+    line-height: 1rem;
+    border-bottom: 1px solid #a18052;
+    background: #d6bb94;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    font-size: 0.8rem;
+}
+
+.bar-div {
+    background-color: #d6bb94;
+    border-bottom: 1px solid #a18052;
+    box-shadow: -3px 5px 10px -5px #9e825a;
+}
+.bar-div-top {
+    background-color: #d6bb94;
+    border-top: 1px solid #a18052;
+}
+
+.selected {
+    box-shadow: 0 0 0 3px darkred;
+}
+
+.premult {
+    color: steelblue;
+}
+
+.total, .total_color {
+    color: grey;
+}
+
+.selected .total, .selected .total_color {
+    color: darkred;
+}
+
+.hide {
+    display: none;
+}
+
+
+.khr {
+  border: 0;
+  font-size: 18px;
+  height: 1.5em;
+  line-height: 1em;
+  position: relative;
+  text-align: center;
+}
+.khr::before {
+    content: "";
+    background: #9e825a;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+}
+.khr::after {
+    background-color: var(--color-bg);
+    color: #9e825a;
+    content: attr(data-content);
+    line-height: 1.5em;
+    padding: 0 7px;
+    position: relative;
+}
+
+.srcbar {
+    background-color: rgba(200, 180, 150, 0.5);
+    border-bottom: 1px solid grey;
+    color: grey;
+    font-size: 0.5rem;
+}
+
+.max {
+    background-color: rgba(200, 180, 150, 1);
+    color: white;
+}
+
+.src_link, .src_link:hover {
+    text-decoration: none;
+    color: grey;
+}
+
+.calcs {
+    line-height: 1.2rem;
+    font-size: 0.6rem;
+}

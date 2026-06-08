@@ -1077,6 +1077,13 @@ def q_chatelier():
     return render_template("lab_q_chatelier.html")
 
 
+@app.route('/labs/milmilionaris')
+def milmilionaris():
+    from lab_milmilionaris import milmilionaris, preus
+    return render_template("/labs/lab_billion.html", mimis=milmilionaris, preus=preus)
+
+
+
 @app.route('/bg/<bg>')
 def bg_dots(bg=None):
     nom = random.choice(["Pernil", "Rinoceront", "Iogurt", "Marsupial", "Cacaolat", "Illuminati", "Llimac",
