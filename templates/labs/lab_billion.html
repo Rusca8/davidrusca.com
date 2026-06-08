@@ -13,8 +13,8 @@
 <div class="px-2 pt-2 pb-1 sticky-top bar-div" style="top: 3rem;">
     <div class="container mb-2">
         <div class="row justify-content-middle">
-            <div class="col-auto mx-auto">
-                  <select id="mimi_selection" class="form-select pl-2 text-center" aria-label="Selecciona un milmilionari" style="width: 40rem;" onchange="load_wealth();">
+            <div class="col-auto mx-auto" style="min-width: 70%;">
+                  <select id="mimi_selection" class="form-select pl-2 text-center" aria-label="Selecciona un milmilionari" style="width: 100%;" onchange="load_wealth();">
                     {% for mimi in mimis %}
                         <option value="{{ mimi.wealth }}" {{ 'selected' if loop.index0 == 2 else ''}}>{{mimi.short}} - {{mimi.name}}</option>
                     {% endfor %}
