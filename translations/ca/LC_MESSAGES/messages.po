@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-08 11:34+0200\n"
+"POT-Creation-Date: 2026-06-09 16:06+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -192,7 +192,7 @@ msgstr "Hi ha vídeo al YouTube i un resum en pdf."
 
 #: templates/anki.html:24 templates/anki.html:25 templates/anki.html:38
 #: templates/anki.html:39 templates/anki.html:58 templates/anki.html:59
-#: templates/docentes.html:305
+#: templates/docentes.html:309
 msgid "Resumen"
 msgstr "Resum"
 
@@ -251,7 +251,7 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:447
+#: templates/anki.html:77 templates/anki.html:133 templates/docentes.html:451
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
@@ -523,7 +523,7 @@ msgstr "Identificar què és un error i què no ho és."
 msgid "Incluye:"
 msgstr "Inclou:"
 
-#: templates/anki.html:227 templates/docentes.html:397
+#: templates/anki.html:227 templates/docentes.html:401
 msgid "Fracciones"
 msgstr "Fraccions"
 
@@ -535,7 +535,7 @@ msgstr "Potències"
 msgid "Raíces"
 msgstr "Arrels"
 
-#: templates/anki.html:230 templates/docentes.html:399
+#: templates/anki.html:230 templates/docentes.html:403
 msgid "Ecuaciones"
 msgstr "Equacions"
 
@@ -2158,13 +2158,13 @@ msgstr "Mates socials"
 
 #: templates/docentes.html:25 templates/docentes.html:48
 #: templates/docentes.html:57 templates/docentes.html:79
-#: templates/docentes.html:258 templates/docentes.html:330
-#: templates/docentes.html:346
+#: templates/docentes.html:258 templates/docentes.html:334
+#: templates/docentes.html:350
 msgid "Tecnología"
 msgstr "Tecnologia"
 
 #: templates/docentes.html:26 templates/docentes.html:269
-#: templates/docentes.html:320
+#: templates/docentes.html:324
 msgid "Dibujo técnico"
 msgstr "Dibuix tècnic"
 
@@ -2172,11 +2172,11 @@ msgstr "Dibuix tècnic"
 msgid "Economía de la empresa"
 msgstr "Economia de l'empresa"
 
-#: templates/docentes.html:34 templates/docentes.html:297
+#: templates/docentes.html:34 templates/docentes.html:301
 msgid "Pruebas de Aptitud Personal"
 msgstr "Proves d'Aptitud Personal"
 
-#: templates/docentes.html:36 templates/docentes.html:301
+#: templates/docentes.html:36 templates/docentes.html:305
 msgid "Competencia Logicomatemática"
 msgstr "Competència Logicomatemàtica"
 
@@ -2188,11 +2188,11 @@ msgstr "Prova d'accés"
 msgid "Dibujo Técnico"
 msgstr "Dibuix Tècnic"
 
-#: templates/docentes.html:64 templates/docentes.html:363
+#: templates/docentes.html:64 templates/docentes.html:367
 msgid "Grado Profesional de Música"
 msgstr "Grau Professional de Música"
 
-#: templates/docentes.html:66 templates/docentes.html:367
+#: templates/docentes.html:66 templates/docentes.html:371
 msgid "Armonía"
 msgstr "Harmonia"
 
@@ -2200,15 +2200,15 @@ msgstr "Harmonia"
 msgid "Educación Secundaria (ESO)"
 msgstr "Educació Secundària (ESO)"
 
-#: templates/docentes.html:78 templates/docentes.html:411
+#: templates/docentes.html:78 templates/docentes.html:415
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: templates/docentes.html:80 templates/docentes.html:443
+#: templates/docentes.html:80 templates/docentes.html:447
 msgid "Sociales"
 msgstr "Socials"
 
-#: templates/docentes.html:81 templates/docentes.html:454
+#: templates/docentes.html:81 templates/docentes.html:458
 msgid "Inglés"
 msgstr "Anglès"
 
@@ -2216,26 +2216,26 @@ msgstr "Anglès"
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: templates/docentes.html:99 templates/docentes.html:486
+#: templates/docentes.html:99 templates/docentes.html:490
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: templates/docentes.html:101 templates/docentes.html:490
+#: templates/docentes.html:101 templates/docentes.html:494
 #: templates/index.html:139
 msgid "Programación"
 msgstr "Programació"
 
-#: templates/docentes.html:104 templates/docentes.html:524
+#: templates/docentes.html:104 templates/docentes.html:528
 #: templates/juegos.html:18 templates/juegos.html:60
 msgid "Juegos de Lengua"
 msgstr "Jocs de Llengua"
 
-#: templates/docentes.html:105 templates/docentes.html:537
+#: templates/docentes.html:105 templates/docentes.html:541
 #: templates/ventriloquia.html:2
 msgid "Ventriloquía"
 msgstr "Ventriloquia"
 
-#: templates/docentes.html:124 templates/docentes.html:303
+#: templates/docentes.html:124 templates/docentes.html:307
 msgid "Resumen:"
 msgstr "Resum:"
 
@@ -2256,7 +2256,7 @@ msgid "Tipos de Funciones"
 msgstr "Tipus de Funcions"
 
 #: templates/docentes.html:138 templates/docentes.html:177
-#: templates/docentes.html:392
+#: templates/docentes.html:396
 msgid "Ecuaciones exponenciales y logarítmicas"
 msgstr "Equacions exponencials i logarítmiques"
 
@@ -2265,7 +2265,7 @@ msgid "Números Complejos"
 msgstr "Números Complexos"
 
 #: templates/docentes.html:140 templates/docentes.html:178
-#: templates/docentes.html:391
+#: templates/docentes.html:395
 msgid "Combinatoria"
 msgstr "Combinatòria"
 
@@ -2302,8 +2302,8 @@ msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
 #: templates/docentes.html:152 templates/docentes.html:189
-#: templates/docentes.html:348 templates/docentes.html:394
-#: templates/docentes.html:432 templates/docentes.html:474
+#: templates/docentes.html:352 templates/docentes.html:398
+#: templates/docentes.html:436 templates/docentes.html:478
 msgid "Fichas:"
 msgstr "Fitxes:"
 
@@ -2312,7 +2312,7 @@ msgid "Ficha de Derivadas Definitiva"
 msgstr "Fitxa de Derivades Definitiva"
 
 #: templates/docentes.html:155 templates/docentes.html:192
-#: templates/docentes.html:398
+#: templates/docentes.html:402
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
@@ -2325,19 +2325,19 @@ msgid "Derivadas"
 msgstr "Derivades"
 
 #: templates/docentes.html:159 templates/docentes.html:196
-#: templates/docentes.html:239 templates/docentes.html:322
-#: templates/docentes.html:332
+#: templates/docentes.html:239 templates/docentes.html:326
+#: templates/docentes.html:336
 msgid "Temario:"
 msgstr "Temari:"
 
 #: templates/docentes.html:161 templates/docentes.html:198
-#: templates/docentes.html:241 templates/docentes.html:324
-#: templates/docentes.html:334
+#: templates/docentes.html:241 templates/docentes.html:328
+#: templates/docentes.html:338
 msgid "Temario optimizado"
 msgstr "Temari optimitzat"
 
 #: templates/docentes.html:165 templates/docentes.html:202
-#: templates/docentes.html:404
+#: templates/docentes.html:408
 msgid "Funciones trigonométricas"
 msgstr "Funcions trigonomètriques"
 
@@ -2347,7 +2347,7 @@ msgstr "Mates Socials"
 
 #: templates/docentes.html:174 templates/docentes.html:211
 #: templates/docentes.html:235 templates/docentes.html:260
-#: templates/docentes.html:389 templates/docentes.html:428
+#: templates/docentes.html:393 templates/docentes.html:432
 msgid "Formularios:"
 msgstr "Formularis"
 
@@ -2367,7 +2367,7 @@ msgstr "Moviments"
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de MRUA"
 
-#: templates/docentes.html:217 templates/docentes.html:434
+#: templates/docentes.html:217 templates/docentes.html:438
 msgid "Fuerzas"
 msgstr "Forces"
 
@@ -2379,10 +2379,10 @@ msgstr "Camp Gravitatori i Elèctric"
 msgid "Ondas"
 msgstr "Ones"
 
-#: templates/docentes.html:229 templates/docentes.html:282
-#: templates/docentes.html:369 templates/docentes.html:492
-#: templates/docentes.html:504 templates/docentes.html:515
-#: templates/index.html:99 templates/index.html:174
+#: templates/docentes.html:229 templates/docentes.html:271
+#: templates/docentes.html:286 templates/docentes.html:373
+#: templates/docentes.html:496 templates/docentes.html:508
+#: templates/docentes.html:519 templates/index.html:99 templates/index.html:174
 msgid "Apuntes:"
 msgstr "Apunts:"
 
@@ -2402,12 +2402,12 @@ msgstr "Propietats Periòdiques"
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: templates/docentes.html:243 templates/docentes.html:417
-#: templates/docentes.html:445
+#: templates/docentes.html:243 templates/docentes.html:421
+#: templates/docentes.html:449
 msgid "Mnemotecnia:"
 msgstr "Mnemotècnia:"
 
-#: templates/docentes.html:245 templates/docentes.html:419
+#: templates/docentes.html:245 templates/docentes.html:423
 msgid "Valencias de los Elementos"
 msgstr "Valències dels Elements"
 
@@ -2429,119 +2429,123 @@ msgid "Formulario"
 msgstr "Formulari"
 
 #: templates/docentes.html:273
+msgid "Poliedros: Construcciones Auxiliares y Vistas Principales"
+msgstr "Poliedres: Construccions Auxiliars i Vistes Principals"
+
+#: templates/docentes.html:277
 msgid "Cambios de plano"
 msgstr "Canvis de pla"
 
-#: templates/docentes.html:280
+#: templates/docentes.html:284
 msgid "Economía de la Empresa"
 msgstr "Economia de l'Empresa"
 
-#: templates/docentes.html:284
+#: templates/docentes.html:288
 msgid "Asientos"
 msgstr "Assentaments"
 
-#: templates/docentes.html:285
+#: templates/docentes.html:289
 msgid "Fuentes de Financiación"
 msgstr "Fonts de Finançament"
 
-#: templates/docentes.html:289
+#: templates/docentes.html:293
 msgid "Qué podría pagar con mil millones?"
 msgstr "Què podria pagar amb mil milions?"
 
-#: templates/docentes.html:316 templates/docentes.html:342
+#: templates/docentes.html:320 templates/docentes.html:346
 msgid "Prueba de Acceso"
 msgstr "Prova d'Accés"
 
-#: templates/docentes.html:350
+#: templates/docentes.html:354
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: templates/docentes.html:351
+#: templates/docentes.html:355
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: templates/docentes.html:352
+#: templates/docentes.html:356
 msgid "Energías"
 msgstr "Energies"
 
-#: templates/docentes.html:353
+#: templates/docentes.html:357
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: templates/docentes.html:354
+#: templates/docentes.html:358
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: templates/docentes.html:355
+#: templates/docentes.html:359
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: templates/docentes.html:371
+#: templates/docentes.html:375
 msgid "Canciones para los intervalos"
 msgstr "Cançons pels intervals"
 
-#: templates/docentes.html:375
+#: templates/docentes.html:379
 msgid "Editor de Esquemas Armónicos"
 msgstr "Editor d'Esquemes Harmònics"
 
-#: templates/docentes.html:396
+#: templates/docentes.html:400
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: templates/docentes.html:400
+#: templates/docentes.html:404
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: templates/docentes.html:415
+#: templates/docentes.html:419
 msgid "Masa y peso"
 msgstr "Massa i pes"
 
-#: templates/docentes.html:430
+#: templates/docentes.html:434
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: templates/docentes.html:435 templates/docentes.html:436
+#: templates/docentes.html:439 templates/docentes.html:440
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: templates/docentes.html:456 templates/docentes.html:526
-#: templates/docentes.html:539
+#: templates/docentes.html:460 templates/docentes.html:530
+#: templates/docentes.html:543
 msgid "Online:"
 msgstr "Online:"
 
-#: templates/docentes.html:468
+#: templates/docentes.html:472
 msgid "Primaria"
 msgstr "Primària"
 
-#: templates/docentes.html:476
+#: templates/docentes.html:480
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: templates/docentes.html:477
+#: templates/docentes.html:481
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: templates/docentes.html:478
+#: templates/docentes.html:482
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: templates/docentes.html:494
+#: templates/docentes.html:498
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: templates/docentes.html:495
+#: templates/docentes.html:499
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
-#: templates/docentes.html:529
+#: templates/docentes.html:533
 msgid "Catagrama del día"
 msgstr "Catagrama del dia"
 
-#: templates/docentes.html:530
+#: templates/docentes.html:534
 msgid "Crucigramas crípticos"
 msgstr "Mots encreuats críptics"
 
-#: templates/docentes.html:541 templates/ventriloquia.html:7
+#: templates/docentes.html:545 templates/ventriloquia.html:7
 msgid "Traductor de Ventriloquía"
 msgstr "Traductor de Ventriloquia"
 
