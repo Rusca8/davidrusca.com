@@ -2,7 +2,7 @@
 milmilionaris = [  # està en dòlars tot
     {"name": "Suma dels 3428 milmilionaris que hi ha", "wealth": 20_100_000_000_000, "short": "$20.1 T", "src": "wikipedia", "date": "2026/06"},
     {"name": "Suma dels 10 senyors més rics", "wealth": 2_679_000_000_000, "short": "$2679 G", "src": "wikipedia"},
-    {"name": "Elon Musk", "wealth": 839_000_000_000, "short": "$839 G", "src": "wikipedia", "date": "2026/06"},
+    {"name": "Elon Musk", "wealth": 1_100_000_000_000, "short": "$1.1 T", "src": "wikipedia", "date": "2026/06"},
     {"name": "Jeff Bezos", "wealth": 259_000_000_000, "short": "$259 G", "src": "wikipedia", "date": "2026/06"},
     {"name": "Mark Zuckerberg", "wealth": 252_000_000_000, "short": "$252 G", "src": "wikipedia", "date": "2026/06"},
     {"name": "Amancio Ortega", "wealth": 148_000_000_000, "short": "$148 G", "src": "wikipedia", "date": "2026/06"},
