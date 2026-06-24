@@ -495,7 +495,14 @@
 
 
         function submit_to_db(){
+            // alert if doubledef
+            if(blocks.def.length > 1){
+                alert("Recorda afegir l'etiqueta de DD a la plana d'admin.");
+            }
+
+            // submission
             let mode = $("#mode").val();
+
             // UPDATE to DB
             if(mode == "update"){
                 let clue_id = $("#clue-id").val();
@@ -517,6 +524,7 @@
                 });
             // CREATE to DB
             }else if(mode == "create"){
+                // submission
                 console.log("Creating new clue");
                 $.ajax({
                     url: base_url + "create",
