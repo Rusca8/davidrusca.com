@@ -371,6 +371,34 @@
             }
         }
 
+        ///////// CENSOR /////////
+        var censored = false;
+        function toggle_censor(){
+            console.log(censored);
+            let the_color = "transparent";
+            if(censored){
+                console.log("uncensoring");
+                the_color = "black";
+                censored = false;
+            }else{
+                console.log("censoring");
+                censored = true;
+            }
+            console.log(the_color);
+            // words
+            $("[id^=word-cell]").each( function () {
+                $(this).css("color", the_color);
+            });
+            // clues
+            $("[id^=clue-cell]").each( function () {
+                $(this).css("color", the_color);
+            })
+            // solus
+            $("[id^=solu-cell]").each( function (){
+                $(this).css("color", the_color);
+            })
+        }
+
     </script>
 </head>
 
@@ -386,7 +414,7 @@
     {% include '/encreuats/diacriptic/calendari.html' %}
 </div>
 
-<div class="small mb-1 ml-1">Queue length: <b>{{queue_len}}</b></div>
+<div class="small mb-1 ml-1"><span onclick="toggle_censor();">👁️</span> | Queue length: <b>{{queue_len}}</b></div>
 
 <div id="cal-day-hover-data" class="px-1"></div>
 

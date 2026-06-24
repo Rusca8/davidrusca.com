@@ -24,7 +24,7 @@
         {% elif col == "clue" %}
             <td id="clue-cell-{{clue_id}}" class="px-1" data-text="{{cclue.clue}} ({{cclue.n|join(',')}})" data-blocks='{{cclue.clue_analysis}}'>{{cclue.clue}}</td>
         {% elif col == "solu" %}
-            <td class="px-1" data-text="{{cclue.solution}}" data-blocks='{{cclue.solution_analysis}}'>{{cclue.solution}}</td>
+            <td id="solu-cell-{{clue_id}}" class="px-1" data-text="{{cclue.solution}}" data-blocks='{{cclue.solution_analysis}}'>{{cclue.solution}}</td>
         {% elif col == "clue_id" %}
             <td class="px-1 mono text-right">{{clue_id}}</td>
         {% elif col == "edit_button" %}
