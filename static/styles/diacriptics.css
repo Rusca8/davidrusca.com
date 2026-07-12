@@ -193,6 +193,11 @@ html {
     background-color: var(--color-mat);
 }
 
+.btn-ind {
+    border: 1px solid var(--color-d-ind);
+    background-color: var(--color-ind);
+}
+
 .btn-hid {
     border: 1px solid #999999;
 }
