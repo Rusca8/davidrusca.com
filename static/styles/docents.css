@@ -1,0 +1,51 @@
+
+.btn-resource {
+    border: 0px;
+    background-color: #E9EFF0;
+    color: black;
+    width: 100%;
+}
+
+.btn-resource:hover {
+    background-color: #CEDDE0;
+}
+
+.resource-prefix {
+    background-color: #5F8D94;
+    border: 0px;
+    color: white;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+    min-width: 2rem;
+}
+
+.resource-suffix {
+    background-color: #A9C5C9;
+    border: 0px;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    min-width: 2rem;
+}
+
+.resource-suffix a, .resource-suffix a:hover {
+    color: white;
+}
+
+.resource-lang {
+    color: #5F8D94;
+}
+
+.left-rad {
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+
+.right-rad {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.docents-categoria {
+    padding-top: 0.13rem;
+    padding-bottom: 0.2rem;
+}

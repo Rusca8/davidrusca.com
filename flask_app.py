@@ -39,7 +39,7 @@ app.config['BABEL_DEFAULT_LOCALE'] = 'es'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = './translations'  # sense això pythonAnywhere es fa un embolic
 babel = Babel(app)
 
-# Recopilar cambios por traducir:     $ pybabel extract -F babel.cfg -o messages.pot .
+# Recopilar cambios por traducir:     $ pybabel extract -F babel.cfg -k _l -o messages.pot .
 # Combinar con traducciones antiguas: $ pybabel update -i messages.pot -d translations
 #           (traducir novedades en archivo .po de cada idioma)
 # Compilar de nuevo:                  $ pybabel compile -d translations

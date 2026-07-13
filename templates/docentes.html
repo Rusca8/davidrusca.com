@@ -2,12 +2,16 @@
 {% block title %}{{ _('Docentes') }} - David Ruscalleda{% endblock %}
 {% block navdocentes %}active{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/docents.css?date=2026-07-13">
+{% endblock %}
+
 {% block content %}
 <div class="ml-2 mr-2">
 <h3 class="mt-3 text-center">{{ _('Recursos Docentes') }}</h3>
 <p class="text-center">{{ _('Formularios y fichas que he ido haciendo, de distintos temas y materias.') }}</p>
 
-    <div class="card bg-light border-c mt-2 mb-2">
+    <div class="card bg-light border-c mt-2 mb-4">
         <h5 class="card-header py-1 text-center">{{ _('Índice') }}</h5>
         <div class="card-body py-2 pr-2">
             <div class="container-fluid pl-0">
@@ -36,27 +40,46 @@
 
     {% for nivell_educatiu, dades in resources.items() %}
     <div class="card border-c bg-light mb-2"><b id="{{dades.anchor}}"></b>
-        <h5 class="card-header">{{nivell_educatiu}}</h5>
+        <h5 class="card-header" >{{nivell_educatiu}}</h5>
         {% for materia, mdades in dades.contents.items() %}
         <div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="{{mdades.anchor}}"></b>
             <div class="card-body">
                 <h5 class="card-title"><span class="mr-2">{{mdades.icon}} </span>{{materia}}</h5>
                 <hr>
                 {% for categoria, llistat in mdades.get("contents", {}).items() %}
-                    <b>{{categoria}}</b>
-                    <ul>
+                    <div class="{{'mt-3' if loop.index0 else 'mt-1'}} mb-2">
+                    <span class="px-2 small docents-categoria" style="border: 0px solid grey; border-radius: 0.2rem; background-color: #A1896D; color: white;">
+                        <b>{{categoria}}</b>
+                    </span>
+                    </div>
+                    <div class="container-flex mx-0 px-3">
                     {% for item, idades in llistat.items() %}
-                        {% if idades.extra_level %}<ul>{% endif %}
-                        <li><a href="{{idades.url}}" target="_blank">{{idades.prefix + " - " if idades.prefix else ''}}{{item}} {{"[" + idades.lang + "]" if idades.lang else ''}}</a>
-                            {{'(WIP)' if idades.wip else ''}}
-                            {% if idades.altlang %}
-                                {% for lang, url in idades.altlang.items() %} <a href="{{url}}" target="_blank">[{{lang}}]</a> {% endfor %}
+                        <div class="row btn-row mt-1 {{'ml-4' if idades.extra_level else ''}}">
+                            {% if idades.prefix %}
+                            <div class="my-0 mx-0 resource-prefix text-center">
+                                <span class="py-0 px-2">{{idades.prefix}}</span>
+                            </div>
                             {% endif %}
-                            {% if idades.ft %} <span class="text-secondary"> - w/ {{idades.ft}}</span> {% endif %}
-                        </li>
-                        {% if idades.extra_level %}</ul>{% endif %}
+                            <div class="col px-0 btn-resource {{'' if idades.prefix else 'left-rad'}} stretched-link-boundary {{'' if idades.altlang else 'right-rad'}}">
+                                <a class="text-left py-0 pl-2 non-decor stretched-link" href="{{idades.url}}" target="_blank">
+                                    {{item}}
+                                    <span class="resource-lang">{{"[" + idades.lang + "]" if idades.lang else ''}}</span>
+                                </a>
+                                <span>
+                                {{'(WIP)' if idades.wip else ''}}
+                                </span>
+                                {% if idades.ft %} <span class="text-secondary"> - w/ {{idades.ft}}</span> {% endif %}
+                            </div>
+                            {% if idades.altlang %}
+                                {% for lang, url in idades.altlang.items() %}
+                                <div class="resource-suffix text-center">
+                                     <a href="{{url}}" class="non-decor" target="_blank">{{lang}}</a>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                        </div>
                     {% endfor %}
-                    </ul>
+                    </div>
                 {% endfor %}
             </div>
         </div>
