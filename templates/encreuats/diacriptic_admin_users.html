@@ -52,8 +52,8 @@
             {% set user_recent = recent.get(user_id, {}) %}
             {% set recent_solved = user_recent.get('solved', 0) %}
             {% set recent_pending = user_recent.get('pending', 0) %}
-            <td class="px-1 text-center">{{ user["solved"] }} <span class="{{'text-success' if recent_solved}}">{{'+' + recent_solved|string if recent_solved else ''}}</span></td>
-            <td class="px-1 text-center">{{ user["pending"] }} <span class="{{'text-success' if recent_pending}}">{{'+' + recent_pending|string if recent_pending else ''}}</span></td>
+            <td class="px-1 text-center">{{ user["solved"] }} <span class="{{'text-success' if recent_solved else ''}}">{{'+' + recent_solved|string if recent_solved else ''}}</span></td>
+            <td class="px-1 text-center">{{ user["pending"] }}</td> <!-- Can't know recent cause only storing solve date (not start date) -->
         </tr>
     {% endfor %}
     </table>
