@@ -54,15 +54,15 @@
 }
 
 .index-item {
-    background-color: #F0EBE4;
+    background-color: #EDF1F2;
 }
 .index-item:hover {
-    background-color: #E8DECF;
+    background-color: #E1E6E8;
 }
 
 .index-prefix-icon {
     min-width: 1.8rem;
-    background-color: #D4C0A4;
+    background-color: #D3DDDF;
 }
 
 .bg-ne {
