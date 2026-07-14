@@ -126,7 +126,7 @@ resources = {
                     "icon": "📐",
                     "contents": {
                         _l("Apuntes"): {
-                            _l("Poliedros: Construcciones Auxiliares y Vistas Principales"): {"lang": "CA", "prefix": "DT", "url": "/static/pdf/DT_Poliedres.pdf"},
+                            _l("Poliedros: Construcciones Auxiliares y Vistas Principales"): {"lang": "CA", "prefix": "DT2", "url": "/static/pdf/DT_Poliedres.pdf"},
                         },
                         "Labs": {
                             _l("Cambios de plano"): {"lang": "CA", "prefix": "DT2", "url": "https://www.geogebra.org/m/nu3gubu7"},

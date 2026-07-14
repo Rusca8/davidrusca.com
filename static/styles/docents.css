@@ -49,3 +49,41 @@
     padding-top: 0.13rem;
     padding-bottom: 0.2rem;
 }
+
+.index-row {
+}
+
+.index-item {
+    background-color: #F0EBE4;
+}
+.index-item:hover {
+    background-color: #E8DECF;
+}
+
+.index-prefix-icon {
+    min-width: 1.8rem;
+    background-color: #D4C0A4;
+}
+
+.bg-ne {
+    background-color: #D2BC99;
+}
+
+.bg-ne .card-header {
+    background-color: #917240;
+    color: white;
+}
+
+.border-ind {
+    border-color: #57747A;
+}
+.bg-ind {
+    background-color: #CEDDE0;
+}
+.bg-ind-header {
+    background-color: rgb(104, 138, 146);
+    color: white;
+}
+.bg-ind-ne-header {
+    background-color: #E5EAEB;
+}
