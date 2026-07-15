@@ -4,6 +4,7 @@
     background-color: #E9EFF0;
     color: black;
     width: 100%;
+    transition: 0.3s;
 }
 
 .btn-resource:hover {
@@ -55,6 +56,7 @@
 
 .index-item {
     background-color: #EDF1F2;
+    transition: 0.1s;
 }
 .index-item:hover {
     background-color: #E1E6E8;
