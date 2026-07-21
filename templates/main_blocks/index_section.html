@@ -1,0 +1,17 @@
+{# INDEX SECTION
+# Requereix:
+#    is_title = Títol de la secció
+#    is_dades = Dades de la secció
+#}
+
+
+<div class="card bg-light border-ind mb-1 min-w-index">
+    <b class="card-header text-center py-1 bg-ind-ne-header stretched-link-boundary"><a href="#{{is_dades.anchor}}" class="non-decor stretched-link">{{is_title}}</a></b>
+    <div class="card-body pl-1 pr-1 pb-1 pt-2">
+    <div class="container-flex">
+        {% for ii_text, ii_dades in is_dades.contents.items() %}
+            {% include '/main_blocks/index_row.html' %}
+        {% endfor %}
+    </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{# AUTO-GENERATED INDEX (from resource list)
+# Requires:
+#    resource_list: Llista de recursos estil {"secció": {"contents": {continguts}}}
+#}
+
+<div class="card bg-ind border-ind mt-2 mb-4">
+    <h5 class="card-header bg-ind-header py-1 text-center">{{ _('Índice') }}</h5>
+    <div class="card-body py-2 pr-2">
+        <div class="container-fluid pl-0">
+            <div class="row">
+                <div class="col pr-0 pl-1">
+                {% for is_title, is_dades in resource_list.items() %}
+                    {% include "/main_blocks/index_section.html" %}
+                    {% if is_dades.index_jump %}
+                    </div><div class="col pr-0 pl-1">
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,45 @@
+:root {
+    /* CuspHanger palette: 225-71, n15, s0.42, b0.51, c0.84, cw0.6 */
+    --col-s-7: oklch(0.3316 0.07 218.44);
+    --col-s-1: oklch(0.889 0.0132 208.76);
+    --col-s-6: color-mix(in oklch, var(--col-s-7) 70%, var(--col-s-1));
+    --col-s-5:  color-mix(in oklch, var(--col-s-7) 50%, var(--col-s-1));
+    --col-s-4:  color-mix(in oklch, var(--col-s-7) 30%, var(--col-s-1));
+    --col-s-3:  color-mix(in oklch, var(--col-s-7) 18%, var(--col-s-1));
+    --col-s-2:  color-mix(in oklch, var(--col-s-7) 8%, var(--col-s-1));
+    --col-0: oklch(0.971 0.0304 127.77);
+    --col-p-1: oklch(0.9189 0.0563 88.89);
+    --col-p-2: oklch(0.8557 0.0696 85.45);
+    --col-p-3: oklch(0.7791 0.0773 82.36);
+    --col-p-4: oklch(0.6861 0.08 79.47);
+    --col-p-5: oklch(0.5733 0.0774 76.72);
+    --col-p-6: oklch(0.4365 0.0679 74.2);
+    --col-p-7: oklch(0.2706 0.0483 72.18);
+}
+
+.bg-s-7 {background-color: var(--col-s-7)}
+.bg-s-6 {background-color: var(--col-s-6)}
+.bg-s-5 {background-color: var(--col-s-5)}
+.bg-s-4 {background-color: var(--col-s-4)}
+.bg-s-3 {background-color: var(--col-s-3)}
+.bg-s-2 {background-color: var(--col-s-2)}
+.bg-s-1 {background-color: var(--col-s-1)}
+.bg-0 {background-color: var(--col-0)}
+.bg-p-1 {background-color: var(--col-p-1)}
+.bg-p-2 {background-color: var(--col-p-2)}
+.bg-p-3 {background-color: var(--col-p-3)}
+.bg-p-4 {background-color: var(--col-p-4)}
+.bg-p-5 {background-color: var(--col-p-5)}
+.bg-p-6 {background-color: var(--col-p-6)}
+.bg-p-7 {background-color: var(--col-p-7)}
+
+
 .bg-rusca {
- background-color: #f2e8c9;
+ background-color: var(--col-p-1);
 }
 
 .bg-c {
- background-color: #5c4723;
+ background-color: var(--col-p-6);
 }
 
 .bg-c-lb {
@@ -19,7 +55,7 @@
 }
 
 .bg-c-dark{
- background-color: #2e210b;
+ background-color: var(--col-p-7);
 }
 
 .btn-c-light {

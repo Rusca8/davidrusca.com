@@ -1,6 +1,6 @@
 from flask_babel import lazy_gettext as _l
 
-resources = {
+docents = {
         _l("Bachillerato"): {
             "anchor": "BAT",
             "contents": {
