@@ -326,7 +326,8 @@ def riichi():
 @app.route('/jocs/')
 @app.route('/juegos/')
 def juegos():
-    return render_template("juegos.html")
+    from llistat_recursos import juegos
+    return render_template("juegos.html", resource_list=juegos)
 
 
 @app.route('/bg/ogl')

@@ -36,35 +36,9 @@
     color: #5F8D94;
 }
 
-.left-rad {
-    border-top-left-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
-}
-
-.right-rad {
-    border-top-right-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
-}
-
 .docents-categoria {
     padding-top: 0.13rem;
     padding-bottom: 0.2rem;
-}
-
-.index-row {
-}
-
-.index-item {
-    background-color: #EDF1F2;
-    transition: 0.1s;
-}
-.index-item:hover {
-    background-color: #E1E6E8;
-}
-
-.index-prefix-icon {
-    min-width: 1.8rem;
-    background-color: #D3DDDF;
 }
 
 .bg-ne {
@@ -74,18 +48,4 @@
 .bg-ne .card-header {
     background-color: #917240;
     color: white;
-}
-
-.border-ind {
-    border-color: #57747A;
-}
-.bg-ind {
-    background-color: #CEDDE0;
-}
-.bg-ind-header {
-    background-color: rgb(104, 138, 146);
-    color: white;
-}
-.bg-ind-ne-header {
-    background-color: #E5EAEB;
 }

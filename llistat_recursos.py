@@ -366,3 +366,41 @@ docents = {
             }
         }
     }
+
+juegos = {
+    _l("Juegos digitales"): {
+        "anchor": "",
+        "contents": {
+            _l("Juegos de Lengua"): {"icon": "✏️", "anchor": "lengua"},
+            _l("Juegos de Mates"): {"icon": "🔢", "anchor": "mates"},
+        },
+        "index_jump": True,
+    },
+    _l("Diseños de juegos de mesa"): {
+        "anchor": "bgdesign",
+        "contents": {
+            _l("Prototipos"): {
+                "anchor": "protos",
+                "icon": "🚧",
+            }
+        },
+        "index_jump": True,
+    },
+    _l("Recursos para juegos de mesa"): {
+        "anchor": "bgrec",
+        "contents": {
+            _l("Dragones y Mazmorras (5ª Edición)"): {
+                "icon": "⚔️",
+                "anchor": "DnD5e",
+            },
+            "Terraforming Mars": {
+                "icon": "🌏",
+                "anchor": "terraforming",
+            },
+            "Riichi Mahjong": {
+                "icon": "🀄️",
+                "anchor": "riichi",
+            }
+        }
+    }
+}

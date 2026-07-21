@@ -7,6 +7,7 @@
     --col-s-4:  color-mix(in oklch, var(--col-s-7) 30%, var(--col-s-1));
     --col-s-3:  color-mix(in oklch, var(--col-s-7) 18%, var(--col-s-1));
     --col-s-2:  color-mix(in oklch, var(--col-s-7) 8%, var(--col-s-1));
+    --col-s-04: color-mix(in oklch, var(--col-s-1) 40%, white);
     --col-0: oklch(0.971 0.0304 127.77);
     --col-p-1: oklch(0.9189 0.0563 88.89);
     --col-p-2: oklch(0.8557 0.0696 85.45);
@@ -32,6 +33,22 @@
 .bg-p-5 {background-color: var(--col-p-5)}
 .bg-p-6 {background-color: var(--col-p-6)}
 .bg-p-7 {background-color: var(--col-p-7)}
+
+.border-s-7 {border-color: var(--col-s-7)}
+.border-s-6 {border-color: var(--col-s-6)}
+.border-s-5 {border-color: var(--col-s-5)}
+.border-s-4 {border-color: var(--col-s-4)}
+.border-s-3 {border-color: var(--col-s-3)}
+.border-s-2 {border-color: var(--col-s-2)}
+.border-s-1 {border-color: var(--col-s-1)}
+.border-0 {border-color: var(--col-0)}
+.border-p-1 {border-color: var(--col-p-1)}
+.border-p-2 {border-color: var(--col-p-2)}
+.border-p-3 {border-color: var(--col-p-3)}
+.border-p-4 {border-color: var(--col-p-4)}
+.border-p-5 {border-color: var(--col-p-5)}
+.border-p-6 {border-color: var(--col-p-6)}
+.border-p-7 {border-color: var(--col-p-7)}
 
 
 .bg-rusca {
@@ -231,4 +248,28 @@ canvas {
 
 .pointer {
     cursor: pointer;
+}
+
+/* border radius classes */
+.left-rad {
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+
+.right-rad {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+
+/* index styling */
+.index-item {
+    background-color: var(--col-s-04);
+    transition: 0.1s;
+}
+.index-item:hover {
+    background-color: color-mix(in oklch, var(--col-s-1) 60%, white);
+}
+.index-prefix-icon {
+    min-width: 1.8rem;
+    background-color: var(--col-s-1);
 }
