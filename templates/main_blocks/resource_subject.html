@@ -1,0 +1,20 @@
+{# RESOURCE SUBJECT (àmbit o sub-secció dins la secció / p.ex. "Mates Científiques")
+# Requires:
+#    rsub_name: Nom de l'àmbit dins la secció
+#    rsub_dades: Continguts dins d'aquest àmbit
+#}
+
+<div class="card border-c ml-2 mr-2 mt-2 mb-2"><b id="{{rsub_dades.anchor}}"></b>
+    <div class="card-body">
+        <h5 class="card-title"><span class="mr-2">{{rsub_dades.icon}} </span>{{rsub_name}}</h5>
+        <hr>
+        {% if layout in rsub_dades and rsub_dades.layout == "cards" %}
+            (CARDS LAYOUT)
+        {% else %}
+            {% for rb_name, llistat in rsub_dades.get("contents", {}).items() %}
+                {% set is_first_item = not loop.index0 %}
+                {% include "/main_blocks/resource_bundle.html" %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

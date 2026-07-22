@@ -1,5 +1,7 @@
 from flask_babel import lazy_gettext as _l
 
+# TODO: hauria de fer una mica de refactor per no traduir les keys del dict, que llavors no les puc referenciar
+
 docents = {
         _l("Bachillerato"): {
             "anchor": "BAT",
@@ -371,8 +373,56 @@ juegos = {
     _l("Juegos digitales"): {
         "anchor": "",
         "contents": {
-            _l("Juegos de Lengua"): {"icon": "✏️", "anchor": "lengua"},
-            _l("Juegos de Mates"): {"icon": "🔢", "anchor": "mates"},
+            _l("Juegos de Lengua"): {
+                "icon": "✏️",
+                "anchor": "lengua",
+                "layout": "cards",
+                "contents": {
+                    "Diacríptic": {
+                        "img": "/static/img/juegos/diacriptic.png",
+                        "lang": "CA",
+                        "desc": "Desxifra cada dia una pista de mots encreuats críptics.",
+                        "extra": "Inclou un tutorial detallat i ple d'exemples, un arxiu amb tots els reptes dels dies anteriors, i totes les resolucions dels diaris es poden veure explicades.",
+                        "buttons": [
+                            {"text": "Juga a la web", "color": "primary", "url": "/diacriptic"},
+                        ]
+                    },
+                    "Catagrama": {
+                        "img": "/static/img/juegos/catagrama.png",
+                        "lang": "CA",
+                        "desc": "Desxifra cada dia un criptograma en català.",
+                        "extra": "Inclou un tutorial i un arxiu amb totes les frases dels dies anteriors.",
+                        "buttons": [
+                            {"text": "Juga a la web", "color": "primary", "url": "/catagrama"},
+                            {"text": "Descarrega l'app d'Android", "color": "success", "url": "https://play.google.com/store/apps/details?id=com.rusca8.catagrama&hl=ca"}
+                        ]
+                    },
+                    "Encreuats críptics": {
+                        "img": "/static/img/juegos/encreuats.png",
+                        "lang": "CA",
+                        "desc": "Desxifra mots encreuats críptics sencers.",
+                        "extra": "Si t'agrada el Diacríptic i vols posar a prova el que hi has après, aquí hi ha alguns mots encreuats críptics que he anat creant.",
+                        "buttons": [
+                            {"text": "Juga a la web", "color": "primary", "url": "/encreuats"}
+                        ]
+                    }
+                }
+            },
+            _l("Juegos de Mates"): {
+                "icon": "🔢",
+                "anchor": "mates",
+                "layout": "cards",
+                "contents": {
+                    "Primes!": {
+                        "img": "/static/img/juegos/primes.png",
+                        "lang": "EN",
+                        "desc": _l("Calcula rápido los factores primeros de los números que aparecen para intentar vaciar la pantalla tan rápido como puedas."),
+                        "buttons": [
+                            {"text": "Descarrega l'app Android", "color": "success", "url": "https://play.google.com/store/apps/details?id=com.rusca8.primes.android"},
+                        ]
+                    }
+                }
+            },
         },
         "index_jump": True,
     },
@@ -382,6 +432,24 @@ juegos = {
             _l("Prototipos"): {
                 "anchor": "protos",
                 "icon": "🚧",
+                "layout": "cards",
+                "contents": {
+                    "Impedimentos": {
+                        "img": "/static/img/bg/impedimentos.png",
+                        "desc": _l("Los jugadores tendrán que moverse a través de un laberinto cambiante para intentar conseguir sus cuatro cubitos antes que los demás."),
+                        "buttons": [
+                            {"text": "Hoja de Ventas", "color": "primary", "url": "/static/pdf/bg/ss_impedimentos.pdf"}
+                        ]
+                    },
+                    "Matriculados": {
+                        "img": "/static/img/bg/matriculados.png",
+                        "desc": _l("Juego de agilidad mental y memoria donde los jugadores tendrán que ser los más rápidos sumando matrículas y recordando dónde están las parecidas."),
+                        "extra": _l("Pensado para trabajar la regla de divisibilidad del 3 y un poco de mnemotecnia en las escuelas."),
+                        "buttons": [
+                            {"text": "Hoja de Ventas", "color": "primary", "url": "/static/pdf/bg/ss_matriculados.pdf"},
+                        ]
+                    }
+                }
             }
         },
         "index_jump": True,
@@ -392,14 +460,85 @@ juegos = {
             _l("Dragones y Mazmorras (5ª Edición)"): {
                 "icon": "⚔️",
                 "anchor": "DnD5e",
+                "layout": "cards",
+                "contents": {
+                    _l("Listas Resumen de Conjuros") + "(PHB)": {
+                        "img": "/static/img/bg/dnd_listas.png",
+                        "contents": {
+                            "main": {
+                                _l("Todos los Conjuros"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Todos.pdf"},
+                                _l("Conjuros de Artificiero"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Artificiero.pdf"},
+                                _l("Conjuros de Bardo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Bardo.pdf"},
+                                _l("Conjuros de Brujo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Brujo.pdf"},
+                                _l("Conjuros de Clérigo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Clerigo.pdf"},
+                                _l("Conjuros de Druida"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Druida.pdf"},
+                                _l("Conjuros de Explorador"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Explorador.pdf"},
+                                _l("Conjuros de Hechicero"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Hechicero.pdf"},
+                                _l("Conjuros de Mago"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Mago.pdf"},
+                                _l("Conjuros de Paladín"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/conjuros_Paladin.pdf"},
+                            }
+                        }
+                    },
+                    _l("Cartas de Conjuros") + "(PHB)": {
+                        "img": "/static/img/bg/dnd_cartas.png",
+                        "contents": {
+                            "main": {
+                                _l("Todos los Conjuros"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Todas.pdf"},
+                                _l("Conjuros de Artificiero"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Artificiero.pdf"},
+                                _l("Conjuros de Bardo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Bardo.pdf"},
+                                _l("Conjuros de Brujo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Brujo.pdf"},
+                                _l("Conjuros de Clérigo"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Clerigo.pdf"},
+                                _l("Conjuros de Druida"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Druida.pdf"},
+                                _l("Conjuros de Explorador"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Explorador.pdf"},
+                                _l("Conjuros de Hechicero"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Hechicero.pdf"},
+                                _l("Conjuros de Mago"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Mago.pdf"},
+                                _l("Conjuros de Paladín"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/cartas_Paladin.pdf"},
+                            }
+                        }
+                    },
+                    _l("Otros Recursos"): {
+                        "img": "/static/img/bg/dnd_otros.png",
+                        "contents": {
+                            "main": {
+                                _l("Diagrama de Todas las Subclases"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/subclases.pdf"},
+                                _l("Tabla d100 de magia salvaje"): {"lang": "ES", "prefix": "DnD 5e", "url": "/static/pdf/tablamagiasalvaje.pdf"},
+                            }
+                        }
+                    }
+                }
             },
             "Terraforming Mars": {
                 "icon": "🌏",
                 "anchor": "terraforming",
+                "layout": "cards",
+                "contents": {
+                    _l("Bandeja de jugador de madera"): {
+                        "img": "/static/img/juegos/laser_terraforming.png",
+                        "desc": _l("Archivo digital para crear una bandeja de jugador de doble capa con la cortadora láser."),
+                        "extra": _l("El archivo incluye la parte de los grabados y el trazo del corte en capas separadas. Las dos capas de madera están colocadas de lado para grabarlas y cortarlas simultáneamente."),
+                        "buttons": [
+                            {"text": _l("Archivo de Illustrator"), "color": "primary", "url": "/static/pdf/bg/terraforming_laser.ai"},
+                        ]
+                    }
+                }
             },
             "Riichi Mahjong": {
                 "icon": "🀄️",
                 "anchor": "riichi",
+                "layout": "cards",
+                "contents": {
+                    _l("Hojas de Referencia"): {
+                        "img": "/static/img/juegos/riichi_cheatsheets.png",
+                        "desc": _l("Creadas por Samuel Marchal (Zessx), las hemos traducido en equipo yo y Aina SG (en github)."),
+                        "extra": _l("La de Iniciación es una versión distinta de la que hay en zessx porque no me convenció el consenso y la retoqué por mi cuenta."),
+                        "buttons": [
+                            {"text": _l("Iniciación"), "color": "primary", "url": "/static/pdf/bg/initiation-v1.3r-ca.pdf"},
+                            {"text": _l("Yakus"), "color": "primary", "url": "https://zes.sx/riichi/doc/yakus-v1.7-ca.pdf"},
+                            {"text": _l("Puntuación"), "color": "primary", "url": "https://zes.sx/riichi/doc/score-v1.2-ca.pdf"},
+                            {"text": _l("Otros idiomas") + " (zes.sx/riichi)", "color": "primary", "url": "https://zes.sx/riichi"},
+                        ]
+                    }
+                }
             }
         }
     }

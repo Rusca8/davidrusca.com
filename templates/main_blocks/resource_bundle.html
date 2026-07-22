@@ -1,0 +1,16 @@
+{# RESOURCE BUNDLE (grup d'enllaços de recursos d'un mateix tipus)
+#
+#}
+
+{% if rb_name != "main" %}
+<div class="{{'mt-1' if is_first_item else 'mt-3'}} mb-2">
+<span class="px-2 small rb_group_name">
+    <b>{{rb_name}}</b>
+</span>
+</div>
+{% endif %}
+<div class="container-flex mx-0 px-3">
+{% for ri_title, ri_dades in llistat.items() %}
+    {% include "/main_blocks/resource_row.html" %}
+{% endfor %}
+</div>

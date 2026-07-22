@@ -273,3 +273,13 @@ canvas {
     min-width: 1.8rem;
     background-color: var(--col-s-1);
 }
+
+/* resource_list styling */
+.rb_group_name {
+    padding-top: 0.13rem;
+    padding-bottom: 0.2rem;
+    border: 0px;
+    border-radius: 0.2rem;
+    background-color: color-mix(in oklch, var(--col-p-5) 40%, var(--col-p-4));
+    color: white;
+}

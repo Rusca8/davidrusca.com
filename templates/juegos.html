@@ -151,6 +151,9 @@
                 <img class="card-img-top" src="/static/img/bg/dnd_cartas.png" alt="Thumbnail Cartas Conjuros">
                 <div class="card-body">
                     <h5 class="card-title">{{ _('Cartas de Conjuros') }} (PHB)</h5>
+                    {% for clase in ["Todas", "Artificiero", "Bardo", "Brujo", "Clerigo", "Druida", "Explorador", "Hechicero", "Mago", "Paladin"] %}
+                        {
+                    {% endfor %}
                     <ul>
                         <li><a href="/static/pdf/cartas_Todas.pdf" target="_blank">DnD 5e - {{ _('Todos los Conjuros') }} [ES]</a></li>
                         <li><a href="/static/pdf/cartas_Artificiero.pdf" target="_blank">DnD 5e - {{ _('Conjuros de Artificiero') }} [ES]</a></li>

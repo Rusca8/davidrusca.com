@@ -1,0 +1,8 @@
+{# RESOURCE LIST (llista de links a recursos)
+# Requires:
+#    resource_list: Llista de recursos estil {"secció": {"contents": {continguts}}}
+#}
+
+{% for rs_name, rs_dades in resources.items() %}
+    {% include "/main_blocks/resource_section.html" %}
+{% endfor %}

@@ -1,0 +1,30 @@
+{# RESOURCE ROW (Resource Item)
+# Requires:
+#    ri_title = títol (text principal) de l'ítem
+#    ri_dades = dades de l'ítem
+#}
+
+<div class="row btn-row mt-1 {{'ml-4' if ri_dades.extra_level else ''}}">
+    {% if ri_dades.prefix %}
+    <div class="my-0 mx-0 resource-prefix text-center">
+        <span class="py-0 px-2">{{ri_dades.prefix}}</span>
+    </div>
+    {% endif %}
+    <div class="col px-0 btn-resource {{'' if ri_dades.prefix else 'left-rad'}} stretched-link-boundary {{'' if ri_dades.altlang else 'right-rad'}}">
+        <a class="text-left py-0 pl-2 non-decor stretched-link" href="{{ri_dades.url}}" target="_blank">
+            {{ri_title}}
+            <span class="resource-lang">{{"[" + ri_dades.lang + "]" if ri_dades.lang else ''}}</span>
+        </a>
+        <span>
+        {{'(WIP)' if ri_dades.wip else ''}}
+        </span>
+        {% if ri_dades.ft %} <span class="text-secondary"> - w/ {{ri_dades.ft}}</span> {% endif %}
+    </div>
+    {% if ri_dades.altlang %}
+        {% for lang, url in ri_dades.altlang.items() %}
+        <div class="resource-suffix text-center">
+             <a href="{{url}}" class="non-decor" target="_blank">{{lang}}</a>
+        </div>
+        {% endfor %}
+        {% endif %}
+</div>
