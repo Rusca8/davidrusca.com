@@ -3,8 +3,8 @@
 #    rs_name: Nom de la secció de recursos
 #    rs_dades: Dades de la secció de recursos
 #}
-<div class="card border-c bg-ne mb-2"><b id="{{rs_dades.anchor}}"></b>
-    <h5 class="card-header">{{rs_name}}</h5>
+<div class="card border-p-6 bg-p-3 mb-2"><b id="{{rs_dades.anchor}}"></b>
+    <h5 class="card-header bg-p-5 text-white border-p-6">{{rs_name}}</h5>
     {% for rsub_name, rsub_dades in rs_dades.contents.items() %}
         {% include "/main_blocks/resource_subject.html" %}
     {% endfor %}

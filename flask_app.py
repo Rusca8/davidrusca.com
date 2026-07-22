@@ -283,7 +283,7 @@ def ankicode():
 @app.route('/docentes/')
 def docents():
     import llistat_recursos as doc
-    return render_template("docentes.html", resources=doc.docents)
+    return render_template("docentes.html", resource_list=doc.docents)
 
 
 @app.route('/bmonstres')

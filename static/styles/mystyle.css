@@ -280,6 +280,41 @@ canvas {
     padding-bottom: 0.2rem;
     border: 0px;
     border-radius: 0.2rem;
-    background-color: color-mix(in oklch, var(--col-p-5) 40%, var(--col-p-4));
+    background-color: color-mix(in oklch, var(--col-p-5) 80%, var(--col-p-4));
     color: white;
+}
+.btn-resource {
+    border: 0px;
+    background-color: color-mix(in oklch, var(--col-s-1) 60%, white);
+    color: black;
+    width: 100%;
+    transition: 0.3s;
+}
+.btn-resource:hover {
+    background-color: var(--col-s-1);
+}
+
+.resource-prefix {
+    background-color: var(--col-s-5);
+    border: 0px;
+    color: white;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+    min-width: 2rem;
+}
+
+.resource-suffix {
+    background-color: #A9C5C9;
+    border: 0px;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    min-width: 2rem;
+}
+
+.resource-suffix a, .resource-suffix a:hover {
+    color: white;
+}
+
+.resource-lang {
+    color: var(--col-s-5);
 }

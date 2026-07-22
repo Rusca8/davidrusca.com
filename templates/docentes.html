@@ -2,22 +2,14 @@
 {% block title %}{{ _('Docentes') }} - David Ruscalleda{% endblock %}
 {% block navdocentes %}active{% endblock %}
 
-{% block extra_head %}
-<link rel="stylesheet" href="/static/styles/docents.css?date=2026-07-22">
-{% endblock %}
-
 {% block content %}
 <div class="ml-2 mr-2">
 <h3 class="mt-3 text-center">{{ _('Recursos Docentes') }}</h3>
 <p class="text-center">{{ _('Formularios y fichas que he ido haciendo, de distintos temas y materias.') }}</p>
 
-    {% with resource_list = resources %}
-        {% include "/main_blocks/auto_index.html" %}
-    {% endwith %}
+    {% include "/main_blocks/auto_index.html" %}
 
-    {% with resource_list = resources %}
-        {% include "/main_blocks/auto_resource_list.html" %}
-    {% endwith %}
+    {% include "/main_blocks/auto_resource_list.html" %}
 
 </div>
 {% endblock %}

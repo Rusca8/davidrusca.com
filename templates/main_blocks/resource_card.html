@@ -1,0 +1,25 @@
+{# RESOURCE CARD (format targeta pels recursos posats en card layout / p.ex. Cartes d'encanteri DnD)
+#}
+<div class="card border-c mx-2 my-2">
+    <img class="card-img-top" src="{{card_dades.img}}" alt="Thumbnail {{card_name}}">
+    <div class="card-body">
+        <h5 class="card-title">{{card_name}} {{"[" + card_dades.lang + "]" if card_dades.lang else ""}}</h5>
+        <hr>
+            <p class="mb-4">
+            {{card_dades.desc}}
+            </p>
+            {% if card_dades.extra %}
+            <p class="mb-4">
+            <i>{{card_dades.extra}}</i>
+            </p>
+            {% endif %}
+        {% if card_dades.contents %}
+            {% for rb_name, llistat in card_dades.get("contents", {}).items() %}
+                {% include "/main_blocks/resource_bundle.html" %}
+            {% endfor %}
+        {% endif %}
+        {% for button in card_dades.get("buttons", []) %}
+            <a href="{{button.url}}" class="btn btn-outline-{{button.color}} btn-sm btn-block" role="button">{{button.text}}</a>
+        {% endfor %}
+    </div>
+</div>

@@ -8,8 +8,12 @@
     <div class="card-body">
         <h5 class="card-title"><span class="mr-2">{{rsub_dades.icon}} </span>{{rsub_name}}</h5>
         <hr>
-        {% if layout in rsub_dades and rsub_dades.layout == "cards" %}
-            (CARDS LAYOUT)
+        {% if "layout" in rsub_dades and rsub_dades.layout == "cards" %}
+            <div class="card-columns">
+            {% for card_name, card_dades in rsub_dades.get("contents", {}).items() %}
+                {% include "/main_blocks/resource_card.html" %}
+            {% endfor %}
+            </div>
         {% else %}
             {% for rb_name, llistat in rsub_dades.get("contents", {}).items() %}
                 {% set is_first_item = not loop.index0 %}

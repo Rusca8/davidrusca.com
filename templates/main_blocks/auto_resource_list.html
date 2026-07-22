@@ -3,6 +3,6 @@
 #    resource_list: Llista de recursos estil {"secció": {"contents": {continguts}}}
 #}
 
-{% for rs_name, rs_dades in resources.items() %}
+{% for rs_name, rs_dades in resource_list.items() %}
     {% include "/main_blocks/resource_section.html" %}
 {% endfor %}

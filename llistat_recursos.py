@@ -371,7 +371,7 @@ docents = {
 
 juegos = {
     _l("Juegos digitales"): {
-        "anchor": "",
+        "anchor": "digi",
         "contents": {
             _l("Juegos de Lengua"): {
                 "icon": "✏️",
@@ -462,7 +462,7 @@ juegos = {
                 "anchor": "DnD5e",
                 "layout": "cards",
                 "contents": {
-                    _l("Listas Resumen de Conjuros") + "(PHB)": {
+                    _l("Listas Resumen de Conjuros") + " (PHB)": {
                         "img": "/static/img/bg/dnd_listas.png",
                         "contents": {
                             "main": {
@@ -479,7 +479,7 @@ juegos = {
                             }
                         }
                     },
-                    _l("Cartas de Conjuros") + "(PHB)": {
+                    _l("Cartas de Conjuros") + " (PHB)": {
                         "img": "/static/img/bg/dnd_cartas.png",
                         "contents": {
                             "main": {
@@ -535,7 +535,7 @@ juegos = {
                             {"text": _l("Iniciación"), "color": "primary", "url": "/static/pdf/bg/initiation-v1.3r-ca.pdf"},
                             {"text": _l("Yakus"), "color": "primary", "url": "https://zes.sx/riichi/doc/yakus-v1.7-ca.pdf"},
                             {"text": _l("Puntuación"), "color": "primary", "url": "https://zes.sx/riichi/doc/score-v1.2-ca.pdf"},
-                            {"text": _l("Otros idiomas") + " (zes.sx/riichi)", "color": "primary", "url": "https://zes.sx/riichi"},
+                            {"text": _l("Otros idiomas") + " (zes.sx/riichi)", "color": "secondary", "url": "https://zes.sx/riichi"},
                         ]
                     }
                 }
