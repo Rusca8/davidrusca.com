@@ -10,8 +10,8 @@
         <span class="py-0 px-2">{{ri_dades.prefix}}</span>
     </div>
     {% endif %}
-    <div class="col px-0 btn-resource {{'' if ri_dades.prefix else 'left-rad'}} stretched-link-boundary {{'' if ri_dades.altlang else 'right-rad'}}">
-        <a class="text-left py-0 pl-2 non-decor stretched-link" href="{{ri_dades.url}}" target="_blank">
+    <div class="col px-2 btn-resource {{'' if ri_dades.prefix else 'left-rad'}} stretched-link-boundary {{'' if ri_dades.altlang else 'right-rad'}}">
+        <a class="text-left py-0 non-decor stretched-link" href="{{ri_dades.url}}" target="_blank">
             {{ri_title}}
             <span class="resource-lang">{{"[" + ri_dades.lang + "]" if ri_dades.lang else ''}}</span>
         </a>
