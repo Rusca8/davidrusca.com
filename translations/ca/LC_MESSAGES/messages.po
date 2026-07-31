@@ -2894,7 +2894,7 @@ msgid "Conjuros de Mago"
 msgstr "Encanteris del Mag"
 
 #: templates/juegos.html:188 templates/juegos.html:207
-msgid "Conjuros de Paladin"
+msgid "Conjuros de Paladín"
 msgstr "Encanteris del Paladí"
 
 #: templates/juegos.html:196
