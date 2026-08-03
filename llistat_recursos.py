@@ -39,6 +39,11 @@ docents = {
                             _l("Sistemas 3D"): {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/equacions/"},
                             _l("Derivadas"): {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/derivades/"},
                         },
+                        "Anki": {
+                            _l("Perímetros, Áreas y Volúmenes"): {"lang": "CA", "prefix": "M", "url": "/anki/#geometria"},
+                            _l("Vandalismos Matemáticos"): {"lang": "CA", "prefix": "M", "url": "/anki/#vandalismes"},
+                            _l("Reglas de Derivación"): {"lang": "CA", "prefix": "M", "url": "/anki/#derivades"},
+                        },
                         _l("Temario"): {
                             _l("Temario optimizado") + " PAU": {"lang": "CA", "prefix": "M", "url": "/static/pdf/MPAU_Temari.pdf"},
                         },
@@ -69,6 +74,10 @@ docents = {
                             _l("Potencias y raíces") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/powsqr/"},
                             _l("Sistemas 3D") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/equacions/"},
                             _l("Derivadas") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/derivades/"},
+                        },
+                        "Anki": {
+                            _l("Vandalismos Matemáticos"): {"lang": "CA", "prefix": "M", "url": "/anki/#vandalismes"},
+                            _l("Reglas de Derivación"): {"lang": "CA", "prefix": "M", "url": "/anki/#derivades"},
                         },
                         _l("Temario"): {
                             _l("Temario optimizado") + " PAU": {"lang": "CA", "prefix": "MS", "url": "/static/pdf/MSPAU_Temari.pdf"},
@@ -101,11 +110,15 @@ docents = {
                         _l("Formularios"): {
                             _l("Termoquímica"): {"lang": "CA", "prefix": "Q2", "url": "/static/pdf/Q2_Termoq.pdf"},
                         },
-                        _l("Temario"): {
-                            _l("Temario optimizado") + " PAU": {"lang": "CA", "prefix": "Q", "url": "/static/pdf/QPAU_Temari.pdf"},
-                        },
                         _l("Mnemotecnia"): {
                             _l("Valencias de los Elementos"): {"lang": "CA", "prefix": "Q", "url": "/static/pdf/Mn_Valencies.pdf"},
+                        },
+                        "Anki": {
+                            _l("Valencias de los Elementos"): {"lang": "CA", "prefix": "Q", "url": "/anki#valencies"},
+                            _l("Isótopos y Compañía"): {"lang": "CA", "prefix": "Q", "url": "/anki/#isot"},
+                        },
+                        _l("Temario"): {
+                            _l("Temario optimizado") + " PAU": {"lang": "CA", "prefix": "Q", "url": "/static/pdf/QPAU_Temari.pdf"},
                         },
                         "Labs": {
                             _l("Equilibrio Químico"): {"lang": "CA", "prefix": "Q", "url": "/labs/q/eq/"},
@@ -160,6 +173,9 @@ docents = {
                     "contents": {
                         _l("Resumen"): {
                             _l("Resumen") + " EsPAPtacular": {"lang": "CA", "prefix": "PAP", "url": "/static/pdf/PAP_Resum.pdf"},
+                        },
+                        "Anki": {
+                            _l("Perímetros, Áreas y Volúmenes"): {"lang": "CA", "prefix": "M", "url": "/anki/#geometria"},
                         },
                         "Labs": {
                             _l("Calcula la nota de mates"): {"lang": "CA", "prefix": "PAP", "url": "/papuladora"},
@@ -220,6 +236,9 @@ docents = {
                         _l("Apuntes"): {
                             _l("Canciones para los intervalos"): {"lang": "CA", "prefix": "H", "url": "/static/pdf/MusGP_Intervals.pdf"},
                         },
+                        "Anki": {
+                            _l("Canciones para los intervalos"): {"prefix": "H", "url": "/anki/#interv"}
+                        },
                         "App": {
                             _l("Editor de Esquemas Armónicos"): {"lang": "CA", "prefix": "H", "url": "https://play.google.com/store/apps/details?id=com.rusca8.hEditor.android"},
                         }
@@ -245,6 +264,10 @@ docents = {
                             _l("Potencias y raíces") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/powsqr/"},
                             _l("Ecuaciones") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/equacions/"},
                             _l("Proporcionalidad") + " (Dynamic Deures)": {"lang": "CA", "prefix": "M", "url": "http://ruscalatex.eu.pythonanywhere.com/proporcionalitat/"},
+                        },
+                        "Anki": {
+                            _l("Vandalismos Matemáticos"): {"lang": "CA", "prefix": "M", "url": "/anki/#vandalismes"},
+                            _l("Perímetros, Áreas y Volúmenes"): {"lang": "CA", "prefix": "M", "url": "/anki/#geometria"},
                         },
                         "Labs": {
                             _l("Funciones trigonométricas"): {"lang": "CA", "prefix": "M", "url": "https://www.geogebra.org/m/cbtwmydd"},
@@ -283,6 +306,19 @@ docents = {
                     "contents": {
                         _l("Mnemotecnia"): {
                             _l("Comarcas de Cataluña"): {"lang": "CA", "prefix": "SE", "url": "/static/pdf/Mn_Comarques.pdf"},
+                        },
+                        "Anki": {
+                            _l("Comarcas de Cataluña"): {"lang": "CA", "prefix": "SE", "url": "/anki/#comarcat"},
+                            _l("Capitales de Asia"): {"lang": "CA", "prefix": "SE", "url": "/anki/#capitasia"},
+                        },
+                    }
+                },
+                _l("Català"): {
+                    "anchor": "catESO",
+                    "icon": "📕",
+                    "contents": {
+                        "Anki": {
+                            _l("Tiempos Verbales Catalanes"): {"lang": "CA", "prefix": "CAE", "url": "/anki/#verbscat"},
                         }
                     }
                 },
@@ -290,6 +326,9 @@ docents = {
                     "anchor": "angESO",
                     "icon": "🇬🇧",
                     "contents": {
+                        "Anki": {
+                            _l("Verbos Irregulares Inglés"): {"lang": "CA", "prefix": "EE", "url": "/anki/#irregular"},
+                        },
                         "Online": {
                             "Irregular Verbs Test": {"lang": "CA/ES", "prefix": "EE", "url": "/ivtest", "ft": "Josep Ruscalleda"},
                         }
@@ -362,6 +401,24 @@ docents = {
                     "contents": {
                         "Lab": {
                             _l("Traductor de Ventriloquía"): {"lang": "CA", "prefix": "V", "url": "/ventriloquia/"},
+                        }
+                    }
+                },
+                "Braille": {
+                    "anchor": "braille",
+                    "icon": "⠝",
+                    "contents": {
+                        "Anki": {
+                            "Braille": {"lang": "CA", "prefix": "BR", "url": "/anki/#braille"},
+                        }
+                    }
+                },
+                _l("Lengua de Signos Catalana"): {
+                    "anchor": "lsc",
+                    "icon": "🧏🏽‍♀️",
+                    "contents": {
+                        "Anki": {
+                            _l("Lengua de Signos Catalana"): {"lang": "CA", "prefix": "LSC", "url": "/anki/#lsc"},
                         }
                     }
                 }
