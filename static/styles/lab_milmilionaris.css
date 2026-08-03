@@ -71,7 +71,7 @@
     height: 1px;
 }
 .khr::after {
-    background-color: var(--color-bg);
+    background-color: var(--col-p-1);
     color: #9e825a;
     content: attr(data-content);
     line-height: 1.5em;
