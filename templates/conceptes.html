@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Paraules per Entendre el Món - Web de David Ruscalleda{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/styles/paraules.css?date=2026-08-03">
+{% endblock %}
+
+{% block content %}
+<script>
+    window.onload = function(){
+        $.fn.random = function(){
+            return this.eq(Math.floor(Math.random() * this.length));
+        }
+        load_random_word();
+    }
+
+    function load_random_word(){
+        let paraula = $(".paraula-item.pointer").random()
+        load_word_by_element(paraula);
+    }
+
+    function load_word_by_element(paraula) {
+        let main_word = $("#main-word");
+        let main_desc = $("#main-desc-text");
+        let main_desc_cred = $("#main-desc-cred");
+
+        main_word.html($(paraula).data("word"));
+        main_desc.html($(paraula).data("desc") || "WIP");
+        main_desc_cred.html($(paraula).data("cred") || "");
+    }
+    function load_word(pi) {
+        let paraula = $("#paraula-" + pi);
+        load_word_by_element(paraula);
+    }
+</script>
+    <h3 class="pt-4 my-0 text-center">{{ _('Palabras para entender el mundo') }}</h3>
+    <p class="my-0 pt-2 text-center pb-4">Idees interessants per pensar una estona, paraules per a coses que ni sabies que tenien nom,<br>i conceptes que la gent informada té al cap quan intenten entendre la complexitat de les coses.</p>
+
+    <div id="main-wrapper" class="py-2 px-3 sticky-top bg-s-5" style="top: 3rem;">
+        <div id="main-card" class="card mx-auto border-s-6">
+            <h5 id="main-word" class="card-header text-center py-1 px-2 bg-s-3 border-s-4"><br></h5>
+            <div id="main-desc" class="card-body py-2 px-3 text-center">
+                <div id="main-desc-text"></div>
+                <div id="main-desc-cred" class="small mt-2"></div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="card-columns mx-2 my-4">
+    {% for _, tematica in paraules.items()|sort(attribute='1.name') %}
+    <div class="card mb-2 border-p-5">
+        <div class="card-header bg-p-3 border-p-5 py-1 px-2 text-center">
+            {{tematica.name}}
+        </div>
+        <div class="card-body px-2 pt-2 pb-1">
+            {% for pi, paraula in tematica.contents.items()|sort(attribute='1.name') %}
+            <div class="right-rad left-rad paraula-item px-1 mb-1 text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
+                 id="paraula-{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
+                {{paraula.name}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

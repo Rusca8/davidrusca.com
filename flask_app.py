@@ -470,6 +470,14 @@ def memory_games(which=None):
     return render_template("/js_games/memory_bld.html", n=n, letters=letters, scheme=scheme)
 
 
+@app.route('/paraules/')
+def conceptes():
+    from paraules import build_words
+    paraules = build_words()
+    print(paraules)
+    return render_template("conceptes.html", paraules=paraules)
+
+
 @app.route('/catagrama/admin')
 def catagrama_admin():
     import catagrames as cg

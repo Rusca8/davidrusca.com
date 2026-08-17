@@ -1,0 +1,44 @@
+.paraula-item {
+    background-color: var(--col-s-04);
+}
+.paraula-item:hover:not(.disabled){
+    background-color: color-mix(in oklch, var(--col-s-1) 70%, white);
+}
+
+#main-card {
+    width: clamp(80%, 60rem, 100%);
+}
+
+#main-wrapper {
+    box-shadow: -3px 5px 10px -5px var(--col-s-5);
+    border-top: 1px solid var(--col-s-6);
+    border-bottom: 1px solid var(--col-s-6);
+}
+
+#main-desc {
+    min-height: 5rem;
+    max-height: 30dvh;
+    overflow: scroll;
+    font-size: clamp(0.1vw, 1rem, 2.1dvh);
+}
+
+#main-desc-cred {
+    color: var(--col-s-5);
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
+
+.disabled {
+    color: var(--col-s-3);
+}
+
+.desc-link {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    border-radius: 0.2rem;
+    background-color: var(--col-s-04);
+}.desc-link:hover {
+    background-color: color-mix(in oklch, var(--col-s-1) 70%, white);
+}
