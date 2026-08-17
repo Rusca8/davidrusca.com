@@ -640,6 +640,7 @@ def encreuat(enc_id="sample"):
     ec = ec.parse_encreuat(enc_id)
     return render_template("/encreuats/encreuat.html", enc=ec, show=False)
 
+
 @app.route('/diacriptic/ajax/<query>', methods=["GET", "POST"])
 def diacriptic_ajax(query=None):
     if query is None:
@@ -686,21 +687,6 @@ def diacriptic_ajax(query=None):
     return "N"
 
 
-@app.route('/diacriptic/arxiu')
-@app.route('/diacriptic/arxiu/')
-def diacriptic_arxiu():
-    import diacriptics as dc
-    this_month = dc.month_calendar()
-    arxiu = dc.get_clues_on_interval()
-    solves = {}
-    if current_user.is_authenticated:
-        # TODO soft-code this
-        solves = dc.get_solves_by_user(user_id=current_user.id)
-        solves |= dc.get_solves_by_user(user_id=current_user.id, focus_month=[2025, 2])
-    return render_template("/encreuats/diacriptic_arxiu.html", arxiu=arxiu,
-                           months=[this_month], solves=solves)
-
-
 @app.route('/diacriptic/arx/ajax/<query>', methods=["GET", "POST"])
 def diacriptic_arxiu_ajax(query=None):
     if query is None:
@@ -727,17 +713,6 @@ def diacriptic_arxiu_ajax(query=None):
 
     print("Nonono")
     return "N"
-
-
-
-@app.route('/diacriptic/tutorial')
-def diacriptic_tutorial():
-    return render_template("/encreuats/diacriptic_tutorial.html")
-
-
-@app.route('/diacriptic/par')
-def diacriptic_par():
-    return render_template("/encreuats/diacriptic_par_explained.html")
 
 
 @app.route('/diacriptic/explained', methods=["GET", "POST"])
@@ -782,15 +757,6 @@ def diacriptic_builder_ajax(query=None):
                 return "Y" if success else "N"
         return "AJAX diac builder - No vol res? Doncs no li dono res."
     return "Not the one I expected, tbh", 401
-
-
-@app.route("/diacriptic/builder")
-@app.route("/diacriptic/builder/<clue_id>")
-@login_required
-def diacriptic_builder(clue_id=None):
-    if current_user.is_admin:
-        return render_template("/encreuats/diacriptic_builder.html", preload_clue=clue_id)
-    return redirect("/")
 
 
 @app.route('/diacriptic/a/ajax/<query>', methods=["POST"])
@@ -843,48 +809,6 @@ def diacriptic_admin_ajax(query=None):
                     return "N"
         return "AJAX admin - No vol res?"
     return "No parlar amb desconeguts. Recorda no parlar amb desconeguts..."
-
-
-@app.route("/diacriptic/admin")
-@login_required
-def diacriptic_admin():
-    if current_user.is_admin:
-        from database.cryptic_clue import CrypticClue
-        import diacriptics as dc
-        pool = dc.get_clues_in_pool()
-        tags = dc.get_tags()
-        available_tags = CrypticClue.available_tags
-        calendar = dc.calendar()
-        arxiu = dc.get_arxiu()
-        queue_len = dc.queue_length()
-        for day, entries in arxiu.items():
-            for da in entries:
-                if da.clue_id in pool:
-                    pool[da.clue_id].arxiu[day] = da.num
-
-        return render_template("/encreuats/diacriptic_admin.html", pool=pool, tags=tags,
-                               available_tags=available_tags, calendar=calendar, arxiu=arxiu, queue_len=queue_len)
-    return redirect("/")
-
-
-@app.route("/diacriptic/admin/users")
-@login_required
-def diacriptic_admin_users():
-    if current_user.is_admin:
-        from database.diacriptic_solve import DiacripticSolve
-        solves = DiacripticSolve.count_solves_per_person()
-        recent_solves = DiacripticSolve.count_solves_per_person(only_recent=True)
-        return render_template("/encreuats/diacriptic_admin_users.html", solves=solves, recent=recent_solves)
-    return redirect("/")
-
-
-@app.route("/diacriptic/u/")
-def user():
-    if current_user.is_authenticated:
-        return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic",
-                               username_regex=User.username_pattern)
-    else:
-        return redirect("/diacriptic")
 
 
 @app.route('/ktn')
