@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Eliminar el Compte (Revisió de les dades) - Web de David Ruscalleda{% endblock %}
+
+{% block content %}
+<h3 class="h3 text-danger text-center mt-4 mb-1">Eliminar el Compte</h3>
+<div class="text-center mb-3">({{current_user.username or "[sense nom d'usuari]"}} | {{current_user.name}} | {{current_user.fallback_email}})</div>
+<div class="text-center mb-3">S'eliminaran les següents entrades de la base de dades de <b>davidrusca.com</b>:</div>
+<div class="mx-auto mb-4" style="width: 30rem;">
+    {% include "/accounts/user_footprint.html" %}
+</div>
+
+<div class="text-center">
+    <div>Això d'aquí sota encara no funciona, hi estic treballant.</div>
+    <button class="btn btn-danger" type="submit" style="width: 28rem;">Esborrar permanentment les meves dades</button><br>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+
+<div class="card bg-p-3 border-p-5 px-1 pt-1">
+    {% for name, amount in user_footprint.items() %}
+    <div class="card mb-1 border-p-4 text-center">{{name}} ({{amount}})</div>
+    {% endfor %}
+</div>

@@ -167,7 +167,7 @@ class User(UserMixin):
             WHERE type ='table' AND name NOT LIKE 'sqlite_%';
             """
         ).fetchall()
-        footprint = {}
+        footprint = {"user": 1}
         for table in db_tables:
             name = table["name"]
             try:

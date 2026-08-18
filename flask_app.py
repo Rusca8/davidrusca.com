@@ -169,7 +169,7 @@ def save_login_origin(origin="home"):
 
 
 @app.route("/login")
-def login(origin="main"):
+def login():
     # Find out what URL to hit for Google login
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
@@ -184,8 +184,10 @@ def login(origin="main"):
     return redirect(request_uri)
 
 
-@app.route("/login/callback")
-def login_callback():
+def get_user_data_from_google_callback(request):
+    """Gets user data from google login's callback.
+    request: data from the request received at the callback route
+    """
     # Get authorization code Google sent back to you
     code = request.args.get("code")
     # Find out what URL to hit to get tokens that allow you to ask for
@@ -221,6 +223,19 @@ def login_callback():
         email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
         name = userinfo_response.json()["given_name"]
+        return {"success": True, "sub": sub, "email": email, "picture": picture, "name": name}
+    else:
+        return {"success": False, "msg": "User email not available or not verified by Google.", "err": 400}
+
+
+@app.route("/login/callback")
+def login_callback():
+    user_data = get_user_data_from_google_callback(request)
+    if user_data["success"]:
+        sub = user_data["sub"]
+        email = user_data["email"]
+        picture = user_data["picture"]
+        name = user_data["name"]
     else:
         return "User email not available or not verified by Google.", 400
 
@@ -245,6 +260,28 @@ def login_callback():
     return redirect(url_for("user_page"))
 
 
+@app.route('/reauth')
+def reauth():
+    """Copy of the '/login' route"""
+    # Find out what URL to hit for Google login
+    google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    # Use library to construct the request for Google login and provide
+    # scopes that let you retrieve user's profile from Google
+    request_uri = oauth_client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url + "/callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
+
+
+@app.route('/reauth/callback')
+def reauth_callback():
+    return "t'is pending, ma fren"
+
+
 @app.route("/logout")
 @app.route("/logout/<origin>")
 @login_required  # nice auto firewall for other things
@@ -262,6 +299,12 @@ def logout(origin="home"):
     response.set_cookie("remember_token", "", expires=datetime.utcnow() - timedelta(days=1),
                         domain=".davidrusca.com")  # got this domain from inspecting the remember_token cookie... (?)
     return response
+
+
+@app.route('/u/delete_account')
+def delete_account():
+    return render_template("/accounts/user_delete_show_footprint.html",
+                           hide_donations=True, user_footprint=current_user.get_footprint())
 
 
 @app.route('/music')
