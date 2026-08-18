@@ -117,6 +117,7 @@ def add_global_variables():
         global_vars["current_user"] = current_user
     global_vars["current_lang"] = session.get('lang',
                                               request.accept_languages.best_match(app.config['LANGUAGES'].keys()))
+    global_vars["debug"] = app.debug
     return global_vars
 
 
@@ -136,9 +137,9 @@ def hello_world():
 @app.route('/u/')
 def user_page():
     if current_user.is_authenticated:
-        return render_template("user_profile.html", username_regex=User.username_pattern)
+        return render_template("user_profile.html", username_regex=User.username_pattern, hide_donations=True)
     else:
-        return render_template("user_none.html")
+        return render_template("user_none.html", hide_donations=True)
 
 
 @app.route('/u/ajax/<query>', methods=["GET", "POST"])
@@ -940,6 +941,13 @@ def d_anki(file):
 @app.route("/privacy")
 def privacy_policy():
     return render_template("privacy_policy.html")
+
+
+@app.route("/user_footprint/")
+@login_required
+def user_footprint():
+    if current_user.is_admin:
+        return current_user.get_footprint()
 
 
 @app.errorhandler(404)

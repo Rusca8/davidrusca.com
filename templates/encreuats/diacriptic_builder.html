@@ -625,7 +625,9 @@
 
     </script>
 </head>
-<body>
+
+{% if debug %}<body class="p-3" style="border: 5px solid darkred;">{% else %}
+<body class="p-3">{% endif %}
 
 <div class="text-center mx-3">
 

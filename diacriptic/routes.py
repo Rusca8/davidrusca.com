@@ -96,7 +96,7 @@ def diacriptic_par():
 def user():
     if current_user.is_authenticated:
         return render_template("/encreuats/diacriptic/user_profile.html", logout_origin="diacriptic",
-                               username_regex=User.username_pattern)
+                               username_regex=User.username_pattern, hide_donations=True)
     else:
         return redirect("/diacriptic")
 

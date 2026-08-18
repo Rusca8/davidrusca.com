@@ -110,7 +110,9 @@
     {% block content %}{% endblock %}
 
     <p></p><!-- space for the widget -->
-    {% include "/widgets/donations.html" %}
+    {% if not hide_donations %}
+      {% include "/widgets/donations.html" %}
+    {% endif %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -402,7 +402,8 @@
     </script>
 </head>
 
-<body class="p-3">
+{% if debug %}<body class="p-3" style="border: 5px solid darkred;">{% else %}
+<body class="p-3">{% endif %}
 
 <div class="text-right"><a href="/diacriptic/builder" class="small non-decor mr-2">builder</a> <a href="/diacriptic/admin/users" class="small non-decor">users</a></div>
 

@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 
+from sqlite3 import OperationalError
+
 from database.db import get_db
 from secretos import oauth_yo, kubb_admins
 
@@ -151,3 +153,33 @@ class User(UserMixin):
                 if ld.get("provider") == "google" and ld.get("sub") in kubb_admins:
                     return True
         return False
+
+    def get_footprint(self, user_id=None):
+        """Returns a summary of the user's data on the site."""
+        if user_id is None:
+            user_id = self.user_id
+        # get table names list
+        db = get_db()
+        db_tables = db.execute(
+            """
+            SELECT name
+            FROM sqlite_schema
+            WHERE type ='table' AND name NOT LIKE 'sqlite_%';
+            """
+        ).fetchall()
+        footprint = {}
+        for table in db_tables:
+            name = table["name"]
+            try:
+                amount = db.execute(
+                    """
+                    SELECT COUNT(*) AS amount FROM 
+                    """ + name +  # table names can't PreparedStatement (NEVER do this UNLESS it's you setting the variable)
+                    """ 
+                    WHERE user_id = ?;
+                    """, (user_id,)
+                ).fetchone()
+            except OperationalError:  # will give error if column not in table, so we skip it
+                continue
+            footprint[name] = amount["amount"]
+        return footprint
