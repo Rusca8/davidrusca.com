@@ -257,7 +257,7 @@ def diacriptic_admin_ajax(query=None):
 
 
 # /////////////////// ADMIN ROUTES ///////////////// #
-@diac.route("/builder")
+@diac.route("/builder/")
 @diac.route("/builder/<clue_id>")
 @login_required
 def diacriptic_builder(clue_id=None):
@@ -266,7 +266,7 @@ def diacriptic_builder(clue_id=None):
     return redirect("/")
 
 
-@diac.route("/admin")
+@diac.route("/admin/")
 @login_required
 def diacriptic_admin():
     if current_user.is_admin:
@@ -288,7 +288,7 @@ def diacriptic_admin():
     return redirect("/")
 
 
-@diac.route("/admin/users")
+@diac.route("/admin/users/")
 @login_required
 def diacriptic_admin_users():
     if current_user.is_admin:
