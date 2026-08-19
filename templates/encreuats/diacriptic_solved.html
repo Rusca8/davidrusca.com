@@ -56,6 +56,7 @@
                         <a href="/diacriptic/par" class="btn btn-block btn-hid py-1 mt-3 alt-outline">Com funciona la puntuació?</a>
                         <button id="toggle-showing" class="btn btn-block btn-hid py-1 mt-1 alt-outline" onclick="toggle_showing();">Amaga les lletres</button>
                         <form method="post" action="/diacriptic/explained">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="clue_id" value="{{cclue.clue_id}}">
                             <input type="hidden" name="word" value="{{cclue.word}}">
                             <input type="hidden" name="clue" value="{{cclue.clue}}">

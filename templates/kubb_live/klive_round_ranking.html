@@ -1,105 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "/kubb_live/klive_base.html" %}
+{% block title %}Classificació - Tomba el rei{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% block extra_head %}
+{% endblock %}
 
-    <title>Classificació - Tomba el rei</title>
-
-    <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css?date=20251012">
-</head>
-<body>
+{% block content %}
     {% set round_type = ranking_info["round_type"] %}
     {% set ranking = ranking_info["ranking"] %}
-    <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
-    <a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_type == "final" else "Ronda " + rnum}}</a>
-    <div class="m-3">
-        {% set finished_matches = ranking_info["finished_matches"] %}
-        <div class="text-center lil-title mb-1 mt-3"><b>Estat dels partits</b></div>
-        {% for fm_round, info in finished_matches.items() %}
-        <div class="text-center"><b>Ronda {{fm_round}}</b> · {{info["total"]}} partit{{'' if info["total"] == 1 else 's' }} · {{info["finished"]}} acabat{{'' if info["finished"] == 1 else 's' }}</div>
-        {% endfor %}
+<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+<a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_type == "final" else "Ronda " + rnum}}</a>
+<div class="m-3">
+    {% set finished_matches = ranking_info["finished_matches"] %}
+    <div class="text-center lil-title mb-1 mt-3"><b>Estat dels partits</b></div>
+    {% for fm_round, info in finished_matches.items() %}
+    <div class="text-center"><b>Ronda {{fm_round}}</b> · {{info["total"]}} partit{{'' if info["total"] == 1 else 's' }} · {{info["finished"]}} acabat{{'' if info["finished"] == 1 else 's' }}</div>
+    {% endfor %}
 
-        <hr class="khr my-3" data-content="★">
+    <hr class="khr my-3" data-content="★">
 
-        <div class="text-center lil-title mb-2"><b>Classificació</b></div>
+    <div class="text-center lil-title mb-2"><b>Classificació</b></div>
 
-        <table class="w100 ranking">
-            <tr>
-                <th class="text-center px-1">#</th>
-                <th class="px-1">Equip</th>
-                <th class="text-center px-1">P</th>
-                <th class="text-center px-1">K</th>
-                <th class="text-center px-1">SoS</th>
-            </tr>
+    <table class="w100 ranking">
+        <tr>
+            <th class="text-center px-1">#</th>
+            <th class="px-1">Equip</th>
+            <th class="text-center px-1">P</th>
+            <th class="text-center px-1">K</th>
+            <th class="text-center px-1">SoS</th>
+        </tr>
+    {% for team in ranking %}
+        {% set team_id = team.get("id") %}
+        <tr onclick="window.location.href = '/tombaelrei/teams/{{team_id}}/stats/'">
+            <td class="text-center px-1 {{'finalista-' + loop.index|string if round_type == 'final' else ''}}">{{team["rank"]}}</td>
+            <td class="px-1">{{team["name"]}}</td>
+            <td class="text-center px-1">{{team["P"]}}</td>
+            <td class="text-center px-1">{{team["K"]}}</td>
+            <td class="text-center px-1">{{team["SOS"]}}</td>
+        </tr>
+        {% if loop.index == 4 and round_type == "final" %}
+        <tr><td colspan="5" class="table-div"></td></tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    {% if current_user.is_kubb_admin %}
+    <hr class="khr my-3" data-content="★">
+    <div class="text-center lil-title mb-2"><b>Dejà vu</b></div>
         {% for team in ranking %}
-            {% set team_id = team.get("id") %}
-            <tr onclick="window.location.href = '/tombaelrei/teams/{{team_id}}/stats/'">
-                <td class="text-center px-1 {{'finalista-' + loop.index|string if round_type == 'final' else ''}}">{{team["rank"]}}</td>
-                <td class="px-1">{{team["name"]}}</td>
-                <td class="text-center px-1">{{team["P"]}}</td>
-                <td class="text-center px-1">{{team["K"]}}</td>
-                <td class="text-center px-1">{{team["SOS"]}}</td>
-            </tr>
-            {% if loop.index == 4 and round_type == "final" %}
-            <tr><td colspan="5" class="table-div"></td></tr>
-            {% endif %}
-        {% endfor %}
-        </table>
-        {% if current_user.is_kubb_admin %}
-        <hr class="khr my-3" data-content="★">
-        <div class="text-center lil-title mb-2"><b>Dejà vu</b></div>
-            {% for team in ranking %}
-                {% if loop.index % 2 %}
-                    {% set oponents = ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
-                    {% if ranking|length > loop.index %}
-                        {% set new_op = ranking[loop.index0+1].get("id", "") %}
-                        {% if new_op in oponents %}
-                        <div class="kbtn mb-2">
-                            <table class="w100 mb-0">
-                                <tr>
-                                    <td rowspan="2" class="redpair br-tl br-bl"></td>
-                                    <td class="text-left px-2 table-team">{{team.get("name", "Equip")}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="b-top text-left px-2 table-team">{{teams.get(new_op, {}).get("name", "Equip")}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                        {% endif %}
+            {% if loop.index % 2 %}
+                {% set oponents = ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
+                {% if ranking|length > loop.index %}
+                    {% set new_op = ranking[loop.index0+1].get("id", "") %}
+                    {% if new_op in oponents %}
+                    <div class="kbtn mb-2">
+                        <table class="w100 mb-0">
+                            <tr>
+                                <td rowspan="2" class="redpair br-tl br-bl"></td>
+                                <td class="text-left px-2 table-team">{{team.get("name", "Equip")}}</td>
+                            </tr>
+                            <tr>
+                                <td class="b-top text-left px-2 table-team">{{teams.get(new_op, {}).get("name", "Equip")}}</td>
+                            </tr>
+                        </table>
+                    </div>
                     {% endif %}
                 {% endif %}
-            {% endfor %}
+            {% endif %}
+        {% endfor %}
 
-        <hr class="khr my-3" data-content="★">
-        <div class="text-center lil-title mb-2"><b>Oponents passats</b></div>
+    <hr class="khr my-3" data-content="★">
+    <div class="text-center lil-title mb-2"><b>Oponents passats</b></div>
 
-            {% for team in ranking %}
-                <table class="w-100 ranking mb-2">
-                    <tr>
-                        <th class="pl-2">{{team.get("name", "Equip")}}</th>
-                    </tr>
-                    {% for op in ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
-                    <tr>
-                        <td class="pl-2">{{teams.get(op, {}).get("name", "Equip")}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            {% endfor %}
+        {% for team in ranking %}
+            <table class="w-100 ranking mb-2">
+                <tr>
+                    <th class="pl-2">{{team.get("name", "Equip")}}</th>
+                </tr>
+                {% for op in ranking_info.get("scores", {}).get(team["id"]).get("oponents", []) %}
+                <tr>
+                    <td class="pl-2">{{teams.get(op, {}).get("name", "Equip")}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
 
-        {% endif %}
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-</body>
-</html>
+    {% endif %}
+</div>
+{% endblock %}

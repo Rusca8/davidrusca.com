@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "/kubb_live/klive_base.html" %}
+{% block title %}Membres de l'equip - Tomba el rei{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Membres de l'equip - Tomba el rei</title>
-
-    <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css?date=20251012">
-
+{% block extra_head %}
     {% if current_user.is_kubb_admin %}
     <script>
         var base_url = "/klive/ajax/";
@@ -81,48 +70,41 @@
         }
     </script>
     {% endif %}
-</head>
-<body>
-    <a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
-    <a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
-    <div class="m-3">
+{% endblock %}
+
+{% block content %}
+<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+<a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
+<div class="m-3">
+    {% if current_user.is_kubb_admin %}
+    <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}" autocomplete="off">
+    {% else %}
+    <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip') or "Nom de l'equip"}}</div>
+    {% endif %}
+    {% if current_user.is_kubb_admin %}
+    <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
+    {% endif %}
+    <hr class="khr my-3" data-content="★">
+    <div id="member_list">
+    {% for member in team.get("members", []) %}
         {% if current_user.is_kubb_admin %}
-        <input id="team_name" class="kbtn text-center py-2 mb-2" type="text" value="{{team.get('name', 'Nom de l\'equip')}}" autocomplete="off">
+        <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}" autocomplete="off">
         {% else %}
-        <div class="text-center team-name">{{team.get('name', 'Nom de l\'equip') or "Nom de l'equip"}}</div>
+        <div class="team-member text-center">{{member}}</div>
         {% endif %}
-        {% if current_user.is_kubb_admin %}
-        <a class="kbtn btn btn-block kbtn-secondary mb-2" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
-        {% endif %}
+    {% endfor %}
+    </div>
+
+    {% if not current_user.is_kubb_admin %}
+    <a class="kbtn btn btn-block mt-4 py-1" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
+    {% endif %}
+
+    {% if current_user.is_kubb_admin %}
+        <button class="kbtn team-member kbtn-admin btn-block py-1" onclick="add_team_member();">+</button>
+        <button class="kbtn kbtn-confirma btn-block py-2" onclick="submit_team_changes()">Confirma</button>
+        {% if not has_matches %}
         <hr class="khr my-3" data-content="★">
-        <div id="member_list">
-        {% for member in team.get("members", []) %}
-            {% if current_user.is_kubb_admin %}
-            <input id="team_member_{{loop.index}}" class="kbtn team-member text-center py-1 mb-2" type="text" value="{{member}}" autocomplete="off">
-            {% else %}
-            <div class="team-member text-center">{{member}}</div>
-            {% endif %}
-        {% endfor %}
-        </div>
-
-        {% if not current_user.is_kubb_admin %}
-        <a class="kbtn btn btn-block mt-4 py-1" href="/tombaelrei/teams/{{tnum}}/stats/">Estadístiques</a>
+        <button class="kbtn kbtn-elimina btn-block py-2" onclick='remove_team({{tnum|tojson}});'>Elimina</button>
         {% endif %}
-
-        {% if current_user.is_kubb_admin %}
-            <button class="kbtn team-member kbtn-admin btn-block py-1" onclick="add_team_member();">+</button>
-            <button class="kbtn kbtn-confirma btn-block py-2" onclick="submit_team_changes()">Confirma</button>
-            {% if not has_matches %}
-            <hr class="khr my-3" data-content="★">
-            <button class="kbtn kbtn-elimina btn-block py-2" onclick='remove_team({{tnum|tojson}});'>Elimina</button>
-            {% endif %}
-        {% endif %}
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-</body>
-</html>
+    {% endif %}
+{% endblock %}

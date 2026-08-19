@@ -86,6 +86,20 @@ class User(UserMixin):
         )
         return user
 
+    def sub(self, provider):
+        db = get_db()
+        sub = db.execute(
+            """
+            SELECT sub
+            FROM user 
+            LEFT JOIN login_details 
+              ON login_details.user_id = user.id 
+            WHERE provider = ? AND user_id = ?;
+            """,
+            (provider, self.id)
+        ).fetchone()["sub"]
+        return sub
+
     @staticmethod  # from realpython's
     def create(name, email, provider, sub, profile_pic=""):
         print(f"Inserting new user into db: {name}")
@@ -183,3 +197,30 @@ class User(UserMixin):
                 continue
             footprint[name] = amount["amount"]
         return footprint
+
+    def self_destruct(self):
+        print(f"Deleting user #{self.id} from the database...")
+        db = get_db()
+        peek = db.execute(
+            """
+            SELECT COUNT(*) FROM user
+            WHERE id = ? AND fallback_email = ? 
+            """, (self.id, self.fallback_email)
+        ).fetchall()
+
+        print(f"Safety peek found {len(peek)} items.")
+        if len(peek) == 1:
+            print("Single Deletion OK. Proceeding...")
+
+            deleted = db.execute(
+                """
+                DELETE FROM user
+                WHERE id = ? AND fallback_email = ?
+                RETURNING id, name
+                """, (self.id, self.fallback_email)
+            ).fetchall()
+            if len(deleted) == 1:
+                db.commit()
+            print(f"Deleted user: #{deleted[0]['id']} ({deleted[0]['name']})")
+            return {"success": True}
+        return {"success": False}

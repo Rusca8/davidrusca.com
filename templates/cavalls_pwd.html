@@ -12,6 +12,7 @@
   </head>
   <body class="mx-3 my-3">
     <form action="#" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <label class="form-check-label ml-2 mr-3"> Accedeix a les respostes: </label>
       {% if incorrecte %}
       <div class="alert alert-sm alert-danger mt-2">EH! No inventi. Casumdena. 😒</div>

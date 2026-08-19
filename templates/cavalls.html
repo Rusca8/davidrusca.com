@@ -61,6 +61,7 @@
 
     <!-- les coses necessiten NAME per aparèixer al POST -->
     <form action="#" target="_blank" method="post" id="formulari">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="card py-1 px-2 mb-2" style="background-color: #ccddee;">
         <div class="form-check form-check-inline form-inline">
           <label class="form-check-label mr-3">Interactues habitualment amb cavalls?</label>

@@ -1,19 +1,20 @@
 from flask import Flask
-from flask import render_template, redirect, request, make_response, url_for, session
+from flask import render_template, redirect, request, make_response, url_for, session, abort
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
+from flask_wtf.csrf import CSRFProtect
 
 # standard
 import re
 import random
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from functools import wraps
 
 # flask blueprints (route bundle modules)
 from diacriptic.routes import diac
 
 # internal
 import crypto
-import utilities
 import utilities as utils
 import crypto as c
 
@@ -36,6 +37,9 @@ GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configura
 # MAIN CONFIG
 app = Flask(__name__)
 app.register_blueprint(diac)
+
+# CSRF Protection
+csrf = CSRFProtect(app)
 
 # TRANSLATIONS config
 app.config['LANGUAGES'] = {'es': 'Español', 'ca': 'Català'}
@@ -260,7 +264,43 @@ def login_callback():
     return redirect(url_for("user_page"))
 
 
+REAUTH_WINDOW = timedelta(minutes=10)
+
+
+def save_reauth_timestamp():
+    session["reauth_timestamp"] = datetime.now(timezone.utc).timestamp()
+
+
+def has_valid_reauth():
+    reauth_timestamp = session.get("reauth_timestamp")
+
+    if reauth_timestamp is None:
+        return False
+
+    reauth_datetime = datetime.fromtimestamp(reauth_timestamp, timezone.utc)
+    return datetime.now(timezone.utc) - reauth_datetime < REAUTH_WINDOW
+
+
+def fresh_reauth_required(route):
+    """Decorator for requiring fresh reauth or else forbidden url"""
+    @wraps(route)
+    @login_required
+    def wrapped(*args, **kwargs):
+        if not has_valid_reauth():
+            return "Requires recent reauthentication", 403
+        return route(*args, **kwargs)
+    return wrapped
+
+
+@app.route("/reauth/<origin>")
+def save_reauth_origin(origin="home"):
+    # store login trigger origin for redirect after login callback
+    session["reauth_origin"] = origin
+    return redirect("/reauth")
+
+
 @app.route('/reauth')
+@login_required
 def reauth():
     """Copy of the '/login' route"""
     # Find out what URL to hit for Google login
@@ -278,8 +318,31 @@ def reauth():
 
 
 @app.route('/reauth/callback')
+@login_required
 def reauth_callback():
-    return "t'is pending, ma fren"
+    user_data = get_user_data_from_google_callback(request)
+    if user_data["success"]:
+        sub = user_data["sub"]
+        email = user_data["email"]
+        picture = user_data["picture"]
+        name = user_data["name"]
+    else:
+        return "User email not available or not verified by Google.", 400
+
+    # HANDLING THE RECEIVED DATA
+    # check for same user both times
+    if current_user.sub("google") != sub:
+        abort(403)
+
+    # reauth successful
+    save_reauth_timestamp()
+
+    # Send user back
+    reauth_origin = session.pop("reauth_origin", "")
+    match reauth_origin:
+        case "deletion":
+            return redirect("/u/delete_account")
+    return redirect(url_for("user_page"))
 
 
 @app.route("/logout")
@@ -304,7 +367,26 @@ def logout(origin="home"):
 @app.route('/u/delete_account')
 def delete_account():
     return render_template("/accounts/user_delete_show_footprint.html",
-                           hide_donations=True, user_footprint=current_user.get_footprint())
+                           hide_donations=True, user_footprint=current_user.get_footprint(),
+                           fresh_reauth=has_valid_reauth())
+
+
+@app.route('/u/execute_deletion', methods=["POST"])
+@fresh_reauth_required
+def execute_user_deletion():
+    """Permanently deletes current (logged_in) user from the database."""
+    # execute db
+    success = current_user.self_destruct()
+
+    if not success:
+        return "Something Failed (contact rusca for he must have messed up)"
+
+    # same procedure as logout function (session wouldn't know DB has changed)
+    session.clear()
+    session["_remember"] = "clear"
+    logout_user()
+
+    return render_template("account_deleted.html", hide_donations=True)
 
 
 @app.route('/music')

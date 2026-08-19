@@ -10,7 +10,16 @@
 </div>
 
 <div class="text-center">
-    <div>Això d'aquí sota encara no funciona, hi estic treballant.</div>
-    <button class="btn btn-danger" type="submit" style="width: 28rem;">Esborrar permanentment les meves dades</button><br>
+    {% if fresh_reauth %}
+    <div class="text-center text-danger mb-3">L'eliminació de dades és <b>permanent</b>.</div>
+    <form method="post" action="/u/execute_deletion">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-danger" type="submit" style="width: 28rem;">Esborrar permanentment les meves dades</button><br>
+    </form>
+    {% else %}
+    <div class="text-center">Per assegurar que realment ets tu abans d'eliminar les teves coses, et demanaré que confirmis l'inici de sessió aquí sota:</div>
+    <a class="btn btn-primary my-2" href="/reauth/deletion" style="width: 28rem;">Reautenticar la sessió</a><br>
+    <div class="small">(la confirmació serà vàlida durant 10 minuts)</div>
+    {% endif %}
 </div>
 {% endblock %}

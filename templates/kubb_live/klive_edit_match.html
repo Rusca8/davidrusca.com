@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "/kubb_live/klive_base.html" %}
+{% block title %}Editar partit - Tomba el rei{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Editar partit - Tomba el rei</title>
-
-    <!-- My CSS -->
-    <link rel="stylesheet" href="/static/styles/klive.css">
-
+{% block extra_head %}
+    {% if current_user.is_kubb_admin %}
     <script>
         var base_url = "/klive/ajax/";
 
@@ -76,60 +66,54 @@
             }
         }
     </script>
-</head>
-<body>
-    <div class="m-3">
-        {% set type = match_edit_data["type"] %}
+    {% endif %}
+{% endblock %}
 
-        {% set match_teams = match_edit_data["match_teams"] %}
-        {% set busy_teams = match_edit_data["busy_teams"] %}
-        {% set result = match_edit_data["result"] %}
-        {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
-        {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
+{% block content %}
+<div class="m-3">
+    {% set type = match_edit_data["type"] %}
 
-        <div class="text-center lil-title">{{"Final" if match_edit_data["type"] == "final" else "Ronda " + rnum}}</div>
+    {% set match_teams = match_edit_data["match_teams"] %}
+    {% set busy_teams = match_edit_data["busy_teams"] %}
+    {% set result = match_edit_data["result"] %}
+    {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
+    {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
 
-        <hr class="khr mt-1 mb-3" data-content="★">
+    <div class="text-center lil-title">{{"Final" if match_edit_data["type"] == "final" else "Ronda " + rnum}}</div>
 
-        {% set p_keys = [["K", "0", "1", "2"], ["3", "4", "5", "6"]] %}
-        {% for i in range(2) %}
-        <div class="mx-1 kselect-out mb-3">
-            <select class="form-select kform-select form-select-lg w-100 px-2 py-3" onchange="edit_match_team({{rnum}}, {{match_id}}, {{i}}, this);">
-                <option value="" class="default-select-option" {{'' if match_teams[i] else 'selected'}}>-tria un equip-</option>
-                {% for team_id, team in teams.items() %}
-                    {% if team_id == match_teams[i] or team_id not in busy_teams %}
-                    <option value="{{team_id}}" {{'selected' if match_teams[i] == team_id else ''}}>{{team.get('name', '(name missing)')}}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        </div>
-            <table class="w-100">
-                {% for row in p_keys %}
-                <tr>
-                    {% for key in row %}
-                        {% set selected = key == result[i] %}
-                    <td class="p-1"><button class="btn kbtn btn-block {{'selected' if selected else ''}}" onclick="edit_match_score({{rnum}}, {{match_id}}, {{i}}, '{{key}}')">{{key}}</button></td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </table>
+    <hr class="khr mt-1 mb-3" data-content="★">
 
-            <hr class="khr my-3" data-content="{{'★' if i else 'vs'}}">
-        {% endfor %}
-
-        <button onclick="history.back();" class="kbtn kbtn-admin btn-block py-2">Fet</button>
-
-        <hr class="khr my-3" data-content="★">
-
-        <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_match({{rnum}}, {{match_id}});">Elimina el partit</button>
-
+    {% set p_keys = [["K", "0", "1", "2"], ["3", "4", "5", "6"]] %}
+    {% for i in range(2) %}
+    <div class="mx-1 kselect-out mb-3">
+        <select class="form-select kform-select form-select-lg w-100 px-2 py-3" onchange="edit_match_team({{rnum}}, {{match_id}}, {{i}}, this);">
+            <option value="" class="default-select-option" {{'' if match_teams[i] else 'selected'}}>-tria un equip-</option>
+            {% for team_id, team in teams.items() %}
+                {% if team_id == match_teams[i] or team_id not in busy_teams %}
+                <option value="{{team_id}}" {{'selected' if match_teams[i] == team_id else ''}}>{{team.get('name', '(name missing)')}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
     </div>
+        <table class="w-100">
+            {% for row in p_keys %}
+            <tr>
+                {% for key in row %}
+                    {% set selected = key == result[i] %}
+                <td class="p-1"><button class="btn kbtn btn-block {{'selected' if selected else ''}}" onclick="edit_match_score({{rnum}}, {{match_id}}, {{i}}, '{{key}}')">{{key}}</button></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <hr class="khr my-3" data-content="{{'★' if i else 'vs'}}">
+    {% endfor %}
 
-</body>
-</html>
+    <button onclick="history.back();" class="kbtn kbtn-admin btn-block py-2">Fet</button>
+
+    <hr class="khr my-3" data-content="★">
+
+    <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_match({{rnum}}, {{match_id}});">Elimina el partit</button>
+
+</div>
+{% endblock %}
