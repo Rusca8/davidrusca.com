@@ -58,7 +58,7 @@
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/static/icons/yo_favicon.png">
   </head>
-  <body class="bg-rusca" {% block bodyextra %}{% endblock %}>
+  <body class="bg-rusca" {% block bodyextra %}{% endblock %} {% if debug %}style="border: 5px solid darkred;"{% endif %}>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-c-dark">
       <a class="navbar-brand" href="/">David Ruscalleda</a>
       <div class="collapse navbar-collapse" id="navbarNav">

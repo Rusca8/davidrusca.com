@@ -162,7 +162,6 @@ def diacriptic_arxiu_ajax(query=None):
             try:
                 the_month = dc.month_calendar(int(year), int(month))
                 arxiu = dc.get_clues_on_interval(f"{year}-{month:0>2}-00", f"{year}-{month:0>2}-32")
-                print(arxiu)
                 solves = {}
                 if current_user.is_authenticated:
                     solves = dc.get_solves_by_user(current_user.id, focus_month=[year, month])
