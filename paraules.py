@@ -169,5 +169,6 @@ paraules = {
     160: {"temas": ["URB"], "name": "Camino del Deseo", "desc": ""},
     161: {"temas": ["POL"], "name": "Golpe blando", "desc": ""},
     162: {"temas": ["ANT"], "name": "Cultura de la violación", "desc": ""},
+    163: {"temas": ["ART"], "name": "Test de Bechdel", "desc": ""},
 
 }
