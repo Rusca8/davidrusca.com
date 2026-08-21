@@ -10,12 +10,12 @@ function csrfSafeMethod(method){
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
+var csrf_token = $('meta[name="csrf-token"]').attr('content');  // initial token (will need refresh)
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings){
         if(!csrfSafeMethod(settings.type) && !settings.crossDomain) {
-            xhr.setRequestHeader(
-                "X-CSRFToken", $('meta[name="csrf-token"]').attr('content')
-            );
+            xhr.setRequestHeader("X-CSRFToken", csrf_token);
         }
     }
 });

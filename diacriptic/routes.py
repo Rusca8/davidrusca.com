@@ -6,6 +6,7 @@ from flask_login import current_user, login_required
 import re
 
 from database.user import User
+from extensions import csrf
 
 diac = Blueprint("diac", __name__, url_prefix="/diacriptic")
 
@@ -52,6 +53,7 @@ def diacriptic(date=None):
 
 
 @diac.route('/explained/', methods=["GET", "POST"])
+@csrf.exempt
 def diacriptic_explained():
     if request.method == "POST":
         import diacriptics as dc
@@ -103,6 +105,7 @@ def user():
 
 # /////////////////// API ROUTES /////////////////// #
 @diac.route('/ajax/<query>', methods=["GET", "POST"])
+@csrf.exempt
 def diacriptic_ajax(query=None):
     if query is None:
         return "Quin bon dia fa aquí"
@@ -149,6 +152,7 @@ def diacriptic_ajax(query=None):
 
 
 @diac.route('/arx/ajax/<query>', methods=["GET", "POST"])
+@csrf.exempt
 def diacriptic_arxiu_ajax(query=None):
     if query is None:
         return "Arxiu Ajax Fail I guess. Aviseu al rusca si de cas."

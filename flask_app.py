@@ -2,13 +2,15 @@ from flask import Flask
 from flask import render_template, redirect, request, make_response, url_for, session, abort
 from flask import send_from_directory
 from flask_babel import Babel  # traduccions
-from flask_wtf.csrf import CSRFProtect
 
 # standard
 import re
 import random
 from datetime import datetime, timedelta, timezone
 from functools import wraps
+
+# extensions
+from extensions import csrf
 
 # flask blueprints (route bundle modules)
 from diacriptic.routes import diac
@@ -39,7 +41,7 @@ app = Flask(__name__)
 app.register_blueprint(diac)
 
 # CSRF Protection
-csrf = CSRFProtect(app)
+csrf.init_app(app)
 
 # TRANSLATIONS config
 app.config['LANGUAGES'] = {'es': 'Español', 'ca': 'Català'}
