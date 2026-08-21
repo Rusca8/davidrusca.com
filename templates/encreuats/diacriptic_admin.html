@@ -406,10 +406,12 @@
     </script>
 </head>
 
-{% if debug %}<body class="p-3" style="border: 5px solid darkred;">{% else %}
-<body class="p-3">{% endif %}
+{% if debug %}<body class="px-3 pb-3 pt-2" style="border: 5px solid darkred;">{% else %}
+<body class="px-3 pb-3 pt-2">{% endif %}
 
-<div class="text-right"><a href="/diacriptic/builder" class="small non-decor mr-2">builder</a> <a href="/diacriptic/admin/users" class="small non-decor">users</a></div>
+
+
+<div class="d-flex justify-content-between"><div>{% include '/widgets/db_snapshots_info.html' %}</div> <div><a href="/diacriptic/builder" class="small non-decor mr-2">builder</a> <a href="/diacriptic/admin/users" class="small non-decor">users</a></div></div>
 
 <h3 class="text-center mb-1">Diacriptic: Admin</h3>
 <div class="dayclock text-center mt-0 mb-2">

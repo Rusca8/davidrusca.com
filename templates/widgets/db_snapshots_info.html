@@ -1,0 +1,12 @@
+{# tiny widget for showing admins the status of db backups #}
+{% if snapshots_info %}
+{% for name, info in snapshots_info.items() %}
+{{ '·' if loop.index0 else ''}}
+<span class="small">[<b>{{name}}:</b>
+    {% if info.timestamp %}
+    {{info.timestamp.day}}/{{info.timestamp.month}}/{{info.timestamp.year}}{% else %}-{% endif %}
+    {% if info.get("status") == "OK" %}✅{% elif info.get("status") == "WAITING" %}⏳{% else %}❌{% endif %}]</span>
+{% endfor %}
+{% else %}
+<span class="small">Snapshots_info not available. Forgot to pass it to jinja template. :)</span>
+{% endif %}

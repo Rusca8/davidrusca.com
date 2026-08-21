@@ -282,8 +282,11 @@ def diacriptic_admin():
                 if da.clue_id in pool:
                     pool[da.clue_id].arxiu[day] = da.num
 
+        from database.db_utils import get_snapshots_info
+
         return render_template("/encreuats/diacriptic_admin.html", pool=pool, tags=tags,
-                               available_tags=available_tags, calendar=calendar, arxiu=arxiu, queue_len=queue_len)
+                               available_tags=available_tags, calendar=calendar, arxiu=arxiu, queue_len=queue_len,
+                               snapshots_info=get_snapshots_info())
     return redirect("/")
 
 
