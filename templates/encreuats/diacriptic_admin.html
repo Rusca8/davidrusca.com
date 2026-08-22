@@ -155,9 +155,8 @@
         }
 
         function add_tag(clue_id, tag){
-            $.ajax({
+            S.post({
                 url: base_url + "add_tag",
-                type: "post",
                 data: {"clue_id": clue_id,
                        "tag": tag
                 },
@@ -176,9 +175,8 @@
         }
 
         function remove_tag(clue_id, tag){
-            $.ajax({
+            S.post({
                 url: base_url + "remove_tag",
-                    type: "post",
                     data: {"clue_id": clue_id,
                            "tag": tag
                     },
@@ -260,9 +258,8 @@
                 return;
             }
             console.log("Assigning date " + date + " to clue #" + clue_id);
-            $.ajax({
+            S.post({
                 url: base_url + "assign_date",
-                type: "post",
                 data: {"clue_id": clue_id,
                        "date": date,
                        "pwd": pwd,
@@ -293,9 +290,8 @@
                 console.log("no clue or no date");
                 return;
             }
-            $.ajax({
+            S.post({
                 url: base_url + "remove_date",
-                type: "post",
                 data: {"clue_id": clue_id,
                        "date": date,
                        "pwd": pwd,
@@ -325,9 +321,8 @@
                 return;
             }
             console.log("Assigning num #" + num + " to clue #" + clue_id);
-            $.ajax({
+            S.post({
                 url: base_url + "assign_num",
-                type: "post",
                 data: {"clue_id": clue_id,
                        "num": num,
                 },

@@ -411,9 +411,8 @@
             let load_clue_id = $("#in-id").val();
             if(load_clue_id){
                 console.log("Loading clue_id=" + load_clue_id);
-                $.ajax({
+                S.post({
                     url: base_url + "load",
-                    type: "post",
                     data: {"clue_id": load_clue_id,
                            "with_analyses": true
                     },
@@ -512,9 +511,8 @@
                 let clue_id = $("#clue-id").val();
                 let autor_id = $("#autor-id").html();
                 console.log("Will update clue #" + clue_id);
-                $.ajax({
+                S.post({
                     url: base_url + "update",
-                    type: "post",
                     data: {
                         "clue_id": clue_id,
                         "word": word,
@@ -530,9 +528,8 @@
             }else if(mode == "create"){
                 // submission
                 console.log("Creating new clue");
-                $.ajax({
+                S.post({
                     url: base_url + "create",
-                    type: "post",
                     data: {
                         "word": word,
                         "clue": clue,
@@ -576,9 +573,8 @@
         }
 
         function load_clue_siblings(){
-            $.ajax({
+            S.post({
                 url: base_url + "siblings",
-                type: "post",
                 data: {
                     "word": word,
                 },

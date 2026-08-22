@@ -11,6 +11,7 @@ from functools import wraps
 
 # extensions
 from extensions import csrf
+from flask_wtf.csrf import generate_csrf
 
 # flask blueprints (route bundle modules)
 from diacriptic.routes import diac
@@ -114,6 +115,12 @@ def before_request():
         url = request.url.replace('http://', 'https://', 1)
         code = 301
         return redirect(url, code=code)
+
+
+@app.route('/csrf-token')
+def get_csrf_token():
+    """Delivers an up-to-date csrf token, for expired token renewal on long-lived pages"""
+    return {"csrf_token": generate_csrf()}
 
 
 @app.context_processor
