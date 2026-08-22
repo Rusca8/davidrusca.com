@@ -28,9 +28,8 @@
             set_check_icon("? (comprovant)");
             t_last_check = Date.now();
 
-            $.ajax({
+            S.post({
                 url: base_url + "username_exists",
-                type: "post",
                 data: {"username": chosen_username},
                 success: check_execute
             });
@@ -44,9 +43,8 @@
     function submit_new_username(){
         let chosen_username = $('#chosen_username').val()  // ho sé, estic mig migrat a jQuery i mig no. és que AJAX
         if(valida(chosen_username)){
-            $.ajax({
+            S.post({
                 url: base_url + "submit_username",
-                type: "post",
                 data: {"username": chosen_username},
                 success: submit_execute,
             });
