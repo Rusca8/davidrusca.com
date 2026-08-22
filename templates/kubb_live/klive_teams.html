@@ -8,9 +8,8 @@
 
         function add_team(){
             console.log("adding team to the tournament");
-            $.ajax({
+            S.post({
                 url: base_url + "add_team",
-                type: "post",
                 data: {
                     "hola": "és que no hi havia res a enviar, ja em sap greu",
                 },

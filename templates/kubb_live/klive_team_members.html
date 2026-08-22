@@ -27,9 +27,8 @@
             console.log("edit team");
             members = JSON.stringify(members);
             let tnum = {{tnum|tojson}};
-            $.ajax({
+            S.post({
                 url: base_url + "edit_team",
-                type: "post",
                 data: {
                     "tnum": tnum,
                     "name": name,
@@ -46,9 +45,8 @@
 
         function remove_team(tnum){
             console.log("remove team");
-            $.ajax({
+            S.post({
                 url: base_url + "remove_team",
-                type: "post",
                 data: {
                     "team_id": tnum,
                 },

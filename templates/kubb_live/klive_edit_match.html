@@ -8,9 +8,8 @@
 
         function edit_match_score(rnum, match_id, team_index, points){
             console.log("editing match " + rnum + "/" + match_id + ": slot #" + team_index + " - " + points + " points");
-            $.ajax({
+            S.post({
                 url: base_url + "edit_match_points",
-                type: "post",
                 data: {
                     "rnum": rnum,
                     "match_id": match_id,
@@ -29,9 +28,8 @@
         function edit_match_team(rnum, match_id, team_index, select_item){
             let team_id = select_item.value;
             console.log("editing match " + rnum + "/" + match_id + ": team at [" + team_index + "] = #" + team_id);
-            $.ajax({
+            S.post({
                 url: base_url + "edit_match_team",
-                type: "post",
                 data: {
                     "rnum": rnum,
                     "match_id": match_id,
@@ -50,9 +48,8 @@
 
         function remove_match(rnum, match_id){
             console.log("removing match " + rnum + "/" + match_id);
-            $.ajax({
+            S.post({
                 url: base_url + "remove_match",
-                type: "post",
                 data: {
                     "rnum": rnum,
                     "match_id": match_id,
