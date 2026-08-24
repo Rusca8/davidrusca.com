@@ -26,7 +26,7 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="/static/styles/encreuats.css?date=2025-08-06">
-    <link rel="stylesheet" href="/static/styles/diacriptics.css?date=2026-07-12">
+    <link rel="stylesheet" href="/static/styles/diacriptics.css?date=2026-08-24">
 
     <!-- My JS modules -->
     <script src="/static/js/diacriptics.js?date=2025-03-10"></script>
@@ -188,15 +188,15 @@
 
         function request_pista(){
             console.log("requesting pista");
-            $.ajax({
+            S.post({
                 url: base_url + "definition",
-                type: "post",
                 data: {
                     "clue_id": clue_id,
                     "clue": clue,
                 },
-                success: request_pista_execute,
             })
+            .done(request_pista_execute)
+            .fail(ajax_fail);
         }
         function request_pista_execute(ajax_result){
             if(ajax_result == "N"){
@@ -275,16 +275,30 @@
             if(i == "nomyst"){
                 return;
             }
-            $.ajax({
+            S.post({
                 url: base_url + "letter",
-                type: "post",
                 data: {
                     "clue_id": clue_id,
                     "clue": clue,
                     "i": i,
                 },
-                success: lletra_execute,
-            });
+            })
+            .fail(ajax_fail)
+            .done(lletra_execute);
+        }
+        function ajax_fail(xhr, textStatus, errorThrown){
+            if(xhr.readyState == 4){
+                // real error
+                console.log("%cHTTP Error (" + errorThrown + "): " + xhr.responseText + "%c", "color: darkred;");
+                raise_error_toast("error", "Sembla que hi ha hagut un error. Prova de tornar-hi (o de refrescar).");
+            }else if(xhr.readyState == 0){
+                // network error
+                console.log("%cNetwork Error%c", "color: darkred;");
+                raise_error_toast("network", "Sembla que no tens connexió.");
+            }else{
+                // middleground error, as in 'wtf is dis doin'
+                console.log("%cSome sort of weird in-the-middle ajax Error ??%c", "color: darkred;");
+            }
         }
         function lletra_execute(ajax_result){
             if(ajax_result == "N"){
@@ -320,9 +334,8 @@
 
         function request_correction(result){
             let help_mask = known_letters_mask();
-            $.ajax({
+            S.post({
                 url: base_url + "submit",
-                type: "post",
                 data: {
                     "clue_id": clue_id,
                     "clue": clue,
@@ -331,8 +344,9 @@
                     "help_used": pistes.join(""),
                     "help_mask": help_mask,
                 },
-                success: correction_execute,
-            });
+            })
+            .done(correction_execute)
+            .fail(ajax_fail);
         }
         function correction_execute(ajax_result){
             if(ajax_result == "Incorrect"){
@@ -393,10 +407,54 @@
             }
         }
 
+        class ErrorToast {
+            constructor(type, text){
+                this.type = type;
+                this.text = text;
+                this.element = $('<div class="error-popup error-popup-' + type + ' mx-auto mt-1 text-center">' + text + '</div>');
+                this.created = Date.now();
+            }
+
+            raise(){
+                let error_popup_container = $('#error-popup-container');
+
+                if(error_popup_container){
+                    this.element = this.element.appendTo(error_popup_container);
+                }else{console.log("Missing error-popup-container element in page")}
+            }
+
+            show(){
+                this.element.addClass("sivisible");
+            }
+
+            collapse(){
+                this.element.addClass("aixafat");
+            }
+
+            hide(){
+                this.element.removeClass("sivisible");
+            }
+
+            kill(){
+                console.log(this.element);
+                this.element.remove();
+            }
+        }
+
+        function raise_error_toast(type, text){
+            let toast = new ErrorToast(type, text);
+            let out_time = 2000;
+            toast.raise();
+            setTimeout(() => {toast.show()}, 10); // can't start at 0 (needs a "before" or won't show the transition)
+            setTimeout(() => {toast.hide()}, out_time);
+            setTimeout(() => {toast.collapse()}, out_time + 500);
+            setTimeout(() => {toast.kill()}, out_time + 1000);
+        }
     </script>
 </head>
 
 <body>
+<div id="error-popup-container" class="justify-content-center"></div>
 <div id="replaceable-wrapper">
     <div class="inner-game margin-x-auto">
     <div class="diac-main pb-4">
@@ -485,6 +543,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <!-- Adding the Flask-WTF csrf token to all rellevant AJAX queries (requires token as header meta tag) -->
-    <script src="/static/js/csrf_for_ajax.js?date=2026-08-22"></script>
+    <script src="/static/js/csrf_for_ajax.js?date=2026-08-23"></script>
 </body>
 </html>

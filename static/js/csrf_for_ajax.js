@@ -21,10 +21,10 @@ async function ensure_valid_csrf_token(){
         return;
     }
     if(!csrf_refresh_promise){
-        console.log("%cCSRF :: Token not loaded or expired. Fetching new token...%c", 'color: saddlebrown')
+        console.log("%cCSRF :: Token not loaded or expired. Fetching new token...%c", 'color: saddlebrown');
         csrf_refresh_promise = $.getJSON('/csrf-token')
         .fail(function(jqXHR, textStatus, errorThrown){
-            console.log("%cCSRF :: Token renewal failed.%c", 'color: saddlebrown')
+            console.log("%cCSRF :: Token renewal failed.%c", 'color: saddlebrown');
         })
         .done(function(data){
             csrf_token = data.csrf_token;
@@ -49,17 +49,32 @@ $.ajaxSetup({
 /*
  * Class as "decorator proxy": swap $ to S in ajax .post calls to wrap them with
  * a function that tries to ensure it'll use a valid csrf-token for the ajax call.
+ *
+ * - Gràcies a l'Alejandro per resoldre el repte d'exposar els mètodes de l'xhr!
  */
 class S {
-    static async post(params){
-        await ensure_valid_csrf_token();
-        return $.post(params);
+    static post(params) {
+        const deferred = $.Deferred();
+
+        ensure_valid_csrf_token()
+            .then(() => {
+                $.post(params)
+                    .done((...args) => {
+                        deferred.resolve(...args);
+                    })
+                    .fail((...args) => {
+                        deferred.reject(...args);
+                    });
+            })
+
+        return deferred.promise();
     }
+
     static async ajax(params){
         if(!params.type == "get"){
             await ensure_valid_csrf_token();
         }
-        console.log("%cAJAX :: Should swap S.ajax() call for an explicit S." + params.type + "() (and remove type:'post')%c", 'color: steelblue');
+        console.log("%cAJAX :: Swap S.ajax() call for an explicit S." + params.type + "() (and remove type:'post') for using .done & .fail%c", 'color: steelblue');
         return $.ajax(params);
     }
 }

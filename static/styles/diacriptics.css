@@ -326,3 +326,43 @@ button.border-c {
     color: var(--color-d-wop);
     border-radius: 0.1rem;
 }
+
+/* Error Popups System */
+
+#error-popup-container {
+    position: fixed;
+    top: 3rem;
+    width: 100%;
+    padding-top: 0.08rem;
+}
+
+.error-popup {
+    border: 2px solid var(--color-d-mat);
+    background-color: color-mix(in oklch, var(--color-mat) 50%, white);
+    font-size: 0.7rem;
+    line-height: 0.7rem;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    width: clamp(20rem, 25rem, 80dvw);
+    color: oklch(from var(--color-d-mat) 0.5 0.12 h);
+    opacity: 0;
+    transition: opacity 0.5s, font-size 0.5s, line-height 0.5s, padding 0.5s, border 0.5s, margin-top 0.5s;
+}
+.error-popup-network {
+    border-color: var(--color-d-def);
+    background-color: color-mix(in oklch, var(--color-def) 50%, white);
+    color: oklch(from var(--color-d-def) 0.5 0.12 h);
+}
+
+.aixafat {
+    font-size: 0.0001rem;
+    line-height: 0.0001rem;
+    padding: 0;
+    border: 0;
+    margin-top: 0 !important;
+}
+
+.sivisible {
+    opacity: 1;
+}
+
