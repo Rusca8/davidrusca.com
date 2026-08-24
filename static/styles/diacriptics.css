@@ -345,6 +345,7 @@ button.border-c {
     border-radius: 0.2rem;
     width: clamp(20rem, 25rem, 80dvw);
     color: oklch(from var(--color-d-mat) 0.5 0.12 h);
+    user-select: none;
     opacity: 0;
     transition: opacity 0.5s, font-size 0.5s, line-height 0.5s, padding 0.5s, border 0.5s, margin-top 0.5s;
 }
