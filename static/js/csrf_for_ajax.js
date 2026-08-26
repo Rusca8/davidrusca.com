@@ -67,6 +67,7 @@ class S {
                         deferred.reject(...args);
                     });
             })
+            .catch((...args) => {deferred.reject(...args)});
 
         return deferred.promise();
     }
