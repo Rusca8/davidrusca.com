@@ -30,7 +30,8 @@ async function ensure_valid_csrf_token(){
             csrf_token = data.csrf_token;
             csrf_token_timestamp = Date.now();
             console.log("%cCSRF :: Token renewed.%c", 'color: saddlebrown')
-        });
+        })
+        .always(() => {csrf_refresh_promise = null});  // gotta clear it or future runs won't start
     }else{
         console.log("%cCSRF :: Someone is renewing the expired token. Waiting with them...%c", 'color: saddlebrown')
     }
