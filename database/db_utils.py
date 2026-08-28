@@ -60,7 +60,7 @@ def get_snapshots_info():
             if timestamp and now - timestamp < timedelta(days=7):
                 snapshots_info[name]["status"] = "OK"
 
-    if any(snapshots_info[name]["status"] == "OK" for name in ["weekly_A", "weekly_B"]):
+    if any(snapshots_info[name].get("status") == "OK" for name in ["weekly_A", "weekly_B"]):
         for name in ["weekly_A", "weekly_B"]:
             snapshots_info[name]["status"] = snapshots_info[name].get("status", "WAITING")
 
