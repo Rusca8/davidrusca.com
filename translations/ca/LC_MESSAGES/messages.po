@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-13 17:47+0200\n"
+"POT-Creation-Date: 2026-09-02 16:20+0200\n"
 "PO-Revision-Date: 2020-09-27 20:24+0200\n"
 "Last-Translator: \n"
 "Language: ca\n"
@@ -18,396 +18,937 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: docents.py:4
+#: llistat_recursos.py:6
 msgid "Bachillerato"
 msgstr "Batxillerat"
 
-#: docents.py:11 docents.py:159 docents.py:160 templates/anki.html:24
-#: templates/anki.html:25 templates/anki.html:38 templates/anki.html:39
-#: templates/anki.html:58 templates/anki.html:59
+#: llistat_recursos.py:13 llistat_recursos.py:174 llistat_recursos.py:175
+#: templates/anki.html:24 templates/anki.html:25 templates/anki.html:38
+#: templates/anki.html:39 templates/anki.html:58 templates/anki.html:59
 msgid "Resumen"
 msgstr "Resum"
 
-#: docents.py:12
+#: llistat_recursos.py:14
 msgid "Las Carreras Explicadas"
 msgstr "Les Carreres Explicades"
 
-#: docents.py:16
+#: llistat_recursos.py:18
 msgid "Mates científicas"
 msgstr "Mates Científiques"
 
-#: docents.py:20 docents.py:52
+#: llistat_recursos.py:22 llistat_recursos.py:59
 msgid "Esquemas y Formularios"
 msgstr "Esquemes i Formularis"
 
-#: docents.py:21 docents.py:53
+#: llistat_recursos.py:23 llistat_recursos.py:60
 msgid "Tipos de Funciones"
 msgstr "Tipus de Funcions"
 
-#: docents.py:22 docents.py:54 docents.py:238
+#: llistat_recursos.py:24 llistat_recursos.py:61 llistat_recursos.py:259
 msgid "Ecuaciones exponenciales y logarítmicas"
 msgstr "Equacions exponencials i logarítmiques"
 
-#: docents.py:23
+#: llistat_recursos.py:25
 msgid "Números Complejos"
 msgstr "Nombres Complexos"
 
-#: docents.py:24 docents.py:55 docents.py:237
+#: llistat_recursos.py:26 llistat_recursos.py:62 llistat_recursos.py:258
 msgid "Combinatoria"
 msgstr "Combinatòria"
 
-#: docents.py:25 docents.py:56
+#: llistat_recursos.py:27 llistat_recursos.py:63
 msgid "Probabilidad"
 msgstr "Probabilitat"
 
-#: docents.py:26 docents.py:57
+#: llistat_recursos.py:28 llistat_recursos.py:64
 msgid "Límites y Continuidad"
 msgstr "Límits i Continuïtat"
 
-#: docents.py:27 docents.py:61
+#: llistat_recursos.py:29 llistat_recursos.py:68
 msgid "Representación de funciones"
 msgstr "Representació de funcions"
 
-#: docents.py:28 docents.py:62
+#: llistat_recursos.py:30 llistat_recursos.py:69
 msgid "Relación entre gráficas y derivadas"
 msgstr "Relació entre gràfiques i derivades"
 
-#: docents.py:29 docents.py:60
+#: llistat_recursos.py:31 llistat_recursos.py:67
 msgid "Recetas y Problemas de funciones"
 msgstr "Receptes i Problemes de funcions"
 
-#: docents.py:30
+#: llistat_recursos.py:32
 msgid "Discusión de Sistemas"
 msgstr "Discussió de Sistemes"
 
-#: docents.py:31 docents.py:63
+#: llistat_recursos.py:33 llistat_recursos.py:70
 msgid "Optimización"
 msgstr "Optimització"
 
-#: docents.py:32
+#: llistat_recursos.py:34
 msgid "Geometría 3D"
 msgstr "Geometria 3D"
 
-#: docents.py:34 docents.py:65 docents.py:199 docents.py:240 docents.py:271
-#: docents.py:305
+#: llistat_recursos.py:36 llistat_recursos.py:72 llistat_recursos.py:217
+#: llistat_recursos.py:261 llistat_recursos.py:296 llistat_recursos.py:346
 msgid "Fichas"
 msgstr "Fitxes"
 
-#: docents.py:35 docents.py:66
+#: llistat_recursos.py:37 llistat_recursos.py:73
 msgid "Ficha de Derivadas Definitiva"
 msgstr "Fitxa de Derivades Definitiva"
 
-#: docents.py:36 docents.py:67 docents.py:243
+#: llistat_recursos.py:38 llistat_recursos.py:74 llistat_recursos.py:264
 msgid "Potencias y raíces"
 msgstr "Potències i arrels"
 
-#: docents.py:37 docents.py:68
+#: llistat_recursos.py:39 llistat_recursos.py:75
 msgid "Sistemas 3D"
 msgstr "Sistemes 3D"
 
-#: docents.py:38 docents.py:69
+#: llistat_recursos.py:40 llistat_recursos.py:76
 msgid "Derivadas"
 msgstr "Derivades"
 
-#: docents.py:40 docents.py:71 docents.py:102 docents.py:176 docents.py:185
+#: llistat_recursos.py:43 llistat_recursos.py:178 llistat_recursos.py:270
+#: templates/anki.html:88 templates/anki.html:294
+msgid "Perímetros, Áreas y Volúmenes"
+msgstr "Perímetres, Àrees i Volums"
+
+#: llistat_recursos.py:44 llistat_recursos.py:79 llistat_recursos.py:269
+#: templates/anki.html:96 templates/anki.html:219
+msgid "Vandalismos Matemáticos"
+msgstr "Vandalismes Matemàtics"
+
+#: llistat_recursos.py:45 llistat_recursos.py:80 templates/anki.html:89
+#: templates/anki.html:350
+msgid "Reglas de Derivación"
+msgstr "Regles de Derivació"
+
+#: llistat_recursos.py:47 llistat_recursos.py:82 llistat_recursos.py:120
+#: llistat_recursos.py:194 llistat_recursos.py:203
 msgid "Temario"
 msgstr "Temari"
 
-#: docents.py:41 docents.py:72 docents.py:103 docents.py:177 docents.py:186
+#: llistat_recursos.py:48 llistat_recursos.py:83 llistat_recursos.py:121
+#: llistat_recursos.py:195 llistat_recursos.py:204
 msgid "Temario optimizado"
 msgstr "Temari optimitzat"
 
-#: docents.py:44 docents.py:248
+#: llistat_recursos.py:51 llistat_recursos.py:273
 msgid "Funciones trigonométricas"
 msgstr "Funcions trigonomètriques"
 
-#: docents.py:48
+#: llistat_recursos.py:55
 msgid "Mates sociales"
 msgstr "Mates socials"
 
-#: docents.py:58
+#: llistat_recursos.py:65
 msgid "Matemática Financiera"
 msgstr "Matemàtica Financera"
 
-#: docents.py:59
+#: llistat_recursos.py:66
 msgid "Mnemotecnia Financiera"
 msgstr "Mnemotècnia Financera"
 
-#: docents.py:80 docents.py:99 docents.py:119 docents.py:236 docents.py:268
+#: llistat_recursos.py:91 llistat_recursos.py:110 llistat_recursos.py:134
+#: llistat_recursos.py:257 llistat_recursos.py:293
 msgid "Formularios"
 msgstr "Formularis"
 
-#: docents.py:81
+#: llistat_recursos.py:92
 msgid "Movimientos"
 msgstr "Moviments"
 
-#: docents.py:82
+#: llistat_recursos.py:93
 msgid "Gráficos de MRUA"
 msgstr "Gràfics de l'MRUA"
 
-#: docents.py:83 docents.py:272
+#: llistat_recursos.py:94 llistat_recursos.py:297
 msgid "Fuerzas"
 msgstr "Forces"
 
-#: docents.py:84
+#: llistat_recursos.py:95
 msgid "Campo Gravitatorio y Eléctrico"
 msgstr "Camp Gravitatori i Elèctric"
 
-#: docents.py:85
+#: llistat_recursos.py:96
 msgid "Física Nuclear"
 msgstr "Física Nuclear"
 
-#: docents.py:86
+#: llistat_recursos.py:97
 msgid "Ondas"
 msgstr "Ones"
 
-#: docents.py:94 docents.py:128 docents.py:140 docents.py:218 docents.py:322
-#: docents.py:323 docents.py:332 docents.py:341
+#: llistat_recursos.py:105 llistat_recursos.py:143 llistat_recursos.py:155
+#: llistat_recursos.py:236 llistat_recursos.py:363 llistat_recursos.py:364
+#: llistat_recursos.py:373 llistat_recursos.py:382
 msgid "Apuntes"
 msgstr "Apunts"
 
-#: docents.py:95
+#: llistat_recursos.py:106
 msgid "Números cuánticos"
 msgstr "Nombres quàntics"
 
-#: docents.py:96
+#: llistat_recursos.py:107
 msgid "Teorías Atómicas, Espectros y Cosas Cuánticas"
 msgstr "Teories Atòmiques, Espectres i Coses Quàntiques"
 
-#: docents.py:97
+#: llistat_recursos.py:108
 msgid "Propiedades Periódicas"
 msgstr "Propietats Periòdiques"
 
-#: docents.py:100
+#: llistat_recursos.py:111
 msgid "Termoquímica"
 msgstr "Termoquímica"
 
-#: docents.py:105 docents.py:259 docents.py:282 templates/anki.html:185
-#: templates/anki.html:204 templates/anki.html:208 templates/anki.html:209
-#: templates/anki.html:210
+#: llistat_recursos.py:113 llistat_recursos.py:284 llistat_recursos.py:307
+#: templates/anki.html:185 templates/anki.html:204 templates/anki.html:208
+#: templates/anki.html:209 templates/anki.html:210
 msgid "Mnemotecnia"
 msgstr "Mnemotècnia"
 
-#: docents.py:106 docents.py:260
+#: llistat_recursos.py:114 llistat_recursos.py:117 llistat_recursos.py:285
 msgid "Valencias de los Elementos"
 msgstr "Valències dels Elements"
 
-#: docents.py:109 templates/lab_q_eq.html:2 templates/lab_q_eq.html:4
+#: llistat_recursos.py:118 templates/anki.html:78 templates/anki.html:488
+msgid "Isótopos y Compañía"
+msgstr "Isòtops i Companyia"
+
+#: llistat_recursos.py:124 templates/lab_q_eq.html:2 templates/lab_q_eq.html:4
 msgid "Equilibrio Químico"
 msgstr "Equilibri Químic"
 
-#: docents.py:110 templates/lab_q_chatelier.html:2
+#: llistat_recursos.py:125 templates/lab_q_chatelier.html:2
 msgid "Le Châtelier"
 msgstr ""
 
-#: docents.py:111
+#: llistat_recursos.py:126
 msgid "Radio Atómico"
 msgstr "Radi Atòmic"
 
-#: docents.py:115 docents.py:181 docents.py:195 docents.py:264
+#: llistat_recursos.py:130 llistat_recursos.py:199 llistat_recursos.py:213
+#: llistat_recursos.py:289 paraules.py:42
 msgid "Tecnología"
 msgstr "Tecnologia"
 
-#: docents.py:120
+#: llistat_recursos.py:135
 msgid "Formulario"
 msgstr "Formulari"
 
-#: docents.py:124
+#: llistat_recursos.py:139
 msgid "Dibujo técnico"
 msgstr "Dibuix tècnic"
 
-#: docents.py:129
+#: llistat_recursos.py:144
 msgid "Poliedros: Construcciones Auxiliares y Vistas Principales"
 msgstr "Poliedres: Construccions Auxiliars i Vistes Principals"
 
-#: docents.py:132
+#: llistat_recursos.py:147
 msgid "Cambios de plano"
 msgstr "Canvis de pla"
 
-#: docents.py:136
+#: llistat_recursos.py:151
 msgid "Economía de la empresa"
 msgstr "Economia de l'Empresa"
 
-#: docents.py:141
+#: llistat_recursos.py:156
 msgid "Asientos"
 msgstr "Assentaments"
 
-#: docents.py:142
+#: llistat_recursos.py:157
 msgid "Fuentes de Financiación"
 msgstr "Fonts de Finançament"
 
-#: docents.py:145
+#: llistat_recursos.py:160
 msgid "Qué podría pagar con mil millones?"
 msgstr "Què podria pagar amb mil milions?"
 
-#: docents.py:152
+#: llistat_recursos.py:167
 msgid "Pruebas de Aptitud Personal"
 msgstr "Proves d'Aptitud Personal"
 
-#: docents.py:155
+#: llistat_recursos.py:170
 msgid "Competencia Logicomatemática"
 msgstr "Competència Logicomatemàtica"
 
-#: docents.py:163
+#: llistat_recursos.py:181
 msgid "Calcula la nota de mates"
 msgstr "Calcula la nota de mates"
 
-#: docents.py:169 docents.py:192
+#: llistat_recursos.py:187 llistat_recursos.py:210
 msgid "Prueba de acceso"
 msgstr "Prova d'accés"
 
-#: docents.py:172
+#: llistat_recursos.py:190
 msgid "Dibujo Técnico"
 msgstr "Dibuix Tècnic"
 
-#: docents.py:200
+#: llistat_recursos.py:218
 msgid "Circuitos Eléctricos"
 msgstr "Circuits Elèctrics"
 
-#: docents.py:201
+#: llistat_recursos.py:219
 msgid "Electrónica Digital"
 msgstr "Electrònica Digital"
 
-#: docents.py:202
+#: llistat_recursos.py:220
 msgid "Energías"
 msgstr "Energies"
 
-#: docents.py:203
+#: llistat_recursos.py:221
 msgid "Pneumática"
 msgstr "Pneumàtica"
 
-#: docents.py:204
+#: llistat_recursos.py:222
 #, fuzzy
 msgid "Telecomunicaciones"
 msgstr "Telecomunicacions"
 
-#: docents.py:205
+#: llistat_recursos.py:223
 msgid "Máquinas de Combustión"
 msgstr "Màquines de Combustió"
 
-#: docents.py:211
+#: llistat_recursos.py:229
 msgid "Grado Profesional de Música"
 msgstr "Grau Professional de Música"
 
-#: docents.py:214
+#: llistat_recursos.py:232
 msgid "Armonía"
 msgstr "Harmonia"
 
-#: docents.py:219
+#: llistat_recursos.py:237 llistat_recursos.py:240
 msgid "Canciones para los intervalos"
 msgstr "Cançons pels intervals"
 
-#: docents.py:222
+#: llistat_recursos.py:243
 msgid "Editor de Esquemas Armónicos"
 msgstr "Editor d'Esquemes Harmònics"
 
-#: docents.py:229
+#: llistat_recursos.py:250
 msgid "Educación Secundaria (ESO)"
 msgstr "Educació Secundària (ESO)"
 
-#: docents.py:241
+#: llistat_recursos.py:262
 msgid "Operaciones con Enteros"
 msgstr "Operacions amb Enters"
 
-#: docents.py:242 templates/anki.html:227
+#: llistat_recursos.py:263 templates/anki.html:227
 msgid "Fracciones"
 msgstr "Fraccions"
 
-#: docents.py:244 templates/anki.html:230
+#: llistat_recursos.py:265 templates/anki.html:230
 msgid "Ecuaciones"
 msgstr "Equacions"
 
-#: docents.py:245
+#: llistat_recursos.py:266
 msgid "Proporcionalidad"
 msgstr "Proporcionalitat"
 
-#: docents.py:252
+#: llistat_recursos.py:277
 msgid "Física y Química"
 msgstr "Física i Química"
 
-#: docents.py:257
+#: llistat_recursos.py:282
 msgid "Masa y peso"
 msgstr "Massa i Pes"
 
-#: docents.py:269
+#: llistat_recursos.py:294
 msgid "Rendimiento"
 msgstr "Rendiment"
 
-#: docents.py:273 docents.py:274
+#: llistat_recursos.py:298 llistat_recursos.py:299
 msgid "Máquinas simples"
 msgstr "Màquines simples"
 
-#: docents.py:278
+#: llistat_recursos.py:303
 msgid "Sociales"
 msgstr "Socials"
 
-#: docents.py:283 templates/anki.html:77 templates/anki.html:133
+#: llistat_recursos.py:308 llistat_recursos.py:311 templates/anki.html:77
+#: templates/anki.html:133
 msgid "Comarcas de Cataluña"
 msgstr "Comarques de Catalunya"
 
-#: docents.py:287
+#: llistat_recursos.py:312
+#, fuzzy
+msgid "Capitales de Asia"
+msgstr "Mnemotècnia Capitals de l'Àsia"
+
+#: llistat_recursos.py:316
+#, fuzzy
+msgid "Català"
+msgstr "cartell"
+
+#: llistat_recursos.py:321 templates/anki.html:94 templates/anki.html:438
+msgid "Tiempos Verbales Catalanes"
+msgstr "Temps Verbals Catalans"
+
+#: llistat_recursos.py:325
 msgid "Inglés"
 msgstr "Anglès"
 
-#: docents.py:298
+#: llistat_recursos.py:330 templates/anki.html:97 templates/anki.html:320
+msgid "Verbos Irregulares Inglés"
+msgstr "Verbs Irregulars Anglès"
+
+#: llistat_recursos.py:339
 msgid "Educación Primaria (EP)"
 msgstr "Educació Primària (EP)"
 
-#: docents.py:306
+#: llistat_recursos.py:347
 msgid "Operaciones sencillas"
 msgstr "Operacions senzilles"
 
-#: docents.py:307
+#: llistat_recursos.py:348
 msgid "Ecuaciones sencillas"
 msgstr "Equacions senzilles"
 
-#: docents.py:308
+#: llistat_recursos.py:349
 msgid "Operaciones en columna"
 msgstr "Operacions en columna"
 
-#: docents.py:315
+#: llistat_recursos.py:356
 msgid "Misceláneo"
 msgstr "Miscel·lani"
 
-#: docents.py:318 templates/index.html:139
+#: llistat_recursos.py:359 templates/index.html:139
 msgid "Programación"
 msgstr "Programació"
 
-#: docents.py:324
+#: llistat_recursos.py:365
 msgid "Apuntes y Trucos"
 msgstr "Apunts i Trucs"
 
-#: docents.py:333
+#: llistat_recursos.py:374
 msgid "El Manual Definitiu de Repartiment"
 msgstr ""
 
-#: docents.py:342
+#: llistat_recursos.py:383
 msgid "Reglament"
 msgstr ""
 
-#: docents.py:346 templates/juegos.html:18 templates/juegos.html:60
+#: llistat_recursos.py:387 llistat_recursos.py:433
 msgid "Juegos de Lengua"
 msgstr "Jocs de Llengua"
 
-#: docents.py:351
+#: llistat_recursos.py:392
 msgid "Diacríptic"
 msgstr ""
 
-#: docents.py:352
+#: llistat_recursos.py:393
 msgid "Catagrama del día"
 msgstr "Catagrama del dia"
 
-#: docents.py:353
+#: llistat_recursos.py:394
 msgid "Crucigramas crípticos"
 msgstr "Mots encreuats críptics"
 
-#: docents.py:357 templates/ventriloquia.html:2
+#: llistat_recursos.py:398 templates/ventriloquia.html:2
 msgid "Ventriloquía"
 msgstr "Ventriloquia"
 
-#: docents.py:362 templates/ventriloquia.html:7
+#: llistat_recursos.py:403 templates/ventriloquia.html:7
 msgid "Traductor de Ventriloquía"
 msgstr "Traductor de Ventriloquia"
+
+#: llistat_recursos.py:416 llistat_recursos.py:421 templates/anki.html:80
+#: templates/anki.html:397
+msgid "Lengua de Signos Catalana"
+msgstr "Llengua de Signes Catalana"
+
+#: llistat_recursos.py:430
+msgid "Juegos digitales"
+msgstr "Jocs digitals"
+
+#: llistat_recursos.py:468
+msgid "Juegos de Mates"
+msgstr "Jocs de Mates"
+
+#: llistat_recursos.py:476
+msgid ""
+"Calcula rápido los factores primeros de los números que aparecen para "
+"intentar vaciar la pantalla tan rápido como puedas."
+msgstr ""
+"Calcula ràpid els factors primers dels números que apareixen per intentar"
+" buidar la pantalla tan ràpid com puguis."
+
+#: llistat_recursos.py:486
+msgid "Diseños de juegos de mesa"
+msgstr "Dissenys de jocs de taula"
+
+#: llistat_recursos.py:489
+msgid "Prototipos"
+msgstr "Prototips"
+
+#: llistat_recursos.py:496
+msgid ""
+"Los jugadores tendrán que moverse a través de un laberinto cambiante para"
+" intentar conseguir sus cuatro cubitos antes que los demás."
+msgstr ""
+"Els jugadors hauran de moure's a través d'un laberint canviant per "
+"intentar aconseguir els seus quatre cubs abans que els altres."
+
+#: llistat_recursos.py:503
+msgid ""
+"Juego de agilidad mental y memoria donde los jugadores tendrán que ser "
+"los más rápidos sumando matrículas y recordando dónde están las "
+"parecidas."
+msgstr ""
+"Joc d'agilitat mental i memòria on els jugadors hauran de ser el més "
+"ràpids sumant matrícules i recordant on són les semblants."
+
+#: llistat_recursos.py:504
+msgid ""
+"Pensado para trabajar la regla de divisibilidad del 3 y un poco de "
+"mnemotecnia en las escuelas."
+msgstr ""
+"Pensat per a treballar la regla de divisibiliatat del 3 i una mica de "
+"mnemotècnia a les escoles."
+
+#: llistat_recursos.py:514
+msgid "Recursos para juegos de mesa"
+msgstr "Recursos per a jocs de taula"
+
+#: llistat_recursos.py:517
+msgid "Dragones y Mazmorras (5ª Edición)"
+msgstr ""
+
+#: llistat_recursos.py:522
+msgid "Listas Resumen de Conjuros"
+msgstr "Llistes Resum d'Encanteris"
+
+#: llistat_recursos.py:526 llistat_recursos.py:543
+msgid "Todos los Conjuros"
+msgstr "Tots els Encanteris"
+
+#: llistat_recursos.py:527 llistat_recursos.py:544
+msgid "Conjuros de Artificiero"
+msgstr "Encanteris de l'Artificier"
+
+#: llistat_recursos.py:528 llistat_recursos.py:545
+msgid "Conjuros de Bardo"
+msgstr "Encanteris del Bard"
+
+#: llistat_recursos.py:529 llistat_recursos.py:546
+msgid "Conjuros de Brujo"
+msgstr "Encanteris del Bruixot"
+
+#: llistat_recursos.py:530 llistat_recursos.py:547
+msgid "Conjuros de Clérigo"
+msgstr "Encanteris del Clergue"
+
+#: llistat_recursos.py:531 llistat_recursos.py:548
+msgid "Conjuros de Druida"
+msgstr "Encanteris del Druida"
+
+#: llistat_recursos.py:532 llistat_recursos.py:549
+msgid "Conjuros de Explorador"
+msgstr "Encanteris de l'Explorador"
+
+#: llistat_recursos.py:533 llistat_recursos.py:550
+msgid "Conjuros de Hechicero"
+msgstr "Encanteris del Fetiller"
+
+#: llistat_recursos.py:534 llistat_recursos.py:551
+msgid "Conjuros de Mago"
+msgstr "Encanteris del Mag"
+
+#: llistat_recursos.py:535 llistat_recursos.py:552
+msgid "Conjuros de Paladín"
+msgstr "Encanteris del Paladí"
+
+#: llistat_recursos.py:539
+msgid "Cartas de Conjuros"
+msgstr "Cartes d'Encanteris"
+
+#: llistat_recursos.py:556
+msgid "Otros Recursos"
+msgstr "Altres Recursos"
+
+#: llistat_recursos.py:560
+msgid "Diagrama de Todas las Subclases"
+msgstr "Diagrama de Totes les Subclasses"
+
+#: llistat_recursos.py:561
+msgid "Tabla d100 de magia salvaje"
+msgstr "Taula d100 de magia salvatge"
+
+#: llistat_recursos.py:572
+msgid "Bandeja de jugador de madera"
+msgstr "Safata de jugador de fusta"
+
+#: llistat_recursos.py:574
+msgid ""
+"Archivo digital para crear una bandeja de jugador de doble capa con la "
+"cortadora láser."
+msgstr ""
+"Fitxer digital per a crear una safata de jugador de doble capa amb la "
+"talladora làser."
+
+#: llistat_recursos.py:575
+msgid ""
+"El archivo incluye la parte de los grabados y el trazo del corte en capas"
+" separadas. Las dos capas de madera están colocadas de lado para "
+"grabarlas y cortarlas simultáneamente."
+msgstr ""
+"El fitxer inclou la part del gravat i la part del tall a capes separades."
+" Les dues capes de fusta estan col·locades de costat per a gravar-les i "
+"tallar-les simultàniament."
+
+#: llistat_recursos.py:577
+msgid "Archivo de Illustrator"
+msgstr "Fitxer d'Illustrator"
+
+#: llistat_recursos.py:587
+msgid "Hojas de Referencia"
+msgstr "Fulls de Referència"
+
+#: llistat_recursos.py:589
+msgid ""
+"Creadas por Samuel Marchal (Zessx), las hemos traducido en equipo yo y "
+"Aina SG (en github)."
+msgstr ""
+"Creats per Samuel Marchal (Zessx), les hem traduït en equip jo i l'Aina "
+"SG (al github)."
+
+#: llistat_recursos.py:590
+msgid ""
+"La de Iniciación es una versión distinta de la que hay en zessx porque no"
+" me convenció el consenso y la retoqué por mi cuenta."
+msgstr ""
+"La d'Iniciació és una versió diferent de la que hi ha a zessx perquè no "
+"em va convèncer el consens i la vaig retocar pel meu compte."
+
+#: llistat_recursos.py:592
+msgid "Iniciación"
+msgstr "iniciació"
+
+#: llistat_recursos.py:593
+msgid "Yakus"
+msgstr "Yakus"
+
+#: llistat_recursos.py:594
+msgid "Puntuación"
+msgstr "Puntuació"
+
+#: llistat_recursos.py:595
+msgid "Otros idiomas"
+msgstr "Altres idiomes"
+
+#: paraules.py:39
+msgid "Política"
+msgstr ""
+
+#: paraules.py:40
+#, fuzzy
+msgid "Economía"
+msgstr "Tecnologia"
+
+#: paraules.py:41
+#, fuzzy
+msgid "Ecología"
+msgstr "Tecnologia"
+
+#: paraules.py:43
+msgid "Estadística"
+msgstr ""
+
+#: paraules.py:44
+#, fuzzy
+msgid "Antropología"
+msgstr "Tecnologia"
+
+#: paraules.py:45
+msgid "Física"
+msgstr ""
+
+#: paraules.py:46
+msgid "Salud"
+msgstr ""
+
+#: paraules.py:47
+#, fuzzy
+msgid "Psicología"
+msgstr "Tecnologia"
+
+#: paraules.py:48
+#, fuzzy
+msgid "Arte"
+msgstr "cartell"
+
+#: paraules.py:49
+#, fuzzy
+msgid "Biología"
+msgstr "Tecnologia"
+
+#: paraules.py:50
+msgid "Urbanismo"
+msgstr ""
+
+#: paraules.py:55
+msgid "Ventana de Overton"
+msgstr ""
+
+#: paraules.py:55
+msgid ""
+"<p>Conjunto de ideas políticas que se consideran 'aceptables' en la "
+"sociedad en general y, por tanto, que pueden acabar convirtiéndose en "
+"leyes.</p>Las ideas más aceptadas están en el centro de la ventana, las "
+"que son algo más atrevidas están en los bordes, y las más radicales están"
+" fuera de la ventana. La ventana se mueve con el tiempo a medida que la "
+"opinión pública cambia, ya sea de forma natural o porque personas o "
+"partidos influyentes (y dispuestos a aceptar las reprimiendas) eligen "
+"repetir las ideas radicales hasta que el público se acostumbra a ellas."
+msgstr ""
+
+#: paraules.py:55
+msgid "https://es.wikipedia.org/wiki/Ventana_de_Overton"
+msgstr ""
+
+#: paraules.py:56
+msgid "Radical vs Extremista"
+msgstr ""
+
+#: paraules.py:56
+msgid ""
+"<p>Usamos las dos palabras como si fueran equivalentes, pero la "
+"etimología nos da dos matices distintos.</p><p><b>Radical</b> es alguien "
+"dispuesto a cambiar las cosas de raíz. <b>Extremista</b> es alguien "
+"dispuesto a llevar las cosas al extremo.</p><i>Por ejemplo, querer que la"
+" vivienda sea gratis para todo el mundo no es 'Extrema Izquierda', es "
+"'Izquierda Radical'. 'Extrema Izquierda' sería por ejemplo torturar a los"
+" milmillonarios hasta que acepten dejar de serlo.</i>"
+msgstr ""
+
+#: paraules.py:57
+msgid "Índice de la Dignidad"
+msgstr ""
+
+#: paraules.py:57
+msgid ""
+"El <b>Índice de la Dignidad</b> (en inglés <i>Dignity Index</i>) es una "
+"escala que mide el grado de humanidad con el que los discursos hablan de "
+"otras personas. Va del 1 al 8, y es muy útil para detectar pronto la "
+"polarización y la deriva que lleva al <b>Alto conflicto</b>."
+msgstr ""
+
+#: paraules.py:58
+msgid "Emprendedores del Conflicto"
+msgstr ""
+
+#: paraules.py:58
+msgid ""
+"Aquellas personas que se benefician del [[Alto Conflicto|9]] y que eligen"
+" deliberadamente provocarlo y alimentarlo."
+msgstr ""
+
+#: paraules.py:58 paraules.py:63
+msgid ""
+"Acuñado por Amanda Ripley en su (recomendadísimo) libro <i>High Conflict:"
+" Why We Get Trapped and How We Get Out</i>"
+msgstr ""
+
+#: paraules.py:59
+msgid "La regla del 3.5%"
+msgstr ""
+
+#: paraules.py:59
+#, python-format
+msgid ""
+"<p>Siempre que un <b>3.5% de la población</b> ha protestado de manera "
+"<b>noviolenta</b> contra un gobierno autoritario, el gobierno autoritario"
+" ha caído.</p>Es decir, para provocar un cambio en el mundo siempre hace "
+"falta mucha menos gente de la que parece."
+msgstr ""
+
+#: paraules.py:60
+msgid "El propósito de un sistema es aquello que hace"
+msgstr ""
+
+#: paraules.py:60
+msgid ""
+"<p>(En inglés <b>POSIWID</b>, <i>The purpose of a system is what it "
+"does</i>)<br>Es la idea de que no tiene sentido juzgar un sistema en "
+"función de las supuestas intenciones de sus creadores o promotores si a "
+"la hora de la verdad constantemente consigue o provoca otros "
+"resultados.</p>Si algo siempre 'funciona mal' y nadie lo corrige, es "
+"sensato asumir que la intención real es que funcione mal."
+msgstr ""
+
+#: paraules.py:61
+msgid "Los ricos te quieren racista"
+msgstr ""
+
+#: paraules.py:62
+msgid "Guerra jurídica"
+msgstr ""
+
+#: paraules.py:62
+msgid ""
+"<p>En inglés <i>Lawfare</i>. Es cuando se usa el poder y favor de los "
+"jueces de forma abusiva o ilegal para intentar eliminar oponentes, ya sea"
+" inhabilitándoles o simplemente dañando su reputación al hacer que "
+"parezca que sus problemas con la justicia son legítimos.</p>En general "
+"acaba siendo <b>judicial y mediática</b> e implicando cuatro actores: las"
+" <b>organizaciones</b> que ponen denuncias falsas, los <b>jueces "
+"corruptos</b> que las aceptan sin pruebas, los <b>medios de "
+"comunicación</b> que aprovechan para provocar revuelo, y las <b>cuentas "
+"en redes sociales</b> que amplifican esas noticias falsas o esos casos "
+"judiciales ilegítimos."
+msgstr ""
+
+#: paraules.py:63
+msgid "Alto Conflicto"
+msgstr ""
+
+#: paraules.py:64
+msgid "Appartheid"
+msgstr ""
+
+#: paraules.py:64
+msgid ""
+"Sistema político en el que las propias instituciones y leyes separan y "
+"discriminan a las personas en función de su raza."
+msgstr ""
+
+#: paraules.py:65
+#, fuzzy
+msgid "Tribalismo"
+msgstr "Tutorials"
+
+#: paraules.py:65
+msgid ""
+"<p>Dinámica en la que las personas se identifican con un grupo y sienten "
+"una fuerte lealtad hacia ese grupo, favoreciéndolo frente a los demás y a"
+" menudo excluyendo o discriminando a los miembros de los demás "
+"grupos.</p><i>Lo que pasa, por ejemplo, con los seguidores de equipos de "
+"fútbol, o con los votantes que defienden a 'su' partido haga lo que "
+"haga.</i>"
+msgstr ""
+
+#: paraules.py:72
+msgid "Gerrymandering"
+msgstr ""
+
+#: paraules.py:72
+msgid ""
+"<p>Cambiar las fronteras de las circunscripciones electorales de manera "
+"maliciosa para intentar favorecer o perjudicar a un partido o grupo de "
+"personas.</p><i>Por ejemplo, dividir a los votantes de un partido en "
+"muchos sectores distintos para que no ganen representación en ninguno de "
+"ellos, o amontonarlos de manera excesiva en un sólo distrito para que no "
+"les sobre suficiente gente como para ganar en ninguno de los demás.</i>"
+msgstr ""
+
+#: paraules.py:74
+msgid "Terrorismo estocástico"
+msgstr ""
+
+#: paraules.py:74
+msgid ""
+"<p>La manera como repetir discursos hostiles públicamente acaba "
+"desencadenando en violencia impartida por personas anónimas (incluso si "
+"no se les pide explícitamente que sean violentas), simplemente por "
+"probabilidad.</p>El modo en el que los actores que quieren dañar a "
+"ciertos grupos de personas no necesitan pedir violencia explícitamente ni"
+" cometerla ellos mismos, porque saben que si señalan y siembran "
+"suficiente odio, alguien entre el público acabará decidiendo cometerla "
+"por su cuenta."
+msgstr ""
+
+#: paraules.py:75
+msgid "Abya Yala"
+msgstr ""
+
+#: paraules.py:75
+msgid ""
+"Nombre con el que se refieren al continente americano las culturas "
+"indígenas que habitan en él y muchos movimientos sociales. Se plantea "
+"como alternativa a términos como <b>América</b> o <b>Nuevo mundo</b>, que"
+" fueron impuestos por los colonizadores europeos."
+msgstr ""
+
+#: paraules.py:77
+msgid "Pinkwashing"
+msgstr ""
+
+#: paraules.py:77
+msgid ""
+"Tácticas publicitarias en las que las empresas y gobiernos posan como "
+"aliadas del colectivo LGBT+ para intentar parecer progresistas."
+msgstr ""
+
+#: paraules.py:78
+#, fuzzy
+msgid "Interseccionalidad"
+msgstr "Proporcionalitat"
+
+#: paraules.py:78
+msgid ""
+"<p>La idea de que no podemos analizar las injusticias sociales de modo "
+"aislado, sino que hay que tener en cuenta cómo se afectan entre ellas, "
+"porque cada persona o conjunto de personas tendrá su combinación única de"
+" discriminaciones y privilegios en función de los grupos sociales a los "
+"que pertenezca.</p><i>Por ejemplo, es <b>Feminismo Interseccional</b> "
+"aquél que se preocupa por incluír y dar la misma voz a todas las mujeres "
+"(i.e. no sólo a las blancas, cristianas, cis...), y por entender y "
+"solidarizarse con las causas por las que éstas puedan estar luchando en "
+"paralelo a la feminista.</i>"
+msgstr ""
+
+#: paraules.py:87
+msgid "Obsolescencia Programada"
+msgstr ""
+
+#: paraules.py:94
+#, fuzzy
+msgid "Reduflación"
+msgstr "Traducció"
+
+#: paraules.py:94
+msgid ""
+"En inglés <i>Shrinkflation</i>, es el modo en el que las empresas suben "
+"el precio de las cosas a base de mantener el precio del producto pero "
+"reducir su tamaño o cantidad de producto."
+msgstr ""
+
+#: paraules.py:101
+msgid "Curva de Laffer"
+msgstr ""
+
+#: paraules.py:101
+msgid ""
+"<p>Relación entre el <b>porcentaje de impuestos</b> que se le exige a los"
+" ricos y la <b>recaudación</b> que se puede conseguir con ese porcentaje,"
+" suponiendo que esos ricos se pudieran llevar sus riquezas a otros países"
+" si el porcentaje sube más de lo que están dispuestos a "
+"soportar.</p><p>La idea es que la <b>máxima recaudación</b> ocurre en un "
+"punto por el medio entre <i>'Poco porcentaje pero hay muchos ricos'</i> y"
+" <i>'Mucho porcentaje pero quedan pocos ricos'</i>. El modelo es "
+"criticablemente simple, pero los análisis empíricos dicen que la mayoría "
+"de los países están <b>por debajo</b> del punto óptimo (i.e. que les "
+"valdría la pena subir el impuesto a los ricos <i>incluso</i> si eso hace "
+"que una parte de ellos se vayan)."
+msgstr ""
+
+#: paraules.py:142
+msgid ""
+"La superstición que dice que puedes fabricar el antídoto para un veneno a"
+" base de mezclar ese mismo veneno con tantísima agua que al final sólo te"
+" queda agua."
+msgstr ""
+
+#: paraules.py:158
+#, fuzzy
+msgid "Saliencia"
+msgstr "València"
+
+#: paraules.py:158
+msgid ""
+"La facilidad que tiene algo para destacar sobre lo demás. Especialmente "
+"relevante en la [[Economía de la Atención|46]]."
+msgstr ""
 
 #: pulseras.py:100
 msgid "Arcoíris"
@@ -517,7 +1058,7 @@ msgstr "Entrellaçant els colors de les altres tres."
 msgid "Como recuerdo de despedida y amuleto para selectividad."
 msgstr "Com a record de comiat i amulet per a la selectivitat."
 
-#: templates/401.html:2
+#: templates/401.html:2 templates/account_deleted.html:2
 msgid "401 No Autorizado"
 msgstr "401 No Autoritzat"
 
@@ -627,8 +1168,8 @@ msgstr "Em falta investigar si es pot fer des del mòbil i com."
 msgid "Barajas"
 msgstr "Baralles"
 
-#: templates/anki.html:70 templates/ankicode.html:12 templates/docentes.html:15
-#: templates/juegos.html:9 templates/music.html:11
+#: templates/anki.html:70 templates/ankicode.html:12
+#: templates/main_blocks/auto_index.html:7 templates/music.html:11
 msgid "Índice"
 msgstr "Índex"
 
@@ -636,17 +1177,9 @@ msgstr "Índex"
 msgid "Braille Español/Catalán"
 msgstr "Braille Espanyol/Català"
 
-#: templates/anki.html:78 templates/anki.html:488
-msgid "Isótopos y Compañía"
-msgstr "Isòtops i Companyia"
-
 #: templates/anki.html:79 templates/anki.html:509
 msgid "Intervalos Musicales"
 msgstr "Intervals Musicals"
-
-#: templates/anki.html:80 templates/anki.html:397
-msgid "Lengua de Signos Catalana"
-msgstr "Llengua de Signes Catalana"
 
 #: templates/anki.html:85 templates/anki.html:194
 msgid "Mnemotecnia Capitales de Asia"
@@ -660,29 +1193,9 @@ msgstr "Mnemotècnia Números 0-99"
 msgid "Músculos"
 msgstr "Músculs"
 
-#: templates/anki.html:88 templates/anki.html:294
-msgid "Perímetros, Áreas y Volúmenes"
-msgstr "Perímetres, Àrees i Volums"
-
-#: templates/anki.html:89 templates/anki.html:350
-msgid "Reglas de Derivación"
-msgstr "Regles de Derivació"
-
-#: templates/anki.html:94 templates/anki.html:438
-msgid "Tiempos Verbales Catalanes"
-msgstr "Temps Verbals Catalans"
-
 #: templates/anki.html:95 templates/anki.html:170
 msgid "Valencias Química"
 msgstr "Valències Química"
-
-#: templates/anki.html:96 templates/anki.html:219
-msgid "Vandalismos Matemáticos"
-msgstr "Vandalismes Matemàtics"
-
-#: templates/anki.html:97 templates/anki.html:320
-msgid "Verbos Irregulares Inglés"
-msgstr "Verbs Irregulars Anglès"
 
 #: templates/anki.html:109
 msgid ""
@@ -2411,31 +2924,31 @@ msgid ""
 "revés'</code>."
 msgstr "Funciona com a l'exemple i <code>'també \"funciona\" al revés'</code>."
 
-#: templates/base.html:62
+#: templates/base.html:67
 msgid "Inicio"
 msgstr "Inici"
 
-#: templates/base.html:68
+#: templates/base.html:73
 msgid "docentes"
 msgstr "docents"
 
-#: templates/base.html:68 templates/docentes.html:2
+#: templates/base.html:73 templates/docentes.html:2
 msgid "Docentes"
 msgstr "Docents"
 
-#: templates/base.html:74
+#: templates/base.html:79
 msgid "juegos"
 msgstr "jocs"
 
-#: templates/base.html:74 templates/juegos.html:2
+#: templates/base.html:79 templates/juegos.html:2
 msgid "Juegos"
 msgstr "Jocs"
 
-#: templates/base.html:77 templates/index.html:132 templates/index.html:148
+#: templates/base.html:82 templates/index.html:132 templates/index.html:148
 msgid "pulseras"
 msgstr "braçalets"
 
-#: templates/base.html:77 templates/pulseras.html:2
+#: templates/base.html:82 templates/pulseras.html:2
 msgid "Pulseras"
 msgstr "Braçalets"
 
@@ -2496,19 +3009,28 @@ msgid ""
 "                    Estuvo un tiempo colgado como un artículo más en el "
 "blog de la revista, pero ya hace tiempo que hicieron limpieza y lo "
 "quitaron."
-msgstr "Dissenyat per al procés de selecció d'una oferta de feina a la revista.\n Va estar un temps penjat com un article més al blog de la revista, però ja fa temps que van fer neteja i el van esborrar."
+msgstr ""
+"Dissenyat per al procés de selecció d'una oferta de feina a la revista.\n"
+" Va estar un temps penjat com un article més al blog de la revista, però "
+"ja fa temps que van fer neteja i el van esborrar."
 
 #: templates/climate_tracker.html:39
 msgid ""
 "PD: La chica de los dominós es Lily Hevesh (artista del dominó y "
 "youtuber). Le hizo ilusión verlo. jajaj"
-msgstr "PD: La noia del dòmino és la Lily Hevesh (artista del dòmino i youtuber). Li va fer il·lusió veure-ho. hahah"
+msgstr ""
+"PD: La noia del dòmino és la Lily Hevesh (artista del dòmino i youtuber)."
+" Li va fer il·lusió veure-ho. hahah"
 
-#: templates/docentes.html:11
+#: templates/conceptes.html:36
+msgid "Palabras para entender el mundo"
+msgstr ""
+
+#: templates/docentes.html:7
 msgid "Recursos Docentes"
 msgstr "Recursos Docents"
 
-#: templates/docentes.html:12
+#: templates/docentes.html:8
 msgid "Formularios y fichas que he ido haciendo, de distintos temas y materias."
 msgstr "Formularis i fitxes que he anat fent, de diferents temes i matèries."
 
@@ -2796,185 +3318,6 @@ msgstr "Jocs digitals i de taula"
 msgid "Diseños propios y recursos para juegos existentes."
 msgstr "Dissenys propis i recursos per a jocs existents."
 
-#: templates/juegos.html:16 templates/juegos.html:56
-msgid "Juegos digitales"
-msgstr "Jocs digitals"
-
-#: templates/juegos.html:19 templates/juegos.html:106
-msgid "Juegos de Mates"
-msgstr "Jocs de Mates"
-
-#: templates/juegos.html:28 templates/juegos.html:128
-msgid "Diseños de juegos de mesa"
-msgstr "Dissenys de jocs de taula"
-
-#: templates/juegos.html:30 templates/juegos.html:132
-msgid "Prototipos"
-msgstr "Prototips"
-
-#: templates/juegos.html:39 templates/juegos.html:164
-msgid "Recursos para juegos de mesa"
-msgstr "Recursos per a jocs de taula"
-
-#: templates/juegos.html:41 templates/juegos.html:168
-msgid "Dragones y Mazmorras (5ª Edición)"
-msgstr ""
-
-#: templates/juegos.html:115
-msgid ""
-"Calcula rápido los factores primeros de los números que aparecen para "
-"intentar vaciar la pantalla tan rápido como puedas."
-msgstr ""
-"Calcula ràpid els factors primers dels números que apareixen per intentar"
-" buidar la pantalla tan ràpid com puguis."
-
-#: templates/juegos.html:141
-msgid ""
-"Los jugadores tendrán que moverse a través de un laberinto cambiante para"
-" intentar conseguir sus cuatro cubitos antes que los demás."
-msgstr ""
-"Els jugadors hauran de moure's a través d'un laberint canviant per "
-"intentar aconseguir els seus quatre cubs abans que els altres."
-
-#: templates/juegos.html:151
-msgid ""
-"Juego de agilidad mental y memoria donde los jugadores tendrán que ser "
-"los más rápidos sumando matrículas y recordando dónde están las "
-"parecidas."
-msgstr ""
-"Joc d'agilitat mental i memòria on els jugadors hauran de ser el més "
-"ràpids sumant matrícules i recordant on són les semblants."
-
-#: templates/juegos.html:153
-msgid ""
-"Pensado para trabajar la regla de divisibilidad del 3 y un poco de "
-"mnemotecnia en las escuelas."
-msgstr ""
-"Pensat per a treballar la regla de divisibiliatat del 3 i una mica de "
-"mnemotècnia a les escoles."
-
-#: templates/juegos.html:177
-msgid "Listas Resumen de Conjuros"
-msgstr "Llistes Resum d'Encanteris"
-
-#: templates/juegos.html:179 templates/juegos.html:198
-msgid "Todos los Conjuros"
-msgstr "Tots els Encanteris"
-
-#: templates/juegos.html:180 templates/juegos.html:199
-msgid "Conjuros de Artificiero"
-msgstr "Encanteris de l'Artificier"
-
-#: templates/juegos.html:181 templates/juegos.html:200
-msgid "Conjuros de Bardo"
-msgstr "Encanteris del Bard"
-
-#: templates/juegos.html:182 templates/juegos.html:201
-msgid "Conjuros de Brujo"
-msgstr "Encanteris del Bruixot"
-
-#: templates/juegos.html:183 templates/juegos.html:202
-msgid "Conjuros de Clérigo"
-msgstr "Encanteris del Clergue"
-
-#: templates/juegos.html:184 templates/juegos.html:203
-msgid "Conjuros de Druida"
-msgstr "Encanteris del Druida"
-
-#: templates/juegos.html:185 templates/juegos.html:204
-msgid "Conjuros de Explorador"
-msgstr "Encanteris de l'Explorador"
-
-#: templates/juegos.html:186 templates/juegos.html:205
-msgid "Conjuros de Hechicero"
-msgstr "Encanteris del Fetiller"
-
-#: templates/juegos.html:187 templates/juegos.html:206
-msgid "Conjuros de Mago"
-msgstr "Encanteris del Mag"
-
-#: templates/juegos.html:188 templates/juegos.html:207
-msgid "Conjuros de Paladín"
-msgstr "Encanteris del Paladí"
-
-#: templates/juegos.html:196
-msgid "Cartas de Conjuros"
-msgstr "Cartes d'Encanteris"
-
-#: templates/juegos.html:215
-msgid "Otros Recursos"
-msgstr "Altres Recursos"
-
-#: templates/juegos.html:217
-msgid "Diagrama de Todas las Subclases"
-msgstr "Diagrama de Totes les Subclasses"
-
-#: templates/juegos.html:218
-msgid "Tabla d100 de magia salvaje"
-msgstr "Taula d100 de magia salvatge"
-
-#: templates/juegos.html:238
-msgid "Bandeja de jugador de madera"
-msgstr "Safata de jugador de fusta"
-
-#: templates/juegos.html:239
-msgid ""
-"Archivo digital para crear una bandeja de jugador de doble capa con la "
-"cortadora láser."
-msgstr ""
-"Fitxer digital per a crear una safata de jugador de doble capa amb la "
-"talladora làser."
-
-#: templates/juegos.html:241
-msgid ""
-"El archivo incluye la parte de los grabados y el trazo del corte en capas"
-" separadas. Las dos capas de madera están colocadas de lado para "
-"grabarlas y cortarlas simultáneamente."
-msgstr ""
-"El fitxer inclou la part del gravat i la part del tall a capes separades."
-" Les dues capes de fusta estan col·locades de costat per a gravar-les i "
-"tallar-les simultàniament."
-
-#: templates/juegos.html:243
-msgid "Archivo de Illustrator"
-msgstr "Fitxer d'Illustrator"
-
-#: templates/juegos.html:260
-msgid "Hojas de Referencia"
-msgstr "Fulls de Referència"
-
-#: templates/juegos.html:261
-msgid ""
-"Creadas por Samuel Marchal (Zessx), las hemos traducido en equipo yo y "
-"Aina SG (en github)."
-msgstr ""
-"Creats per Samuel Marchal (Zessx), les hem traduït en equip jo i l'Aina "
-"SG (al github)."
-
-#: templates/juegos.html:263
-msgid ""
-"La de Iniciación es una versión distinta de la que hay en zessx porque no"
-" me convenció el consenso y la retoqué por mi cuenta."
-msgstr ""
-"La d'Iniciació és una versió diferent de la que hi ha a zessx perquè no "
-"em va convèncer el consens i la vaig retocar pel meu compte."
-
-#: templates/juegos.html:265
-msgid "Iniciación"
-msgstr "iniciació"
-
-#: templates/juegos.html:266
-msgid "Yakus"
-msgstr "Yakus"
-
-#: templates/juegos.html:267
-msgid "Puntuación"
-msgstr "Puntuació"
-
-#: templates/juegos.html:268
-msgid "Otros idiomas"
-msgstr "Altres idiomes"
-
 #: templates/lab_q_chatelier.html:2 templates/lab_q_eq.html:2
 #: templates/labs/lab_radiatomic.html:2
 msgid "Laboratorio"
@@ -3071,46 +3414,54 @@ msgid "Recopilatorio de logotipos que he ido diseñando."
 msgstr "Recopilatori de logotips que he anat dissenyant."
 
 #: templates/logos.html:14
+msgid "Para una comunidad energética que han montado en el pueblo de mi madre."
+msgstr "Per una comunitat energètica que han muntat al poble de la meu mare."
+
+#: templates/logos.html:24
+msgid "Para el servicio de pedicura a domicilio de una amiga."
+msgstr "Pel servei de pedicura a domicili d'una amiga."
+
+#: templates/logos.html:34
 msgid "Propuesta de imagen alternativa a las que se presentaron oficialmente"
 msgstr "Proposta d'imatge alternativa a les que es van presentar oficialment"
 
-#: templates/logos.html:14
+#: templates/logos.html:34
 msgid "doc completo"
 msgstr "doc complet"
 
-#: templates/logos.html:15
+#: templates/logos.html:35
 msgid ""
 "Junto a otras dos, se tuvo en cuenta para darle una segunda vuelta a las "
 "oficiales."
 msgstr "Juntament amb dues més, es va tenir en compte per repensar les oficials."
 
-#: templates/logos.html:25 templates/logos.html:36
+#: templates/logos.html:45 templates/logos.html:56
 msgid "Para el proceso de selección de una oferta de trabajo de TwoSet Violin."
 msgstr "Per al procés de selecció d'una oferta de feina de TwoSet Violin."
 
-#: templates/logos.html:26
+#: templates/logos.html:46
 msgid "Presentado para la segunda fase."
 msgstr "Presentat per a la segona fase."
 
-#: templates/logos.html:37
+#: templates/logos.html:57
 msgid "Presentado en la primera fase del proceso, con él pasé a la segunda."
 msgstr "Presentat a la primera fase del procés, amb ell vaig passar a la segona."
 
-#: templates/logos.html:47
+#: templates/logos.html:67
 msgid "Para mi app de edición de esquemas musicales (que a su vez fue mi TFG)."
 msgstr ""
 "Per la meva app d'edició d'esquemes musicals (que alhora va ser el meu "
 "TFG)."
 
-#: templates/logos.html:48
+#: templates/logos.html:68
 msgid "Usado en la app"
 msgstr "Usat a l'app"
 
-#: templates/logos.html:58
+#: templates/logos.html:78
 msgid "Renovación del logotipo de Grup Sardanista Antaviana."
 msgstr "Renovació del logotip del Grup Sardanista Antaviana."
 
-#: templates/logos.html:59
+#: templates/logos.html:79
 msgid "Ahora en uso en su instagram"
 msgstr "Utilitzat actualment al seu instagram"
 
@@ -3289,7 +3640,9 @@ msgstr ""
 msgid ""
 "Lleva técnicas extendidas (p.ej. harmónicos) que el audio (VST) no "
 "refleja en absoluto."
-msgstr "Porta tècniques exteses (p.ex. harmònics) que l'àudio (VST) no reflecteix en absolut."
+msgstr ""
+"Porta tècniques exteses (p.ex. harmònics) que l'àudio (VST) no reflecteix"
+" en absolut."
 
 #: templates/music.html:232 templates/music.html:233 templates/music.html:276
 #: templates/music.html:277
@@ -3336,17 +3689,23 @@ msgstr "Clarinet"
 msgid ""
 "Pieza compuesta para el concurso de composición del Conservatorio de "
 "Música de Girona."
-msgstr "Peça composta per al concurs de composició del Conservatori de Música de Girona"
+msgstr ""
+"Peça composta per al concurs de composició del Conservatori de Música de "
+"Girona"
 
 #: templates/music.html:271
 msgid "Fui el único que se presentó y decidieron dejar el premio desierto."
-msgstr "Vaig ser l'únic que s'hi va presentar i van decidir deixar el premi desert."
+msgstr ""
+"Vaig ser l'únic que s'hi va presentar i van decidir deixar el premi "
+"desert."
 
 #: templates/music.html:272
 msgid ""
 "Un día que tenga tiempo tengo que ponerle mejor las articulaciones y esas"
 " cosas."
-msgstr "Un dia que tingui temps he de posar-li millor les articulacions i aquestes coses."
+msgstr ""
+"Un dia que tingui temps he de posar-li millor les articulacions i "
+"aquestes coses."
 
 #: templates/music.html:290 templates/music.html:306
 msgid "Para dúo de flautas"
@@ -3364,13 +3723,17 @@ msgstr "Un dia que tingui temps he de posar-li articulacions i aquestes coses."
 msgid ""
 "Tenía que formar parte de una suite de 4 movimientos, de los cuales sólo "
 "llegué a componer 2."
-msgstr "Havia de formar part d'una suite de 4 moviments, dels quals només en vaig compondre 2."
+msgstr ""
+"Havia de formar part d'una suite de 4 moviments, dels quals només en vaig"
+" compondre 2."
 
 #: templates/music.html:310
 msgid ""
 "Llevan la voz difícil en la Flauta 2 porque solíamos tocarlas con mi "
 "prima y a ella le iba mejor leer de arriba. ajajaj"
-msgstr "Porten la veu difícil a la Flauta 2 perquè solíem tocar-les amb la meva cosina i a ella li anava millor llegir a dalt. ahhaha"
+msgstr ""
+"Porten la veu difícil a la Flauta 2 perquè solíem tocar-les amb la meva "
+"cosina i a ella li anava millor llegir a dalt. ahhaha"
 
 #: templates/pulseras.html:8
 msgid "Pulseras de abalorios"
@@ -3422,13 +3785,17 @@ msgstr "Cronologia de dissenys dedicats"
 msgid ""
 "A lo largo de los años he ido creando diseños nuevos para poder regalar "
 "pulseras únicas a personas concretas."
-msgstr "Al llarg dels anys he anat creant dissenys nous per poder regalar braçalets únics a persones concretes."
+msgstr ""
+"Al llarg dels anys he anat creant dissenys nous per poder regalar "
+"braçalets únics a persones concretes."
 
 #: templates/pulseras.html:168
 msgid ""
 "Algunas de las más antiguas ya aparecen arriba, pero así recopilo en "
 "algun sitio las más nuevas también."
-msgstr "Alguns dels més antics ja apreixen a dalt, però així faig un recopilatori també de les noves en algun lloc."
+msgstr ""
+"Alguns dels més antics ja apreixen a dalt, però així faig un recopilatori"
+" també de les noves en algun lloc."
 
 #: templates/pulseras.html:216
 msgid ""
