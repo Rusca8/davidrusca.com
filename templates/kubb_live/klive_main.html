@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+{% include '/kubb_live/klive_header.html' %}
 <div class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Resultats en directe</div>
 <div class="m-3">
     <a href="/tombaelrei/teams" class="btn kbtn btn-block py-2">Equips</a>
@@ -21,4 +21,5 @@
     {% endif %}
 
 </div>
+{% include '/kubb_live/klive_footer.html' %}
 {% endblock %}

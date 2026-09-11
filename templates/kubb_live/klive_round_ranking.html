@@ -7,7 +7,8 @@
 {% block content %}
     {% set round_type = ranking_info["round_type"] %}
     {% set ranking = ranking_info["ranking"] %}
-<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+
+{% include '/kubb_live/klive_header.html' %}
 <a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_type == "final" else "Ronda " + rnum}}</a>
 <div class="m-3">
     {% set finished_matches = ranking_info["finished_matches"] %}
@@ -20,22 +21,24 @@
 
     <div class="text-center lil-title mb-2"><b>Classificació</b></div>
 
+    {% set column_order = ["P", "K", "SOS"] if sorting_style == "PKS" else ["K", "SOS", "P"] %}
+
     <table class="w100 ranking">
         <tr>
             <th class="text-center px-1">#</th>
             <th class="px-1">Equip</th>
-            <th class="text-center px-1">P</th>
-            <th class="text-center px-1">K</th>
-            <th class="text-center px-1">SoS</th>
+            {% for col in column_order %}
+            <th class="text-center px-1">{{"SoS" if col == "SOS" else col}}</th>
+            {% endfor %}
         </tr>
     {% for team in ranking %}
         {% set team_id = team.get("id") %}
         <tr onclick="window.location.href = '/tombaelrei/teams/{{team_id}}/stats/'">
             <td class="text-center px-1 {{'finalista-' + loop.index|string if round_type == 'final' else ''}}">{{team["rank"]}}</td>
             <td class="px-1">{{team["name"]}}</td>
-            <td class="text-center px-1">{{team["P"]}}</td>
-            <td class="text-center px-1">{{team["K"]}}</td>
-            <td class="text-center px-1">{{team["SOS"]}}</td>
+            {% for col in column_order %}
+            <td class="text-center px-1">{{team[col]}}</td>
+            {% endfor %}
         </tr>
         {% if loop.index == 4 and round_type == "final" %}
         <tr><td colspan="5" class="table-div"></td></tr>
@@ -85,4 +88,5 @@
 
     {% endif %}
 </div>
+{% include '/kubb_live/klive_footer.html' %}
 {% endblock %}

@@ -1,7 +1,12 @@
 :root {
-    --color-bg: #d3dfe2;
-    --color-sub: #a9c3c8;
-    --color-head: #80a4ae;
+    /* [Logotip TombaElRei] vermell e84731 :: taronja ffa42c :: beix edebe4 :: blau 7bb4e3 :: negre 020202 */
+    --color-lj-negre: #020202;
+
+    --color-bg: #edebe4;
+    --color-sub: #020202;
+    --color-head: #e84731;
+    --color-third: #ffa42c;
+    --color-footer: #7bb4e3;
 
     --color-success: #cce0c8;
     --color-danger: #e8b5b5;
@@ -39,9 +44,10 @@ body {
     font-size: 2rem;
     border-bottom: 1px solid black;
     border-radius: 0px;
+    color: white;
 }
 .ksub:focus, .ksub:hover {
-    color: black;
+    color: white;
 }
 
 .kbtn {
@@ -53,7 +59,7 @@ body {
     width: 100%;
 }
 .kbtn.selected {
-    background: var(--color-head);
+    background: var(--color-footer);
     color: white;
 }
 
@@ -92,7 +98,7 @@ table {
 }
 
 .ranking th, .false-th {
-    background-color: var(--color-sub);
+    background-color: var(--color-third);
 }
 
 td {
@@ -240,4 +246,10 @@ td {
 .negative {
     color: darkred;
     background-color: var(--color-danger);
+}
+
+.footer {
+    background-color: var(--color-footer);
+    border-top: 1px solid var(--color-lj-negre);
+    color: color-mix(in oklab, var(--color-footer) 40%, black);
 }

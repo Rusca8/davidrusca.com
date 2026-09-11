@@ -51,7 +51,7 @@
 {% endblock %}
 
 {% block content %}
-<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+{% include '/kubb_live/klive_header.html' %}
 <a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_.get("type") == "final" else "Ronda " + rnum}}</a>
 <div class="m-3">
     <a href="/tombaelrei/rounds/{{rnum}}/ranking" class="btn kbtn btn-block py-2">Classificació</a>
@@ -78,12 +78,12 @@
                     {% endif %}
                     <td class="text-left px-2 table-team">{{t0}}</td>
                     {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}
-                    <td class="b-left br-tr table-punts {{result_class}}">{{result[0]}}</td>
+                    <td class="b-left br-tr table-punts {{result_class}}">{{6 + king_worth_extra if result[0] == "6" else result[0]}}</td>
                 </tr>
                 <tr>
                     <td class="b-top text-left px-2 table-team">{{t1}}</td>
                     {% set result_class = '' if not match_done else "winner" if result[1] == "6" else "loser" %}
-                    <td class="b-top b-left br-br table-punts {{result_class}}">{{result[1]}}</td>
+                    <td class="b-top b-left br-br table-punts {{result_class}}">{{6 + king_worth_extra if result[1] == "6" else result[1]}}</td>
                 </tr>
             </table>
         </a>
@@ -100,4 +100,5 @@
         {% endif %}
     {% endif %}
 </div>
+{% include '/kubb_live/klive_footer.html' %}
 {% endblock %}

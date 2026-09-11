@@ -21,6 +21,10 @@
 
 </head>
 <body>
+    {% set meta = meta or {} %}
+        {% set king_worth_extra = meta.get("king_worth_extra", 2) %}
+        {% set comp_name = meta.get("name", "Campionat de Kubb") %}
+        {% set sorting_style = meta.get("sorting_style", "KSP")%}
 
     {% block content %}{% endblock %}
 

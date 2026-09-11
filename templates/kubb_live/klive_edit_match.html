@@ -97,7 +97,7 @@
             <tr>
                 {% for key in row %}
                     {% set selected = key == result[i] %}
-                <td class="p-1"><button class="btn kbtn btn-block {{'selected' if selected else ''}}" onclick="edit_match_score({{rnum}}, {{match_id}}, {{i}}, '{{key}}')">{{key}}</button></td>
+                <td class="p-1"><button class="btn kbtn btn-block {{'selected' if selected else ''}}" onclick="edit_match_score({{rnum}}, {{match_id}}, {{i}}, '{{key}}')">{{"R" if key == "6" else key}}</button></td>
                 {% endfor %}
             </tr>
             {% endfor %}

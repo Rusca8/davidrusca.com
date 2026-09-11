@@ -55,10 +55,12 @@
         </div>
         <div class="card-body px-2 pt-2 pb-1">
             {% for pi, paraula in tematica.contents.items()|sort(attribute='1.name') %}
+            {% if paraula.desc or paraula.show %}
             <div class="right-rad left-rad paraula-item px-1 mb-1 text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
                  id="paraula-{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
                 {{paraula.name}}
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

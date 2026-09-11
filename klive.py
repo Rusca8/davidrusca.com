@@ -4,9 +4,16 @@ import utilities
 from utilities import Reversor as Rev
 
 klive_lock = RLock()
-klive_root = "./static/json/kubb_live/tombaelrei/"
+klive_root = "./static/json/kubb_live/tombaelrei_2026/"
 teams_file = klive_root + "teams.json"
 rounds_file = klive_root + "rounds.json"
+meta_file = klive_root + "meta.json"
+
+
+def load_meta():
+    with klive_lock:
+        meta = utilities.load_json(meta_file)
+    return meta
 
 
 def load_teams():
@@ -30,9 +37,18 @@ def team_has_matches(tnum, rounds=None):
     return False
 
 
-def get_scores(rnum=None, rounds=None, teams=None):
+def get_scores(rnum=None, rounds=None, teams=None, meta=None):
+    """Retorna la taula de puntuacions dels equips.
+    rnum: Número de Ronda (ignora rondes "futures")
+    rounds: informació dels partits (si no és donada, es carrega del json)
+    teams: informació dels equips (si no és donada, es carrega del json)
+    meta: info addicional sobre el campionat (i.e. manera de puntuar, etc)
+    """
     rounds = rounds or load_rounds()
     teams = teams or load_teams()
+    meta = meta or load_meta()
+
+    king_worth_extra = meta.get("king_worth_extra", 2)
 
     scores = {}
 
@@ -49,9 +65,12 @@ def get_scores(rnum=None, rounds=None, teams=None):
             match_result = match.get("result", [])
             if len(match_teams) == 2 and len(match_result) == 2:
                 if all(x.isnumeric() for x in match_result) and all(x in teams for x in match_teams):
-                    # KCSS
-                    scores[match_teams[0]]["K"] += int(match_result[0])
-                    scores[match_teams[1]]["K"] += int(match_result[1])
+                    # precalc extra points from winning the match (for when king is worth more than 1 point)
+                    extra_from_king = [king_worth_extra if match_result[0] == "6" else 0,
+                                       king_worth_extra if match_result[1] == "6" else 0]
+                    # KCSS-ish (may have extra from king)
+                    scores[match_teams[0]]["K"] += int(match_result[0]) + extra_from_king[0]
+                    scores[match_teams[1]]["K"] += int(match_result[1]) + extra_from_king[1]
                     # Tournament Points
                     if match_result[0] == "6":
                         scores[match_teams[0]]["P"] += 1
@@ -61,8 +80,8 @@ def get_scores(rnum=None, rounds=None, teams=None):
                     scores[match_teams[0]]["oponents"].append(match_teams[1])
                     scores[match_teams[1]]["oponents"].append(match_teams[0])
                     # KC scored by oponents against the team
-                    scores[match_teams[0]]["-K"] += int(match_result[1])
-                    scores[match_teams[1]]["-K"] += int(match_result[0])
+                    scores[match_teams[0]]["-K"] += int(match_result[1]) + extra_from_king[1]
+                    scores[match_teams[1]]["-K"] += int(match_result[0]) + extra_from_king[0]
 
     # calculate Strength of Schedule
     for team, stats in scores.items():
@@ -75,18 +94,19 @@ def get_scores(rnum=None, rounds=None, teams=None):
     return scores
 
 
-def get_ranking(rnum=None, teams=None):
+def get_ranking(rnum=None, teams=None, meta=None):
     teams = teams or load_teams()
+    meta = meta or load_meta()
     rounds = load_rounds()
 
     round_type = rounds.get(rnum, {}).get("type", "normal")
 
     # get scores
-    scores = get_scores(rnum=rnum, rounds=rounds, teams=teams)
+    scores = get_scores(rnum=rnum, rounds=rounds, teams=teams, meta=meta)
 
     # generate ranking
     finals_ranking = get_finals_ranking(rnum, rounds=rounds)
-    ranking = generate_ranking(scores, teams=teams, finals=finals_ranking)
+    ranking = generate_ranking(scores, teams=teams, finals=finals_ranking, sorting_style=meta.get("sorting_style"))
 
     # count finished matches
     finished_matches = count_finished_matches(rnum=rnum, rounds=rounds)
@@ -127,41 +147,82 @@ def get_finals_ranking(rnum, rounds=None):
                         finals_ranking[2], finals_ranking[3] = teams[1], teams[0]
                     else:
                         finals_ranking[2], finals_ranking[3] = teams
-    print(finals_ranking)
     return [f for f in finals_ranking if f]
 
 
-def generate_ranking(scores, teams=None, finals=None):
+def ranking_sorting_params(sorting_style=None):
+    """Returns dictionary containing "sorting_priorities" and "tied_when".
+    sorting_priorities: A list of stat_codes representing the priority of each statistic on the ranking generation
+    tied_when: A list of stat_codes representing which statistics need to match in order for it to be a technical tie
+    """
+    match sorting_style:
+        case "PKS":
+            return {"sorting_priorities": ["P", "K", "SOS", "RevID"],
+                    "tied_when": ["P", "K", "SOS"]}
+        case "SOS":
+            return {"sorting_priorities": ["SOS", "RevID"],
+                    "tied_when": ["SOS"]}
+        case "KSP" | _:
+            return {"sorting_priorities": ["K", "SOS", "P", "RevID"],
+                    "tied_when": ["K", "SOS", "P"]}
+
+
+def build_stat_for_sorting(stats, stat_code):
+    match stat_code:
+        case "RevID":
+            return Rev(f'{stats["id"]:0>3}')
+        case _:
+            built_stat = stats.get(stat_code)
+            if built_stat is not None:
+                return built_stat
+            print("the stat_code", stat_code, "isn't defined")
+            return built_stat
+
+
+def generate_ranking(scores, teams=None, finals=None, sorting_style="PKS"):
     if finals is None:
         finals = []
     teams = teams or load_teams()
     ranking = []
     rank = 0
-    last = {"P": 0, "K": 0, "SOS": 0}
+    ranks_skipped = 0  # if more than one team on the same rank, next non-tied will need to add the amount of extras
+
+    s_params = ranking_sorting_params(sorting_style=sorting_style)
+    s_priorities = s_params.get("sorting_priorities", [])
+    s_tied_when = s_params.get("tied_when", [])
+    last = {s_code: None for s_code in s_tied_when}
+
     # force extract finalists (if round is final)
     for finalist in finals:
         team = scores.get(finalist)
         team_name = teams.get(team["id"]).get("name", "(Equip)")
         rank += 1
         ranking.append({"rank": rank, "id": team["id"], "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
+
     # generate swiss ranking
     for team in reversed(
-            sorted(scores.values(), key=lambda stats: [stats["P"], stats["K"], stats["SOS"], Rev(f'{stats["id"]:0>3}')])):
+            sorted(scores.values(), key=lambda stats: [build_stat_for_sorting(stats, sc) for sc in s_priorities])):
         if team["id"] in finals:
             continue
         team_name = teams.get(team["id"]).get("name", "(Equip)")
-        if last["P"] != team["P"] or last["K"] != team["K"] or last["SOS"] != team["SOS"]:
-            rank += 1
+        current = {s_code: build_stat_for_sorting(team, s_code) for s_code in s_tied_when}
+        if any(last[sc] != current[sc] for sc in s_tied_when):
+            rank += 1 + ranks_skipped
+            ranks_skipped = 0
+        else:
+            ranks_skipped += 1
+        last = current
         ranking.append({"rank": rank, "id": team["id"], "name": team_name, "P": team["P"], "K": team["K"], "SOS": team["SOS"]})
     return ranking
 
 
-def get_team_stats(tnum, rounds=None, teams=None):
+def get_team_stats(tnum, rounds=None, teams=None, meta=None):
     rounds = rounds or load_rounds()
     teams = teams or load_teams()
+    meta = meta or load_meta()
 
     # calculate scores
-    scores = get_scores(rounds=rounds, teams=teams)
+    scores = get_scores(rounds=rounds, teams=teams, meta=meta)
 
     # get matches
     matches = []
@@ -176,8 +237,6 @@ def get_team_stats(tnum, rounds=None, teams=None):
     sos_table = {}
     for oponent in scores.get(tnum, {}).get("oponents", []):
         sos_table[oponent] = scores.get(oponent, {}).get("K", 0)
-
-    print(scores)
 
     return {"scores": scores.get(tnum, {}), "matches": matches, "sos_table": sos_table}
 
@@ -469,6 +528,10 @@ def simulate_swiss_matches(teams, n_rounds=3, deviation=40):
             else:
                 proxy_scores[t1] += 6
                 proxy_scores[t0] += random.randint(0, 5)
+
+
+def def_pairs(rnum):
+    return "NOT DONE YET BAHAHA"
 
 
 if __name__ == "__main__":

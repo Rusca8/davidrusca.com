@@ -5,20 +5,24 @@
 {% endblock %}
 
 {% block content %}
-<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+{% include '/kubb_live/klive_header.html' %}
 <a href="/tombaelrei/teams/{{tnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{team.get('name', "Nom de l'equip")}}</a>
 <div class="m-3">
     <div class="text-center lil-title mb-1 mt-3"><b>Resum</b></div>
+
+        {% set column_order = ["P", "K", "SOS"] if sorting_style == "PKS" else ["K", "SOS", "P"] %}
+        {% set column_headers = {"P": "Partits", "K": "Punts", "SOS": "SoS"} %}
+
         <table class="w-100 ranking">
             <tr>
-                <th class="text-center stats-P">Punts</th>
-                <th class="text-center stats-K">Kubbs</th>
-                <th class="text-center stats-SoS">SoS</th>
+                {% for col in column_order %}
+                <th class="text-center stats-{{'SoS' if col == 'SOS' else col}}">{{column_headers[col]}}</th>
+                {% endfor %}
             </tr>
             <tr>
-                <td class="text-center big-text-td">{{stats["scores"].get("P", "-")}}</td>
-                <td class="text-center big-text-td">{{stats["scores"].get("K", "-")}}</td>
-                <td class="text-center big-text-td">{{stats["scores"].get("SOS", "-")}}</td>
+                {% for col in column_order %}
+                <td class="text-center big-text-td">{{stats["scores"].get(col, "-")}}</td>
+                {% endfor %}
             </tr>
         </table>
 
@@ -50,12 +54,12 @@
                     {% endif %}
                     <td class="text-left px-2 table-team">{{t0}}</td>
                     {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}
-                    <td class="b-left br-tr table-punts {{result_class}}">{{result[0]}}</td>
+                    <td class="b-left br-tr table-punts {{result_class}}">{{6 + king_worth_extra if result[0] == "6" else result[0]}}</td>
                 </tr>
                 <tr>
                     <td class="b-top text-left px-2 table-team">{{t1}}</td>
                     {% set result_class = '' if not match_done else "winner" if result[1] == "6" else "loser" %}
-                    <td class="b-top b-left br-br table-punts {{result_class}}">{{result[1]}}</td>
+                    <td class="b-top b-left br-br table-punts {{result_class}}">{{6 + king_worth_extra if result[1] == "6" else result[1]}}</td>
                 </tr>
             </table>
         </a>
@@ -83,4 +87,5 @@
         </tr>
     </table>
 </div>
+{% include '/kubb_live/klive_footer.html' %}
 {% endblock %}

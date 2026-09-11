@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block content %}
-<a href="/tombaelrei" class="btn khead btn-block text-center px-3 py-1">Tomba el rei 2025</a>
+{% include '/kubb_live/klive_header.html' %}
 <a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
 <div class="m-3">
     {% for id_, team in teams.items() %}
@@ -44,4 +44,5 @@
     {% if current_user.is_kubb_admin %}
     <button class="kbtn kbtn-admin btn-block py-2 my-3" onclick="add_team();">+</button>
     {% endif %}
+{% include '/kubb_live/klive_footer.html' %}
 {% endblock %}
