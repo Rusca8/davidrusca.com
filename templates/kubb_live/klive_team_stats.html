@@ -6,7 +6,9 @@
 
 {% block content %}
 {% include '/kubb_live/klive_header.html' %}
-<a href="/tombaelrei/teams/{{tnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{team.get('name', "Nom de l'equip")}}</a>
+{% with text=team.get('name', "Nom de l'equip"), link="/tombaelrei/teams/" + tnum %}
+    {% include '/kubb_live/klive_subheader.html' %}
+{% endwith %}
 <div class="m-3">
     <div class="text-center lil-title mb-1 mt-3"><b>Resum</b></div>
 

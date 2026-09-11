@@ -1,0 +1,9 @@
+{# SUBHEADER
+# text: text for the subheader
+# link: link for the subheader
+#}
+{% if link %}
+<a href="{{link}}" class="btn ksub btn-block text-left mt-0 pr-3 pl-5 pb-1 mb-4"><span class="ml-4"></span><span class="ml-3"></span>{{text}}</a>
+{% else %}
+<div class="btn ksub btn-block text-left mt-0 pr-3 pl-5 pb-1 mb-4"><span class="ml-4"></span><span class="ml-3"></span>{{text}}</div>
+{% endif %}

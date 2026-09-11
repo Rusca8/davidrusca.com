@@ -41,7 +41,7 @@ body {
 
 .ksub {
     background-color: var(--color-sub);
-    font-size: 2rem;
+    font-size: 1.7rem;
     border-bottom: 1px solid black;
     border-radius: 0px;
     color: white;

@@ -52,7 +52,9 @@
 
 {% block content %}
 {% include '/kubb_live/klive_header.html' %}
-<a href="/tombaelrei/rounds/{{rnum}}" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">{{"Final" if round_.get("type") == "final" else "Ronda " + rnum}}</a>
+{% with text="Final" if round_.get("type") == "final" else "Ronda " + rnum, link="/tombaelrei/rounds/" + rnum %}
+    {% include '/kubb_live/klive_subheader.html' %}
+{% endwith %}
 <div class="m-3">
     <a href="/tombaelrei/rounds/{{rnum}}/ranking" class="btn kbtn btn-block py-2">Classificació</a>
 

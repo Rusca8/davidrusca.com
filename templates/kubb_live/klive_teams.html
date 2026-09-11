@@ -29,7 +29,9 @@
 
 {% block content %}
 {% include '/kubb_live/klive_header.html' %}
-<a href="/tombaelrei/teams" class="btn ksub btn-block text-center mt-0 px-3 py-1 mb-4">Equips</a>
+{% with text="Equips", link="/tombaelrei/teams" %}
+    {% include '/kubb_live/klive_subheader.html' %}
+{% endwith %}
 <div class="m-3">
     {% for id_, team in teams.items() %}
     <a class="btn kbtn btn-block" href="/tombaelrei/teams/{{id_}}">
