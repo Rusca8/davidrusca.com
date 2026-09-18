@@ -179,6 +179,7 @@ paraules = {
     171: {"temas": ["POL"], "name": "Guerra Híbrida", "desc": ""},
     172: {"temas": ["SAL"], "name": "El Càncer no és una malaltia", "desc": ""},
     173: {"temas": ["ECON"], "name": "Paper Towns", "desc": ""},
-    174: {"temas": ["SAL"], "name": "Neoantígen", "desc": ""},
+    174: {"temas": ["SAL"], "name": "Neoantígeno", "desc": ""},
+    175: {"temas": ["POL"], "name": "Eugenics", "desc": ""},
 
 }
