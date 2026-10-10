@@ -95,6 +95,9 @@ def klive_ajax(query=None):
             case "edit_match_team":
                 success = klive.edit_match_team(data=request.form)
                 return {"success": success}
+            case "edit_match_number":
+                success = klive.edit_match_number(data=request.form)
+                return {"success": success}
             case "add_team":
                 result = klive.append_team()
                 success = bool(result)

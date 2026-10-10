@@ -62,6 +62,24 @@
                 window.location.href = "/tombaelrei/rounds/{{rnum}}";
             }
         }
+        function edit_field_number(field_number){
+            S.post({
+                url: base_url + "edit_match_number",
+                data: {
+                    "rnum": {{rnum}},
+                    "match_id": {{match_id}},
+                    "field_num": field_number,
+                },
+                success: edit_field_number_execute,
+            });
+        }
+        function edit_field_number_execute(ajax_result){
+            if(ajax_result.success){
+                location.reload();
+            }else{
+
+            }
+        }
     </script>
     {% endif %}
 {% endblock %}
@@ -73,10 +91,25 @@
     {% set match_teams = match_edit_data["match_teams"] %}
     {% set busy_teams = match_edit_data["busy_teams"] %}
     {% set result = match_edit_data["result"] %}
+    {% set field = match_edit_data.get("field", "#") %}
+    {% set busy_fields = match_edit_data.get("busy_fields", []) %}
     {% set t0 = teams.get(match_teams[0], {}).get("name", "Equip") %}
     {% set t1 = teams.get(match_teams[1], {}).get("name", "Equip") %}
 
     <div class="text-center lil-title">{{"Final" if match_edit_data["type"] == "final" else "Ronda " + rnum}}</div>
+
+    <hr class="khr mt-1 mb-2" data-content="★">
+    <div class="container-fluid">
+        <div class="row">
+            {% for i in range(match_edit_data.get("matches_in_round", 0) + 1) %}
+                {% set field_number = (i or "#")|string %}
+                {% set field_class = "selected" if field_number == field else "field-busy" if field_number != "#" and field_number in busy_fields else "" %}
+               <div class="col-auto px-1">
+                   <button class="btn match-num-btn btn-block {{field_class}}" onclick="edit_field_number('{{field_number}}');">{{field_number}}</button>
+               </div>
+            {% endfor %}
+        </div>
+    </div>
 
     <hr class="khr mt-1 mb-3" data-content="★">
 

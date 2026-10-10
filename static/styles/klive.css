@@ -63,6 +63,19 @@ body {
     color: white;
 }
 
+.match-num-btn {
+    width: 4rem;
+    border: 1px solid black;
+    font-size: 1.5rem;
+}
+.match-num-btn.field-busy {
+    background-color: rgba(0,0,0, 0.1);
+    color: rgba(0,0,0,0.3)
+}
+.match-num-btn.selected {
+    background-color: var(--color-third);
+}
+
 .team-name {
     font-size: 2rem;
 }

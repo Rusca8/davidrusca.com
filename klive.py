@@ -317,6 +317,26 @@ def edit_match_team(data=None):
     return False
 
 
+def edit_match_number(data=None):
+    print(data)
+    if data is None:
+        return False
+    if all(x in data for x in ["rnum", "match_id", "field_num"]):
+        rnum = data["rnum"]
+        match_id = data["match_id"]
+        field_num = data["field_num"]
+
+        with klive_lock:
+            rounds = utilities.load_json(rounds_file)
+            match = rounds["rounds"].get(rnum, {}).get("matches", {}).get(match_id, {})
+            if match:
+                rounds["rounds"][rnum]["matches"][match_id]["field"] = field_num
+                print(rounds["rounds"][rnum])
+                utilities.dump_json(rounds, filename=rounds_file)
+                return True
+    return False
+
+
 def append_team():
     with klive_lock:
         teams = utilities.load_json(teams_file)
@@ -420,6 +440,7 @@ def remove_round(data=None):
 
 def get_match_edit_data(rnum, match_id):
     rounds = load_rounds()
+    teams = load_teams()
 
     round_ = rounds.get(rnum, {})
     matches = round_.get("matches", {})
@@ -431,8 +452,11 @@ def get_match_edit_data(rnum, match_id):
         return {}
 
     match_edit_data["type"] = round_.get("type", "normal")
+    match_edit_data["matches_in_round"] = len(teams) // 2 + len(teams) % 2
     match_edit_data["match_teams"] = match_.get("teams", ["", ""])
     match_edit_data["result"] = match_.get("result", ["K", "K"])
+    match_edit_data["field"] = match_.get("field", "#")
+    match_edit_data["busy_fields"] = [m.get("field", "#") for m in matches.values()]
 
     match_edit_data["busy_teams"] = set()
     for m in matches.values():
