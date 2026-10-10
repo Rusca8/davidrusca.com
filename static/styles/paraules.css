@@ -1,8 +1,41 @@
+.grid-table {
+    width: 100%;
+    border: 0px;
+}
+
 .paraula-item {
     background-color: var(--col-s-04);
+    width: 100%;
 }
 .paraula-item:hover:not(.disabled){
     background-color: color-mix(in oklch, var(--col-s-1) 70%, white);
+}
+
+.seen-button-td {
+    width: 2rem;
+}
+
+.paraula-seen-button {
+    background-color: var(--col-s-04);
+    color: var(--col-s-2);
+    justify-content: center;
+    display:flex;
+    align-items: center;
+    width: 100%;
+}
+.paraula-seen-button:hover{
+    background-color: color-mix(in oklch, var(--col-s-1) 70%, white);
+    color: color-mix(in oklch, var(--col-s-2) 70%, var(--col-s-5));
+}
+
+.paraula-seen-button-checked {
+    border: 0px;
+    background-color: var(--col-s-2);
+    color: white;
+}
+.paraula-seen-button-checked:hover {
+    background-color: color-mix(in oklch, var(--col-s-2) 70%, white);
+    color: white;
 }
 
 #main-card {

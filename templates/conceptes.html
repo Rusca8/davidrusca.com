@@ -12,6 +12,14 @@
             return this.eq(Math.floor(Math.random() * this.length));
         }
         load_random_word();
+
+        console.log("Loading localStorage for seen words");
+        $(".paraula-seen-button").each(function() {
+            let pi = $(this).data("pi");
+            if(pi && localStorage.getItem("paraules/" + pi)){
+                $(this).addClass("paraula-seen-button-checked");
+            }
+        });
     }
 
     function load_random_word(){
@@ -29,12 +37,28 @@
         main_desc_cred.html($(paraula).data("cred") || "");
     }
     function load_word(pi) {
-        let paraula = $("#paraula-" + pi);
+        let paraula = $(".paraula-item[data-pi='" + pi + "']");
         load_word_by_element(paraula);
+    }
+
+    function toggle_seen(pi){
+        console.log("toggle_seen: " + pi);
+        let seen_button = $(".paraula-seen-button[data-pi='" + pi + "']").first();
+        if(seen_button.hasClass("paraula-seen-button-checked")){
+            localStorage.removeItem("paraules/" + pi);
+            $(".paraula-seen-button[data-pi='" + pi + "']").each(function (){
+                $(this).removeClass("paraula-seen-button-checked");
+            })
+        }else{
+            localStorage.setItem("paraules/" + pi, true);
+            $(".paraula-seen-button[data-pi='" + pi + "']").each(function (){
+                $(this).addClass("paraula-seen-button-checked");
+            })
+        }
     }
 </script>
     <h3 class="pt-4 my-0 text-center">{{ _('Palabras para entender el mundo') }}</h3>
-    <p class="my-0 pt-2 text-center pb-4">Idees interessants per pensar una estona, paraules per a coses que ni sabies que tenien nom,<br>i conceptes que la gent informada té al cap quan intenten entendre la complexitat de les coses.</p>
+    <p class="my-0 pt-2 text-center pb-4">{{ _('Ideas interesantes para pensar un rato, palabras para cosas que ni sabías que tenían nombre,<br>y conceptos que la gente informada tiene en mente cuando intentan entender la complejidad de las cosas.') }}</p>
 
     <div id="main-wrapper" class="py-2 px-3 sticky-top bg-s-5" style="top: 3rem;">
         <div id="main-card" class="card mx-auto border-s-6">
@@ -53,15 +77,27 @@
         <div class="card-header bg-p-3 border-p-5 py-1 px-2 text-center">
             {{tematica.name}}
         </div>
-        <div class="card-body px-2 pt-2 pb-1">
+        <div class="card-body px-2 pt-2 pb-2">
+            <table class="grid-table">
             {% for pi, paraula in tematica.contents.items()|sort(attribute='1.name') %}
             {% if paraula.desc or paraula.show %}
-            <div class="right-rad left-rad paraula-item px-1 mb-1 text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
-                 id="paraula-{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
-                {{paraula.name}}
-            </div>
+            <tr class="px-1 mb-1">
+                <td class="seen-button-td">
+                    <div  class="left-rad paraula-seen-button align-middle text-center px-0 pointer"
+                    onclick="toggle_seen({{pi}});" data-pi="{{pi}}">
+                    ✓
+                    </div>
+                </td>
+                <td class="paraula-td">
+                    <div class="right-rad paraula-item text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
+                         data-pi="{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
+                        {{paraula.name}}
+                    </div>
+                </td>
+            </tr>
             {% endif %}
             {% endfor %}
+            </table>
         </div>
     </div>
     {% endfor %}
