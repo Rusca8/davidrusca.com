@@ -174,7 +174,7 @@ paraules = {
     166: {"temas": ["ANT"], "name": "Máximas de Grice", "desc": ""},
     167: {"temas": ["CIE"], "name": _l("Navaja de Ockham"), "desc": _l("<p>La idea de que en igualdad de condiciones e igualdad de pruebas, la explicación más simple tiene más probabilidades de ser verdad.</p>Es decir, la idea de que la ciencia tiene que intentar siempre explicar las cosas del modo más simple posible, y que sólo vale añadir complejidad si no hay otras maneras más sencillas de entender los mismos resultados.")},
     168: {"temas": ["POL"], "name": "Tecnocracia", "desc": ""},
-    169: {"temas": ["POL"], "name": "Malicious Compliance", "desc": ""},
+    169: {"temas": ["POL"], "name": _l("Obediencia maliciosa"), "desc": _l("<p>En inglés, <b>Malicious compliance</b>, es la estrategia de protesta que consiste en seguir las normas más al pie de la letra de lo que las autoridades querrían, con el objetivo de provocar los problemas y disrrupciones que normalmente evitaría el sentido común.</p>"), "cred": "Por ejemplo, cuando el gobierno hace una ley para que las personas trans tengan que ir al baño que coincide con su sexo biológico (intentando que las mujeres trans tengan que ir al baño de hombres) y como protesta los hombres trans provocan revuelo yendo al baño de mujeres a pesar de su aspecto masculino."},
     170: {"temas": ["POL"], "name": "Weaponized Incompetence", "desc": ""},
     171: {"temas": ["POL"], "name": "Guerra Híbrida", "desc": ""},
     172: {"temas": ["SAL"], "name": "El Càncer no és una malaltia", "desc": ""},
