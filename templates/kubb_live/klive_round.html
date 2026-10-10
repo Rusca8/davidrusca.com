@@ -78,6 +78,8 @@
                 <tr>
                     {% if "final" in match %}
                     <td rowspan="2" class="table-final br-tl br-bl table-final-{{match['final']}}">{{match["final"]}}</td>
+                    {% else %}
+                    <td rowspan="2" class="table-final br-tl br-bl table-match-num">{{loop.index}}</td>
                     {% endif %}
                     <td class="text-left px-2 table-team">{{t0}}</td>
                     {% set result_class = '' if not match_done else "winner" if result[0] == "6" else "loser" %}

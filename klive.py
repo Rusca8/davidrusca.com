@@ -531,6 +531,7 @@ def simulate_swiss_matches(teams, n_rounds=3, deviation=40):
 
 
 def def_pairs(rnum):
+    """interface to default_pairs?"""
     return "NOT DONE YET BAHAHA"
 
 

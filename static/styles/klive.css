@@ -173,6 +173,9 @@ td {
 .table-final-Q {
     background-color: var(--color-bronze);
 }
+.table-match-num {
+    background-color: var(--color-third);
+}
 
 .teams-text {
     font-size: 1.3rem;
