@@ -44,10 +44,15 @@
     {% for pair in rand_pairs %}
         <table class="w-100 mb-2">
             <tr><td id="paired-{{loop.index}}-0" class="px-2 rand-pairs text-right randpair-num br-tl br-bl">{{pair[0]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[0], {}).get("name", "Team " + pair[0] + "?")}}</td></tr>
-            <tr><td id="paired-{{loop.index}}-1" class="px-2 rand-pairs text-right randpair-num">{{pair[1]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[1], {}).get("name", "Team " + pair[1] + "?")}}</td></tr>
+            {% if pair[1] %}
+            <tr><td id="paired-{{loop.index}}-1" class="px-2 rand-pairs text-right randpair-num">{{pair[1] or "B"}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[1], {}).get("name", "Team " + pair[1] + "?")}}</td></tr>
+            {% else %}
+            <tr><td colspan="2" class="text-left table-team table-team-bye px-2 rand-pairs">Falta un equip! (...o un maniquí pels byes)</td></tr>
+            {% endif %}
         </table>
     {% endfor %}
     <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="location.reload()">Reroll</button>
+    <button class="kbtn kbtn-elimina btn-block py-2" onclick="location.href = '/tombaelrei/rounds/1/'">Cancel·lar</button>
     <button class="kbtn kbtn-confirma btn-block py-2 my-4" onclick="push_rand_pairs_to_r1();">Confirmar Parelles</button>
 </div>
 {% endblock %}

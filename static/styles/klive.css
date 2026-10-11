@@ -278,3 +278,6 @@ td {
 .randpair-num {
     width: 2rem;
 }
+.table-team-bye {
+    background-color: rgba(0,0,0,0.1);
+}
