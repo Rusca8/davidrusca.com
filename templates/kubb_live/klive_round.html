@@ -100,6 +100,9 @@
         {% endif %}
 
         {% if not round_.get("matches", {}) %}
+            {% if rnum == "1" %}
+            <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="location.href = '/tombaelrei/r1_randomizer/'">Generació Aleatòria</button>
+            {% endif %}
         <hr class="khr my-3" data-content="★">
         <button class="kbtn kbtn-elimina btn-block py-2" onclick="remove_round({{rnum}});">Elimina la ronda</button>
         {% endif %}

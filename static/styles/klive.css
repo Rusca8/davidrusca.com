@@ -269,3 +269,12 @@ td {
     border-top: 1px solid var(--color-lj-negre);
     color: color-mix(in oklab, var(--color-footer) 40%, black);
 }
+
+
+.rand-pairs {
+    background-color: white;
+    border: 1px solid black;
+}
+.randpair-num {
+    width: 2rem;
+}

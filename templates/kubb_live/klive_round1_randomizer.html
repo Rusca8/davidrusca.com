@@ -1,0 +1,53 @@
+{% extends "/kubb_live/klive_base.html" %}
+{% block title %}Editar partit - Tomba el rei{% endblock %}
+
+{% block extra_head %}
+    {% if current_user.is_kubb_admin %}
+    <script>
+        var base_url = "/klive/ajax/";
+
+        let teams = {{teams|tojson}};
+        let rand_pairs = {{rand_pairs|tojson}};
+
+        function push_rand_pairs_to_r1(){
+            S.post({
+                url: base_url + "push_rand_pairs",
+                data: {
+                    "rand_pairs": JSON.stringify(rand_pairs),
+                },
+                success: push_pairs_execute,
+            });
+        }
+        function push_pairs_execute(ajax_result){
+            if(ajax_result.success){
+                window.location.href = "/tombaelrei/rounds/1";
+            }
+        }
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="mx-3">
+    {% if show_forced_pairs_list %}
+    <div class="text-center lil-title mb-1 mt-3"><b>Parelles Forçades</b></div>
+        {% for pair in forced_pairs %}
+            <table class="w-100 mb-2">
+                <tr><td id="forced-{{loop.index}}-0" class="px-2 rand-pairs text-right randpair-num br-tl br-bl">{{pair[0]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[0], {}).get("name", "Team " + pair[0] + "?")}}</td></tr>
+                <tr><td id="forced-{{loop.index}}-1" class="px-2 rand-pairs text-right randpair-num">{{pair[1]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[1], {}).get("name", "Team " + pair[1] + "?")}}</td></tr>
+            </table>
+        {% endfor %}
+    <hr class="khr mt-1 mb-3" data-content="★">
+    {% endif %}
+    <div class="text-center lil-title mb-0 mt-3"><b>Parelles Aleatòries</b></div>
+    <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="location.reload()">Reroll</button>
+    {% for pair in rand_pairs %}
+        <table class="w-100 mb-2">
+            <tr><td id="paired-{{loop.index}}-0" class="px-2 rand-pairs text-right randpair-num br-tl br-bl">{{pair[0]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[0], {}).get("name", "Team " + pair[0] + "?")}}</td></tr>
+            <tr><td id="paired-{{loop.index}}-1" class="px-2 rand-pairs text-right randpair-num">{{pair[1]}}</td><td class="text-left table-team px-2 rand-pairs">{{teams.get(pair[1], {}).get("name", "Team " + pair[1] + "?")}}</td></tr>
+        </table>
+    {% endfor %}
+    <button class="kbtn kbtn-admin btn-block py-2 my-4" onclick="location.reload()">Reroll</button>
+    <button class="kbtn kbtn-confirma btn-block py-2 my-4" onclick="push_rand_pairs_to_r1();">Confirmar Parelles</button>
+</div>
+{% endblock %}

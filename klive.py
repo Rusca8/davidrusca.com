@@ -1,7 +1,9 @@
 from threading import RLock
+import json
 
 import utilities
 from utilities import Reversor as Rev
+from random import shuffle
 
 klive_lock = RLock()
 klive_root = "./static/json/kubb_live/tombaelrei_2026/"
@@ -351,9 +353,11 @@ def append_team():
     return False
 
 
-def append_match(data=None):
+def append_match(data=None, playing_teams=None):
     if data is None:
         return False
+    if playing_teams is None:
+        playing_teams = ["", ""]
     rnum = data.get("rnum")
     if rnum:
         with klive_lock:
@@ -361,11 +365,33 @@ def append_match(data=None):
             if rnum in rounds["rounds"] and "matches" in rounds["rounds"][rnum]:
                 matches = rounds["rounds"][rnum]["matches"]
                 new_id = max(int(id_) for id_ in matches) + 1 if matches else 1
-                matches[new_id] = {"teams": ["", ""], "result": ["K", "K"]}
+                matches[new_id] = {"teams": playing_teams, "result": ["K", "K"]}
 
                 utilities.dump_json(rounds, filename=rounds_file)
                 return {"new_id": new_id}
     return False
+
+
+def push_rand_pairs(data=None):
+    if data is None:
+        return False
+    pairs = json.loads(data.get("rand_pairs"))
+    if pairs:
+        with klive_lock:
+            rounds = load_rounds()
+            if len(rounds) != 1 or "1" not in rounds:
+                print("We're not at the begining of the tournament, can't do that.")
+                return False
+            if rounds["1"].get("matches", {}):
+                print("Already have matches in the first round")
+                return False
+            for pair in pairs:
+                print(pair)
+                if len(pair) == 2:
+                    append_match({"rnum": "1"}, playing_teams=pair)
+                else:
+                    print("Team pair not a pair wtf")
+    return True
 
 
 def remove_team(data=None):
@@ -552,6 +578,32 @@ def simulate_swiss_matches(teams, n_rounds=3, deviation=40):
             else:
                 proxy_scores[t1] += 6
                 proxy_scores[t0] += random.randint(0, 5)
+
+
+def pair_the_list(list_):
+    pairs = []
+    for i in range(len(list_)//2):
+        pairs.append(list_[2*i:2*i+2])
+    if len(list_) % 2:
+        pairs.append([list_[-1], None])
+    return pairs
+
+
+def rand_pairs(teams, locked_pairs=None):
+    """locked_pairs: list of (ungrouped but intrinsically paired by order) teams already assigned"""
+    print("locked", locked_pairs)
+    teams = teams or load_teams()
+    if locked_pairs is None:
+        locked_pairs = []
+
+    randomizable = [t for t in teams if t not in locked_pairs]
+    print(randomizable)
+    shuffle(randomizable)
+    paired = pair_the_list(randomizable)
+    paired += pair_the_list(locked_pairs)
+    shuffle(paired)
+
+    return paired
 
 
 def def_pairs(rnum):

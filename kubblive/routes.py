@@ -76,7 +76,43 @@ def kubb_live_edit_match(rnum=None, match_id=None):
 
 @kubblive.route('/tombaelrei/add_round/')
 def add_round():
-    return render_template("/kubb_live/klive_add_round_dialogue.html")
+    if current_user.is_kubb_admin():
+        return render_template("/kubb_live/klive_add_round_dialogue.html")
+    else:
+        return redirect('/tombaelrei/')
+
+
+@kubblive.route('/tombaelrei/r1_randomizer/')
+@kubblive.route('/tombaelrei/r1_randomizer/<locked>')
+def r1_randomizer(locked=None):
+    """add any (even) number of team_ids separated by '-' for making them forced pairs"""
+    if current_user.is_kubb_admin():
+        import klive
+        teams = klive.load_teams()
+
+        if locked is not None:
+            try:
+                locked = locked.split("-")
+                print(locked)
+                if len(locked) % 2:
+                    locked = locked[:-1]
+                curated = []
+                for i in range(len(locked) // 2):
+                    if locked[2*i] in teams and locked[2*i+1] in teams:
+                        curated += locked[2*i:2*i+2]
+                    else:
+                        print("Locking unexisting team?")
+                    print(locked, curated)
+                locked = curated
+            except Exception as e:
+                print(e)
+                locked = None
+        rand_pairs = klive.rand_pairs(teams=teams, locked_pairs=locked)
+        locked = klive.pair_the_list(locked or [])
+        return render_template("/kubb_live/klive_round1_randomizer.html", teams=teams,
+                               rand_pairs=rand_pairs, forced_pairs=locked)
+    else:
+        return redirect('/tombaelrei/')
 
 
 @login_required
@@ -106,6 +142,10 @@ def klive_ajax(query=None):
                 result = klive.append_match(data=request.form)
                 success = bool(result)
                 return {"success": success, "new_id": result["new_id"] if result else None}
+            case "push_rand_pairs":
+                result = klive.push_rand_pairs(data=request.form)
+                success = bool(result)
+                return {"success": success}
             case "remove_team":
                 success = klive.remove_team(data=request.form)
                 return {"success": success}
