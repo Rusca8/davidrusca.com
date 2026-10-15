@@ -49,6 +49,7 @@ temas_list = {
     "BIO": {"name": _l("Biología")},
     "URB": {"name": _l("Urbanismo")},
     "CIE": {"name": _l("Ciencia")},
+    "PER": {"name": _l("Periodismo")},
 }
 
 
@@ -190,4 +191,5 @@ paraules = {
     182: {"temas": ["PSI"], "name": "Responsabilidad afectiva", "desc": ""},
     183: {"temas": ["PSI"], "name": "ASMR", "desc": ""},
     184: {"temas": ["SAL"], "name": _l("478"), "desc": _l("<p>Técnica de respiración y relajación muy potente que usan los soldados en ambientes de alto estrés para conseguir rebajar el estrés lo suficiente como para poder dormir. Consiste en repetir el siguiente ciclo:</p><b>4 segundos</b> para llenar los pulmones de aire al máximo<br><b>7 segundos</b> manteniendo el aire dentro<br><b>8 segundos</b> para soltar poco a poco tanto arie como sea posible")},
+    185: {"temas": ["PER"], "name": "Scare Quotes", "desc": _l("<p>Comillas usadas para cuestionar algo o para insinuar que lo que se está diciendo es la opinión de alguien en lugar de una realidad objetiva.</p><i>Por ejemplo, los titulares que hablan del 'genocidio' en gaza (poniéndole así unas comillas que tendrían que ser innecesarias, sólo porque el periodista quiere insinuar que la mayoría de la gente no está de acuerdo en que sea un genocidio de verdad)</i>.")},
 }

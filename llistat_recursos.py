@@ -103,6 +103,7 @@ docents = {
                     "icon": "🧪",
                     "contents": {
                         _l("Apuntes"): {
+                            _l("Grups Funcionals"): {"lang": "CA", "prefix": "Q1", "url": "/static/pdf/Q1_GrupsFuncionals.pdf"},
                             _l("Números cuánticos"): {"lang": "CA", "prefix": "Q1", "url": "/static/pdf/Q1_QuanticNums.pdf"},
                             _l("Teorías Atómicas, Espectros y Cosas Cuánticas"): {"lang": "CA", "prefix": "Q1", "url": "/static/pdf/Q1_TeoriaAtomica.pdf"},
                             _l("Propiedades Periódicas"): {"lang": "CA", "prefix": "Q1", "url": "/static/pdf/Q1_PropietatsPeriodiques.pdf"},
