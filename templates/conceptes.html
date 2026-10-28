@@ -73,33 +73,35 @@
 
 <div class="card-columns mx-2 my-4">
     {% for _, tematica in paraules.items()|sort(attribute='1.name') %}
-    <div class="card mb-2 border-p-5">
-        <div class="card-header bg-p-3 border-p-5 py-1 px-2 text-center">
-            {{tematica.name}}
+        {% if tematica.name != "()" %}
+        <div class="card mb-2 border-p-5">
+            <div class="card-header bg-p-3 border-p-5 py-1 px-2 text-center">
+                {{tematica.name}}
+            </div>
+            <div class="card-body px-2 pt-2 pb-2">
+                <table class="grid-table">
+                {% for pi, paraula in tematica.contents.items()|sort(attribute='1.name') %}
+                {% if paraula.desc or paraula.show %}
+                <tr class="px-1 mb-1">
+                    <td class="seen-button-td">
+                        <div  class="left-rad paraula-seen-button align-middle text-center px-0 pointer"
+                        onclick="toggle_seen({{pi}});" data-pi="{{pi}}">
+                        ✓
+                        </div>
+                    </td>
+                    <td class="paraula-td">
+                        <div class="right-rad paraula-item text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
+                             data-pi="{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
+                            {{paraula.name}}
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </table>
+            </div>
         </div>
-        <div class="card-body px-2 pt-2 pb-2">
-            <table class="grid-table">
-            {% for pi, paraula in tematica.contents.items()|sort(attribute='1.name') %}
-            {% if paraula.desc or paraula.show %}
-            <tr class="px-1 mb-1">
-                <td class="seen-button-td">
-                    <div  class="left-rad paraula-seen-button align-middle text-center px-0 pointer"
-                    onclick="toggle_seen({{pi}});" data-pi="{{pi}}">
-                    ✓
-                    </div>
-                </td>
-                <td class="paraula-td">
-                    <div class="right-rad paraula-item text-center {{'pointer' if paraula.desc else 'disabled'}}" {% if paraula.desc %}onclick="load_word({{pi}});" {% endif %}
-                         data-pi="{{pi}}" data-word="{{paraula.name}}" data-desc="{{paraula.desc}}" data-cred="{{paraula.cred}}">
-                        {{paraula.name}}
-                    </div>
-                </td>
-            </tr>
-            {% endif %}
-            {% endfor %}
-            </table>
-        </div>
-    </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
